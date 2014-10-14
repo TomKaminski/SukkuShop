@@ -22,7 +22,7 @@ namespace SukkuShop.Models
 
         public ApplicationUser()
         {
-            Zamowienia= new List<Zamowienia>();
+            Zamowienia = new List<Zamowienia>();
         }
 
         public string Imie { get; set; }
@@ -31,8 +31,7 @@ namespace SukkuShop.Models
         public string Ulica { get; set; }
         public string Number { get; set; }
         public string KodPocztowy { get; set; }
-        public ICollection<Zamowienia> Zamowienia { get; set; } 
-
+        public ICollection<Zamowienia> Zamowienia { get; set; }
     }
 
     [Table("Kategorie")]
@@ -42,14 +41,13 @@ namespace SukkuShop.Models
         {
             Produkty = new List<Produkty>();
         }
+
         [Key]
         public int KategoriaId { get; set; }
-
         public string Nazwa { get; set; }
-
         public int Promocja { get; set; }
 
-        public ICollection<Produkty> Produkty { get; set; } 
+        public ICollection<Produkty> Produkty { get; set; }
     }
 
     [Table("Produkty")]
@@ -62,26 +60,17 @@ namespace SukkuShop.Models
 
         [Key]
         public int ProduktId { get; set; }
-
         public string Nazwa { get; set; }
-
-        public string Opis { get; set; }
-
         public decimal Cena { get; set; }
-
         public int Ilosc { get; set; }
-
         public int KategoriaId { get; set; }
-
         public string FilePath { get; set; }
-
         public string Producent { get; set; }
-
         public int Promocja { get; set; }
 
         public virtual Kategorie Kategorie { get; set; }
 
-        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; } 
+        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; }
     }
 
     [Table("SzczegZamowienia")]
@@ -89,7 +78,6 @@ namespace SukkuShop.Models
     {
         [Key]
         public int SzczegZamId { get; set; }
-        
         public int ProduktId { get; set; }
         public int ZamowienieId { get; set; }
         public int Ilosc { get; set; }
@@ -97,28 +85,26 @@ namespace SukkuShop.Models
         public virtual Produkty Produkty { get; set; }
 
         public virtual Zamowienia Zamowienia { get; set; }
-
-
     }
 
     [Table("Zamowienia")]
     public class Zamowienia
     {
-
         public Zamowienia()
         {
             SzczegZamowienia = new LinkedList<SzczegZamowienia>();
         }
+
         [Key]
         public int ZamowienieId { get; set; }
-
         public int UserId { get; set; }
         public DateTime DataZamowienia { get; set; }
         public DateTime DataWysylki { get; set; }
         public string StanZamowienia { get; set; }
-        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; }
-        public virtual ApplicationUser User { get; set; }
 
+        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; }
+        
+        public virtual ApplicationUser User { get; set; }
     }
 
 
@@ -128,11 +114,13 @@ namespace SukkuShop.Models
         public ApplicationDbContext()
             : base("DefaultConnection")
         {
-
         }
 
         public DbSet<Produkty> Produkty { get; set; }
         public DbSet<Kategorie> Kategorie { get; set; }
+        public DbSet<SzczegZamowienia> SzczegZamowienia { get; set; }
+        public DbSet<Zamowienia> Zamowienia { get; set; }
+
 
         public static ApplicationDbContext Create()
         {

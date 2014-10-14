@@ -196,6 +196,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="PrivateSettings.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -249,6 +250,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Web\" />
+    <Folder Include="Infrastructure\Binders\" />
+    <Folder Include="Infrastructure\Helpers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

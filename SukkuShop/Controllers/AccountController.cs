@@ -17,20 +17,20 @@ namespace SukkuShop.Controllers
 
         public AccountController()
         {
-
         }
+
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
         }
+
         public ApplicationUserManager UserManager
         {
             get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
             private set { _userManager = value; }
         }
 
-        //
         // GET: /Account/Login
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
@@ -45,10 +45,7 @@ namespace SukkuShop.Controllers
 
         public ApplicationSignInManager SignInManager
         {
-            get
-            {
-                return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
-            }
+            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
             private set { _signInManager = value; }
         }
 
@@ -76,7 +73,10 @@ namespace SukkuShop.Controllers
             //{
             //    return View("NonActiveAccount", (object) model.Email);
             //}
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result =
+                await
+                    SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe,
+                        shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -89,7 +89,6 @@ namespace SukkuShop.Controllers
             }
         }
 
-        
 
         // GET: /Account/Register
         [AllowAnonymous]
@@ -108,7 +107,7 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -160,7 +159,8 @@ namespace SukkuShop.Controllers
                     return View("ForgotPasswordConfirmation");
                 }
                 var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code }, Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new {userId = user.Id, code},
+                    Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -245,10 +245,7 @@ namespace SukkuShop.Controllers
 
         private IAuthenticationManager AuthenticationManager
         {
-            get
-            {
-                return HttpContext.GetOwinContext().Authentication;
-            }
+            get { return HttpContext.GetOwinContext().Authentication; }
         }
 
         private void AddErrors(IdentityResult result)
@@ -268,7 +265,6 @@ namespace SukkuShop.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        
         #endregion
     }
 }
