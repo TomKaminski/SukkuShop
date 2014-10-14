@@ -36,8 +36,8 @@ namespace SukkuShop
         public Task SendAsync(IdentityMessage message)
         {
             // Credentials:
-            var credentialUserName = "tkaminski93@gmail.com";
-            var sentFrom = "tkaminski93@gmail.com";
+            const string credentialUserName = "tkaminski93@gmail.com";
+            const string sentFrom = "tkaminski93@gmail.com";
             var pwd = ConfigurationManager.AppSettings["mailpassword"];
 
             // Configure the client:
@@ -68,15 +68,6 @@ namespace SukkuShop
 
             // Send:
             return client.SendMailAsync(mail);
-        }
-    }
-
-    public class SmsService : IIdentityMessageService
-    {
-        public Task SendAsync(IdentityMessage message)
-        {
-            // Plug in your SMS service here to send a text message.
-            return Task.FromResult(0);
         }
     }
 
@@ -111,20 +102,7 @@ namespace SukkuShop
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             manager.MaxFailedAccessAttemptsBeforeLockout = 5;
-
-            // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
-            // You can write your own provider and plug it in here.
-            manager.RegisterTwoFactorProvider("Phone Code", new PhoneNumberTokenProvider<ApplicationUser, int>
-            {
-                MessageFormat = "Your security code is {0}"
-            });
-            manager.RegisterTwoFactorProvider("Email Code", new EmailTokenProvider<ApplicationUser, int>
-            {
-                Subject = "Security Code",
-                BodyFormat = "Your security code is {0}"
-            });
             manager.EmailService = new EmailService();
-            manager.SmsService = new SmsService();
             var dataProtectionProvider = options.DataProtectionProvider;
             if (dataProtectionProvider != null)
             {

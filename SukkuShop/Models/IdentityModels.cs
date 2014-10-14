@@ -1,4 +1,8 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -16,35 +20,107 @@ namespace SukkuShop.Models
             return userIdentity;
         }
 
+        public ApplicationUser()
+        {
+            Zamowienia= new List<Zamowienia>();
+        }
+
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
         public string Miasto { get; set; }
         public string Ulica { get; set; }
         public string Number { get; set; }
         public string KodPocztowy { get; set; }
+        public ICollection<Zamowienia> Zamowienia { get; set; } 
+
     }
 
+    [Table("Kategorie")]
+    public sealed class Kategorie
+    {
+        public Kategorie()
+        {
+            Produkty = new List<Produkty>();
+        }
+        [Key]
+        public int KategoriaId { get; set; }
 
-    //public class Produkty
-    //{
-    //    [Key]
-    //    public int ProduktId { get; set; }
-    //    public string NazwaProduktu { get; set; }
-    //    public string Description { get; set; }
-    //    public decimal Cena { get; set; }
-    //    public int Ilosc { get; set; }
-    //    public string Kategoria { get; set; }
-    //    public string FilePath { get; set; }
+        public string Nazwa { get; set; }
 
-    //}
+        public int Promocja { get; set; }
 
-    //public class Zamowienia
-    //{
-    //    [Key]
-    //    public int ZamowienieId { get; set; }
-    //    public int ProduktId { get; set; }
-    //    public int Ilosc { get; set; }
-    //}
+        public ICollection<Produkty> Produkty { get; set; } 
+    }
+
+    [Table("Produkty")]
+    public class Produkty
+    {
+        public Produkty()
+        {
+            SzczegZamowienia = new LinkedList<SzczegZamowienia>();
+        }
+
+        [Key]
+        public int ProduktId { get; set; }
+
+        public string Nazwa { get; set; }
+
+        public string Opis { get; set; }
+
+        public decimal Cena { get; set; }
+
+        public int Ilosc { get; set; }
+
+        public int KategoriaId { get; set; }
+
+        public string FilePath { get; set; }
+
+        public string Producent { get; set; }
+
+        public int Promocja { get; set; }
+
+        public virtual Kategorie Kategorie { get; set; }
+
+        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; } 
+    }
+
+    [Table("SzczegZamowienia")]
+    public class SzczegZamowienia
+    {
+        [Key]
+        public int SzczegZamId { get; set; }
+        
+        public int ProduktId { get; set; }
+        public int ZamowienieId { get; set; }
+        public int Ilosc { get; set; }
+
+        public virtual Produkty Produkty { get; set; }
+
+        public virtual Zamowienia Zamowienia { get; set; }
+
+
+    }
+
+    [Table("Zamowienia")]
+    public class Zamowienia
+    {
+
+        public Zamowienia()
+        {
+            SzczegZamowienia = new LinkedList<SzczegZamowienia>();
+        }
+        [Key]
+        public int ZamowienieId { get; set; }
+
+        public int UserId { get; set; }
+        public DateTime DataZamowienia { get; set; }
+        public DateTime DataWysylki { get; set; }
+        public string StanZamowienia { get; set; }
+        public ICollection<SzczegZamowienia> SzczegZamowienia { get; set; }
+        public virtual ApplicationUser User { get; set; }
+
+    }
+
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, RoleIntPk, int,
         UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>
@@ -55,8 +131,8 @@ namespace SukkuShop.Models
 
         }
 
-        //public DbSet<Produkty> Produkty { get; set; }
-        //public DbSet<Zamowienia> Zamowienia { get; set; }
+        public DbSet<Produkty> Produkty { get; set; }
+        public DbSet<Kategorie> Kategorie { get; set; }
 
         public static ApplicationDbContext Create()
         {
@@ -85,7 +161,7 @@ namespace SukkuShop.Models
         }
 
         /// Context Initializer
-        public class DropCreateInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
+        public class DropCreateInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
         {
             protected override void Seed(ApplicationDbContext context)
             {
