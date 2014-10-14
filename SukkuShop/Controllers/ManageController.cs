@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -83,15 +85,18 @@ namespace SukkuShop.Controllers
                                         ? "Your phone number was removed."
                                         : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+;
+
+
             var userInfo = new ChangeUserInfoViewModel
             {
-                Name = user.Name,
-                City = user.City,
-                LastName = user.LastName,
-                Number = user.Number,
-                Phone = user.PhoneNumber,
-                PostalCode = user.PostalCode,
-                Street = user.Street
+                Name = user.Name ?? "Brak danych",
+                City = user.City ?? "Brak danych",
+                LastName = user.LastName ?? "Brak danych",
+                Number = user.Number ?? "Brak danych",
+                Phone = user.PhoneNumber ?? "Brak danych",
+                PostalCode = user.PostalCode ?? "Brak danych",
+                Street = user.Street ?? "Brak danych"
 
             };
             var model = new IndexViewModel
@@ -99,7 +104,7 @@ namespace SukkuShop.Controllers
                 HasPassword = HasPassword(),
                 BrowserRemembered =
                     await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
-                    ChangeUserInfoViewModel = userInfo
+                    ChangeUserInfoViewModel = userInfo,
             };
             return View(model);
         }
