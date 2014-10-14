@@ -21,9 +21,20 @@
             {
                 @Html.ActionLink("Create", "SetPassword")
             }
-            ]
+            
         </dd>
         
         
     </dl>
+    <h2>Twoje dane wysyłki</h2>
+    Imie: @Model.ChangeUserInfoViewModel.Name <br/>
+    Nazwisko: @Model.ChangeUserInfoViewModel.LastName <br />
+    Telefon: @Model.ChangeUserInfoViewModel.Phone <br />
+    City: @Model.ChangeUserInfoViewModel.City<br />
+    Ulica: @Model.ChangeUserInfoViewModel.Street <br />
+    Numer domu: @Model.ChangeUserInfoViewModel.Number <br />
+    Kod pocztowy: @Model.ChangeUserInfoViewModel.PostalCode <br />
+    
+
+    @Html.ActionLink("Edit your order info","EditUserInfo")
 </div>

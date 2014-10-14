@@ -28,6 +28,42 @@ namespace SukkuShop.Controllers
             private set { _userManager = value; }
         }
 
+
+        public async Task<ActionResult> EditUserInfo()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var userInfo = new ChangeUserInfoViewModel
+            {
+                Name = user.Name,
+                City = user.City,
+                LastName = user.LastName,
+                Number = user.Number,
+                Phone = user.PhoneNumber,
+                PostalCode = user.PostalCode,
+                Street = user.Street
+
+            };
+            return View(userInfo);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditUserInfo(ChangeUserInfoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                user.City = model.City;
+                user.LastName = model.LastName;
+                user.Name = model.Name;
+                user.PostalCode = model.PostalCode;
+                user.Number = model.Number;
+                user.PhoneNumber = model.Phone;
+                user.Street = model.Street;
+                await UserManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
         //
         // GET: /Manage/Index
         public async Task<ActionResult> Index(ManageMessageId? message)
@@ -46,12 +82,24 @@ namespace SukkuShop.Controllers
                                     : message == ManageMessageId.RemovePhoneSuccess
                                         ? "Your phone number was removed."
                                         : "";
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var userInfo = new ChangeUserInfoViewModel
+            {
+                Name = user.Name,
+                City = user.City,
+                LastName = user.LastName,
+                Number = user.Number,
+                Phone = user.PhoneNumber,
+                PostalCode = user.PostalCode,
+                Street = user.Street
 
+            };
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 BrowserRemembered =
-                    await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId())
+                    await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+                    ChangeUserInfoViewModel = userInfo
             };
             return View(model);
         }
