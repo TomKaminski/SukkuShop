@@ -86,25 +86,32 @@ namespace SukkuShop.Controllers
                                         : "";
             var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
 ;
-
-
+            var isNull = false;
+            
             var userInfo = new ChangeUserInfoViewModel
             {
-                Name = user.Name ?? "Brak danych",
-                City = user.City ?? "Brak danych",
-                LastName = user.LastName ?? "Brak danych",
-                Number = user.Number ?? "Brak danych",
-                Phone = user.PhoneNumber ?? "Brak danych",
-                PostalCode = user.PostalCode ?? "Brak danych",
-                Street = user.Street ?? "Brak danych"
+                Name = user.Name,
+                City = user.City,
+                LastName = user.LastName,
+                Number = user.Number,
+                Phone = user.PhoneNumber,
+                PostalCode = user.PostalCode,
+                Street = user.Street
 
             };
+            foreach (var prop in userInfo.GetType().GetProperties())
+            {
+                var propertyValue = prop.GetValue(userInfo);
+                if (propertyValue == null)
+                    isNull = true;
+            }
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 BrowserRemembered =
                     await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
                     ChangeUserInfoViewModel = userInfo,
+                    IsNull = isNull
             };
             return View(model);
         }

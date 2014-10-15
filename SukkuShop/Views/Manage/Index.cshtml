@@ -34,6 +34,10 @@
     Ulica: @Model.ChangeUserInfoViewModel.Street <br />
     Numer domu: @Model.ChangeUserInfoViewModel.Number <br />
     Kod pocztowy: @Model.ChangeUserInfoViewModel.PostalCode <br />
+    @if (Model.IsNull)
+    {
+        <div class="text-danger">Uzupełnij swoje dane!</div>
+    }
     
 
     @Html.ActionLink("Edit your order info","EditUserInfo")

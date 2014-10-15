@@ -7,6 +7,7 @@ namespace SukkuShop.Models
         public bool HasPassword { get; set; }
         public bool BrowserRemembered { get; set; }
         public ChangeUserInfoViewModel ChangeUserInfoViewModel { get; set; }
+        public bool IsNull { get; set; }
     }
 
     public class SetPasswordViewModel
@@ -42,6 +43,7 @@ namespace SukkuShop.Models
         public string Street { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
         [Display(Name = "Numer domu")]
         public string Number { get; set; }
 
