@@ -26,35 +26,35 @@ namespace SukkuShop.Models
 
     public class ChangeUserInfoViewModel
     {
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Imię")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
         [Display(Name = "Numer domu")]
         public string Number { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("[1-9][0-9]{8}", ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[RegularExpression("[1-9][0-9]{8}", ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Kod pocztowy")]
-        [RegularExpression("[0-9]{2}-[0-9]{3}",ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
+        //[RegularExpression("[0-9]{2}-[0-9]{3}",ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
         public string PostalCode { get; set; }
     }
 

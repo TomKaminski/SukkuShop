@@ -5364,7 +5364,7 @@ if (typeof jQuery === 'undefined') {
 }(window.jQuery));
 ;(function($) {
     $.fn.bootstrapValidator.i18n.phone = $.extend($.fn.bootstrapValidator.i18n.phone || {}, {
-        'default': 'Please enter a valid phone number',
+        'default': 'Podaj prawidłowy numer telefonu',
         countryNotSupported: 'The country code %s is not supported',
         country: 'Please enter a valid phone number in %s',
         countries: {
@@ -5382,7 +5382,8 @@ if (typeof jQuery === 'undefined') {
             SK: 'Slovakia',
             TH: 'Thailand',
             US: 'USA',
-            VE: 'Venezuela'
+            VE: 'Venezuela',
+            PL: 'Poland'
         }
     });
 
@@ -5393,7 +5394,7 @@ if (typeof jQuery === 'undefined') {
         },
 
         // The supported countries
-        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE'],
+        COUNTRY_CODES: ['BR', 'CN', 'CZ', 'DK', 'ES', 'FR', 'GB', 'MA', 'PK', 'RO', 'RU', 'SK', 'TH', 'US', 'VE', 'PL'],
 
         /**
          * Return true if the input value contains a valid phone number for the country
@@ -5490,6 +5491,8 @@ if (typeof jQuery === 'undefined') {
                     isValid = (/^0?3[0-9]{2}[0-9]{7}$/).test(value);
                     break;
 
+
+
         		case 'RO':
         		    // All mobile network and land line
                     // http://regexr.com/39fv1
@@ -5526,6 +5529,9 @@ if (typeof jQuery === 'undefined') {
                     // Test: http://regexr.com/38mqi
                     value   = value.replace(/\D/g, '');
                     isValid = (/^(?:(1\-?)|(\+1 ?))?\(?(\d{3})[\)\-\.]?(\d{3})[\-\.]?(\d{4})$/).test(value) && (value.length === 10);
+                    break;
+                case 'PL':
+                    isValid = (/[1-9][0-9]{8}/).test(value);
                     break;
             }
 

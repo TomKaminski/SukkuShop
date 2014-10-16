@@ -59,15 +59,15 @@
                     Password: {
                         validators: {
                             notEmpty: {
-                                message: 'The password is required and cannot be empty'
+                                message: 'To pole jest wymagane'
                             },
                             stringLength: {
                                 min: 6,
-                                message: 'The password must have at least 6 characters'
+                                message: 'Hasło musi zawierać przynajmniej 6 znaków'
                             },
                             identical: {
                                 field: "ConfirmPassword",
-                                message: "Password and Confirm password must be identical"
+                                message: "Pola Hasło i Potwierdź hasło muszą być identyczne"
                             }
                         }
                     },
@@ -75,10 +75,10 @@
                         validators: {
                             identical: {
                                 field: "Password",
-                                message: "Password and Confirm password must be identical"
+                                message: "Pola Hasło i Potwierdź hasło muszą być identyczne"
                             },
                             notEmpty: {
-                                message: 'The password is required and cannot be empty'
+                                message: 'To pole jest wymagane'
                             },
                         }
                     }
