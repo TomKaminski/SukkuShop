@@ -175,7 +175,6 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -211,6 +210,17 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Konto\Zaloguj.cshtml" />
+    <Content Include="Views\Konto\Zarejestruj.cshtml" />
+    <Content Include="Views\Konto\ZapomnianeHaslo.cshtml" />
+    <Content Include="Views\Konto\ZapomnianeHasloPotwierdzenie.cshtml" />
+    <Content Include="Views\Konto\ResetujHaslo.cshtml" />
+    <Content Include="Views\Konto\ResetujHasloPotwierdzenie.cshtml" />
+    <Content Include="Views\Konto\EdytujDane.cshtml" />
+    <Content Include="Views\Konto\Index.cshtml" />
+    <Content Include="Views\Konto\ZmienHaslo.cshtml" />
+    <Content Include="Views\Konto\UstawHaslo.cshtml" />
+    <Content Include="Views\Shared\Blokada.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
