@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -11,15 +10,15 @@ using SukkuShop.Models;
 namespace SukkuShop.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class KontoController : Controller
     {
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public KontoController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public KontoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -31,15 +30,7 @@ namespace SukkuShop.Controllers
             private set { _userManager = value; }
         }
 
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Manage");
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
+        
 
         private ApplicationSignInManager _signInManager;
 
@@ -59,11 +50,21 @@ namespace SukkuShop.Controllers
         //    return RedirectToAction("Login");
         //}
 
+
+        // GET: /Account/Login
+        [AllowAnonymous]
+        public ActionResult Zaloguj(string returnUrl)
+        {
+            if (User.Identity.IsAuthenticated)
+                return RedirectToAction("Index", "Manage");
+            ViewBag.ReturnUrl = returnUrl;
+            return View();
+        }
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Zaloguj(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -98,7 +99,6 @@ namespace SukkuShop.Controllers
                 return RedirectToAction("Index", "Manage");
             return View();
         }
-
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -122,6 +122,7 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -142,7 +143,6 @@ namespace SukkuShop.Controllers
         {
             return View();
         }
-
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -226,6 +226,166 @@ namespace SukkuShop.Controllers
             AuthenticationManager.SignOut();
             return RedirectToAction("Index", "Home");
         }
+        
+
+        ////////////MANAGE///////////////
+        public async Task<ActionResult> EditUserInfo()
+        {
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var userInfo = new ChangeUserInfoViewModel
+            {
+                Name = user.Name,
+                City = user.City,
+                LastName = user.LastName,
+                Number = user.Number,
+                Phone = user.PhoneNumber,
+                PostalCode = user.PostalCode,
+                Street = user.Street
+
+            };
+            return View(userInfo);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> EditUserInfo(ChangeUserInfoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                user.City = model.City;
+                user.LastName = model.LastName;
+                user.Name = model.Name;
+                user.PostalCode = model.PostalCode;
+                user.Number = model.Number;
+                user.PhoneNumber = model.Phone;
+                user.Street = model.Street;
+                await UserManager.UpdateAsync(user);
+                return RedirectToAction("Index");
+            }
+            return View(model);
+        }
+
+
+        //
+        // GET: /Manage/Index
+        public async Task<ActionResult> Index(ManageMessageId? message)
+        {
+            ViewBag.StatusMessage =
+                message == ManageMessageId.ChangePasswordSuccess
+                    ? "Your password has been changed."
+                    : message == ManageMessageId.SetPasswordSuccess
+                        ? "Your password has been set."
+                        : message == ManageMessageId.SetTwoFactorSuccess
+                            ? "Your two-factor authentication provider has been set."
+                            : message == ManageMessageId.Error
+                                ? "An error has occurred."
+                                : message == ManageMessageId.AddPhoneSuccess
+                                    ? "Your phone number was added."
+                                    : message == ManageMessageId.RemovePhoneSuccess
+                                        ? "Your phone number was removed."
+                                        : "";
+            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            ;
+            var isNull = false;
+
+            var userInfo = new ChangeUserInfoViewModel
+            {
+                Name = user.Name,
+                City = user.City,
+                LastName = user.LastName,
+                Number = user.Number,
+                Phone = user.PhoneNumber,
+                PostalCode = user.PostalCode,
+                Street = user.Street
+
+            };
+            foreach (var prop in userInfo.GetType().GetProperties())
+            {
+                var propertyValue = prop.GetValue(userInfo);
+                if (propertyValue == null)
+                    isNull = true;
+            }
+            var model = new IndexViewModel
+            {
+                HasPassword = HasPassword(),
+                BrowserRemembered =
+                    await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+                ChangeUserInfoViewModel = userInfo,
+                IsNull = isNull
+            };
+            return View(model);
+        }
+
+
+        //
+        // GET: /Manage/ChangePassword
+        public ActionResult ChangePassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/ChangePassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangePassword(ChangePasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var result =
+                await
+                    UserManager.ChangePasswordAsync(int.Parse(User.Identity.GetUserId()), model.OldPassword,
+                        model.NewPassword);
+            if (result.Succeeded)
+            {
+                var user = await UserManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+                if (user != null)
+                {
+                    await SignInAsync(user, isPersistent: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+            }
+            AddErrors(result);
+            return View(model);
+        }
+
+        //
+        // GET: /Manage/SetPassword
+        public ActionResult SetPassword()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Manage/SetPassword
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SetPassword(SetPasswordViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await UserManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
+                if (result.Succeeded)
+                {
+                    var user = await UserManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+                    if (user != null)
+                    {
+                        await SignInAsync(user, isPersistent: false);
+                    }
+                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+       
+
+        
 
         #region Helpers
 
@@ -263,6 +423,38 @@ namespace SukkuShop.Controllers
                 return Redirect(returnUrl);
             }
             return RedirectToAction("Index", "Home");
+        }
+
+
+        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
+                DefaultAuthenticationTypes.TwoFactorCookie);
+            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
+                await user.GenerateUserIdentityAsync(UserManager));
+        }
+
+
+
+        private bool HasPassword()
+        {
+            var user = UserManager.FindById(int.Parse(User.Identity.GetUserId()));
+            if (user != null)
+            {
+                return user.PasswordHash != null;
+            }
+            return false;
+        }
+
+        public enum ManageMessageId
+        {
+            AddPhoneSuccess,
+            ChangePasswordSuccess,
+            SetTwoFactorSuccess,
+            SetPasswordSuccess,
+            RemoveLoginSuccess,
+            RemovePhoneSuccess,
+            Error
         }
 
         #endregion
