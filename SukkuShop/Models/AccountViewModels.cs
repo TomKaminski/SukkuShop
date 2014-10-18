@@ -33,6 +33,14 @@ namespace SukkuShop.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [Display(Name = "Imie")]
+        public string Name { get; set; }
+
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [Display(Name = "Nazwisko")]
+        public string LastName { get; set; }
+
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [StringLength(100, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]

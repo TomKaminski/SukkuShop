@@ -74,12 +74,12 @@ namespace SukkuShop.Controllers
             //{
             //    return View("NonActiveAccount", (object) model.Email);
             //}
-            var result =
-                await
-                    SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
+                    var user = await UserManager.FindByEmailAsync(model.Email);
+                    Session["username"] = user.Name;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Blokada");
@@ -106,7 +106,7 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser {UserName = model.Email, Email = model.Email, Name = model.Name, LastName = model.LastName};
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -132,7 +132,7 @@ namespace SukkuShop.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Blad");
+            return View(result.Succeeded ? "PotwierdzonyMail" : "Blad");
         }
 
         //
@@ -223,6 +223,7 @@ namespace SukkuShop.Controllers
         public ActionResult Wyloguj()
         {
             AuthenticationManager.SignOut();
+            Session["username"] = null;
             return RedirectToAction("Index", "Home");
         }
         
