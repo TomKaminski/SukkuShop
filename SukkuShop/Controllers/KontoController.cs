@@ -114,6 +114,7 @@ namespace SukkuShop.Controllers
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", ActivationMailBuilder(callbackUrl));
                     await SignInManager.SignInAsync(user, false, false);
+                    Session["username"] = user.Name;
                     return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
@@ -299,6 +300,7 @@ namespace SukkuShop.Controllers
                 Street = user.Street
 
             };
+
             foreach (var prop in userInfo.GetType().GetProperties())
             {
                 var propertyValue = prop.GetValue(userInfo);
