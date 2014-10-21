@@ -1,23 +1,81 @@
-﻿<!DOCTYPE html>
+﻿@using System.Net.Mime
+<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>@ViewBag.Title - Sukku</title>
-
-</head>
-<body>
-    <header>
-        <nav>
-            
-        </nav>
-    </header>
-    @RenderBody()
-    <hr />
-    <footer>
-        <p>&copy; @DateTime.Now.Year - Sukku</p>
-    </footer>
-    
-
-    @RenderSection("scripts", required: false)
-</body>
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Sukku</title>
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/jquery")
+    </head>
+    <body>
+        <header>
+            <div class="header-top-container">
+                <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
+                <nav>
+                    <div class="login-panel">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Witaj " + User.Identity.Name + "!", "Index", "Konto", null, new {@class = "login-panel-text"})
+                            <br />
+                            @Html.ActionLink("WYLOGUJ", "Wyloguj", "Konto", null, new {@class = "login-panel-text"})
+                        }
+                        else
+                        {
+                            @Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new {@class = "login-panel-text"})
+                        }
+                    </div>
+                    <ul>
+                        <li><a href="#">Kosmetyki</a></li>
+                        <li><a href="#">Przyprawy</a></li>
+                        <li><a href="#">Herbaty</a></li>
+                        <li><a href="#">Bakalie</a></li>
+                        <li><a href="#">Inne</a></li>
+                    </ul>
+                </nav>
+                <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
+            </div>
+            <div class="nav-low">
+                @using (Html.BeginForm("Search", "Product", FormMethod.Get, new {@class = "search"}))
+                {
+                    @Html.TextBox("Search", null, new {placeholder = "WYSZUKAJ"})
+                    <input type="submit" class="search-arrow" value="" />
+                }
+                @*TUTAJ JAK JUZ BEDZIE DZIALAC KOSZYK I ZAKUPY TO ZROBIC Z TEGO PARTIAL VIEW*@
+                <a href="#">
+                    <div class="cart-box">
+                        <div class="cart-text">koszyk (3123123,00 pln)</div>
+                        <div class="cart-img"></div>
+                    </div>
+                </a>
+            </div>
+        </header>
+        @RenderBody()
+        <footer>
+            <hr/>
+            <ul>
+                <li>
+                    <div class="footer-text-big">zakupy</div>
+                    <img src="~/Content/Images/footer-cart.png" alt=""/>
+                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin", "Home")<br/></div>
+                    <div class="footer-text">@Html.ActionLink("Koszty dostawy", "Dostawa", "Home")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Formy płatności", "Formy płatności", "Home")<br /></div>
+                </li>
+                <li>
+                    <div class="footer-text-big">użytkownik</div>
+                    <img src="~/Content/Images/footer-user.png" alt=""/>
+                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Regulamin", "Home")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Dostawa", "Home")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "Formy płatności", "Home")<br /></div>
+                </li>
+                <li>
+                    <div class="footer-text-big">sukku</div>
+                    <img src="~/Content/Images/footer-sukku.png" alt=""/>
+                    <div class="footer-text">ul. Świętokrzyska 9A, 32-650 Kęty<br /></div>
+                    <div class="footer-text">tel +48 606 307 809<br /></div>
+                    <div class="footer-text">magda@sukku.pl</div>
+                </li>
+            </ul>
+        </footer>
+        @RenderSection("scripts", required: false)
+    </body>
 </html>

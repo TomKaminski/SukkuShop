@@ -17,8 +17,8 @@ namespace SukkuShop
         public Task SendAsync(IdentityMessage message)
         {
             // Credentials:
-            const string credentialUserName = "tkaminski93@gmail.com";
-            const string sentFrom = "tkaminski93@gmail.com";
+            const string credentialUserName = "sukkusklep@gmail.com";
+            const string sentFrom = "sukkusklep@gmail.com";
             var pwd = ConfigurationManager.AppSettings["mailpassword"];
 
             // Configure the client:

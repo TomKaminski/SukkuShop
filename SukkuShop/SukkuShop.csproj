@@ -179,9 +179,13 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Home.css" />
+    <Content Include="Content\css\main.css" />
+    <Content Include="Content\css\reset.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
+    <Content Include="Content\fonts\SegoeSemibold.ttf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
@@ -224,8 +228,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\css\" />
-    <Folder Include="Content\fonts\" />
     <Folder Include="Content\Images\" />
     <Folder Include="Content\Web\" />
     <Folder Include="Infrastructure\Binders\" />

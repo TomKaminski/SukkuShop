@@ -19,7 +19,9 @@ namespace SukkuShop
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                 "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include());
+            bundles.Add(new StyleBundle("~/Content/css").Include(
+                "~/Content/css/reset.css","~/Content/css/main.css"
+                ));
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
             BundleTable.EnableOptimizations = false;
