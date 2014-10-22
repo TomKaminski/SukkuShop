@@ -38,3 +38,9 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+.clear {
+    float: none;
+    clear: both;
+    height: 0;
+}

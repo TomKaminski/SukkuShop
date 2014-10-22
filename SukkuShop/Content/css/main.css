@@ -4,14 +4,11 @@
 }
 body {
     width: 1066px;
-    margin: auto;
+    margin: 20px auto;
 }
 
-
 header {
-    height: 250px;
-    margin-top: 30px;
-    margin-bottom: 20px;
+    margin: 30px 0;
 }
 
 .header-logo {
@@ -51,18 +48,12 @@ a { text-decoration: none; }
 
 a:hover { text-decoration: underline; }
 
-.header-top-container {
-    height: 188px;
-}
-
 nav {
     width: 802px;
-    height: 188px;
     float: left;
 }
 
 .login-panel {
-    height: 44px;
     float: right;
     text-align: right;
 }
@@ -72,8 +63,6 @@ nav {
     text-align: right;
     float: right;
     padding: 0;
-    height: 44px;
-
 }
 
 .login-container li {
@@ -81,6 +70,7 @@ nav {
     margin: 0;
     padding:0
 }
+
 .login-panel-text {
     font-family: Calibri;
     font-weight: bold;
@@ -99,9 +89,7 @@ nav {
 
 .nav-low {
     width: 1066px;
-    margin: auto;
-    height: 50px;
-    margin: 0 auto;
+    margin: 10px auto 0;
 }
 
 header input {
@@ -115,7 +103,6 @@ header input {
 }
 
 .search {
-    height: 40px;
     border-bottom: 1px black solid;
     float: left;
 }
@@ -168,14 +155,12 @@ footer {
 footer ul { margin-top: 30px; }
 
 footer ul li {
-    height: 136px;
     width: 240px;
     float: left;
     margin-right: 140px;
 }
 
 footer ul li:last-child {
-    height: 136px;
     width: 260px;
     float: left;
     margin-right: 140px;
@@ -212,4 +197,4 @@ footer a:hover {
     color: black;
 }
 
-.footer-text { margin-bottom: 18px; }
+.footer-text { margin-bottom: 14px; }

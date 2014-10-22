@@ -132,7 +132,6 @@ namespace SukkuShop.Models
             var roleManager = new ApplicationRoleManager(new RoleStore<RoleIntPk, int, UserRoleIntPk>(context));
             roleManager.Create(new RoleIntPk("Admin", "Admin Role"));
 
-
             //Create Admin acc
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser, RoleIntPk, int,
                 UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>(context));

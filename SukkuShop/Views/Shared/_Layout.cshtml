@@ -8,7 +8,6 @@
     </head>
     <body>
         <header>
-            <div class="header-top-container">
                 <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
                 <nav id="nav-top">
                     @if (Request.IsAuthenticated)
@@ -38,7 +37,6 @@
                     </ul>
                 </nav>
                 <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
-            </div>
             <nav id="nav-bottom" class="nav-low">
                 @using (Html.BeginForm("Search", "Product", FormMethod.Get, new {@class = "search"}))
                 {
@@ -47,6 +45,7 @@
                 }
                 @Html.Partial("_CartInfoPartialView")
             </nav>
+            <div class="clear">&nbsp;</div>
         </header>
         <article>
             @RenderBody()
@@ -58,8 +57,9 @@
                     <div class="footer-text-big">zakupy</div>
                     <img src="~/Content/Images/footer-cart.png" alt=""/>
                     <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin", "Home")<br/></div>
-                    <div class="footer-text">@Html.ActionLink("Koszty dostawy", "Dostawa", "Home")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Formy płatności", "Platnosci", "Home")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", "Dostawa", "Home")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Płatności", "Platnosci", "Home")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Polityka prywatności", "PolitykaPrywatnosci", "Home")<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big">użytkownik</div>
@@ -75,7 +75,9 @@
                     <div class="footer-text">tel +48 606 307 809<br /></div>
                     <div class="footer-text">magda@sukku.pl</div>
                 </li>
+
             </ul>
+            <div class="clear">&nbsp;</div>
         </footer>
         @RenderSection("scripts", required: false)
     </body>

@@ -1,9 +1,4 @@
-﻿article {
-    width: 1066px;
-    height: 710px;
-    margin: auto;
-}
-.container {
+﻿.container {
     width: 355px;
     height: 355px;
     float: left;
@@ -22,7 +17,6 @@
 
 .container-check {
     width: 180px;
-    height: 60px;
     margin: auto;
 }
 
@@ -44,7 +38,6 @@ a .check:hover { text-decoration: underline; }
 
 .link-to-shop-container {
     width: 210px;
-    height: 18px;
     margin-top: 100px;
     color: #f89b1d;
     text-decoration: none;
