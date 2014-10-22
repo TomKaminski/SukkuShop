@@ -13,11 +13,15 @@
                 <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
                 <nav id="nav-top">
                     <div class="login-panel">
-                        @if (User.Identity.IsAuthenticated)
+                        @if (Request.IsAuthenticated)
                         {
-                            @Html.ActionLink("Witaj " + User.Identity.Name + "!", "Index", "Konto", null, new {@class = "login-panel-text"})
-                            <br />
-                            @Html.ActionLink("WYLOGUJ", "Wyloguj", "Konto", null, new {@class = "login-panel-text"})
+                            using (Html.BeginForm("wyloguj", "konto", new {area = ""}, FormMethod.Post, new {id = "logoutForm", @class = "navbar-right"}))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ActionLink("Witaj " + Session["username"] + "!", "Index", "Konto", null, new {@class = "login-panel-text"})
+                                <br />
+                                <a class="login-panel-text" href="javascript:document.getElementById('logoutForm').submit()">wyloguj</a>
+                            }
                         }
                         else
                         {
