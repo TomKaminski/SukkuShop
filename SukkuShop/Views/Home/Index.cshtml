@@ -2,34 +2,34 @@
     ViewBag.Title = "Home";
 }
 
-<article>
-    <a href="#"><div class="container"><img src="~/Content/Images/content-pic1.png" alt=""/></div></a>
-    <div class="container">
-        <div class="text-big">bestseller</div>
-        <div class="container-check">
-            <a href="#"><div class="check">sprawdź</div></a>
-        </div>
+
+<div class="container"><img src="~/Content/Images/content-pic1.png" alt=""/></div>
+<div class="container">
+<div class="text-big">bestseller</div>
+<div class="container-check">
+    <a href="#"><div class="check">sprawdź</div></a>
+</div>
+</div>
+<div class="container"><img src="~/Content/Images/content-pic2.png" alt="" /></div>
+<div class="container">
+<div class="text-big">promocje</div>
+<div class="container-check">
+    <a href="#"><div class="check">sprawdź</div></a>
+</div>
+</div>
+<div class="container"><img src="~/Content/Images/content-pic3.png" alt="" /></div>
+<div class="container">
+<div class="text-big">nowości</div>
+<div class="container-check">
+    <a href="#"><div class="check">sprawdź</div></a>
+</div>
+<a href="@Url.Action("Index","Produkty",null,null)">
+    <div class="link-to-shop-container">
+        <div id="triangle-right"></div>
+        <div class="shop-link">Przejdź do sklepu</div>
     </div>
-    <a href="#"><div class="container"><img src="~/Content/Images/content-pic2.png" alt="" /></div></a>
-    <div class="container">
-        <div class="text-big">promocje</div>
-        <div class="container-check">
-            <a href="#"><div class="check">sprawdź</div></a>
-        </div>
-    </div>
-    <a href="#"><div class="container"><img src="~/Content/Images/content-pic3.png" alt="" /></div></a>
-    <div class="container">
-        <div class="text-big">nowości</div>
-        <div class="container-check">
-            <a href="#"><div class="check">sprawdź</div></a>
-        </div>
-        <a href="@Url.Action("Index","Produkty",null,null)">
-            <div class="link-to-shop-container">
-                <div id="triangle-right"></div>
-                <div class="shop-link">Przejdź do sklepu</div>
-            </div>
-        </a>
-    </div>
-</article>
+</a>
+</div>
+
 
 @Styles.Render("~/Content/css/home.css")
