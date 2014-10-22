@@ -4,7 +4,22 @@ namespace SukkuShop.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ViewResult Index()
+        {
+            return View();
+        }
+
+        public ViewResult Regulamin()
+        {
+            return View();
+        }
+
+        public ViewResult Dostawa()
+        {
+            return View();
+        }
+
+        public ViewResult Platnosci()
         {
             return View();
         }

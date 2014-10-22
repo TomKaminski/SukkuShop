@@ -139,8 +139,9 @@ namespace SukkuShop.Models
 
             var user = new ApplicationUser
             {
-                UserName = "Admin",
-                Email = "Admin@sukku.pl"
+                Name = "Admin",
+                Email = "Admin@sukku.pl",
+                UserName = "Admin@sukku.pl"
             };
 
             userManager.Create(user, "Admin123456");

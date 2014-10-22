@@ -25,11 +25,11 @@
                         }
                     </div>
                     <ul>
-                        <li><a href="#">Kosmetyki</a></li>
-                        <li><a href="#">Przyprawy</a></li>
-                        <li><a href="#">Herbaty</a></li>
-                        <li><a href="#">Bakalie</a></li>
-                        <li><a href="#">Inne</a></li>
+                        <li>@Html.ActionLink("Kosmetyki","Index","Produkty",new{category="kosmetyki"},null)</li>
+                        <li>@Html.ActionLink("Przyprawy","Index","Produkty",new{category ="przyprawy" },null)</li>
+                        <li>@Html.ActionLink("Herbaty", "Index", "Produkty", new { category = "herbaty" }, null)</li>
+                        <li>@Html.ActionLink("Bakalie", "Index", "Produkty", new { category = "bakalie" }, null)</li>
+                        <li>@Html.ActionLink("Inne", "Index", "Produkty", new { category = "inne" }, null)</li>
                     </ul>
                 </nav>
                 <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
@@ -52,14 +52,14 @@
                     <img src="~/Content/Images/footer-cart.png" alt=""/>
                     <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin", "Home")<br/></div>
                     <div class="footer-text">@Html.ActionLink("Koszty dostawy", "Dostawa", "Home")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Formy płatności", "Formy płatności", "Home")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Formy płatności", "Platnosci", "Home")<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big">użytkownik</div>
                     <img src="~/Content/Images/footer-user.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Regulamin", "Home")<br /></div>
-                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Dostawa", "Home")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "Formy płatności", "Home")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto")<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto")<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big">sukku</div>
