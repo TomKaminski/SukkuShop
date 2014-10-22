@@ -11,7 +11,7 @@
         <header>
             <div class="header-top-container">
                 <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
-                <nav>
+                <nav id="nav-top">
                     <div class="login-panel">
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -34,20 +34,14 @@
                 </nav>
                 <a href="@Url.Action("Index","Home")"><div class="header-logo"></div></a>
             </div>
-            <div class="nav-low">
+            <nav id="nav-bottom" class="nav-low">
                 @using (Html.BeginForm("Search", "Product", FormMethod.Get, new {@class = "search"}))
                 {
                     @Html.TextBox("Search", null, new {placeholder = "WYSZUKAJ"})
-                    <input type="submit" class="search-arrow" value="" />
+                    <input type="submit" class="search-arrow"/>
                 }
-                @*TUTAJ JAK JUZ BEDZIE DZIALAC KOSZYK I ZAKUPY TO ZROBIC Z TEGO PARTIAL VIEW*@
-                <a href="#">
-                    <div class="cart-box">
-                        <div class="cart-text">koszyk (3123123,00 pln)</div>
-                        <div class="cart-img"></div>
-                    </div>
-                </a>
-            </div>
+                @Html.Partial("_CartInfoPartialView")
+            </nav>
         </header>
         @RenderBody()
         <footer>

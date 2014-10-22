@@ -2,11 +2,13 @@
     font-family: SegoeSemibold;
     src: url(../fonts/SegoeSemibold.ttf);
 }
+
 header {
     width: 1066px;
     height: 265px;
     margin: 30px auto;
 }
+
 .header-logo {
     width: 132px;
     height: 188px;
@@ -20,14 +22,17 @@ header {
     transition: all 0.3s ease-in-out;
     opacity: 0.8;
 }
+
 header ul {
     float: left;
     margin-top: 120px;
 }
+
 header ul li {
     display: inline;
     margin-right: 40px;
 }
+
 header ul li:first-child { margin-left: 40px; }
 
 header ul li a {
@@ -36,6 +41,7 @@ header ul li a {
     color: #f89b1d;
     text-transform: uppercase;
 }
+
 a { text-decoration: none; }
 
 a:hover { text-decoration: underline; }
@@ -44,17 +50,20 @@ a:hover { text-decoration: underline; }
     height: 188px;
     margin-bottom: 20px
 }
+
 nav {
     width: 802px;
     height: 188px;
     float: left;
 }
+
 .login-panel {
     height: 40px;
     width: 400px;
     float: right;
     text-align: right;
 }
+
 .login-panel-text {
     font-family: Calibri;
     font-weight: bold;
@@ -69,12 +78,14 @@ nav {
     opacity: 1;
     text-decoration: none;
 }
+
 .nav-low {
     width: 1066px;
     margin: auto;
     height: 50px;
     margin: 0 auto 20px;
 }
+
 header input {
     margin-top: 15px;
     width: 170px;
@@ -84,11 +95,13 @@ header input {
     outline: none;
     float: left;
 }
+
 .search {
     height: 40px;
     border-bottom: 1px black solid;
     float: left;
 }
+
 .search-arrow {
     width: 0;
     height: 0;
@@ -103,6 +116,7 @@ header input {
     margin-left: 5px;
     margin-right: -12px;
 }
+
 .search-arrow:hover { opacity: 1; }
 
 .cart-text {
@@ -115,6 +129,7 @@ header input {
     text-decoration: none;
     font-size: 20px;
 }
+
 .cart-box { opacity: 0.6; }
 
 .cart-box:hover { opacity: 1; }
@@ -127,11 +142,13 @@ header input {
     margin-top: 15px;
     margin-right: 5px;
 }
+
 footer {
     height: 170px;
     width: 1066px;
     margin: 50px auto
 }
+
 footer ul { margin-top: 30px; }
 
 footer ul li {
@@ -140,12 +157,14 @@ footer ul li {
     float: left;
     margin-right: 140px;
 }
+
 footer ul li:last-child {
     height: 136px;
     width: 260px;
     float: left;
     margin-right: 140px;
 }
+
 footer ul li .footer-text-big {
     font-family: SegoeSemibold;
     font-size: 25px;
@@ -155,11 +174,13 @@ footer ul li .footer-text-big {
     float: left;
     margin-bottom: 30px;
 }
+
 footer ul li:last-child {
     margin-right: 0;
     float: right;
     width: 290px;
 }
+
 footer ul li:last-child .footer-text-big { width: 230px; }
 
 footer ul li img { float: right; }
@@ -169,4 +190,5 @@ footer, footer a {
     font-family: SegoeSemibold;
     color: black;
 }
+
 .footer-text { margin-bottom: 18px; }

@@ -225,6 +225,7 @@
     <Content Include="Views\Konto\UstawHaslo.cshtml" />
     <Content Include="Views\Shared\Blokada.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_CartInfoPartialView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

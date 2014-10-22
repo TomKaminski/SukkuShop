@@ -3,11 +3,13 @@
     height: 710px;
     margin: auto;
 }
+
 .container {
     width: 355px;
     height: 355px;
     float: left;
 }
+
 .container .text-big {
     margin-top: 100px;
     margin-bottom: 20px;
@@ -16,13 +18,15 @@
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
-    color: black;    
+    color: black;
 }
+
 .container-check {
     width: 180px;
     height: 60px;
-    margin:auto;   
+    margin: auto;
 }
+
 a .check {
     width: 180px;
     height: 60px;
@@ -36,9 +40,9 @@ a .check {
     line-height: 60px;
     vertical-align: middle;
 }
-a .check:hover {
-    text-decoration: underline;
-}
+
+a .check:hover { text-decoration: underline; }
+
 .link-to-shop-container {
     width: 210px;
     height: 18px;
@@ -46,25 +50,24 @@ a .check:hover {
     color: #f89b1d;
     text-decoration: none;
     float: right;
+}
 
-}
-.link-to-shop-container:hover {
-    border-bottom: 1px solid #f89b1d;   
-}
+.link-to-shop-container:hover { border-bottom: 1px solid #f89b1d; }
+
 a .shop-link {
     text-align: right;
     font-size: 18px;
     font-family: Arial;
     text-transform: uppercase;
     font-weight: bold;
-
 }
+
 #triangle-right {
-	width: 0;
-	height: 0;
-	border-top: 5px solid transparent;
-	border-left: 10px solid #f89b1d;
-	border-bottom: 5px solid transparent;
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 10px solid #f89b1d;
+    border-bottom: 5px solid transparent;
     float: right;
     margin-left: 5px;
     margin-top: 3px;
@@ -76,4 +79,3 @@ a .container img:hover {
     transition: all 0.3s ease-in-out;
     opacity: 0.8;
 }
-
