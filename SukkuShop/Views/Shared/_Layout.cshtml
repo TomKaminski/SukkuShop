@@ -13,7 +13,7 @@
                 <nav id="nav-top">
                     @if (Request.IsAuthenticated)
                     {
-                        using (Html.BeginForm("wyloguj", "konto", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "login-panel" }))
+                        using (Html.BeginForm("wyloguj", "konto", new {area = ""}, FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
                         {
                             @Html.AntiForgeryToken()
                             <ul class="login-container">
@@ -25,25 +25,25 @@
                     else
                     {
                         <ul class="login-container">
-                            <li>@Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new { @class = "login-panel-text" })</li>
-                            </ul>
-                            }
+                            <li>@Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new {@class = "login-panel-text"})</li>
+                        </ul>
+                    }
 
-                            <ul>
-                                <li>@Html.ActionLink("Kosmetyki", "Index", "Produkty", new {category = "kosmetyki"}, null)</li>
-                                <li>@Html.ActionLink("Przyprawy", "Index", "Produkty", new {category = "przyprawy"}, null)</li>
-                                <li>@Html.ActionLink("Herbaty", "Index", "Produkty", new {category = "herbaty"}, null)</li>
-                                <li>@Html.ActionLink("Bakalie", "Index", "Produkty", new {category = "bakalie"}, null)</li>
-                                <li>@Html.ActionLink("Inne", "Index", "Produkty", new {category = "inne"}, null)</li>
-                            </ul>
-</nav>
+                    <ul>
+                        <li>@Html.ActionLink("Kosmetyki", "Index", "Produkty", new {category = "kosmetyki"}, null)</li>
+                        <li>@Html.ActionLink("Przyprawy", "Index", "Produkty", new {category = "przyprawy"}, null)</li>
+                        <li>@Html.ActionLink("Herbaty", "Index", "Produkty", new {category = "herbaty"}, null)</li>
+                        <li>@Html.ActionLink("Bakalie", "Index", "Produkty", new {category = "bakalie"}, null)</li>
+                        <li>@Html.ActionLink("Inne", "Index", "Produkty", new {category = "inne"}, null)</li>
+                    </ul>
+                </nav>
                 <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
             </div>
             <nav id="nav-bottom" class="nav-low">
                 @using (Html.BeginForm("Search", "Product", FormMethod.Get, new {@class = "search"}))
                 {
                     @Html.TextBox("Search", null, new {placeholder = "WYSZUKAJ"})
-                    <input type="submit" class="search-arrow"/>
+                    <input type="submit" class="search-arrow" />
                 }
                 @Html.Partial("_CartInfoPartialView")
             </nav>

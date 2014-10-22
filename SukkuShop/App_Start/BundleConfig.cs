@@ -9,7 +9,8 @@ namespace SukkuShop
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                 "~/Scripts/jquery-{version}.js",
-                "~/Scripts/jquery.unobtrusive-ajax.min.js"));
+                "~/Scripts/jquery.unobtrusive-ajax.min.js",
+                "~/Scripts/main.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
                 "~/Scripts/jquery.validate*"));

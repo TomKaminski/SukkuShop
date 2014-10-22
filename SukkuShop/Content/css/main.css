@@ -9,8 +9,9 @@ body {
 
 
 header {
+    height: 250px;
     margin-top: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .header-logo {
@@ -52,7 +53,6 @@ a:hover { text-decoration: underline; }
 
 .header-top-container {
     height: 188px;
-    margin-bottom: 20px
 }
 
 nav {
@@ -62,7 +62,7 @@ nav {
 }
 
 .login-panel {
-    height: 40px;
+    height: 44px;
     float: right;
     text-align: right;
 }
@@ -72,6 +72,7 @@ nav {
     text-align: right;
     float: right;
     padding: 0;
+    height: 44px;
 
 }
 
@@ -91,8 +92,6 @@ nav {
     text-transform:none
 }
 
-
-
 .login-panel-text:hover {
     opacity: 1;
     text-decoration: none;
@@ -102,7 +101,7 @@ nav {
     width: 1066px;
     margin: auto;
     height: 50px;
-    margin: 0 auto 20px;
+    margin: 0 auto;
 }
 
 header input {
@@ -202,9 +201,14 @@ footer ul li:last-child .footer-text-big { width: 230px; }
 
 footer ul li img { float: right; }
 
+
 footer, footer a {
     font-size: 15px;
     font-family: SegoeSemibold;
+    color: #8d8d8d;
+}
+
+footer a:hover {
     color: black;
 }
 
