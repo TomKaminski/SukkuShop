@@ -2,14 +2,13 @@
     font-family: SegoeSemibold;
     src: url(../fonts/SegoeSemibold.ttf);
 }
+
 body {
     width: 1066px;
     margin: 20px auto;
 }
 
-header {
-    margin: 30px 0;
-}
+header { margin: 30px 0; }
 
 .header-logo {
     width: 132px;
@@ -25,19 +24,21 @@ header {
     opacity: 0.8;
 }
 
-header ul {
+header ul#shop-category {
     float: left;
-    margin-top: 120px;
+    margin-top: 51px;
 }
-
-header ul li {
+header ul {
+    float: right;
+}
+header ul#shop-category li {
     display: inline;
     margin-right: 40px;
 }
 
-header ul li:first-child { margin-left: 40px; }
+header ul#shop-category li:first-child { margin-left: 40px; }
 
-header ul li a {
+header ul#shop-category li a {
     font-size: 26px;
     font-family: Segoe UI;
     color: #f89b1d;
@@ -59,19 +60,22 @@ nav {
 }
 
 .login-container {
-    margin: 0 5px 0 0;
     text-align: right;
     float: right;
     padding: 0;
 }
 
 .login-container li {
-    display: block;
+    display: inline;
     margin: 0;
-    padding:0
+    padding: 0;
 }
 
-.login-panel-text {
+.manage-box { float: right; }
+
+.manage-box a:hover { opacity: 1; }
+
+.hello-text {
     font-family: Calibri;
     font-weight: bold;
     font-size: 20px;
@@ -79,7 +83,27 @@ nav {
     text-decoration: none;
     padding-right: 10px;
     opacity: 0.6;
-    text-transform:none
+    text-transform: none
+}
+
+.manage-text {
+    font-size: 11px;
+    font-family: Calibri;
+    color: black;
+    float: right;
+    padding-right: 10px;
+    opacity: 0.6;
+    text-decoration: none;
+}
+
+.login-panel-text {
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 20px;
+    color: black;
+    padding-right: 10px;
+    opacity: 0.6;
+    text-transform: none
 }
 
 .login-panel-text:hover {
@@ -135,7 +159,12 @@ header input {
     font-size: 20px;
 }
 
-.cart-box { opacity: 0.6; }
+.cart-box {
+opacity: 0.6;
+margin-right: 7px;
+margin-top: 68px;
+}
+
 
 .cart-box:hover { opacity: 1; }
 
@@ -148,9 +177,7 @@ header input {
     margin-right: 5px;
 }
 
-footer {
-    margin-top: 50px;
-}
+footer { margin-top: 50px; }
 
 footer ul { margin-top: 30px; }
 
@@ -193,8 +220,35 @@ footer, footer a {
     color: #8d8d8d;
 }
 
-footer a:hover {
-    color: black;
-}
+footer a:hover { color: black; }
 
 .footer-text { margin-bottom: 14px; }
+
+.link-to-shop-container {
+    float: right;
+    text-align: right;
+    margin-top: 20px;
+}
+
+.link-to-shop-container:hover { border-bottom: 1px solid #f89b1d; }
+
+.link-to-shop-container a {
+    font-size: 18px;
+    font-family: Calibri;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #f89b1d;
+}
+
+.link-to-shop-container a:hover { text-decoration: none; }
+
+#triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 5px solid transparent;
+    border-left: 10px solid #f89b1d;
+    border-bottom: 5px solid transparent;
+    float: right;
+    margin-left: 5px;
+    margin-top: 5px;
+}
