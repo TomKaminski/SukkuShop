@@ -34,12 +34,29 @@ namespace SukkuShop.Models
         public ICollection<Orders> Orders { get; set; }
     }
 
+    [Table("Subcategories")]
+    public class Subcategories
+    {
+        public Subcategories()
+        {
+            Products = new List<Products>();
+        }
+        public string Name { get; set; }
+        [Key]
+        public int SubcategoriesId { get; set; }
+        public int CategoryId { get; set; }
+
+        public virtual Categories Categories { get; set; }
+        public ICollection<Products> Products { get; set; }
+
+    }
+
     [Table("Categories")]
     public sealed class Categories
     {
         public Categories()
         {
-            Products = new List<Products>();
+            Subcategories = new List<Subcategories>();
         }
 
         [Key]
@@ -47,7 +64,7 @@ namespace SukkuShop.Models
         public string Name { get; set; }
         public int Promotion { get; set; }
 
-        public ICollection<Products> Products { get; set; }
+        public ICollection<Subcategories> Subcategories { get; set; }
     }
 
     [Table("Products")]
@@ -68,7 +85,7 @@ namespace SukkuShop.Models
         public string Producer { get; set; }
         public int Promotion { get; set; }
 
-        public virtual Categories Categories { get; set; }
+        public virtual Categories SubCategories { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
     }
@@ -103,7 +120,7 @@ namespace SukkuShop.Models
         public string OrderInfo { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
-        
+
         public virtual ApplicationUser User { get; set; }
     }
 
@@ -120,6 +137,7 @@ namespace SukkuShop.Models
         public DbSet<Categories> Categories { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Orders> Orders { get; set; }
+        public DbSet<Subcategories> Subcategories { get; set; }
 
 
         public static ApplicationDbContext Create()

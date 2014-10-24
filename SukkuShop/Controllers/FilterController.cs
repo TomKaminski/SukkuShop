@@ -15,7 +15,7 @@ namespace SukkuShop.Controllers
                 CenaMin = filter.CenaMin,
                 Fraza = filter.Fraza,
                 SelectedCategories = filter.SelectedCategories,
-                SortMethod = filter.SortMethod,
+                SortMethod = filter.SortMethod
             };
             return PartialView(model);
         }
