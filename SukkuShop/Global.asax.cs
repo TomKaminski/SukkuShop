@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using SukkuShop.Infrastructure.Binders;
 using SukkuShop.Models;
 
 namespace SukkuShop
@@ -16,7 +15,6 @@ namespace SukkuShop
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             Database.SetInitializer(new ApplicationDbContext.DropCreateInitializer());
-            ModelBinders.Binders.Add(typeof(ProductFilter), new ProductFilterBinder());
         }
     }
 }

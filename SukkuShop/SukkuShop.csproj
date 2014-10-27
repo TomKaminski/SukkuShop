@@ -168,16 +168,23 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\FilterController.cs" />
     <Compile Include="Controllers\KontoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ProduktyController.cs" />
+    <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\SklepController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\Binders\ProductFilterBinder.cs" />
+    <Compile Include="Infrastructure\Helpers\PagingHelper.cs" />
+    <Compile Include="Infrastructure\NotEqualConstraint.cs" />
+    <Compile Include="Migrations\201410251928272_InitialCreate.cs" />
+    <Compile Include="Migrations\201410251928272_InitialCreate.Designer.cs">
+      <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\ShopViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -236,19 +243,27 @@
     <Content Include="Views\Shared\Blokada.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_CartInfoPartialView.cshtml" />
-    <Content Include="Views\Produkty\Index.cshtml" />
+    <Content Include="Views\Sklep\Produkty.cshtml" />
     <Content Include="Views\Home\Regulamin.cshtml" />
     <Content Include="Views\Home\Dostawa.cshtml" />
     <Content Include="Views\Home\Platnosci.cshtml" />
+    <Content Include="Views\Nav\Menu.cshtml" />
+    <Content Include="Views\Home\PolitykaPrywatnosci.cshtml" />
+    <Content Include="Views\Nav\SortList.cshtml" />
+    <Content Include="Views\Sklep\SzczegółyProduktu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Infrastructure\Helpers\" />
-    <Folder Include="Views\Filter\" />
+    <Folder Include="Infrastructure\Binders\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201410251928272_InitialCreate.resx">
+      <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

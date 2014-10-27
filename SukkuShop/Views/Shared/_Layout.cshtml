@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SukkuShop.Models
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -17,7 +18,6 @@
                             <div class="manage-box">
                                 <div class="hello-text" style="margin-left:8px">Witaj @Session["username"]!</div>
                                 @Html.ActionLink("zarządzaj kontem", "Index", "Konto", null, new { @class = "manage-text" })
-                                
                             </div>
                         </li>
                         <li>
@@ -41,24 +41,18 @@
                         @Html.Partial("_CartInfoPartialView")
                     </li>
                 </ul>
-                <ul id="shop-category">
-                    <li>@Html.ActionLink("Kosmetyki", "Index", "Produkty", new {category = "kosmetyki"}, null)</li>
-                    <li>@Html.ActionLink("Przyprawy", "Index", "Produkty", new {category = "przyprawy"}, null)</li>
-                    <li>@Html.ActionLink("Herbaty", "Index", "Produkty", new {category = "herbaty"}, null)</li>
-                    <li>@Html.ActionLink("Bakalie", "Index", "Produkty", new {category = "bakalie"}, null)</li>
-                    <li>@Html.ActionLink("Inne", "Index", "Produkty", new {category = "inne"}, null)</li>
-                </ul>
+                @Html.Action("Menu","Nav")
             </nav>
             <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
             <nav id="nav-bottom" class="nav-low">
-                @using (Html.BeginForm("Search", "Product", FormMethod.Get, new {@class = "search"}))
+                @using (Html.BeginRouteForm(new{controller = "Sklep", action = "Produkty"}))
                 {
-                    @Html.TextBox("Search", null, new {placeholder = "WYSZUKAJ"})
+                    @Html.TextBox("search", null, new {id="search",placeholder = "WYSZUKAJ"})
                     <input type="submit" class="search-arrow" />
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
-                    @Html.ActionLink("Przejdź do sklepu", "Index", "Produkty", null, new {@class = "shop-link"})
+                    @Html.ActionLink("Przejdź do sklepu", "Produkty", "Sklep",null, null)
                 </div>
             </nav>
             <div class="clear">&nbsp;</div>
@@ -80,9 +74,9 @@
                 <li>
                     <div class="footer-text-big">użytkownik</div>
                     <img src="~/Content/Images/footer-user.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto")<br /></div>
-                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto",null,null)<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto",null,null)<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto",null,null)<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big">sukku</div>

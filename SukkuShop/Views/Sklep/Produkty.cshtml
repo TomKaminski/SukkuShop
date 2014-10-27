@@ -1,0 +1,23 @@
+﻿@using SukkuShop.Infrastructure.Helpers
+@model SukkuShop.Models.ProductsListViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@Html.Action("SortList", "Nav")
+
+<br/>
+
+@foreach (var product in Model.Products)
+{
+    
+    <h1>@product.Name</h1>
+    <h2>@product.Price</h2>
+    <h3>@product.Id</h3>
+    @Html.ActionLink("Szczegóły","SzczegółyProduktu",new{id=product.Id})
+    <br/>
+}
+
+<br/>
+@Html.PageLinks(Model.PagingInfo, x=>Url.Action("Produkty","Sklep", new{page=x,category=Model.CurrentCategory,method=Model.CurrentSortMethod}))
+

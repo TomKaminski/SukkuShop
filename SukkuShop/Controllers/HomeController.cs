@@ -23,5 +23,10 @@ namespace SukkuShop.Controllers
         {
             return View();
         }
+
+        public ViewResult PolitykaPrywatnosci()
+        {
+            return View();
+        }
     }
 }

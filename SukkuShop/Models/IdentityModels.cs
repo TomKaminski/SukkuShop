@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -34,37 +35,21 @@ namespace SukkuShop.Models
         public ICollection<Orders> Orders { get; set; }
     }
 
-    [Table("Subcategories")]
-    public class Subcategories
-    {
-        public Subcategories()
-        {
-            Products = new List<Products>();
-        }
-        public string Name { get; set; }
-        [Key]
-        public int SubcategoriesId { get; set; }
-        public int CategoryId { get; set; }
-
-        public virtual Categories Categories { get; set; }
-        public ICollection<Products> Products { get; set; }
-
-    }
 
     [Table("Categories")]
     public sealed class Categories
     {
         public Categories()
         {
-            Subcategories = new List<Subcategories>();
+            Products = new List<Products>();
         }
 
         [Key]
         public int CategoryId { get; set; }
         public string Name { get; set; }
-        public int Promotion { get; set; }
+        public int? Promotion { get; set; }
 
-        public ICollection<Subcategories> Subcategories { get; set; }
+        public ICollection<Products> Products { get; set; }
     }
 
     [Table("Products")]
@@ -81,11 +66,14 @@ namespace SukkuShop.Models
         public decimal Price { get; set; }
         public int Quantity { get; set; }
         public int CategoryId { get; set; }
-        public string FilePath { get; set; }
+        public string ImageName { get; set; }
         public string Producer { get; set; }
-        public int Promotion { get; set; }
+        public int? Promotion { get; set; }
+        public DateTime DateAdded { get; set; }
+        [DefaultValue(0)]
+        public int OrdersCount { get; set; }
 
-        public virtual Categories SubCategories { get; set; }
+        public virtual Categories Categories { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
     }
@@ -137,7 +125,6 @@ namespace SukkuShop.Models
         public DbSet<Categories> Categories { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<Subcategories> Subcategories { get; set; }
 
 
         public static ApplicationDbContext Create()
@@ -167,7 +154,7 @@ namespace SukkuShop.Models
         }
 
         /// Context Initializer
-        public class DropCreateInitializer : DropCreateDatabaseAlways<ApplicationDbContext>
+        public class DropCreateInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
         {
             protected override void Seed(ApplicationDbContext context)
             {
