@@ -16,12 +16,12 @@
                     {
                         <li>
                             <div class="manage-box">
-                                <div class="hello-text" style="margin-left:8px">Witaj @Session["username"]!</div>
-                                @Html.ActionLink("zarządzaj kontem", "Index", "Konto", null, new { @class = "manage-text" })
+                                <div class="hello-text" style="margin-left: 8px">Witaj @Session["username"]!</div>
+                                @Html.ActionLink("zarządzaj kontem", "Index", "Konto", null, new {@class = "manage-text"})
                             </div>
                         </li>
                         <li>
-                            @using (Html.BeginForm("wyloguj", "konto", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "login-panel" }))
+                            @using (Html.BeginForm("wyloguj", "konto", new {area = ""}, FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
                             {
                                 @Html.AntiForgeryToken()
                                 <a class="login-panel-text" href="javascript:document.getElementById('logoutForm').submit()">WYLOGUJ</a>
@@ -32,8 +32,8 @@
                     {
                         <li>
                             <ul class="login-container">
-                                <li>@Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new { @class = "login-panel-text", style = "border-right: 2px solid #8d8d8d;" })</li>
-                                <li>@Html.ActionLink("REJESTRACJA", "Zarejestruj", "Konto", null, new { @class = "login-panel-text", style = "margin-left: 5px;" })</li>
+                                <li>@Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new {@class = "login-panel-text", style = "border-right:2px solid #8d8d8d;"})</li>
+                                <li>@Html.ActionLink("REJESTRACJA", "Zarejestruj", "Konto", null, new {@class = "login-panel-text", style = "margin-left:5px;"})</li>
                             </ul>
                         </li>
                     }
@@ -41,18 +41,18 @@
                         @Html.Partial("_CartInfoPartialView")
                     </li>
                 </ul>
-                @Html.Action("Menu","Nav")
+                @Html.Action("Menu", "Nav")
             </nav>
             <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
             <nav id="nav-bottom" class="nav-low">
-                @using (Html.BeginRouteForm(new{controller = "Sklep", action = "Produkty"}))
+                @using (Html.BeginRouteForm(new {controller = "Sklep", action = "Produkty"}))
                 {
-                    @Html.TextBox("search", null, new {id="search",placeholder = "WYSZUKAJ"})
+                    @Html.TextBox("search", (string)ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
                     <input type="submit" class="search-arrow" />
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
-                    @Html.ActionLink("Przejdź do sklepu", "Produkty", "Sklep",null, null)
+                    @Html.ActionLink("Przejdź do sklepu", "Produkty", "Sklep", null, null)
                 </div>
             </nav>
             <div class="clear">&nbsp;</div>
@@ -74,9 +74,9 @@
                 <li>
                     <div class="footer-text-big">użytkownik</div>
                     <img src="~/Content/Images/footer-user.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto",null,null)<br /></div>
-                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto",null,null)<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto",null,null)<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto", null, null)<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto", null, null)<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto", null, null)<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big">sukku</div>

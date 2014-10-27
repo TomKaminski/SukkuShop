@@ -28,15 +28,18 @@ namespace SukkuShop.Controllers
 
 
         // GET: Produkty
-        public ActionResult Produkty(string category, SortMethod method = SortMethod.Nowości,string search=null, int page = 1)
+        public ActionResult Produkty(string category, SortMethod method = SortMethod.Nowości, string search = null,
+            int page = 1)
         {
             var category1 = category;
             if (search == null)
-                search = category1;
+               search = category1;
+
             var listaProd = DbContext.Products.Where(c => category1 == null || c.Categories.Name == category1);
             var categorylist = DbContext.Categories.Select(x => x.Name).Distinct().ToList();
-            if (!categorylist.Contains(category) && search!=null)
+            if (!categorylist.Contains(category) && search != null)
             {
+                ViewBag.SearchString = search;
                 category = search;
                 listaProd = DbContext.Products.Where(c => c.Name.Contains(category));
             }
@@ -88,6 +91,6 @@ namespace SukkuShop.Controllers
         {
             var product = DbContext.Products.FirstOrDefault(x => x.ProductId == id);
             return View(product);
-        }   
+        }
     }
 }
