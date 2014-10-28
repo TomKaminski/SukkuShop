@@ -1,10 +1,10 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using SukkuShop.Identity;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
@@ -12,32 +12,16 @@ namespace SukkuShop.Controllers
     [Authorize]
     public class KontoController : Controller
     {
-        private ApplicationUserManager _userManager;
+        private readonly ApplicationUserManager _userManager;
+        private readonly ApplicationSignInManager _signInManager;
+        private readonly IAuthenticationManager _authenticationManager;
 
-        public KontoController()
+        public KontoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
+            IAuthenticationManager authenticationManager)
         {
-        }
-
-        public KontoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
-        {
-            UserManager = userManager;
-            SignInManager = signInManager;
-        }
-
-        public ApplicationUserManager UserManager
-        {
-            get { return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>(); }
-            private set { _userManager = value; }
-        }
-
-        
-
-        private ApplicationSignInManager _signInManager;
-
-        public ApplicationSignInManager SignInManager
-        {
-            get { return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>(); }
-            private set { _signInManager = value; }
+            _userManager = userManager;
+            _signInManager = signInManager;
+            _authenticationManager = authenticationManager;
         }
 
         //[AllowAnonymous]
@@ -60,6 +44,7 @@ namespace SukkuShop.Controllers
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
+
         // POST: /Account/Login
         [HttpPost]
         [AllowAnonymous]
@@ -74,11 +59,11 @@ namespace SukkuShop.Controllers
             //{
             //    return View("NonActiveAccount", (object) model.Email);
             //}
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = await UserManager.FindByEmailAsync(model.Email);
+                    var user = await _userManager.FindByEmailAsync(model.Email);
                     Session["username"] = user.Name;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -98,6 +83,7 @@ namespace SukkuShop.Controllers
                 return RedirectToAction("Index", "Konto");
             return View();
         }
+
         // POST: /Account/Register
         [HttpPost]
         [AllowAnonymous]
@@ -106,14 +92,20 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser {UserName = model.Email, Email = model.Email, Name = model.Name, LastName = model.LastName};
-                var result = await UserManager.CreateAsync(user, model.Password);
+                var user = new ApplicationUser
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    Name = model.Name,
+                    LastName = model.LastName
+                };
+                var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, Request.Url.Scheme);
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", ActivationMailBuilder(callbackUrl));
-                    await SignInManager.SignInAsync(user, false, false);
+                    await _signInManager.SignInAsync(user, false, false);
                     Session["username"] = user.Name;
                     return RedirectToAction("Index", "Home");
                 }
@@ -132,7 +124,7 @@ namespace SukkuShop.Controllers
             {
                 return View("Error");
             }
-            var result = await UserManager.ConfirmEmailAsync(userId, code);
+            var result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "PotwierdzonyMail" : "Blad");
         }
 
@@ -143,6 +135,7 @@ namespace SukkuShop.Controllers
         {
             return View();
         }
+
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
@@ -152,16 +145,16 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return View("ZapomnianeHasloPotwierdzenie");
                 }
-                var code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetujHaslo", "Konto", new {userId = user.Id, code},
                     Request.Url.Scheme);
-                await UserManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
+                await _userManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
                 return RedirectToAction("ZapomnianeHasloPotwierdzenie", "Konto");
             }
             return View(model);
@@ -194,13 +187,13 @@ namespace SukkuShop.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
                 return RedirectToAction("ResetujHasloPotwierdzenie", "Konto");
             }
-            var result = await UserManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
+            var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
                 return RedirectToAction("ResetujHasloPotwierdzenie", "Konto");
@@ -223,16 +216,16 @@ namespace SukkuShop.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Wyloguj()
         {
-            AuthenticationManager.SignOut();
+            _authenticationManager.SignOut();
             Session["username"] = null;
             return RedirectToAction("Index", "Home");
         }
-        
+
 
         ////////////MANAGE///////////////
         public async Task<ActionResult> EdytujDane()
         {
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             var userInfo = new ChangeUserInfoViewModel
             {
                 Name = user.Name,
@@ -242,7 +235,6 @@ namespace SukkuShop.Controllers
                 Phone = user.PhoneNumber,
                 PostalCode = user.PostalCode,
                 Street = user.Street
-
             };
             return View(userInfo);
         }
@@ -252,7 +244,7 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
                 user.City = model.City;
                 user.LastName = model.LastName;
                 user.Name = model.Name;
@@ -260,7 +252,7 @@ namespace SukkuShop.Controllers
                 user.Number = model.Number;
                 user.PhoneNumber = model.Phone;
                 user.Street = model.Street;
-                await UserManager.UpdateAsync(user);
+                await _userManager.UpdateAsync(user);
                 return RedirectToAction("Index");
             }
             return View(model);
@@ -285,7 +277,7 @@ namespace SukkuShop.Controllers
                                     : message == ManageMessageId.RemovePhoneSuccess
                                         ? "Your phone number was removed."
                                         : "";
-            var user = await UserManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             ;
             var isNull = false;
 
@@ -298,7 +290,6 @@ namespace SukkuShop.Controllers
                 Phone = user.PhoneNumber,
                 PostalCode = user.PostalCode,
                 Street = user.Street
-
             };
 
             foreach (var prop in userInfo.GetType().GetProperties())
@@ -311,7 +302,7 @@ namespace SukkuShop.Controllers
             {
                 HasPassword = HasPassword(),
                 BrowserRemembered =
-                    await AuthenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
+                    await _authenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
                 ChangeUserInfoViewModel = userInfo,
                 IsNull = isNull
             };
@@ -338,16 +329,16 @@ namespace SukkuShop.Controllers
             }
             var result =
                 await
-                    UserManager.ChangePasswordAsync(int.Parse(User.Identity.GetUserId()), model.OldPassword,
+                    _userManager.ChangePasswordAsync(int.Parse(User.Identity.GetUserId()), model.OldPassword,
                         model.NewPassword);
             if (result.Succeeded)
             {
-                var user = await UserManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+                var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
                 if (user != null)
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction("Index", new { Message = ManageMessageId.ChangePasswordSuccess });
+                return RedirectToAction("Index", new {Message = ManageMessageId.ChangePasswordSuccess});
             }
             AddErrors(result);
             return View(model);
@@ -368,15 +359,16 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await UserManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
+                var result =
+                    await _userManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
                 if (result.Succeeded)
                 {
-                    var user = await UserManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+                    var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
                     if (user != null)
                     {
                         await SignInAsync(user, isPersistent: false);
                     }
-                    return RedirectToAction("Index", new { Message = ManageMessageId.SetPasswordSuccess });
+                    return RedirectToAction("Index", new {Message = ManageMessageId.SetPasswordSuccess});
                 }
                 AddErrors(result);
             }
@@ -384,10 +376,6 @@ namespace SukkuShop.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
-       
-
-        
 
         #region Helpers
 
@@ -405,10 +393,10 @@ namespace SukkuShop.Controllers
             return body.ToString();
         }
 
-        private IAuthenticationManager AuthenticationManager
-        {
-            get { return HttpContext.GetOwinContext().Authentication; }
-        }
+        //private IAuthenticationManager AuthenticationManager
+        //{
+        //    get { return HttpContext.GetOwinContext().Authentication; }
+        //}
 
         private void AddErrors(IdentityResult result)
         {
@@ -430,17 +418,16 @@ namespace SukkuShop.Controllers
 
         private async Task SignInAsync(ApplicationUser user, bool isPersistent)
         {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
+            _authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
                 DefaultAuthenticationTypes.TwoFactorCookie);
-            AuthenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
-                await user.GenerateUserIdentityAsync(UserManager));
+            _authenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
+                await user.GenerateUserIdentityAsync(_userManager));
         }
-
 
 
         private bool HasPassword()
         {
-            var user = UserManager.FindById(int.Parse(User.Identity.GetUserId()));
+            var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
             if (user != null)
             {
                 return user.PasswordHash != null;

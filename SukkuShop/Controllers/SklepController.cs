@@ -1,30 +1,20 @@
 ﻿using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI;
-using Microsoft.AspNet.Identity.Owin;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
     public class SklepController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public SklepController()
-        {
-        }
+
 
         public SklepController(ApplicationDbContext dbContext)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
-        public ApplicationDbContext DbContext
-        {
-            get { return _dbContext ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>(); }
-            private set { _dbContext = value; }
-        }
 
 
         // GET: Produkty
@@ -35,13 +25,13 @@ namespace SukkuShop.Controllers
             if (search == null)
                search = category1;
 
-            var listaProd = DbContext.Products.Where(c => category1 == null || c.Categories.Name == category1);
-            var categorylist = DbContext.Categories.Select(x => x.Name).Distinct().ToList();
+            var listaProd = _dbContext.Products.Where(c => category1 == null || c.Categories.Name == category1);
+            var categorylist = _dbContext.Categories.Select(x => x.Name).Distinct().ToList();
             if (!categorylist.Contains(category) && search != null)
             {
                 ViewBag.SearchString = search;
                 category = search;
-                listaProd = DbContext.Products.Where(c => c.Name.Contains(category));
+                listaProd = _dbContext.Products.Where(c => c.Name.Contains(category));
             }
             var paginator = new PagingInfo
             {
@@ -90,7 +80,7 @@ namespace SukkuShop.Controllers
         public ActionResult SzczegółyProduktu(int id, string returnUrl)
         {
 
-            var product = DbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             return View(product);
         }
     }

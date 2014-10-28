@@ -33,11 +33,16 @@ namespace SukkuShop
             container.RegisterType<ApplicationSignInManager>();
             container.RegisterType<ApplicationRoleManager>();
             container.RegisterType<ApplicationUserManager>();
+
             container.RegisterType<IAuthenticationManager>(
                 new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 
-            container.RegisterType<IUserStore<ApplicationUser, int>, UserStore<ApplicationUser, RoleIntPk, int,
-                UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>>(new InjectionConstructor(typeof (ApplicationDbContext)));
+            container.RegisterType<IUserStore<ApplicationUser, int>, UserStoreIntPk>(
+                new InjectionConstructor(typeof (ApplicationDbContext)));
+
+            container.RegisterType<IRoleStore<RoleIntPk, int>, RoleStoreIntPk>(
+                new InjectionConstructor(typeof(ApplicationDbContext)));
+
         }
     }
 }

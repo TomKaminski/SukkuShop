@@ -10,29 +10,22 @@ namespace SukkuShop.Controllers
 {
     public class NavController : Controller
     {
-        private ApplicationDbContext _dbContext;
+        private readonly ApplicationDbContext _dbContext;
 
-        public NavController()
-        {
-        }
 
         
         public NavController(ApplicationDbContext dbContext)
         {
-            DbContext = dbContext;
+            _dbContext = dbContext;
         }
 
         
-        public ApplicationDbContext DbContext
-        {
-            get { return _dbContext ?? HttpContext.GetOwinContext().Get<ApplicationDbContext>(); }
-            private set { _dbContext = value; }
-        }
+
 
         public PartialViewResult Menu(string category = null)
         {
             ViewBag.Category = category;
-            IEnumerable<string> categoryLinks = DbContext.Categories.Select(x => x.Name);
+            IEnumerable<string> categoryLinks = _dbContext.Categories.Select(x => x.Name);
             return PartialView(categoryLinks);
         }
 
