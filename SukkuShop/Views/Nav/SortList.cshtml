@@ -1,0 +1,18 @@
+﻿@model IEnumerable<string>
+           
+@foreach (var link in Model)
+{
+    <li>
+        @Html.RouteLink(link, new
+        {
+            controller = "Sklep",
+            action = "Produkty",
+            category = ViewBag.SelectedCategory,
+            method = link,
+            page = 1
+        }, new
+        {
+            style = (link == ViewBag.CurrentSortMethod.ToString() ? "font-weight:bold" : "")
+        })
+    </li>
+}
