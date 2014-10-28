@@ -1,15 +1,16 @@
-﻿@model SukkuShop.Models.Products
+﻿@model SukkuShop.Models.ProductDetailsViewModel
 @{
     ViewBag.Title = "SzczegółyProduktu";
 }
 
 <h2>SzczegółyProduktu</h2>
 
-@Model.Name <br/>
-@Model.Price <br />
-@Model.Producer <br />
-@Model.Promotion <br />
-@Model.Quantity <br />
-@Model.DateAdded <br />
+@Model.Product.Name <br/>
+@Model.Product.Price <br />
+@Model.Product.Producer <br />
+@Model.Product.Promotion <br />
+@Model.Product.Quantity <br />
+@Model.Product.DateAdded <br />
 
+<a href="@Session["returnUrl"]">Powrót do sklepuuu</a>
 

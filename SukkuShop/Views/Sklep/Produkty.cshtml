@@ -2,6 +2,7 @@
 @model SukkuShop.Models.ProductsListViewModel
 @{
     ViewBag.Title = "Index";
+    Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
 }
 
 @Html.Action("SortList", "Nav")

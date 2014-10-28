@@ -2,12 +2,15 @@
 
 namespace SukkuShop.Controllers
 {
+
     public class HomeController : Controller
     {
+
         public ViewResult Index()
         {
             return View();
         }
+
 
         public ViewResult Regulamin()
         {
@@ -18,6 +21,7 @@ namespace SukkuShop.Controllers
         {
             return View();
         }
+
 
         public ViewResult Platnosci()
         {

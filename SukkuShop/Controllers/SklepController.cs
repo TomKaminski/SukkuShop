@@ -46,7 +46,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 1,
+                ItemsPerPage = 3,
                 TotalItems = listaProd.Count()
             };
             switch (method)
@@ -87,10 +87,16 @@ namespace SukkuShop.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SzczegółyProduktu(int id)
+        public ActionResult SzczegółyProduktu(int id, string returnUrl)
         {
+
             var product = DbContext.Products.FirstOrDefault(x => x.ProductId == id);
-            return View(product);
+            var model = new ProductDetailsViewModel
+            {
+                Product = product,
+                ReturnUrl = returnUrl
+            };
+            return View(model);
         }
     }
 }
