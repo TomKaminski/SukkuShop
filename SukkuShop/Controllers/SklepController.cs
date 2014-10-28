@@ -91,12 +91,7 @@ namespace SukkuShop.Controllers
         {
 
             var product = DbContext.Products.FirstOrDefault(x => x.ProductId == id);
-            var model = new ProductDetailsViewModel
-            {
-                Product = product,
-                ReturnUrl = returnUrl
-            };
-            return View(model);
+            return View(product);
         }
     }
 }
