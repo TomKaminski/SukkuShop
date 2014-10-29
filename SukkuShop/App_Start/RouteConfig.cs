@@ -93,9 +93,6 @@ namespace SukkuShop
                 }
                 );
 
-
-            
-
             routes.MapRoute(null, "{controller}/{action}/{id}",
                 new
                 {

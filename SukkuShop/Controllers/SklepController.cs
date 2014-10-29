@@ -77,9 +77,8 @@ namespace SukkuShop.Controllers
             return View(viewModel);
         }
 
-        public ActionResult SzczegółyProduktu(int id, string returnUrl)
+        public ActionResult SzczegółyProduktu(int id)
         {
-
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             return View(product);
         }
