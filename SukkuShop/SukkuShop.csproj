@@ -198,6 +198,7 @@
     <Compile Include="Identity\ApplicationSignInManager.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\EmailService.cs" />
+    <Compile Include="Infrastructure\Generic\IAppRepository.cs" />
     <Compile Include="Infrastructure\Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NotEqualConstraint.cs" />
     <Compile Include="Migrations\201410251928272_InitialCreate.cs" />

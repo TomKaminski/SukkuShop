@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 
 namespace SukkuShop.Models
 {
-    public class ApplicationUser : IdentityUser<int, UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>
+    public sealed class ApplicationUser : IdentityUser<int, UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>
     {
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(ApplicationUserManager manager)
         {
@@ -54,7 +55,7 @@ namespace SukkuShop.Models
     }
 
     [Table("Products")]
-    public class Products
+    public sealed class Products
     {
         public Products()
         {
@@ -74,7 +75,7 @@ namespace SukkuShop.Models
         [DefaultValue(0)]
         public int OrdersCount { get; set; }
 
-        public virtual Categories Categories { get; set; }
+        public Categories Categories { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
     }
@@ -94,7 +95,7 @@ namespace SukkuShop.Models
     }
 
     [Table("Orders")]
-    public class Orders
+    public sealed class Orders
     {
         public Orders()
         {
@@ -110,12 +111,12 @@ namespace SukkuShop.Models
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
 
-        public virtual ApplicationUser User { get; set; }
+        public ApplicationUser User { get; set; }
     }
 
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, RoleIntPk, int,
-        UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>
+        UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>,IAppRepository
     {
         public ApplicationDbContext()
             : base("DefaultConnection")
