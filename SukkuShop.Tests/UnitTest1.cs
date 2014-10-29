@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SukkuShop.Models;
@@ -25,6 +24,7 @@ namespace SukkuShop.Tests
                 new Products {Name = "Produkt5", ProductId = 5},
                 new Products {Name = "Produkt6", ProductId = 6},
             }.AsQueryable();
+
             var mock = new Mock<DbSet<Products>>();
             mock.As<IQueryable<Products>>().Setup(m => m.Provider).Returns(products.Provider);
             mock.As<IQueryable<Products>>().Setup(m => m.Expression).Returns(products.Expression);

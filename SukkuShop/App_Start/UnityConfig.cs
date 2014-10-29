@@ -29,18 +29,18 @@ namespace SukkuShop
 
         public static void RegisterTypes(IUnityContainer container)
         {
-            container.RegisterType<ApplicationDbContext>();
-            container.RegisterType<ApplicationSignInManager>();
-            container.RegisterType<ApplicationRoleManager>();
-            container.RegisterType<ApplicationUserManager>();
+            container.RegisterType<ApplicationDbContext>(new PerRequestLifetimeManager());
+            container.RegisterType<ApplicationSignInManager>(new PerRequestLifetimeManager());
+            container.RegisterType<ApplicationRoleManager>(new PerRequestLifetimeManager());
+            container.RegisterType<ApplicationUserManager>(new PerRequestLifetimeManager());
 
-            container.RegisterType<IAuthenticationManager>(
+            container.RegisterType<IAuthenticationManager>(new PerRequestLifetimeManager(),
                 new InjectionFactory(c => HttpContext.Current.GetOwinContext().Authentication));
 
-            container.RegisterType<IUserStore<ApplicationUser, int>, UserStoreIntPk>(
+            container.RegisterType<IUserStore<ApplicationUser, int>, UserStoreIntPk>(new PerRequestLifetimeManager(),
                 new InjectionConstructor(typeof (ApplicationDbContext)));
 
-            container.RegisterType<IRoleStore<RoleIntPk, int>, RoleStoreIntPk>(
+            container.RegisterType<IRoleStore<RoleIntPk, int>, RoleStoreIntPk>(new PerRequestLifetimeManager(),
                 new InjectionConstructor(typeof(ApplicationDbContext)));
 
         }
