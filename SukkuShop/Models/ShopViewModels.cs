@@ -41,6 +41,7 @@ namespace SukkuShop.Models
         public string ImageName { get; set; }
         public int QuantityInStock { get; set; }
         public string Category { get; set; }
+        public decimal PriceAfterDiscount { get; set; }
     }
 
 }

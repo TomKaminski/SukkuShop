@@ -199,6 +199,7 @@
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Identity\EmailService.cs" />
     <Compile Include="Infrastructure\Generic\IAppRepository.cs" />
+    <Compile Include="Infrastructure\Generic\IShop.cs" />
     <Compile Include="Infrastructure\Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\NotEqualConstraint.cs" />
     <Compile Include="Migrations\201410251928272_InitialCreate.cs" />
@@ -208,6 +209,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Shop.cs" />
     <Compile Include="Models\ShopViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

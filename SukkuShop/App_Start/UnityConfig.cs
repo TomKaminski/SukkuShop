@@ -5,6 +5,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
 using Microsoft.Practices.Unity;
 using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop
@@ -43,6 +44,7 @@ namespace SukkuShop
             container.RegisterType<IRoleStore<RoleIntPk, int>, RoleStoreIntPk>(new PerRequestLifetimeManager(),
                 new InjectionConstructor(typeof(ApplicationDbContext)));
 
+            container.RegisterType<IShop, Shop>();
         }
     }
 }
