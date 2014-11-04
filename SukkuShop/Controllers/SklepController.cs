@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data;
+using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
@@ -17,21 +18,29 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string category, SortMethod method = SortMethod.Nowości, string search = null,
+        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowości,
+            string search = null,
             int page = 1)
         {
+            var subcategorylist = _dbContext.SubCategories.Select(x => x.Name).Distinct().ToList();
             var categorylist = _dbContext.Categories.Select(x => x.Name).Distinct().ToList();
 
-            if (!categorylist.Contains(category))
+            if (!subcategorylist.Contains(subcategory) && !categorylist.Contains(category))
             {
                 if (search == null)
                     search = category;
                 ViewBag.SearchString = search;
                 category = search;
                 _shop.Products = _dbContext.Products.Where(c => c.Name.Contains(category));
+                if(search==null && category==null)
+                    _shop.Products = _dbContext.Products.Select(c => c);
             }
-            else
-                _shop.Products = _dbContext.Products.Where(c => category == null || c.Categories.Name == category);
+            else if (subcategorylist.Contains(subcategory))
+                _shop.Products = _dbContext.Products.Where(c => c.SubCategories.Name == subcategory);
+            else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
+                _shop.Products = _dbContext.Products.Where(c => c.SubCategories.Categories.Name == category);
+
+
 
             var paginator = new PagingInfo
             {
@@ -48,8 +57,6 @@ namespace SukkuShop.Controllers
                     ImageName = x.ImageName,
                     Price = x.Price,
                     Promotion = x.Promotion ?? 0,
-                    QuantityInStock = x.Quantity,
-                    Category = x.Categories.Name,
                     Id = x.ProductId,
                     PriceAfterDiscount = x.Price*x.Promotion ?? 0
                 }).Skip((page - 1)*paginator.ItemsPerPage)
@@ -66,6 +73,5 @@ namespace SukkuShop.Controllers
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             return View(product);
         }
-
     }
 }

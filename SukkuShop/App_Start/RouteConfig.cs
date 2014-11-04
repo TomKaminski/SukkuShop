@@ -31,6 +31,7 @@ namespace SukkuShop
                     category = (string) null,
                     method = SortMethod.Nowości,
                     page = 1,
+                    subcategory=(string)null
                 }
                 );
 
@@ -41,8 +42,8 @@ namespace SukkuShop
                     controller = "Sklep",
                     action = "Produkty",
                     method = SortMethod.Nowości,
-                    category =
-                        (string) null
+                    category =(string) null,
+                    subcategory = (string)null
                 },
                 new {page = @"\d+"}
                 );
@@ -54,7 +55,8 @@ namespace SukkuShop
                     controller = "Sklep",
                     action = "Produkty",
                     page = 1,
-                    method = SortMethod.Nowości
+                    method = SortMethod.Nowości,
+                    subcategory = (string)null
                 }
                 );
 
@@ -62,7 +64,10 @@ namespace SukkuShop
                 "{category}/{page}",
                 new
                 {
-                    controller = "Sklep", action = "Produkty", method = SortMethod.Nowości
+                    controller = "Sklep",
+                    action = "Produkty",
+                    method = SortMethod.Nowości,
+                    subcategory = (string)null
                 },
                 new
                 {
@@ -77,7 +82,8 @@ namespace SukkuShop
                     controller = "Sklep",
                     action = "Produkty",
                     page = 1,
-                    category = (string) null
+                    category = (string) null,
+                    subcategory = (string)null
                 }
                 );
 
@@ -85,7 +91,8 @@ namespace SukkuShop
                 "Produkty/{method}/{page}",
                 new
                 {
-                    controller = "Sklep", action = "Produkty", category = (string) null
+                    controller = "Sklep", action = "Produkty", category = (string) null,
+                    subcategory = (string)null
                 },
                 new
                 {
@@ -104,10 +111,35 @@ namespace SukkuShop
                 });
 
             routes.MapRoute(null,
+                "{category}/{subcategory}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Produkty",
+                    page = 1,
+                    method = SortMethod.Nowości
+                }
+                );
+
+            routes.MapRoute(null,
+                "{category}/{subcategory}/{page}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Produkty",
+                    method = SortMethod.Nowości,
+                },
+                new
+                {
+                    page = @"\d+"
+                }
+                );
+
+            routes.MapRoute(null,
                 "{category}/{method}",
                 new
                 {
-                    controller = "Sklep", action = "Produkty", page = 1
+                    controller = "Sklep", action = "Produkty", page = 1,subcategory=(string)null
                 }
                 );
 
@@ -115,7 +147,32 @@ namespace SukkuShop
                 "{category}/{method}/{page}",
                 new
                 {
-                    controller = "Sklep", action = "Produkty"
+                    controller = "Sklep",
+                    action = "Produkty",
+                    subcategory = (string)null
+                },
+                new
+                {
+                    page = @"\d+"
+                }
+                );
+
+            routes.MapRoute(null,
+                "{category}/{subcategory}/{method}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Produkty",
+                    page = 1,
+                }
+                );
+
+            routes.MapRoute(null,
+                "{category}/{subcategory}/{method}/{page}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Produkty"
                 },
                 new
                 {

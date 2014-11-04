@@ -206,6 +206,14 @@
     <Compile Include="Migrations\201410251928272_InitialCreate.Designer.cs">
       <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411041907364_SubCategories.cs" />
+    <Compile Include="Migrations\201411041907364_SubCategories.Designer.cs">
+      <DependentUpon>201411041907364_SubCategories.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411041919415_SubCategoriesV2.cs" />
+    <Compile Include="Migrations\201411041919415_SubCategoriesV2.Designer.cs">
+      <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -289,6 +297,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201410251928272_InitialCreate.resx">
       <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411041907364_SubCategories.resx">
+      <DependentUpon>201411041907364_SubCategories.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411041919415_SubCategoriesV2.resx">
+      <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

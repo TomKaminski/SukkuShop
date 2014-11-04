@@ -45,14 +45,24 @@
             </nav>
             <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
             <nav id="nav-bottom" class="nav-low">
+                
                 @using (Html.BeginRouteForm(new {controller = "Sklep", action = "Produkty"}))
                 {
-                    @Html.TextBox("search", (string)ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
-                    <input type="submit" class="search-arrow" />
+                    <div class="search">
+                        @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
+                        <input type="submit" class="search-arrow" />
+                    </div>
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
-                    @Html.ActionLink("Przejdź do sklepu", "Produkty", "Sklep", null, null)
+                    @Html.RouteLink("E-Sklep", new
+                    {
+                        controller = "Sklep",
+                        action = "Produkty",
+                        category = (string) null,
+                        page = 1,
+                        subcategory = (string) null
+                    })
                 </div>
             </nav>
             <div class="clear">&nbsp;</div>

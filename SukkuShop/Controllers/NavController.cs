@@ -15,20 +15,20 @@ namespace SukkuShop.Controllers
             _dbContext = dbContext;
         }
 
-                public PartialViewResult Menu(string category = null)
+        public PartialViewResult Menu(string category = null)
         {
             ViewBag.Category = category;
             var categoryLinks = _dbContext.Categories.Select(x => x.Name);
             return PartialView(categoryLinks);
         }
 
-        public PartialViewResult SortList( string category, string search,SortMethod method = SortMethod.Nowości)
+        public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowości)
         {
             if (search != null)
                 category = search;
             ViewBag.CurrentSortMethod = method;
             ViewBag.SelectedCategory = category;
-
+            ViewBag.SelectedSubCategory = subcategory;
             var sortlist = Enum.GetValues(typeof (SortMethod))
                 .Cast<SortMethod>()
                 .Select(v => v.ToString());

@@ -9,7 +9,8 @@
             action = "Produkty",
             category = ViewBag.SelectedCategory,
             method = link,
-            page = 1
+            page = 1,
+            subcategory = ViewBag.SelectedSubCategory
         }, new
         {
             style = (link == ViewBag.CurrentSortMethod.ToString() ? "font-weight:bold" : "")
