@@ -10,20 +10,15 @@ namespace SukkuShop.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
 
-
-        
         public NavController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
-        
-
-
-        public PartialViewResult Menu(string category = null)
+                public PartialViewResult Menu(string category = null)
         {
             ViewBag.Category = category;
-            IEnumerable<string> categoryLinks = _dbContext.Categories.Select(x => x.Name);
+            var categoryLinks = _dbContext.Categories.Select(x => x.Name);
             return PartialView(categoryLinks);
         }
 
@@ -33,6 +28,7 @@ namespace SukkuShop.Controllers
                 category = search;
             ViewBag.CurrentSortMethod = method;
             ViewBag.SelectedCategory = category;
+
             var sortlist = Enum.GetValues(typeof (SortMethod))
                 .Cast<SortMethod>()
                 .Select(v => v.ToString());

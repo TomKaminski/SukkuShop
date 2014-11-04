@@ -8,7 +8,7 @@ namespace SukkuShop.Controllers
     public class SklepController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-        private IShop _shop;
+        private readonly IShop _shop;
 
         public SklepController(ApplicationDbContext dbContext, IShop shop)
         {
@@ -20,21 +20,18 @@ namespace SukkuShop.Controllers
         public ActionResult Produkty(string category, SortMethod method = SortMethod.Nowości, string search = null,
             int page = 1)
         {
-            var category1 = category;
-            if (search == null)
-               search = category1;
-
             var categorylist = _dbContext.Categories.Select(x => x.Name).Distinct().ToList();
 
-            if (!categorylist.Contains(category) && search != null)
+            if (!categorylist.Contains(category))
             {
+                if (search == null)
+                    search = category;
                 ViewBag.SearchString = search;
                 category = search;
                 _shop.Products = _dbContext.Products.Where(c => c.Name.Contains(category));
             }
             else
-                _shop.Products = _dbContext.Products.Where(c => category1 == null || c.Categories.Name == category1);
-            
+                _shop.Products = _dbContext.Products.Where(c => category == null || c.Categories.Name == category);
 
             var paginator = new PagingInfo
             {
@@ -69,5 +66,6 @@ namespace SukkuShop.Controllers
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             return View(product);
         }
+
     }
 }

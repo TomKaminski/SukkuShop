@@ -19,7 +19,9 @@
     width: 180px;
     margin: auto;
 }
-
+.container-check a:hover {
+    text-decoration: none;
+}
 a .check {
     width: 180px;
     height: 60px;
@@ -34,7 +36,7 @@ a .check {
     vertical-align: middle;
 }
 
-a .check:hover { text-decoration: underline; }
+a .check:hover { text-decoration: underline; color:#6d6c6c }
 
 .container img:hover {
     -webkit-transition: all 0.3s ease-in-out;

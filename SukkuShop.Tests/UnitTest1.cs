@@ -11,34 +11,49 @@ namespace SukkuShop.Tests
     [TestClass]
     public class UnitTest1
     {
+        private readonly List<Products> _products = new List<Products>
+        {
+            new Products {Name = "Produkt1", ProductId = 1, Price = 10},
+            new Products {Name = "Produkt2", ProductId = 2, Price = 20},
+            new Products {Name = "Produkt3", ProductId = 3, Price = 30},
+            new Products {Name = "Produkt4", ProductId = 4, Price = 40},
+            new Products {Name = "Produkt5", ProductId = 5, Price = 50},
+            new Products {Name = "Produkt6", ProductId = 6, Price = 60},
+        };
+
         [TestMethod]
-        public void TestMethod1()
+        public void GetProduct()
         {
             //Arrange
-            var products = new List<Products>()
-            {
-                new Products {Name = "Produkt1", ProductId = 1},
-                new Products {Name = "Produkt2", ProductId = 2},
-                new Products {Name = "Produkt3", ProductId = 3},
-                new Products {Name = "Produkt4", ProductId = 4},
-                new Products {Name = "Produkt5", ProductId = 5},
-                new Products {Name = "Produkt6", ProductId = 6},
-            }.AsQueryable();
+            var mock = new Mock<IShop>();
+            mock.As<IShop>().Setup(m => m.Products).Returns(_products.AsQueryable);
 
-            var mock = new Mock<DbSet<Products>>();
-            mock.As<IQueryable<Products>>().Setup(m => m.Provider).Returns(products.Provider);
-            mock.As<IQueryable<Products>>().Setup(m => m.Expression).Returns(products.Expression);
-            mock.As<IQueryable<Products>>().Setup(m => m.ElementType).Returns(products.ElementType);
-            mock.As<IQueryable<Products>>().Setup(m => m.GetEnumerator()).Returns(products.GetEnumerator());
-
-            var mockContext = new Mock<IAppRepository>();
-            mockContext.Setup(c => c.Products).Returns(mock.Object); 
             //act
-            var plz = mock.Object.FirstOrDefault(x=>x.ProductId == 6);
+            var plz = mock.Object.Products.FirstOrDefault(x => x.ProductId == 6);
 
             //assert
             Assert.AreEqual(plz.Name, "Produkt6");
             Assert.AreEqual(plz.ProductId, 6);
         }
+
+        //[TestMethod]
+        //public void SortProducts()
+        //{
+        //    //Arrange
+        //    var mock = new Mock<IShop>();
+        //    mock.As<IShop>().Setup(m => m.Products).Returns(_products.AsQueryable);
+
+        //    //act
+        //    var plz = mock.Object.SortProducts(mock.Object.Products, SortMethod.CenaRosnąco);
+
+        //    //assert
+        //    var i = 0;
+        //    foreach (var item in plz)
+        //    {
+
+        //        Assert.AreEqual(item.Price,_products[i].Price);
+        //        i++;
+        //    }
+        //}
     }
 }

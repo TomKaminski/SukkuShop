@@ -227,7 +227,7 @@ footer a:hover { color: black; }
 .link-to-shop-container {
     float: right;
     text-align: right;
-    margin-top: 20px;
+    margin-top: 19px;
 }
 
 .link-to-shop-container:hover { border-bottom: 1px solid #f89b1d; }
