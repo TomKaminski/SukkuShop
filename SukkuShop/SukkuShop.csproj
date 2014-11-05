@@ -214,6 +214,14 @@
     <Compile Include="Migrations\201411041919415_SubCategoriesV2.Designer.cs">
       <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411051000184_CategoriesOnly.cs" />
+    <Compile Include="Migrations\201411051000184_CategoriesOnly.Designer.cs">
+      <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411051124133_CategoryFix.cs" />
+    <Compile Include="Migrations\201411051124133_CategoryFix.Designer.cs">
+      <DependentUpon>201411051124133_CategoryFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -285,6 +293,7 @@
     <Content Include="Views\Home\PolitykaPrywatnosci.cshtml" />
     <Content Include="Views\Nav\SortList.cshtml" />
     <Content Include="Views\Sklep\SzczegółyProduktu.cshtml" />
+    <Content Include="Views\Nav\SubCategory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -303,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411041919415_SubCategoriesV2.resx">
       <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411051000184_CategoriesOnly.resx">
+      <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411051124133_CategoryFix.resx">
+      <DependentUpon>201411051124133_CategoryFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

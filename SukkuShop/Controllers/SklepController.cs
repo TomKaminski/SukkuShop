@@ -21,9 +21,17 @@ namespace SukkuShop.Controllers
             string search = null,
             int page = 1)
         {
-            var subcategorylist = _dbContext.SubCategories.Select(x => x.Name).Distinct().ToList();
-            var categorylist = _dbContext.Categories.Select(x => x.Name).Distinct().ToList();
+            var categorylist =
+                _dbContext.Categories.Where(j => j.UpperCategoryId == 0).Select(x => x.Name);
+            var categoryId = 0;
+            if (category != null)
+                categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
 
+            var subcategorylist =
+                _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
+                    .Select(j => j.Name)
+                    .Distinct()
+                    .ToList();
             if (!subcategorylist.Contains(subcategory) && !categorylist.Contains(category))
             {
                 if (search == null)
@@ -31,14 +39,15 @@ namespace SukkuShop.Controllers
                 ViewBag.SearchString = search;
                 category = search;
                 _shop.Products = _dbContext.Products.Where(c => c.Name.Contains(category));
-                if(search==null && category==null)
+                if (search == null && category == null)
                     _shop.Products = _dbContext.Products.Select(c => c);
             }
             else if (subcategorylist.Contains(subcategory))
-                _shop.Products = _dbContext.Products.Where(c => c.SubCategories.Name == subcategory);
+                _shop.Products = _dbContext.Products.Where(c => c.Categories.Name == subcategory);
             else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
-                _shop.Products = _dbContext.Products.Where(c => c.SubCategories.Categories.Name == category);
-
+                _shop.Products =
+                    _dbContext.Products.Where(
+                        c => c.Categories.Name == category || subcategorylist.Contains(c.Categories.Name));
 
 
             var paginator = new PagingInfo

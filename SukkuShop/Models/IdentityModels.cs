@@ -41,37 +41,14 @@ namespace SukkuShop.Models
     [Table("Categories")]
     public sealed class Categories
     {
-        public Categories()
-        {
-            SubCategories = new List<SubCategories>();
-        }
-
         [Key]
         public int CategoryId { get; set; }
+
         public string Name { get; set; }
         public int? Promotion { get; set; }
-
-        public ICollection<SubCategories> SubCategories { get; set; }
+        public int? UpperCategoryId { get; set; }
     }
 
-    [Table("SubCategories")]
-    public sealed class SubCategories
-    {
-        public SubCategories()
-        {
-            Products = new List<Products>();
-        }
-
-        [Key]
-        public int SubCategoryId { get; set; }
-        public string Name { get; set; }
-        public int? Promotion { get; set; }
-        public int CategoryId { get; set; }
-
-        public Categories Categories { get; set; }
-
-        public ICollection<Products> Products { get; set; }
-    }
 
     [Table("Products")]
     public sealed class Products
@@ -86,7 +63,7 @@ namespace SukkuShop.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
-        public int SubCategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string ImageName { get; set; }
         public string Producer { get; set; }
         public int? Promotion { get; set; }
@@ -95,7 +72,7 @@ namespace SukkuShop.Models
         [DefaultValue(0)]
         public int OrdersCount { get; set; }
 
-        public SubCategories SubCategories { get; set; }
+        public Categories Categories { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
     }
@@ -147,7 +124,7 @@ namespace SukkuShop.Models
         public DbSet<Categories> Categories { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
         public DbSet<Orders> Orders { get; set; }
-        public DbSet<SubCategories> SubCategories { get; set; } 
+
 
 
         public static ApplicationDbContext Create()
