@@ -20,5 +20,5 @@
 }
 
 <br/>
-@Html.PageLinks(Model.PagingInfo, x=>Url.Action("Produkty","Sklep", new{page=x,category=Model.CurrentCategory,method=Model.CurrentSortMethod}))
+@Html.PageLinks(Model.PagingInfo, x=>Url.Action("Produkty","Sklep", new{page=x,category=Model.CurrentCategory,method=Model.CurrentSortMethod,subcategory=Model.CurrentSubCategory}))
 

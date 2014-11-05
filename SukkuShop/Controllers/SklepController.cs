@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
@@ -45,7 +44,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 3,
+                ItemsPerPage = 1,
                 TotalItems = _shop.Products.Count()
             };
 
@@ -63,7 +62,8 @@ namespace SukkuShop.Controllers
                     .Take(paginator.ItemsPerPage),
                 CurrentCategory = category,
                 CurrentSortMethod = method,
-                PagingInfo = paginator
+                PagingInfo = paginator,
+                CurrentSubCategory = subcategory
             };
             return View(viewModel);
         }
