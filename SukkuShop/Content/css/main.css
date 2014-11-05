@@ -30,6 +30,7 @@ header ul#shop-category {
 }
 header ul {
     float: right;
+    display: inline;
 }
 header ul#shop-category li {
     display: inline;

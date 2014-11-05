@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<string>
-
-@foreach (var link in Model)
-{
-    <li>
-        @Html.RouteLink(link, new
+<ul class="subcategory-menu">
+    @foreach (var link in Model)
+    {
+        <li>
+            @Html.RouteLink(link, new
         {
             controller = "Sklep",
             action = "Produkty",
@@ -15,5 +15,6 @@
         {
             style = (link == ViewBag.SubCategory ? "font-weight:bold" : "")
         })
-    </li>
-}
+        </li>
+    }
+</ul>

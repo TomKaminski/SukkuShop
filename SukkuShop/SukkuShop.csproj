@@ -234,6 +234,7 @@
     <Content Include="Content\css\Home.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\reset.css" />
+    <Content Include="Content\css\Shop.css" />
     <Content Include="Content\Images\carticon.png" />
     <Content Include="Content\Images\content-pic1.png" />
     <Content Include="Content\Images\content-pic2.png" />
@@ -243,6 +244,7 @@
     <Content Include="Content\Images\footer-user.png" />
     <Content Include="Content\Images\input-icon.png" />
     <Content Include="Content\Images\logo-header.png" />
+    <Content Include="Content\Images\Shop\test-image1.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />

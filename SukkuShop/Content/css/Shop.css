@@ -1,0 +1,119 @@
+﻿.product-list-container {
+    width: 963px;
+    margin-left: auto;
+    margin-right: auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-wrap: wrap;
+}
+
+.product-list-item {
+    height: 182px;
+    width: 127px;
+    padding-bottom: 30px;
+    padding-right: 39px;
+}
+
+.product-list-item:nth-child(6n) { padding-right: 0; }
+
+.product-list-item-image {
+    height: 127px;
+    width: 127px;
+    position: relative;
+}
+
+.image-bottom-panel {
+    height: 32px;
+    bottom: 0;
+    position: absolute;
+    width: 127px;    
+}
+
+.image-bottom-panel .add-to-cart-icon {
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    position: absolute;
+}
+
+.image-bottom-panel .info-icon {
+    width: 32px;
+    height: 32px;
+    background-color: red;
+    position: absolute;
+    right: 0;
+}
+
+.image-bottom-panel:before {
+    position: absolute;
+    background-color: white;
+    opacity: 0.5;
+    content: '';
+    height: 32px;
+    width: 127px;
+    bottom: 0;
+    clear: both;
+}
+
+.product-list-item-textbox {
+    height: 54px;
+    bottom: 0;
+    position: relative;
+    margin-top: 2px;
+}
+
+.product-list-item-textbox:after {
+    position: absolute;
+    background-color: orangered;
+    opacity: 0.1;
+    content: '';
+    height: 54px;
+    width: 127px;
+    bottom: 0;
+}
+
+.product-title {
+    padding: 5px 3px 10px;
+    font-size: 16px;
+    font-family: Footlight MT Light;
+}
+
+.product-price {
+    margin: 0 3px 5px;
+    font-size: 18px;
+    font-family: FoglihtenPCS;
+}
+
+ul.sort-menu {
+    margin-bottom: 33px;
+    text-align: right;
+}
+
+ul.sort-menu li {
+    display: inline;
+    margin-right: 20px;
+}
+
+ul.sort-menu li:last-child { margin-right: 0; }
+
+.shop-nav-container {
+    width: 963px;
+    margin: auto;
+}
+
+ul.subcategory-menu { text-align: center; }
+
+ul.subcategory-menu li {
+    display: inline;
+    margin-right: 40px;
+}
+
+ul.subcategory-menu li:last-child { margin-right: 0; }
+
+.shop-paginator { text-align: center; }
+
+.shop-paginator a { margin-right: 10px; }

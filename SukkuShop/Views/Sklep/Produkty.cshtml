@@ -5,21 +5,28 @@
     Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
 }
 
-@Html.Action("SortList", "Nav")
-
-@Html.Action("SubCategory", "Nav")
-<br/>
-
-@foreach (var product in Model.Products)
-{
-    
-    <h1>@product.Name</h1>
-    <h2>@product.Price</h2>
-    <h3>@product.Id</h3>
-    @Html.ActionLink("Szczegóły","SzczegółyProduktu",new{id=product.Id})
-    <br/>
-}
-
-<br/>
-@Html.PageLinks(Model.PagingInfo, x=>Url.Action("Produkty","Sklep", new{page=x,category=Model.CurrentCategory,method=Model.CurrentSortMethod,subcategory=Model.CurrentSubCategory}))
-
+<div class="shop-nav-container">
+    @Html.Action("SortList", "Nav")
+    @Html.Action("SubCategory", "Nav")
+</div>
+<div class="product-list-container">
+    @foreach (var product in Model.Products)
+    {
+        <div class="product-list-item">
+            <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/test-image1.png")')">
+                <div class="image-bottom-panel">
+                    <a href="#"><div class="add-to-cart-icon"></div></a>
+                    <a href="@Url.Action("SzczegółyProduktu", new { id = product.Id })"><div class="info-icon"></div></a>
+                </div>
+            </div>
+            <div class="product-list-item-textbox">
+                <div class="product-title">@product.Name</div>
+                <div class="product-price">@product.Price</div>
+            </div>
+        </div>
+    }
+</div>
+<div class="shop-paginator">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Produkty", "Sklep", new { page = x, category = Model.CurrentCategory, method = Model.CurrentSortMethod, subcategory = Model.CurrentSubCategory }))
+</div>
+@Styles.Render("~/Content/css/Shop.css")
