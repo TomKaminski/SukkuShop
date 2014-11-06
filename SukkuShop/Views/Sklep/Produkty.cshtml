@@ -13,6 +13,14 @@
     @foreach (var product in Model.Products)
     {
         <div class="product-list-item">
+            @if (product.Bestseller)
+            {
+                @:BESTSELLER
+            }
+            @if (product.Novelty)
+            {
+                @:NOWOŚć
+            }
             <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/test-image1.png")')">
                 <div class="image-bottom-panel">
                     <a href="#"><div class="add-to-cart-icon"></div></a>

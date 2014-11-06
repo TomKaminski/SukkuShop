@@ -37,7 +37,7 @@ namespace SukkuShop.Controllers
 
             var noveltyBestsellerCounter = Math.Ceiling(allProducts.Count*0.1);
 
-            allProducts = allProducts.OrderBy(x => x.Novelty).ToList();
+            allProducts = allProducts.OrderByDescending(x => x.DateAdded).ToList();
             var i = 0;
             foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
             {
@@ -46,7 +46,7 @@ namespace SukkuShop.Controllers
             }
 
             i = 0;
-            allProducts = allProducts.OrderBy(x => x.OrdersCount).ToList();
+            allProducts = allProducts.OrderByDescending(x => x.OrdersCount).ToList();
             foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
             {
                 item.Bestseller = true;
