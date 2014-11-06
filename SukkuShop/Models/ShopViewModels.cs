@@ -33,6 +33,22 @@ namespace SukkuShop.Models
         public string CurrentSubCategory { get; set; }  
     }
 
+    public class ProductModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int? Promotion { get; set; }
+        public decimal Price { get; set; }
+        public string ImageName { get; set; }
+        public int QuantityInStock { get; set; }
+        public decimal PriceAfterDiscount { get; set; }
+        public bool Bestseller { get; set; }
+        public bool Novelty { get; set; }
+        public string Category { get; set; }
+        public DateTime DateAdded { get; set; }
+        public int OrdersCount { get; set; }
+    }
+
     public class ProductViewModel
     {
         public int Id { get; set; }
@@ -41,8 +57,9 @@ namespace SukkuShop.Models
         public decimal Price { get; set; }
         public string ImageName { get; set; }
         public int QuantityInStock { get; set; }
-        public string Category { get; set; }
         public decimal PriceAfterDiscount { get; set; }
+        public bool Bestseller { get; set; }
+        public bool Novelty { get; set; }
     }
 
 }

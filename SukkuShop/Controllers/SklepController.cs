@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
@@ -21,33 +22,67 @@ namespace SukkuShop.Controllers
             string search = null,
             int page = 1)
         {
+            var allProducts = _dbContext.Products.Select(x => new ProductModel
+            {
+                Name = x.Name,
+                ImageName = x.ImageName,
+                Price = x.Price,
+                Promotion = x.Promotion ?? 0,
+                Id = x.ProductId,
+                PriceAfterDiscount = x.Price*x.Promotion ?? 0,
+                Category = x.Categories.Name,
+                DateAdded = x.DateAdded,
+                OrdersCount = x.OrdersCount
+            }).ToList();
+
+            var noveltyBestsellerCounter = Math.Ceiling(allProducts.Count*0.1);
+
+            allProducts = allProducts.OrderBy(x => x.Novelty).ToList();
+            var i = 0;
+            foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
+            {
+                item.Novelty = true;
+                i++;
+            }
+
+            i = 0;
+            allProducts = allProducts.OrderBy(x => x.OrdersCount).ToList();
+            foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
+            {
+                item.Bestseller = true;
+                i++;
+            }
+
             var categorylist =
                 _dbContext.Categories.Where(j => j.UpperCategoryId == 0).Select(x => x.Name);
             var categoryId = 0;
-            if (category != null)
+            if (categorylist.Contains(category))
                 categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
-
+            
             var subcategorylist =
                 _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
                     .Select(j => j.Name)
                     .Distinct()
                     .ToList();
+
             if (!subcategorylist.Contains(subcategory) && !categorylist.Contains(category))
             {
                 if (search == null)
                     search = category;
                 ViewBag.SearchString = search;
                 category = search;
-                _shop.Products = _dbContext.Products.Where(c => c.Name.Contains(category));
                 if (search == null && category == null)
-                    _shop.Products = _dbContext.Products.Select(c => c);
+                    _shop.Products = allProducts.Select(c => c).ToList();
+                else
+                    _shop.Products = allProducts.Where(c => c.Name.Contains(category)).ToList();
+                
             }
             else if (subcategorylist.Contains(subcategory))
-                _shop.Products = _dbContext.Products.Where(c => c.Categories.Name == subcategory);
+                _shop.Products = allProducts.Where(c => c.Category == subcategory).ToList();
             else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
                 _shop.Products =
-                    _dbContext.Products.Where(
-                        c => c.Categories.Name == category || subcategorylist.Contains(c.Categories.Name));
+                    allProducts.Where(
+                        c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
 
 
             var paginator = new PagingInfo
@@ -59,14 +94,17 @@ namespace SukkuShop.Controllers
 
             var viewModel = new ProductsListViewModel
             {
-                Products = _shop.SortProducts(_shop.Products, method).Select(x => new ProductViewModel
+                Products = _shop.SortProducts(_shop.Products, method).Select(x=>new ProductViewModel
                 {
-                    Name = x.Name,
+                    Bestseller = x.Bestseller,
+                    Id = x.Id,
                     ImageName = x.ImageName,
+                    Name = x.Name,
+                    Novelty = x.Novelty,
                     Price = x.Price,
+                    PriceAfterDiscount = x.Price * x.Promotion ?? 0,
                     Promotion = x.Promotion ?? 0,
-                    Id = x.ProductId,
-                    PriceAfterDiscount = x.Price*x.Promotion ?? 0
+                    QuantityInStock = x.QuantityInStock
                 }).Skip((page - 1)*paginator.ItemsPerPage)
                     .Take(paginator.ItemsPerPage),
                 CurrentCategory = category,

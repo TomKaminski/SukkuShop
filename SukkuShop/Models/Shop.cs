@@ -1,31 +1,32 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using SukkuShop.Infrastructure.Generic;
 
 namespace SukkuShop.Models
 {
     public class Shop:IShop
     {
-        public IQueryable<Products> Products { get; set; }
+        public IList<ProductModel> Products { get; set; }
 
-        public IQueryable<Products> SortProducts(IQueryable<Products> listaProd, SortMethod method)
+        public IList<ProductModel> SortProducts(IList<ProductModel> listaProd, SortMethod method)
         {
-            IQueryable<Products> products;
+            IList<ProductModel> products;
             switch (method)
             {
                 case SortMethod.Popularność:
-                    products = listaProd.OrderByDescending(o => o.OrdersCount);
+                    products = listaProd.OrderByDescending(o => o.OrdersCount).ToList();
                     break;
                 case SortMethod.Promocje:
-                    products = listaProd.OrderByDescending(o => o.Promotion);
+                    products = listaProd.OrderByDescending(o => o.Promotion).ToList();
                     break;
                 case SortMethod.CenaMalejąco:
-                    products = listaProd.OrderByDescending(o => o.Price);
+                    products = listaProd.OrderByDescending(o => o.Price).ToList();
                     break;
                 case SortMethod.CenaRosnąco:
-                    products = listaProd.OrderBy(o => o.Price);
+                    products = listaProd.OrderBy(o => o.Price).ToList();
                     break;
                 default:
-                    products = listaProd.OrderByDescending(o => o.DateAdded);
+                    products = listaProd.OrderByDescending(o => o.DateAdded).ToList();
                     break;
             }
             return products;

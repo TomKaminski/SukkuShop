@@ -1,13 +1,13 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Infrastructure.Generic
 {
     public interface IShop
     {
-        IQueryable<Products> Products { get; set; }
+        IList<ProductModel> Products { get; set; }
 
-        IQueryable<Products> SortProducts(IQueryable<Products> products, SortMethod method);
+        IList<ProductModel> SortProducts(IList<ProductModel> products, SortMethod method);
 
     }
 }
