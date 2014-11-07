@@ -18,7 +18,7 @@ namespace SukkuShop.Infrastructure.Helpers
                 tag.InnerHtml = i.ToString(CultureInfo.InvariantCulture);
                 if (i == pagingInfo.CurrentPage)
                 {
-                    tag.Attributes.Add("style","font-weight:bold");
+                    //tag.Attributes.Add("style",);
                 }
                 tag.AddCssClass("");
                 result.Append(tag);

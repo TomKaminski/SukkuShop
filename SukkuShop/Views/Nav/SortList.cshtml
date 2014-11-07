@@ -1,22 +1,24 @@
 ﻿@model IEnumerable<string>
-           
+
 <ul class="sort-menu">
-    <li>SORTUJ:</li>
     @foreach (var link in Model)
     {
+       
         <li>
-            @Html.RouteLink(link, new
-            {
-                controller = "Sklep",
-                action = "Produkty",
-                category = ViewBag.SelectedCategory,
-                method = link,
-                page = 1,
-                subcategory = ViewBag.SelectedSubCategory
-            }, new
-            {
-                style = (link == ViewBag.CurrentSortMethod.ToString() ? "font-weight:bold" : "")
-            })
+            <div class="sort-box">@link
+                <a href="@Url.RouteUrl(new
+                         {
+                             controller = "Sklep",
+                             
+                             action = "Produkty",
+                             category = ViewBag.SelectedCategory,
+                             method = link,
+                             page = 1,
+                             subcategory = ViewBag.SelectedSubCategory})">
+                    <div class="sort-arrow"></div>
+                </a>
+                </div>
         </li>
     }
+    <li><div class="sort-box">SORTUJ:</div></li>
 </ul>

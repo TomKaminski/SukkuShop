@@ -8,7 +8,10 @@ body {
     margin: 20px auto;
 }
 
-header { margin: 30px 0; }
+header { 
+    margin: 30px auto;
+    width: 1066px;
+}
 
 .header-logo {
     width: 132px;
@@ -177,8 +180,14 @@ margin-top: 68px;
     margin-top: 15px;
     margin-right: 5px;
 }
+.main-container {
+    width: 1066px;
+    margin: auto;
+}
 
-footer { margin-top: 50px; }
+footer {margin: 50px auto 0;     
+         width: 1066px;
+}
 
 footer ul { margin-top: 30px; }
 

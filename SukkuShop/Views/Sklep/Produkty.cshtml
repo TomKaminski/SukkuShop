@@ -9,32 +9,42 @@
     @Html.Action("SortList", "Nav")
     @Html.Action("SubCategory", "Nav")
 </div>
+<div class="product-backgroud" style="background-image: url('@Url.Content("~/Content/Images/Shop/background_spices.jpg")')">
 <div class="product-list-container">
     @foreach (var product in Model.Products)
     {
         <div class="product-list-item">
-            @if (product.Bestseller)
-            {
-                @:BESTSELLER
-            }
-            @if (product.Novelty)
-            {
-                @:NOWOŚć
-            }
+           
             <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/test-image1.png")')">
+                <ul class="top-panel">
+                    @if (product.Bestseller)
+                    {
+                        <li>
+                            <div class="top-panel-text">Bestseller</div>
+                        </li>
+                    }
+                    @if (product.Novelty)
+                    {
+                        <li>
+                          <div class="top-panel-text">NOWOŚĆ</div> 
+                        </li>
+                    }
+                </ul>
                 <div class="image-bottom-panel">
-                    <a href="#"><div class="add-to-cart-icon"></div></a>
-                    <a href="@Url.Action("SzczegółyProduktu", new { id = product.Id })"><div class="info-icon"></div></a>
+                    <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 100%"/></div></a>
+                    <a href="@Url.Action("SzczegółyProduktu", new { id = product.Id })"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 100%; background-size:cover"/></div></a>
                 </div>
             </div>
             <div class="product-list-item-textbox">
                 <div class="product-title">@product.Name</div>
-                <div class="product-price">@product.Price</div>
+                <div class="product-price">@product.Price PLN</div>
             </div>
         </div>
     }
 </div>
-<div class="shop-paginator">
-    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Produkty", "Sklep", new { page = x, category = Model.CurrentCategory, method = Model.CurrentSortMethod, subcategory = Model.CurrentSubCategory }))
+
+    <div class="shop-paginator">
+        @Html.PageLinks(Model.PagingInfo, x => Url.Action("Produkty", "Sklep", new { page = x, category = Model.CurrentCategory, method = Model.CurrentSortMethod, subcategory = Model.CurrentSubCategory }))
+    </div>
+    @Styles.Render("~/Content/css/Shop.css")
 </div>
-@Styles.Render("~/Content/css/Shop.css")

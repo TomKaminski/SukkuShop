@@ -1,4 +1,11 @@
-﻿.product-list-container {
+﻿.product-backgroud {
+    background: no-repeat;
+    height: 712px;
+    width: 1066px;
+    margin: auto;
+}
+.product-list-container {
+    padding-top: 28px;
     width: 963px;
     margin-left: auto;
     margin-right: auto;
@@ -26,6 +33,30 @@
     position: relative;
 }
 
+
+ul.top-panel li:before {
+    position: absolute;
+    height: 30px;
+    width: 127px;
+    background-color: rgba(255,255,255,0.5);
+    content: '';
+}
+ul.top-panel li{   
+    height: 30px;
+    width: 127px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.top-panel-text   {
+    font-family: Lucida Console;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;  
+    text-shadow: white 0.1em 0.1em 0.2em     
+}
+
+
 .image-bottom-panel {
     height: 32px;
     bottom: 0;
@@ -36,14 +67,12 @@
 .image-bottom-panel .add-to-cart-icon {
     width: 32px;
     height: 32px;
-    background-color: red;
     position: absolute;
 }
 
 .image-bottom-panel .info-icon {
     width: 32px;
     height: 32px;
-    background-color: red;
     position: absolute;
     right: 0;
 }
@@ -59,6 +88,7 @@
     clear: both;
 }
 
+
 .product-list-item-textbox {
     height: 54px;
     bottom: 0;
@@ -68,7 +98,7 @@
 
 .product-list-item-textbox:after {
     position: absolute;
-    background-color: orangered;
+    background-color: #f7eee7;
     opacity: 0.1;
     content: '';
     height: 54px;
@@ -110,10 +140,53 @@ ul.subcategory-menu { text-align: center; }
 ul.subcategory-menu li {
     display: inline;
     margin-right: 40px;
+
 }
 
+ul.subcategory-menu li a {
+    font-family: Segoe UI;
+    font-size: 19px;
+    color: #f89b1d;
+    text-transform: uppercase;
+}
 ul.subcategory-menu li:last-child { margin-right: 0; }
 
 .shop-paginator { text-align: center; }
 
-.shop-paginator a { margin-right: 10px; }
+.shop-paginator a { margin-right: 10px; 
+width: 21px;
+    height: 21px;
+    background: white;
+    opacity: 0.5;
+}
+
+
+ul.sort-menu li:last-child {
+    font-size: 16px;
+    font-family: Segoe UI;
+    color: #818181;
+}
+.sort-box {
+    padding-right: 14px;
+    display: inline;
+    float: right;
+   
+}
+.sort-arrow {
+    width: 0;
+    height: 0;
+    border-top: 6px solid transparent;
+    border-left: 11px solid black;
+    border-bottom: 6px solid transparent;
+    float: right;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-top: 2px;
+    margin-left: 8px;   
+}
+ul.sort-menu li {
+    font-family: Segoe UI;
+    color: #f89b1d;
+    text-transform: uppercase;
+}
