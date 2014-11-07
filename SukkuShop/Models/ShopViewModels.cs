@@ -5,10 +5,10 @@ namespace SukkuShop.Models
 {
     public enum SortMethod
     {
-        CenaMalejąco,
-        CenaRosnąco,
-        Promocje,
-        Nowości,
+        CenaMalejaco,
+        CenaRosnaco,
+        Promocja,
+        Nowość,
         Popularność
     }
 

@@ -1,22 +1,67 @@
-﻿@model IEnumerable<string>
+﻿@using SukkuShop.Models
+@model IEnumerable<string>
            
 <ul class="sort-menu">
     <li>SORTUJ:</li>
-    @foreach (var link in Model)
-    {
-        <li>
-            @Html.RouteLink(link, new
-            {
-                controller = "Sklep",
-                action = "Produkty",
-                category = ViewBag.SelectedCategory,
-                method = link,
-                page = 1,
-                subcategory = ViewBag.SelectedSubCategory
-            }, new
-            {
-                style = (link == ViewBag.CurrentSortMethod.ToString() ? "font-weight:bold" : "")
-            })
-        </li>
-    }
+    <li>
+        PROMOCJA 
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.Promocja,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">strzałka</a>
+            
+    </li>
+    <li>
+        CENA
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.CenaRosnaco,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">strzałkaup</a>
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.CenaMalejaco,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">strzałkadown</a>
+
+    </li>
+    <li>
+        Popularność
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.Popularność,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">strzałka</a>
+
+    </li>
+    <li>
+        Nowość
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.Nowość,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">strzałka</a>
+
+    </li>
 </ul>

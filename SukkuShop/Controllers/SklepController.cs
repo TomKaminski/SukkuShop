@@ -18,7 +18,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowości,
+        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowość,
             string search = null,
             int page = 1)
         {
