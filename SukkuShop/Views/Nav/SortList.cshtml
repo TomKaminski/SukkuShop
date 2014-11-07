@@ -1,5 +1,6 @@
-﻿@model IEnumerable<string>
-
+﻿@using SukkuShop.Models
+@model IEnumerable<string>
+           
 <ul class="sort-menu">
     @foreach (var link in Model)
     {
@@ -7,13 +8,13 @@
         <li>
             <div class="sort-box">@link
                 <a href="@Url.RouteUrl(new
-                         {
-                             controller = "Sklep",
+            {
+                controller = "Sklep",
                              
-                             action = "Produkty",
-                             category = ViewBag.SelectedCategory,
-                             method = link,
-                             page = 1,
+                action = "Produkty",
+                category = ViewBag.SelectedCategory,
+                     method = SortMethod.Popularność,
+                page = 1,
                              subcategory = ViewBag.SelectedSubCategory})">
                     <div class="sort-arrow"></div>
                 </a>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Models;
@@ -22,7 +21,7 @@ namespace SukkuShop.Controllers
             return PartialView(categoryLinks);
         }
 
-        public PartialViewResult SubCategory(string category = null, string subcategory = null, SortMethod method = SortMethod.Nowości)
+        public PartialViewResult SubCategory(string category = null, string subcategory = null, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.Category = category;
             ViewBag.SubCategory = subcategory;
@@ -42,17 +41,14 @@ namespace SukkuShop.Controllers
             return null;
         }
 
-        public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowości)
+        public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowość)
         {
             if (search != null)
                 category = search;
             ViewBag.CurrentSortMethod = method;
             ViewBag.SelectedCategory = category;
             ViewBag.SelectedSubCategory = subcategory;
-            var sortlist = Enum.GetValues(typeof (SortMethod))
-                .Cast<SortMethod>()
-                .Select(v => v.ToString());
-            return PartialView(sortlist);
+            return PartialView();
         }
     }
 }

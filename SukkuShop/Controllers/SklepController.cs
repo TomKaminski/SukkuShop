@@ -18,7 +18,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowości,
+        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowość,
             string search = null,
             int page = 1)
         {
@@ -118,7 +118,16 @@ namespace SukkuShop.Controllers
         public ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
-            return View(product);
+            var similarProducts =
+                _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).OrderBy(x => Guid.NewGuid()).Take(6);
+
+            var model = new ProductDetailsViewModel
+            {
+                Product = product,
+                SimilarProducts = similarProducts
+            };
+
+            return View(model);
         }
     }
 }

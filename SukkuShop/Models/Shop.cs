@@ -16,13 +16,13 @@ namespace SukkuShop.Models
                 case SortMethod.Popularność:
                     products = listaProd.OrderByDescending(o => o.OrdersCount).ToList();
                     break;
-                case SortMethod.Promocje:
+                case SortMethod.Promocja:
                     products = listaProd.OrderByDescending(o => o.Promotion).ToList();
                     break;
-                case SortMethod.CenaMalejąco:
+                case SortMethod.CenaMalejaco:
                     products = listaProd.OrderByDescending(o => o.Price).ToList();
                     break;
-                case SortMethod.CenaRosnąco:
+                case SortMethod.CenaRosnaco:
                     products = listaProd.OrderBy(o => o.Price).ToList();
                     break;
                 default:

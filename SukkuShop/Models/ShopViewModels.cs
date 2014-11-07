@@ -5,10 +5,10 @@ namespace SukkuShop.Models
 {
     public enum SortMethod
     {
-        CenaMalejąco,
-        CenaRosnąco,
-        Promocje,
-        Nowości,
+        CenaMalejaco,
+        CenaRosnaco,
+        Promocja,
+        Nowość,
         Popularność
     }
 
@@ -60,6 +60,23 @@ namespace SukkuShop.Models
         public decimal PriceAfterDiscount { get; set; }
         public bool Bestseller { get; set; }
         public bool Novelty { get; set; }
+    }
+
+    public class ProductDetailsViewModel
+    {
+        public IEnumerable<Products> SimilarProducts { get; set; }
+        public Products Product { get; set; }
+    }
+
+    public class SimilarProductModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Promotion { get; set; }
+        public decimal Price { get; set; }
+        public string ImageName { get; set; }
+        public int QuantityInStock { get; set; }
+        public decimal PriceAfterDiscount { get; set; }
     }
 
 }
