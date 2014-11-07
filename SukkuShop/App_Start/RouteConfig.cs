@@ -123,8 +123,8 @@ namespace SukkuShop
                     controller = "Sklep",
                     action = "Produkty",
                     page = 1,
-                    subcategory = (string) null
-                }
+                    subcategory = (string)null
+                }, new { method=new IsEnum()}
                 );
 
             routes.MapRoute(null,
@@ -133,11 +133,12 @@ namespace SukkuShop
                 {
                     controller = "Sklep",
                     action = "Produkty",
-                    subcategory = (string) null
+                    subcategory = (string)null
                 },
                 new
                 {
                     page = @"\d+",
+                    method = new IsEnum()
                 }
                 );
 
@@ -165,6 +166,10 @@ namespace SukkuShop
                     page = @"\d+"
                 }
                 );
+
+            
+
+            
 
 
             routes.MapRoute(null,

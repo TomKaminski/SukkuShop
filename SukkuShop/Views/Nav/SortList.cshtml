@@ -2,24 +2,73 @@
 @model IEnumerable<string>
            
 <ul class="sort-menu">
-    @foreach (var link in Model)
-    {
-       
-        <li>
-            <div class="sort-box">@link
-                <a href="@Url.RouteUrl(new
+    <li>
+        <div class="sort-box">PROMOCJA
+            <a href="@Url.RouteUrl(new
+                     {
+                         controller = "Sklep",
+                         action = "Produkty",
+                         category = ViewBag.SelectedCategory,
+                         method = SortMethod.Promocja,
+                         page = 1,
+                         subcategory = ViewBag.SelectedSubCategory
+                     })">
+                <div class="sort-arrow"></div>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="sort-box">CENA
+            <a href="@Url.RouteUrl(new
+                     {
+                         controller = "Sklep",
+                         action = "Produkty",
+                         category = ViewBag.SelectedCategory,
+                         method = SortMethod.CenaMalejaco,
+                         page = 1,
+                         subcategory = ViewBag.SelectedSubCategory})">
+                <div class="sort-arrow"></div>
+            </a>
+            <a href="@Url.RouteUrl(new
+                     {
+                         controller = "Sklep",
+                         action = "Produkty",
+                         category = ViewBag.SelectedCategory,
+                         method = SortMethod.CenaRosnaco,
+                         page = 1,
+                         subcategory = ViewBag.SelectedSubCategory})">
+                <div class="sort-arrow"></div>
+            </a>
+        </div>
+    </li>
+    <li>
+        <div class="sort-box">POPULARNOŚć
+            <a href="@Url.RouteUrl(new
             {
                 controller = "Sklep",
-                             
                 action = "Produkty",
                 category = ViewBag.SelectedCategory,
-                     method = SortMethod.Popularność,
+                method = SortMethod.Popularność,
                 page = 1,
-                             subcategory = ViewBag.SelectedSubCategory})">
-                    <div class="sort-arrow"></div>
-                </a>
-                </div>
-        </li>
-    }
+                subcategory = ViewBag.SelectedSubCategory})">
+                <div class="sort-arrow"></div>
+            </a>
+        </div>
+    </li>
+    <li>
+
+        <div class="sort-box">        NOWOŚć
+            <a href="@Url.RouteUrl(new
+            {
+                controller = "Sklep",
+                action = "Produkty",
+                category = ViewBag.SelectedCategory,
+                method = SortMethod.Nowość,
+                page = 1,
+                subcategory = ViewBag.SelectedSubCategory})">
+                <div class="sort-arrow"></div>
+            </a>
+        </div>
+    </li>
     <li><div class="sort-box">SORTUJ:</div></li>
 </ul>
