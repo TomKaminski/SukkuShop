@@ -2,34 +2,26 @@
 @model IEnumerable<string>
            
 <ul class="sort-menu">
-    <li>
-        <div class="sort-box">PROMOCJA
-            <a href="@Url.RouteUrl(new
-                     {
-                         controller = "Sklep",
-                         action = "Produkty",
-                         category = ViewBag.SelectedCategory,
-                         method = SortMethod.Promocja,
-                         page = 1,
-                         subcategory = ViewBag.SelectedSubCategory
-                     })">
-                <div class="sort-arrow"></div>
-            </a>
-        </div>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "font-weight:bold;":"")">PROMOCJA</div>
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.Promocja,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory
+                 })">
+            
+            <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "opacity:1;":"")"></div>
+        </a>
     </li>
-    <li>
-        <div class="sort-box">CENA
-            <a href="@Url.RouteUrl(new
-                     {
-                         controller = "Sklep",
-                         action = "Produkty",
-                         category = ViewBag.SelectedCategory,
-                         method = SortMethod.CenaMalejaco,
-                         page = 1,
-                         subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow"></div>
-            </a>
-            <a href="@Url.RouteUrl(new
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.CenaMalejaco || ViewBag.CurrentSortMethod == SortMethod.CenaRosnaco ? "font-weight:bold;" : "")">
+            CENA</div>
+            <div class="price-arrow-box">
+                <a href="@Url.RouteUrl(new
                      {
                          controller = "Sklep",
                          action = "Produkty",
@@ -37,12 +29,23 @@
                          method = SortMethod.CenaRosnaco,
                          page = 1,
                          subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow"></div>
-            </a>
-        </div>
-    </li>
-    <li>
-        <div class="sort-box">POPULARNOŚć
+                    <div class="sort-arrow-up" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaRosnaco ? "opacity:1;":"")"></div>
+                </a>
+                <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Produkty",
+                     category = ViewBag.SelectedCategory,
+                     method = SortMethod.CenaMalejaco,
+                     page = 1,
+                     subcategory = ViewBag.SelectedSubCategory})">
+                    <div class="sort-arrow-down" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaMalejaco ? "opacity:1;":"")"></div>
+                </a>
+            </div>
+</li>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "font-weight:bold;":"")">
+            POPULARNOŚć</div>
             <a href="@Url.RouteUrl(new
             {
                 controller = "Sklep",
@@ -51,13 +54,12 @@
                 method = SortMethod.Popularność,
                 page = 1,
                 subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow"></div>
+                <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "opacity:1;":"")"></div>
             </a>
-        </div>
-    </li>
-    <li>
-
-        <div class="sort-box">        NOWOŚć
+</li>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "font-weight:bold;":"")">
+            NOWOŚć</div>
             <a href="@Url.RouteUrl(new
             {
                 controller = "Sklep",
@@ -66,9 +68,9 @@
                 method = SortMethod.Nowość,
                 page = 1,
                 subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow"></div>
+                <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "opacity:1;":"")"></div>
             </a>
-        </div>
-    </li>
-    <li><div class="sort-box">SORTUJ:</div></li>
+</li>
+    <li class="sort-box">SORTUJ:</li>
+    <li><div class="clear">&nbsp;</div></li>
 </ul>

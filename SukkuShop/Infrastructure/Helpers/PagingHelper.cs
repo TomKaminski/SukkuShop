@@ -15,7 +15,7 @@ namespace SukkuShop.Infrastructure.Helpers
             {
                 var tag = new TagBuilder("a");
                 tag.MergeAttribute("href", pageUrl(i));
-                tag.InnerHtml = i.ToString(CultureInfo.InvariantCulture);
+                tag.InnerHtml = "<div class=paginator-box>"+i.ToString(CultureInfo.InvariantCulture)+"</div>";
                 if (i == pagingInfo.CurrentPage)
                 {
                     //tag.Attributes.Add("style",);

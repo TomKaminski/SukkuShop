@@ -124,7 +124,21 @@ namespace SukkuShop
                     action = "Produkty",
                     page = 1,
                     subcategory = (string)null
-                }, new { method=new IsEnum()}
+                }, new
+                {
+                    method=new IsEnum()
+                }
+                );
+
+            routes.MapRoute(null,
+                "{category}/{subcategory}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Produkty",
+                    page = 1,
+                    method = SortMethod.Nowość
+                }
                 );
 
             routes.MapRoute(null,
@@ -142,16 +156,7 @@ namespace SukkuShop
                 }
                 );
 
-            routes.MapRoute(null,
-                "{category}/{subcategory}",
-                new
-                {
-                    controller = "Sklep",
-                    action = "Produkty",
-                    page = 1,
-                    method = SortMethod.Nowość
-                }
-                );
+            
 
             routes.MapRoute(null,
                 "{category}/{subcategory}/{page}",
@@ -167,11 +172,6 @@ namespace SukkuShop
                 }
                 );
 
-            
-
-            
-
-
             routes.MapRoute(null,
                 "{category}/{subcategory}/{method}",
                 new
@@ -179,6 +179,9 @@ namespace SukkuShop
                     controller = "Sklep",
                     action = "Produkty",
                     page = 1,
+                }, new
+                {
+                    method=new IsEnum()
                 }
                 );
 

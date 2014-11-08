@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
@@ -18,7 +19,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string subcategory, string category, SortMethod method = SortMethod.Nowość,
+        public ActionResult Produkty(string category, string subcategory= null, SortMethod method = SortMethod.Nowość,
             string search = null,
             int page = 1)
         {
@@ -74,7 +75,7 @@ namespace SukkuShop.Controllers
                 if (search == null && category == null)
                     _shop.Products = allProducts.Select(c => c).ToList();
                 else
-                    _shop.Products = allProducts.Where(c => c.Name.Contains(category)).ToList();
+                    _shop.Products = allProducts.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
                 
             }
             else if (subcategorylist.Contains(subcategory))

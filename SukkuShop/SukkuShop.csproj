@@ -235,7 +235,7 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\css\Shop.css" />
-    <Content Include="Content\Images\carticon.png" />
+    <Content Include="Content\Images\Shop\carticon.png" />
     <Content Include="Content\Images\content-pic1.png" />
     <Content Include="Content\Images\content-pic2.png" />
     <Content Include="Content\Images\content-pic3.png" />
@@ -252,6 +252,10 @@
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
     <Content Include="Content\fonts\SegoeSemibold.ttf" />
+    <Content Include="Content\fonts\lucon.ttf" />
+    <Content Include="Content\fonts\FTLTLT.TTF" />
+    <Content Include="Content\fonts\FoglihtenPCS.otf" />
+    <Content Include="Content\fonts\LBRITE.TTF" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

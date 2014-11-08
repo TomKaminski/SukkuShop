@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System;
+using System.Web;
 using System.Web.Routing;
 using SukkuShop.Models;
 
@@ -8,15 +9,7 @@ namespace SukkuShop.Infrastructure
     {
         public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
         {
-            return values[parameterName] is SortMethod;
+            return Enum.IsDefined(typeof (SortMethod), values[parameterName]);
         }
     }
-
-    public class NotEnum : IRouteConstraint
-    {
-        public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
-        {
-            return !(values[parameterName] is SortMethod);
-        }
-    }    
 }
