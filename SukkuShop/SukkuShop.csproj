@@ -235,6 +235,8 @@
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\reset.css" />
     <Content Include="Content\css\Shop.css" />
+    <Content Include="Content\fonts\lucida_bright.svg" />
+    <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\Shop\carticon.png" />
     <Content Include="Content\Images\content-pic1.png" />
     <Content Include="Content\Images\content-pic2.png" />
@@ -252,10 +254,15 @@
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
     <Content Include="Content\fonts\SegoeSemibold.ttf" />
-    <Content Include="Content\fonts\lucon.ttf" />
     <Content Include="Content\fonts\FTLTLT.TTF" />
     <Content Include="Content\fonts\FoglihtenPCS.otf" />
-    <Content Include="Content\fonts\LBRITE.TTF" />
+    <Content Include="Content\fonts\SegoeSemiboldIE.eot" />
+    <Content Include="Content\fonts\lucida_console.eot" />
+    <Content Include="Content\fonts\lucida_console.ttf" />
+    <Content Include="Content\fonts\lucida_console.woff" />
+    <Content Include="Content\fonts\lucida_bright.eot" />
+    <Content Include="Content\fonts\lucida_bright.ttf" />
+    <Content Include="Content\fonts\lucida_bright.woff" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

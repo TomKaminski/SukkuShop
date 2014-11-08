@@ -3,6 +3,15 @@
     src: url(../fonts/SegoeSemibold.ttf);
 }
 
+@font-face {
+    font-family: SegoeSemiboldIE;
+    src: url(../fonts/SegoeSemiboldIE.eot);
+}
+
+.segoe-semibold {
+    font-family: SegoeSemibold, SegoeSemiboldIE;
+}
+
 body {
     margin: 20px auto;
 }
@@ -41,7 +50,7 @@ header ul {
 }
 header ul#shop-category li {
     display: inline;
-    margin-right: 40px;
+    margin-right: 38px;
 }
 
 header ul#shop-category li:first-child { margin-left: 40px; }
@@ -179,7 +188,7 @@ margin-top: 68px;
 .cart-img {
     width: 35px;
     height: 28px;
-    background-image: url(../Images/carticon.png);
+    background-image: url(../Images/shop/carticon.png);
     float: right;
     margin-top: 15px;
     margin-right: 5px;
@@ -208,7 +217,6 @@ footer ul li:last-child {
 }
 
 footer ul li .footer-text-big {
-    font-family: SegoeSemibold;
     font-size: 25px;
     text-transform: uppercase;
     color: black;
@@ -230,7 +238,7 @@ footer ul li img { float: right; }
 
 footer, footer a {
     font-size: 15px;
-    font-family: SegoeSemibold;
+    font-family: SegoeSemibold, SegoeSemiboldIE;
     color: #8d8d8d;
 }
 

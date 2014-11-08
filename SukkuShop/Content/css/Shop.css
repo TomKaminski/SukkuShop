@@ -1,15 +1,9 @@
-﻿@font-face {
-    font-family: lucon;
-    src: url(../fonts/lucon.ttf);
-}
+﻿@font-face { font-family: 'LucidaConsole'; src: url('../fonts/lucida_console.eot'); src: url('../fonts/lucida_console.eot?#iefix') format('embedded-opentype'), url('../fonts/lucida_console.svg#Lucida Console') format('svg'), url('../fonts/lucida_console.woff') format('woff'), url('../fonts/lucida_console.ttf') format('truetype'); font-weight: normal; font-style: normal;}
+
+@font-face { font-family: 'LucidaBright'; src: url('../fonts/lucida_bright.eot'); src: url('../fonts/lucida_bright.eot?#iefix') format('embedded-opentype'), url('../fonts/lucida_bright.svg#Lucida Bright') format('svg'), url('../fonts/lucida_bright.woff') format('woff'), url('../fonts/lucida_bright.ttf') format('truetype'); font-weight: normal; font-style: normal;}
 
 @font-face {
-    font-family: LBRITE;
-    src: url(../fonts/LBRITE.ttf);
-}
-
-@font-face {
-    font-family: FTLTLT;
+    font-family: FootlightMTLight;
     src: url(../fonts/FTLTLT.ttf);
 }
 
@@ -79,7 +73,7 @@ ul.top-panel li {
 
 .top-panel-text {
     position: relative;
-    font-family: lucon;
+    font-family: LucidaConsole;
     line-height: 30px;
     vertical-align: middle;
     font-size: 16px;
@@ -156,7 +150,7 @@ ul.top-panel li {
     position: relative;
     padding: 5px 3px 10px;
     font-size: 16px;
-    font-family: FTLTLT;
+    font-family: FootlightMTLight;
 }
 
 .product-price {
@@ -230,7 +224,7 @@ ul.shop-paginator li a .paginator-box {
     line-height: 21px;
     vertical-align: middle;
     position: relative;
-    font-family: LBRITE;
+    font-family: LucidaBright;
     font-size: 13px;
     text-align: center;
     color: white;
