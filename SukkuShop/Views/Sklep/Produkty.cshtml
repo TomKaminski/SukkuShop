@@ -12,49 +12,49 @@
 {
     <div class="product-backgroud" style="background-image: url('@Url.Content("~/Content/Images/Shop/background_spices.jpg")'); background-repeat: no-repeat; background-size: 100% 100%">
         <div class="product-list-container">
-            @foreach (var product in Model.Products)
-            {
-                <div class="product-list-item">
+                @foreach (var product in Model.Products)
+                {
+                    <div class="product-list-item">
 
-                    <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + product.ImageName)')">
-                        <ul class="top-panel">
-                            @if (product.Bestseller)
-                            {
-                                <li>
-                                    <div class="top-panel-text-container">
-                                    
-                                        <div class="top-panel-text" style="color: #875546;">Bestseller</div>
-                                    </div>
-                                </li>
-                            }
-                            @if (product.Novelty)
-                            {
-                                <li>
-                                    <div class="top-panel-text-container">
-                                        <div class="top-panel-text" style="color: green;">NOWOŚĆ</div>
-                                    </div>
-                                </li>
-                            }
-                            @if (product.Promotion > 0)
-                            {
-                                <li>
-                                    <div class="top-panel-text-container">
-                                        <div class="top-panel-text" style="color: #f36f21;">PROMOCJA</div>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                        <div class="image-bottom-panel">
-                            <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
-                            <a href="@Url.Action("SzczegółyProduktu", new {id = product.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+                        <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + product.ImageName)')">
+                            <ul class="top-panel">
+                                @if (product.Bestseller)
+                                {
+                                    <li>
+                                        <div class="top-panel-text-container">
+
+                                            <div class="top-panel-text" style="color: #875546;">Bestseller</div>
+                                        </div>
+                                    </li>
+                                }
+                                @if (product.Novelty)
+                                {
+                                    <li>
+                                        <div class="top-panel-text-container">
+                                            <div class="top-panel-text" style="color: green;">NOWOŚĆ</div>
+                                        </div>
+                                    </li>
+                                }
+                                @if (product.Promotion > 0)
+                                {
+                                    <li>
+                                        <div class="top-panel-text-container">
+                                            <div class="top-panel-text" style="color: #f36f21;">PROMOCJA</div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                            <div class="image-bottom-panel">
+                                <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+                                <a href="@Url.Action("SzczegółyProduktu", new {id = product.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+                            </div>
+                        </div>
+                        <div class="product-list-item-textbox">
+                            <div class="product-title">@product.Name</div>
+                            <div class="product-price">@product.Price pln</div>
                         </div>
                     </div>
-                    <div class="product-list-item-textbox">
-                        <div class="product-title">@product.Name</div>
-                        <div class="product-price">@product.Price pln</div>
-                    </div>
-                </div>
-            }
+                }
         </div>
         @if (Model.PagingInfo.TotalPages > 1)
         {
