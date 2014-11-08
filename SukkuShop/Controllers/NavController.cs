@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -28,17 +29,14 @@ namespace SukkuShop.Controllers
             ViewBag.CurrentSortMethod = method;
 
             var r = _dbContext.Categories.FirstOrDefault(c => c.Name == category);
-            if (r != null)
-            {
-                var categoryid = r.CategoryId;
-                var subcategoryLinks =
-                    _dbContext.Categories.Where(j => j.UpperCategoryId == categoryid)
-                        .Select(x => x.Name)
-                        .Distinct()
-                        .ToList();
-                return PartialView(subcategoryLinks);
-            }
-            return null;
+            if (r == null) return null;
+            var categoryid = r.CategoryId;
+            var subcategoryLinks =
+                _dbContext.Products.Where(x => x.Categories.UpperCategoryId != 0 && x.Categories.UpperCategoryId==categoryid)
+                    .Select(j => j.Categories.Name)
+                    .Distinct()
+                    .ToList();
+            return PartialView(subcategoryLinks);
         }
 
         public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowość)

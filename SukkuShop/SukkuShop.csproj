@@ -214,6 +214,10 @@
     <Compile Include="Migrations\201411041919415_SubCategoriesV2.Designer.cs">
       <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411050934126_CategoryProducts.cs" />
+    <Compile Include="Migrations\201411050934126_CategoryProducts.Designer.cs">
+      <DependentUpon>201411050934126_CategoryProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201411051000184_CategoriesOnly.cs" />
     <Compile Include="Migrations\201411051000184_CategoriesOnly.Designer.cs">
       <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
@@ -310,6 +314,7 @@
     <Content Include="Views\Nav\SortList.cshtml" />
     <Content Include="Views\Sklep\SzczegółyProduktu.cshtml" />
     <Content Include="Views\Nav\SubCategory.cshtml" />
+    <Content Include="Views\Sklep\NoProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -328,6 +333,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411041919415_SubCategoriesV2.resx">
       <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411050934126_CategoryProducts.resx">
+      <DependentUpon>201411050934126_CategoryProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411051000184_CategoriesOnly.resx">
       <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
