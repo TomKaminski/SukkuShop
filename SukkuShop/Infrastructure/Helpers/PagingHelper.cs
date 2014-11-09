@@ -31,9 +31,8 @@ namespace SukkuShop.Infrastructure.Helpers
         {
             var tag = new TagBuilder("a");
             tag.MergeAttribute("href", pageUrl(i));
-            tag.Attributes.Add("style","width:21px;height:21px;");
             if(dots)
-                tag.InnerHtml = "<div class=" + "paginator-box" + ">" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>"+"<div class="+"clear"+">&nbsp;</div>" + "</div>";
+                tag.InnerHtml = "<div class=" + "paginator-box" + ">" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>"+"<div class="+"clear"+"></div>" + "</div>";
             else
             {
                 tag.InnerHtml = "<div class=" + "paginator-box" + " style=" +
