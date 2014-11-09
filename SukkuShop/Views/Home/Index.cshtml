@@ -1,4 +1,5 @@
-﻿@{
+﻿@using SukkuShop.Models
+@{
     ViewBag.Title = "Home";
 }
 
@@ -8,21 +9,21 @@
     <div class="container">
         <div class=" segoe-semibold text-big">bestseller</div>
         <div class="container-check">
-            <a href="#"><div class="check segoe-semibold">sprawdź</div></a>
+            <a href="@Url.RouteUrl(new{controller="Sklep",action="Produkty",method=SortMethod.Popularność})"><div class="check segoe-semibold">sprawdź</div></a>
         </div>
     </div>
     <div class="container"><img src="@Url.Content("~/Content/Images/content-pic2.png")" alt="" /></div>
     <div class="container">
         <div class=" segoe-semibold text-big">promocje</div>
         <div class="container-check">
-            <a href="#"><div class="check segoe-semibold">sprawdź</div></a>
+            <a href="@Url.RouteUrl(new{controller="Sklep",action="Produkty",method=SortMethod.Promocja})"><div class="check segoe-semibold">sprawdź</div></a>
         </div>
     </div>
     <div class="container"><img src="@Url.Content("~/Content/Images/content-pic3.png")" alt="" /></div>
     <div class="container">
         <div class="segoe-semibold text-big">nowości</div>
         <div class="container-check">
-            <a href="#"><div class="check segoe-semibold">sprawdź</div></a>
+            <a href="@Url.RouteUrl(new{controller="Sklep",action="Produkty",method=SortMethod.Nowość})"><div class="check segoe-semibold">sprawdź</div></a>
         </div>
     </div>
     <div class="clear">&nbsp;</div>

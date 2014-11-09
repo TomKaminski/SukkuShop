@@ -13,7 +13,6 @@
 }
 
 .product-backgroud {
-    background: no-repeat;
     height: 752px;
     width: 1300px;
     margin: auto;
@@ -53,13 +52,10 @@
 
 ul.top-panel li {
     height: 30px;
-    width: 127px;
-    line-height: 30px;
-    vertical-align: middle;
+
 }
 
 .top-panel-text-container {
-    height: 30px;
     width: 127px;
     position: absolute;
 }
@@ -134,7 +130,6 @@ ul.top-panel li {
 
 .product-list-item-textbox {
     height: 54px;
-    bottom: 0;
     position: relative;
     margin-top: 2px;
 }
@@ -152,7 +147,6 @@ ul.top-panel li {
 .product-title {
     position: relative;
     padding: 5px 3px 10px;
-    font-size: 16px;
     font-family: FootlightMTLight;
 }
 
@@ -206,9 +200,7 @@ ul.subcategory-menu li:last-child { margin-right: 0; }
 ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
     margin: 0 4px;
     float: left;
-    position: relative;
     width: 21px;
-    height: 21px;
 }
 
 ul.shop-paginator li.inner-paginator:before {

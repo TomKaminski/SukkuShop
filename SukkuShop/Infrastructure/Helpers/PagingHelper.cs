@@ -34,10 +34,8 @@ namespace SukkuShop.Infrastructure.Helpers
             if(dots)
                 tag.InnerHtml = "<div class=" + "paginator-box" + ">" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>" + "<div class=" + "square-paginator" + ">" + "</div>"+"<div class="+"clear"+"></div>" + "</div>";
             else
-            {
                 tag.InnerHtml = "<div class=" + "paginator-box" + " style=" +
                             (pagingInfo.CurrentPage == i ? "font-weight:bold;" : "") + ">" + i.ToString(CultureInfo.InvariantCulture) + "</div>";
-            }
             result.Append("<li class=" + (dots == false ?
                             "inner-paginator" : "") + ">");
             result.Append(tag);

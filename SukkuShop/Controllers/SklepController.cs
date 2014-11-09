@@ -23,6 +23,8 @@ namespace SukkuShop.Controllers
             string search = null,
             int page = 1)
         {
+
+            //getallproducts
             var allProducts = _dbContext.Products.Select(x => new ProductModel
             {
                 Name = x.Name,
@@ -36,26 +38,25 @@ namespace SukkuShop.Controllers
                 OrdersCount = x.OrdersCount
             }).ToList();
 
-            var noveltyBestsellerCounter = Math.Ceiling(allProducts.Count*0.1);
-
-            allProducts = allProducts.OrderByDescending(x => x.DateAdded).ToList();
-            var i = 0;
-            foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
-            {
+           
+            //Novelty system
+            foreach (var item in allProducts.Where(item => (DateTime.Now - item.DateAdded).Days < 14))
                 item.Novelty = true;
-                i++;
-            }
-
-            i = 0;
+            
+            //bestseller system
+            var bestsellerCounter = Math.Ceiling(allProducts.Count * 0.1);
+            var i = 0;
             allProducts = allProducts.OrderByDescending(x => x.OrdersCount).ToList();
-            foreach (var item in allProducts.TakeWhile(item => i != noveltyBestsellerCounter))
+            foreach (var item in allProducts.TakeWhile(item => i != bestsellerCounter))
             {
                 item.Bestseller = true;
                 i++;
             }
 
+            //get category and subcategory list
             var categorylist =
                 _dbContext.Categories.Where(j => j.UpperCategoryId == 0).Select(x => x.Name);
+
             var categoryId = 0;
             if (categorylist.Contains(category))
                 categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
@@ -66,6 +67,7 @@ namespace SukkuShop.Controllers
                     .Distinct()
                     .ToList();
 
+            //search system
             if (!subcategorylist.Contains(subcategory) && !categorylist.Contains(category))
             {
                 if (search == null)
@@ -76,7 +78,6 @@ namespace SukkuShop.Controllers
                     _shop.Products = allProducts.Select(c => c).ToList();
                 else
                     _shop.Products = allProducts.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
-                
             }
             else if (subcategorylist.Contains(subcategory))
                 _shop.Products = allProducts.Where(c => c.Category == subcategory).ToList();

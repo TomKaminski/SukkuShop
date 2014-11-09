@@ -52,6 +52,7 @@
                         @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
                         <input type="submit" class="search-arrow" />
                     </div>
+
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
@@ -63,7 +64,9 @@
                         page = 1,
                         subcategory = (string) null
                     })
+                    
                 </div>
+
             </nav>
             <div class="clear">&nbsp;</div>
         </header>
@@ -74,7 +77,7 @@
                 <li>
                     <div class="footer-text-big segoe-semibold">zakupy</div>
                     <img src="~/Content/Images/footer-cart.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin", "Home")<br/></div>
+                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin","Home")<br/></div>
                     <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", "Dostawa", "Home")<br /></div>
                     <div class="footer-text"> @Html.ActionLink("Płatności", "Platnosci", "Home")<br /></div>
                     <div class="footer-text"> @Html.ActionLink("Polityka prywatności", "PolitykaPrywatnosci", "Home")<br /></div>
