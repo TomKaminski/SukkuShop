@@ -85,7 +85,9 @@ namespace SukkuShop.Controllers
                     allProducts.Where(
                         c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
 
-
+            if (!_shop.Products.Any())
+                return View("NoProducts");
+            
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
