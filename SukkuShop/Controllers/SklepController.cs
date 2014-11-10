@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
@@ -66,10 +65,12 @@ namespace SukkuShop.Controllers
                     search = category;
                 else
                     category = search;
-                ViewBag.SearchString = search;
-                
+
                 if (category != null)
+                {
+                    ViewBag.SearchString = search;
                     _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
+                }
             }
             else if (subcategorylist.Contains(subcategory))
                 _shop.Products = _shop.Products.Where(c => c.Category == subcategory).ToList();

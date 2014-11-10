@@ -11,6 +11,19 @@ namespace SukkuShop
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(null, "{action}/{id}",
+                new
+                {
+                    controller = "Sklep",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                },
+                new
+                {
+                    controller = "Sklep",
+                    action = "SzczegółyProduktu"
+                });
+
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new
                 {
@@ -23,12 +36,13 @@ namespace SukkuShop
                     controller = "Home|Nav|Konto"
                 });
 
+            
+
             routes.MapRoute(null,
-                "Produkty",
+                "{action}",
                 new
                 {
                     controller = "Sklep",
-                    action = "Produkty",
                     category = (string) null,
                     method = SortMethod.Nowość,
                     page = 1,
@@ -37,11 +51,10 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "Produkty/{page}",
+                "{action}/{page}",
                 new
                 {
                     controller = "Sklep",
-                    action = "Produkty",
                     method = SortMethod.Nowość,
                     category = (string) null,
                     subcategory = (string) null
@@ -50,11 +63,36 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}",
+                "{action}/{method}",
                 new
                 {
                     controller = "Sklep",
-                    action = "Produkty",
+                    page = 1,
+                    category = (string)null,
+                    subcategory = (string)null
+                }, new { method = new IsEnum()}
+                );
+
+            routes.MapRoute(null,
+                "{action}/{method}/{page}",
+                new
+                {
+                    controller = "Sklep",
+                    category = (string)null,
+                    subcategory = (string)null
+                },
+                new
+                {
+                    page = @"\d+",
+                    method = new IsEnum()
+                }
+                );
+
+            routes.MapRoute(null,
+                "{action}/{category}",
+                new
+                {
+                    controller = "Sklep",
                     page = 1,
                     method = SortMethod.Nowość,
                     subcategory = (string) null
@@ -62,11 +100,10 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}/{page}",
+                "{action}/{category}/{page}",
                 new
                 {
                     controller = "Sklep",
-                    action = "Produkty",
                     method = SortMethod.Nowość,
                     subcategory = (string) null
                 },
@@ -76,48 +113,12 @@ namespace SukkuShop
                 }
                 );
 
-            routes.MapRoute(null,
-                "Produkty/{method}",
-                new
-                {
-                    controller = "Sklep",
-                    action = "Produkty",
-                    page = 1,
-                    category = (string) null,
-                    subcategory = (string) null
-                }
-                );
+            
+
+            
 
             routes.MapRoute(null,
-                "Produkty/{method}/{page}",
-                new
-                {
-                    controller = "Sklep",
-                    action = "Produkty",
-                    category = (string) null,
-                    subcategory = (string) null
-                },
-                new
-                {
-                    page = @"\d+"
-                }
-                );
-
-            routes.MapRoute(null, "{controller}/{action}/{id}",
-                new
-                {
-                    controller = "Home",
-                    action = "Index",
-                    id = UrlParameter.Optional
-                },
-                new
-                {
-                    controller = "Sklep",
-                    action = "SzczegółyProduktu"
-                });
-
-            routes.MapRoute(null,
-                "{category}/{method}",
+                "{action}/{category}/{method}",
                 new
                 {
                     controller = "Sklep",
@@ -131,7 +132,7 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}/{subcategory}",
+                "{action}/{category}/{subcategory}",
                 new
                 {
                     controller = "Sklep",
@@ -142,7 +143,7 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}/{method}/{page}",
+                "{action}/{category}/{method}/{page}",
                 new
                 {
                     controller = "Sklep",
@@ -159,7 +160,7 @@ namespace SukkuShop
             
 
             routes.MapRoute(null,
-                "{category}/{subcategory}/{page}",
+                "{action}/{category}/{subcategory}/{page}",
                 new
                 {
                     controller = "Sklep",
@@ -173,7 +174,7 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}/{subcategory}/{method}",
+                "{action}/{category}/{subcategory}/{method}",
                 new
                 {
                     controller = "Sklep",
@@ -186,7 +187,7 @@ namespace SukkuShop
                 );
 
             routes.MapRoute(null,
-                "{category}/{subcategory}/{method}/{page}",
+                "{action}/{category}/{subcategory}/{method}/{page}",
                 new
                 {
                     controller = "Sklep",
