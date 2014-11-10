@@ -25,7 +25,7 @@ namespace SukkuShop.Controllers
         {
 
             //getallproducts
-            var allProducts = _dbContext.Products.Select(x => new ProductModel
+            _shop.Products = _dbContext.Products.Select(x => new ProductModel
             {
                 Name = x.Name,
                 ImageName = x.ImageName,
@@ -40,18 +40,10 @@ namespace SukkuShop.Controllers
 
            
             //Novelty system
-            foreach (var item in allProducts.Where(item => (DateTime.Now - item.DateAdded).Days < 14))
-                item.Novelty = true;
+            _shop.Bestsellers();
             
             //bestseller system
-            var bestsellerCounter = Math.Ceiling(allProducts.Count * 0.1);
-            var i = 0;
-            allProducts = allProducts.OrderByDescending(x => x.OrdersCount).ToList();
-            foreach (var item in allProducts.TakeWhile(item => i != bestsellerCounter))
-            {
-                item.Bestseller = true;
-                i++;
-            }
+            _shop.NewProducts();
 
             //get category and subcategory list
             var categorylist =
@@ -68,22 +60,22 @@ namespace SukkuShop.Controllers
                     .ToList();
 
             //search system
-            if (!subcategorylist.Contains(subcategory) && !categorylist.Contains(category))
+            if (!categorylist.Contains(category))
             {
                 if (search == null)
                     search = category;
-                ViewBag.SearchString = search;
-                category = search;
-                if (search == null && category == null)
-                    _shop.Products = allProducts.Select(c => c).ToList();
                 else
-                    _shop.Products = allProducts.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
+                    category = search;
+                ViewBag.SearchString = search;
+                
+                if (category != null)
+                    _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
             }
             else if (subcategorylist.Contains(subcategory))
-                _shop.Products = allProducts.Where(c => c.Category == subcategory).ToList();
+                _shop.Products = _shop.Products.Where(c => c.Category == subcategory).ToList();
             else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
                 _shop.Products =
-                    allProducts.Where(
+                    _shop.Products.Where(
                         c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
 
             if (!_shop.Products.Any())
@@ -96,9 +88,10 @@ namespace SukkuShop.Controllers
                 TotalItems = _shop.Products.Count()
             };
 
+            _shop.SortProducts(method);
             var viewModel = new ProductsListViewModel
             {
-                Products = _shop.SortProducts(_shop.Products, method).Select(x=>new ProductViewModel
+                Products = _shop.Products.Select(x=>new ProductViewModel
                 {
                     Bestseller = x.Bestseller,
                     Id = x.Id,

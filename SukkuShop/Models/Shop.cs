@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using SukkuShop.Infrastructure.Generic;
 
@@ -8,28 +9,44 @@ namespace SukkuShop.Models
     {
         public IList<ProductModel> Products { get; set; }
 
-        public IList<ProductModel> SortProducts(IList<ProductModel> listaProd, SortMethod method)
+        public void SortProducts(SortMethod method)
         {
-            IList<ProductModel> products;
             switch (method)
             {
                 case SortMethod.Popularność:
-                    products = listaProd.OrderByDescending(o => o.OrdersCount).ToList();
+                    Products = Products.OrderByDescending(o => o.OrdersCount).ToList();
                     break;
                 case SortMethod.Promocja:
-                    products = listaProd.OrderByDescending(o => o.Promotion).ToList();
+                    Products = Products.OrderByDescending(o => o.Promotion).ToList();
                     break;
                 case SortMethod.CenaMalejaco:
-                    products = listaProd.OrderByDescending(o => o.Price).ToList();
+                    Products = Products.OrderByDescending(o => o.Price).ToList();
                     break;
                 case SortMethod.CenaRosnaco:
-                    products = listaProd.OrderBy(o => o.Price).ToList();
+                    Products = Products.OrderBy(o => o.Price).ToList();
                     break;
                 default:
-                    products = listaProd.OrderByDescending(o => o.DateAdded).ToList();
+                    Products = Products.OrderByDescending(o => o.DateAdded).ToList();
                     break;
             }
-            return products;
+        }
+
+        public void Bestsellers()
+        {
+            foreach (var item in Products.Where(item => (DateTime.Now - item.DateAdded).Days < 14))
+                item.Novelty = true;
+        }
+
+        public void NewProducts()
+        {
+            var bestsellerCounter = Math.Ceiling(Products.Count * 0.1);
+            var i = 0;
+            Products = Products.OrderByDescending(x => x.OrdersCount).ToList();
+            foreach (var item in Products.TakeWhile(item => i != bestsellerCounter))
+            {
+                item.Bestseller = true;
+                i++;
+            }
         }
     }
 }

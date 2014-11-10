@@ -7,7 +7,13 @@ namespace SukkuShop.Infrastructure.Generic
     {
         IList<ProductModel> Products { get; set; }
 
-        IList<ProductModel> SortProducts(IList<ProductModel> products, SortMethod method);
+        void SortProducts( SortMethod method);
+
+        void Bestsellers();
+
+        void NewProducts();
+
+
 
     }
 }
