@@ -55,7 +55,7 @@ namespace SukkuShop.Controllers
 
             //get category and subcategory list
             var categorylist =
-                _dbContext.Categories.Where(j => j.UpperCategoryId == 0).Select(x => x.Name);
+                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null).Select(x => x.Name);
 
             var categoryId = 0;
             if (categorylist.Contains(category))
