@@ -21,7 +21,6 @@ namespace SukkuShop.Controllers
         public ActionResult Produkty(string category, string subcategory= null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
-            ViewBag.CurrentAction = "Produkty";
             //getallproducts
             _shop.Products = _dbContext.Products.Select(x => new ProductModel
             {
@@ -116,7 +115,6 @@ namespace SukkuShop.Controllers
 
         public ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
-            ViewBag.CurrentAction = "Wyszukaj";
             //getallproducts
             _shop.Products = _dbContext.Products.Select(x => new ProductModel
             {
@@ -130,7 +128,6 @@ namespace SukkuShop.Controllers
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount
             }).ToList();
-
 
             //Novelty system
             _shop.Bestsellers();
@@ -173,7 +170,6 @@ namespace SukkuShop.Controllers
                 CurrentSubCategory = null,
                 CurrentSearch = search
             };
-
             return View("Produkty", viewModel);
         }
     }

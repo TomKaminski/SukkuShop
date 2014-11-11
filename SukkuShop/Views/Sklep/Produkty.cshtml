@@ -22,9 +22,9 @@
             <ul class="shop-paginator">
                 @if (Model.PagingInfo.CurrentPage != 1)
                 {
-                    <li><a href="@Url.RouteUrl(new {controller = "Sklep", action = ViewBag.CurrentAction,search=Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage - 1})"><div class="paging-arrow-left"></div></a></li>
+                    <li><a href="@Url.RouteUrl(new { controller = "Sklep", action = ViewContext.RouteData.Values["action"], search = Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage - 1 })"><div class="paging-arrow-left"></div></a></li>
                 }
-                @Html.PageLinks(Model.PagingInfo, x => Url.Action(ViewBag.CurrentAction, new
+                @Html.PageLinks(Model.PagingInfo, x => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new
                 {
                     page = x,
                     category = Model.CurrentCategory,
@@ -35,7 +35,7 @@
                 
                 @if (Model.PagingInfo.CurrentPage != Model.PagingInfo.TotalPages)
                 {
-                    <li><a href="@Url.RouteUrl(new { controller = "Sklep", action = ViewBag.CurrentAction, search = Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage + 1 })"><div class="paging-arrow-right"></div></a></li>
+                    <li><a href="@Url.RouteUrl(new { controller = "Sklep", action = ViewContext.RouteData.Values["action"], search = Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage + 1 })"><div class="paging-arrow-right"></div></a></li>
                 }
             </ul>
         </div>
