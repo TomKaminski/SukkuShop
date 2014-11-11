@@ -18,7 +18,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string category, string subcategory= null, SortMethod method = SortMethod.Nowość,
+        public ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
             //getallproducts
@@ -29,27 +29,28 @@ namespace SukkuShop.Controllers
                 Price = x.Price,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price-((x.Price*x.Promotion)/100)?? x.Price,
+                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount
             }).ToList();
 
-           
+
             //Novelty system
             _shop.Bestsellers();
-            
+
             //bestseller system
             _shop.NewProducts();
 
             //get category and subcategory list
             var categorylist =
-                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null).Select(x => x.Name);
+                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
+                    .Select(x => x.Name);
 
             var categoryId = 0;
             if (categorylist.Contains(category))
                 categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
-            
+
             var subcategorylist =
                 _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
                     .Select(j => j.Name)
@@ -65,7 +66,7 @@ namespace SukkuShop.Controllers
 
             if (!_shop.Products.Any())
                 return View("NoProducts");
-            
+
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
@@ -76,7 +77,7 @@ namespace SukkuShop.Controllers
             _shop.SortProducts(method);
             var viewModel = new ProductsListViewModel
             {
-                Products = _shop.Products.Select(x=>new ProductViewModel
+                Products = _shop.Products.Select(x => new ProductViewModel
                 {
                     Bestseller = x.Bestseller,
                     Id = x.Id,
@@ -101,8 +102,16 @@ namespace SukkuShop.Controllers
         public ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
-            var similarProducts =
-                _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).OrderBy(x => Guid.NewGuid()).Take(6);
+            var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).
+                Select(j =>
+                    new SimilarProductModel
+                    {
+                        Id = j.ProductId,
+                        ImageName = j.ImageName,
+                        Name = j.Name,
+                        Price = j.Price,
+                        PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
+                    }).OrderBy(x => Guid.NewGuid()).Take(6);
 
             var model = new ProductDetailsViewModel
             {
@@ -123,7 +132,7 @@ namespace SukkuShop.Controllers
                 Price = x.Price,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price * x.Promotion) / 100) ?? x.Price,
+                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount
@@ -162,7 +171,7 @@ namespace SukkuShop.Controllers
                     PriceAfterDiscount = x.PriceAfterDiscount,
                     Promotion = x.Promotion ?? 0,
                     QuantityInStock = x.QuantityInStock
-                }).Skip((page - 1) * paginator.ItemsPerPage)
+                }).Skip((page - 1)*paginator.ItemsPerPage)
                     .Take(paginator.ItemsPerPage),
                 CurrentCategory = null,
                 CurrentSortMethod = method,

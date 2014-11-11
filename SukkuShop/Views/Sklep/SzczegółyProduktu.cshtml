@@ -1,16 +1,52 @@
-﻿@model SukkuShop.Models.ProductDetailsViewModel
+﻿@using SukkuShop.Models
+@model SukkuShop.Models.ProductDetailsViewModel
 @{
     ViewBag.Title = "SzczegółyProduktu";
 }
 
-<h2>SzczegółyProduktu</h2>
 
-@Model.Product.Name <br/>
-@Model.Product.Price <br />
-@Model.Product.Producer <br />
-@Model.Product.Promotion <br />
-@Model.Product.Quantity <br />
-@Model.Product.DateAdded <br />
+<div style="text-align: center">
+    @Model.Product.Name <br />
+    @Model.Product.Price <br />
+    @Model.Product.Producer <br />
+    @Model.Product.Promotion <br />
+    @Model.Product.Quantity <br />
+    @Model.Product.DateAdded <br />
+</div>
 
-<a href="@Session["returnUrl"]">Powrót do sklepuuu</a>
+<div class="product-list-container">
+    @foreach (var product in Model.SimilarProducts)
+    {
+        <div class="product-list-item">
 
+            <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + product.ImageName)')">
+                <div class="image-bottom-panel">
+                    <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+                    <a href="@Url.Action("SzczegółyProduktu", new {id = product.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+                </div>
+            </div>
+            <div class="product-list-item-textbox">
+                <div class="product-title">@product.Name</div>
+                @if (product.Price == product.PriceAfterDiscount)
+                {
+                    <div class="product-price">@product.PriceAfterDiscount.ToString("c")</div>
+                }
+                else
+                {
+                    <div class="product-price" style="text-decoration: line-through; color:red">@product.Price</div>
+                    <div class="product-discount">@product.PriceAfterDiscount.ToString("c")</div>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<div style="text-align: center"><a href="@(Session["returnUrl"] ?? Url.Action("Produkty", new
+                                     {
+                                         category = (string)null,
+                                         page = 1,
+                                         subcategory = (string)null,
+                                         method = SortMethod.Nowość
+                                     }))">Powrót do sklepuuu</a></div>
+
+@Styles.Render("~/Content/css/Shop.css")

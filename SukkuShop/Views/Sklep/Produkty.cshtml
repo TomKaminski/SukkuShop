@@ -2,7 +2,14 @@
 @model SukkuShop.Models.ProductsListViewModel
 @{
     ViewBag.Title = "Index";
-    Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
+    if (ViewContext.RouteData.Values["action"].ToString() != "Wyszukaj")
+    {
+        Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
+    }
+    else
+    {
+        Session["returnUrl"] = null;
+    }
 }
 
 <div class="shop-nav-container">
