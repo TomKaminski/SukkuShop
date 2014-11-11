@@ -314,6 +314,8 @@
     <Content Include="Views\Sklep\SzczegółyProduktu.cshtml" />
     <Content Include="Views\Nav\SubCategory.cshtml" />
     <Content Include="Views\Sklep\NoProducts.cshtml" />
+    <Content Include="Views\Nav\SearchSortList.cshtml" />
+    <Content Include="Views\Sklep\ProductItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

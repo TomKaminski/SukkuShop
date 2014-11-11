@@ -39,9 +39,12 @@ namespace SukkuShop.Controllers
 
         public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowość)
         {
-            if (search != null)
-                category = search;
             ViewBag.CurrentSortMethod = method;
+            if (search != null)
+            {
+                ViewBag.SearchString = search;
+                return PartialView("SearchSortList");
+            }            
             ViewBag.SelectedCategory = category;
             ViewBag.SelectedSubCategory = subcategory;
             return PartialView();

@@ -19,10 +19,9 @@ namespace SukkuShop.Controllers
 
         // GET: Produkty
         public ActionResult Produkty(string category, string subcategory= null, SortMethod method = SortMethod.Nowość,
-            string search = null,
             int page = 1)
         {
-
+            ViewBag.CurrentAction = "Produkty";
             //getallproducts
             _shop.Products = _dbContext.Products.Select(x => new ProductModel
             {
@@ -31,7 +30,7 @@ namespace SukkuShop.Controllers
                 Price = x.Price,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price-((x.Price*x.Promotion)/100) ?? 0,
+                PriceAfterDiscount = x.Price-((x.Price*x.Promotion)/100)?? x.Price,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount
@@ -58,21 +57,7 @@ namespace SukkuShop.Controllers
                     .Distinct()
                     .ToList();
 
-            //search system
-            if (!categorylist.Contains(category))
-            {
-                if (search == null)
-                    search = category;
-                else
-                    category = search;
-
-                if (category != null)
-                {
-                    ViewBag.SearchString = search;
-                    _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
-                }
-            }
-            else if (subcategorylist.Contains(subcategory))
+            if (subcategorylist.Contains(subcategory))
                 _shop.Products = _shop.Products.Where(c => c.Category == subcategory).ToList();
             else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
                 _shop.Products =
@@ -108,7 +93,8 @@ namespace SukkuShop.Controllers
                 CurrentCategory = category,
                 CurrentSortMethod = method,
                 PagingInfo = paginator,
-                CurrentSubCategory = subcategory
+                CurrentSubCategory = subcategory,
+                CurrentSearch = null
             };
             return View(viewModel);
         }
@@ -126,6 +112,69 @@ namespace SukkuShop.Controllers
             };
 
             return View(model);
+        }
+
+        public ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
+        {
+            ViewBag.CurrentAction = "Wyszukaj";
+            //getallproducts
+            _shop.Products = _dbContext.Products.Select(x => new ProductModel
+            {
+                Name = x.Name,
+                ImageName = x.ImageName,
+                Price = x.Price,
+                Promotion = x.Promotion ?? 0,
+                Id = x.ProductId,
+                PriceAfterDiscount = x.Price - ((x.Price * x.Promotion) / 100) ?? x.Price,
+                Category = x.Categories.Name,
+                DateAdded = x.DateAdded,
+                OrdersCount = x.OrdersCount
+            }).ToList();
+
+
+            //Novelty system
+            _shop.Bestsellers();
+
+            //bestseller system
+            _shop.NewProducts();
+
+            ViewBag.SearchString = search;
+            _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
+
+            if (!_shop.Products.Any())
+                return View("NoProducts");
+
+            var paginator = new PagingInfo
+            {
+                CurrentPage = page,
+                ItemsPerPage = 18,
+                TotalItems = _shop.Products.Count()
+            };
+
+            _shop.SortProducts(method);
+            var viewModel = new ProductsListViewModel
+            {
+                Products = _shop.Products.Select(x => new ProductViewModel
+                {
+                    Bestseller = x.Bestseller,
+                    Id = x.Id,
+                    ImageName = x.ImageName,
+                    Name = x.Name,
+                    Novelty = x.Novelty,
+                    Price = x.Price,
+                    PriceAfterDiscount = x.PriceAfterDiscount,
+                    Promotion = x.Promotion ?? 0,
+                    QuantityInStock = x.QuantityInStock
+                }).Skip((page - 1) * paginator.ItemsPerPage)
+                    .Take(paginator.ItemsPerPage),
+                CurrentCategory = null,
+                CurrentSortMethod = method,
+                PagingInfo = paginator,
+                CurrentSubCategory = null,
+                CurrentSearch = search
+            };
+
+            return View("Produkty", viewModel);
         }
     }
 }

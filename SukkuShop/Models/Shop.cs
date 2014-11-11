@@ -20,10 +20,10 @@ namespace SukkuShop.Models
                     Products = Products.OrderByDescending(o => o.Promotion).ToList();
                     break;
                 case SortMethod.CenaMalejaco:
-                    Products = Products.OrderByDescending(o => o.Price).ToList();
+                    Products = Products.OrderByDescending(o => o.PriceAfterDiscount).ToList();
                     break;
                 case SortMethod.CenaRosnaco:
-                    Products = Products.OrderBy(o => o.Price).ToList();
+                    Products = Products.OrderBy(o => o.PriceAfterDiscount).ToList();
                     break;
                 default:
                     Products = Products.OrderByDescending(o => o.DateAdded).ToList();

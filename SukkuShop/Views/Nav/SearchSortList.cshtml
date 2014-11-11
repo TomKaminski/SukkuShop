@@ -1,0 +1,78 @@
+﻿@using SukkuShop.Models
+
+<ul class="sort-menu">
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "font-weight:bold;":"")">PROMOCJA</div>
+        <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Wyszukaj",
+                     page = 1,
+                     search = ViewBag.SearchString,
+                     method = SortMethod.Promocja
+                 })">
+
+            <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "opacity:1;":"")"></div>
+        </a>
+    </li>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.CenaMalejaco || ViewBag.CurrentSortMethod == SortMethod.CenaRosnaco ? "font-weight:bold;" : "")">
+            CENA
+        </div>
+        <div class="price-arrow-box">
+            <a href="@Url.RouteUrl(new
+                     {
+                         controller = "Sklep",
+                         action = "Wyszukaj",
+                         page = 1,
+                         search = ViewBag.SearchString,
+                         method = SortMethod.CenaRosnaco
+
+                     })">
+                <div class="sort-arrow-up" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaRosnaco ? "opacity:1;":"")"></div>
+            </a>
+            <a href="@Url.RouteUrl(new
+                 {
+                     controller = "Sklep",
+                     action = "Wyszukaj",
+                     page = 1,
+                     search = ViewBag.SearchString,
+                     method = SortMethod.CenaMalejaco
+                 })">
+                <div class="sort-arrow-down" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaMalejaco ? "opacity:1;":"")"></div>
+            </a>
+        </div>
+    </li>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "font-weight:bold;":"")">
+            POPULARNOŚć
+        </div>
+        <a href="@Url.RouteUrl(new
+                     {
+                         controller = "Sklep",
+                         action = "Wyszukaj",
+                         page = 1,
+                         search = ViewBag.SearchString,
+                         method = SortMethod.Popularność
+                     })">
+            <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "opacity:1;":"")"></div>
+        </a>
+    </li>
+    <li class="sort-box">
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "font-weight:bold;":"")">
+            NOWOŚć
+        </div>
+        <a href="@Url.RouteUrl(new
+            {
+                controller = "Sklep",
+                action = "Wyszukaj",
+                page = 1,
+                search = ViewBag.SearchString,
+                method = SortMethod.Nowość
+            })">
+            <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "opacity:1;":"")"></div>
+        </a>
+    </li>
+    <li class="sort-box">SORTUJ:</li>
+    <li><div class="clear">&nbsp;</div></li>
+</ul>

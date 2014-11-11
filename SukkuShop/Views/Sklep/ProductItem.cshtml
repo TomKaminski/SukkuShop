@@ -1,0 +1,50 @@
+﻿@model SukkuShop.Models.ProductViewModel
+
+<div class="product-list-item">
+
+    <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + Model.ImageName)')">
+        <ul class="top-panel">
+            @if (Model.Bestseller)
+            {
+                <li>
+                    <div class="top-panel-text-container">
+                        <div class="top-panel-text" style="color: #875546;">Bestseller</div>
+                    </div>
+                </li>
+            }
+            @if (Model.Novelty)
+            {
+                <li>
+                    <div class="top-panel-text-container">
+                        <div class="top-panel-text" style="color: green;">NOWOŚĆ</div>
+                    </div>
+                </li>
+            }
+            @if (Model.Promotion > 0)
+            {
+                <li>
+                    <div class="top-panel-text-container">
+                        <div class="top-panel-text" style="color: #f36f21;">PROMOCJA</div>
+                    </div>
+                </li>
+            }
+        </ul>
+        <div class="image-bottom-panel">
+            <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+            <a href="@Url.Action("SzczegółyProduktu", new {id = Model.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+        </div>
+    </div>
+    <div class="product-list-item-textbox">
+        <div class="product-title">@Model.Name</div>
+        @if (Model.Promotion == 0)
+        {
+            <div class="product-price">@Model.PriceAfterDiscount.ToString("c")</div>
+        }
+        else
+        {
+            <div class="product-price" style="text-decoration: line-through; color:red">@Model.Price</div>
+            <div class="product-discount">@Model.PriceAfterDiscount.ToString("c")</div>
+        }
+    </div>
+</div>
+

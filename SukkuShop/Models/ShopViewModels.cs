@@ -30,7 +30,8 @@ namespace SukkuShop.Models
         public PagingInfo PagingInfo { get; set; }
         public string CurrentCategory { get; set; }
         public SortMethod CurrentSortMethod { get; set; }
-        public string CurrentSubCategory { get; set; }  
+        public string CurrentSubCategory { get; set; }
+        public string CurrentSearch { get; set; }
     }
 
     public class ProductModel

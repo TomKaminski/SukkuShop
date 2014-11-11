@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using SukkuShop.Models
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -46,7 +47,7 @@
             <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
             <nav id="nav-bottom" class="nav-low">
                 
-                @using (Html.BeginForm("Produkty","Sklep",FormMethod.Post))
+                @using (Html.BeginForm("Wyszukaj","Sklep",FormMethod.Post))
                 {
                     <div class="search">
                         @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
@@ -62,11 +63,10 @@
                         action = "Produkty",
                         category = (string) null,
                         page = 1,
-                        subcategory = (string) null
+                        subcategory = (string) null,
+                        method = SortMethod.Nowość
                     })
-                    
                 </div>
-
             </nav>
             <div class="clear">&nbsp;</div>
         </header>
