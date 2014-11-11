@@ -51,7 +51,7 @@
 }
 
 ul.top-panel li {
-    height: 30px;
+    height: 24px;
 
 }
 
@@ -62,7 +62,7 @@ ul.top-panel li {
 
 .top-panel-text-container:before {
     position: absolute;
-    height: 30px;
+    height: 24px;
     width: 127px;
     background-color: white;
     opacity: 0.6;
@@ -73,7 +73,7 @@ ul.top-panel li {
 .top-panel-text {
     position: relative;
     font-family: LucidaConsole;
-    line-height: 30px;
+    line-height: 24px;
     vertical-align: middle;
     font-size: 16px;
     text-transform: uppercase;
@@ -155,6 +155,7 @@ ul.top-panel li {
     margin: 0 3px 5px;
     font-size: 18px;
     font-family: FoglihtenPCS;
+    float: left;
 }
 
 
@@ -334,5 +335,15 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     margin-right: 2px;
     margin-left: 2px;
     margin-top:15px;
+}
+
+.product-discount {
+    font-family: Segoe UI;
+    color: green;
+    text-align: right;
+    position: relative;
+    font-size: 18px;
+    font-family: FoglihtenPCS;
+    margin-right: 5px;
 }
 

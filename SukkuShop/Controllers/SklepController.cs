@@ -31,7 +31,7 @@ namespace SukkuShop.Controllers
                 Price = x.Price,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price*x.Promotion ?? 0,
+                PriceAfterDiscount = x.Price-((x.Price*x.Promotion)/100) ?? 0,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount
@@ -100,7 +100,7 @@ namespace SukkuShop.Controllers
                     Name = x.Name,
                     Novelty = x.Novelty,
                     Price = x.Price,
-                    PriceAfterDiscount = x.Price * x.Promotion ?? 0,
+                    PriceAfterDiscount = x.PriceAfterDiscount,
                     Promotion = x.Promotion ?? 0,
                     QuantityInStock = x.QuantityInStock
                 }).Skip((page - 1)*paginator.ItemsPerPage)

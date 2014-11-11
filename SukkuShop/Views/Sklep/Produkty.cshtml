@@ -49,7 +49,15 @@
                 </div>
                 <div class="product-list-item-textbox">
                     <div class="product-title">@product.Name</div>
-                    <div class="product-price">@product.Price pln</div>
+                    @if (product.Promotion == 0)
+                    {
+                        <div class="product-price">@product.Price.ToString("c")</div>
+                    }
+                    else
+                    {
+                        <div class="product-price" style="text-decoration: line-through; color:red">@product.Price</div>
+                        <div class="product-discount">@product.PriceAfterDiscount.ToString("c")</div>
+                    }
                 </div>
             </div>
         }
