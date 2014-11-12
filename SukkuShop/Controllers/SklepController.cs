@@ -162,6 +162,15 @@ namespace SukkuShop.Controllers
             return !String.IsNullOrEmpty(Request["search"]) ? RedirectToAction("Wyszukaj", new { search = Request["search"],method=SortMethod.Nowość,page=1 }) : RedirectToAction("Produkty", new {method = SortMethod.Nowość, page = 1 });
         }
 
+        public ActionResult RedirectToLocal(string returnUrl)
+        {
+            if (Url.IsLocalUrl(returnUrl))
+            {
+                return Redirect(returnUrl);
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
         private void GetAllProducts()
         {
             _shop.Products = _dbContext.Products.Select(x => new ProductModel

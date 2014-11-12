@@ -1,5 +1,4 @@
-﻿@using SukkuShop.Models
-@model SukkuShop.Models.ProductDetailsViewModel
+﻿@model SukkuShop.Models.ProductDetailsViewModel
 @{
     ViewBag.Title = "SzczegółyProduktu";
 }
@@ -41,12 +40,9 @@
     }
 </div>
 
-<div style="text-align: center"><a href="@(Session["returnUrl"] ?? Url.Action("Produkty", new
+<div style="text-align: center">@Html.ActionLink("Wróć do sklepu","RedirectToLocal" ,new
                                      {
-                                         category = (string)null,
-                                         page = 1,
-                                         subcategory = (string)null,
-                                         method = SortMethod.Nowość
-                                     }))">Powrót do sklepuuu</a></div>
+                                         returnUrl = Session["returnUrl"]
+                                     })</div>
 
 @Styles.Render("~/Content/css/Shop.css")
