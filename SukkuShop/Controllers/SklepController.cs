@@ -47,7 +47,7 @@ namespace SukkuShop.Controllers
 
             if (subcategorylist.Contains(subcategory))
                 _shop.Products = _shop.Products.Where(c => c.Category == subcategory).ToList();
-            else if (!subcategorylist.Contains(subcategory) && categorylist.Contains(category))
+            else if (categorylist.Contains(category))
                 _shop.Products =
                     _shop.Products.Where(
                         c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
@@ -89,6 +89,9 @@ namespace SukkuShop.Controllers
         public ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            if (product == null)
+                return View("NoProducts");
+            
             var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).
                 Select(j =>
                     new SimilarProductModel
@@ -105,7 +108,6 @@ namespace SukkuShop.Controllers
                 Product = product,
                 SimilarProducts = similarProducts
             };
-
             return View(model);
         }
 

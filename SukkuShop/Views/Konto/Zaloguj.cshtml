@@ -2,37 +2,22 @@
 @{
     ViewBag.Title = "Zaloguj";
 }
-<h2>Zaloguj się</h2>
+<h2 style="font-weight: bold; margin:20px 0; text-align: center">Zaloguj się</h2>
 @using (Html.BeginForm("Zaloguj", "Konto", FormMethod.Post))
 {
-    @Html.ValidationSummary("")
-    @Html.AntiForgeryToken()
-    @Html.LabelFor(m => m.Email)
-    @Html.TextBoxFor(m=>m.Email)
-    @Html.LabelFor(m => m.Password)
-    @Html.PasswordFor(m => m.Password)
-    @Html.LabelFor(m => m.RememberMe)
-    @Html.CheckBoxFor(m=>m.RememberMe)
-    <input type="submit" value="Zaloguj"/>
+    <div style="text-align: center">
+        @Html.ValidationSummary("")
+        @Html.AntiForgeryToken()
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        <br/>
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        <br />
+        @Html.LabelFor(m => m.RememberMe)
+        @Html.CheckBoxFor(m => m.RememberMe)
+        <input type="submit" value="Zaloguj" />
+    </div>
 }
-<br/>
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
-<br />
 
 

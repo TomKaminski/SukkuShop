@@ -1,7 +1,31 @@
-﻿
+﻿@model SukkuShop.Models.RegisterViewModel
 @{
     ViewBag.Title = "Zarejestruj";
 }
-
-<h2>Zarejestruj</h2>
-
+<h2 style="font-weight: bold; margin:20px 0; text-align: center">Stwórz konto</h2>
+@using (Html.BeginForm("Zarejestruj", "Konto", FormMethod.Post))
+{
+    <div style="text-align: center">
+        @Html.ValidationSummary("")
+        @Html.AntiForgeryToken()
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        <br />
+        @Html.LabelFor(m => m.Password)
+        @Html.PasswordFor(m => m.Password)
+        <br />
+        @Html.LabelFor(m => m.ConfirmPassword)
+        @Html.PasswordFor(m => m.ConfirmPassword)
+        <br />
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        <br />
+        @Html.LabelFor(m => m.LastName)
+        @Html.TextBoxFor(m => m.LastName)
+        <br />
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone)
+        <br />
+        <input type="submit" value="Zarejestruj" />
+    </div>
+}

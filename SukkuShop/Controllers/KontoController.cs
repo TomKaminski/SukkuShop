@@ -97,7 +97,8 @@ namespace SukkuShop.Controllers
                     UserName = model.Email,
                     Email = model.Email,
                     Name = model.Name,
-                    LastName = model.LastName
+                    LastName = model.LastName,
+                    PhoneNumber = model.Phone
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
