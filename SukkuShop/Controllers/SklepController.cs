@@ -22,19 +22,7 @@ namespace SukkuShop.Controllers
             int page = 1)
         {
             //getallproducts
-            _shop.Products = _dbContext.Products.Select(x => new ProductModel
-            {
-                Name = x.Name,
-                ImageName = x.ImageName,
-                Price = x.Price,
-                Promotion = x.Promotion ?? 0,
-                Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
-                Category = x.Categories.Name,
-                DateAdded = x.DateAdded,
-                OrdersCount = x.OrdersCount
-            }).ToList();
-
+            GetAllProducts();
 
             //Novelty system
             _shop.Bestsellers();
@@ -75,7 +63,7 @@ namespace SukkuShop.Controllers
             };
 
             _shop.SortProducts(method);
-            var viewModel = new ProductsListViewModel
+            return View(new ProductsListViewModel
             {
                 Products = _shop.Products.Select(x => new ProductViewModel
                 {
@@ -95,8 +83,7 @@ namespace SukkuShop.Controllers
                 PagingInfo = paginator,
                 CurrentSubCategory = subcategory,
                 CurrentSearch = null
-            };
-            return View(viewModel);
+            });
         }
 
         public ActionResult SzczegółyProduktu(int id)
@@ -125,18 +112,7 @@ namespace SukkuShop.Controllers
         public ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
             //getallproducts
-            _shop.Products = _dbContext.Products.Select(x => new ProductModel
-            {
-                Name = x.Name,
-                ImageName = x.ImageName,
-                Price = x.Price,
-                Promotion = x.Promotion ?? 0,
-                Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
-                Category = x.Categories.Name,
-                DateAdded = x.DateAdded,
-                OrdersCount = x.OrdersCount
-            }).ToList();
+            GetAllProducts();
 
             //Novelty system
             _shop.Bestsellers();
@@ -158,7 +134,7 @@ namespace SukkuShop.Controllers
             };
 
             _shop.SortProducts(method);
-            var viewModel = new ProductsListViewModel
+            return View("Produkty", new ProductsListViewModel
             {
                 Products = _shop.Products.Select(x => new ProductViewModel
                 {
@@ -178,8 +154,28 @@ namespace SukkuShop.Controllers
                 PagingInfo = paginator,
                 CurrentSubCategory = null,
                 CurrentSearch = search
-            };
-            return View("Produkty", viewModel);
+            });
+        }
+
+        public ActionResult Szukaj()
+        {
+            return !String.IsNullOrEmpty(Request["search"]) ? RedirectToAction("Wyszukaj", new { search = Request["search"],method=SortMethod.Nowość,page=1 }) : RedirectToAction("Produkty", new {method = SortMethod.Nowość, page = 1 });
+        }
+
+        private void GetAllProducts()
+        {
+            _shop.Products = _dbContext.Products.Select(x => new ProductModel
+            {
+                Name = x.Name,
+                ImageName = x.ImageName,
+                Price = x.Price,
+                Promotion = x.Promotion ?? 0,
+                Id = x.ProductId,
+                PriceAfterDiscount = x.Price - ((x.Price * x.Promotion) / 100) ?? x.Price,
+                Category = x.Categories.Name,
+                DateAdded = x.DateAdded,
+                OrdersCount = x.OrdersCount
+            }).ToList();
         }
     }
 }

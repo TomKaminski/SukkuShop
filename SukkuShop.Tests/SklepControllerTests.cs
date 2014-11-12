@@ -20,7 +20,7 @@ namespace SukkuShop.Tests
             new Products {Name = "Produkt3", ProductId = 3, Price = 30, CategoryId = 2,DateAdded = DateTime.Now,OrdersCount = 7,ImageName = "asd.png",Promotion = 0,Categories = new Categories {CategoryId = 2, Name = "Bakalie"}},
             new Products {Name = "Produkt4", ProductId = 4, Price = 40, CategoryId = 3,DateAdded = DateTime.Now,OrdersCount = 8,ImageName = "asd.png",Promotion = 0,Categories = new Categories {CategoryId = 3, Name = "Do ciała", UpperCategoryId = 1}},
             new Products {Name = "Produkt5", ProductId = 5, Price = 50, CategoryId = 3,DateAdded = DateTime.Now,OrdersCount = 9,ImageName = "asd.png",Promotion = 0,Categories = new Categories {CategoryId = 3, Name = "Do ciała", UpperCategoryId = 1}},
-            new Products {Name = "Produkt6", ProductId = 6, Price = 60, CategoryId = 4,DateAdded = DateTime.Now,OrdersCount = 0,ImageName = "asd.png",Promotion = 0,Categories = new Categories {CategoryId = 4, Name = "Do twarzy", UpperCategoryId = 1}},
+            new Products {Name = "SearchItemTest", ProductId = 6, Price = 60, CategoryId = 4,DateAdded = DateTime.Now,OrdersCount = 0,ImageName = "asd.png",Promotion = 0,Categories = new Categories {CategoryId = 4, Name = "Do twarzy", UpperCategoryId = 1}},
         }.AsQueryable();
 
         private readonly IQueryable<Categories> _categories = new List<Categories>
@@ -54,15 +54,16 @@ namespace SukkuShop.Tests
             var shop = new Shop();
             var controller = new SklepController(mockContext.Object, shop);
             
-            //Act
+            
+            //Act -> category
             var result = (ViewResult)controller.Produkty("Kosmetyki");
             var model = (ProductsListViewModel)result.Model;
             //Assert
             Assert.AreEqual(model.Products.Count(),4);
             Assert.AreEqual(model.CurrentCategory, "Kosmetyki");
             Assert.AreEqual(model.CurrentSortMethod, SortMethod.Nowość);
-
-            //Act
+            
+            //Act -> subcategory
             result = (ViewResult)controller.Produkty("Kosmetyki","Do ciała");
             model = (ProductsListViewModel)result.Model;
             //Assert
@@ -70,7 +71,7 @@ namespace SukkuShop.Tests
             Assert.AreEqual(model.CurrentCategory, "Kosmetyki");
             Assert.AreEqual(model.CurrentSortMethod, SortMethod.Nowość);
 
-            //Act
+            //Act -> all products
             result = (ViewResult)controller.Produkty(null,null,SortMethod.CenaMalejaco);
             model = (ProductsListViewModel)result.Model;
             //Assert
@@ -79,8 +80,13 @@ namespace SukkuShop.Tests
             Assert.AreEqual(model.CurrentCategory,null);
             Assert.AreEqual(model.CurrentSortMethod, SortMethod.CenaMalejaco);
 
-        }
+            //Act -> search
+            result = (ViewResult)controller.Wyszukaj("search",SortMethod.CenaMalejaco);
+            model = (ProductsListViewModel)result.Model;
+            //Assert
+            Assert.AreEqual(model.Products.Count(),1);
+            Assert.AreEqual(model.Products.First().Id,6);
 
-        
+        }        
     }
 }

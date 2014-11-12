@@ -39,12 +39,11 @@ namespace SukkuShop
                 "{action}",
                 new
                 {
-                    controller = "Sklep",
-                    search = (string)null
+                    controller = "Sklep"
                 },
                 new
                 {
-                    action = "Wyszukaj"
+                    action = "Szukaj"
                 }
                 );
 
