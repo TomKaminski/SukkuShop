@@ -87,6 +87,10 @@ namespace SukkuShop.Tests
             Assert.AreEqual(model.Products.Count(),1);
             Assert.AreEqual(model.Products.First().Id,6);
 
+            result = (ViewResult) controller.SzczegółyProduktu(1);
+            var model2 = (ProductDetailsViewModel)result.Model;
+            Assert.AreEqual(model2.SimilarProducts.Count(),3);
+            Assert.AreNotEqual(model2.SimilarProducts.Count(),99);
         }        
     }
 }

@@ -89,14 +89,18 @@ namespace SukkuShop.Controllers
             });
         }
 
-        [OutputCache(Duration = int.MaxValue, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+
+        [OutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             if (product == null)
                 return View(MVC.Sklep.Views.NoProducts);
-            
-            var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).
+
+            var subcategoryList =
+                _dbContext.Categories.Where(x => x.UpperCategoryId == product.CategoryId).Select(j => j.CategoryId);
+
+            var similarProducts = _dbContext.Products.Where(x => (x.CategoryId == product.CategoryId || subcategoryList.Contains(x.CategoryId)) && x.ProductId != product.ProductId).
                 Select(j =>
                     new SimilarProductModel
                     {
@@ -106,7 +110,6 @@ namespace SukkuShop.Controllers
                         Price = j.Price,
                         PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
                     }).OrderBy(x => Guid.NewGuid()).Take(6);
-
             var model = new ProductDetailsViewModel
             {
                 Product = product,
