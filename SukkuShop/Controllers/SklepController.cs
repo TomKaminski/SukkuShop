@@ -115,7 +115,7 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = 1800, VaryByParam = "search", Location = OutputCacheLocation.Client)]
+        [OutputCache(Duration = 1800, VaryByParam = "search;method", Location = OutputCacheLocation.Client)]
         public virtual ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
             //getallproducts

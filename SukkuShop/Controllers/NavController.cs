@@ -44,7 +44,7 @@ namespace SukkuShop.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 86400, VaryByParam = "category;subcategory;method")]
+        [OutputCache(Duration = 86400, VaryByParam = "category;search;subcategory;method")]
         public virtual PartialViewResult SortList(string category, string search, string subcategory, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.CurrentSortMethod = method;
