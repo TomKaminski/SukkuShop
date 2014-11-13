@@ -3,7 +3,7 @@
     ViewBag.Title = "Zaloguj";
 }
 <h2 style="font-weight: bold; margin:20px 0; text-align: center">Zaloguj się</h2>
-@using (Html.BeginForm("Zaloguj", "Konto", FormMethod.Post))
+@using (Html.BeginForm(MVC.Konto.Zaloguj(), FormMethod.Post))
 {
     <div style="text-align: center">
         @Html.ValidationSummary("")

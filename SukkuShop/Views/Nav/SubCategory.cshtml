@@ -1,20 +1,14 @@
-﻿@model IEnumerable<string>
+﻿@using SukkuShop.Models
+@model IEnumerable<string>
 <ul class="subcategory-menu">
     @foreach (var link in Model)
     {
         <li>
-            @Html.RouteLink(link, new
-        {
-            controller = "Sklep",
-            action = "Produkty",
-            category = ViewBag.Category,
-            method = ViewBag.CurrentSortMethod,
-            page = 1,
-            subcategory = link
-        }, new
-        {
-            style = (link == ViewBag.SubCategory ? "font-weight:bold" : "")
-        })
+            @Html.ActionLink(link, MVC.Sklep.Produkty((string)ViewBag.Category,link,(SortMethod)ViewBag.CurrentSortMethod), 
+            new
+            {
+                style = (link == ViewBag.SubCategory ? "font-weight:bold" : "")
+            })
         </li>
     }
 </ul>

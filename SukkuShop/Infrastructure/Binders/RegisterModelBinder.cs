@@ -17,6 +17,7 @@ namespace SukkuShop.Infrastructure.Binders
             model.ConfirmPassword = request.Form.Get("ConfirmPassword");
             model.Phone = (request.Form.Get("Phone") == "" ? "<Nie określono>":request.Form.Get("Phone"));
             model.Name = request.Form.Get("Name");
-            return model;        }
+            return model;
+        }
     }
 }

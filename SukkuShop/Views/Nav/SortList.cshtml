@@ -1,76 +1,27 @@
-﻿@using SukkuShop.Models
+﻿@using SukkuShop.Infrastructure.Helpers
+@using SukkuShop.Models
 @model IEnumerable<string>
            
 <ul class="sort-menu">
     <li class="sort-box">
-        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "font-weight:bold;":"")">PROMOCJA</div>
-        <a href="@Url.RouteUrl(new
-                 {
-                     controller = "Sklep",
-                     action = "Produkty",
-                     category = ViewBag.SelectedCategory,
-                     method = SortMethod.Promocja,
-                     page = 1,
-                     subcategory = ViewBag.SelectedSubCategory
-                 })">
-            
-            <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Promocja ? "opacity:1;":"")"></div>
-        </a>
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.Promocja ? "font-weight:bold;" : "")">PROMOCJA</div>
+        @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory,(string)ViewBag.SelectedSubCategory,SortMethod.Promocja)), (SortMethod) ViewBag.CurrentSortMethod, SortMethod.Promocja)
     </li>
     <li class="sort-box">
-        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.CenaMalejaco || ViewBag.CurrentSortMethod == SortMethod.CenaRosnaco ? "font-weight:bold;" : "")">
-            CENA</div>
-            <div class="price-arrow-box">
-                <a href="@Url.RouteUrl(new
-                     {
-                         controller = "Sklep",
-                         action = "Produkty",
-                         category = ViewBag.SelectedCategory,
-                         method = SortMethod.CenaRosnaco,
-                         page = 1,
-                         subcategory = ViewBag.SelectedSubCategory})">
-                    <div class="sort-arrow-up" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaRosnaco ? "opacity:1;":"")"></div>
-                </a>
-                <a href="@Url.RouteUrl(new
-                 {
-                     controller = "Sklep",
-                     action = "Produkty",
-                     category = ViewBag.SelectedCategory,
-                     method = SortMethod.CenaMalejaco,
-                     page = 1,
-                     subcategory = ViewBag.SelectedSubCategory})">
-                    <div class="sort-arrow-down" style="@(ViewBag.CurrentSortMethod==SortMethod.CenaMalejaco ? "opacity:1;":"")"></div>
-                </a>
-            </div>
-</li>
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.CenaMalejaco || ViewBag.CurrentSortMethod == SortMethod.CenaRosnaco ? "font-weight:bold;" : "")">CENA</div>
+        <div class="price-arrow-box">
+            @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory, (string)ViewBag.SelectedSubCategory, SortMethod.CenaRosnaco)), (SortMethod)ViewBag.CurrentSortMethod, SortMethod.CenaRosnaco)
+            @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory, (string)ViewBag.SelectedSubCategory, SortMethod.CenaMalejaco)), (SortMethod)ViewBag.CurrentSortMethod, SortMethod.CenaMalejaco)
+        </div>
+    </li>
     <li class="sort-box">
-        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "font-weight:bold;":"")">
-            POPULARNOŚć</div>
-            <a href="@Url.RouteUrl(new
-            {
-                controller = "Sklep",
-                action = "Produkty",
-                category = ViewBag.SelectedCategory,
-                method = SortMethod.Popularność,
-                page = 1,
-                subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Popularność ? "opacity:1;":"")"></div>
-            </a>
-</li>
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.Popularność ? "font-weight:bold;" : "")">POPULARNOŚć</div>
+        @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory, (string)ViewBag.SelectedSubCategory, SortMethod.Popularność)), (SortMethod)ViewBag.CurrentSortMethod, SortMethod.Popularność)
+    </li>
     <li class="sort-box">
-        <div id="sort-text" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "font-weight:bold;":"")">
-            NOWOŚć</div>
-            <a href="@Url.RouteUrl(new
-            {
-                controller = "Sklep",
-                action = "Produkty",
-                category = ViewBag.SelectedCategory,
-                method = SortMethod.Nowość,
-                page = 1,
-                subcategory = ViewBag.SelectedSubCategory})">
-                <div class="sort-arrow" style="@(ViewBag.CurrentSortMethod==SortMethod.Nowość ? "opacity:1;":"")"></div>
-            </a>
-</li>
+        <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.Nowość ? "font-weight:bold;" : "")">NOWOŚć</div>
+        @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory, (string)ViewBag.SelectedSubCategory)), (SortMethod)ViewBag.CurrentSortMethod)
+    </li>
     <li class="sort-box">SORTUJ:</li>
     <li><div class="clear">&nbsp;</div></li>
 </ul>

@@ -4,10 +4,7 @@
     @foreach (var link in Model)
     {
         <li>
-            @Html.RouteLink(link, new
-            {
-                controller = "Sklep", action = "Produkty", category = link, method = SortMethod.Nowość, page = 1,subcategory=(string)null
-            },new
+            @Html.ActionLink(link,MVC.Sklep.Produkty(link,null,(SortMethod)ViewBag.CurrentSortMethod),new
             {
                 style = (link == ViewBag.Category ? "font-weight:bold" : "")
             })

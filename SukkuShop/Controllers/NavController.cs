@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public class NavController : Controller
+    public partial class NavController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -13,14 +14,19 @@ namespace SukkuShop.Controllers
             _dbContext = dbContext;
         }
 
-        public PartialViewResult Menu(string category = null)
+        [ChildActionOnly]
+        [OutputCache(Duration = 86400, VaryByParam = "category")]
+        public virtual PartialViewResult Menu(string category, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.Category = category;
+            ViewBag.CurrentSortMethod = method;
             var categoryLinks = _dbContext.Categories.Where(j=>j.UpperCategoryId==0).Select(x => x.Name);
             return PartialView(categoryLinks);
         }
 
-        public PartialViewResult SubCategory(string category = null, string subcategory = null, SortMethod method = SortMethod.Nowość)
+        [ChildActionOnly]
+        [OutputCache(Duration = 86400, VaryByParam = "category;subcategory;method")]
+        public virtual PartialViewResult SubCategory(string category, string subcategory = null, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.Category = category;
             ViewBag.SubCategory = subcategory;
@@ -37,13 +43,15 @@ namespace SukkuShop.Controllers
             return PartialView(subcategoryLinks);
         }
 
-        public PartialViewResult SortList(string category, string search,string subcategory,SortMethod method = SortMethod.Nowość)
+        [ChildActionOnly]
+        [OutputCache(Duration = 86400, VaryByParam = "category;subcategory;method")]
+        public virtual PartialViewResult SortList(string category, string search, string subcategory, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.CurrentSortMethod = method;
             if (search != null)
             {
                 ViewBag.SearchString = search;
-                return PartialView("SearchSortList");
+                return PartialView(MVC.Nav.Views.SearchSortList);
             }            
             ViewBag.SelectedCategory = category;
             ViewBag.SelectedSubCategory = subcategory;

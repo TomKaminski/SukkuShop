@@ -3,32 +3,32 @@
 namespace SukkuShop.Controllers
 {
 
-    public class HomeController : Controller
+    public partial class HomeController : Controller
     {
 
-        public ViewResult Index()
+        public virtual ViewResult Index()
         {
             return View();
         }
 
 
-        public ViewResult Regulamin()
+        public virtual ViewResult Regulamin()
         {
             return View();
         }
 
-        public ViewResult Dostawa()
+        public virtual ViewResult Dostawa()
         {
             return View();
         }
 
 
-        public ViewResult Platnosci()
+        public virtual ViewResult Platnosci()
         {
             return View();
         }
 
-        public ViewResult PolitykaPrywatnosci()
+        public virtual ViewResult PolitykaPrywatnosci()
         {
             return View();
         }

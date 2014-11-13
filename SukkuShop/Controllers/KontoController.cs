@@ -10,7 +10,7 @@ using SukkuShop.Models;
 namespace SukkuShop.Controllers
 {
     [Authorize]
-    public class KontoController : Controller
+    public partial class KontoController : Controller
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
@@ -37,10 +37,10 @@ namespace SukkuShop.Controllers
 
         // GET: /Account/Login
         [AllowAnonymous]
-        public ActionResult Zaloguj(string returnUrl)
+        public virtual ActionResult Zaloguj(string returnUrl)
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Konto");
+                return RedirectToAction(MVC.Home.Index());
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
@@ -49,7 +49,7 @@ namespace SukkuShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Zaloguj(LoginViewModel model, string returnUrl)
+        public virtual async Task<ActionResult> Zaloguj(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace SukkuShop.Controllers
                     Session["username"] = user.Name;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
-                    return View("Blokada");
+                    return View(MVC.Shared.Views.Blokada);
                 default:
                     ModelState.AddModelError("", "Nieprawidłowa nazwa użytkownika lub hasło");
                     return View(model);
@@ -77,10 +77,10 @@ namespace SukkuShop.Controllers
 
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Zarejestruj()
+        public virtual ActionResult Zarejestruj()
         {
             if (User.Identity.IsAuthenticated)
-                return RedirectToAction("Index", "Konto");
+                return RedirectToAction(MVC.Home.Index());
             return View();
         }
 
@@ -88,7 +88,7 @@ namespace SukkuShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Zarejestruj(RegisterViewModel model)
+        public virtual async Task<ActionResult> Zarejestruj(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace SukkuShop.Controllers
                     //await UserManager.SendEmailAsync(user.Id, "Confirm your account", ActivationMailBuilder(callbackUrl));
                     await _signInManager.SignInAsync(user, false, false);
                     Session["username"] = user.Name;
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction(MVC.Home.Index());
                 }
                 AddErrors(result);
             }
@@ -119,11 +119,11 @@ namespace SukkuShop.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        public async Task<ActionResult> Aktywacja(int userId, string code)
+        public virtual async Task<ActionResult> Aktywacja(int userId, string code)
         {
             if (code == null)
             {
-                return View("Error");
+                return View(MVC.Shared.Views.Error);
             }
             var result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "PotwierdzonyMail" : "Blad");
@@ -132,7 +132,7 @@ namespace SukkuShop.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
-        public ActionResult ZapomnianeHaslo()
+        public virtual ActionResult ZapomnianeHaslo()
         {
             return View();
         }
@@ -142,7 +142,7 @@ namespace SukkuShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ZapomnianeHaslo(ForgotPasswordViewModel model)
+        public virtual async Task<ActionResult> ZapomnianeHaslo(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -150,13 +150,12 @@ namespace SukkuShop.Controllers
                 if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ZapomnianeHasloPotwierdzenie");
+                    return View(MVC.Konto.Views.ZapomnianeHasloPotwierdzenie);
                 }
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetujHaslo", "Konto", new {userId = user.Id, code},
-                    Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetujHaslo", "Konto", new {userId = user.Id, code}, Request.Url.Scheme);
                 await _userManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
-                return RedirectToAction("ZapomnianeHasloPotwierdzenie", "Konto");
+                return RedirectToAction(MVC.Konto.ZapomnianeHasloPotwierdzenie());
             }
             return View(model);
         }
@@ -164,7 +163,7 @@ namespace SukkuShop.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ZapomnianeHasloPotwierdzenie()
+        public virtual ActionResult ZapomnianeHasloPotwierdzenie()
         {
             return View();
         }
@@ -172,9 +171,9 @@ namespace SukkuShop.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        public ActionResult ResetujHaslo(string code)
+        public virtual ActionResult ResetujHaslo(string code)
         {
-            return code == null ? View("Error") : View();
+            return code == null ? View(MVC.Shared.Views.Error) : View();
         }
 
         //
@@ -182,7 +181,7 @@ namespace SukkuShop.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ResetujHaslo(ResetPasswordViewModel model)
+        public virtual async Task<ActionResult> ResetujHaslo(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -192,12 +191,12 @@ namespace SukkuShop.Controllers
             if (user == null)
             {
                 // Don't reveal that the user does not exist
-                return RedirectToAction("ResetujHasloPotwierdzenie", "Konto");
+                return RedirectToAction(MVC.Konto.ResetujHasloPotwierdzenie());
             }
             var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction("ResetujHasloPotwierdzenie", "Konto");
+                return RedirectToAction(MVC.Konto.ResetujHasloPotwierdzenie());
             }
             AddErrors(result);
             return View();
@@ -206,7 +205,7 @@ namespace SukkuShop.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
-        public ActionResult ResetujHasloPotwierdzenie()
+        public virtual ActionResult ResetujHasloPotwierdzenie()
         {
             return View();
         }
@@ -215,16 +214,16 @@ namespace SukkuShop.Controllers
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Wyloguj()
+        public virtual ActionResult Wyloguj()
         {
             _authenticationManager.SignOut();
             Session["username"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MVC.Home.Index());
         }
 
 
         ////////////MANAGE///////////////
-        public async Task<ActionResult> EdytujDane()
+        public virtual async Task<ActionResult> EdytujDane()
         {
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             var userInfo = new ChangeUserInfoViewModel
@@ -241,7 +240,7 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> EdytujDane(ChangeUserInfoViewModel model)
+        public virtual async Task<ActionResult> EdytujDane(ChangeUserInfoViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -254,7 +253,7 @@ namespace SukkuShop.Controllers
                 user.PhoneNumber = model.Phone;
                 user.Street = model.Street;
                 await _userManager.UpdateAsync(user);
-                return RedirectToAction("Index");
+                return RedirectToAction(MVC.Konto.Index());
             }
             return View(model);
         }
@@ -262,7 +261,7 @@ namespace SukkuShop.Controllers
 
         //
         // GET: /Manage/Index
-        public async Task<ActionResult> Index(ManageMessageId? message)
+        public virtual async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
                 message == ManageMessageId.ChangePasswordSuccess
@@ -313,7 +312,7 @@ namespace SukkuShop.Controllers
 
         //
         // GET: /Manage/ChangePassword
-        public ActionResult ZmienHaslo()
+        public virtual ActionResult ZmienHaslo()
         {
             return View();
         }
@@ -322,7 +321,7 @@ namespace SukkuShop.Controllers
         // POST: /Manage/ChangePassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ZmienHaslo(ChangePasswordViewModel model)
+        public virtual async Task<ActionResult> ZmienHaslo(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -339,7 +338,7 @@ namespace SukkuShop.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction("Index", new {Message = ManageMessageId.ChangePasswordSuccess});
+                return RedirectToAction(MVC.Konto.Index(ManageMessageId.ChangePasswordSuccess));
             }
             AddErrors(result);
             return View(model);
@@ -347,7 +346,7 @@ namespace SukkuShop.Controllers
 
         //
         // GET: /Manage/SetPassword
-        public ActionResult UstawHaslo()
+        public virtual ActionResult UstawHaslo()
         {
             return View();
         }
@@ -356,7 +355,7 @@ namespace SukkuShop.Controllers
         // POST: /Manage/SetPassword
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UstawHaslo(SetPasswordViewModel model)
+        public virtual async Task<ActionResult> UstawHaslo(SetPasswordViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -369,7 +368,7 @@ namespace SukkuShop.Controllers
                     {
                         await SignInAsync(user, isPersistent: false);
                     }
-                    return RedirectToAction("Index", new {Message = ManageMessageId.SetPasswordSuccess});
+                    return RedirectToAction(MVC.Konto.Index(ManageMessageId.SetPasswordSuccess));
                 }
                 AddErrors(result);
             }
@@ -413,7 +412,7 @@ namespace SukkuShop.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MVC.Home.Index());
         }
 
 

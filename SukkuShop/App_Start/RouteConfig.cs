@@ -15,7 +15,8 @@ namespace SukkuShop
                 {
                     controller = "Sklep",
                     action = "Index",
-                    id = UrlParameter.Optional
+                    id = UrlParameter.Optional,
+                    area = ""
                 },
                 new
                 {
@@ -27,7 +28,8 @@ namespace SukkuShop
                "{action}",
                new
                {
-                   controller = "Sklep"
+                   controller = "Sklep",
+                   area = ""
                },
                new
                {
@@ -40,7 +42,8 @@ namespace SukkuShop
                 new
                 {
                     controller = "Sklep",
-                    page = 1
+                    page = 1,
+                    area = ""
                 },
                 new
                 {
@@ -57,7 +60,8 @@ namespace SukkuShop
                     controller = "Sklep",
                     category = (string)null,
                     subcategory = (string)null,
-                    page = 1
+                    page = 1,
+                    area = ""
                 },
                 new
                 {
@@ -73,7 +77,8 @@ namespace SukkuShop
                 {
                     controller = "Sklep",
                     subcategory = (string)null,
-                    page = 1
+                    page = 1,
+                    area = ""
                 },
                 new
                 {
@@ -88,7 +93,8 @@ namespace SukkuShop
                 new
                 {
                     controller = "Sklep",
-                    page = 1
+                    page = 1,
+                    area = ""
                 },
                 new
                 {
@@ -103,7 +109,8 @@ namespace SukkuShop
                 {
                     controller = "Home",
                     action = "Index",
-                    id = UrlParameter.Optional
+                    id = UrlParameter.Optional,
+                    area = ""
                 }
                 );
 

@@ -1,37 +1,15 @@
-﻿@model SukkuShop.Models.ProductViewModel
+﻿@using SukkuShop.Infrastructure.Helpers
+@model SukkuShop.Models.ProductViewModel
 
 <div class="product-list-item">
 
     <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + Model.ImageName)')">
         <ul class="top-panel">
-            @if (Model.Bestseller)
-            {
-                <li>
-                    <div class="top-panel-text-container">
-                        <div class="top-panel-text" style="color: #875546;">Bestseller</div>
-                    </div>
-                </li>
-            }
-            @if (Model.Novelty)
-            {
-                <li>
-                    <div class="top-panel-text-container">
-                        <div class="top-panel-text" style="color: green;">NOWOŚĆ</div>
-                    </div>
-                </li>
-            }
-            @if (Model.Promotion > 0)
-            {
-                <li>
-                    <div class="top-panel-text-container">
-                        <div class="top-panel-text" style="color: #f36f21;">PROMOCJA</div>
-                    </div>
-                </li>
-            }
+            @Html.TopPanelBoxes(Model.Novelty,Model.Bestseller,Model.Promotion)
         </ul>
         <div class="image-bottom-panel">
             <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
-            <a href="@Url.Action("SzczegółyProduktu", new {id = Model.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+            <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
         </div>
     </div>
     <div class="product-list-item-textbox">

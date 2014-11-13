@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public class SklepController : Controller
+    public partial class SklepController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IShop _shop;
@@ -18,9 +19,11 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        public ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
+        [OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
+        public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
+
             //getallproducts
             GetAllProducts();
 
@@ -53,7 +56,7 @@ namespace SukkuShop.Controllers
                         c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
 
             if (!_shop.Products.Any())
-                return View("NoProducts");
+                return View(MVC.Sklep.Views.NoProducts);
 
             var paginator = new PagingInfo
             {
@@ -86,11 +89,12 @@ namespace SukkuShop.Controllers
             });
         }
 
-        public ActionResult SzczegółyProduktu(int id)
+        [OutputCache(Duration = int.MaxValue, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+        public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
             if (product == null)
-                return View("NoProducts");
+                return View(MVC.Sklep.Views.NoProducts);
             
             var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId).
                 Select(j =>
@@ -111,7 +115,8 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        public ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
+        [OutputCache(Duration = 1800, VaryByParam = "search", Location = OutputCacheLocation.Client)]
+        public virtual ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
             //getallproducts
             GetAllProducts();
@@ -126,7 +131,7 @@ namespace SukkuShop.Controllers
             _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
 
             if (!_shop.Products.Any())
-                return View("NoProducts");
+                return View(MVC.Sklep.Views.NoProducts);
 
             var paginator = new PagingInfo
             {
@@ -136,7 +141,7 @@ namespace SukkuShop.Controllers
             };
 
             _shop.SortProducts(method);
-            return View("Produkty", new ProductsListViewModel
+            return View(MVC.Sklep.Views.Produkty, new ProductsListViewModel
             {
                 Products = _shop.Products.Select(x => new ProductViewModel
                 {
@@ -159,18 +164,18 @@ namespace SukkuShop.Controllers
             });
         }
 
-        public ActionResult Szukaj()
+        public virtual ActionResult Szukaj()
         {
-            return !String.IsNullOrEmpty(Request["search"]) ? RedirectToAction("Wyszukaj", new { search = Request["search"],method=SortMethod.Nowość,page=1 }) : RedirectToAction("Produkty", new {method = SortMethod.Nowość, page = 1 });
+            return !String.IsNullOrEmpty(Request["search"]) ? RedirectToAction(MVC.Sklep.Wyszukaj(Request["search"])) : RedirectToAction(MVC.Sklep.Produkty(null));
         }
 
-        public ActionResult RedirectToLocal(string returnUrl)
+        public virtual ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(MVC.Home.Index());
         }
 
         private void GetAllProducts()

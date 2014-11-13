@@ -21,7 +21,7 @@
             <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + product.ImageName)')">
                 <div class="image-bottom-panel">
                     <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
-                    <a href="@Url.Action("SzczegółyProduktu", new {id = product.Id})"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+                    <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(product.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
                 </div>
             </div>
             <div class="product-list-item-textbox">

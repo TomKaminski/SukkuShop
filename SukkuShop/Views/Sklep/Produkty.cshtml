@@ -6,42 +6,28 @@
 }
 
 <div class="shop-nav-container">
-    @Html.Action("SortList", "Nav")
-    @Html.Action("SubCategory", "Nav")
+    @Html.Action(MVC.Nav.SortList(Model.CurrentCategory,Model.CurrentSearch,Model.CurrentSubCategory,Model.CurrentSortMethod))
+    @Html.Action(MVC.Nav.SubCategory(Model.CurrentCategory,Model.CurrentSubCategory,Model.CurrentSortMethod))
 </div>
 <div class="product-backgroud" style="background-image: url('@Url.Content("~/Content/Images/Shop/background_spices.jpg")'); background-repeat: no-repeat; background-size: 100% 100%">
     <div class="product-list-container">
         @foreach (var product in Model.Products)
         {
-            Html.RenderPartial("ProductItem", product);
+            Html.RenderPartial(MVC.Sklep.Views.ProductItem,product);
         }
     </div>
-    @if (Model.PagingInfo.TotalPages > 1)
-    {
-        <div id="paginator">
-            <ul class="shop-paginator">
-                @if (Model.PagingInfo.CurrentPage != 1)
-                {
-                    <li><a href="@Url.RouteUrl(new { controller = "Sklep", action = ViewContext.RouteData.Values["action"], search = Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage - 1 })"><div class="paging-arrow-left"></div></a></li>
-                }
-                @Html.PageLinks(Model.PagingInfo, x => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new
-                {
-                    page = x,
-                    category = Model.CurrentCategory,
-                    subcategory = Model.CurrentSubCategory,
-                    method = Model.CurrentSortMethod,
-                    search = Model.CurrentSearch
-                }))
-                
-                @if (Model.PagingInfo.CurrentPage != Model.PagingInfo.TotalPages)
-                {
-                    <li><a href="@Url.RouteUrl(new { controller = "Sklep", action = ViewContext.RouteData.Values["action"], search = Model.CurrentSearch, category = Model.CurrentCategory, subcategory = Model.CurrentSubCategory, method = Model.CurrentSortMethod, page = Model.PagingInfo.CurrentPage + 1 })"><div class="paging-arrow-right"></div></a></li>
-                }
-            </ul>
-        </div>
-    }
-
-    <div class="clear">&nbsp;</div>
+    <div id="paginator">
+        <ul class="shop-paginator">
+            @Html.PageLinks(Model.PagingInfo, x => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new
+            {
+                page = x,
+                category = Model.CurrentCategory,
+                subcategory = Model.CurrentSubCategory,
+                method = Model.CurrentSortMethod,
+                search = Model.CurrentSearch
+            }))
+        </ul>
+    </div>    
 </div>
 
 @Styles.Render("~/Content/css/Shop.css")

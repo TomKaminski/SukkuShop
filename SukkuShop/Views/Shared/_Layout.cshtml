@@ -1,5 +1,4 @@
-﻿@using SukkuShop.Models
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -10,7 +9,7 @@
     </head>
     <body>
         <header>
-            <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
+            <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
             <nav id="nav-top">
                 <ul>
                     @if (Request.IsAuthenticated)
@@ -18,11 +17,11 @@
                         <li>
                             <div class="manage-box">
                                 <div class="hello-text" style="margin-left: 8px">Witaj @Session["username"]!</div>
-                                @Html.ActionLink("zarządzaj kontem", "Index", "Konto", null, new {@class = "manage-text"})
+                                @Html.ActionLink("zarządzaj kontem", MVC.Konto.Index(), new {@class = "manage-text"})
                             </div>
                         </li>
                         <li>
-                            @using (Html.BeginForm("wyloguj", "konto", new {area = ""}, FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
+                            @using (Html.BeginForm(MVC.Konto.Wyloguj(), FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
                             {
                                 @Html.AntiForgeryToken()
                                 <a class="login-panel-text" href="javascript:document.getElementById('logoutForm').submit()">WYLOGUJ</a>
@@ -33,21 +32,21 @@
                     {
                         <li>
                             <ul class="login-container">
-                                <li>@Html.ActionLink("LOGOWANIE", "Zaloguj", "Konto", null, new {@class = "login-panel-text", style = "border-right:2px solid #8d8d8d;"})</li>
-                                <li>@Html.ActionLink("REJESTRACJA", "Zarejestruj", "Konto", null, new {@class = "login-panel-text", style = "margin-left:5px;"})</li>
+                                <li>@Html.ActionLink("LOGOWANIE",MVC.Konto.Zaloguj(), new {@class = "login-panel-text", style = "border-right:2px solid #8d8d8d;"})</li>
+                                <li>@Html.ActionLink("REJESTRACJA",MVC.Konto.Zarejestruj(), new {@class = "login-panel-text", style = "margin-left:5px;"})</li>
                             </ul>
                         </li>
                     }
                     <li>
-                        @Html.Partial("_CartInfoPartialView")
+                        @Html.Partial(MVC.Shared.Views._CartInfoPartialView)
                     </li>
                 </ul>
-                @Html.Action("Menu", "Nav")
+                @Html.Action("Menu","Nav")
             </nav>
-            <a href="@Url.Action("Index", "Home")"><div class="header-logo"></div></a>
+            <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
             <nav id="nav-bottom" class="nav-low">
                 
-                @using (Html.BeginForm("Szukaj","Sklep",FormMethod.Get))
+                @using (Html.BeginForm(MVC.Sklep.Szukaj(),FormMethod.Get))
                 {
                     <div class="search">
                         @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
@@ -57,15 +56,7 @@
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
-                    @Html.RouteLink("E-Sklep", new
-                    {
-                        controller = "Sklep",
-                        action = "Produkty",
-                        category = (string) null,
-                        page = 1,
-                        subcategory = (string) null,
-                        method = SortMethod.Nowość
-                    })
+                    @Html.ActionLink("E-Sklep", MVC.Sklep.Produkty(null))
                 </div>
             </nav>
             <div class="clear">&nbsp;</div>
@@ -77,17 +68,17 @@
                 <li>
                     <div class="footer-text-big segoe-semibold">zakupy</div>
                     <img src="~/Content/Images/footer-cart.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", "Regulamin","Home")<br/></div>
-                    <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", "Dostawa", "Home")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Płatności", "Platnosci", "Home")<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Polityka prywatności", "PolitykaPrywatnosci", "Home")<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", MVC.Home.Regulamin())<br/></div>
+                    <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", MVC.Home.Dostawa())<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Płatności", MVC.Home.Platnosci())<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Polityka prywatności", MVC.Home.PolitykaPrywatnosci())<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big segoe-semibold">użytkownik</div>
                     <img src="~/Content/Images/footer-user.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Rejestracja", "Zarejestruj", "Konto", null, null)<br /></div>
-                    <div class="footer-text">@Html.ActionLink("Zaloguj się", "Zaloguj", "Konto", null, null)<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", "ZapomnianeHaslo", "Konto", null, null)<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Rejestracja", MVC.Konto.Zarejestruj())<br /></div>
+                    <div class="footer-text">@Html.ActionLink("Zaloguj się", MVC.Konto.Zaloguj())<br /></div>
+                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", MVC.Konto.ZapomnianeHaslo())<br /></div>
                 </li>
                 <li>
                     <div class="footer-text-big segoe-semibold">sukku</div>
