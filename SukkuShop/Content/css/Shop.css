@@ -50,6 +50,9 @@
     position: relative;
 }
 
+.product-list-item-image img {
+    position: absolute;
+}
 ul.top-panel li {
     height: 24px;
 
@@ -386,15 +389,14 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 }
 
 .product-details-info-container .price-box .price-text {
-    font-family: Segoe UI;
-    font-weight: bold;
+    font-family: SegoeBlack;
     font-size: 28px;
     float: left;
     margin-right: 25px
 }
 
 .product-details-info-container .price-box .gramature-text {
-    font-family: Segoe UI;
+    font-family: SegoeLight;
     font-size: 24px;
     vertical-align: middle;
     line-height: 28px;
@@ -412,7 +414,12 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 .product-details-info-container .ask-for-product {
     font-size: 12px;
     color: black;
-    text-decoration: underline;
+    font-family: SegoeLight;
+    border-bottom: 1px solid black;
+}
+
+.product-details-info-container .ask-for-product:hover {
+    text-decoration: none;
 }
 
 .product-details-info-container .quantity-box {
@@ -420,7 +427,8 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     font-size: 21px;
     color: black;
     margin-top: 24px;
-    position: relative
+    position: relative;
+    font-family: SegoeLight;
 }
 
 .quantity-box .quanity-text {
@@ -439,6 +447,7 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     float: left;
     text-align: center;
     margin-right: 9px;
+    font-family: SegoeLight;
 }
 
 .quantity-box .arrows-box {
@@ -501,12 +510,13 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 
 .add-to-cart-button .add-to-cart-button-text {
     line-height: 51px;
-    margin-left: 12px;
+    margin-left: 15px;
     font-size: 18px;
     color: white;
     text-transform: uppercase;
     margin-right: 9px;
     float: left;
+    font-family: SegoeLight
 }
 
 .white-cart-icon {
@@ -527,30 +537,47 @@ hr.hr-orange {
 
 
 .details-info-title{
-    font-family: Segoe UI;
-    font-weight: bold;
+    font-family: SegoeBold;
     font-size: 14px;
     margin-top: 14px;
     text-transform: uppercase;
 }
 
 .product-details-info-container .details-info-text {
-    font-family: Segoe UI;
+    font-family: SegoeLight;
     font-size: 14px;
     margin-top: 14px;
 }
 
 .product-category-label-img {
-   width: 179px;
-height: 38px;
-background-color: #f89b1d;
-font-family: Segoe Ui;
-font-size: 20px;
-color: white;
-text-align: center;
-line-height: 38px;
-margin: auto;
-position: absolute;
-left: 100px;
-bottom: 0;
+    width: 179px;
+    height: 38px;
+    background-color: #f89b1d;
+    font-family: Segoe Ui;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 38px;
+    margin: auto;
+    position: absolute;
+    left: 100px;
+    bottom: 0;
+    text-transform: uppercase
+}
+
+img.lupa {
+    width: 119px;
+    height: 119px;
+    position: absolute;
+    top: 126px;
+    left: 126px;
+    opacity: 0.8;
+}
+
+.flying-product-start {
+    opacity: 0.5;
+    position: absolute;
+    height: 50px;
+    width: 50px;
+    z-index: 1031
 }

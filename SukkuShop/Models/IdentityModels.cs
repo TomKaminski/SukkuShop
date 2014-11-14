@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -67,9 +68,13 @@ namespace SukkuShop.Models
         public string ImageName { get; set; }
         public string Producer { get; set; }
         public int? Promotion { get; set; }
+
+        [DisplayName("Sposób pakowania")]
+        public string Packing { get; set; }
+
         public DateTime DateAdded { get; set; }
 
-        [DefaultValue(0)]
+        [DefaultValue(typeof(int),"0")]
         public int OrdersCount { get; set; }
 
         public Categories Categories { get; set; }
@@ -150,6 +155,19 @@ namespace SukkuShop.Models
 
             userManager.Create(user, "Admin123456");
             var success = userManager.AddToRole(user.Id, "Admin");
+
+            context.Categories.AddOrUpdate(p => p.CategoryId,
+                    new Categories { CategoryId = 1, Name = "Kosmetyki", UpperCategoryId = 0 },
+                    new Categories { CategoryId = 2, Name = "Przyprawy", UpperCategoryId = 0 },
+                    new Categories { CategoryId = 3, Name = "Herbaty", UpperCategoryId = 0 },
+                    new Categories { CategoryId = 4, Name = "Bakalie", UpperCategoryId = 0 },
+                    new Categories { CategoryId = 5, Name = "Inne", UpperCategoryId = 0 },
+                    new Categories { CategoryId = 6, Name = "Pielęgnacja Ciała", UpperCategoryId = 1 },
+                    new Categories { CategoryId = 7, Name = "Pielęgnacja Twarzy", UpperCategoryId = 1 },
+                    new Categories { CategoryId = 8, Name = "Ostre", UpperCategoryId = 2 },
+                    new Categories { CategoryId = 9, Name = "Łagodne", UpperCategoryId = 2 }
+                );
+            
             return success.Succeeded;
         }
 

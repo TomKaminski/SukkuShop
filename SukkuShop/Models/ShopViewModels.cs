@@ -66,7 +66,20 @@ namespace SukkuShop.Models
     public class ProductDetailsViewModel
     {
         public IEnumerable<SimilarProductModel> SimilarProducts { get; set; }
-        public Products Product { get; set; }
+        public ProductDetailModel Product { get; set; }
+    }
+
+    public class ProductDetailModel
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public int Promotion { get; set; }
+        public decimal Price { get; set; }
+        public string ImageName { get; set; }
+        public int QuantityInStock { get; set; }
+        public decimal PriceAfterDiscount { get; set; }
+        public string Category { get; set; }
+        public string Packing  { get; set; }
     }
 
     public class SimilarProductModel

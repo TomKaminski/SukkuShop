@@ -3,7 +3,7 @@ namespace SukkuShop.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class InitialMigration : DbMigration
     {
         public override void Up()
         {
@@ -14,27 +14,9 @@ namespace SukkuShop.Migrations
                         CategoryId = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Promotion = c.Int(),
+                        UpperCategoryId = c.Int(),
                     })
                 .PrimaryKey(t => t.CategoryId);
-            
-            CreateTable(
-                "dbo.Products",
-                c => new
-                    {
-                        ProductId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        Quantity = c.Int(nullable: false),
-                        CategoryId = c.Int(nullable: false),
-                        ImageName = c.String(),
-                        Producer = c.String(),
-                        Promotion = c.Int(),
-                        DateAdded = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
-                        OrdersCount = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.ProductId)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.OrderDetails",
@@ -130,6 +112,26 @@ namespace SukkuShop.Migrations
                 .Index(t => t.RoleId);
             
             CreateTable(
+                "dbo.Products",
+                c => new
+                    {
+                        ProductId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Price = c.Decimal(nullable: false, precision: 18, scale: 2),
+                        Quantity = c.Int(nullable: false,defaultValue:0),
+                        CategoryId = c.Int(nullable: false),
+                        ImageName = c.String(),
+                        Producer = c.String(),
+                        Promotion = c.Int(defaultValue:0),
+                        Packing = c.String(),
+                        DateAdded = c.DateTime(nullable: false, defaultValueSql: "GETDATE()"),
+                        OrdersCount = c.Int(nullable: false,defaultValue:0),
+                    })
+                .PrimaryKey(t => t.ProductId)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
+                .Index(t => t.CategoryId);
+            
+            CreateTable(
                 "dbo.AspNetRoles",
                 c => new
                     {
@@ -146,13 +148,14 @@ namespace SukkuShop.Migrations
         {
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.OrderDetails", "ProductId", "dbo.Products");
+            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.AspNetUserRoles", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.Orders", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.OrderDetails", "OrderId", "dbo.Orders");
-            DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
+            DropIndex("dbo.Products", new[] { "CategoryId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -161,15 +164,14 @@ namespace SukkuShop.Migrations
             DropIndex("dbo.Orders", new[] { "UserId" });
             DropIndex("dbo.OrderDetails", new[] { "OrderId" });
             DropIndex("dbo.OrderDetails", new[] { "ProductId" });
-            DropIndex("dbo.Products", new[] { "CategoryId" });
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.Products");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.Orders");
             DropTable("dbo.OrderDetails");
-            DropTable("dbo.Products");
             DropTable("dbo.Categories");
         }
     }

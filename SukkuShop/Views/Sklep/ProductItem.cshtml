@@ -3,12 +3,16 @@
 
 <div class="product-list-item">
 
-    <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + Model.ImageName)')">
+    <div class="product-list-item-image">
+        <img src="~/Content/Images/Shop/@(Model.ImageName)"/>
         <ul class="top-panel">
-            @Html.TopPanelBoxes(Model.Novelty,Model.Bestseller,Model.Promotion)
+            @Html.TopPanelBoxes(Model.Novelty, Model.Bestseller, Model.Promotion)
         </ul>
         <div class="image-bottom-panel">
-            <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+            @if (Model.QuantityInStock != 0)
+            {
+                <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+            }
             <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
         </div>
     </div>

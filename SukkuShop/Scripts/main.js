@@ -1,17 +1,28 @@
-﻿//$(document).ready(function () {
-//    var stickyNavTop = $('.nav-low').offset().top;
-//    $('.sticky').hide();
-//    var stickyNav = function () {
-//        var scrollTop = $(window).scrollTop();
-//        if (scrollTop > stickyNavTop) {
-//            $('.nav-low').slideUp('slow');
-//            $('.sticky').slideDown('slow');
-//        } else {
-//            $('.nav-low').slideDown('slow');
-//            $('.sticky').slideUp('slow');
-//        }
-//    };
-//    $(window).scroll(function () {
-//        stickyNav();
-//    });
-//});
+﻿$(document).ready(function () {
+    $('.add-to-cart-icon').on('click', function () {
+        var cart = $(this);
+        var imgtodrag = $(this).parent().parent().parent().find("img").eq(0);
+        if (imgtodrag) {
+            imgtodrag.clone()
+                .offset({
+                    top: imgtodrag.offset().top,
+                    left: imgtodrag.offset().left
+                })
+                .addClass("flying-product-start")
+                .appendTo($('body')).
+                animate({
+                    'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': '10px',
+                    'height': '10px'
+                }, 1000, function () {
+                    $(this).animate({
+                        'width': 0,
+                        'height': 0
+                    }, function () {
+                        $(this).detach();
+                    });
+                });
+        }
+    });   
+});

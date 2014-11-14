@@ -213,29 +213,9 @@
     <Compile Include="KontoController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201410251928272_InitialCreate.cs" />
-    <Compile Include="Migrations\201410251928272_InitialCreate.Designer.cs">
-      <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411041907364_SubCategories.cs" />
-    <Compile Include="Migrations\201411041907364_SubCategories.Designer.cs">
-      <DependentUpon>201411041907364_SubCategories.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411041919415_SubCategoriesV2.cs" />
-    <Compile Include="Migrations\201411041919415_SubCategoriesV2.Designer.cs">
-      <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411050934126_CategoryProducts.cs" />
-    <Compile Include="Migrations\201411050934126_CategoryProducts.Designer.cs">
-      <DependentUpon>201411050934126_CategoryProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411051000184_CategoriesOnly.cs" />
-    <Compile Include="Migrations\201411051000184_CategoriesOnly.Designer.cs">
-      <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201411051124133_CategoryFix.cs" />
-    <Compile Include="Migrations\201411051124133_CategoryFix.Designer.cs">
-      <DependentUpon>201411051124133_CategoryFix.cs</DependentUpon>
+    <Compile Include="Migrations\201411141819303_InitialMigration.cs" />
+    <Compile Include="Migrations\201411141819303_InitialMigration.Designer.cs">
+      <DependentUpon>201411141819303_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -279,7 +259,9 @@
     <Content Include="Content\Images\Shop\carticonwhite.png" />
     <Content Include="Content\Images\Shop\info_icon.png" />
     <Content Include="Content\Images\Shop\img1_details.png" />
+    <Content Include="Content\Images\Shop\lupa.png" />
     <Content Include="Content\Images\Shop\test-image1.png" />
+    <Content Include="Content\Images\Shop\test-largeimage1.jpg" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
@@ -293,11 +275,17 @@
     <Content Include="Content\fonts\lucida_bright.eot" />
     <Content Include="Content\fonts\lucida_bright.ttf" />
     <Content Include="Content\fonts\lucida_bright.woff" />
+    <Content Include="Content\fonts\segoeui.ttf" />
+    <Content Include="Content\fonts\segoeuibold.ttf" />
+    <Content Include="Content\fonts\segoeuil.ttf" />
+    <Content Include="Content\fonts\segoeuisl.ttf" />
+    <Content Include="Content\fonts\seguiblack.ttf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.elevatezoom.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
@@ -358,27 +346,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201410251928272_InitialCreate.resx">
-      <DependentUpon>201410251928272_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411041907364_SubCategories.resx">
-      <DependentUpon>201411041907364_SubCategories.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411041919415_SubCategoriesV2.resx">
-      <DependentUpon>201411041919415_SubCategoriesV2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411050934126_CategoryProducts.resx">
-      <DependentUpon>201411050934126_CategoryProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411051000184_CategoriesOnly.resx">
-      <DependentUpon>201411051000184_CategoriesOnly.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411051124133_CategoryFix.resx">
-      <DependentUpon>201411051124133_CategoryFix.cs</DependentUpon>
-    </EmbeddedResource>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <EmbeddedResource Include="Migrations\201411141819303_InitialMigration.resx">
+      <DependentUpon>201411141819303_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

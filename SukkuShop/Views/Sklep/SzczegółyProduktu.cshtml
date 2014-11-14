@@ -1,38 +1,62 @@
-﻿@model SukkuShop.Models.ProductDetailsViewModel
+﻿@using System.Collections.Specialized
+@using System.Web.Script.Serialization
+@model SukkuShop.Models.ProductDetailsViewModel
 @{
     ViewBag.Title = "SzczegółyProduktu";
 }
 
 <div class="product-details-main-container">
     <div class="product-details-img">
-        <img src="~/Content/Images/Shop/img1_details.png" alt=""/>
-        <div class="product-category-label-img">PRZYPRAWY</div>
+        <img id="product-image-details" src="~/Content/Images/Shop/img1_details.png" data-zoom-image="@Url.Content("~/Content/Images/Shop/test-largeimage1.jpg")" alt="" />
+        <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
+        <div class="product-category-label-img">@Model.Product.Category</div>
     </div>
     
     <div class="product-details-info-container">
         <div class="title-box">@Model.Product.Name</div>
         <div class="price-box">
             <div class="price-text">@Model.Product.Price.ToString("c")</div>
-            <div class="gramature-text">(@Model.Product.Quantity)</div>
+            <div class="gramature-text">(@Model.Product.Packing)</div>
         </div>
-        <div class="avaibility segoe-semibold"><span style="color:red">PRODUKT NIEDOSTEPNY</span></div>
-        <a href="#" class="ask-for-product segoe-semibold">zapytaj o dostępność</a>
-            
-        <div class="quantity-box segoe-semibold">
+        <div class="avaibility segoe-semibold">
+            @if (Model.Product.QuantityInStock > 0)
+            {
+                <span style="color: green">PRODUKT DOSTĘPNY (@Model.Product.QuantityInStock)</span>
+            }
+            else
+            {
+                <span style="color: red">PRODUK NIEDOSTEPNY</span>
+            }
+        </div>
+        @if (Model.Product.QuantityInStock == 0)
+        {
+            <a href="#" class="ask-for-product">zapytaj o dostępność</a>
+        }
+        <div class="quantity-box">
             <div class="quanity-text">Ilość:</div>
-            <input type="text" />
+            @Html.TextBox("Quantity",null,new{id="quantity_counter",placeholder="1"})
             <div class="arrows-box">
-                <div class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
-                <div class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+                <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                <div id="decrease_quantity" class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
             </div>
             <div class="quanity-text-right">szt.</div>
         </div>
-        <a href="#">
-            <div class="add-to-cart-button">
-                <div class="add-to-cart-button-text segoe-semibold">Dodaj do koszyka</div>
+        @if (Model.Product.QuantityInStock != 0)
+        {
+            <a href="#">
+                <div class="add-to-cart-button">
+                    <div class="add-to-cart-button-text">Dodaj do koszyka</div>
+                    <div class="white-cart-icon"></div>
+                </div>
+            </a>
+        }
+        else
+        {
+            <div class="add-to-cart-button" style="background-color: gray;cursor: default">
+                <div class="add-to-cart-button-text">Dodaj do koszyka</div>
                 <div class="white-cart-icon"></div>
             </div>
-        </a>
+        }
         <hr class="hr-orange"/>
         <div class="details-info-title">szczegóły produktu</div>
         <div class="details-info-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, s
@@ -79,9 +103,57 @@
     }
 </div>
 
-<div style="text-align: center">@Html.ActionLink("Wróć do sklepu","RedirectToLocal" ,new
+
+<div id="product-error">@Html.ActionLink("Wróć do sklepu", "RedirectToLocal", new
                                      {
                                          returnUrl = Session["returnUrl"]
                                      })</div>
 
 @Styles.Render("~/Content/css/Shop.css")
+
+@Scripts.Render("~/Scripts/jquery.elevatezoom.js")
+@section Scripts{
+    <script>
+        
+        $(document).ready(function() {
+            $('#product-image-details').elevateZoom({
+                zoomType: "inner",
+                cursor: "crosshair",
+                zoomWindowFadeIn: 500,
+                zoomWindowFadeOut: 750
+            });
+            @{
+                var jsSerializer = new JavaScriptSerializer();
+            }
+
+            var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
+
+            $('#increase_quantity').click(function() {
+                var value = $('#quantity_counter').val();
+                if (value < maxQuantity)
+                    value++;
+                $('#quantity_counter').val(value);
+            });
+
+            $('#decrease_quantity').click(function() {
+                var value = $('#quantity_counter').val();
+                if (value > 1)
+                    value--;
+                $('#quantity_counter').val(value);
+            });
+
+            $('#quantity_counter').on('change keyup paste',function() {
+                if ($('#quantity_counter').val() > maxQuantity) {
+                    $(this).val(maxQuantity);
+                }
+            });
+
+            $("#quantity_counter").keypress(function(e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57))
+                    return false;
+                if ($('#quantity_counter').val().length == 0 && e.which == 48 )
+                    return false;
+            });
+        });
+    </script>
+}

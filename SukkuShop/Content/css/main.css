@@ -8,6 +8,26 @@
     src: url(../fonts/SegoeSemiboldIE.eot);
 }
 
+@font-face {
+    font-family: SegoeSemilight;
+    src: url(../fonts/segoeuisl.ttf)
+}
+
+@font-face {
+    font-family: SegoeBold;
+    src: url(../fonts/segoeuibold.ttf)
+}
+
+@font-face {
+    font-family: SegoeBlack;
+    src: url(../fonts/seguiblack.ttf)
+}
+
+@font-face {
+    font-family: SegoeLight;
+    src: url(../fonts/segoeuil.ttf)
+}
+
 .segoe-semibold {
     font-family: SegoeSemibold, SegoeSemiboldIE;
 }
@@ -298,7 +318,7 @@ footer a:hover { color: black; }
     text-decoration: none;
     color: #f89b1d;
     font-weight: bold;
-    font-family: Calibri;
+    font-family: SegoeSemibold;
 }
 
 #product-error a:hover {

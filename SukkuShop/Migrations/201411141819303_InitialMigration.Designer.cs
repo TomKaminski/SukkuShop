@@ -7,13 +7,13 @@ namespace SukkuShop.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.1-30610")]
-    public sealed partial class CategoriesOnly : IMigrationMetadata
+    public sealed partial class InitialMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CategoriesOnly));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "201411051000184_CategoriesOnly"; }
+            get { return "201411141819303_InitialMigration"; }
         }
         
         string IMigrationMetadata.Source

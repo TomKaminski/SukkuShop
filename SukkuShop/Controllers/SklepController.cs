@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing.Design;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -19,7 +20,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        [OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
+        //[OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
         public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
@@ -97,22 +98,49 @@ namespace SukkuShop.Controllers
             if (product == null)
                 return View(MVC.Sklep.Views.NoProducts);
 
-            var subcategoryList =
-                _dbContext.Categories.Where(x => x.UpperCategoryId == product.CategoryId).Select(j => j.CategoryId);
+            var category =
+                _dbContext.Categories.First(x => x.CategoryId == product.CategoryId);
 
-            var similarProducts = _dbContext.Products.Where(x => (x.CategoryId == product.CategoryId || subcategoryList.Contains(x.CategoryId)) && x.ProductId != product.ProductId).
-                Select(j =>
-                    new SimilarProductModel
-                    {
-                        Id = j.ProductId,
-                        ImageName = j.ImageName,
-                        Name = j.Name,
-                        Price = j.Price,
-                        PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
-                    }).OrderBy(x => Guid.NewGuid()).Take(5);
+            var categoryName = category.UpperCategoryId == 0 ? category.Name : _dbContext.Categories.First(x => x.CategoryId == category.UpperCategoryId).Name;
+
+            //PODOBNE GŁÓWNA KATEGORIA
+            var similarProducts = _dbContext.Products.Where(x => x.Categories.Name == categoryName && x.ProductId != product.ProductId).
+            Select(j =>
+                new SimilarProductModel
+                {
+                    Id = j.ProductId,
+                    ImageName = j.ImageName,
+                    Name = j.Name,
+                    Price = j.Price,
+                    PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price
+                }).OrderBy(x => Guid.NewGuid()).Take(5);
+            
+            //PODOBNE TA SAMA PODKATEGORIA/KATEGORIA
+            //var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId && x.ProductId != product.ProductId).
+            //    Select(j =>
+            //        new SimilarProductModel
+            //        {
+            //            Id = j.ProductId,
+            //            ImageName = j.ImageName,
+            //            Name = j.Name,
+            //            Price = j.Price,
+            //            PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
+            //        }).OrderBy(x => Guid.NewGuid()).Take(5);
+
             var model = new ProductDetailsViewModel
             {
-                Product = product,
+                Product = new ProductDetailModel
+                {
+                    Category = categoryName,
+                    Id=product.ProductId,
+                    ImageName = product.ImageName,
+                    Name = product.Name,
+                    Price = product.Price,
+                    PriceAfterDiscount = product.Price-((product.Promotion*product.Price)/100)??product.Price,
+                    Promotion = product.Promotion ?? 0,
+                    QuantityInStock = product.Quantity,
+                    Packing = product.Packing
+                },
                 SimilarProducts = similarProducts
             };
             return View(model);
@@ -193,7 +221,8 @@ namespace SukkuShop.Controllers
                 PriceAfterDiscount = x.Price - ((x.Price * x.Promotion) / 100) ?? x.Price,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
-                OrdersCount = x.OrdersCount
+                OrdersCount = x.OrdersCount,
+                QuantityInStock = x.Quantity
             }).ToList();
         }
     }
