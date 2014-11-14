@@ -551,8 +551,6 @@ text-align: center;
 line-height: 38px;
 margin: auto;
 position: absolute;
-
-z-index: 1000;
 left: 100px;
 bottom: 0;
 }
