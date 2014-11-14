@@ -109,7 +109,7 @@ namespace SukkuShop.Controllers
                         Name = j.Name,
                         Price = j.Price,
                         PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
-                    }).OrderBy(x => Guid.NewGuid()).Take(6);
+                    }).OrderBy(x => Guid.NewGuid()).Take(5);
             var model = new ProductDetailsViewModel
             {
                 Product = product,

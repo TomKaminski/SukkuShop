@@ -3,17 +3,56 @@
     ViewBag.Title = "SzczegółyProduktu";
 }
 
-
-<div style="text-align: center">
-    @Model.Product.Name <br />
-    @Model.Product.Price <br />
-    @Model.Product.Producer <br />
-    @Model.Product.Promotion <br />
-    @Model.Product.Quantity <br />
-    @Model.Product.DateAdded <br />
+<div class="product-details-main-container">
+    <div class="product-details-img">
+        <img src="~/Content/Images/Shop/img1_details.png" alt=""/>
+        <div class="product-category-label-img">PRZYPRAWY</div>
+    </div>
+    
+    <div class="product-details-info-container">
+        <div class="title-box">@Model.Product.Name</div>
+        <div class="price-box">
+            <div class="price-text">@Model.Product.Price.ToString("c")</div>
+            <div class="gramature-text">(@Model.Product.Quantity)</div>
+        </div>
+        <div class="avaibility segoe-semibold"><span style="color:red">PRODUKT NIEDOSTEPNY</span></div>
+        <a href="#" class="ask-for-product segoe-semibold">zapytaj o dostępność</a>
+            
+        <div class="quantity-box segoe-semibold">
+            <div class="quanity-text">Ilość:</div>
+            <input type="text" />
+            <div class="arrows-box">
+                <div class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                <div class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+            </div>
+            <div class="quanity-text-right">szt.</div>
+        </div>
+        <a href="#">
+            <div class="add-to-cart-button">
+                <div class="add-to-cart-button-text segoe-semibold">Dodaj do koszyka</div>
+                <div class="white-cart-icon"></div>
+            </div>
+        </a>
+        <hr class="hr-orange"/>
+        <div class="details-info-title">szczegóły produktu</div>
+        <div class="details-info-text">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, s
+            ed diam nonummy nibh euismod tincidunt ut laoreet dolore
+            magna aliquam erat volutpat. Ut wisi enim ad minim veniam,
+            quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut
+            aliquip ex ea commodo consequat. Duis autem vel eum iriure
+            dolor in hendrerit in vulputate velit esse molestie consequat,
+            vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan
+            et iusto odio dignissim qui blandit praesent luptatum zzril
+            delenit augue duis dolore te feugait nulla facilisi. Nam liber
+            tempor cum soluta nobis eleifend option congue nihil imperdiet
+            doming id quod mazim placerat facer possim assum.</div>
+    </div>
+    <div class="clear">&nbsp;</div>
 </div>
 
-<div class="product-list-container">
+<div class="details-info-title" style="text-align: center;margin-top: 30px;">podobne w tej kategorii</div>
+<div class="product-list-container" style="padding-top: 20px;">
+
     @foreach (var product in Model.SimilarProducts)
     {
         <div class="product-list-item">

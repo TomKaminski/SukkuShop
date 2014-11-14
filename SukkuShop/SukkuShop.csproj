@@ -276,7 +276,9 @@
     <Content Include="Content\Images\logo-header.png" />
     <Content Include="Content\Images\Shop\background_spices.jpg" />
     <Content Include="Content\Images\Shop\basket.png" />
+    <Content Include="Content\Images\Shop\carticonwhite.png" />
     <Content Include="Content\Images\Shop\info_icon.png" />
+    <Content Include="Content\Images\Shop\img1_details.png" />
     <Content Include="Content\Images\Shop\test-image1.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
