@@ -1,4 +1,6 @@
 ﻿$(document).ready(function () {
+
+    //flying product
     $('.add-to-cart-icon').on('click', function () {
         var cart = $(this);
         var imgtodrag = $(this).parent().parent().parent().find("img").eq(0);
@@ -24,5 +26,7 @@
                     });
                 });
         }
-    });   
+    });
+
+
 });

@@ -140,7 +140,7 @@ ul.top-panel li {
 .product-list-item-textbox:before {
     position: absolute;
     background-color: #f7eee7;
-    opacity: 0.5;
+    opacity: 0.8;
     content: '';
     height: 54px;
     width: 127px;
@@ -154,11 +154,12 @@ ul.top-panel li {
 }
 
 .product-price {
-    position: relative;
-    margin: 0 3px 5px;
+    position: absolute;
     font-size: 18px;
     font-family: FoglihtenPCS;
     float: left;
+    bottom: 0;
+    left: 3px;
 }
 
 
@@ -343,10 +344,12 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 .product-discount {
     color: green;
     text-align: right;
-    position: relative;
+    position: absolute;
     font-size: 18px;
     font-family: FoglihtenPCS;
     margin-right: 5px;
+    right: 3px;
+    bottom: 0;
 }
 
 .product-details-main-container {
@@ -354,6 +357,7 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     margin: 60px auto 12px;
     padding-bottom: 60px;
     border-bottom: 1px solid #f89b1d;
+    position: relative;
 }
 
 .product-details-img {
@@ -384,7 +388,6 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 
 
 .product-details-info-container .price-box {
-    height: 28px;
     margin-bottom: 10px;
 }
 
@@ -432,10 +435,10 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
 }
 
 .quantity-box .quanity-text {
-    vertical-align: bottom;
-    line-height: 34px;
     margin-right: 80px;
     float: left;
+    position: absolute;
+    bottom: 0;
 }
 
 .quantity-box input {
@@ -448,6 +451,7 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     text-align: center;
     margin-right: 9px;
     font-family: SegoeLight;
+    margin-left: 123px;
 }
 
 .quantity-box .arrows-box {
@@ -565,6 +569,23 @@ hr.hr-orange {
     text-transform: uppercase
 }
 
+.product-promotion-label-img {
+    width: 179px;
+    height: 38px;
+    background-color: green;
+    font-family: Segoe Ui;
+    font-size: 20px;
+    color: white;
+    text-align: center;
+    line-height: 38px;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+    text-transform: uppercase;
+    z-index: 1000;
+}
+
 img.lupa {
     width: 119px;
     height: 119px;
@@ -580,4 +601,9 @@ img.lupa {
     height: 50px;
     width: 50px;
     z-index: 1031
+}
+
+.product-detail-price-before-discount {
+    font-size: 16px;
+    text-decoration: line-through;
 }

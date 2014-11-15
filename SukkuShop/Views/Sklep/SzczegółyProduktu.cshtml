@@ -1,12 +1,16 @@
-﻿@using System.Collections.Specialized
-@using System.Web.Script.Serialization
+﻿@using System.Web.Script.Serialization
 @model SukkuShop.Models.ProductDetailsViewModel
 @{
     ViewBag.Title = "SzczegółyProduktu";
 }
 
 <div class="product-details-main-container">
-    <div class="product-details-img">
+    @if (Model.Product.Promotion > 0)
+    {
+        <div class="product-promotion-label-img">PROMOCJA -@Model.Product.Promotion%</div>
+    }
+        <div class="product-details-img">
+        
         <img id="product-image-details" src="~/Content/Images/Shop/img1_details.png" data-zoom-image="@Url.Content("~/Content/Images/Shop/test-largeimage1.jpg")" alt="" />
         <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
         <div class="product-category-label-img">@Model.Product.Category</div>
@@ -15,7 +19,15 @@
     <div class="product-details-info-container">
         <div class="title-box">@Model.Product.Name</div>
         <div class="price-box">
-            <div class="price-text">@Model.Product.Price.ToString("c")</div>
+            @if (Model.Product.Promotion == 0)
+            {
+                <div class="price-text">@Model.Product.PriceAfterDiscount.ToString("c")</div>
+            }
+            else
+            {
+                <div class="product-detail-price-before-discount segoe-semibold">@Model.Product.Price.ToString("c")</div>
+                <div class="price-text" style="color:green">@Model.Product.PriceAfterDiscount.ToString("c")</div>
+            }
             <div class="gramature-text">(@Model.Product.Packing)</div>
         </div>
         <div class="avaibility segoe-semibold">
@@ -81,10 +93,14 @@
     {
         <div class="product-list-item">
 
-            <div class="product-list-item-image" style="background-image: url('@Url.Content("~/Content/Images/Shop/" + product.ImageName)')">
+            <div class="product-list-item-image">
+                <img src="~/Content/Images/Shop/@(product.ImageName)" alt=""/>
                 <div class="image-bottom-panel">
+                @if (product.Available)
+                {
                     <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
-                    <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(product.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+                }
+                <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(product.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
                 </div>
             </div>
             <div class="product-list-item-textbox">
@@ -95,7 +111,7 @@
                 }
                 else
                 {
-                    <div class="product-price" style="text-decoration: line-through; color:red">@product.Price</div>
+                    <div class="product-price" style="text-decoration: line-through">@product.Price</div>
                     <div class="product-discount">@product.PriceAfterDiscount.ToString("c")</div>
                 }
             </div>
@@ -110,50 +126,35 @@
                                      })</div>
 
 @Styles.Render("~/Content/css/Shop.css")
-
-@Scripts.Render("~/Scripts/jquery.elevatezoom.js")
 @section Scripts{
     <script>
-        
+
         $(document).ready(function() {
-            $('#product-image-details').elevateZoom({
-                zoomType: "inner",
-                cursor: "crosshair",
-                zoomWindowFadeIn: 500,
-                zoomWindowFadeOut: 750
-            });
+
             @{
                 var jsSerializer = new JavaScriptSerializer();
             }
-
             var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
 
-            $('#increase_quantity').click(function() {
+            //Counter ++
+            $('#increase_quantity').click(function () {
                 var value = $('#quantity_counter').val();
                 if (value < maxQuantity)
                     value++;
                 $('#quantity_counter').val(value);
             });
 
-            $('#decrease_quantity').click(function() {
-                var value = $('#quantity_counter').val();
-                if (value > 1)
-                    value--;
-                $('#quantity_counter').val(value);
-            });
 
-            $('#quantity_counter').on('change keyup paste',function() {
+            //Counter validate
+            $('#quantity_counter').on('change keyup paste', function () {
                 if ($('#quantity_counter').val() > maxQuantity) {
                     $(this).val(maxQuantity);
                 }
             });
-
-            $("#quantity_counter").keypress(function(e) {
-                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57))
-                    return false;
-                if ($('#quantity_counter').val().length == 0 && e.which == 48 )
-                    return false;
-            });
         });
     </script>
 }
+@Scripts.Render("~/Scripts/jquery.elevatezoom.js")
+@Scripts.Render("~/Scripts/shopdetails.js")
+@Scripts.Render("~/Scripts/main.js")
+

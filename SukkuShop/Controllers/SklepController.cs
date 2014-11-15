@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing.Design;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -20,7 +19,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        //[OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
+        [OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
         public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
@@ -112,7 +111,8 @@ namespace SukkuShop.Controllers
                     ImageName = j.ImageName,
                     Name = j.Name,
                     Price = j.Price,
-                    PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price
+                    PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price,
+                    Available = j.Quantity>0
                 }).OrderBy(x => Guid.NewGuid()).Take(5);
             
             //PODOBNE TA SAMA PODKATEGORIA/KATEGORIA

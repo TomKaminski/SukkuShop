@@ -56,7 +56,7 @@ namespace SukkuShop.Infrastructure.Helpers
             {
                 toppaneltext.SetInnerText("Nowość");
                 toppaneltext.Attributes.Remove("style");
-                toppaneltext.Attributes.Add("style", "color: green");
+                toppaneltext.Attributes.Add("style", "color: #f36f21");
                 toppanelcontainer.InnerHtml = toppaneltext.ToString();
                 tag.Attributes.Clear();
                 tag.InnerHtml = toppanelcontainer.ToString();
@@ -67,7 +67,7 @@ namespace SukkuShop.Infrastructure.Helpers
 
             toppaneltext.SetInnerText("Promocja");
             toppaneltext.Attributes.Remove("style");
-            toppaneltext.Attributes.Add("style", "color: #f36f21");
+            toppaneltext.Attributes.Add("style", "color: green");
             toppanelcontainer.InnerHtml = toppaneltext.ToString();
             tag.Attributes.Clear();
             tag.InnerHtml = toppanelcontainer.ToString();
