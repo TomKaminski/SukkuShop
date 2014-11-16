@@ -1,23 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace SukkuShop.Models
 {
     public class Cart
     {
-        private List<CartLine> lineCollection = new List<CartLine>();
+        private readonly List<CartLine> _lineCollection = new List<CartLine>();
 
-        public void AddItem(CartProduct product, int quantity = 1)
+        public void AddItem(int id, int quantity = 1)
         {
-            CartLine line = lineCollection.FirstOrDefault(p => p.CartProduct.Id == product.Id);
+            var line = _lineCollection.FirstOrDefault(p => p.Id == id);
 
             if (line == null)
             {
-                lineCollection.Add(new CartLine
+                _lineCollection.Add(new CartLine
                 {
-                    CartProduct = product,
+                    Id = id,
                     Quantity = quantity
                 });
             }
@@ -29,33 +27,24 @@ namespace SukkuShop.Models
 
         public void Clear()
         {
-            lineCollection.Clear();
-        }
-        public void RemoveLine(CartProduct cartProduct)
-        {
-            lineCollection.RemoveAll(l => l.CartProduct.Id == cartProduct.Id);
+            _lineCollection.Clear();
         }
 
-        public decimal TotalValue()
+        public void RemoveLine(int id)
         {
-            return lineCollection.Sum(e => e.CartProduct.Price*e.Quantity);
+            _lineCollection.RemoveAll(l => l.Id == id);
         }
 
-        public IEnumerable<CartLine> Lines { get { return lineCollection; } } 
-        public class CartProduct
+        public IEnumerable<CartLine> Lines
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
-            public decimal Price { get; set; }
-            // public string ImageName {get; set;}
-            public int QuantityInStock { get; set; }
+            get { return _lineCollection; }
         }
+
 
         public class CartLine
         {
-            public CartProduct CartProduct { get; set; }
+            public int Id { get; set; }
             public int Quantity { get; set; }
-            public int LinePrice { get; set; }
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -18,17 +15,10 @@ namespace SukkuShop.Controllers
             _dbContext = dbContext;
         }
         [HttpPost]
-        public ActionResult AddToCart(int ProductId, Cart shoppingCart, int Quantity = 1)
+        public ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
-            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == ProductId);
-            shoppingCart.AddItem(new Cart.CartProduct
-            {
-                Id=product.ProductId,
-                Name = product.Name,
-                Price = product.Price,
-                QuantityInStock = product.Quantity             
-            },Quantity);
-            return View();
+            shoppingCart.AddItem(id, quantity);
+            return RedirectToAction("Produkty", "Sklep");
         }
         // GET: Cart
         public ActionResult Index()
