@@ -11,7 +11,11 @@
         <div class="image-bottom-panel">
             @if (Model.QuantityInStock != 0)
             {
-                <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
+                <a href="#">
+                    <div class="add-to-cart-icon">
+                        <img src="~/Content/Images/Shop/basket.png" style="width: 75%" />
+                    </div>
+                </a>
             }
             <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
         </div>
