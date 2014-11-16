@@ -102,7 +102,6 @@ ul.top-panel li {
     width: 32px;
     height: 32px;
     position: absolute;
-    opacity: 0.9;
 }
 
 .add-to-cart-icon img, .info-icon img {
@@ -115,7 +114,7 @@ ul.top-panel li {
     opacity: 0.8
 }
 
-.add-to-cart-icon:hover, .info-icon img:hover { opacity: 1; }
+.add-to-cart-icon img:hover, .info-icon img:hover { opacity: 1; }
 
 .image-bottom-panel .info-icon {
     width: 32px;
