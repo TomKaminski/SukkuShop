@@ -3,7 +3,7 @@
     //flying product
     $('.add-to-cart-icon').on('click', function () {
         var cart = $(this);
-        var imgtodrag = $(this).parent().parent().parent().find("img").eq(0);
+        var imgtodrag = $(this).parent().parent().parent().parent().find("img").eq(0);
         if (imgtodrag) {
             imgtodrag.clone()
                 .offset({
