@@ -9,7 +9,8 @@
     @Html.Action(MVC.Nav.SortList(Model.CurrentCategory,Model.CurrentSearch,Model.CurrentSubCategory,Model.CurrentSortMethod))
     @Html.Action(MVC.Nav.SubCategory(Model.CurrentCategory,Model.CurrentSubCategory,Model.CurrentSortMethod))
 </div>
-<div class="product-backgroud" style="background-image: url('@Url.Content("~/Content/Images/Shop/background_spices.jpg")'); background-repeat: no-repeat; background-size: 100% 100%">
+<div class="product-background" >
+    @Html.BackgroundImage(Model.CurrentCategory)
     <div class="product-list-container">
         @foreach (var product in Model.Products)
         {

@@ -11,7 +11,7 @@
     }
         <div class="product-details-img">
         
-        <img id="product-image-details" src="~/Content/Images/Shop/img1_details.png" data-zoom-image="@Url.Content("~/Content/Images/Shop/test-largeimage1.jpg")" alt="" />
+        <img id="product-image-details" src="~/Content/Images/Shop/@Model.Product.ImageName" data-zoom-image="@Url.Content("~/Content/Images/Shop/"+@Model.Product.ImageName)" alt="" />
         <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
         <div class="product-category-label-img">@Model.Product.Category</div>
     </div>
