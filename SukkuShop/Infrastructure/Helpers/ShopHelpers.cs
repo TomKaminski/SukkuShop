@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Web;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -6,6 +7,14 @@ namespace SukkuShop.Infrastructure.Helpers
 {
     public static class ShopHelpers
     {
+
+        public static MvcHtmlString BackgroundImage(this HtmlHelper html, string category=null)
+        {
+            var imgTag = new TagBuilder("img");
+            var src = category != null ? VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/" + category.ToLower() + ".png") : VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/allproducts.png");
+            imgTag.MergeAttribute("src",src);
+            return MvcHtmlString.Create(imgTag.ToString());
+        }
         public static MvcHtmlString SortList(this HtmlHelper html, string pageUrl, SortMethod currentSortMethod, SortMethod sortMethod = SortMethod.Nowość)
         {
             var result = new StringBuilder();
