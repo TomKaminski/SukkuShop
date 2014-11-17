@@ -19,7 +19,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        [OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
+        //[OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
         public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
@@ -90,7 +90,7 @@ namespace SukkuShop.Controllers
         }
 
 
-        [OutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+        //[OutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
@@ -146,7 +146,7 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        [OutputCache(Duration = 1800, VaryByParam = "search;method", Location = OutputCacheLocation.Client)]
+        //[OutputCache(Duration = 1800, VaryByParam = "search;method", Location = OutputCacheLocation.Client)]
         public virtual ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
             //getallproducts

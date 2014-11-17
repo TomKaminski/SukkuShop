@@ -513,10 +513,21 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     background-color: #f89b1d;
     height: 51px;
     width: 237px;
-    margin-bottom: 15px; 
+    margin-bottom: 5px 
 }
 
-.add-to-cart-button .add-to-cart-button-text {
+.product-details-info-container .add-to-cart-button-gray {
+    margin-top: 24px;
+    height: 51px;
+    width: 237px;
+    margin-bottom: 5px;
+    background-color: gray;
+    cursor: default
+}
+
+
+
+.add-to-cart-button-text {
     line-height: 51px;
     margin-left: 15px;
     font-size: 18px;
@@ -612,3 +623,13 @@ img.lupa {
     text-decoration: line-through;
 }
 
+.add-to-cart-animation {
+    font-size: 11px;
+    color: green;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.add-to-cart-animation-box {
+    height: 11px;
+}
