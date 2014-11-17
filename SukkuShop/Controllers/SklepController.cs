@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
+using DevTrends.MvcDonutCaching;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
@@ -19,7 +20,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        //[OutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory")]
+        [DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory;page;method")]
         public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
             int page = 1)
         {
@@ -90,7 +91,7 @@ namespace SukkuShop.Controllers
         }
 
 
-        //[OutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+        [DonutOutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
@@ -146,7 +147,7 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        //[OutputCache(Duration = 1800, VaryByParam = "search;method", Location = OutputCacheLocation.Client)]
+        [DonutOutputCache(Duration = 1800, VaryByParam = "search;method;page", Location = OutputCacheLocation.Client)]
         public virtual ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
         {
             //getallproducts

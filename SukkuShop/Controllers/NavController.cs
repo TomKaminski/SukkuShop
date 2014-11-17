@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using DevTrends.MvcDonutCaching;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
@@ -14,7 +15,7 @@ namespace SukkuShop.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 86400, VaryByParam = "category")]
+        [DonutOutputCache(Duration = 86400, VaryByParam = "category")]
         public virtual PartialViewResult Menu(string category, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.Category = category;
@@ -24,7 +25,7 @@ namespace SukkuShop.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 86400, VaryByParam = "category;subcategory;method")]
+        [DonutOutputCache(Duration = 86400, VaryByParam = "category;subcategory;method")]
         public virtual PartialViewResult SubCategory(string category, string subcategory = null, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.Category = category;
@@ -43,7 +44,7 @@ namespace SukkuShop.Controllers
         }
 
         [ChildActionOnly]
-        [OutputCache(Duration = 86400, VaryByParam = "category;search;subcategory;method")]
+        [DonutOutputCache(Duration = 86400, VaryByParam = "category;search;subcategory;method")]
         public virtual PartialViewResult SortList(string category, string search, string subcategory, SortMethod method = SortMethod.Nowość)
         {
             ViewBag.CurrentSortMethod = method;

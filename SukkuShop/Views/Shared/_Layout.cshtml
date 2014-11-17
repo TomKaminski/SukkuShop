@@ -12,33 +12,9 @@
             <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
             <nav id="nav-top">
                 <ul>
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li>
-                            <div class="manage-box">
-                                <div class="hello-text" style="margin-left: 8px">Witaj @Session["username"]!</div>
-                                @Html.ActionLink("zarządzaj kontem", MVC.Konto.Index(), new {@class = "manage-text"})
-                            </div>
-                        </li>
-                        <li>
-                            @using (Html.BeginForm(MVC.Konto.Wyloguj(), FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
-                            {
-                                @Html.AntiForgeryToken()
-                                <a class="login-panel-text" href="javascript:document.getElementById('logoutForm').submit()">WYLOGUJ</a>
-                            }
-                        </li>
-                    }
-                    else
-                    {
-                        <li>
-                            <ul class="login-container">
-                                <li>@Html.ActionLink("LOGOWANIE",MVC.Konto.Zaloguj(), new {@class = "login-panel-text", style = "border-right:2px solid #8d8d8d;"})</li>
-                                <li>@Html.ActionLink("REJESTRACJA",MVC.Konto.Zarejestruj(), new {@class = "login-panel-text", style = "margin-left:5px;"})</li>
-                            </ul>
-                        </li>
-                    }
+                    @Html.Action("LoginPartial","Home",true)
                     <li>
-                        @Html.Action("TotalValue", "Cart")
+                        @Html.Action("TotalValue", "Cart",true)
                     </li>
                 </ul>
                 @Html.Action("Menu","Nav")
@@ -52,7 +28,6 @@
                         @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
                         <input type="submit" class="search-arrow" />
                     </div>
-
                 }
                 <div class="link-to-shop-container">
                     <div id="triangle-right"></div>
