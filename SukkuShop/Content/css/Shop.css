@@ -102,16 +102,17 @@ ul.top-panel li {
     width: 32px;
     height: 32px;
     position: absolute;
+    cursor: pointer;
 }
 
-.add-to-cart-icon img, .info-icon img {
+.add-to-cart-icon img, .info-icon img, .add-to-cart-icon input {
     position: absolute;
     margin: auto;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    opacity: 0.8
+    opacity: 0.8;
 }
 
 .add-to-cart-icon img:hover, .info-icon img:hover { opacity: 1; }
@@ -610,3 +611,4 @@ img.lupa {
     font-size: 16px;
     text-decoration: line-through;
 }
+

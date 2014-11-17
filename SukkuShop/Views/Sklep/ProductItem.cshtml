@@ -15,12 +15,11 @@
                 using (Ajax.BeginForm("AddToCart", "Cart", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" },new {id="CartTotalValue"}))
                 {
                     @Html.HiddenFor(m=>m.Id)
-                      <a href="javascript:document.getElementById('CartTotalValue').submit()">
-                     <div class="add-to-cart-icon">
-                         <img src="~/Content/Images/Shop/basket.png" style="width: 75%" />
-                     </div>
-                </a>
-                 }
+                    <div class="add-to-cart-icon">
+                        <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                    </div>
+               
+                }
             }
             <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
         </div>
