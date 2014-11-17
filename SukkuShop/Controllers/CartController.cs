@@ -17,13 +17,14 @@ namespace SukkuShop.Controllers
             _dbContext = dbContext;
         }
         [HttpPost]
+        //[OutputCache(Duration = 1)]
         public ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
             shoppingCart.AddItem(id, quantity);
             var value = CalcTotalValue(shoppingCart);
             return PartialView("_CartInfoPartialView",value.ToString("c"));
         }
-
+        //[OutputCache(Duration = 1)]
         public ActionResult TotalValue(Cart shoppingCart)
         {
             var value = CalcTotalValue(shoppingCart);

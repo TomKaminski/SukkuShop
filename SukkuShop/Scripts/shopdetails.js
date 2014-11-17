@@ -25,6 +25,8 @@
             return false;
     });
 
+
+    //Ajax add to cart from details
     $('.add-to-cart-button').click(function() {
         var url = $('#addtocartform').attr("action");
         var formData = $('#addtocartform').serialize();

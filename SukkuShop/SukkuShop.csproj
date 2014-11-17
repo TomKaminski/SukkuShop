@@ -209,6 +209,7 @@
     <Compile Include="Infrastructure\Binders\RegisterModelBinder.cs" />
     <Compile Include="Infrastructure\Generic\IAppRepository.cs" />
     <Compile Include="Infrastructure\Generic\IShop.cs" />
+    <Compile Include="Infrastructure\Helpers\CacheOutput.cs" />
     <Compile Include="Infrastructure\Helpers\PagingHelper.cs" />
     <Compile Include="Infrastructure\Helpers\ShopHelpers.cs" />
     <Compile Include="Infrastructure\NotEqualConstraint.cs" />
