@@ -101,38 +101,26 @@ namespace SukkuShop.Controllers
             var category =
                 _dbContext.Categories.First(x => x.CategoryId == product.CategoryId);
 
-            var categoryName = category.UpperCategoryId == 0 ? category.Name : _dbContext.Categories.First(x => x.CategoryId == category.UpperCategoryId).Name;
-
-            //PODOBNE GŁÓWNA KATEGORIA
-            var similarProducts = _dbContext.Products.Where(x => x.Categories.Name == categoryName && x.ProductId != product.ProductId).
-            Select(j =>
-                new SimilarProductModel
-                {
-                    Id = j.ProductId,
-                    ImageName = j.ImageName,
-                    Name = j.Name,
-                    Price = j.Price,
-                    PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price,
-                    Available = j.Quantity>0
-                }).OrderBy(x => Guid.NewGuid()).Take(5);
-            
-            //PODOBNE TA SAMA PODKATEGORIA/KATEGORIA
-            //var similarProducts = _dbContext.Products.Where(x => x.CategoryId == product.CategoryId && x.ProductId != product.ProductId).
-            //    Select(j =>
-            //        new SimilarProductModel
-            //        {
-            //            Id = j.ProductId,
-            //            ImageName = j.ImageName,
-            //            Name = j.Name,
-            //            Price = j.Price,
-            //            PriceAfterDiscount = j.Price - ((j.Price*j.Promotion)/100) ?? j.Price
-            //        }).OrderBy(x => Guid.NewGuid()).Take(5);
+            var categoryName = category.UpperCategoryId == 0 ? category : _dbContext.Categories.First(x => x.CategoryId == category.UpperCategoryId);
+            var similarProducts =
+                _dbContext.Products.Where(
+                    x =>
+                        (x.Categories.UpperCategoryId==categoryName.CategoryId || x.Categories.CategoryId==categoryName.CategoryId) &&
+                        x.ProductId != product.ProductId).Select(j=>new SimilarProductModel
+                        {
+                            Id = j.ProductId,
+                            ImageName = j.ImageName,
+                            Name = j.Name,
+                            Price = j.Price,
+                            PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price,
+                            Available = j.Quantity > 0
+                        }).OrderBy(x => Guid.NewGuid()).Take(5);
 
             var model = new ProductDetailsViewModel
             {
                 Product = new ProductDetailModel
                 {
-                    Category = categoryName,
+                    Category = categoryName.Name,
                     Id=product.ProductId,
                     ImageName = product.ImageName,
                     Name = product.Name,

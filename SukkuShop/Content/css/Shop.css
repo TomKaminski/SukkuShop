@@ -46,8 +46,12 @@
     padding-right: 39px;
 }
 
-.product-list-item:nth-child(6n) { padding-right: 0; }
+.product-list-item:nth-child(6n)
+ { padding-right: 0; }
 
+.product-list-item:last-child {
+     padding-right: 0; 
+}
 .product-list-item-image {
     height: 127px;
     width: 127px;
