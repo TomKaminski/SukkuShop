@@ -512,14 +512,14 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     margin-top: 24px;
     background-color: #f89b1d;
     height: 51px;
-    width: 237px;
+    width: 245px;
     margin-bottom: 5px 
 }
 
 .product-details-info-container .add-to-cart-button-gray {
     margin-top: 24px;
     height: 51px;
-    width: 237px;
+    width: 245px;
     margin-bottom: 5px;
     background-color: gray;
     cursor: default

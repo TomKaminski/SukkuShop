@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
@@ -41,13 +42,34 @@ namespace SukkuShop.Controllers
         public ActionResult Index(Cart shoppingCart)
         {
         //chcesz mi powiedizec, ze jestem debilem i sie nie nadaje. ok - przyjalem
-            Products tmpProducts = _dbContext.Products.Where(x=>x.ProductId ==)
-            CartViewModels CVM = new CartViewModels();
+            var productList = new List<CartProduct>();
+            decimal totalValue = 0;
             foreach (var item in shoppingCart.Lines)
             {
-               CVM.CartProductsList.Add(new CartProduct());
+                var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
+                if (product != null)
+                {
+                    productList.Add(new CartProduct
+                    {
+                        Id = product.ProductId,
+                        Name = product.Name,
+                        Price =
+                            ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price).ToString("c"),
+                        Quantity = item.Quantity,
+                        TotalValue =
+                            (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
+                                .ToString("c")
+                    });
+                    totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
+                                  item.Quantity;
+                }
             }
-            return View();
+            var model = new CartViewModels
+            {
+                CartProductsList = productList,
+                TotalValue = totalValue.ToString("c")
+            };
+            return View(model);
             
         }
     }

@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace SukkuShop.Models
 {
     public class CartViewModels
     {
         public List<CartProduct> CartProductsList {get; set;}
-        public decimal TotalValue { get; set; }
+        public string TotalValue { get; set; }
     }
 
     public class CartProduct
@@ -17,6 +14,6 @@ namespace SukkuShop.Models
         public string Name { get; set; }
         public int Quantity { get; set; }
         public string Price { get; set; }
-        public decimal TotalValue { get; set; }
+        public string TotalValue { get; set; }
     }
 }
