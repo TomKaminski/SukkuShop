@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Newtonsoft.Json.Schema;
 using SukkuShop.Models;
 
@@ -33,21 +34,21 @@ namespace SukkuShop.Controllers
 
         private decimal CalcTotalValue(Cart shoppingCart)
         {
-            decimal value = 0;
-            foreach (var line in shoppingCart.Lines)
-            {
-                var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
-                if (firstOrDefault != null)
-                    value += (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ??
-                             firstOrDefault.Price*line.Quantity;
-            }
-            return value;
+            return (from line in shoppingCart.Lines let firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id) where firstOrDefault != null select (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity).Sum();
         }
 
         // GET: Cart
-        public ActionResult Index()
+        public ActionResult Index(Cart shoppingCart)
         {
+        //chcesz mi powiedizec, ze jestem debilem i sie nie nadaje. ok - przyjalem
+            Products tmpProducts = _dbContext.Products.Where(x=>x.ProductId ==)
+            CartViewModels CVM = new CartViewModels();
+            foreach (var item in shoppingCart.Lines)
+            {
+               CVM.CartProductsList.Add(new CartProduct());
+            }
             return View();
+            
         }
     }
 }
