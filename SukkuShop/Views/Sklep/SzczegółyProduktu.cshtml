@@ -97,31 +97,7 @@
 
     @foreach (var product in Model.SimilarProducts)
     {
-        <div class="product-list-item">
-
-            <div class="product-list-item-image">
-                <img src="~/Content/Images/Shop/@(product.ImageName)" alt=""/>
-                <div class="image-bottom-panel">
-                    @if (product.Available)
-                    {
-                        <a href="#"><div class="add-to-cart-icon"><img src="~/Content/Images/Shop/basket.png" style="width: 75%" /></div></a>
-                    }
-                    <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(product.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
-                </div>
-            </div>
-            <div class="product-list-item-textbox">
-                <div class="product-title">@product.Name</div>
-                @if (product.Price == product.PriceAfterDiscount)
-                {
-                    <div class="product-price">@product.PriceAfterDiscount.ToString("c")</div>
-                }
-                else
-                {
-                    <div class="product-price" style="text-decoration: line-through">@product.Price</div>
-                    <div class="product-discount">@product.PriceAfterDiscount.ToString("c")</div>
-                }
-            </div>
-        </div>
+        Html.RenderPartial("similarProduct",product);
     }
 </div>
 
