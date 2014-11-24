@@ -11,7 +11,7 @@ namespace SukkuShop.Infrastructure.Helpers
         public static MvcHtmlString BackgroundImage(this HtmlHelper html, string category=null)
         {
             var imgTag = new TagBuilder("img");
-            var src = category != null ? VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/" + category.ToLower() + ".jpg") : VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/allproducts.png");
+            var src = category != null ? VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/" + category.ToLower() + ".jpg") : VirtualPathUtility.ToAbsolute("~/Content/Images/Shop/inne.jpg");
             imgTag.MergeAttribute("src",src);
             imgTag.Attributes.Add("style","z-index:-1000");
             return MvcHtmlString.Create(imgTag.ToString());
