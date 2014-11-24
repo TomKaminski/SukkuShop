@@ -44,7 +44,7 @@
             <a href="#" class="ask-for-product">zapytaj o dostępność</a>
         }
 
-        @using (Html.BeginForm(MVC.Cart.AddToCart(), FormMethod.Post, new {id = "addtocartform"}))
+        @using (Html.BeginForm(MVC.Koszyk.AddToCart(), FormMethod.Post, new {id = "addtocartform"}))
         {
             <div class="quantity-box">
                 <div class="quanity-text">Ilość:</div>
@@ -92,7 +92,7 @@
 </div>
 
 <div class="details-info-title" style="text-align: center; margin-top: 30px;">podobne w tej kategorii</div>
-<div class="product-list-container" style="padding-top: 20px;">
+<div class="product-details-list-container">
 
     @foreach (var product in Model.SimilarProducts)
     {

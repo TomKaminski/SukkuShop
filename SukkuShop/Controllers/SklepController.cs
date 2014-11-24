@@ -62,7 +62,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 18,
+                ItemsPerPage = 15,
                 TotalItems = _shop.Products.Count()
             };
 
@@ -156,7 +156,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 18,
+                ItemsPerPage = 15,
                 TotalItems = _shop.Products.Count()
             };
 

@@ -1,0 +1,18 @@
+﻿@model SukkuShop.Models.CartViewModels
+
+@{
+    ViewBag.Title = "Twój koszyk";
+}
+
+<ul>
+    @foreach (var item in Model.CartProductsList)
+    {
+        <li>
+            <h1>@item.Name</h1>
+            <p>@item.Price | ilość:@item.Quantity</p>
+            <p style="text-align: right">@item.TotalValue</p>
+        </li>
+    }
+</ul>
+
+

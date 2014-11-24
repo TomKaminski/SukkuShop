@@ -10,24 +10,16 @@
 using System;
 using System.Diagnostics;
 using System.CodeDom.Compiler;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Web;
-using System.Web.Hosting;
 using System.Web.Mvc;
-using System.Web.Mvc.Ajax;
-using System.Web.Mvc.Html;
 using System.Web.Routing;
-using T4MVC;
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
-    public static SukkuShop.Controllers.CartController Cart = new SukkuShop.Controllers.T4MVC_CartController();
     public static SukkuShop.Controllers.HomeController Home = new SukkuShop.Controllers.T4MVC_HomeController();
     public static SukkuShop.Controllers.KontoController Konto = new SukkuShop.Controllers.T4MVC_KontoController();
+    public static SukkuShop.Controllers.KoszykController Koszyk = new SukkuShop.Controllers.T4MVC_KoszykController();
     public static SukkuShop.Controllers.NavController Nav = new SukkuShop.Controllers.T4MVC_NavController();
     public static SukkuShop.Controllers.SklepController Sklep = new SukkuShop.Controllers.T4MVC_SklepController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
@@ -48,21 +40,6 @@ namespace T4MVC
 }
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-     
-    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
 {
     public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
@@ -82,6 +59,21 @@ internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.P
     {
         this.InitMVCT4Result(area, controller, action, protocol);
     }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+     
+    public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
     
     public string Controller { get; set; }
     public string Action { get; set; }

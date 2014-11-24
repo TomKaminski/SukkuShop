@@ -1,20 +1,17 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
-using Newtonsoft.Json.Schema;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers 
 {
 
-    public partial class CartController : Controller
+    public partial class KoszykController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
         
-        public CartController(ApplicationDbContext dbContext)
+        public KoszykController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -41,28 +38,25 @@ namespace SukkuShop.Controllers
         // GET: Cart
         public virtual ActionResult Index(Cart shoppingCart)
         {
-        //chcesz mi powiedizec, ze jestem debilem i sie nie nadaje. ok - przyjalem
             var productList = new List<CartProduct>();
             decimal totalValue = 0;
             foreach (var item in shoppingCart.Lines)
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
-                if (product != null)
+                if (product == null) continue;
+                productList.Add(new CartProduct
                 {
-                    productList.Add(new CartProduct
-                    {
-                        Id = product.ProductId,
-                        Name = product.Name,
-                        Price =
-                            ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price).ToString("c"),
-                        Quantity = item.Quantity,
-                        TotalValue =
-                            (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
-                                .ToString("c")
-                    });
-                    totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
-                                  item.Quantity;
-                }
+                    Id = product.ProductId,
+                    Name = product.Name,
+                    Price =
+                        ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price).ToString("c"),
+                    Quantity = item.Quantity,
+                    TotalValue =
+                        (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
+                            .ToString("c")
+                });
+                totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
+                              item.Quantity;
             }
             var model = new CartViewModels
             {

@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace SukkuShop.Controllers
 {
-    public partial class CartController
+    public partial class KoszykController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected CartController(Dummy d) { }
+        protected KoszykController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -74,13 +74,13 @@ namespace SukkuShop.Controllers
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public CartController Actions { get { return MVC.Cart; } }
+        public KoszykController Actions { get { return MVC.Koszyk; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Cart";
+        public readonly string Name = "Koszyk";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Cart";
+        public const string NameConst = "Koszyk";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -138,16 +138,14 @@ namespace SukkuShop.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Views/Cart/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_CartController : SukkuShop.Controllers.CartController
+    public partial class T4MVC_KoszykController : SukkuShop.Controllers.KoszykController
     {
-        public T4MVC_CartController() : base(Dummy.Instance) { }
+        public T4MVC_KoszykController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void AddToCartOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, SukkuShop.Models.Cart shoppingCart, int quantity);

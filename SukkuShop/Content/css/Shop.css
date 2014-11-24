@@ -14,19 +14,19 @@
 
 .product-background {
     height: 752px;
-    width: 1300px;
     margin: auto;
     position: relative;
+    padding-top: 40px;
 }
 
 .product-background img {
     position: absolute;
 }
+
 .product-list-container {
-    padding-top: 58px;
-    width: 963px;
-    margin-left: auto;
-    margin-right: auto;
+    padding-top: 20px;
+    width: 797px;
+    margin-left: 30%;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -35,22 +35,65 @@
     -webkit-flex-flow: row wrap;
     flex-wrap: wrap;
     justify-content: center;
-    margin: auto;
+}
 
+.product-list-container {
+    padding-top: 20px;
+    width: 815px;
+    margin-left: 30%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-details-list-container {
+    padding-top: 20px;
+    margin: auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.product-list-item-box {
+    height: 191px;
+    width: 135px;
+    box-sizing: border-box;
+    margin-bottom: 28px;
+    margin-right: 34px;
+    position: relative;
 }
 
 .product-list-item {
-    height: 182px;
-    width: 127px;
-    padding-bottom: 30px;
-    padding-right: 39px;
+    top: 2px;
+    left: 2px;
+    height: 187px;
+    width: 131px;
+    box-sizing: border-box;
+    position: absolute
+
 }
 
-.product-list-item:nth-child(6n)
- { padding-right: 0; }
+.product-list-item-box:hover {
+    border: 2px solid #f89b1d;
+    top: -2px;
+    left: -2px;
+}
 
-.product-list-item:last-child {
-     padding-right: 0; 
+.product-list-item-box:nth-child(5n)
+ { margin-right: 0; }
+
+.product-list-item-box:last-child {
+     margin-right:  0; 
 }
 .product-list-item-image {
     height: 127px;
@@ -173,26 +216,25 @@ ul.top-panel li {
 
 
 .shop-nav-container {
-    width: 963px;
+   width: 1066px;
     margin: auto;
-    height: 77px;
+    position: relative;
+    margin-bottom: 20px;
 }
 
 ul.subcategory-menu {
-    text-align: center;
-    left: 0;
-    right: 0;
     margin: 0 auto;
+    position: absolute;
+    z-index: 100;
 }
 
 ul.subcategory-menu li {
-    display: inline;
-    margin-right: 40px;
+    margin-bottom: 20px;
 }
 
 ul.subcategory-menu li a {
     font-family: Microsoft PhagsPa;
-    font-size: 19px;
+    font-size: 22px;
     color: #f89b1d;
     text-transform: uppercase;
 }
@@ -207,7 +249,7 @@ ul.subcategory-menu li:last-child { margin-right: 0; }
 #paginator {
     float: right;
     position: relative;
-    left: -50%;
+    left: -40%;
 }
 
 ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
@@ -218,8 +260,7 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
 
 ul.shop-paginator li.inner-paginator:before {
     position: absolute;
-    background: white;
-    opacity: 0.5;
+    background: #f89b1d;
     content: '';
     width: 21px;
     height: 21px;
@@ -243,7 +284,7 @@ ul.shop-paginator li a:hover { color: white; }
     
 
 
-ul.sort-menu { margin-bottom: 30px; }
+ul.sort-menu { margin-bottom: -30px; }
 
 ul.sort-menu li.sort-box {
     padding-right: 14px;
@@ -315,12 +356,11 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     width: 0;
     height: 0;
     border-top: 8px solid transparent;
-    border-left: 11px solid white;
+    border-left: 11px solid #f89b1d;
     border-bottom: 8px solid transparent;
     float: right;
     background-color: transparent;
     cursor: pointer;
-    opacity: 0.6;
     margin-top: 2px;
     margin-right: 12px;
 }
@@ -329,11 +369,10 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     width: 0;
     height: 0;
     border-top: 8px solid transparent;
-    border-right: 11px solid white;
+    border-right: 11px solid #f89b1d;
     border-bottom: 8px solid transparent;
     background-color: transparent;
     cursor: pointer;
-    opacity: 0.6;
     float:left;
     margin-top: 2px;
     margin-left: 12px;

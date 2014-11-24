@@ -193,10 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
-    <Compile Include="CartController.generated.cs">
-      <DependentUpon>T4MVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\KoszykController.cs" />
     <Compile Include="Controllers\KontoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
@@ -219,6 +216,9 @@
     <Compile Include="Infrastructure\Helpers\ShopHelpers.cs" />
     <Compile Include="Infrastructure\NotEqualConstraint.cs" />
     <Compile Include="KontoController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="KoszykController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Migrations\201411141819303_InitialMigration.cs" />
@@ -260,7 +260,6 @@
     <Content Include="Content\Images\Shop\2.jpg" />
     <Content Include="Content\Images\Shop\4.jpg" />
     <Content Include="Content\Images\Shop\4.png" />
-    <Content Include="Content\Images\Shop\bakalie.png" />
     <Content Include="Content\Images\Shop\carticon.png" />
     <Content Include="Content\Images\content-pic1.png" />
     <Content Include="Content\Images\content-pic2.png" />
@@ -271,11 +270,9 @@
     <Content Include="Content\Images\logo-header.png" />
     <Content Include="Content\Images\Shop\basket.png" />
     <Content Include="Content\Images\Shop\carticonwhite.png" />
-    <Content Include="Content\Images\Shop\herbaty.png" />
     <Content Include="Content\Images\Shop\info_icon.png" />
-    <Content Include="Content\Images\Shop\kosmetyki.png" />
+    <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
-    <Content Include="Content\Images\Shop\przyprawy.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
@@ -352,7 +349,7 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>T4MVC.cs</LastGenOutput>
     </None>
-    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Koszyk\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sklep\similarProduct.cshtml" />
   </ItemGroup>
