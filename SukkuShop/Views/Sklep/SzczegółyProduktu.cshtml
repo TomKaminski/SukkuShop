@@ -9,9 +9,8 @@
     {
         <div class="product-promotion-label-img">PROMOCJA -@Model.Product.Promotion%</div>
     }
-    <div class="product-details-img">
-        
-        <img id="product-image-details" src="~/Content/Images/Shop/@Model.Product.ImageName" data-zoom-image="@Url.Content("~/Content/Images/Shop/" + @Model.Product.ImageName)" alt="" />
+    <div class="product-details-img" style="background-color:white;">
+        <img id="product-image-details" src=~/@("Content/Images/Shop/"+Model.Product.ImageName+".png") data-zoom-image="@Url.Content("~/Content/Images/Shop/" + Model.Product.ImageName+".jpg")">
         <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
         <div class="product-category-label-img">@Model.Product.Category</div>
     </div>
@@ -45,7 +44,7 @@
             <a href="#" class="ask-for-product">zapytaj o dostępność</a>
         }
 
-        @using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post, new {id = "addtocartform"}))
+        @using (Html.BeginForm(MVC.Cart.AddToCart(), FormMethod.Post, new {id = "addtocartform"}))
         {
             <div class="quantity-box">
                 <div class="quanity-text">Ilość:</div>

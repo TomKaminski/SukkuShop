@@ -74,6 +74,7 @@ namespace SukkuShop.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string LoginPartial = "LoginPartial";
             public readonly string Regulamin = "Regulamin";
             public readonly string Dostawa = "Dostawa";
             public readonly string Platnosci = "Platnosci";
@@ -84,6 +85,7 @@ namespace SukkuShop.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string LoginPartial = "LoginPartial";
             public const string Regulamin = "Regulamin";
             public const string Dostawa = "Dostawa";
             public const string Platnosci = "Platnosci";
@@ -128,6 +130,17 @@ namespace SukkuShop.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void LoginPartialOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult LoginPartial()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.LoginPartial);
+            LoginPartialOverride(callInfo);
             return callInfo;
         }
 

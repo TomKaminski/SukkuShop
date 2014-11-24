@@ -38,11 +38,13 @@ namespace T4MVC
             {
                 public readonly string _CartInfoPartialView = "_CartInfoPartialView";
                 public readonly string _Layout = "_Layout";
+                public readonly string _LoginPartial = "_LoginPartial";
                 public readonly string Blokada = "Blokada";
                 public readonly string Error = "Error";
             }
             public readonly string _CartInfoPartialView = "~/Views/Shared/_CartInfoPartialView.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
+            public readonly string _LoginPartial = "~/Views/Shared/_LoginPartial.cshtml";
             public readonly string Blokada = "~/Views/Shared/Blokada.cshtml";
             public readonly string Error = "~/Views/Shared/Error.cshtml";
         }

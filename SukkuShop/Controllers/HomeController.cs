@@ -16,7 +16,7 @@ namespace SukkuShop.Controllers
         [ChildActionOnly]
         public virtual PartialViewResult LoginPartial()
         {
-            return PartialView("_LoginPartial");
+            return PartialView(MVC.Shared.Views._LoginPartial);
         }
 
         [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]

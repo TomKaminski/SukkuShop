@@ -4,8 +4,6 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
-
-using SukkuShop.Models;
 #pragma warning disable 1591, 3008, 3009
 #region T4MVC
 
@@ -58,6 +56,18 @@ namespace SukkuShop.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult Menu()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Menu);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult SubCategory()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SubCategory);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.PartialViewResult SortList()
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SortList);
@@ -99,6 +109,7 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Menu
         {
             public readonly string category = "category";
+            public readonly string method = "method";
         }
         static readonly ActionParamsClass_SubCategory s_params_SubCategory = new ActionParamsClass_SubCategory();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -149,15 +160,15 @@ namespace SukkuShop.Controllers
         public T4MVC_NavController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void MenuOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string category);
+        partial void MenuOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string category, SukkuShop.Models.SortMethod method);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Menu(string category,SortMethod method)
+        public override System.Web.Mvc.PartialViewResult Menu(string category, SukkuShop.Models.SortMethod method)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Menu);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            MenuOverride(callInfo, category);
+            MenuOverride(callInfo, category, method);
             return callInfo;
         }
 

@@ -25,6 +25,7 @@ using T4MVC;
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 public static partial class MVC
 {
+    public static SukkuShop.Controllers.CartController Cart = new SukkuShop.Controllers.T4MVC_CartController();
     public static SukkuShop.Controllers.HomeController Home = new SukkuShop.Controllers.T4MVC_HomeController();
     public static SukkuShop.Controllers.KontoController Konto = new SukkuShop.Controllers.T4MVC_KontoController();
     public static SukkuShop.Controllers.NavController Nav = new SukkuShop.Controllers.T4MVC_NavController();
@@ -47,19 +48,6 @@ namespace T4MVC
 }
 
 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
-{
-    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
-    {
-        this.InitMVCT4Result(area, controller, action, protocol);
-    }
-    
-    public string Controller { get; set; }
-    public string Action { get; set; }
-    public string Protocol { get; set; }
-    public RouteValueDictionary RouteValueDictionary { get; set; }
-}
-[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
 internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.ActionResult, IT4MVCActionResult
 {
     public T4MVC_System_Web_Mvc_ActionResult(string area, string controller, string action, string protocol = null): base()
@@ -68,6 +56,19 @@ internal partial class T4MVC_System_Web_Mvc_ActionResult : System.Web.Mvc.Action
     }
      
     public override void ExecuteResult(System.Web.Mvc.ControllerContext context) { }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_ViewResult : System.Web.Mvc.ViewResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_ViewResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
     
     public string Controller { get; set; }
     public string Action { get; set; }
@@ -102,6 +103,7 @@ namespace Links
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
+        public static readonly string jquery_elevatezoom_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.elevatezoom.min.js") ? Url("jquery.elevatezoom.min.js") : Url("jquery.elevatezoom.js");
         public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
         public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
         public static readonly string jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");
@@ -111,6 +113,7 @@ namespace Links
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
+        public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -150,6 +153,11 @@ namespace Links
             public static readonly string lucida_console_woff = Url("lucida_console.woff");
             public static readonly string SegoeSemibold_ttf = Url("SegoeSemibold.ttf");
             public static readonly string SegoeSemiboldIE_eot = Url("SegoeSemiboldIE.eot");
+            public static readonly string segoeui_ttf = Url("segoeui.ttf");
+            public static readonly string segoeuibold_ttf = Url("segoeuibold.ttf");
+            public static readonly string segoeuil_ttf = Url("segoeuil.ttf");
+            public static readonly string segoeuisl_ttf = Url("segoeuisl.ttf");
+            public static readonly string seguiblack_ttf = Url("seguiblack.ttf");
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -169,11 +177,19 @@ namespace Links
                 private const string URLPATH = "~/Content/Images/Shop";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string background_spices_jpg = Url("background_spices.jpg");
+                public static readonly string _1_jpg = Url("1.jpg");
+                public static readonly string _2_jpg = Url("2.jpg");
+                public static readonly string _4_jpg = Url("4.jpg");
+                public static readonly string _4_png = Url("4.png");
+                public static readonly string bakalie_png = Url("bakalie.png");
                 public static readonly string basket_png = Url("basket.png");
                 public static readonly string carticon_png = Url("carticon.png");
+                public static readonly string carticonwhite_png = Url("carticonwhite.png");
+                public static readonly string herbaty_png = Url("herbaty.png");
                 public static readonly string info_icon_png = Url("info_icon.png");
-                public static readonly string test_image1_png = Url("test-image1.png");
+                public static readonly string kosmetyki_png = Url("kosmetyki.png");
+                public static readonly string lupa_png = Url("lupa.png");
+                public static readonly string przyprawy_png = Url("przyprawy.png");
             }
         
         }

@@ -162,11 +162,13 @@ namespace SukkuShop.Controllers
                 public readonly string NoProducts = "NoProducts";
                 public readonly string ProductItem = "ProductItem";
                 public readonly string Produkty = "Produkty";
+                public readonly string similarProduct = "similarProduct";
                 public readonly string SzczegółyProduktu = "SzczegółyProduktu";
             }
             public readonly string NoProducts = "~/Views/Sklep/NoProducts.cshtml";
             public readonly string ProductItem = "~/Views/Sklep/ProductItem.cshtml";
             public readonly string Produkty = "~/Views/Sklep/Produkty.cshtml";
+            public readonly string similarProduct = "~/Views/Sklep/similarProduct.cshtml";
             public readonly string SzczegółyProduktu = "~/Views/Sklep/SzczegółyProduktu.cshtml";
         }
     }

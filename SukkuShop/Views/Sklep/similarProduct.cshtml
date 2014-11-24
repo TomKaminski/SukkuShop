@@ -3,7 +3,7 @@
 <div class="product-list-item">
 
     <div class="product-list-item-image">
-        <img src="~/Content/Images/Shop/@(Model.ImageName)" alt="" />
+        <img src=~/@("Content/Images/Shop/"+Model.ImageName+".png") />
         <div class="image-bottom-panel">
             @if (Model.Available)
             {

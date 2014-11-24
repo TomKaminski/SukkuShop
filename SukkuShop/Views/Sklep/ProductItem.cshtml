@@ -1,11 +1,10 @@
 ﻿@using SukkuShop.Infrastructure.Helpers
-@using SukkuShop.Models
 @model SukkuShop.Models.ProductViewModel
 
 <div class="product-list-item">
 
-    <div class="product-list-item-image">
-        <img src="~/Content/Images/Shop/@(Model.ImageName)"/>
+    <div class="product-list-item-image" style="background-color: white;">
+        <img src=~/@("Content/Images/Shop/"+Model.ImageName+".png") />
         <ul class="top-panel">
             @Html.TopPanelBoxes(Model.Novelty, Model.Bestseller, Model.Promotion)
         </ul>

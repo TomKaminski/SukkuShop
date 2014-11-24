@@ -8,8 +8,8 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Controllers 
 {
-   
-    public class CartController : Controller
+
+    public partial class CartController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -20,17 +20,17 @@ namespace SukkuShop.Controllers
         }
         [HttpPost]
         //[OutputCache(Duration = 1)]
-        public ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
+        public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
             shoppingCart.AddItem(id, quantity);
             var value = CalcTotalValue(shoppingCart);
-            return PartialView("_CartInfoPartialView",value.ToString("c"));
+            return PartialView(MVC.Shared.Views._CartInfoPartialView,value.ToString("c"));
         }
         //[OutputCache(Duration = 1)]
-        public ActionResult TotalValue(Cart shoppingCart)
+        public virtual ActionResult TotalValue(Cart shoppingCart)
         {
             var value = CalcTotalValue(shoppingCart);
-            return PartialView("_CartInfoPartialView", value.ToString("c"));
+            return PartialView(MVC.Shared.Views._CartInfoPartialView, value.ToString("c"));
         }
 
         private decimal CalcTotalValue(Cart shoppingCart)
@@ -39,7 +39,7 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Cart
-        public ActionResult Index(Cart shoppingCart)
+        public virtual ActionResult Index(Cart shoppingCart)
         {
         //chcesz mi powiedizec, ze jestem debilem i sie nie nadaje. ok - przyjalem
             var productList = new List<CartProduct>();

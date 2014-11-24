@@ -193,6 +193,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="CartController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\KontoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -256,6 +259,7 @@
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\2.jpg" />
     <Content Include="Content\Images\Shop\4.jpg" />
+    <Content Include="Content\Images\Shop\4.png" />
     <Content Include="Content\Images\Shop\bakalie.png" />
     <Content Include="Content\Images\Shop\carticon.png" />
     <Content Include="Content\Images\content-pic1.png" />
