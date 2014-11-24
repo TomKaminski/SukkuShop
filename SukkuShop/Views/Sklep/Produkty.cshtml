@@ -11,11 +11,13 @@
 </div>
 <div class="product-background" >
     @Html.BackgroundImage(Model.CurrentCategory)
-    <div class="product-list-container">
-        @foreach (var product in Model.Products)
-        {
-            Html.RenderPartial(MVC.Sklep.Views.ProductItem,product);
-        }
+    <div class="products-container">
+        <div class="product-list-container">
+            @foreach (var product in Model.Products)
+            {
+                Html.RenderPartial(MVC.Sklep.Views.ProductItem, product);
+            }
+        </div>
     </div>
     <div id="paginator">
         <ul class="shop-paginator">

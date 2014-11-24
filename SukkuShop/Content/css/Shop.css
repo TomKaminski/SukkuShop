@@ -11,6 +11,10 @@
     font-family: FoglihtenPCS;
     src: url(../fonts/FoglihtenPCS.otf);
 }
+.products-container {
+    width: 1066px;
+    margin: auto;
+}
 
 .product-background {
     height: 752px;
@@ -26,7 +30,7 @@
 .product-list-container {
     padding-top: 20px;
     width: 797px;
-    margin-left: 30%;
+    margin-left: 25%;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
