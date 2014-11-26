@@ -1,0 +1,24 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+@Styles.Render("~/Content/css/Error.css")
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Blad404</title>
+</head>
+    <body>
+        <div class="center">
+            <div class="notfound-text-big">
+                Uuuups!
+            </div>
+            <div class="notfound-text-normal">
+                Nie znaleziono strony - błąd 404.
+            </div>
+            <div class="notfound-backlink"><a href="@Url.Action(MVC.Home.Index())">&laquo Zabierz mnie stąd! &raquo</a></div>
+        </div>
+    </body>
+</html>

@@ -8,7 +8,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public partial class SklepController : Controller
+    public partial class SklepController : ErrorController
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IShop _shop;
@@ -62,7 +62,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 15,
+                ItemsPerPage = 12,
                 TotalItems = _shop.Products.Count()
             };
 
@@ -156,7 +156,7 @@ namespace SukkuShop.Controllers
             var paginator = new PagingInfo
             {
                 CurrentPage = page,
-                ItemsPerPage = 15,
+                ItemsPerPage = 12,
                 TotalItems = _shop.Products.Count()
             };
 

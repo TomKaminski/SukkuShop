@@ -5,10 +5,16 @@
     {
         <li>
             @Html.ActionLink(link, MVC.Sklep.Produkty((string)ViewBag.Category,link,(SortMethod)ViewBag.CurrentSortMethod), 
-            new
-            {
-                style = (link == ViewBag.SubCategory ? "font-weight:bold" : "")
-            })
+                new
+                {
+                    style = (link == ViewBag.SubCategory ? "font-weight:bold" : "")
+                })
         </li>
+        
     }
+    <li>@Html.ActionLink("Wszystkie", MVC.Sklep.Produkty((string)ViewBag.Category, null, (SortMethod)ViewBag.CurrentSortMethod),
+                new
+                {
+                    style = (ViewBag.SubCategory == null ? "font-weight:bold" : "")
+                })</li>
 </ul>

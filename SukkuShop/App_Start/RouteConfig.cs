@@ -114,7 +114,11 @@ namespace SukkuShop
                 }
                 );
 
-           
+            routes.MapRoute(
+                 "404-PageNotFound",
+                 "{*url}",
+                 new { controller = "Error", action = "Blad404" }
+                 );
 
             
         }

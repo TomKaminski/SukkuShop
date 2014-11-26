@@ -10,7 +10,7 @@ using SukkuShop.Models;
 namespace SukkuShop.Controllers
 {
     [Authorize]
-    public partial class KontoController : Controller
+    public partial class KontoController : ErrorController
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;

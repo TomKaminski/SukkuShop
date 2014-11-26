@@ -5,7 +5,7 @@ using DevTrends.MvcDonutCaching;
 namespace SukkuShop.Controllers
 {
 
-    public partial class HomeController : Controller
+    public partial class HomeController : ErrorController
     {
         [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Index()

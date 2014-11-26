@@ -193,6 +193,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
     <Compile Include="Controllers\KontoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -250,6 +251,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\Error.css" />
     <Content Include="Content\css\Home.css" />
     <Content Include="Content\css\main.css" />
     <Content Include="Content\css\reset.css" />
@@ -308,7 +310,9 @@
     <Content Include="Scripts\shopdetails.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="T4MVC.tt.settings.xml" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -330,7 +334,7 @@
     <Content Include="Views\Konto\ZmienHaslo.cshtml" />
     <Content Include="Views\Konto\UstawHaslo.cshtml" />
     <Content Include="Views\Shared\Blokada.cshtml" />
-    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
     <Content Include="Views\Shared\_CartInfoPartialView.cshtml" />
     <Content Include="Views\Sklep\Produkty.cshtml" />
     <Content Include="Views\Home\Regulamin.cshtml" />
@@ -352,6 +356,7 @@
     <Content Include="Views\Koszyk\Index.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Sklep\similarProduct.cshtml" />
+    <Content Include="Views\Error\Blad404.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
