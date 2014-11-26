@@ -10,7 +10,7 @@ using SukkuShop.Models;
 namespace SukkuShop.Controllers
 {
     [Authorize]
-    public partial class KontoController : ErrorController
+    public partial class KontoController : Controller
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
@@ -123,7 +123,7 @@ namespace SukkuShop.Controllers
         {
             if (code == null)
             {
-                return View(MVC.Shared.Views.Error);
+                return View(MVC.Error.Views.Error);
             }
             var result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "PotwierdzonyMail" : "Blad");
@@ -173,7 +173,7 @@ namespace SukkuShop.Controllers
         [AllowAnonymous]
         public virtual ActionResult ResetujHaslo(string code)
         {
-            return code == null ? View(MVC.Shared.Views.Error) : View();
+            return code == null ? View(MVC.Error.Views.Error) : View();
         }
 
         //

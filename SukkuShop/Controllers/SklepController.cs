@@ -8,7 +8,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public partial class SklepController : ErrorController
+    public partial class SklepController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IShop _shop;

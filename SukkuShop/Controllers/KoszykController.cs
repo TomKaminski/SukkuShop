@@ -6,7 +6,7 @@ using SukkuShop.Models;
 namespace SukkuShop.Controllers 
 {
 
-    public partial class KoszykController : ErrorController
+    public partial class KoszykController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 

@@ -2,9 +2,9 @@
 
 namespace SukkuShop.Controllers
 {
-    public class ErrorController : Controller
+    public partial class ErrorController : Controller
     {
-        public ActionResult Blad404()
+        public virtual ActionResult Blad404()
         {
             ActionResult result;
 
@@ -18,7 +18,7 @@ namespace SukkuShop.Controllers
             return result;
         }
 
-        public ActionResult Error()
+        public virtual ActionResult Error()
         {
             return View();
         }

@@ -2,10 +2,10 @@
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public class AdminHomeController : Controller
+    public partial class AdminHomeController : Controller
     {
         // GET: Admin/AdminHome
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }

@@ -5,7 +5,7 @@ using DevTrends.MvcDonutCaching;
 namespace SukkuShop.Controllers
 {
 
-    public partial class HomeController : ErrorController
+    public partial class HomeController : Controller
     {
         [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Index()
@@ -18,6 +18,8 @@ namespace SukkuShop.Controllers
         {
             return PartialView(MVC.Shared.Views._LoginPartial);
         }
+
+
 
         [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Regulamin()

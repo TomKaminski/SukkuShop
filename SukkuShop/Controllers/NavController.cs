@@ -5,7 +5,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public partial class NavController : ErrorController
+    public partial class NavController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
