@@ -26,18 +26,16 @@ namespace SukkuShop
 
         protected void Application_EndRequest()
         {
-            if (Context.Response.StatusCode == 404)
-            {
-                Response.Clear();
-                Server.ClearError();
-                var rd = new RouteData();
-                rd.DataTokens["area"] = "";
-                rd.Values["controller"] = "Error";
-                rd.Values["action"] = "Blad404";
-                Response.TrySkipIisCustomErrors = true;
-                IController c = new ErrorController();
-                c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
-            }
+            if (Context.Response.StatusCode != 404) return;
+            Response.Clear();
+            Server.ClearError();
+            var rd = new RouteData();
+            rd.DataTokens["area"] = "";
+            rd.Values["controller"] = "Error";
+            rd.Values["action"] = "Blad404";
+            Response.TrySkipIisCustomErrors = true;
+            IController c = new ErrorController();
+            c.Execute(new RequestContext(new HttpContextWrapper(Context), rd));
         }
     }
 }
