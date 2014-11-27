@@ -201,6 +201,9 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminProductController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminRoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
     <Compile Include="Controllers\KontoController.cs" />
@@ -377,6 +380,9 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\AdminProduct\" />
+    <Folder Include="Areas\Admin\Views\AdminRole\" />
+    <Folder Include="Areas\Admin\Views\AdminUser\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
