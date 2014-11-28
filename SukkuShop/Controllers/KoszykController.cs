@@ -32,7 +32,13 @@ namespace SukkuShop.Controllers
 
         private decimal CalcTotalValue(Cart shoppingCart)
         {
-            return (from line in shoppingCart.Lines let firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id) where firstOrDefault != null select (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity).Sum();
+            decimal sum = 0;
+            foreach (Cart.CartLine line in shoppingCart.Lines)
+            {
+                Products firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
+                if (firstOrDefault != null) sum += (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity;
+            }
+            return sum;
         }
 
         // GET: Cart
@@ -53,7 +59,9 @@ namespace SukkuShop.Controllers
                     Quantity = item.Quantity,
                     TotalValue =
                         (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
-                            .ToString("c")
+                            .ToString("c"),
+                            Image = product.ImageName
+                            
                 });
                 totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
                               item.Quantity;

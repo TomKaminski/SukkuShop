@@ -8,11 +8,17 @@
     @foreach (var item in Model.CartProductsList)
     {
         <li>
-            <h1>@item.Name</h1>
-            <p>@item.Price | ilość:@item.Quantity</p>
-            <p style="text-align: right">@item.TotalValue</p>
+            <h1 style="text-align: center">
+                <div style="height: 100px;width: 100px"><img src=~/@("Content/Images/Shop/"+item.Image+".jpg") /></div>
+                @item.Name | @item.Price | ilość:@item.Quantity |              @item.TotalValue
+            </h1>
+
         </li>
     }
 </ul>
+<p style="text-align: center">
+        @Model.TotalValue
+</p>
+ 
 
 
