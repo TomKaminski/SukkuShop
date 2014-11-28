@@ -80,6 +80,7 @@ namespace SukkuShop.Models
         public decimal PriceAfterDiscount { get; set; }
         public string Category { get; set; }
         public string Packing  { get; set; }
+        public string Description { get; set; }
     }
 
     public class SimilarProductModel

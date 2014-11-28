@@ -68,6 +68,7 @@ namespace SukkuShop.Models
         public string ImageName { get; set; }
         public string Producer { get; set; }
         public int? Promotion { get; set; }
+        public string Description { get; set; }
 
         [DisplayName("Sposób pakowania")]
         public string Packing { get; set; }

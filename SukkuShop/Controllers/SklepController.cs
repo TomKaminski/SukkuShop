@@ -70,7 +70,7 @@ namespace SukkuShop.Controllers
             return View(new ProductsListViewModel
             {
                 Products = _shop.Products.Select(x => new ProductViewModel
-                {
+                {      
                     Bestseller = x.Bestseller,
                     Id = x.Id,
                     ImageName = x.ImageName,
@@ -128,7 +128,8 @@ namespace SukkuShop.Controllers
                     PriceAfterDiscount = product.Price-((product.Promotion*product.Price)/100)??product.Price,
                     Promotion = product.Promotion ?? 0,
                     QuantityInStock = product.Quantity,
-                    Packing = product.Packing
+                    Packing = product.Packing,
+                    Description = product.Description
                 },
                 SimilarProducts = similarProducts
             };
