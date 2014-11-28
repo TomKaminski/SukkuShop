@@ -6,10 +6,10 @@ using System.Web.Mvc;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public class AdminRoleController : Controller
+    public partial class AdminRoleController : Controller
     {
         // GET: Admin/AdminRole
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }

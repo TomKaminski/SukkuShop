@@ -62,6 +62,12 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult RemoveFromCart()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RemoveFromCart);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult TotalValue()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.TotalValue);
@@ -89,6 +95,7 @@ namespace SukkuShop.Controllers
         public class ActionNamesClass
         {
             public readonly string AddToCart = "AddToCart";
+            public readonly string RemoveFromCart = "RemoveFromCart";
             public readonly string TotalValue = "TotalValue";
             public readonly string Index = "Index";
         }
@@ -97,6 +104,7 @@ namespace SukkuShop.Controllers
         public class ActionNameConstants
         {
             public const string AddToCart = "AddToCart";
+            public const string RemoveFromCart = "RemoveFromCart";
             public const string TotalValue = "TotalValue";
             public const string Index = "Index";
         }
@@ -111,6 +119,15 @@ namespace SukkuShop.Controllers
             public readonly string id = "id";
             public readonly string shoppingCart = "shoppingCart";
             public readonly string quantity = "quantity";
+        }
+        static readonly ActionParamsClass_RemoveFromCart s_params_RemoveFromCart = new ActionParamsClass_RemoveFromCart();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_RemoveFromCart RemoveFromCartParams { get { return s_params_RemoveFromCart; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_RemoveFromCart
+        {
+            public readonly string id = "id";
+            public readonly string shoppingCart = "shoppingCart";
         }
         static readonly ActionParamsClass_TotalValue s_params_TotalValue = new ActionParamsClass_TotalValue();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -160,6 +177,19 @@ namespace SukkuShop.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "quantity", quantity);
             AddToCartOverride(callInfo, id, shoppingCart, quantity);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void RemoveFromCartOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult RemoveFromCart(int id, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RemoveFromCart);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            RemoveFromCartOverride(callInfo, id, shoppingCart);
             return callInfo;
         }
 

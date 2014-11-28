@@ -5,7 +5,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public class AdminProductController : Controller
+    public partial class AdminProductController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
@@ -15,20 +15,20 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminProduct
-        public ActionResult Index()
+        public virtual ActionResult Index()
         {
             return View();
         }
 
         [HttpGet]
-        public ActionResult Create()
+        public virtual ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Products model)
+        public virtual ActionResult Create(Products model)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Delete(int id)
+        public virtual ActionResult Delete(int id)
         {
             var item = _dbContext.Products.Find(id);
             return View(item);
@@ -64,7 +64,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ActionName("Delete")]
-        public ActionResult DeletePost(int id)
+        public virtual ActionResult DeletePost(int id)
         {
 
             var item = _dbContext.Products.Find(id);
@@ -78,7 +78,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 
-        public ActionResult Edit(int id)
+        public virtual ActionResult Edit(int id)
         {
 
             var item = _dbContext.Products.Find(id);
@@ -92,7 +92,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Products model)
+        public virtual ActionResult Edit(Products model)
         {
 
             var item = _dbContext.Products.Find(model.ProductId);
@@ -111,7 +111,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult Details(int id)
+        public virtual ActionResult Details(int id)
         {
             var prod = _dbContext.Products.Find(id);
 

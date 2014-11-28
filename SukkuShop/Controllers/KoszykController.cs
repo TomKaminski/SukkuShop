@@ -23,6 +23,12 @@ namespace SukkuShop.Controllers
             var value = CalcTotalValue(shoppingCart);
             return PartialView(MVC.Shared.Views._CartInfoPartialView,value.ToString("c"));
         }
+
+        public virtual ActionResult RemoveFromCart(int id, Cart shoppingCart)
+        {
+            shoppingCart.RemoveLine(id);
+            return RedirectToAction(MVC.Koszyk.Index());
+        }
         //[OutputCache(Duration = 1)]
         public virtual ActionResult TotalValue(Cart shoppingCart)
         {

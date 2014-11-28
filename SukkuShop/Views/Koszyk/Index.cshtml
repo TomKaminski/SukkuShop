@@ -3,22 +3,29 @@
 @{
     ViewBag.Title = "Twój koszyk";
 }
-
+@Styles.Render("~/Content/css/Cart.css")
 <ul>
     @foreach (var item in Model.CartProductsList)
     {
         <li>
             <h1 style="text-align: center">
                 <div style="height: 100px;width: 100px"><img src=~/@("Content/Images/Shop/"+item.Image+".jpg") /></div>
-                @item.Name | @item.Price | ilość:@item.Quantity |              @item.TotalValue
+                @item.Name | @item.Price | @Html.TextBoxFor(x=>item.Quantity) |  @item.TotalValue | @using (Html.BeginForm(MVC.Koszyk.RemoveFromCart()))
+                                                                                                    {
+                                                                                                        @Html.Hidden("id",item.Id)
+                                                                                                        <input type="submit" value="Remove"/>
+                                                                                                    }
             </h1>
 
         </li>
     }
+  
 </ul>
 <p style="text-align: center">
-        @Model.TotalValue
+    @Model.TotalValue
 </p>
+
+@Scripts.Render("~/Scripts/CartSummary.js")
  
 
 
