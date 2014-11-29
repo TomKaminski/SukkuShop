@@ -222,7 +222,7 @@ input[type=radio].css-checkbox {
 
 input[type=radio].css-checkbox + label.css-label {
     padding-left: 23px;
-    height: 18.5px;
+    height: 18px;
     line-height: 20px;
     display: inline-block;
     background-repeat: no-repeat;
@@ -236,7 +236,7 @@ input[type=radio].css-checkbox + label.css-label {
     width: 525px;
 }
 
-input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -17.5px; }
+input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -18px; }
 
 label.css-label {
     background-image: url('../images/checkbox.png');
