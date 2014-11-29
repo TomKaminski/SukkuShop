@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Twój koszyk</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/Cart.css">
+</head>
+    <body>
+        <div class="cart-container">
+            <div class="cart-title">Twój koszyk</div>
+            <ul class="cart-order-steps">
+                <li class="selected">1. Koszyk</li>
+                <li>2. Twoje dane</li>
+                <li>3. Potwierdzenie zamówienia</li>
+            </ul>
+            <table class="cart-table" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Twoje produkty</th>
+                        <th>Cena</th>
+                        <th>Ilość</th>
+                        <th>Suma</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <img src="../Images/Shop/1.jpg"/>
+                            <div class="custom-product-text-container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
+                            <div class="cart-delete-text">usuń</div>
+                        </td>
+                        <td>15,00 PLN</td>
+                        <td>
+                            <div class="quantity-box">
+                                <input type="text" id="quantity_counter"/>
+                                <input type="hidden" name="id"/>
+                                <div class="arrows-box">
+                                    <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                                    <div id="decrease_quantity" class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+                                </div>
+                                <div class="quanity-text-right">szt.</div>
+                            </div>
+                        </td>
+                        <td>30,00 PLN</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="../Images/Shop/1.jpg" />
+                            <div class="custom-product-text-container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
+                            <div class="cart-delete-text">usuń</div>
+                        </td>
+                        <td>15,00 PLN</td>
+                        <td><div class="quantity-box">
+                                <input type="text" id="quantity_counter" />
+                                <input type="hidden" name="id" />
+                                <div class="arrows-box">
+                                    <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                                    <div id="decrease_quantity" class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+                                </div>
+                                <div class="quanity-text-right">szt.</div>
+                            </div>
+                        </td>
+                        <td>30,00 PLN</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="../Images/Shop/1.jpg" />
+                            <div class="custom-product-text-container">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</div>
+                            <div class="cart-delete-text">usuń</div>
+                        </td>
+                        <td>15,00 PLN</td>
+                        <td><div class="quantity-box">
+                                <input type="text" id="quantity_counter" />
+                                <input type="hidden" name="id" />
+                                <div class="arrows-box">
+                                    <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                                    <div id="decrease_quantity" class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+                                </div>
+                                <div class="quanity-text-right">szt.</div>
+                            </div>
+                        </td>
+                        <td>30,00 PLN</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="products-price-summary">60,00 PLN</div>
+            <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+            <div class="cart-title">Dostawa</div>
+            <ul class="shipping">
+                <li>
+                    <input type="radio" name="shipping" id="ship1" class="css-checkbox">
+                    <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
+                    <div class="shipping-price">8,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship2" class="css-checkbox">
+                    <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
+                    <div class="shipping-price">7,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship3" class="css-checkbox">
+                    <label for="ship3" class="css-label">Kurier Siódemka</label>
+                    <div class="shipping-price clear">12,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship4" class="css-checkbox">
+                    <label for="ship4" class="css-label">Paczkomaty</label>
+                    <div class="shipping-price clear">5,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship5" class="css-checkbox">
+                    <label for="ship5" class="css-label">Odbiór osobisty</label>
+                    <div class="shipping-price clear">0,00 PLN</div>
+                </li>
+            </ul>
+            <div class="products-price-summary">68,00 PLN</div>
+            <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+            <div class="cart-title">Płatność</div>
+            <ul id="payment-list" class="shipping">
+                <li>
+                    <input type="radio" name="payment" id="pay1" class="css-checkbox">
+                    <label for="pay1" class="css-label">Przedpłata na konto</label>
+                    <div class="shipping-price">0,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="payment" id="pay2" class="css-checkbox">
+                    <label for="pay2" class="css-label">Płatność za pobraniem</label>
+                    <div class="shipping-price">5,00 PLN</div>
+                </li>
+                <li>
+                    <input type="radio" name="payment" id="pay3" class="css-checkbox">
+                    <label for="pay3" class="css-label">PayU</label>
+                    <div class="shipping-price">1,00 PLN</div>
+                </li>
+                
+            </ul>
+            <div class="cart-title">Podsumowanie</div>
+            <ul id="products-summary">
+                <li>
+                    <div id="price-box">60,00 PLN</div><div id="text-box clear">Produkty</div>
+
+                </li>
+                <li>
+                    <div id="price-box">8,00 PLN</div><div id="text-box clear">Dostawa</div>
+                </li>
+                <li>
+                    <div id="price-box">0,00 PLN</div><div id="text-box clear">Płatność</div>
+                </li>
+                <li class="summary-text-bold">
+                    <div id="price-box"><span style="color:#f89b1d">68,00 PLN</span></div><div id="text-box clear">Razem</div>
+                </li>
+            </ul>
+            <div id="triangle-right-big"></div><div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>
+            
+            
+            
+            
+        </div>
+    </body>
+</html>

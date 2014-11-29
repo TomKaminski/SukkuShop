@@ -1,1 +1,296 @@
-﻿
+﻿.cart-container {
+    width: 1066px;
+    margin: auto;
+}
+
+.cart-title {
+    font-size: 24px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 40px 0 36px;
+    color: #f89b1d;
+}
+
+ul.cart-order-steps {
+    font-family: Segoe UI;
+    color: #f89b1d;
+    padding: 0 0 32px;
+    border-bottom: 1px solid #f89b1d;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 0 23px;
+}
+
+ul.cart-order-steps li {
+    display: inline;
+    margin-right: 81px;
+}
+
+ul.cart-order-steps li.selected {
+    font-weight: bold;
+}
+
+table.cart-table {
+    font-family: SegoeLight;
+    color: black;
+}
+
+table.cart-table tr th {
+    font-size: 14px;
+    
+    
+    text-transform: uppercase;    
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #f89b1d;
+
+}
+
+table.cart-table tr th,table.cart-table tr td{
+    width: 174px;
+    text-align: center;
+}
+
+table.cart-table tr th:last-child,table.cart-table tr td:last-child {
+    text-align: right;
+}
+
+
+
+table.cart-table tr th:first-child,table.cart-table tr td:first-child {
+    width: 535px;
+    text-align: left;
+    position: relative;
+}
+
+table.cart-table tbody tr td {
+    padding: 20px 0 ;
+}
+
+table.cart-table tbody tr {
+    height: 140px;
+}
+
+table.cart-table tbody tr td img{
+    height: 136px;
+    width: 136px;
+    float: left;
+    border: 2px solid #f89b1d
+}
+
+.custom-product-text-container {
+    width: 384px;
+    float: left;
+    position: absolute;
+    display: table;
+    left: 150px;
+    top: 60px;
+}
+
+.custom-product-text-container p {
+    display: table-cell; 
+    vertical-align: middle; 
+}
+
+.cart-delete-text {
+    font-size: 12px;
+text-decoration: underline;
+color: red;
+position: absolute;
+bottom: 20px;
+left: 150px;
+}
+.quantity-box {
+    width: 90px;
+    margin: auto;
+}
+.quantity-box input {
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    font-size: 15px;
+    outline: none;
+    float: left;
+    text-align: center;
+    font-family: SegoeLight;
+    margin-right: 6px;
+}
+
+.quantity-box .arrows-box {
+    width: 24px;
+    height: 24px;
+    float: left;
+}
+
+.quantity-box .arrow-up-box {
+    width: 24px;
+    height: 12px;
+    background-color: #f89b1d;
+    padding-bottom: 3px;
+}
+
+.quantity-box .arrow-down-box {
+    width: 24px;
+    height: 12px;
+    background-color: #f89b1d;
+    padding-bottom: 1px;
+}
+
+
+.quantity-box .quantity-arrow-up {
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-bottom: 11px solid white;
+    border-left: 7px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    margin: auto;
+    padding-top: 2px;
+}
+
+.quantity-box .quantity-arrow-down {
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-top: 11px solid white;
+    border-left: 7px solid transparent;
+    background-color: transparent;
+    cursor: pointer;
+    margin: auto;
+}
+
+.quantity-box .quanity-text-right {
+    line-height: 24px;
+    vertical-align: middle;
+    float: left;
+    margin-left: 10px;
+}
+
+.products-price-summary {
+    font-family: SegoeLight;
+    font-size: 18px;
+    text-align: right;
+    text-transform: uppercase;
+    float: right;
+}
+
+ul.shipping  {
+    list-style-type: none;
+    padding-left: 5px;
+}
+
+ul.shipping li {
+    margin-bottom: 26px;
+    width: 700px;
+    height: 20px;
+}
+
+.sukku-radio-button {
+    float: left;
+    margin-right: 10px;
+}
+
+.shipping-provider {
+    font-size: 18px;
+    font-family: SegoeLight;
+    float: left;
+    width: 525px;
+}
+
+.shipping-price {
+    float: left;
+    font-size: 12px;
+    font-family: SegoeLight;
+    width: 135px;
+    text-align: center;
+}
+
+
+input[type=radio].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+input[type=radio].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18.5px;
+    line-height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 18px;
+    font-family: SegoeLight;
+    float: left;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-bottom: 2px;
+    width: 525px;
+}
+
+input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -17.5px; }
+
+label.css-label {
+    background-image: url('../images/checkbox.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#payment-list {
+    padding-bottom: 30px;
+    border-bottom: #f89b1d 1px solid;
+}
+
+
+ul#products-summary {
+    list-style-type: none;
+    font-family: SegoeLight;
+    font-size: 18px;
+    text-align: right;
+    text-transform: uppercase;
+
+}
+
+ul#products-summary li {
+    margin-bottom: 10px;
+}
+
+ul#products-summary #price-box {
+    text-align: right;
+    width: 130px;
+    float: right;
+}
+
+ul#products-summary #text-box {
+    width: 100px;
+    float: right;
+    text-align: right;
+}
+
+.summary-text-bold {
+    font-family: Segoe UI;
+    font-weight: bold;
+}
+
+#triangle-right-big {
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-left: 15px solid #f89b1d;
+    border-bottom: 11px solid transparent;
+    float: right;
+    margin-left: 25px;
+    margin-top: 7px;
+}

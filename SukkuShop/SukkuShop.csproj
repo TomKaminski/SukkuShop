@@ -286,6 +286,7 @@
     <Content Include="Content\css\Shop.css" />
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
+    <Content Include="Content\Images\checkbox.png" />
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\2.jpg" />
     <Content Include="Content\Images\Shop\4.jpg" />
@@ -303,6 +304,7 @@
     <Content Include="Content\Images\Shop\info_icon.png" />
     <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
+    <Content Include="Content\web\Koszyk.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />
