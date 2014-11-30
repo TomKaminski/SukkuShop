@@ -27,7 +27,7 @@
 @Scripts.Render("~/Scripts/CartSummary.js")
 
 @Styles.Render("~/Content/css/Cart.css")
-@Styles.Render("~/Conrent/css/main.css")
+
     <head>
         <title>Twój koszyk</title>
     </head>
@@ -54,7 +54,7 @@
                 {
                     <tr>
                         <td>
-                            <img src=~@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
+                            <img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
                             <div class="custom-product-text-container">@item.Description</div>
                             <div class="cart-delete-text">usuń</div>
                         </td>
@@ -76,7 +76,7 @@
             </tbody>
         </table>
         <div class="products-price-summary">@Model.TotalValue</div>
-        <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+        <div class="products-price-summary clear" style="margin-right: 40px; float: right">Razem</div>
         <div class="cart-title">Dostawa</div>
         <ul class="shipping">
             <li>
