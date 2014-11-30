@@ -23,16 +23,11 @@
 
     @{
         ViewBag.Title = "Twój koszyk";
-    }
-@Scripts.Render("~/Scripts/CartSummary.js")
+        @Styles.Render("~/Content/css/Cart.css")
+        @Scripts.Render("~/Scripts/CartSummary.js")
+}
 
-@Styles.Render("~/Content/css/Cart.css")
 
-    <head>
-        <title>Twój koszyk</title>
-    </head>
-
-<body>
     <div class="cart-container">
         <div class="cart-title">Twój koszyk</div>
         <ul class="cart-order-steps">
@@ -55,7 +50,7 @@
                     <tr>
                         <td>
                             <img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
-                            <div class="custom-product-text-container">@item.Description</div>
+                            <div class="custom-product-text-container">@item.Name</div>
                             <div class="cart-delete-text">usuń</div>
                         </td>
                         <td>@item.Price</td>
@@ -76,7 +71,7 @@
             </tbody>
         </table>
         <div class="products-price-summary">@Model.TotalValue</div>
-        <div class="products-price-summary clear" style="margin-right: 40px; float: right">Razem</div>
+        <div class="products-price-summary" style="margin-right: 40px; float: right">Razem</div>
         <div class="cart-title">Dostawa</div>
         <ul class="shipping">
             <li>
@@ -92,21 +87,21 @@
             <li>
                 <input type="radio" name="shipping" id="ship3" class="css-checkbox">
                 <label for="ship3" class="css-label">Kurier Siódemka</label>
-                <div class="shipping-price clear">12,00 PLN</div>
+                <div class="shipping-price">12,00 PLN</div>
             </li>
             <li>
                 <input type="radio" name="shipping" id="ship4" class="css-checkbox">
                 <label for="ship4" class="css-label">Paczkomaty</label>
-                <div class="shipping-price clear">5,00 PLN</div>
+                <div class="shipping-price">5,00 PLN</div>
             </li>
             <li>
                 <input type="radio" name="shipping" id="ship5" class="css-checkbox">
                 <label for="ship5" class="css-label">Odbiór osobisty</label>
-                <div class="shipping-price clear">0,00 PLN</div>
+                <div class="shipping-price">0,00 PLN</div>
             </li>
         </ul>
         <div class="products-price-summary">68,00 PLN</div>
-        <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+        <div class="products-price-summary" style="margin-right: 40px;">Razem</div>
         <div class="cart-title">Płatność</div>
         <ul id="payment-list" class="shipping">
             <li>
@@ -142,11 +137,15 @@
                 <div id="price-box"><span style="color:#f89b1d">68,00 PLN</span></div><div id="text-box clear">Razem</div>
             </li>
         </ul>
-        <div id="triangle-right-big"></div><div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>
+        <div id="cart-button-bottom">
+            <div id="triangle-right-big"></div>
+            <div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>
+            <div class="clear">&nbsp;</div>
+        </div>
+        
 
 
 
 
-    </div>
-</body>
-</html>
+</div>
+

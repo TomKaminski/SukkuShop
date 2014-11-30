@@ -42,7 +42,7 @@ body {
 }
 
 header { 
-    margin: 30px auto 90px;
+    margin: 30px auto 30px;
     width: 1066px;
 }
 
@@ -156,7 +156,6 @@ nav {
 .nav-low {
     width: 1066px;
     margin: 10px auto 0;
-    height: 20px;
 }
 
 header input {
