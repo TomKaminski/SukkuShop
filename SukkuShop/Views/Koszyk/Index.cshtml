@@ -50,7 +50,9 @@
                     <tr>
                         <td>
                             <img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
-                            <div class="custom-product-text-container">@item.Name</div>
+                            <div class="custom-product-text-container">
+                                <p>@item.Name</p>
+                            </div>
                             <div class="cart-delete-text">usuń</div>
                         </td>
                         <td>@item.Price</td>

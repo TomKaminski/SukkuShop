@@ -96,7 +96,8 @@ table.cart-table tbody tr td img{
     position: absolute;
     display: table;
     left: 150px;
-    top: 60px;
+    /* top: 60px; */
+    height: 130px;
 }
 
 .custom-product-text-container p {
