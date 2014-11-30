@@ -59,6 +59,7 @@ namespace SukkuShop.Controllers
                 productList.Add(new CartProduct
                 {
                     Id = product.ProductId,
+                    Description = product.Description,
                     Name = product.Name,
                     Price =
                         ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price).ToString("c"),

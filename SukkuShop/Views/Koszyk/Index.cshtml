@@ -1,31 +1,152 @@
-﻿@model SukkuShop.Models.CartViewModels
-
-@{
-    ViewBag.Title = "Twój koszyk";
-}
-@Styles.Render("~/Content/css/Cart.css")
-<ul>
+﻿
+@*<ul>
     @foreach (var item in Model.CartProductsList)
     {
         <li>
             <h1 style="text-align: center">
-                <div style="height: 100px;width: 100px"><img src=~/@("Content/Images/Shop/"+item.Image+".jpg") /></div>
-                @item.Name | @item.Price | @Html.TextBoxFor(x=>item.Quantity) |  @item.TotalValue | @using (Html.BeginForm(MVC.Koszyk.RemoveFromCart()))
-                                                                                                    {
-                                                                                                        @Html.Hidden("id",item.Id)
-                                                                                                        <input type="submit" value="Remove"/>
-                                                                                                    }
+                <div style="height: 100px; width: 100px"></div>
+                @item.Name | @item.Price | @Html.TextBoxFor(x => item.Quantity) |  @item.TotalValue | @using (Html.BeginForm(MVC.Koszyk.RemoveFromCart()))
+                                                                                                      {
+                                                                                                          @Html.Hidden("id", item.Id)
+                                                                                                          <input type="submit" value="Remove" />
+                                                                                                      }
+
             </h1>
 
         </li>
     }
   
 </ul>
-<p style="text-align: center">
-    @Model.TotalValue
-</p>
+*@
 
+@model SukkuShop.Models.CartViewModels
+
+    @{
+        ViewBag.Title = "Twój koszyk";
+    }
 @Scripts.Render("~/Scripts/CartSummary.js")
- 
+
+@Styles.Render("~/Content/css/Cart.css")
+@Styles.Render("~/Conrent/css/main.css")
+    <head>
+        <title>Twój koszyk</title>
+    </head>
+
+<body>
+    <div class="cart-container">
+        <div class="cart-title">Twój koszyk</div>
+        <ul class="cart-order-steps">
+            <li class="selected">1. Koszyk</li>
+            <li>2. Twoje dane</li>
+            <li>3. Potwierdzenie zamówienia</li>
+        </ul>
+        <table class="cart-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Twoje produkty</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                    <th>Suma</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartProductsList)
+                {
+                    <tr>
+                        <td>
+                            <img src=~@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
+                            <div class="custom-product-text-container">@item.Description</div>
+                            <div class="cart-delete-text">usuń</div>
+                        </td>
+                        <td>@item.Price</td>
+                        <td>
+                            <div class="quantity-box">
+                                @Html.TextBox("quantity", null, new { id = "quantity_counter", placeholder = @item.Quantity })
+                                @Html.Hidden("id", @item.Id)
+                                <div class="arrows-box">
+                                    <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
+                                    <div id="decrease_quantity" class="arrow-down-box"><div class="quantity-arrow-down"></div></div>
+                                </div>
+                                <div class="quanity-text-right">szt.</div>
+                            </div>
+                        </td>
+                        <td>@item.TotalValue</td>
+                    </tr>
+                }              
+            </tbody>
+        </table>
+        <div class="products-price-summary">@Model.TotalValue</div>
+        <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+        <div class="cart-title">Dostawa</div>
+        <ul class="shipping">
+            <li>
+                <input type="radio" name="shipping" id="ship1" class="css-checkbox">
+                <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
+                <div class="shipping-price">8,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="shipping" id="ship2" class="css-checkbox">
+                <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
+                <div class="shipping-price">7,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="shipping" id="ship3" class="css-checkbox">
+                <label for="ship3" class="css-label">Kurier Siódemka</label>
+                <div class="shipping-price clear">12,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="shipping" id="ship4" class="css-checkbox">
+                <label for="ship4" class="css-label">Paczkomaty</label>
+                <div class="shipping-price clear">5,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="shipping" id="ship5" class="css-checkbox">
+                <label for="ship5" class="css-label">Odbiór osobisty</label>
+                <div class="shipping-price clear">0,00 PLN</div>
+            </li>
+        </ul>
+        <div class="products-price-summary">68,00 PLN</div>
+        <div class="products-price-summary clear" style="margin-right: 40px;">Razem</div>
+        <div class="cart-title">Płatność</div>
+        <ul id="payment-list" class="shipping">
+            <li>
+                <input type="radio" name="payment" id="pay1" class="css-checkbox">
+                <label for="pay1" class="css-label">Przedpłata na konto</label>
+                <div class="shipping-price">0,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="payment" id="pay2" class="css-checkbox">
+                <label for="pay2" class="css-label">Płatność za pobraniem</label>
+                <div class="shipping-price">5,00 PLN</div>
+            </li>
+            <li>
+                <input type="radio" name="payment" id="pay3" class="css-checkbox">
+                <label for="pay3" class="css-label">PayU</label>
+                <div class="shipping-price">1,00 PLN</div>
+            </li>
+
+        </ul>
+        <div class="cart-title">Podsumowanie</div>
+        <ul id="products-summary">
+            <li>
+                <div id="price-box">60,00 PLN</div><div id="text-box clear">Produkty</div>
+
+            </li>
+            <li>
+                <div id="price-box">8,00 PLN</div><div id="text-box clear">Dostawa</div>
+            </li>
+            <li>
+                <div id="price-box">0,00 PLN</div><div id="text-box clear">Płatność</div>
+            </li>
+            <li class="summary-text-bold">
+                <div id="price-box"><span style="color:#f89b1d">68,00 PLN</span></div><div id="text-box clear">Razem</div>
+            </li>
+        </ul>
+        <div id="triangle-right-big"></div><div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>
 
 
+
+
+    </div>
+</body>
+</html>
