@@ -305,6 +305,7 @@
     <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
     <Content Include="Content\web\Koszyk.html" />
+    <Content Include="Content\web\OrderSummary.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="PrivateSettings.config" />

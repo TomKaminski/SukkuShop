@@ -8,7 +8,17 @@
     font-family: Segoe UI;
     font-weight: bold;
     text-transform: uppercase;
-    margin: 40px 0 36px;
+    margin: 20px 0 36px;
+    padding-top: 20px;
+    color: #f89b1d;
+}
+
+.cart-title-ending {
+    font-size: 20px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0 0 36px;
     color: #f89b1d;
 }
 
@@ -205,6 +215,7 @@ ul.shipping li {
     font-family: SegoeLight;
     width: 135px;
     text-align: center;
+    line-height: 18px;
 }
 
 
@@ -260,7 +271,7 @@ ul#products-summary {
     font-size: 18px;
     text-align: right;
     text-transform: uppercase;
-
+    border-bottom: #f89b1d 1px solid;
 }
 
 ul#products-summary li {
@@ -292,5 +303,38 @@ ul#products-summary #text-box {
     border-bottom: 11px solid transparent;
     float: right;
     margin-left: 25px;
-    margin-top: 7px;
+    margin-top: 3px;
+}
+
+#triangle-left-big {
+    width: 0;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-right: 15px solid #f89b1d;
+    border-bottom: 11px solid transparent;
+    float: left;
+    margin-top: 3px;
+    margin-right: 25px;
+}
+
+.order-summary-header-text {
+    font-size: 18px;
+    font-family: SegoeBold;
+    float: left;
+    width: 548px;
+}
+
+.order-summary-description-text {
+    font-size: 16px;
+    font-family: SegoeLight;
+    width: 390px;
+}
+
+ul.order-summary  {
+    list-style-type: none;
+    padding: 0;
+}
+
+ul.order-summary li {
+    width: 700px;
 }
