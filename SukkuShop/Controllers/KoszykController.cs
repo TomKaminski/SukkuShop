@@ -27,9 +27,49 @@ namespace SukkuShop.Controllers
         public virtual ActionResult RemoveFromCart(int id, Cart shoppingCart)
         {
             shoppingCart.RemoveLine(id);
-            return RedirectToAction(MVC.Koszyk.Index());
+            var result = CartViewModels(shoppingCart);
+            return PartialView("CartTable",result);
         }
-        //[OutputCache(Duration = 1)]
+
+        public JsonResult IncreaseQuantity(int id, Cart shoppingCart)
+        {
+            
+            var firstOrDefault = _dbContext.Products.Where(x => x.ProductId == id).Select(k => new
+            {
+                k.Price,
+                k.Quantity,
+                k.Promotion
+            }).First();
+            
+            var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
+            if (firstOrDefault.Quantity <= quantity) return Json(false);
+            shoppingCart.AddItem(id);
+            var data = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*(quantity+1) ??
+                       firstOrDefault.Price*(quantity+1);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult DecreaseQuantity(int id, Cart shoppingCart)
+        {
+            
+            shoppingCart.DecreaseQuantity(id);
+            var firstOrDefault = _dbContext.Products.Where(x => x.ProductId == id).Select(k => new
+            {
+                k.Price,
+                k.Quantity,
+                k.Promotion
+            }).First();
+            var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
+            var data = (firstOrDefault.Price - ((firstOrDefault.Price * firstOrDefault.Promotion) / 100)) * quantity ?? firstOrDefault.Price * quantity;
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult TotalPriceJson(Cart cart)
+        {
+            var data = CalcTotalValue(cart);
+            return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
         public virtual ActionResult TotalValue(Cart shoppingCart)
         {
             var value = CalcTotalValue(shoppingCart);
@@ -41,7 +81,7 @@ namespace SukkuShop.Controllers
             decimal sum = 0;
             foreach (Cart.CartLine line in shoppingCart.Lines)
             {
-                Products firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
+                var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
                 if (firstOrDefault != null) sum += (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity;
             }
             return sum;
@@ -49,6 +89,12 @@ namespace SukkuShop.Controllers
 
         // GET: Cart
         public virtual ActionResult Index(Cart shoppingCart)
+        {
+            var model = CartViewModels(shoppingCart);
+            return View(model);
+        }
+
+        private CartViewModels CartViewModels(Cart shoppingCart)
         {
             var productList = new List<CartProduct>();
             decimal totalValue = 0;
@@ -67,8 +113,8 @@ namespace SukkuShop.Controllers
                     TotalValue =
                         (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
                             .ToString("c"),
-                            Image = product.ImageName
-                            
+                    Image = product.ImageName,
+                    MaxQuantity = product.Quantity
                 });
                 totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
                               item.Quantity;
@@ -76,10 +122,9 @@ namespace SukkuShop.Controllers
             var model = new CartViewModels
             {
                 CartProductsList = productList,
-                TotalValue = totalValue.ToString("c")
+                TotalValue = totalValue.ToString("c").Replace(",",".")
             };
-            return View(model);
-            
+            return model;
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿@model SukkuShop.Models.CartProduct
+
+<tr>
+    <td>
+        <img src=@("/Content/Images/Shop/" + Model.Image + ".jpg" ) />
+        <div class="custom-product-text-container">
+            <p>@Model.Name</p>
+        </div>
+        @using (Html.BeginForm("RemoveFromCart", "Koszyk", FormMethod.Get, new { id = "removeform" }))
+        {
+            <input type="hidden" name="id" value="@Model.Id" />
+            
+            <div class="cart-delete-text">usuń</div>
+        }
+    </td>
+    <td>@Model.Price</td>
+
+    <td>
+        <div class="quantity-box">
+            <div id="quantity_counter">@Html.Label(Convert.ToString(Model.Quantity),new{id="quantity"+Model.Id})</div>
+            @Html.Hidden("id", @Model.Id)
+            <div class="arrows-box">
+                <div id="plzarrowsup" class="arrow-up-box increase_quantity"><div class="quantity-arrow-up"></div></div>
+                <div id="plzarrowsdown" class="arrow-down-box decrease_quantity"><div class="quantity-arrow-down"></div></div>
+            </div>
+            <div class="quanity-text-right">szt.</div>
+        </div>
+    </td>
+    <td id="quantity-total@(Model.Id)">@Model.TotalValue</td>
+</tr>

@@ -105,19 +105,20 @@ table.cart-table tbody tr td img{
     vertical-align: middle; 
 }
 
-.cart-delete-text {
+.cart-delete-text{
     font-size: 12px;
 text-decoration: underline;
 color: red;
 position: absolute;
 bottom: 20px;
 left: 150px;
+    cursor: pointer;
 }
 .quantity-box {
     width: 90px;
     margin: auto;
 }
-.quantity-box input {
+.quantity-box #quantity_counter {
     width: 24px;
     height: 24px;
     border: 1px solid black;
@@ -127,6 +128,8 @@ left: 150px;
     text-align: center;
     font-family: SegoeLight;
     margin-right: 6px;
+    vertical-align: middle;
+    line-height: 24px;
 }
 
 .quantity-box .arrows-box {
@@ -274,13 +277,14 @@ ul#products-summary {
     text-align: right;
     text-transform: uppercase;
     border-bottom: #f89b1d 1px solid;
+    padding-bottom: 20px;
 }
 
 ul#products-summary li {
     margin-bottom: 10px;
 }
 
-ul#products-summary #price-box {
+ul#products-summary li .price-box {
     text-align: right;
     width: 130px;
     float: right;

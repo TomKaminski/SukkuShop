@@ -1,0 +1,19 @@
+﻿@model SukkuShop.Models.CartViewModels
+<table class="cart-table" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Twoje produkty</th>
+            <th>Cena</th>
+            <th>Ilość</th>
+            <th>Suma</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.CartProductsList)
+        {
+            Html.RenderPartial("CartLine", item);
+        }
+    </tbody>
+</table>
+<div class="products-price-summary" id="products-price-sum">@Model.TotalValue</div>
+<div class="products-price-summary" style="margin-right: 40px; float: right">Razem</div>

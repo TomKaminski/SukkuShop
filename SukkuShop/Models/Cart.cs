@@ -25,6 +25,13 @@ namespace SukkuShop.Models
             }
         }
 
+        public void DecreaseQuantity(int id)
+        {
+            var line = _lineCollection.FirstOrDefault(p => p.Id == id);
+            if (line != null && line.Quantity>1) 
+                line.Quantity--;
+        }
+
         public void Clear()
         {
             _lineCollection.Clear();

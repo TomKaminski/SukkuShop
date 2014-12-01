@@ -394,6 +394,8 @@
     <Content Include="Views\Sklep\similarProduct.cshtml" />
     <Content Include="Views\Error\Blad404.cshtml" />
     <Content Include="Views\Shared\_AdminPanel.cshtml" />
+    <Content Include="Views\Koszyk\CartTable.cshtml" />
+    <Content Include="Views\Koszyk\CartLine.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
