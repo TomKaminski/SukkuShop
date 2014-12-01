@@ -1,8 +1,7 @@
 ﻿@model SukkuShop.Models.CartViewModels
 
 @{
-    ViewBag.Title = "Twój koszyk";
-    
+    ViewBag.Title = "Twój koszyk";   
 }
 
 <div class="cart-container">
@@ -12,37 +11,37 @@
         <li>2. Twoje dane</li>
         <li>3. Potwierdzenie zamówienia</li>
     </ul>
-    <div id="remove-static">
-        <div id="remove">
-            @{Html.RenderPartial("CartTable", Model);}
-        </div>
+
+    <div id="remove">
+        @{Html.RenderPartial("CartTable", Model);}
     </div>
+
     <div class="cart-title">Dostawa</div>
     <ul class="shipping">
         <li>
-            <input type="radio" name="shipping" id="ship1" class="css-checkbox">
+            <input type="radio" name="shipping" id="ship1" class="css-checkbox" checked>
             <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
-            <div class="shipping-price">8,00 PLN</div>
+            <div class="shipping-price">8.00 zł</div>
         </li>
         <li>
             <input type="radio" name="shipping" id="ship2" class="css-checkbox">
             <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
-            <div class="shipping-price">7,00 PLN</div>
+            <div class="shipping-price">7.00 zł</div>
         </li>
         <li>
             <input type="radio" name="shipping" id="ship3" class="css-checkbox">
             <label for="ship3" class="css-label">Kurier Siódemka</label>
-            <div class="shipping-price">12,00 PLN</div>
+            <div class="shipping-price">12.00 zł</div>
         </li>
         <li>
             <input type="radio" name="shipping" id="ship4" class="css-checkbox">
             <label for="ship4" class="css-label">Paczkomaty</label>
-            <div class="shipping-price">5,00 PLN</div>
+            <div class="shipping-price">5.00 zł</div>
         </li>
         <li>
             <input type="radio" name="shipping" id="ship5" class="css-checkbox">
             <label for="ship5" class="css-label">Odbiór osobisty</label>
-            <div class="shipping-price">0,00 PLN</div>
+            <div class="shipping-price">0.00 zł</div>
         </li>
     </ul>
     <div class="products-price-summary" id="shipping-price-summary">Wybierz metodę wysyłki</div>
@@ -52,22 +51,23 @@
     <div class="cart-title">Płatność</div>
     <ul id="payment-list" class="shipping">
         <li>
-            <input type="radio" name="payment" id="pay1" class="css-checkbox">
+            <input type="radio" name="payment" id="pay1" class="css-checkbox" checked>
             <label for="pay1" class="css-label">Przedpłata na konto</label>
-            <div class="shipping-price">0,00 PLN</div>
+            <div class="shipping-price">0.00 zł</div>
         </li>
         <li>
             <input type="radio" name="payment" id="pay2" class="css-checkbox">
             <label for="pay2" class="css-label">Płatność za pobraniem</label>
-            <div class="shipping-price">5,00 PLN</div>
+            <div class="shipping-price">5.00 zł</div>
         </li>
         <li>
             <input type="radio" name="payment" id="pay3" class="css-checkbox">
             <label for="pay3" class="css-label">PayU</label>
-            <div class="shipping-price">1,00 PLN</div>
+            <div class="shipping-price">1.00 zł</div>
         </li>
 
     </ul>
+
     <div class="cart-title">Podsumowanie</div>
     <ul id="products-summary">
         <li>
@@ -83,6 +83,7 @@
             <div class="price-box" id="total-price-summary" style="color:#f89b1d">N/A</div><div id="text-box clear">Razem</div>
         </li>
     </ul>
+
     <div id="cart-button-bottom">
         <div id="triangle-right-big"></div>
         <div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>

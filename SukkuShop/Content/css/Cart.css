@@ -107,11 +107,11 @@ table.cart-table tbody tr td img{
 
 .cart-delete-text{
     font-size: 12px;
-text-decoration: underline;
-color: red;
-position: absolute;
-bottom: 20px;
-left: 150px;
+    text-decoration: underline;
+    color: red;
+    position: absolute;
+    bottom: 20px;
+    left: 150px;
     cursor: pointer;
 }
 .quantity-box {
@@ -249,7 +249,8 @@ input[type=radio].css-checkbox + label.css-label {
     vertical-align: middle;
     cursor: pointer;
     margin-bottom: 2px;
-    width: 525px;
+    width: 300px;
+    margin-right: 225px;
 }
 
 input[type=radio].css-checkbox:checked + label.css-label { background-position: 0 -18px; }

@@ -1,5 +1,4 @@
 ﻿$(document).ready(function() {
-
     function currency(n) {
         n = parseFloat(n);
         return isNaN(n) ? false : n.toFixed(2);
@@ -18,7 +17,7 @@
                 value--;
             target.empty().append(value);
             var totalpriceTarget = $('#quantity-total' + id);
-            totalpriceTarget.empty().append(currency(data) + " PLN");
+            totalpriceTarget.empty().append(currency(data) + " zł");
             totalPriceJson();
             priceSummary();
             dostawaSummary();
@@ -41,7 +40,7 @@
             priceSummary();
             dostawaSummary();
             var totalpriceTarget = $('#quantity-total' + id);
-            totalpriceTarget.empty().append(currency(data) + " PLN");
+            totalpriceTarget.empty().append(currency(data) + " zł");
         });
 
     });
@@ -49,37 +48,36 @@
 
     //price summary na dole, modyfikacja
     function priceSummary() {
-        var value1 = $('#price-box-json').text().replace(' PLN', '').replace(',', '.');
-        var value2 = $('#dostawa-box-summary').text().replace(' PLN', '');
-        var value3 = $('#payment-box-summary').text().replace(' PLN', '');
+        var value1 = $('#price-box-json').text().replace(' zł', '').replace(',', '.');
+        var value2 = $('#dostawa-box-summary').text().replace(' zł', '');
+        var value3 = $('#payment-box-summary').text().replace(' zł', '');
         var sum = Number(currency(value1)) + Number(currency(value2)) + Number(currency(value3));
-        $("#total-price-summary").empty().append(currency(sum) + " PLN");
+        $("#total-price-summary").empty().append(currency(sum) + " zł");
     }
 
     //summary po dostawie, modyfikacja
     function dostawaSummary() {
-        var value2 = $('#dostawa-box-summary').text().replace(' PLN', '');
-        var value1 = $('#price-box-json').text().replace(' PLN', '');
+        var value2 = $('#dostawa-box-summary').text().replace(' zł', '');
+        var value1 = $('#price-box-json').text().replace(' zł', '');
         var sum = Number(currency(value1)) + Number(currency(value2));
-        $("#shipping-price-summary").empty().append(currency(sum) + " PLN");
+        $("#shipping-price-summary").empty().append(currency(sum) + " zł");
     }
 
 
     $("input:radio[name=shipping]").click(function() {
-        var value = $(this).siblings(".shipping-price").text().replace(' PLN', '').replace(',', '.');
+        var value = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
         var productsPrice = $('#products-price-sum').text().replace(' zł', '').replace(',', '.');
         var sum = Number(currency(value)) + Number(currency(productsPrice));
-        $('#dostawa-box-summary').empty().append(value + ' PLN');
+        $('#dostawa-box-summary').empty().append(value + ' zł');
         var target = $('#shipping-price-summary');
-        target.empty();
-        target.append(currency(sum) + " PLN");
+        target.empty().append(currency(sum) + " zł");
         priceSummary();
     });
 
     $("input:radio[name=payment]").click(function() {
-        var value = $(this).siblings(".shipping-price").text().replace(' PLN', '').replace(',', '.');
+        var value = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
         var sum = currency(value);
-        $('#payment-box-summary').empty().append(sum + ' PLN');
+        $('#payment-box-summary').empty().append(sum + ' zł');
         priceSummary();
     });
 
@@ -90,24 +88,21 @@
                 url: '/Koszyk/TotalPriceJson',
                 contentType: 'application/html; charset=utf-8',
                 type: 'GET'
-            })
-            .success(function(data) {
+            }).success(function (data) {
+                var curr = currency(data);
                 var target3 = $('#cart-price-header');
-                target3.empty();
-                target3.append("koszyk " + currency(data) + " PLN");
+                target3.empty().append("koszyk " + curr + " zł");
                 var target2 = $('#products-price-sum');
-                target2.empty();
-                target2.append(currency(data) + " PLN");
+                target2.empty().append(curr + " zł");
                 var target = $('#price-box-json');
-                target.empty();
-                target.append(currency(data) + " PLN");
+                target.empty().append(curr + " zł");
                 priceSummary();
                 dostawaSummary();
             });
     }
 
 
-    $(document).on("click", ".cart-delete-text", function() {
+    $("#remove").on("click", ".cart-delete-text", function() {
         var url = $('#removeform').attr("action");
         var formData = $('#removeform').serialize();
         $.ajax({
@@ -116,8 +111,7 @@
             data: formData
         }).success(function(data) {
             var target = $('#remove');
-            target.empty();
-            target.append(data);
+            target.empty().append(data);
             totalPriceJson();
         });
     });
