@@ -225,15 +225,7 @@ ul.shipping li {
 
 
 input[type=radio].css-checkbox {
-    position: absolute;
-    z-index: -1000;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    width: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
+    display: none;
 }
 
 input[type=radio].css-checkbox + label.css-label {
@@ -257,8 +249,7 @@ input[type=radio].css-checkbox:checked + label.css-label { background-position: 
 
 label.css-label {
     background-image: url('../images/checkbox.png');
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
+
     -khtml-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
