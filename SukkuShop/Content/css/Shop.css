@@ -570,7 +570,8 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     text-transform: uppercase;
     margin-right: 9px;
     float: left;
-    font-family: SegoeLight
+    font-family: SegoeLight;
+    cursor:pointer;
 }
 
 .white-cart-icon {
@@ -579,6 +580,7 @@ ul.sort-menu li.sort-box:first-child { padding-right: 0; }
     margin-top: 11px;
     background-image: url(../Images/shop/carticonwhite.png);
     float:left;
+    cursor:pointer;
 }
 
 hr.hr-orange {

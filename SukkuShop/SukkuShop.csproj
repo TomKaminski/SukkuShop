@@ -288,7 +288,9 @@
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox.png" />
     <Content Include="Content\Images\Shop\1.jpg" />
+    <Content Include="Content\Images\Shop\1.png" />
     <Content Include="Content\Images\Shop\2.jpg" />
+    <Content Include="Content\Images\Shop\2.png" />
     <Content Include="Content\Images\Shop\4.jpg" />
     <Content Include="Content\Images\Shop\4.png" />
     <Content Include="Content\Images\Shop\carticon.png" />

@@ -101,6 +101,19 @@ internal partial class T4MVC_System_Web_Mvc_PartialViewResult : System.Web.Mvc.P
     public string Protocol { get; set; }
     public RouteValueDictionary RouteValueDictionary { get; set; }
 }
+[GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+internal partial class T4MVC_System_Web_Mvc_JsonResult : System.Web.Mvc.JsonResult, IT4MVCActionResult
+{
+    public T4MVC_System_Web_Mvc_JsonResult(string area, string controller, string action, string protocol = null): base()
+    {
+        this.InitMVCT4Result(area, controller, action, protocol);
+    }
+    
+    public string Controller { get; set; }
+    public string Action { get; set; }
+    public string Protocol { get; set; }
+    public RouteValueDictionary RouteValueDictionary { get; set; }
+}
 
 
 
@@ -183,6 +196,7 @@ namespace Links
             private const string URLPATH = "~/Content/Images";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string checkbox_png = Url("checkbox.png");
             public static readonly string content_pic1_png = Url("content-pic1.png");
             public static readonly string content_pic2_png = Url("content-pic2.png");
             public static readonly string content_pic3_png = Url("content-pic3.png");
@@ -196,7 +210,9 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string _1_jpg = Url("1.jpg");
+                public static readonly string _1_png = Url("1.png");
                 public static readonly string _2_jpg = Url("2.jpg");
+                public static readonly string _2_png = Url("2.png");
                 public static readonly string _4_jpg = Url("4.jpg");
                 public static readonly string _4_png = Url("4.png");
                 public static readonly string basket_png = Url("basket.png");
@@ -207,6 +223,15 @@ namespace Links
                 public static readonly string lupa_png = Url("lupa.png");
             }
         
+        }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static class web {
+            private const string URLPATH = "~/Content/web";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string Koszyk_html = Url("Koszyk.html");
+            public static readonly string OrderSummary_html = Url("OrderSummary.html");
         }
     
     }

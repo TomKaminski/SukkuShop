@@ -31,7 +31,7 @@ namespace SukkuShop.Controllers
             return PartialView("CartTable",result);
         }
 
-        public JsonResult IncreaseQuantity(int id, Cart shoppingCart)
+        public virtual JsonResult IncreaseQuantity(int id, Cart shoppingCart)
         {
             
             var firstOrDefault = _dbContext.Products.Where(x => x.ProductId == id).Select(k => new
@@ -49,7 +49,7 @@ namespace SukkuShop.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult DecreaseQuantity(int id, Cart shoppingCart)
+        public virtual JsonResult DecreaseQuantity(int id, Cart shoppingCart)
         {
             
             shoppingCart.DecreaseQuantity(id);
@@ -64,7 +64,7 @@ namespace SukkuShop.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult TotalPriceJson(Cart cart)
+        public virtual JsonResult TotalPriceJson(Cart cart)
         {
             var data = CalcTotalValue(cart);
             return Json(data, JsonRequestBehavior.AllowGet);
@@ -101,6 +101,7 @@ namespace SukkuShop.Controllers
             foreach (var item in shoppingCart.Lines)
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
+                var categoryName = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == product.CategoryId).Name;
                 if (product == null) continue;
                 productList.Add(new CartProduct
                 {
@@ -114,7 +115,8 @@ namespace SukkuShop.Controllers
                         (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
                             .ToString("c"),
                     Image = product.ImageName,
-                    MaxQuantity = product.Quantity
+                    MaxQuantity = product.Quantity,
+                    CategoryName = categoryName
                 });
                 totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
                               item.Quantity;
