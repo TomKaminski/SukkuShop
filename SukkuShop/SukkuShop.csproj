@@ -278,12 +278,42 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\css\Cart.css" />
-    <Content Include="Content\css\Error.css" />
-    <Content Include="Content\css\Home.css" />
-    <Content Include="Content\css\main.css" />
-    <Content Include="Content\css\reset.css" />
-    <Content Include="Content\css\Shop.css" />
+    <Content Include="Content\css\Cart.css">
+      <DependentUpon>Cart.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Cart.min.css">
+      <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Error.css">
+      <DependentUpon>Error.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Error.min.css">
+      <DependentUpon>Error.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Home.css">
+      <DependentUpon>Home.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Home.min.css">
+      <DependentUpon>Home.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\reset.css">
+      <DependentUpon>reset.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\reset.min.css">
+      <DependentUpon>reset.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Shop.css">
+      <DependentUpon>Shop.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Shop.min.css">
+      <DependentUpon>Shop.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox.png" />
@@ -330,6 +360,30 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Content\css\Cart.scss" />
+    <Content Include="Content\css\Error.scss" />
+    <Content Include="Content\css\Home.scss" />
+    <Content Include="Content\css\main.scss" />
+    <Content Include="Content\css\reset.scss" />
+    <Content Include="Content\css\Shop.scss" />
+    <Content Include="Content\css\Cart.css.map">
+      <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Error.css.map">
+      <DependentUpon>Error.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Home.css.map">
+      <DependentUpon>Home.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\main.css.map">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\reset.css.map">
+      <DependentUpon>reset.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Shop.css.map">
+      <DependentUpon>Shop.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\CartSummary.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

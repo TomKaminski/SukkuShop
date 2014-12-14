@@ -1,0 +1,639 @@
+﻿//colors
+$color_tree_poppy_approx: #f89b1d;
+$white: white;
+$white_100: rgba(255, 255, 255, 1);
+$color_merino_approx: #f7eee7;
+$color_gray_approx: #818181;
+$black:  black;
+$color_kangaroo_approx: #c5cdbc;
+$color_japanese_laurel_approx: green;
+$gray: gray;
+
+//fonts
+$font_0: LucidaConsole;
+$font_1: LucidaBright;
+$font_2: FootlightMTLight;
+$font_3: FoglihtenPCS;
+$font_4: Microsoft PhagsPa;
+$font_5: SegoeBlack;
+$font_6: SegoeLight;
+$font_7: SegoeBold;
+$font_8: Segoe Ui;
+
+//@extend-elements
+//original selectors
+//.add-to-cart-icon img, .info-icon img, .add-to-cart-icon input
+%extend_1 {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	opacity: 0.8;
+}
+
+//original selectors
+//ul.shop-paginator li, ul.shop-paginator li.inner-paginator
+%extend_2 {
+	margin: 0 4px;
+	float: left;
+	width: 21px;
+}
+
+
+@font-face {
+	font-family: $font_0;
+	src: url('../fonts/lucida_console.eot');
+	src: url('../fonts/lucida_console.eot?#iefix') format('embedded-opentype'), url('../fonts/lucida_console.svg#Lucida Console') format('svg'), url('../fonts/lucida_console.woff') format('woff'), url('../fonts/lucida_console.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+.product-background {
+	height: 752px;
+	max-width: 1600px;
+	margin: auto;
+	position: relative;
+	padding-top: 40px;
+	img {
+		position: absolute;
+	}
+}
+.product-list-container {
+	padding-top: 20px;
+	width: 642px;
+	margin-left: 40%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+}
+.product-details-list-container {
+	padding-top: 20px;
+	margin: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.product-list-item-box {
+	height: 191px;
+	width: 135px;
+	//Instead of the line below you could use @includebox-sizing($bs)
+	box-sizing: border-box;
+	margin-bottom: 28px;
+	margin-right: 34px;
+	position: relative;
+	&:hover {
+		border: 2px solid $color_tree_poppy_approx;
+		top: -2px;
+		left: -2px;
+	}
+	&:nth-child(4n) {
+		margin-right: 0;
+	}
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.sort-arrow-up {
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-bottom: 11px solid black;
+    border-left: 7px solid transparent;
+    float: right;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-bottom: 1px;
+}
+
+.sort-arrow-down {
+    width: 0;
+    height: 0;
+    border-right: 7px solid transparent;
+    border-top: 11px solid black;
+    border-left: 7px solid transparent;
+    float: right;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: 0.6;
+    margin-top: 1px;
+}
+.product-list-item {
+	top: 2px;
+	left: 2px;
+	height: 187px;
+	width: 131px;
+	//Instead of the line below you could use @includebox-sizing($bs)
+	box-sizing: border-box;
+	position: absolute;
+}
+.product-list-item-image {
+	height: 127px;
+	width: 127px;
+	position: relative;
+	img {
+		position: absolute;
+	}
+}
+ul {
+	&.subcategory-menu {
+		margin: 0 auto;
+		position: absolute;
+		z-index: 100;
+		li {
+			margin-bottom: 20px;
+			a {
+				font-family: $font_4;
+				font-size: 22px;
+				color: $color_tree_poppy_approx;
+				text-transform: uppercase;
+			}
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+	&.sort-menu {
+		margin-bottom: -30px;
+		li.sort-box {
+			padding-right: 14px;
+			display: inline;
+			float: right;
+			font-size: 16px;
+			font-family: $font_4;
+			color: $color_tree_poppy_approx;
+			text-transform: uppercase;
+			&:nth-child(5) {
+				color: $color_gray_approx;
+			}
+			&:first-child {
+				padding-right: 0;
+			}
+		}
+	}
+	&.top-panel li {
+		height: 24px;
+	}
+	&.shop-paginator li {
+		@extend %extend_2;
+		&.inner-paginator {
+			@extend %extend_2;
+			&:before {
+				position: absolute;
+				background: $color_tree_poppy_approx;
+				content: '';
+				width: 21px;
+				height: 21px;
+			}
+		}
+		&:last-child {
+			position: relative;
+		}
+		a {
+			.paginator-box {
+				line-height: 21px;
+				vertical-align: middle;
+				position: relative;
+				font-family: $font_1;
+				font-size: 13px;
+				text-align: center;
+				color: $white;
+				text-decoration: none;
+			}
+			&:hover {
+				color: $white;
+			}
+		}
+	}
+}
+.top-panel-text-container {
+	width: 127px;
+	position: absolute;
+	&:before {
+		position: absolute;
+		height: 24px;
+		width: 127px;
+		background-color: $white;
+		opacity: 0.6;
+		content: '';
+		top: 0;
+	}
+}
+.top-panel-text {
+	position: relative;
+	font-family: $font_0;
+	line-height: 24px;
+	vertical-align: middle;
+	font-size: 16px;
+	text-transform: uppercase;
+	text-align: center;
+	//Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	text-shadow: 2px 2px 3px $white;
+	//Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	text-shadow: 2px 2px 3px $white_100;
+	font-weight: bold;
+}
+.image-bottom-panel {
+	height: 32px;
+	bottom: 0;
+	position: absolute;
+	width: 127px;
+	.add-to-cart-icon {
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		cursor: pointer;
+	}
+	.info-icon {
+		width: 32px;
+		height: 32px;
+		position: absolute;
+		right: 0;
+	}
+	&:before {
+		position: absolute;
+		background-color: $white;
+		opacity: 0.5;
+		content: '';
+		height: 32px;
+		width: 127px;
+		bottom: 0;
+	}
+}
+.add-to-cart-icon {
+	img {
+		@extend %extend_1;
+		&:hover {
+			opacity: 1;
+		}
+	}
+	input {
+		@extend %extend_1;
+	}
+}
+.product-list-item-textbox {
+	height: 54px;
+	position: relative;
+	margin-top: 2px;
+	&:before {
+		position: absolute;
+		background-color: $color_merino_approx;
+		opacity: 0.8;
+		content: '';
+		height: 54px;
+		width: 127px;
+		bottom: 0;
+	}
+}
+.product-title {
+	position: relative;
+	padding: 5px 3px 10px;
+	font-family: $font_2;
+}
+.product-price {
+	position: absolute;
+	font-size: 18px;
+	font-family: $font_3;
+	float: left;
+	bottom: 0;
+	left: 3px;
+}
+.shop-nav-container {
+	width: 1066px;
+	margin: auto;
+	position: relative;
+	margin-bottom: 20px;
+}
+#paginator {
+	float: right;
+	position: relative;
+	left: -35%;
+	ul.shop-paginator {
+		position: relative;
+		left: 50%;
+	}
+}
+#sort-text {
+	float: left;
+}
+.sort-arrow {
+	width: 0;
+	height: 0;
+	border-top: 7px solid transparent;
+	border-left: 11px solid $black;
+	border-bottom: 7px solid transparent;
+	float: right;
+	background-color: transparent;
+	cursor: pointer;
+	opacity: 0.6;
+	margin-top: 2px;
+	margin-left: 8px;
+	&:hover {
+		opacity: 1;
+	}
+}
+.price-arrow-box {
+	float: right;
+	display: block;
+	width: 20px;
+	height: 30px;
+	margin-top: -3px;
+}
+.paging-arrow-right {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-left: 11px solid $color_tree_poppy_approx;
+	border-bottom: 8px solid transparent;
+	float: right;
+	background-color: transparent;
+	cursor: pointer;
+	margin-top: 2px;
+	margin-right: 12px;
+}
+.paging-arrow-left {
+	width: 0;
+	height: 0;
+	border-top: 8px solid transparent;
+	border-right: 11px solid $color_tree_poppy_approx;
+	border-bottom: 8px solid transparent;
+	background-color: transparent;
+	cursor: pointer;
+	float: left;
+	margin-top: 2px;
+	margin-left: 12px;
+}
+.square-paginator {
+	height: 4px;
+	width: 3px;
+	background-color: $color_kangaroo_approx;
+	float: left;
+	margin-right: 2px;
+	margin-left: 2px;
+	margin-top: 15px;
+}
+.product-discount {
+	color: $color_japanese_laurel_approx;
+	text-align: right;
+	position: absolute;
+	font-size: 18px;
+	font-family: $font_3;
+	margin-right: 5px;
+	right: 3px;
+	bottom: 0;
+}
+.product-details-main-container {
+	width: 1066px;
+	margin: 60px auto 12px;
+	padding-bottom: 60px;
+	border-bottom: 1px solid $color_tree_poppy_approx;
+	position: relative;
+}
+.product-details-img {
+	width: 368px;
+	height: 368px;
+	margin: 36px 73px 0 55px;
+	float: left;
+	position: relative;
+	img {
+		width: 100%;
+		height: 100%;
+	}
+}
+.product-details-info-container {
+	width: 415px;
+	float: left;
+	.title-box {
+		height: 48px;
+		margin-bottom: 28px;
+		font-size: 24px;
+		font-family: $font_3;
+		text-transform: uppercase;
+	}
+	.price-box {
+		margin-bottom: 10px;
+		.price-text {
+			font-family: $font_5;
+			font-size: 28px;
+			float: left;
+			margin-right: 25px;
+		}
+		.gramature-text {
+			font-family: $font_6;
+			font-size: 24px;
+			vertical-align: middle;
+			line-height: 28px;
+			color: $gray;
+		}
+	}
+	.avaibility {
+		font-weight: bold;
+		font-size: 14px;
+		text-transform: uppercase;
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.ask-for-product {
+		font-size: 12px;
+		color: $black;
+		font-family: $font_6;
+		border-bottom: 1px solid $black;
+		&:hover {
+			text-decoration: none;
+		}
+	}
+	.quantity-box {
+		height: 34px;
+		font-size: 21px;
+		color: $black;
+		margin-top: 24px;
+		position: relative;
+		font-family: $font_6;
+	}
+	.add-to-cart-button {
+		margin-top: 24px;
+		background-color: $color_tree_poppy_approx;
+		height: 51px;
+		width: 245px;
+		margin-bottom: 5px;
+	}
+	.add-to-cart-button-gray {
+		margin-top: 24px;
+		height: 51px;
+		width: 245px;
+		margin-bottom: 5px;
+		background-color: $gray;
+		cursor: default;
+	}
+	.details-info-text {
+		font-family: $font_6;
+		font-size: 14px;
+		margin-top: 14px;
+	}
+}
+.quantity-box {
+	.quanity-text {
+		margin-right: 80px;
+		float: left;
+		position: absolute;
+		bottom: 0;
+	}
+	input {
+		width: 32px;
+		height: 30px;
+		border: 1px solid $black;
+		font-size: 21px;
+		outline: none;
+		float: left;
+		text-align: center;
+		margin-right: 9px;
+		font-family: $font_6;
+		margin-left: 123px;
+	}
+	.arrows-box {
+		width: 34px;
+		height: 34px;
+		float: left;
+	}
+	.arrow-up-box {
+		width: 34px;
+		height: 19px;
+		background-color: $color_tree_poppy_approx;
+	}
+	.arrow-down-box {
+		width: 34px;
+		height: 15px;
+		background-color: $color_tree_poppy_approx;
+	}
+	.quantity-arrow-up {
+		width: 0;
+		height: 0;
+		border-right: 7px solid transparent;
+		border-bottom: 11px solid $white;
+		border-left: 7px solid transparent;
+		background-color: transparent;
+		cursor: pointer;
+		margin: auto;
+		padding-top: 3px;
+	}
+	.quantity-arrow-down {
+		width: 0;
+		height: 0;
+		border-right: 7px solid transparent;
+		border-top: 11px solid $white;
+		border-left: 7px solid transparent;
+		background-color: transparent;
+		cursor: pointer;
+		margin: auto;
+		padding-top: 3px;
+	}
+	.quanity-text-right {
+		line-height: 34px;
+		vertical-align: middle;
+		float: left;
+		margin-left: 14px;
+	}
+}
+.add-to-cart-button-text {
+	line-height: 51px;
+	margin-left: 15px;
+	font-size: 18px;
+	color: $white;
+	text-transform: uppercase;
+	margin-right: 9px;
+	float: left;
+	font-family: $font_6;
+}
+.white-cart-icon {
+	height: 27px;
+	width: 34px;
+	margin-top: 11px;
+	background-image: url(../Images/shop/carticonwhite.png);
+	float: left;
+}
+.details-info-title {
+	font-family: $font_7;
+	font-size: 14px;
+	margin-top: 14px;
+	text-transform: uppercase;
+}
+.product-category-label-img {
+	width: 179px;
+	height: 38px;
+	background-color: $color_tree_poppy_approx;
+	font-family: $font_8;
+	font-size: 20px;
+	color: $white;
+	text-align: center;
+	line-height: 38px;
+	margin: auto;
+	position: absolute;
+	left: 100px;
+	bottom: 0;
+	text-transform: uppercase;
+}
+.product-promotion-label-img {
+	width: 179px;
+	height: 38px;
+	background-color: $color_japanese_laurel_approx;
+	font-family: $font_8;
+	font-size: 20px;
+	color: $white;
+	text-align: center;
+	line-height: 38px;
+	margin: auto;
+	position: absolute;
+	right: 0;
+	top: 0;
+	text-transform: uppercase;
+	z-index: 1000;
+}
+.flying-product-start {
+	opacity: 0.7;
+	position: absolute;
+	height: 50px;
+	width: 50px;
+	z-index: 1031;
+}
+.product-detail-price-before-discount {
+	font-size: 16px;
+	text-decoration: line-through;
+}
+.add-to-cart-animation {
+	font-size: 11px;
+	color: $color_japanese_laurel_approx;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+}
+.add-to-cart-animation-box {
+	height: 11px;
+}
+.info-icon img {
+	@extend %extend_1;
+	&:hover {
+		opacity: 1;
+	}
+}
+.sort-arrow-down:hover {
+	opacity: 1;
+}
+.sort-arrow-up:hover {
+	opacity: 1;
+}
+hr.hr-orange {
+	background-color: $color_tree_poppy_approx;
+	height: 1px;
+	border: 0;
+	color: $color_tree_poppy_approx;
+	border-color: $color_tree_poppy_approx;
+}
+img.lupa {
+	width: 119px;
+	height: 119px;
+	position: absolute;
+	top: 126px;
+	left: 126px;
+	opacity: 0.8;
+}

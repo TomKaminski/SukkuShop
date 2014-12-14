@@ -1,33 +1,31 @@
-﻿.notfound-text-big {
-    font-size: 60px;
-    font-family: Segoe UI;
-    color: #f89b1d;
-    text-align: center;
-    margin-bottom: 10px;
-}
+.notfound-text-big {
+  font-size: 60px;
+  font-family: Segoe UI;
+  color: #f89b1d;
+  text-align: center;
+  margin-bottom: 10px; }
 
 .notfound-text-normal {
-    text-align: center;
-    font-size: 42px;
-    color: black;
-    font-family: Calibri;
-    margin-bottom: 10px;
-}
+  text-align: center;
+  font-size: 42px;
+  color: black;
+  font-family: Calibri;
+  margin-bottom: 10px; }
 
 .notfound-backlink {
-    text-align: center;
-}
-
-.notfound-backlink a{
+  text-align: center; }
+  .notfound-backlink a {
     text-decoration: none;
     color: #f89b1d;
     font-weight: bold;
-    font-family: Segoe UI;
-}
+    font-family: Segoe UI; }
 
 .center {
-    bottom: 0; left: 0; top: 0; right: 0;
-    margin: auto;
-    position: absolute;
-    height: 200px;
-}
+  bottom: 0;
+  left: 0;
+  top: 0;
+  right: 0;
+  margin: auto;
+  position: absolute;
+  height: 200px; }
+
