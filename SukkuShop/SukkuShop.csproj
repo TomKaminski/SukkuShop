@@ -385,6 +385,7 @@
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\CartSummary.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

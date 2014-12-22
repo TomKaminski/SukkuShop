@@ -4,6 +4,7 @@
         return isNaN(n) ? false : n.toFixed(2);
     }
 
+
     $("#remove").on("click", "#plzarrowsdown", function () {
         var id = $(this).parent().siblings("#quantity_counter").children().attr("id").replace("quantity", '');
         var target = $(this).parent().siblings("#quantity_counter").children();

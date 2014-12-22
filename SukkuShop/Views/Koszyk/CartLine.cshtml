@@ -3,24 +3,23 @@
 <tr>
     <td>
         <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><img src=@("/Content/Images/Shop/" + Model.Image + ".jpg" ) /></a>
-            <div class="custom-product-text-container">
-                <p ><span style="font-size:18px;line-height:25px;">Nazwa: @Model.Name</span> 
-    <br />
-    Kategoria:  @Model.CategoryName
-</p>
-            </div>
-            @using (Html.BeginForm("RemoveFromCart", "Koszyk", FormMethod.Get, new { id = "removeform" }))
+        <div class="custom-product-text-container">
+            <p ><span style="font-size: 18px; line-height: 25px;">Nazwa: @Model.Name</span> 
+                <br />
+                Kategoria:  @Model.CategoryName
+            </p>
+        </div>
+        @using (Html.BeginForm("RemoveFromCart", "Koszyk", FormMethod.Get, new {id = "removeform"}))
         {
-                <input type="hidden" name="id" value="@Model.Id" />
-
-                <div class="cart-delete-text">usuń</div>
+            <input type="hidden" name="id" value="@Model.Id" />
+            <div class="cart-delete-text">usuń</div>
         }
-</td>
+    </td>
     <td>@Model.Price</td>
 
     <td>
         <div class="quantity-box">
-            <div id="quantity_counter">@Html.Label(Convert.ToString(Model.Quantity),new{id="quantity"+Model.Id})</div>
+            <div id="quantity_counter">@Html.Label(Convert.ToString(Model.Quantity), new {id = "quantity" + Model.Id})</div>
             @Html.Hidden("id", @Model.Id)
             <div class="arrows-box">
                 <div id="plzarrowsup" class="arrow-up-box increase_quantity"><div class="quantity-arrow-up"></div></div>

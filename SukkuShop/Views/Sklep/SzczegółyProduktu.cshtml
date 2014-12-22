@@ -99,36 +99,36 @@
 @Styles.Render("~/Content/css/Shop.css")
 @section Scripts{
     <script>
-        $(document).ready(function() {
-            @{
-                var jsSerializer = new JavaScriptSerializer();
+    $(document).ready(function() {
+
+        @{
+            var jsSerializer = new JavaScriptSerializer();
+        }
+        var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
+        $('.add-to-cart-button').click(function() {
+            if (maxQuantity > 0) {
+                $('#add-to-cart-animation').stop().fadeOut();
+                $('#add-to-cart-animation').show("fast", function() {
+                    $('#add-to-cart-animation').fadeOut(5000);
+                });
             }
-            var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
-
-            $('.add-to-cart-button').click(function() {
-                if (maxQuantity > 0) {
-                    $('#add-to-cart-animation').stop().fadeOut();
-                    $('#add-to-cart-animation').show("fast", function() {
-                        $('#add-to-cart-animation').fadeOut(5000);
-                    });
-                }
-            });
-
-            //Counter ++
-            $('#increase_quantity').click(function() {
-                var value = $('#quantity_counter').val();
-                if (value < maxQuantity)
-                    value++;
-                $('#quantity_counter').val(value);
-            });
-
-            //Counter validate
-            $('#quantity_counter').on('change keyup paste', function() {
-                if ($('#quantity_counter').val() > maxQuantity) {
-                    $(this).val(maxQuantity);
-                }
-            });
         });
+
+        //Counter ++
+        $('#increase_quantity').click(function() {
+            var value = $('#quantity_counter').val();
+            if (value < maxQuantity)
+                value++;
+            $('#quantity_counter').val(value);
+        });
+
+        //Counter validate
+        $('#quantity_counter').on('change keyup paste', function() {
+            if ($('#quantity_counter').val() > maxQuantity) {
+                $(this).val(maxQuantity);
+            }
+        });
+    });
     </script>
 }
 @Scripts.Render("~/Scripts/jquery.elevatezoom.js")

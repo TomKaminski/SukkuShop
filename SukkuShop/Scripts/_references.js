@@ -7,3 +7,5 @@
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="jquery.elevatezoom.js" />
 /// <reference path="shopdetails.js" />
+/// <reference path="CartSummary.js" />
+/// <reference path="angular.min.js" />
