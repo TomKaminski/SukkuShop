@@ -10,6 +10,15 @@ namespace SukkuShop
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute(null, "{controller}/{action}/{category}",new
+            {
+                area = ""
+            },
+            new
+            {
+                action = "GetProductByCategory"
+            });
+
             routes.MapRoute(null, "{action}/{id}",
                 new
                 {

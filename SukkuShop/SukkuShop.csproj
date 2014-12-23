@@ -385,6 +385,7 @@
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\CartSummary.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
@@ -400,6 +401,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\shopAngular.js" />
     <Content Include="Scripts\shopdetails.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="T4MVC.tt.settings.xml" />

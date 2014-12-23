@@ -1,23 +1,62 @@
 ﻿@using SukkuShop.Infrastructure.Helpers
-@model SukkuShop.Models.ProductsListViewModel
+@model string
 @{
     ViewBag.Title = "Index";
     Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
 }
+@Scripts.Render("~/Scripts/angular.js")
+@Scripts.Render("~/Scripts/shopAngular.js")
 
-<div class="shop-nav-container">
+<div ng-app="shopApp">
+    <div ng-controller="ShopCtrl" ng-init="init('@Model')">
+        <img ng-src="~/Content/Images/Shop/{{imgName}}.jpg" />
+        <div class="products-container">
+            <div class="product-list-container">
+                <div class="product-list-item-box">
+                    <div class="product-list-item" ng-repeat="item in productList">
+                            <div class="product-list-item-image" style="background-color: white;">
+                                <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.png" />
+                                <div class="image-bottom-panel">
+                                    @*@if (Model.QuantityInStock != 0)
+                        {
+                            using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "CartTotalValue" }))
+                            {
+                                @Html.HiddenFor(m => m.Id)
+                                <div class="add-to-cart-icon">
+                                    <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                                </div>
+
+                            }
+                        }*@
+                                    @*<a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>*@
+                                </div>
+                            </div>
+                            <div class="product-list-item-textbox">
+                                <div class="product-title">{{item.Name}}</div>
+                                <div class="product-price" style="text-decoration: line-through;">{{item.Price}}</div>
+                                <div class="product-discount">{{item.PriceAfterDiscount}}</div>
+                                @*@if (Model.Promotion == 0)
+                    {
+                        <div class="product-price">@Model.PriceAfterDiscount.ToString("c")</div>
+                    }
+                    else
+                    {
+
+                    }*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+@*<div class="shop-nav-container">
     @Html.Action(MVC.Nav.SortList(Model.CurrentCategory,Model.CurrentSearch,Model.CurrentSubCategory,Model.CurrentSortMethod))
     @Html.Action(MVC.Nav.SubCategory(Model.CurrentCategory,Model.CurrentSubCategory,Model.CurrentSortMethod))
-</div>
-<div class="product-background" >
+</div>*@
+@*<div class="product-background" >
     @Html.BackgroundImage(Model.CurrentCategory)
-    <div class="products-container">
-        <div class="product-list-container">
-            @foreach (var product in Model.Products)
-            {
-                Html.RenderPartial(MVC.Sklep.Views.ProductItem, product);
-            }
-        </div>
+    
     </div>
     <div id="paginator">
         <ul class="shop-paginator">
@@ -31,9 +70,7 @@
             }))
         </ul>
     </div>    
-</div>
+</div>*@
 
 @Styles.Render("~/Content/css/Shop.css")
 @Scripts.Render("~/Scripts/main.js")
-
-

@@ -2,7 +2,7 @@
 @using SukkuShop.Models
 @model IEnumerable<string>
            
-<ul class="sort-menu">
+@*<ul class="sort-menu">
     <li class="sort-box">
         <div id="sort-text" style="@(ViewBag.CurrentSortMethod == SortMethod.Promocja ? "font-weight:bold;" : "")">PROMOCJA</div>
         @Html.SortList(Url.Action(MVC.Sklep.Produkty((string)ViewBag.SelectedCategory,(string)ViewBag.SelectedSubCategory,SortMethod.Promocja)), (SortMethod) ViewBag.CurrentSortMethod, SortMethod.Promocja)
@@ -24,4 +24,4 @@
     </li>
     <li class="sort-box">SORTUJ:</li>
     <li><div class="clear">&nbsp;</div></li>
-</ul>
+</ul>*@

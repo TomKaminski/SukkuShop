@@ -1,10 +1,9 @@
-﻿@using SukkuShop.Models
-@model IEnumerable<string>
+﻿@model IEnumerable<string>
 <ul id="shop-category">
     @foreach (var link in Model)
     {
         <li>
-            @Html.ActionLink(link,MVC.Sklep.Produkty(link,null,(SortMethod)ViewBag.CurrentSortMethod),new
+            @Html.ActionLink(link,MVC.Sklep.Produkty(link),new
             {
                 style = (link == ViewBag.Category ? "font-weight:bold" : "")
             })

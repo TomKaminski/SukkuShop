@@ -20,11 +20,9 @@ namespace SukkuShop.Controllers
         }
 
         // GET: Produkty
-        [DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category;subcategory;page;method")]
-        public virtual ActionResult Produkty(string category, string subcategory = null, SortMethod method = SortMethod.Nowość,
-            int page = 1)
-        {
 
+        public virtual ActionResult GetProductByCategory(string category=null)
+        {
             //getallproducts
             GetAllProducts();
 
@@ -34,60 +32,48 @@ namespace SukkuShop.Controllers
             //bestseller system
             _shop.NewProducts();
 
-            //get category and subcategory list
-            var categorylist =
-                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
-                    .Select(x => x.Name);
+            if (category != null)
+            {
+                var categorylist =
+               _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
+                   .Select(x => x.Name);
 
-            var categoryId = 0;
-            if (categorylist.Contains(category))
-                categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
+                var categoryId = 0;
+                if (categorylist.Contains(category))
+                    categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
 
-            var subcategorylist =
-                _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
-                    .Select(j => j.Name)
-                    .Distinct()
-                    .ToList();
+                var subcategorylist =
+                    _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
+                        .Select(j => j.Name)
+                        .Distinct()
+                        .ToList();
 
-            if (subcategorylist.Contains(subcategory))
-                _shop.Products = _shop.Products.Where(c => c.Category == subcategory).ToList();
-            else if (categorylist.Contains(category))
-                _shop.Products =
-                    _shop.Products.Where(
-                        c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
+
+                if (categorylist.Contains(category))
+                    _shop.Products =
+                        _shop.Products.Where(
+                            c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
+            }
+           
+
+            
 
             if (!_shop.Products.Any())
                 return View(MVC.Sklep.Views.NoProducts);
-
-            var paginator = new PagingInfo
+            var obj = new
             {
-                CurrentPage = page,
-                ItemsPerPage = 12,
-                TotalItems = _shop.Products.Count()
+                category,
+                productList = _shop.Products
             };
+            return Json(obj, JsonRequestBehavior.AllowGet);
 
-            _shop.SortProducts(method);
-            return View(new ProductsListViewModel
-            {
-                Products = _shop.Products.Select(x => new ProductViewModel
-                {      
-                    Bestseller = x.Bestseller,
-                    Id = x.Id,
-                    ImageName = x.ImageName,
-                    Name = x.Name,
-                    Novelty = x.Novelty,
-                    Price = x.Price,
-                    PriceAfterDiscount = x.PriceAfterDiscount,
-                    Promotion = x.Promotion ?? 0,
-                    QuantityInStock = x.QuantityInStock
-                }).Skip((page - 1)*paginator.ItemsPerPage)
-                    .Take(paginator.ItemsPerPage),
-                CurrentCategory = category,
-                CurrentSortMethod = method,
-                PagingInfo = paginator,
-                CurrentSubCategory = subcategory,
-                CurrentSearch = null
-            });
+        }
+
+        //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category")]
+        public virtual ActionResult Produkty(string category)
+        {
+
+            return View((object) category);
         }
 
 

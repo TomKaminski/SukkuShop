@@ -1,72 +1,73 @@
 ﻿<!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>@ViewBag.Title - Sukku</title>
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/jquery")
-        
-    </head>
-    <body>
-        <header>
-            <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
-            <nav id="nav-top">
-                <ul>
-                    @Html.Action("LoginPartial","Home",true)
-                    <li>
-                        @Html.Action("TotalValue", "Koszyk", true)
-                        
-                    </li>
-                </ul>
-                @Html.Action("Menu","Nav")
-            </nav>
-            <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
-            <nav id="nav-bottom" class="nav-low">
-                
-                @using (Html.BeginForm(MVC.Sklep.Szukaj(),FormMethod.Get))
-                {
-                    <div class="search">
-                        @Html.TextBox("search", (string) ViewBag.SearchString, new {id = "search", placeholder = "WYSZUKAJ"})
-                        <input type="submit" class="search-arrow" />
-                    </div>
-                }
-                <div class="link-to-shop-container">
-                    <div id="triangle-right"></div>
-                    @Html.ActionLink("E-Sklep", MVC.Sklep.Produkty(null))
-                </div>
-            </nav>
-            <div class="clear">&nbsp;</div>
-        </header>
-            @RenderBody()
-        <footer>
-            <hr/>
-            <ul>
-                <li>
-                    <div class="footer-text-big segoe-semibold">zakupy</div>
-                    <img src="~/Content/Images/footer-cart.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Regulamin zakupów", MVC.Home.Regulamin())<br/></div>
-                    <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", MVC.Home.Dostawa())<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Płatności", MVC.Home.Platnosci())<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Polityka prywatności", MVC.Home.PolitykaPrywatnosci())<br /></div>
-                </li>
-                <li>
-                    <div class="footer-text-big segoe-semibold">użytkownik</div>
-                    <img src="~/Content/Images/footer-user.png" alt=""/>
-                    <div class="footer-text">@Html.ActionLink("Rejestracja", MVC.Konto.Zarejestruj())<br /></div>
-                    <div class="footer-text">@Html.ActionLink("Zaloguj się", MVC.Konto.Zaloguj())<br /></div>
-                    <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", MVC.Konto.ZapomnianeHaslo())<br /></div>
-                </li>
-                <li>
-                    <div class="footer-text-big segoe-semibold">sukku</div>
-                    <img src="~/Content/Images/footer-sukku.png" alt=""/>
-                    <div class="footer-text">ul. Świętokrzyska 9A, 32-650 Kęty<br /></div>
-                    <div class="footer-text">tel +48 606 307 809<br /></div>
-                    <div class="footer-text">magda@sukku.pl</div>
-                </li>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - Sukku</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
 
+</head>
+<body>
+    <header>
+        <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
+        <nav id="nav-top">
+            <ul>
+                @Html.Action("LoginPartial", "Home", true)
+                <li>
+                    @Html.Action("TotalValue", "Koszyk", true)
+
+                </li>
             </ul>
-            <div class="clear">&nbsp;</div>
-        </footer>
-        @RenderSection("scripts", required: false)
-    </body>
+            @Html.Action("Menu", "Nav")
+        </nav>
+        <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
+        <nav id="nav-bottom" class="nav-low">
+
+            @using (Html.BeginForm(MVC.Sklep.Szukaj(), FormMethod.Get))
+            {
+                <div class="search">
+                    @Html.TextBox("search", (string)ViewBag.SearchString, new { id = "search", placeholder = "WYSZUKAJ" })
+                    <input type="submit" class="search-arrow" />
+                </div>
+            }
+            <div class="link-to-shop-container">
+                <div id="triangle-right"></div>
+                @Html.ActionLink("E-Sklep", MVC.Sklep.Produkty(null))
+            </div>
+        </nav>
+        <div class="clear">&nbsp;</div>
+    </header>
+
+    @RenderBody()
+    <footer>
+        <hr />
+        <ul>
+            <li>
+                <div class="footer-text-big segoe-semibold">zakupy</div>
+                <img src="~/Content/Images/footer-cart.png" alt="" />
+                <div class="footer-text">@Html.ActionLink("Regulamin zakupów", MVC.Home.Regulamin())<br /></div>
+                <div class="footer-text">@Html.ActionLink("Wysyłka i dostawa", MVC.Home.Dostawa())<br /></div>
+                <div class="footer-text"> @Html.ActionLink("Płatności", MVC.Home.Platnosci())<br /></div>
+                <div class="footer-text"> @Html.ActionLink("Polityka prywatności", MVC.Home.PolitykaPrywatnosci())<br /></div>
+            </li>
+            <li>
+                <div class="footer-text-big segoe-semibold">użytkownik</div>
+                <img src="~/Content/Images/footer-user.png" alt="" />
+                <div class="footer-text">@Html.ActionLink("Rejestracja", MVC.Konto.Zarejestruj())<br /></div>
+                <div class="footer-text">@Html.ActionLink("Zaloguj się", MVC.Konto.Zaloguj())<br /></div>
+                <div class="footer-text"> @Html.ActionLink("Przypomnij hasło", MVC.Konto.ZapomnianeHaslo())<br /></div>
+            </li>
+            <li>
+                <div class="footer-text-big segoe-semibold">sukku</div>
+                <img src="~/Content/Images/footer-sukku.png" alt="" />
+                <div class="footer-text">ul. Świętokrzyska 9A, 32-650 Kęty<br /></div>
+                <div class="footer-text">tel +48 606 307 809<br /></div>
+                <div class="footer-text">magda@sukku.pl</div>
+            </li>
+
+        </ul>
+        <div class="clear">&nbsp;</div>
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
 </html>

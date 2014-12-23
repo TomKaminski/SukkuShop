@@ -9,3 +9,4 @@
 /// <reference path="shopdetails.js" />
 /// <reference path="CartSummary.js" />
 /// <reference path="angular.min.js" />
+/// <reference path="shopangular.js" />

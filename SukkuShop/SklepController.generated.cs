@@ -56,6 +56,12 @@ namespace SukkuShop.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult GetProductByCategory()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Produkty()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
@@ -94,6 +100,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string GetProductByCategory = "GetProductByCategory";
             public readonly string Produkty = "Produkty";
             public readonly string SzczegółyProduktu = "SzczegółyProduktu";
             public readonly string Wyszukaj = "Wyszukaj";
@@ -104,6 +111,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string GetProductByCategory = "GetProductByCategory";
             public const string Produkty = "Produkty";
             public const string SzczegółyProduktu = "SzczegółyProduktu";
             public const string Wyszukaj = "Wyszukaj";
@@ -112,6 +120,14 @@ namespace SukkuShop.Controllers
         }
 
 
+        static readonly ActionParamsClass_GetProductByCategory s_params_GetProductByCategory = new ActionParamsClass_GetProductByCategory();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetProductByCategory GetProductByCategoryParams { get { return s_params_GetProductByCategory; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetProductByCategory
+        {
+            public readonly string category = "category";
+        }
         static readonly ActionParamsClass_Produkty s_params_Produkty = new ActionParamsClass_Produkty();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Produkty ProduktyParams { get { return s_params_Produkty; } }
@@ -119,9 +135,6 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Produkty
         {
             public readonly string category = "category";
-            public readonly string subcategory = "subcategory";
-            public readonly string method = "method";
-            public readonly string page = "page";
         }
         static readonly ActionParamsClass_SzczegółyProduktu s_params_SzczegółyProduktu = new ActionParamsClass_SzczegółyProduktu();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -179,17 +192,26 @@ namespace SukkuShop.Controllers
         public T4MVC_SklepController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void ProduktyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string category, string subcategory, SukkuShop.Models.SortMethod method, int page);
+        partial void GetProductByCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string category);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Produkty(string category, string subcategory, SukkuShop.Models.SortMethod method, int page)
+        public override System.Web.Mvc.ActionResult GetProductByCategory(string category)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
+            GetProductByCategoryOverride(callInfo, category);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ProduktyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string category);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Produkty(string category)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "subcategory", subcategory);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            ProduktyOverride(callInfo, category, subcategory, method, page);
+            ProduktyOverride(callInfo, category);
             return callInfo;
         }
 
