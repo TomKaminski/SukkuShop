@@ -1,0 +1,46 @@
+﻿//colors
+$black: black;
+$dove_gray: #6d6c6c;
+
+.container {
+	width: 355px;
+	height: 355px;
+	float: left;
+	.text-big {
+		margin-top: 100px;
+		margin-bottom: 20px;
+		font-size: 58px;
+		font-weight: bold;
+		text-transform: uppercase;
+		text-align: center;
+		color: $black;
+	}
+	img:hover {
+		//Instead of the line below you could use @includetransition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+		transition: all 0.3s ease-in-out;
+		opacity: 0.8;
+	}
+}
+.container-check {
+	width: 180px;
+	margin: auto;
+	a:hover {
+		text-decoration: none;
+	}
+}
+a .check {
+	width: 180px;
+	height: 60px;
+	border: 3px solid $dove_gray;
+	font-size: 29px;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-align: center;
+	color: $dove_gray;
+	line-height: 60px;
+	vertical-align: middle;
+	&:hover {
+		text-decoration: underline;
+		color: $dove_gray;
+	}
+}
