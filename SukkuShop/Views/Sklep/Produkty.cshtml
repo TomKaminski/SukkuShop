@@ -1,5 +1,4 @@
-﻿@using SukkuShop.Infrastructure.Helpers
-@model string
+﻿@model string
 @{
     ViewBag.Title = "Index";
     Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
@@ -9,68 +8,99 @@
 
 <div ng-app="shopApp">
     <div ng-controller="ShopCtrl" ng-init="init('@Model')">
-        <img ng-src="~/Content/Images/Shop/{{imgName}}.jpg" />
-        <div class="products-container">
-            <div class="product-list-container">
-                <div class="product-list-item-box">
-                    <div class="product-list-item" ng-repeat="item in productList">
+        <div class="shop-nav-container">            
+            <ul class="sort-menu">
+                <li class="sort-box">
+                    <div id="sort-text" style="">PROMOCJA</div>
+                    <div class="sort-arrow plz" ng-click="setSortMethod('Promocja')"></div>
+                </li>
+                <li class="sort-box">
+                    <div id="sort-text" style="">CENA</div>
+                    <div class="price-arrow-box">
+                        <div class="sort-arrow-up plz" ng-click="setSortMethod('CenaRosnaco')"></div>
+                        <div class="sort-arrow-down plz" ng-click="setSortMethod('CenaMalejaco')"></div>
+                    </div>
+                </li>
+                <li class="sort-box">
+                    <div id="sort-text" style="">POPULARNOŚć</div>
+                    <div class="sort-arrow plz" ng-click="setSortMethod('Popularnosc')"></div>
+                </li>
+                <li class="sort-box">
+                    <div id="sort-text" style="font-weight: bold">NOWOŚć</div>
+                    <div class="sort-arrow plz" ng-click="setSortMethod('Nowosc')"></div>
+                </li>
+                <li class="sort-box">SORTUJ:</li>
+                <li><div class="clear">&nbsp;</div></li>
+            </ul>
+
+            <ul class="subcategory-menu">
+                <li ng-repeat="subcategory in subCategoryList" ng-class="{ 'selectedOpt': $index == selectedIndex }"
+                    ng-click="itemClicked($index)">                    
+                    {{subcategory}}
+                </li>
+            </ul>
+        </div>
+        <div class="product-background">
+            <img ng-src="~/Content/Images/Shop/{{imgName}}.jpg" />
+            <div class="products-container">
+                <div class="product-list-container">
+                    <div class="product-list-item-box" ng-repeat="item in productList">
+                        <div class="product-list-item">
                             <div class="product-list-item-image" style="background-color: white;">
                                 <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.png" />
+                                <ul class="top-panel">
+                                    <li ng-if="item.Bestseller"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #875546">Bestseller</div></div></li>
+                                    <li ng-if="item.Promotion!=0"><div class="top-panel-text-container"><div class="top-panel-text" style="color: green">Promocja</div></div></li>
+                                    <li ng-if="item.Novelty"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #f36f21">Nowość</div></div></li>
+                                </ul>
                                 <div class="image-bottom-panel">
-                                    @*@if (Model.QuantityInStock != 0)
-                        {
-                            using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "CartTotalValue" }))
-                            {
-                                @Html.HiddenFor(m => m.Id)
-                                <div class="add-to-cart-icon">
-                                    <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
-                                </div>
-
-                            }
-                        }*@
-                                    @*<a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>*@
+                                    <div ng-if="item.QuantityInStock != 0">
+                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "CartTotalValue" }))
+                                        {
+                                            <input type="hidden" name="id" value="{{item.Id}}" />
+                                            <div class="add-to-cart-icon">
+                                                <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                                            </div>
+                                        }
+                                    </div>
+                                    <a ng-href="/Sklep/SzczegółyProduktu/{{item.Id}}"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
                                 </div>
                             </div>
                             <div class="product-list-item-textbox">
                                 <div class="product-title">{{item.Name}}</div>
-                                <div class="product-price" style="text-decoration: line-through;">{{item.Price}}</div>
-                                <div class="product-discount">{{item.PriceAfterDiscount}}</div>
-                                @*@if (Model.Promotion == 0)
-                    {
-                        <div class="product-price">@Model.PriceAfterDiscount.ToString("c")</div>
-                    }
-                    else
-                    {
-
-                    }*@
+                                <div ng-if="item.Promotion==0">
+                                    <div class="product-price">{{item.PriceAfterDiscount | number:2}} zł</div>
+                                </div>
+                                <div ng-if="item.Promotion!=0">
+                                    <div class="product-price" style="text-decoration: line-through;">{{item.Price | number:2}} </div>
+                                    <div class="product-discount">{{item.PriceAfterDiscount | number:2}} zł</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div id="paginator" ng-if="pages>1">
+                <ul class="shop-paginator" >
+                    <li>
+                        <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
+                    </li>
+                    <li class="inner-paginator" ng-repeat="page in tableOfPages">
+                        <div ng-if="page==currentPage">
+                            <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
+                        </div>
+                        <div ng-if="page!=currentPage">
+                            <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
+                    </li>
+                </ul>
+            </div>    
         </div>
-</div>
-@*<div class="shop-nav-container">
-    @Html.Action(MVC.Nav.SortList(Model.CurrentCategory,Model.CurrentSearch,Model.CurrentSubCategory,Model.CurrentSortMethod))
-    @Html.Action(MVC.Nav.SubCategory(Model.CurrentCategory,Model.CurrentSubCategory,Model.CurrentSortMethod))
-</div>*@
-@*<div class="product-background" >
-    @Html.BackgroundImage(Model.CurrentCategory)
-    
     </div>
-    <div id="paginator">
-        <ul class="shop-paginator">
-            @Html.PageLinks(Model.PagingInfo, x => Url.Action(ViewContext.RouteData.Values["action"].ToString(), new
-            {
-                page = x,
-                category = Model.CurrentCategory,
-                subcategory = Model.CurrentSubCategory,
-                method = Model.CurrentSortMethod,
-                search = Model.CurrentSearch
-            }))
-        </ul>
-    </div>    
-</div>*@
+</div>
 
-@Styles.Render("~/Content/css/Shop.css")
-@Scripts.Render("~/Scripts/main.js")
+    @Styles.Render("~/Content/css/Shop.css")
+    @Scripts.Render("~/Scripts/main.js")

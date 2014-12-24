@@ -12,6 +12,10 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   float: left;
   width: 21px; }
 
+.selectedOpt {
+  opacity: 1;
+  font-weight: bold; }
+
 @font-face {
   font-family: LucidaConsole;
   src: url("../fonts/lucida_console.eot");
@@ -102,12 +106,12 @@ ul.subcategory-menu {
   position: absolute;
   z-index: 100; }
   ul.subcategory-menu li {
-    margin-bottom: 20px; }
-    ul.subcategory-menu li a {
-      font-family: Microsoft PhagsPa;
-      font-size: 22px;
-      color: #f89b1d;
-      text-transform: uppercase; }
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-family: Microsoft PhagsPa;
+    font-size: 22px;
+    color: #f89b1d;
+    text-transform: uppercase; }
     ul.subcategory-menu li:last-child {
       margin-right: 0; }
 ul.sort-menu {
@@ -134,7 +138,7 @@ ul.shop-paginator li.inner-paginator:before {
   height: 21px; }
 ul.shop-paginator li:last-child {
   position: relative; }
-ul.shop-paginator li a .paginator-box {
+ul.shop-paginator li .paginator-box {
   line-height: 21px;
   vertical-align: middle;
   position: relative;
@@ -142,9 +146,13 @@ ul.shop-paginator li a .paginator-box {
   font-size: 13px;
   text-align: center;
   color: white;
-  text-decoration: none; }
-ul.shop-paginator li a:hover {
+  text-decoration: none;
+  cursor: pointer; }
+ul.shop-paginator li:hover {
   color: white; }
+
+.boldplz {
+  font-weight: bold; }
 
 .top-panel-text-container {
   width: 127px;

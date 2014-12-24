@@ -60,18 +60,6 @@ namespace SukkuShop.Controllers
         {
             return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Menu);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult SubCategory()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SubCategory);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.PartialViewResult SortList()
-        {
-            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SortList);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public NavController Actions { get { return MVC.Nav; } }
@@ -89,16 +77,12 @@ namespace SukkuShop.Controllers
         public class ActionNamesClass
         {
             public readonly string Menu = "Menu";
-            public readonly string SubCategory = "SubCategory";
-            public readonly string SortList = "SortList";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Menu = "Menu";
-            public const string SubCategory = "SubCategory";
-            public const string SortList = "SortList";
         }
 
 
@@ -109,27 +93,6 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Menu
         {
             public readonly string category = "category";
-            public readonly string method = "method";
-        }
-        static readonly ActionParamsClass_SubCategory s_params_SubCategory = new ActionParamsClass_SubCategory();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SubCategory SubCategoryParams { get { return s_params_SubCategory; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SubCategory
-        {
-            public readonly string category = "category";
-            public readonly string subcategory = "subcategory";
-            public readonly string method = "method";
-        }
-        static readonly ActionParamsClass_SortList s_params_SortList = new ActionParamsClass_SortList();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_SortList SortListParams { get { return s_params_SortList; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_SortList
-        {
-            public readonly string category = "category";
-            public readonly string search = "search";
-            public readonly string subcategory = "subcategory";
             public readonly string method = "method";
         }
         static readonly ViewsClass s_views = new ViewsClass();
@@ -169,35 +132,6 @@ namespace SukkuShop.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
             MenuOverride(callInfo, category, method);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SubCategoryOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string category, string subcategory, SukkuShop.Models.SortMethod method);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult SubCategory(string category, string subcategory, SukkuShop.Models.SortMethod method)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SubCategory);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "subcategory", subcategory);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            SubCategoryOverride(callInfo, category, subcategory, method);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void SortListOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string category, string search, string subcategory, SukkuShop.Models.SortMethod method);
-
-        [NonAction]
-        public override System.Web.Mvc.PartialViewResult SortList(string category, string search, string subcategory, SukkuShop.Models.SortMethod method)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.SortList);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "subcategory", subcategory);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            SortListOverride(callInfo, category, search, subcategory, method);
             return callInfo;
         }
 

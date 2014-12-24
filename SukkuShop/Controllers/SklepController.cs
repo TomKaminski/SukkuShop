@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI;
@@ -31,39 +33,44 @@ namespace SukkuShop.Controllers
 
             //bestseller system
             _shop.NewProducts();
-
+            var categoryId = 0;
+            var subcategoryList = new List<string>();
             if (category != null)
             {
                 var categorylist =
                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
                    .Select(x => x.Name);
 
-                var categoryId = 0;
                 if (categorylist.Contains(category))
                     categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
+                if(categoryId!=0)
+                    subcategoryList =
+                        _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
+                            .Select(j => j.Name)
+                            .Distinct()
+                            .ToList();
 
-                var subcategorylist =
-                    _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
-                        .Select(j => j.Name)
-                        .Distinct()
-                        .ToList();
 
 
                 if (categorylist.Contains(category))
                     _shop.Products =
                         _shop.Products.Where(
-                            c => c.Category == category || subcategorylist.Contains(c.Category)).ToList();
+                            c => c.Category == category || subcategoryList.Contains(c.Category)).ToList();
+
+                if (!categorylist.Contains(category))
+                    _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
+                
             }
-           
-
             
-
+            subcategoryList.Add("Wszystko");
             if (!_shop.Products.Any())
                 return View(MVC.Sklep.Views.NoProducts);
             var obj = new
             {
+                categoryId,
                 category,
-                productList = _shop.Products
+                productList = _shop.Products,
+                subcategoryList
             };
             return Json(obj, JsonRequestBehavior.AllowGet);
 
@@ -123,52 +130,53 @@ namespace SukkuShop.Controllers
         }
 
         [DonutOutputCache(Duration = 1800, VaryByParam = "search;method;page", Location = OutputCacheLocation.Client)]
-        public virtual ActionResult Wyszukaj(string search, SortMethod method = SortMethod.Nowość, int page = 1)
+        public virtual ActionResult Wyszukaj(string search)
         {
-            //getallproducts
-            GetAllProducts();
+            ////getallproducts
+            //GetAllProducts();
 
-            //Novelty system
-            _shop.Bestsellers();
+            ////Novelty system
+            //_shop.Bestsellers();
 
-            //bestseller system
-            _shop.NewProducts();
+            ////bestseller system
+            //_shop.NewProducts();
 
-            ViewBag.SearchString = search;
-            _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
+            //ViewBag.SearchString = search;
+            //_shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(search.ToUpper())).ToList();
 
-            if (!_shop.Products.Any())
-                return View(MVC.Sklep.Views.NoProducts);
+            //if (!_shop.Products.Any())
+            //    return View(MVC.Sklep.Views.NoProducts);
 
-            var paginator = new PagingInfo
-            {
-                CurrentPage = page,
-                ItemsPerPage = 12,
-                TotalItems = _shop.Products.Count()
-            };
+            //var paginator = new PagingInfo
+            //{
+            //    CurrentPage = page,
+            //    ItemsPerPage = 12,
+            //    TotalItems = _shop.Products.Count()
+            //};
 
-            _shop.SortProducts(method);
-            return View(MVC.Sklep.Views.Produkty, new ProductsListViewModel
-            {
-                Products = _shop.Products.Select(x => new ProductViewModel
-                {
-                    Bestseller = x.Bestseller,
-                    Id = x.Id,
-                    ImageName = x.ImageName,
-                    Name = x.Name,
-                    Novelty = x.Novelty,
-                    Price = x.Price,
-                    PriceAfterDiscount = x.PriceAfterDiscount,
-                    Promotion = x.Promotion ?? 0,
-                    QuantityInStock = x.QuantityInStock
-                }).Skip((page - 1)*paginator.ItemsPerPage)
-                    .Take(paginator.ItemsPerPage),
-                CurrentCategory = null,
-                CurrentSortMethod = method,
-                PagingInfo = paginator,
-                CurrentSubCategory = null,
-                CurrentSearch = search
-            });
+            //_shop.SortProducts(method);
+            //return View(MVC.Sklep.Views.Produkty, new ProductsListViewModel
+            //{
+            //    Products = _shop.Products.Select(x => new ProductViewModel
+            //    {
+            //        Bestseller = x.Bestseller,
+            //        Id = x.Id,
+            //        ImageName = x.ImageName,
+            //        Name = x.Name,
+            //        Novelty = x.Novelty,
+            //        Price = x.Price.ToString("C"),
+            //        PriceAfterDiscount = x.PriceAfterDiscount.ToString("C"),
+            //        Promotion = x.Promotion ?? 0,
+            //        QuantityInStock = x.QuantityInStock
+            //    }).Skip((page - 1)*paginator.ItemsPerPage)
+            //        .Take(paginator.ItemsPerPage),
+            //    CurrentCategory = null,
+            //    CurrentSortMethod = method,
+            //    PagingInfo = paginator,
+            //    CurrentSubCategory = null,
+            //    CurrentSearch = search
+            //});
+            return View("Produkty", (object)search);
         }
 
         public virtual ActionResult Szukaj()

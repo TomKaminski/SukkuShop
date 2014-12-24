@@ -47,71 +47,33 @@ namespace SukkuShop
                );
 
             routes.MapRoute(null,
-                "{action}/{search}/{method}/{page}",
+                "{action}/{search}",
                 new
                 {
                     controller = "Sklep",
-                    page = 1,
                     area = ""
                 },
                 new
                 {
-                    page = @"\d+",
-                    method = new IsEnum(),
                     action = "Wyszukaj"
                 }
                 );
 
             routes.MapRoute(null,
-                "{action}/{method}/{page}",
+                "{action}/{category}",
                 new
                 {
                     controller = "Sklep",
                     category = (string)null,
-                    subcategory = (string)null,
-                    page = 1,
                     area = ""
                 },
                 new
                 {
                     action = "Produkty",
-                    page = @"\d+",
-                    method = new IsEnum()
                 }
                 );
 
-            routes.MapRoute(null,
-                "{action}/{category}/{method}/{page}",
-                new
-                {
-                    controller = "Sklep",
-                    subcategory = (string)null,
-                    page = 1,
-                    area = ""
-                },
-                new
-                {
-                    action = "Produkty",
-                    page = @"\d+",
-                    method = new IsEnum()
-                }
-                );
-
-            routes.MapRoute(null,
-                "{action}/{category}/{subcategory}/{method}/{page}",
-                new
-                {
-                    controller = "Sklep",
-                    page = 1,
-                    area = ""
-                },
-                new
-                {
-                    action = "Produkty",
-                    page = @"\d+",
-                    method = new IsEnum()
-                }
-                );
+            
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new

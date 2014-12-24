@@ -41,7 +41,10 @@ $font_8: Segoe Ui;
 	width: 21px;
 }
 
-
+.selectedOpt{
+    opacity:1;
+    font-weight:bold;
+}
 @font-face {
 	font-family: $font_0;
 	src: url('../fonts/lucida_console.eot');
@@ -144,12 +147,12 @@ ul {
 		z-index: 100;
 		li {
 			margin-bottom: 20px;
-			a {
+                cursor:pointer;
 				font-family: $font_4;
 				font-size: 22px;
 				color: $color_tree_poppy_approx;
 				text-transform: uppercase;
-			}
+			
 			&:last-child {
 				margin-right: 0;
 			}
@@ -191,7 +194,7 @@ ul {
 		&:last-child {
 			position: relative;
 		}
-		a {
+
 			.paginator-box {
 				line-height: 21px;
 				vertical-align: middle;
@@ -201,13 +204,19 @@ ul {
 				text-align: center;
 				color: $white;
 				text-decoration: none;
+                cursor:pointer;
 			}
 			&:hover {
 				color: $white;
 			}
-		}
+		
 	}
 }
+
+.boldplz{
+    font-weight:bold;
+}
+
 .top-panel-text-container {
 	width: 127px;
 	position: absolute;

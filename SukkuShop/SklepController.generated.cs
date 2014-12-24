@@ -56,12 +56,6 @@ namespace SukkuShop.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult GetProductByCategory()
-        {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Produkty()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
@@ -151,8 +145,6 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Wyszukaj
         {
             public readonly string search = "search";
-            public readonly string method = "method";
-            public readonly string page = "page";
         }
         static readonly ActionParamsClass_RedirectToLocal s_params_RedirectToLocal = new ActionParamsClass_RedirectToLocal();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -228,16 +220,14 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void WyszukajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string search, SukkuShop.Models.SortMethod method, int page);
+        partial void WyszukajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string search);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Wyszukaj(string search, SukkuShop.Models.SortMethod method, int page)
+        public override System.Web.Mvc.ActionResult Wyszukaj(string search)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Wyszukaj);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "page", page);
-            WyszukajOverride(callInfo, search, method, page);
+            WyszukajOverride(callInfo, search);
             return callInfo;
         }
 
