@@ -15,11 +15,10 @@ namespace SukkuShop.Controllers
         }
 
         [ChildActionOnly]
-        [DonutOutputCache(Duration = 86400, VaryByParam = "category")]
-        public virtual PartialViewResult Menu(string category, SortMethod method = SortMethod.Nowość)
+        [DonutOutputCache(Duration = 86400, VaryByParam = "id")]
+        public virtual PartialViewResult Menu(string id)
         {
-            ViewBag.Category = category;
-            ViewBag.CurrentSortMethod = method;
+            ViewBag.Category = id;
             var categoryLinks = _dbContext.Categories.Where(j=>j.UpperCategoryId==0).Select(x => x.Name);
             return PartialView(categoryLinks);
         }

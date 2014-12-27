@@ -23,7 +23,7 @@ namespace SukkuShop.Controllers
 
         // GET: Produkty
 
-        public virtual ActionResult GetProductByCategory(string category=null)
+        public virtual ActionResult GetProductByCategory(string id=null)
         {
             //getallproducts
             GetAllProducts();
@@ -35,14 +35,14 @@ namespace SukkuShop.Controllers
             _shop.NewProducts();
             var categoryId = 0;
             var subcategoryList = new List<string>();
-            if (category != null)
+            if (id != null)
             {
                 var categorylist =
                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
                    .Select(x => x.Name);
 
-                if (categorylist.Contains(category))
-                    categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == category).CategoryId;
+                if (categorylist.Contains(id))
+                    categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == id).CategoryId;
                 if(categoryId!=0)
                     subcategoryList =
                         _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
@@ -52,13 +52,13 @@ namespace SukkuShop.Controllers
 
 
 
-                if (categorylist.Contains(category))
+                if (categorylist.Contains(id))
                     _shop.Products =
                         _shop.Products.Where(
-                            c => c.Category == category || subcategoryList.Contains(c.Category)).ToList();
+                            c => c.Category == id || subcategoryList.Contains(c.Category)).ToList();
 
-                if (!categorylist.Contains(category))
-                    _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(category.ToUpper())).ToList();
+                if (!categorylist.Contains(id))
+                    _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(id.ToUpper())).ToList();
                 
             }
             
@@ -68,7 +68,7 @@ namespace SukkuShop.Controllers
             var obj = new
             {
                 categoryId,
-                category,
+                id,
                 productList = _shop.Products,
                 subcategoryList
             };
@@ -76,15 +76,15 @@ namespace SukkuShop.Controllers
 
         }
 
-        //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "category")]
-        public virtual ActionResult Produkty(string category)
+        //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
+        public virtual ActionResult Produkty(string id)
         {
 
-            return View((object) category);
+            return View((object)id);
         }
 
 
-        [DonutOutputCache(Duration = 10, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+        [DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
@@ -129,8 +129,8 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        [DonutOutputCache(Duration = 1800, VaryByParam = "search;method;page", Location = OutputCacheLocation.Client)]
-        public virtual ActionResult Wyszukaj(string search)
+        //[DonutOutputCache(Duration = 1800, VaryByParam = "search;method;page", Location = OutputCacheLocation.Client)]
+        public virtual ActionResult Wyszukaj(string id)
         {
             ////getallproducts
             //GetAllProducts();
@@ -176,7 +176,7 @@ namespace SukkuShop.Controllers
             //    CurrentSubCategory = null,
             //    CurrentSearch = search
             //});
-            return View("Produkty", (object)search);
+            return View("Produkty", (object)id);
         }
 
         public virtual ActionResult Szukaj()

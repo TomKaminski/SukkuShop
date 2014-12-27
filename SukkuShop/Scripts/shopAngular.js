@@ -1,4 +1,34 @@
-﻿var shopApp = angular.module("shopApp", []);
+﻿function plz() {
+    var cart = jQuery(this);
+    var imgtodrag = jQuery(this).parent().parent().parent().parent().parent().find("img").eq(0);
+    if (imgtodrag) {
+        imgtodrag.clone()
+            .offset({
+                top: imgtodrag.offset().top,
+                left: imgtodrag.offset().left
+            })
+            .addClass("flying-product-start")
+            .css('position', 'absolute')
+            .appendTo(jQuery('body')).
+            animate({
+                'top': cart.offset().top + 10,
+                'left': cart.offset().left + 10,
+                'width': '10px',
+                'height': '10px',
+                'position': 'absolute'
+            }, 1000, function () {
+                jQuery(this).animate({
+                    'width': 0,
+                    'height': 0
+                }, function () {
+                    jQuery(this).detach();
+                });
+            });
+    }
+};
+
+
+var shopApp = angular.module("shopApp", []);
 var itemsPerPage = 12;
 
 shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
@@ -11,7 +41,7 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
                 $scope.products = data;
                 $scope.subCategoryList = $scope.products.subcategoryList;
                 $scope.selectedIndex = $scope.subCategoryList.length - 1;
-                $scope.productList = $scope.filterProducts();
+                $scope.productList = filterProducts();
             });
             $scope.imgName = "inne";
         } else {
@@ -19,7 +49,7 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
                 $scope.products = data;
                 $scope.subCategoryList = $scope.products.subcategoryList;
                 $scope.selectedIndex = $scope.subCategoryList.length - 1;
-                $scope.productList = $scope.filterProducts();
+                $scope.productList = filterProducts();
                 if ($scope.products.categoryId != 0)
                     $scope.imgName = category.toLowerCase();
                 else
@@ -32,13 +62,13 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
     $scope.itemClicked = function($index) {
         $scope.selectedIndex = $index;
         $scope.currentPage = 1;
-        $scope.productList = $scope.filterProducts();
+        $scope.productList = filterProducts();
     }
 
     $scope.setSortMethod = function(sortMethod) {
         $scope.sortMethod = sortMethod;
         $scope.currentPage = 1;
-        $scope.productList = $scope.filterProducts();
+        $scope.productList = filterProducts();
     }
 
     $scope.setPage = function (page) {
@@ -47,11 +77,11 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
         if (page > $scope.pages)
             page = $scope.pages;
         $scope.currentPage = page;
-        $scope.productList = $scope.filterProducts();
+        $scope.productList = filterProducts();
     }
 
 
-    $scope.filterProducts = function () {
+     function filterProducts() {
         var filteredProducts;
         if ($scope.selectedIndex != $scope.subCategoryList.length - 1)
             filteredProducts=$filter('filter')($scope.products.productList, { Category: $scope.subCategoryList[$scope.selectedIndex] });
@@ -93,16 +123,21 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
         }
         $scope.tableOfPages = pages;
         return filteredProducts.slice($scope.currentPage * 12 - 12, $scope.currentPage * 12);
-    }
+     }
+
 });
 
 
-$(document).ready(function() {
-    $("ul.sort-menu div.plz").click(function() {
-        $("ul.sort-menu div.plz").css("opacity", "0.6");
-        $("ul.sort-menu li.sort-box #sort-text").css("font-weight", "normal");
-        $(this).css("opacity", "1");
-        $(this).siblings("#sort-text").css("font-weight", "bold");
-        $(this).parent().siblings("#sort-text").css("font-weight", "bold");
+jQuery(document).ready(function () {
+    jQuery("ul.sort-menu div.plz").click(function () {
+        jQuery("ul.sort-menu div.plz").css("opacity", "0.6");
+        jQuery("ul.sort-menu li.sort-box #sort-text").css("font-weight", "normal");
+        jQuery(this).css("opacity", "1");
+        jQuery(this).siblings("#sort-text").css("font-weight", "bold");
+        jQuery(this).parent().siblings("#sort-text").css("font-weight", "bold");
     });
+
+
+    //flying product
+
 });

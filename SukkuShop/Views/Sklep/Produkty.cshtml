@@ -3,9 +3,13 @@
     ViewBag.Title = "Index";
     Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
 }
+
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Scripts/shopAngular.js")
 
+<script>
+   
+</script>
 <div ng-app="shopApp">
     <div ng-controller="ShopCtrl" ng-init="init('@Model')">
         <div class="shop-nav-container">            
@@ -55,11 +59,11 @@
                                 </ul>
                                 <div class="image-bottom-panel">
                                     <div ng-if="item.QuantityInStock != 0">
-                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "CartTotalValue" }))
+                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnSuccess = "plz"}))
                                         {
                                             <input type="hidden" name="id" value="{{item.Id}}" />
                                             <div class="add-to-cart-icon">
-                                                <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                                                <input ng-click="flyingitem()" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
                                             </div>
                                         }
                                     </div>
@@ -103,4 +107,3 @@
 </div>
 
     @Styles.Render("~/Content/css/Shop.css")
-    @Scripts.Render("~/Scripts/main.js")

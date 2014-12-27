@@ -120,7 +120,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetProductByCategory
         {
-            public readonly string category = "category";
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Produkty s_params_Produkty = new ActionParamsClass_Produkty();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -128,7 +128,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Produkty
         {
-            public readonly string category = "category";
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_SzczegółyProduktu s_params_SzczegółyProduktu = new ActionParamsClass_SzczegółyProduktu();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -144,7 +144,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Wyszukaj
         {
-            public readonly string search = "search";
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_RedirectToLocal s_params_RedirectToLocal = new ActionParamsClass_RedirectToLocal();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -184,26 +184,26 @@ namespace SukkuShop.Controllers
         public T4MVC_SklepController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void GetProductByCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string category);
+        partial void GetProductByCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult GetProductByCategory(string category)
+        public override System.Web.Mvc.ActionResult GetProductByCategory(string id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            GetProductByCategoryOverride(callInfo, category);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            GetProductByCategoryOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void ProduktyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string category);
+        partial void ProduktyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Produkty(string category)
+        public override System.Web.Mvc.ActionResult Produkty(string id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            ProduktyOverride(callInfo, category);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ProduktyOverride(callInfo, id);
             return callInfo;
         }
 
@@ -220,14 +220,14 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void WyszukajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string search);
+        partial void WyszukajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Wyszukaj(string search)
+        public override System.Web.Mvc.ActionResult Wyszukaj(string id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Wyszukaj);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "search", search);
-            WyszukajOverride(callInfo, search);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            WyszukajOverride(callInfo, id);
             return callInfo;
         }
 

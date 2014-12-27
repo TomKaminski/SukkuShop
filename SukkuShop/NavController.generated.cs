@@ -92,8 +92,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Menu
         {
-            public readonly string category = "category";
-            public readonly string method = "method";
+            public readonly string id = "id";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -123,15 +122,14 @@ namespace SukkuShop.Controllers
         public T4MVC_NavController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void MenuOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string category, SukkuShop.Models.SortMethod method);
+        partial void MenuOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, string id);
 
         [NonAction]
-        public override System.Web.Mvc.PartialViewResult Menu(string category, SukkuShop.Models.SortMethod method)
+        public override System.Web.Mvc.PartialViewResult Menu(string id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.Menu);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "category", category);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "method", method);
-            MenuOverride(callInfo, category, method);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            MenuOverride(callInfo, id);
             return callInfo;
         }
 
