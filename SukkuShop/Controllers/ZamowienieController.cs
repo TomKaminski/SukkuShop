@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -42,6 +45,37 @@ namespace SukkuShop.Controllers
         public void SetPayment(Cart shoppingCart, int id)
         {
             shoppingCart.PaymentId = id;
+        }
+
+        public void SaveToDatabase(Cart shoppingCart)
+        {
+            
+            Orders Orders = new Orders();
+            Orders.OrderDate = DateTime.Now;
+            Orders.ShippingId = shoppingCart.ShippingId;
+            Orders.PaymentId = shoppingCart.PaymentId;
+            // Orders.SentDate -> panel admina [czeckbox, że wysłane]?
+            // Orders.OrderInfo -> wtf tutaj?
+            // Orders.ProductsPrice -> suma SubTotalPrice z Order Details
+            // Orders.TotalPrice -> ProductsPrice - Discount
+            // Orders.Discout -> to z użytkownika jakoś trzeba brać
+            // Orders.Name -> jw
+            // Orders.Surname -> jw
+            // Orders.SpecialAddress -> jw [co to w ogole jest]
+            Orders.City = shoppingCart.OrderAdress.City;
+            Orders.Street = shoppingCart.OrderAdress.Street;
+            Orders.Number = shoppingCart.OrderAdress.Number;
+            Orders.PostalCode = shoppingCart.OrderAdress.PostalCode;
+            
+            foreach (var item in shoppingCart.Lines)
+            {
+                OrderDetails OrderD = new OrderDetails();
+                OrderD.ProductId = item.Id;
+                OrderD.Quantity = item.Quantity;
+                var productPrice = _dbContext.Products.First(i => i.ProductId == item.Id).Price;
+                OrderD.SubTotalPrice += item.Quantity*productPrice;
+                _dbContext.OrderDetails.Add(OrderD);
+            }
         }
 
         private OrderViewModels OrderViewModels(Cart shoppingCart)

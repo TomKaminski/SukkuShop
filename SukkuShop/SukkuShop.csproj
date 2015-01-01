@@ -104,6 +104,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -295,6 +296,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\SukkuShop.mdf" />
+    <Content Include="App_Data\SukkuShop_log.ldf">
+      <DependentUpon>SukkuShop.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\css\Cart.css">
       <DependentUpon>Cart.scss</DependentUpon>
     </Content>
@@ -499,7 +504,6 @@
     <Content Include="Views\Zamowienie\Podsumowanie.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\AdminProduct\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
@@ -510,6 +514,7 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
