@@ -30,6 +30,8 @@ namespace SukkuShop.Models
         public string Nazwisko { get; set; }
         public string Ulica { get; set; }
         public string Miasto { get; set; }
+
+        [Display(Name="Kod Pocztowy")]
         public string KodPocztowy { get; set; }
         public string Telefon { get; set; }
         public string Numer { get; set; }
