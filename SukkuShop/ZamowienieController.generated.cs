@@ -62,9 +62,10 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Krok2()
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Krok2()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -153,12 +154,12 @@ namespace SukkuShop.Controllers
         partial void Krok2Override(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Krok2(SukkuShop.Models.Cart shoppingCart)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Krok2(SukkuShop.Models.Cart shoppingCart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
             Krok2Override(callInfo, shoppingCart);
-            return callInfo;
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [NonAction]

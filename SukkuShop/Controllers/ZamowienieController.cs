@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using SukkuShop.Identity;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
@@ -8,9 +11,11 @@ namespace SukkuShop.Controllers
     public partial class ZamowienieController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationUserManager _userManager;
 
-        public ZamowienieController(ApplicationDbContext dbContext)
+        public ZamowienieController(ApplicationUserManager userManager,ApplicationDbContext dbContext)
         {
+            _userManager = userManager;
             _dbContext = dbContext;
         }
 
@@ -21,12 +26,26 @@ namespace SukkuShop.Controllers
             var model = OrderViewModels(shoppingCart);
             return View(model);
         }
-        public virtual ActionResult Krok2(Cart shoppingCart)
+        public async virtual Task<ActionResult>Krok2(Cart shoppingCart)
         {
             if (shoppingCart.PaymentId == 0 || shoppingCart.ShippingId == 0)
                 return RedirectToAction(MVC.Zamowienie.Krok1());
             if (!shoppingCart.Lines.Any())
                 return RedirectToAction(MVC.Koszyk.Index());
+            
+            if (User.Identity.IsAuthenticated)
+            {
+                var model = new UserAddressModel();
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                model.Imie = user.Name ?? "Nie podano";
+                model.Nazwisko = user.LastName ?? "Nie podano";
+                model.Ulica = user.Street ?? "Nie podano";
+                model.Telefon = user.PhoneNumber ?? "Nie podano";
+                model.KodPocztowy = user.PostalCode ?? "Nie podano";
+                model.Miasto = user.City ?? "Nie podano";
+                model.Numer = user.Number ?? "Nie podano";
+                return View(model);
+            }
             return View();
         }
         public virtual ActionResult Podsumowanie()

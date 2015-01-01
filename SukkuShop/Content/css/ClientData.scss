@@ -9,13 +9,28 @@ $SeUI: Segoe UI;
 $SeL: SegoeLight;
 $SeB: SegoeBold;
 
+.left-container label.error{
+margin-left: 145px;
+}
 
 .user-data-title{
     font-family:$SeL;
     text-transform:uppercase;
     font-size:18px;
 }
+label.error{
+float: left;
+/* margin: auto; */
+margin-left: 105px;
+color: red;
+font-weight: bold;
+font-size: 14px;
+margin-top:2px;
+}
 
+input.error{
+    border-color:red;
+}
 .cart-container {
 	width: 1066px;
 	margin: auto;
@@ -28,6 +43,14 @@ $SeB: SegoeBold;
 	margin: 20px 0 36px;
 	padding-top: 20px;
 	color: $color_tree_poppy_approx;
+}
+
+.error-summary
+{
+    color:red;
+    text-align:center;
+    margin-top:15px;
+    font-family: $SeUI;
 }
 
 .left-container{
@@ -60,16 +83,17 @@ ul {
 }
 
 .sukku-button-small{
-    margin: 24px auto 0;
-	background-color: $color_tree_poppy_approx;
-	height: 30px;
-	width: 200px;
-    text-align:center;
-    line-height:30px;
-    font-family:$SeUI;
-    color:white;
-    border-radius:10px;    
-    cursor:pointer;
+    margin: 24px 120px 0;
+    background-color: #f89b1d;
+    height: 30px;
+    width: 200px;
+    text-align: center;
+    line-height: 30px;
+    font-family: Segoe UI;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
 }
 .sukku-button-small:hover{
     background-color:orange
@@ -99,7 +123,7 @@ margin: 0 25px 37px 15px;
 }
 
 .client-data-container{
-    height: 840px;
+    height: 870px;
 width: 900px;
 border: 2px solid #f89b1d;
 margin: 45px auto 200px;
@@ -135,8 +159,8 @@ text-align: center;
         text-align:center;
         font-family:$SeL;
         width:118px;
+        float:left;
         border:1px solid #cccccc;
-        float:right;
         margin-right:11px;
         height:27px;
         padding:0
