@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Twój dane</title>
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+    <link rel="stylesheet" type="text/css" href="../css/ClientData.css">
+</head>
+<body>
+    <div class="cart-container">
+        <div class="cart-title">Twój koszyk</div>
+        <ul class="cart-order-steps">
+            <li>1. Koszyk</li>
+            <li class="selected">2. Twoje dane</li>
+            <li>3. Potwierdzenie zamówienia</li>
+        </ul>
+        <div class="client-data-container">
+            <div class="client-type-text">Jestem nowym klientem</div>
+            <div class="data-box">
+                <div class="text">imię*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">nazwisko*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">ulica*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">nr domu*:</div>
+                <input type="text" class="mini" /><span style="float: right;margin-right: 11px" class="text">/</span>
+                <input type="text" class="mini" />
+            </div>
+
+            <div class="data-box">
+                <div class="text">miasto*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">kod-pocztowy*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">województwo:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">telefon*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <div class="text">e-mail*:</div>
+                <input type="text" />
+            </div>
+            <div class="data-box" style="margin-bottom: 150px;">
+                <div class="text">uwagi:</div>
+                <textarea></textarea>
+                <div class="clear"></div>
+            </div>
+            <div id="checkboxes-container">
+                <input type="checkbox" id="regulamin" class="css-checkbox">
+                <label for="regulamin" class="css-label">Zapoznałem/am się i akceptuję regulamin sklepu SUKKU.PL*</label>
+                <input type="checkbox" id="daneosobowe" class="css-checkbox">
+                <label for="daneosobowe" class="css-label" style="font-size: 12px;">
+                    Wyrażam zgodę na przetwarzanie moich danych osobowych w celu rejestracji konta
+                    oraz realizacji zamówienia przez sklep internetowy SUKKU.PL prowadzony
+                    przez Smaki Orientu: Magdalena Agani-Chowaniec z siedzibą w: 32-650 Kęty,
+                    ul. Świętokrzyska 9A, która jest administratore danych osobowych. Zgodnie z ustawą
+                    z dnia 29.08.1997r. każdy Klient ma prawo wglądu do swoich danych, ich poprawiania, zarządzania,
+                    zaprzestania przetwarzania oraza zażądania ich usunięcia. Podanie danych jest dobrowolne,
+                    ale brak zgody uniemożliwia założenie konta i realizację zamówienia.*
+                </label>
+            </div>
+            <div class="data-box">
+                <div class="text">(*)-POLA OBOWIĄZKOWE</div>
+            </div>
+            <div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">FINALIZUJ ZAMÓWIENIE</div>
+        </div>
+    </div>
+</body>
+</html>

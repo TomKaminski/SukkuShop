@@ -1,6 +1,5 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using SukkuShop.Infrastructure;
 
 namespace SukkuShop
 {
@@ -88,7 +87,11 @@ namespace SukkuShop
             routes.MapRoute(
                  "404-PageNotFound",
                  "{*url}",
-                 new { controller = "Error", action = "Blad404" }
+                 new
+                 {
+                     controller = "Error", action = "Blad404" 
+                 
+                 }
                  );
 
             

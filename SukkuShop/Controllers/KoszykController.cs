@@ -15,6 +15,7 @@ namespace SukkuShop.Controllers
         {
             _dbContext = dbContext;
         }
+
         [HttpPost]
         //[OutputCache(Duration = 1)]
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)

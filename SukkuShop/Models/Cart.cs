@@ -7,6 +7,10 @@ namespace SukkuShop.Models
     {
         private readonly List<CartLine> _lineCollection = new List<CartLine>();
 
+        public int ShippingId { get; set; }
+        public int PaymentId { get; set; }
+        public OrderAdress OrderAdress { get; set; }
+
         public void AddItem(int id, int quantity = 1)
         {
             var line = _lineCollection.FirstOrDefault(p => p.Id == id);
@@ -28,7 +32,7 @@ namespace SukkuShop.Models
         public void DecreaseQuantity(int id)
         {
             var line = _lineCollection.FirstOrDefault(p => p.Id == id);
-            if (line != null && line.Quantity>1) 
+            if (line != null && line.Quantity > 1)
                 line.Quantity--;
         }
 
@@ -53,5 +57,14 @@ namespace SukkuShop.Models
             public int Id { get; set; }
             public int Quantity { get; set; }
         }
+
+        
     }
+    public class OrderAdress
+    {
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string PostalCode { get; set; }
+    }            
 }

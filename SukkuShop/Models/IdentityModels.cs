@@ -91,7 +91,7 @@ namespace SukkuShop.Models
         public int ProductId { get; set; }
         public int OrderId { get; set; }
         public int Quantity { get; set; }
-
+        public decimal SubTotalPrice { get; set; }
         public virtual Products Products { get; set; }
 
         public virtual Orders Orders { get; set; }
@@ -104,19 +104,50 @@ namespace SukkuShop.Models
         {
             OrderDetails = new List<OrderDetails>();
         }
-
+            
         [Key]
         public int OrderId { get; set; }
         public int UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime SentDate { get; set; }
         public string OrderInfo { get; set; }
-
+        public int ShippingId { get; set; }
+        public int PaymentId { get; set; }
+        public decimal ProductsPrice { get; set; }
+        public decimal TotalPrice { get; set; }
+        public decimal Discout { get; set; }
+        public string Name { get; set; }
+        public string Surname { get; set; }
+        public string City { get; set; }
+        public string Street { get; set; }
+        public string Number { get; set; }
+        public string PostalCode { get; set; }
+        public bool SpecialAddress { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
 
+        public ShippingType Shipping { get; set; }
+        public PaymentType Payment { get; set; }
         public ApplicationUser User { get; set; }
     }
 
+
+    [Table("ShippingTypes")]
+    public class ShippingType
+    {
+        [Key]
+        public int ShippingId { get; set; }
+        public string ShippingName { get; set; }
+        public decimal ShippingPrice { get; set; }
+    }
+
+    [Table("PaymentTypes")]
+    public class PaymentType
+    {
+        [Key]
+        public int PaymentId { get; set; }
+        public string PaymentName { get; set; }
+        public decimal PaymentPrice { get; set; }
+    }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, RoleIntPk, int,
         UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>,IAppRepository
@@ -130,7 +161,8 @@ namespace SukkuShop.Models
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<OrderDetails> OrderDetails { get; set; }
         public virtual DbSet<Orders> Orders { get; set; }
-
+        public virtual DbSet<ShippingType> ShippingTypes { get; set; }
+        public virtual DbSet<PaymentType> PaymentTypes { get; set; }
 
 
         public static ApplicationDbContext Create()
@@ -138,46 +170,58 @@ namespace SukkuShop.Models
             return new ApplicationDbContext();
         }
 
-        public bool Seed(ApplicationDbContext context)
-        {
-            var roleManager = new ApplicationRoleManager(new RoleStore<RoleIntPk, int, UserRoleIntPk>(context));
-            roleManager.Create(new RoleIntPk("Admin", "Admin Role"));
-
-            //Create Admin acc
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser, RoleIntPk, int,
-                UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>(context));
-
-            var user = new ApplicationUser
-            {
-                Name = "Admin",
-                Email = "Admin@sukku.pl",
-                UserName = "Admin@sukku.pl"
-            };
-
-            userManager.Create(user, "Admin123456");
-            var success = userManager.AddToRole(user.Id, "Admin");
-
-            context.Categories.AddOrUpdate(p => p.CategoryId,
-                    new Categories { CategoryId = 1, Name = "Kosmetyki", UpperCategoryId = 0 },
-                    new Categories { CategoryId = 2, Name = "Przyprawy", UpperCategoryId = 0 },
-                    new Categories { CategoryId = 3, Name = "Herbaty", UpperCategoryId = 0 },
-                    new Categories { CategoryId = 4, Name = "Bakalie", UpperCategoryId = 0 },
-                    new Categories { CategoryId = 5, Name = "Inne", UpperCategoryId = 0 },
-                    new Categories { CategoryId = 6, Name = "Pielęgnacja Ciała", UpperCategoryId = 1 },
-                    new Categories { CategoryId = 7, Name = "Pielęgnacja Twarzy", UpperCategoryId = 1 },
-                    new Categories { CategoryId = 8, Name = "Ostre", UpperCategoryId = 2 },
-                    new Categories { CategoryId = 9, Name = "Łagodne", UpperCategoryId = 2 }
-                );
+        //public bool Seed(ApplicationDbContext context)
+        //{
             
-            return success.Succeeded;
-        }
+        //}
 
         /// Context Initializer
         public class DropCreateInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
         {
             protected override void Seed(ApplicationDbContext context)
             {
-                context.Seed(context);
+                var roleManager = new ApplicationRoleManager(new RoleStore<RoleIntPk, int, UserRoleIntPk>(context));
+                roleManager.Create(new RoleIntPk("Admin", "Admin Role"));
+
+                //Create Admin acc
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser, RoleIntPk, int,
+                    UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>(context));
+
+                var user = new ApplicationUser
+                {
+                    Name = "Admin",
+                    Email = "Admin@sukku.pl",
+                    UserName = "Admin@sukku.pl"
+                };
+
+                userManager.Create(user, "Admin123456");
+                userManager.AddToRole(user.Id, "Admin");
+
+                context.Categories.AddOrUpdate(p => p.CategoryId,
+                        new Categories { CategoryId = 1, Name = "Kosmetyki", UpperCategoryId = 0 },
+                        new Categories { CategoryId = 2, Name = "Przyprawy", UpperCategoryId = 0 },
+                        new Categories { CategoryId = 3, Name = "Herbaty", UpperCategoryId = 0 },
+                        new Categories { CategoryId = 4, Name = "Bakalie", UpperCategoryId = 0 },
+                        new Categories { CategoryId = 5, Name = "Inne", UpperCategoryId = 0 },
+                        new Categories { CategoryId = 6, Name = "Pielęgnacja Ciała", UpperCategoryId = 1 },
+                        new Categories { CategoryId = 7, Name = "Pielęgnacja Twarzy", UpperCategoryId = 1 },
+                        new Categories { CategoryId = 8, Name = "Ostre", UpperCategoryId = 2 },
+                        new Categories { CategoryId = 9, Name = "Łagodne", UpperCategoryId = 2 }
+                    );
+
+                context.PaymentTypes.AddOrUpdate(p => p.PaymentId,
+                        new PaymentType { PaymentId = 1, PaymentName = "Przedpłata na konto", PaymentPrice = 0 },
+                        new PaymentType { PaymentId = 2, PaymentName = "Płatność za pobraniem", PaymentPrice = 5 },
+                        new PaymentType { PaymentId = 2, PaymentName = "PayU", PaymentPrice = 1 }
+                    );
+
+                context.ShippingTypes.AddOrUpdate(p => p.ShippingId,
+                    new ShippingType { ShippingId = 1, ShippingName = "Poczta Polska Kurier48", ShippingPrice = 8 },
+                    new ShippingType { ShippingId = 2, ShippingName = "Poczta Polska Przesyłka Ekonomiczna", ShippingPrice = 7 },
+                    new ShippingType { ShippingId = 3, ShippingName = "Kurier Siódemka", ShippingPrice = 12 },
+                    new ShippingType { ShippingId = 4, ShippingName = "Paczkomaty", ShippingPrice = 5 },
+                    new ShippingType { ShippingId = 5, ShippingName = "Odbiór osobisty", ShippingPrice = 0 }
+                    );
                 base.Seed(context);
             }
         }

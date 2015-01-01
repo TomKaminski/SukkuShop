@@ -1,4 +1,4 @@
-﻿//colors
+//colors
 $color_tree_poppy_approx: #f89b1d;
 $black: black;
 $color_red_approx: red;
@@ -13,7 +13,7 @@ $font_2: SegoeBold;
 //original selectors
 //table.cart-table tr th, table.cart-table tr td
 %extend_1 {
-	width: 174px;
+	width: 177px;
 	text-align: center;
 	vertical-align: middle;
 }
@@ -27,28 +27,13 @@ $font_2: SegoeBold;
 }
 
 
-.notfound-text-big {
-  font-size: 60px;
-  font-family: Segoe UI;
-  color: #f89b1d;
-  text-align: center;
-  margin-bottom: 10px; }
-
-.notfound-text-normal {
-  text-align: center;
-  font-size: 42px;
-  color: black;
-  font-family: Calibri;
-  margin-bottom: 10px; }
-
-.notfound-backlink {
-  text-align: center; }
-  .notfound-backlink a {
-    text-decoration: none;
-    color: #f89b1d;
-    font-weight: bold;
-    font-family: Segoe UI; }
-
+.invalidradio{
+float:right;
+font-family:Segoe UI;
+color:red;
+text-transform:none;
+visibility:hidden;
+}
 .cart-container {
 	width: 1066px;
 	margin: auto;
@@ -64,11 +49,11 @@ $font_2: SegoeBold;
 }
 .cart-title-ending {
 	font-size: 20px;
-	font-family: $font_0;
-	font-weight: bold;
-	text-transform: uppercase;
-	margin: 0 0 36px;
-	color: $color_tree_poppy_approx;
+font-family: Segoe UI;
+font-weight: bold;
+text-transform: uppercase;
+/* margin: 0 0 36px; */
+color: #f89b1d;
 }
 ul {
 	&.cart-order-steps {
@@ -92,7 +77,6 @@ ul {
 		padding-left: 5px;
 		li {
 			margin-bottom: 26px;
-			width: 700px;
 			height: 20px;
 		}
 	}
@@ -104,6 +88,7 @@ ul {
 		text-transform: uppercase;
 		border-bottom: $color_tree_poppy_approx 1px solid;
 		padding-bottom: 20px;
+        margin-bottom:20px;
 		li {
 			margin-bottom: 10px;
 			.price-box {
@@ -208,12 +193,20 @@ ul {
 		margin-left: 10px;
 	}
 }
+
+.bottom-box{
+    width:50%;
+    float:left;
+border-top: 1px solid #f89b1d;
+}
+
 .products-price-summary {
-	font-family: $font_1;
-	font-size: 18px;
-	text-align: right;
-	text-transform: uppercase;
-	float: right;
+	font-family: SegoeLight;
+font-size: 18px;
+text-align: right;
+text-transform: uppercase;
+margin-bottom: 20px;
+
 }
 .sukku-radio-button {
 	float: left;
@@ -226,7 +219,7 @@ ul {
 	width: 525px;
 }
 .shipping-price {
-	float: left;
+	float: right;
 	font-size: 12px;
 	font-family: $font_1;
 	width: 135px;
@@ -235,7 +228,6 @@ ul {
 }
 #payment-list {
 	padding-bottom: 30px;
-	border-bottom: $color_tree_poppy_approx 1px solid;
 }
 .summary-text-bold {
 	font-family: $font_0;
@@ -243,13 +235,12 @@ ul {
 }
 #triangle-right-big {
 	width: 0;
-	height: 0;
-	border-top: 11px solid transparent;
-	border-left: 15px solid $color_tree_poppy_approx;
-	border-bottom: 11px solid transparent;
-	float: right;
-	margin-left: 25px;
-	margin-top: 23px;
+    height: 0;
+    border-top: 11px solid transparent;
+    border-left: 15px solid #f89b1d;
+    border-bottom: 11px solid transparent;
+    float: right;
+    margin-left: 25px;
 }
 #triangle-left-big {
 	width: 0;
@@ -258,7 +249,6 @@ ul {
 	border-right: 15px solid $color_tree_poppy_approx;
 	border-bottom: 11px solid transparent;
 	float: left;
-	margin-top: 23px;
 	margin-right: 25px;
 }
 .order-summary-header-text {
@@ -319,19 +309,18 @@ input[type=radio].css-checkbox {
 	display: none;
 	+ label.css-label {
 		padding-left: 23px;
-		height: 18px;
-		line-height: 20px;
-		display: inline-block;
-		background-repeat: no-repeat;
-		background-position: 0 0;
-		font-size: 18px;
-		font-family: $font_1;
-		float: left;
-		vertical-align: middle;
-		cursor: pointer;
-		margin-bottom: 2px;
-		width: 300px;
-		margin-right: 225px;
+        height: 18px;
+        line-height: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        font-size: 18px;
+        font-family: SegoeLight;
+        float: left;
+        vertical-align: middle;
+        cursor: pointer;
+        margin-bottom: 2px;
+        
 	}
 	&:checked + label.css-label {
 		background-position: 0 -18px;

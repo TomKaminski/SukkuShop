@@ -136,8 +136,4 @@ jQuery(document).ready(function () {
         jQuery(this).siblings("#sort-text").css("font-weight", "bold");
         jQuery(this).parent().siblings("#sort-text").css("font-weight", "bold");
     });
-
-
-    //flying product
-
 });

@@ -6,89 +6,35 @@
 
 <div class="cart-container">
     <div class="cart-title">Twój koszyk</div>
-    <ul class="cart-order-steps">
-        <li class="selected">1. Koszyk</li>
-        <li>2. Twoje dane</li>
-        <li>3. Potwierdzenie zamówienia</li>
-    </ul>
-
     <div id="remove">
-        @{Html.RenderPartial("CartTable", Model);}
+        @if (Model.CartProductsList.Any())
+        {
+            Html.RenderPartial("CartTable", Model);
+        }
+        else
+        {
+                <div class="notfound-text-big">
+                    Uuuups!
+                </div>
+                <div class="notfound-text-normal">
+                    Twój koszyk jest pusty!
+                </div>
+                <div class="notfound-backlink"><a href="@Url.Action(MVC.Sklep.Produkty())">&laquo Rozpocznij zakupy! &raquo</a></div>
+        }
     </div>
-
-    <div class="cart-title">Dostawa</div>
-    <ul class="shipping">
-        <li>
-            <input type="radio" name="shipping" id="ship1" class="css-checkbox" checked>
-            <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
-            <div class="shipping-price">8.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="shipping" id="ship2" class="css-checkbox">
-            <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
-            <div class="shipping-price">7.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="shipping" id="ship3" class="css-checkbox">
-            <label for="ship3" class="css-label">Kurier Siódemka</label>
-            <div class="shipping-price">12.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="shipping" id="ship4" class="css-checkbox">
-            <label for="ship4" class="css-label">Paczkomaty</label>
-            <div class="shipping-price">5.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="shipping" id="ship5" class="css-checkbox">
-            <label for="ship5" class="css-label">Odbiór osobisty</label>
-            <div class="shipping-price">0.00 zł</div>
-        </li>
-    </ul>
-    <div class="products-price-summary" id="shipping-price-summary">Wybierz metodę wysyłki</div>
-    <div class="products-price-summary" style="margin-right: 40px;">Razem</div>
-    
-
-    <div class="cart-title">Płatność</div>
-    <ul id="payment-list" class="shipping">
-        <li>
-            <input type="radio" name="payment" id="pay1" class="css-checkbox" checked>
-            <label for="pay1" class="css-label">Przedpłata na konto</label>
-            <div class="shipping-price">0.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="payment" id="pay2" class="css-checkbox">
-            <label for="pay2" class="css-label">Płatność za pobraniem</label>
-            <div class="shipping-price">5.00 zł</div>
-        </li>
-        <li>
-            <input type="radio" name="payment" id="pay3" class="css-checkbox">
-            <label for="pay3" class="css-label">PayU</label>
-            <div class="shipping-price">1.00 zł</div>
-        </li>
-
-    </ul>
-
-    <div class="cart-title">Podsumowanie</div>
-    <ul id="products-summary">
-        <li>
-            <div class="price-box" id="price-box-json">@Model.TotalValue</div><div id="text-box clear">Produkty</div>
-        </li>
-        <li>
-            <div class="price-box" id="dostawa-box-summary">Wybierz</div><div id="text-box clear">Dostawa</div>
-        </li>
-        <li>
-            <div class="price-box" id="payment-box-summary">Wybierz</div><div id="text-box clear">Płatność</div>
-        </li>
-        <li class="summary-text-bold">
-            <div class="price-box" id="total-price-summary" style="color:#f89b1d">N/A</div><div id="text-box clear">Razem</div>
-        </li>
-    </ul>
-
-    <div id="cart-button-bottom">
-        <div id="triangle-right-big"></div>
-        <div class="cart-title" style="float:right; margin:0">Finalizuj Zamówienie</div>
-        <div class="clear">&nbsp;</div>
-    </div>        
+    <a href="@Url.Action(MVC.Sklep.Produkty())">
+        <div id="cart-button-bottom">
+            <div id="triangle-left-big"></div>
+            <div class="cart-title" style="float:left; margin:0">Kontynuuj zakupy</div>
+        </div>
+    </a>
+    <a href="@Url.Action(MVC.Zamowienie.Krok1())">
+        <div id="cart-button-bottom">
+            <div id="triangle-right-big"></div>
+            <div class="cart-title" style="float:right; margin:0">Złóż zamówienie</div>
+            <div class="clear">&nbsp;</div>
+        </div>
+    </a>
 </div>
 @Styles.Render("~/Content/css/Cart.css")
 @Scripts.Render("~/Scripts/CartSummary.js")

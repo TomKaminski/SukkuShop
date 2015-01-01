@@ -1,0 +1,115 @@
+﻿@model SukkuShop.Models.OrderViewModels
+@{
+    ViewBag.Title = "Krok1";
+}
+<div class="cart-container">
+    <div class="cart-title">Twoje zamówienie</div>
+    <ul class="cart-order-steps">
+        <li class="selected">1. Produkty i wysyłka</li>
+        <li>2. Dane kontaktowe</li>
+        <li>3. Podsumowanie zamówienia</li>
+    </ul>
+    <table class="cart-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Twoje produkty</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderProductList)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity szt.</td>
+                    <td>@item.TotalValue</td>
+                </tr>
+            }
+            
+        </tbody>
+    </table>
+    <div class="products-price-summary">@Model.TotalValue</div>
+    <div>
+        <div class="bottom-box">
+            <div class="cart-title">Dostawa</div>
+            <ul class="shipping">
+                <li>
+                    <input type="radio" name="shipping" id="ship1" class="css-checkbox">
+                    <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
+                    <div class="shipping-price">8,00 ZŁ</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship2" class="css-checkbox">
+                    <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
+                    <div class="shipping-price">7,00 zł</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship3" class="css-checkbox">
+                    <label for="ship3" class="css-label">Kurier Siódemka</label>
+                    <div class="shipping-price">12,00 zł</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship4" class="css-checkbox">
+                    <label for="ship4" class="css-label">Paczkomaty</label>
+                    <div class="shipping-price">5,00 zł</div>
+                </li>
+                <li>
+                    <input type="radio" name="shipping" id="ship5" class="css-checkbox">
+                    <label for="ship5" class="css-label">Odbiór osobisty</label>
+                    <div class="shipping-price">0,00 zł</div>
+                </li>
+            </ul>
+        </div>
+        <div class="bottom-box">
+            <div class="cart-title">Płatność</div>
+            <ul id="payment-list" class="shipping">
+                <li>
+                    <input type="radio" name="payment" id="pay1" class="css-checkbox">
+                    <label for="pay1" class="css-label">Przedpłata na konto</label>
+                    <div class="shipping-price">0,00 zł</div>
+                </li>
+                <li>
+                    <input type="radio" name="payment" id="pay2" class="css-checkbox">
+                    <label for="pay2" class="css-label">Płatność za pobraniem</label>
+                    <div class="shipping-price">5,00 zł</div>
+                </li>
+                <li>
+                    <input type="radio" name="payment" id="pay3" class="css-checkbox">
+                    <label for="pay3" class="css-label">PayU</label>
+                    <div class="shipping-price">1,00 zł</div>
+                </li>
+
+            </ul>
+        </div>
+        <div class="clear" style="clear: both"></div>
+    </div>
+    <div class="cart-title">Podsumowanie</div>
+    <ul id="products-summary">
+        <li>
+            <div class="price-box" id="price-box-json">@Model.TotalValue</div><div id="text-box clear">Produkty</div>
+        </li>
+        <li>
+            <div class="price-box" id="dostawa-box-summary">WYBIERZ</div><div id="text-box">Dostawa</div><div id="validShipment" class="invalidradio">Proszę wybrać formę dostawy!</div><div class="clear" style="clear: both;"></div>
+        </li>
+        <li>
+            <div class="price-box" id="payment-box-summary">WYBIERZ</div><div id="text-box">Płatność</div><div id="validPayment" class="invalidradio">Proszę wybrać formę płatności!</div><div class="clear" style="clear: both"></div>
+        </li>
+        <li class="summary-text-bold">
+            <div class="price-box" id="total-price-summary" style="color:#f89b1d">N/A</div><div id="text-box clear">Razem</div>
+        </li>
+    </ul>
+    <div>
+        <a href="@Url.Action(MVC.Koszyk.Index())">
+            <div id="triangle-left-big"></div><div class="cart-title-ending" style="float:left;">Powrót do koszyka</div></a>
+            <a id="nextStep" href="@Url.Action(MVC.Zamowienie.Krok2())"><div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">Dalej</div></a>
+            <div class="clear" style="clear: both"></div>
+</div>
+
+
+
+</div>
+@Styles.Render("~/Content/css/Order.css")
+@Scripts.Render("~/Scripts/OrderScripts.js")

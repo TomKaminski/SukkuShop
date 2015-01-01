@@ -33,6 +33,7 @@ public static partial class MVC
     public static SukkuShop.Controllers.KoszykController Koszyk = new SukkuShop.Controllers.T4MVC_KoszykController();
     public static SukkuShop.Controllers.NavController Nav = new SukkuShop.Controllers.T4MVC_NavController();
     public static SukkuShop.Controllers.SklepController Sklep = new SukkuShop.Controllers.T4MVC_SklepController();
+    public static SukkuShop.Controllers.ZamowienieController Zamowienie = new SukkuShop.Controllers.T4MVC_ZamowienieController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 
@@ -142,6 +143,7 @@ namespace Links
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
+        public static readonly string OrderScripts_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderScripts.min.js") ? Url("OrderScripts.min.js") : Url("OrderScripts.js");
         public static readonly string shopAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopAngular.min.js") ? Url("shopAngular.min.js") : Url("shopAngular.js");
         public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
     }
@@ -161,6 +163,11 @@ namespace Links
                  
             public static readonly string Cart_css_map = Url("Cart.css.map");
             public static readonly string Cart_min_css = Url("Cart.min.css");
+            public static readonly string ClientData_scss = Url("ClientData.scss");
+            public static readonly string ClientData_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ClientData.min.css") ? Url("ClientData.min.css") : Url("ClientData.css");
+                 
+            public static readonly string ClientData_css_map = Url("ClientData.css.map");
+            public static readonly string ClientData_min_css = Url("ClientData.min.css");
             public static readonly string Error_scss = Url("Error.scss");
             public static readonly string Error_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Error.min.css") ? Url("Error.min.css") : Url("Error.css");
                  
@@ -176,6 +183,11 @@ namespace Links
                  
             public static readonly string main_css_map = Url("main.css.map");
             public static readonly string main_min_css = Url("main.min.css");
+            public static readonly string Order_scss = Url("Order.scss");
+            public static readonly string Order_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Order.min.css") ? Url("Order.min.css") : Url("Order.css");
+                 
+            public static readonly string Order_css_map = Url("Order.css.map");
+            public static readonly string Order_min_css = Url("Order.min.css");
             public static readonly string reset_scss = Url("reset.scss");
             public static readonly string reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/reset.min.css") ? Url("reset.min.css") : Url("reset.css");
                  
@@ -251,7 +263,8 @@ namespace Links
             private const string URLPATH = "~/Content/web";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string Koszyk_html = Url("Koszyk.html");
+            public static readonly string DaneKlientaKoszyk_html = Url("DaneKlientaKoszyk.html");
+            public static readonly string OrderDetails_html = Url("OrderDetails.html");
             public static readonly string OrderSummary_html = Url("OrderSummary.html");
         }
     

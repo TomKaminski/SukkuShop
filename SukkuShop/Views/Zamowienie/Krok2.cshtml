@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Twoje Dane";
+}
+<div class="cart-container">
+    <div class="cart-title">Twoje zamówienie</div>
+    <ul class="cart-order-steps">
+        <li>1. Produkty i wysyłka</li>
+        <li class="selected">2. Dane kontaktowe</li>
+        <li>3. Podsumowanie zamówienia</li>
+    </ul>
+    <div class="client-data-container">
+        <div class="left-container">
+            <div class="client-type-text">Jestem nowym klientem</div>
+            <div class="data-box">
+                <label for="email" class="text">e-mail*:</label>
+                <input id="email" type="email" name="email" required/>
+            </div>
+            <div class="data-box">
+                <label for="password" class="text">hasło*:</label>
+                <input id="password" name="password" required type="password" />
+            </div>
+            <div class="data-box">
+                <label for="confirmPassword" class="text">potwierdź hasło*:</label>
+                <input id="confirmPassword" name="confirmPassword" required type="password" />
+            </div>
+            <div class="data-box">
+                <label for="imie" class="text">imię*:</label>
+                <input id="imie" name="imie" required type="text" />
+            </div>
+            <div class="data-box">
+                <label class="text">nazwisko*:</label>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <label class="text">ulica*:</label>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <label class="text">nr domu*:</label>
+                <input type="text" class="mini" /><span style="float: right;margin-right: 11px" class="text">/</span>
+                <input type="text" class="mini" />
+            </div>
+
+            <div class="data-box">
+                <label class="text">miasto*:</label>
+                <input type="text" />
+            </div>
+            <div class="data-box">
+                <label class="text">kod-pocztowy*:</label>
+                <input type="text" />
+            </div>
+            @*<div class="data-box">
+                <div class="text">województwo:</div>
+                <input type="text" />
+            </div>*@
+            <div class="data-box" style="margin-bottom: 50px">
+                <div class="text">telefon*:</div>
+                <input type="text" />
+            </div>
+        </div>
+        <div class="right-container">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="client-type-text">Twoje dane wysyłkowe</div>
+                
+
+            }
+            else
+            {
+                <div class="client-type-text">Zaloguj się na istniejące konto</div>
+                <div class="data-box">
+                    <div class="text">e-mail:</div>
+                    <input type="text" style="margin-right:50px" />
+                </div>
+                <div class="data-box">
+                    <div class="text">hasło:</div>
+                    <input type="password" style="margin-right:50px" />
+                </div>
+                <div class="sukku-button-small">Zaloguj</div>
+            }
+            
+        </div>
+        <div class="clear" style="clear: both"></div>
+        @*<div class="data-box" style="margin-bottom: 150px;">
+            <div class="text">uwagi:</div>
+            <textarea></textarea>
+            <div class="clear"></div>
+        </div>*@
+        <div id="checkboxes-container">
+            <input type="checkbox" id="regulamin" class="css-checkbox">
+            <label for="regulamin" class="css-label">Zapoznałem/am się i akceptuję regulamin sklepu SUKKU.PL*</label>
+            <input type="checkbox" id="daneosobowe" class="css-checkbox">
+            <label for="daneosobowe" class="css-label" style="font-size: 12px;">
+                Wyrażam zgodę na przetwarzanie moich danych osobowych w celu rejestracji konta
+                oraz realizacji zamówienia przez sklep internetowy SUKKU.PL prowadzony
+                przez Smaki Orientu: Magdalena Agani-Chowaniec z siedzibą w: 32-650 Kęty,
+                ul. Świętokrzyska 9A, która jest administratorem danych osobowych. Zgodnie z ustawą
+                z dnia 29.08.1997r. każdy Klient ma prawo wglądu do swoich danych, ich poprawiania, zarządzania,
+                zaprzestania przetwarzania oraza zażądania ich usunięcia. Podanie danych jest dobrowolne,
+                ale brak zgody uniemożliwia założenie konta i realizację zamówienia.*
+            </label>
+        </div>
+        <div class="data-box">
+            <div class="text">(*)-POLA OBOWIĄZKOWE</div>
+        </div>
+        <div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">FINALIZUJ ZAMÓWIENIE</div>
+    </div>
+</div>
+@Styles.Render("~/Content/css/ClientData.css")
+@Scripts.Render("~/Scripts/OrderScripts.js")
+

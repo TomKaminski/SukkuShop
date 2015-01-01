@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\SklepController.cs" />
+    <Compile Include="Controllers\ZamowienieController.cs" />
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -253,11 +254,24 @@
     <Compile Include="Migrations\201411272050088_Description.Designer.cs">
       <DependentUpon>201411272050088_Description.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201412302111175_OrdersEnhancement.cs" />
+    <Compile Include="Migrations\201412302111175_OrdersEnhancement.Designer.cs">
+      <DependentUpon>201412302111175_OrdersEnhancement.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412302123352_OrdersEnhancement2.cs" />
+    <Compile Include="Migrations\201412302123352_OrdersEnhancement2.Designer.cs">
+      <DependentUpon>201412302123352_OrdersEnhancement2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201412311014203_OrderSpecialAddress.cs" />
+    <Compile Include="Migrations\201412311014203_OrderSpecialAddress.Designer.cs">
+      <DependentUpon>201412311014203_OrderSpecialAddress.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\Shop.cs" />
     <Compile Include="Models\ShopViewModels.cs" />
     <Compile Include="NavController.generated.cs">
@@ -276,6 +290,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ZamowienieController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\Cart.css">
@@ -283,6 +300,12 @@
     </Content>
     <Content Include="Content\css\Cart.min.css">
       <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\ClientData.css">
+      <DependentUpon>ClientData.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\ClientData.min.css">
+      <DependentUpon>ClientData.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
@@ -301,6 +324,12 @@
     </Content>
     <Content Include="Content\css\main.min.css">
       <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Order.css">
+      <DependentUpon>Order.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Order.min.css">
+      <DependentUpon>Order.css</DependentUpon>
     </Content>
     <Content Include="Content\css\reset.css">
       <DependentUpon>reset.scss</DependentUpon>
@@ -336,7 +365,8 @@
     <Content Include="Content\Images\Shop\info_icon.png" />
     <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
-    <Content Include="Content\web\Koszyk.html" />
+    <Content Include="Content\web\DaneKlientaKoszyk.html" />
+    <Content Include="Content\web\OrderDetails.html" />
     <Content Include="Content\web\OrderSummary.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -384,6 +414,14 @@
     <Content Include="Content\css\Shop.css.map">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\ClientData.scss" />
+    <Content Include="Content\css\ClientData.css.map">
+      <DependentUpon>ClientData.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Order.scss" />
+    <Content Include="Content\css\Order.css.map">
+      <DependentUpon>Order.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -401,6 +439,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\OrderScripts.js" />
     <Content Include="Scripts\shopAngular.js" />
     <Content Include="Scripts\shopdetails.js" />
     <Content Include="Scripts\_references.js" />
@@ -455,6 +494,9 @@
     <Content Include="Views\Shared\_AdminPanel.cshtml" />
     <Content Include="Views\Koszyk\CartTable.cshtml" />
     <Content Include="Views\Koszyk\CartLine.cshtml" />
+    <Content Include="Views\Zamowienie\Krok1.cshtml" />
+    <Content Include="Views\Zamowienie\Krok2.cshtml" />
+    <Content Include="Views\Zamowienie\Podsumowanie.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -476,6 +518,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411272050088_Description.resx">
       <DependentUpon>201411272050088_Description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412302111175_OrdersEnhancement.resx">
+      <DependentUpon>201412302111175_OrdersEnhancement.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412302123352_OrdersEnhancement2.resx">
+      <DependentUpon>201412302123352_OrdersEnhancement2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201412311014203_OrderSpecialAddress.resx">
+      <DependentUpon>201412311014203_OrderSpecialAddress.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
