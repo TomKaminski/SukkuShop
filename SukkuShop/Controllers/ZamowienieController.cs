@@ -64,18 +64,18 @@ namespace SukkuShop.Controllers
             shoppingCart.PaymentId = id;
         }
 
-        public void SaveToDatabase(Cart shoppingCart)
+        public async void SaveToDatabase(Cart shoppingCart)
         {
             
-            
-            // Orders.SentDate -> panel admina [czeckbox, że wysłane]?
-            // Orders.OrderInfo -> wtf tutaj?
-            // Orders.ProductsPrice -> suma SubTotalPrice z Order Details
-            // Orders.TotalPrice -> ProductsPrice - Discount
-            // Orders.Discout -> to z użytkownika jakoś trzeba brać
-            // Orders.Name -> jw
-            // Orders.Surname -> jw
-            // Orders.SpecialAddress -> jw [co to w ogole jest]
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+             //Orders.SentDate -> panel admina [czeckbox, że wysłane]?
+             //Orders.OrderInfo -> wtf tutaj?
+             
+             //Orders.TotalPrice -> ProductsPrice + shippingPrice + PaymentPrice                       
+             // Orders.SpecialAddress -> CZO TO JEST
+            // trzeba discounta usunac
+
+            //Orders.ProductsPrice -> suma SubTotalPrice z Order Details [nie umiem] :(
 
             var listakurwa = new List<OrderDetails>();
             foreach (var item in shoppingCart.Lines)
@@ -92,6 +92,8 @@ namespace SukkuShop.Controllers
             }
             var orders = new Orders
             {
+                Name = user.Name,
+                Surname = user.LastName,
                 OrderDate = DateTime.Now,
                 ShippingId = shoppingCart.ShippingId,
                 PaymentId = shoppingCart.PaymentId,
