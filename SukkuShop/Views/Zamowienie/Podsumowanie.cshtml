@@ -25,7 +25,11 @@
                 <tr>
                     <td>
                         <img img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
-                        <div class="custom-product-text-container">@item.Name</div>
+                        <div class="custom-product-text-container">
+                            <p>
+                                <span style="font-size: 18px; line-height: 25px;">@item.Name</span>
+                            </p>
+                        </div>
                     </td>
                     <td>@item.Price</td>
                     <td>@item.Quantity szt.</td>
@@ -34,7 +38,7 @@
             }                        
         </tbody>
     </table>
-    <div class="products-price-summary">Razem: @Model.OrderViewItemsTotal.TotalValue zł</div>
+    <div class="products-price-summary"><span style="margin-right:15px">Razem</span> @Model.OrderViewItemsTotal.TotalValue zł</div>
     <div class="cart-title">Dostawa</div>
     <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
     <div class="shipping-price">@Model.OrderShipping.Price zł</div>
@@ -61,7 +65,10 @@
             <div id="price-box">Razem: <span style="color:#f89b1d">@Model.TotalTotalValue zł</span></div>
         </li>
     </ul>
-    <div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">Złóż zamówienie</div>
+    <a href="@Url.Action(MVC.Zamowienie.Krok2())">
+        <div id="triangle-left-big" style="margin-top:0"></div><div class="cart-title-ending" style="float:left;">POWRÓT</div>
+    </a>
+    <div id="triangle-right-big" style="margin-top:0"></div><div class="cart-title-ending" style="float:right;">Złóż zamówienie</div>
     </div>
 
 @Styles.Render("~/Content/css/Cart.css")

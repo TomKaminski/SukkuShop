@@ -16,12 +16,24 @@ $SeB: SegoeBold;
     margin-bottom:10px;
 }
 
+#triangle-left-big {
+	width: 0;
+height: 0;
+border-top: 11px solid transparent;
+border-right: 15px solid #f89b1d;
+border-bottom: 11px solid transparent;
+float: left;
+/* margin-top: 23px; */
+margin-right: 25px;
+margin-left: 25px;
+}
+
 .error-box{
     margin: auto auto 50px;
     width: 90%;
     height: 300px;
     color:red;
-    font-family:$SeB
+    font-family:$SeUI
 }
 
 .validation-summary-errors ul li{
@@ -86,7 +98,6 @@ input.error{
 
 .error-summary
 {
-    font-weight:bold;
     color:red;
     font-family: $SeUI;
 }

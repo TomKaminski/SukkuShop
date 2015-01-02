@@ -32,6 +32,7 @@ namespace SukkuShop.Controllers
             var model = OrderViewModels(shoppingCart);
             return View(model);
         }
+
         public async virtual Task<ActionResult>Krok2(Cart shoppingCart)
         {
             if (shoppingCart.PaymentId == 0 || shoppingCart.ShippingId == 0)
@@ -59,7 +60,8 @@ namespace SukkuShop.Controllers
             return View();
         }
 
-        public virtual async Task<ActionResult> UserOrderSubmit(Cart shoppingCart, UserAddressModel model)
+        [HttpPost]
+        public virtual async Task<ActionResult> Krok2(Cart shoppingCart, UserAddressModel model)
         {
             if (ModelState.IsValid)
             {

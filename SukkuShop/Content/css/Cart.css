@@ -49,7 +49,6 @@ table.cart-table tr th:first-child, table.cart-table tr td:first-child {
   font-family: Segoe UI;
   font-weight: bold;
   text-transform: uppercase;
-  margin: 0 0 36px;
   color: #f89b1d; }
 
 ul.cart-order-steps {
@@ -79,7 +78,8 @@ ul#products-summary {
   text-align: right;
   text-transform: uppercase;
   border-bottom: #f89b1d 1px solid;
-  padding-bottom: 20px; }
+  padding-bottom: 20px;
+  margin-bottom: 20px; }
   ul#products-summary li {
     margin-bottom: 10px; }
     ul#products-summary li .price-box {
@@ -224,12 +224,14 @@ ul.order-summary {
   margin-right: 25px; }
 
 .order-summary-header-text {
+  margin-bottom: 10px;
   font-size: 18px;
   font-family: SegoeBold;
   float: left;
   width: 548px; }
 
 .order-summary-description-text {
+  margin-bottom: 5px;
   font-size: 16px;
   font-family: SegoeLight;
   width: 390px; }

@@ -1,5 +1,23 @@
 ﻿$(document).ready(function () {
 
+
+    if ($("#newaddress").is(":checked")) {
+        $("#left-container-new-address").children().children("input[type=text]").each(function () {
+            $(this).css("background-color", "white");
+            $(this).attr("readonly", false);
+        });
+
+    } else {
+        $("#left-container-new-address").children().children("input[type=text]").each(function () {
+            $(this).css("background-color", "#ebebeb");
+            $(this).attr("readonly", true);
+        });
+    }
+
+    $("#dalejKrok2").click(function() {
+        $("#krok2Form").submit();
+    });
+
     $.validator.addMethod("regex", function (value, element, regexpr) {
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");
@@ -68,39 +86,39 @@
             confirmPassword: {
                 equalTo: "#password"
             },
-            imie: {
+            Imie: {
                 required: true,
                 regex: /^[A-Ża-ż]*$/,
                 notEqual: "Nie podano"
             },
-            nazwisko: {
+            Nazwisko: {
                 required: true,
                 minlength: 2,
                 regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
                 notEqual: "Nie podano"
             },
-            ulica: {
+            Ulica: {
                 required: true,
                 minlength: 2,
                 regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
                 notEqual: "Nie podano"
             },
-            numer: {
+            Numer: {
                 required: true,
                 notEqual: "Nie podano"
             },
-            miasto: {
+            Miasto: {
                 required: true,
                 minlength: 2,
                 regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
                 notEqual: "Nie podano"
             },
-            telefon: {
+            Telefon: {
                 required: true,
                 regex: /^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$/,
                 notEqual: "Nie podano"
             },
-            kodpocztowy: {
+            KodPocztowy: {
                 required: true,
                 regex: /^[0-9]{2}-[0-9]{3}$/,
                 notEqual: "Nie podano"
@@ -119,34 +137,34 @@
             confirmPassword: {
                 equalTo: "Hasła muszą być takie same"
             },
-            imie: {
+            Imie: {
                 required: "Pole Imie jest wymagane.",
-                minlength: "Imie musi się składać z przynajmniej 2 znaków.",
+                minlength: "Minimum 2 znaki.",
                 regex: "Imie jest niepoprawne"
             },
-            nazwisko: {
+            Nazwisko: {
                 required: "Pole Nazwisko jest wymagane.",
-                minlength: "Nazwisko musi się składać z przynajmniej 2 znaków.",
+                minlength: "Minimum 2 znaki.",
                 regex: "Nazwisko jest niepoprawne"
             },
-            ulica: {
+            Ulica: {
                 required: "Pole Ulica jest wymagane.",
-                minlength: "Ulica musi się składać z przynajmniej 2 znaków.",
+                minlength: "Minimum 2 znaki.",
                 regex: "Telefon jest niepoprawny"
             },
-            numer: {
+            Numer: {
                 required: "Pole Numer jest wymagane."
             },
-            miasto: {
+            Miasto: {
                 required: "Pole Miasto jest wymagane.",
-                minlength: "Miasto musi się składać z przynajmniej 2 znaków.",
+                minlength: "Minimum 2 znaki.",
                 regex: "Miasto jest niepoprawne"
             },
-            telefon: {
+            Telefon: {
                 required: "Pole Telefon jest wymagane.",
                 regex: "Telefon jest niepoprawny"
             },
-            kodpocztowy: {
+            KodPocztowy: {
                 required: "Pole Kod Pocztowy jest wymagane.",
                 regex: "Kod pocztowy jest niepoprawny"
             },

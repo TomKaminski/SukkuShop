@@ -69,13 +69,6 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UserOrderSubmit()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UserOrderSubmit);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrder()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrder);
@@ -105,7 +98,6 @@ namespace SukkuShop.Controllers
         {
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
-            public readonly string UserOrderSubmit = "UserOrderSubmit";
             public readonly string Wyloguj = "Wyloguj";
             public readonly string NewAddressOrder = "NewAddressOrder";
             public readonly string Podsumowanie = "Podsumowanie";
@@ -116,7 +108,6 @@ namespace SukkuShop.Controllers
         {
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
-            public const string UserOrderSubmit = "UserOrderSubmit";
             public const string Wyloguj = "Wyloguj";
             public const string NewAddressOrder = "NewAddressOrder";
             public const string Podsumowanie = "Podsumowanie";
@@ -136,14 +127,6 @@ namespace SukkuShop.Controllers
         public ActionParamsClass_Krok2 Krok2Params { get { return s_params_Krok2; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Krok2
-        {
-            public readonly string shoppingCart = "shoppingCart";
-        }
-        static readonly ActionParamsClass_UserOrderSubmit s_params_UserOrderSubmit = new ActionParamsClass_UserOrderSubmit();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_UserOrderSubmit UserOrderSubmitParams { get { return s_params_UserOrderSubmit; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_UserOrderSubmit
         {
             public readonly string shoppingCart = "shoppingCart";
             public readonly string model = "model";
@@ -215,15 +198,15 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void UserOrderSubmitOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model);
+        partial void Krok2Override(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UserOrderSubmit(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Krok2(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UserOrderSubmit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            UserOrderSubmitOverride(callInfo, shoppingCart, model);
+            Krok2Override(callInfo, shoppingCart, model);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

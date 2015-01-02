@@ -4,7 +4,14 @@ using SukkuShop.Infrastructure;
 
 namespace SukkuShop.Models
 {
+    public class Krok1Model
+    {
+        [BooleanRequired(ErrorMessage = "Wybierz formę dostawy")]
+        public bool shipping { get; set; }
 
+        [BooleanRequired(ErrorMessage = "Wybierz formę płatności")]
+        public bool payment { get; set; }
+    }
     public class OrderViewModels
     {
         public List<OrderItem> OrderProductList { get; set; }
@@ -97,6 +104,8 @@ namespace SukkuShop.Models
 
 
         public string Numer { get; set; }
+
+        public bool newaddress { get; set; }
     }
 
     public class NewOrderAddressModel
