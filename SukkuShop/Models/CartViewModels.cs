@@ -6,6 +6,7 @@ namespace SukkuShop.Models
     {
         public List<CartProduct> CartProductsList {get; set;}
         public string TotalValue { get; set; }
+        
     }
 
     public class CartProduct

@@ -198,6 +198,8 @@ namespace Links
                  
             public static readonly string Shop_css_map = Url("Shop.css.map");
             public static readonly string Shop_min_css = Url("Shop.min.css");
+            public static readonly string Summary_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Summary.min.css") ? Url("Summary.min.css") : Url("Summary.css");
+                 
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

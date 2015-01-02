@@ -212,7 +212,7 @@ namespace SukkuShop.Models
                 context.PaymentTypes.AddOrUpdate(p => p.PaymentId,
                         new PaymentType { PaymentId = 1, PaymentName = "Przedpłata na konto", PaymentPrice = 0 },
                         new PaymentType { PaymentId = 2, PaymentName = "Płatność za pobraniem", PaymentPrice = 5 },
-                        new PaymentType { PaymentId = 2, PaymentName = "PayU", PaymentPrice = 1 }
+                        new PaymentType { PaymentId = 3, PaymentName = "PayU", PaymentPrice = 1 }
                     );
 
                 context.ShippingTypes.AddOrUpdate(p => p.ShippingId,

@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SukkuShop.Models
 {
+
     public class OrderViewModels
     {
         public List<OrderItem> OrderProductList { get; set; }
@@ -17,12 +18,45 @@ namespace SukkuShop.Models
         public string TotalValue { get; set; }
     }
 
-    public class OrderDataViewModel
+    public class OrderViewItemsTotal
     {
-        public CartUserLogin CartUserLogin { get; set; }
-        public NewOrderAddressModel NewOrderAddressModel { get; set; }
-        public ChangeOrderAddressModel ChangeOrderAddressModel { get; set; }
+        public List<OrderItemSummary> OrderProductList { get; set; }
+        public string TotalValue { get; set; }
     }
+
+    public class OrderViewModelsSummary
+    {
+        public OrderViewItemsTotal OrderViewItemsTotal { get; set; }
+        public UserAddressModel UserAddressModel { get; set; }
+        public OrderShippingSummary OrderShipping { get; set; }
+        public OrderPaymentSummary OrderPayment { get; set; }
+        public string TotalTotalValue { get; set; }
+    }
+
+    public class OrderShippingSummary
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Price { get; set; }
+    }
+
+    public class OrderPaymentSummary
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string Price { get; set; }
+    }
+
+
+    public class OrderItemSummary
+    {
+        public string Name { get; set; }
+        public int Quantity { get; set; }
+        public string Price { get; set; }
+        public string TotalValue { get; set; }
+        public string Image { get; set; }
+    }
+
 
     public class UserAddressModel
     {

@@ -62,6 +62,9 @@ namespace SukkuShop.Models
     }
     public class OrderAdress
     {
+        public string Name { get; set; }
+        public string Nazwisko { get; set; }
+        public string Telefon { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }

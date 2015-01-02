@@ -1,16 +1,15 @@
-﻿@model SukkuShop.Models.OrderViewModels
+﻿@model SukkuShop.Models.OrderViewModelsSummary
 @{
     ViewBag.Title = "Podsumowanie";
 }
 
 <div class="cart-container">
-    <div class="cart-title">Twoje zamówienie</div>
+    <div class="cart-title">Twój koszyk</div>
     <ul class="cart-order-steps">
-        <li>1. Produkty i wysyłka</li>
-        <li>2. Dane kontaktowe</li>
-        <li class="selected">3. Podsumowanie zamówienia</li>
+        <li>1. Koszyk</li>
+        <li>2. Twoje dane</li>
+        <li class="selected">3. Potwierdzenie zamówienia</li>
     </ul>
-
     <table class="cart-table" cellspacing="0">
         <thead>
             <tr>
@@ -21,67 +20,48 @@
             </tr>
         </thead>
         <tbody>
-            @*Tu chyba jeszcze zdjecie gdzies, nie?*@
-            <tr>
-                <td>Name</td>
-                <td>10.00</td>
-                <td>20 szt.</td>
-                <td>200.00</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>10.00</td>
-                <td>20 szt.</td>
-                <td>200.00</td>
-            </tr>
-            <tr>
-                <td>Name</td>
-                <td>10.00</td>
-                <td>20 szt.</td>
-                <td>200.00</td>
-            </tr>
+            @foreach (var item in Model.OrderViewItemsTotal.OrderProductList)
+            {
+                <tr>
+                    <td>
+                        <img img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
+                        <div class="custom-product-text-container">@item.Name</div>
+                    </td>
+                    <td>@item.Price</td>
+                    <td>@item.Quantity szt.</td>
+                    <td>@item.TotalValue</td>
+                </tr>
+            }                        
         </tbody>
     </table>
-    <div class="products-price-summary">RAZEM 5000.00</div>
-    <div>
-        <div class="middle-box">
-            <div class="cart-title">Dostawa</div>
-            <div class="main-line"> Poczta Polska Bla Bla Bla</div><div class="cost"> 8.00 PLN</div>
-            <div class="description-box">
-                <div class="description-line">Przesyłka powinno zostać dostarczona w ciągu 2-3 dni roboczych od momentu nadania.</div>
-            </div>
-            <div class="clear" style="clear: both"></div>
-            <div class="cart-title">Adres Dostawy</div>
-            <div class="main-line">Jan Kowalski</div>
-            <div class="description-box">
-                <div class="description-line">Ul. Blablabla 12</div>
-                <div class="description-line"> 99-999 Zameczek</div>
-                <div class="description-line">Polska</div>
-                <div class="description-line">Tel: 666-666-666</div>
-            </div>
-            <div class="clear" style="clear: both"></div>
-            <div class="cart-title">Płatność</div>
-            <div class="main-line"> Przedpłata na konto</div><div class="cost"> 8.00 PLN</div>
-            <div class="description-box">
-                <div class="description-line">Zamówienie zostanie wysłane po zaksięgowaniu wpłaty.</div>
-            </div>
-        </div>
-        <div class="clear" style="clear: both"></div>
-        <div>
-            <div class="bottom-box">
-                <div class="cart-title">Podsumowanie</div>
-                <div class="bottom-summary-box">
-                    <div class="cost-summary-price"> 50.00 PLN</div>
-                    <div class="cost-summary">RAZEM</div>
-                </div>
-                <div class="clear" style="clear: both"></div>
-            </div>           
-        </div>
+    <div class="products-price-summary">Razem: @Model.OrderViewItemsTotal.TotalValue zł</div>
+    <div class="cart-title">Dostawa</div>
+    <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
+    <div class="shipping-price">@Model.OrderShipping.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">@Model.OrderShipping.Description</div>
+
+    <div class="cart-title">Adres dostawy</div>
+    <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">
+        ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
+        @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
+        Tel.: @Model.UserAddressModel.Telefon<br />
     </div>
-</div>
+    <div class="cart-title">Płatność</div>
+    <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
+    <div class="shipping-price">@Model.OrderPayment.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
 
+    <div class="cart-title" style="border-top:#f89b1d 1px solid">Podsumowanie</div>
+    <ul id="products-summary" style="padding-bottom: 20px;">
+        <li class="summary-text-bold">
+            <div id="price-box">Razem: <span style="color:#f89b1d">@Model.TotalTotalValue zł</span></div>
+        </li>
+    </ul>
+    <div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">Złóż zamówienie</div>
+    </div>
 
-
-
-@Scripts.Render("~/Scripts/OrderScripts.js")
-@Styles.Render("~/Content/css/Summary.css")
+@Styles.Render("~/Content/css/Cart.css")

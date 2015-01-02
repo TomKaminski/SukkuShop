@@ -67,6 +67,26 @@ namespace SukkuShop.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UserOrderSubmit()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UserOrderSubmit);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrder()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrder);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Podsumowanie()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Podsumowanie);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ZamowienieController Actions { get { return MVC.Zamowienie; } }
@@ -85,6 +105,8 @@ namespace SukkuShop.Controllers
         {
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
+            public readonly string UserOrderSubmit = "UserOrderSubmit";
+            public readonly string NewAddressOrder = "NewAddressOrder";
             public readonly string Podsumowanie = "Podsumowanie";
         }
 
@@ -93,6 +115,8 @@ namespace SukkuShop.Controllers
         {
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
+            public const string UserOrderSubmit = "UserOrderSubmit";
+            public const string NewAddressOrder = "NewAddressOrder";
             public const string Podsumowanie = "Podsumowanie";
         }
 
@@ -110,6 +134,32 @@ namespace SukkuShop.Controllers
         public ActionParamsClass_Krok2 Krok2Params { get { return s_params_Krok2; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Krok2
+        {
+            public readonly string shoppingCart = "shoppingCart";
+        }
+        static readonly ActionParamsClass_UserOrderSubmit s_params_UserOrderSubmit = new ActionParamsClass_UserOrderSubmit();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_UserOrderSubmit UserOrderSubmitParams { get { return s_params_UserOrderSubmit; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_UserOrderSubmit
+        {
+            public readonly string shoppingCart = "shoppingCart";
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_NewAddressOrder s_params_NewAddressOrder = new ActionParamsClass_NewAddressOrder();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_NewAddressOrder NewAddressOrderParams { get { return s_params_NewAddressOrder; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_NewAddressOrder
+        {
+            public readonly string model = "model";
+            public readonly string shoppingCart = "shoppingCart";
+        }
+        static readonly ActionParamsClass_Podsumowanie s_params_Podsumowanie = new ActionParamsClass_Podsumowanie();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Podsumowanie PodsumowanieParams { get { return s_params_Podsumowanie; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Podsumowanie
         {
             public readonly string shoppingCart = "shoppingCart";
         }
@@ -163,13 +213,40 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void PodsumowanieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void UserOrderSubmitOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Podsumowanie()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UserOrderSubmit(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UserOrderSubmit);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            UserOrderSubmitOverride(callInfo, shoppingCart, model);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void NewAddressOrderOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrder(SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrder);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            NewAddressOrderOverride(callInfo, model, shoppingCart);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void PodsumowanieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Podsumowanie(SukkuShop.Models.Cart shoppingCart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Podsumowanie);
-            PodsumowanieOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            PodsumowanieOverride(callInfo, shoppingCart);
             return callInfo;
         }
 

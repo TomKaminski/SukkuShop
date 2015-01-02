@@ -4,19 +4,29 @@
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");
 
-    $(".cart-title-ending").click(function() {
-        $("#NewClientForm").submit();
+    $.validator.addMethod("notEqual", function (value, element, param) {
+        return this.optional(element) || value != param;
+    }, "Proszę podać inną wartość");
+
+    $(".cart-title-ending").click(function () {
+        if ($("#newaddress").length)
+            $("#NewAddressForm").submit();
+        else {
+            $("#NewClientForm").submit();
+        }
     });
 
     $("#newaddress").click(function() {
         if ($(this).is(":checked")) {
-            $(".left-container").children().children("input[type=text]").each(function() {
-                $(this).attr("disabled", false);
+            $(".left-container").children().children("input[type=text]").each(function () {
+                $(this).css("background-color", "white");
+                $(this).attr("readonly", false);
             });
             
         } else {
             $(".left-container").children().children("input[type=text]").each(function () {
-                $(this).attr("disabled", true);
+                $(this).css("background-color", "#ebebeb");
+                $(this).attr("readonly", true);
             });
         }
     });
@@ -60,33 +70,40 @@
             },
             imie: {
                 required: true,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             nazwisko: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             ulica: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             numer: {
-                required: true
+                required: true,
+                notEqual: "Nie podano"
             },
             miasto: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$/
+                regex: /^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$/,
+                notEqual: "Nie podano"
             },
             kodpocztowy: {
                 required: true,
-                regex: /^[0-9]{2}-[0-9]{3}$/
+                regex: /^[0-9]{2}-[0-9]{3}$/,
+                notEqual: "Nie podano"
             }
 
         },
@@ -142,33 +159,40 @@
         rules: {
             Imie: {
                 required: true,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             Nazwisko: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             Ulica: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             Numer: {
-                required: true
+                required: true,
+                notEqual: "Nie podano"
             },
             Miasto: {
                 required: true,
                 minlength: 2,
-                regex: /^[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/,
+                notEqual: "Nie podano"
             },
             Telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$/
+                regex: /^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$/,
+                notEqual: "Nie podano"
             },
             KodPocztowy: {
                 required: true,
-                regex: /^[0-9]{2}-[0-9]{3}$/
+                regex: /^[0-9]{2}-[0-9]{3}$/,
+                notEqual: "Nie podano"
             }
 
         },
@@ -186,7 +210,7 @@
             Ulica: {
                 required: "Pole Ulica jest wymagane.",
                 minlength: "Ulica musi się składać z przynajmniej 2 znaków.",
-                regex: "Telefon jest niepoprawny"
+                regex: "Ulica jest niepoprawna"
             },
             Numer: {
                 required: "Pole Numer jest wymagane."

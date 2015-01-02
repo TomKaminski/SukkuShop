@@ -9,150 +9,146 @@
         <li class="selected">2. Dane kontaktowe</li>
         <li>3. Podsumowanie zamówienia</li>
     </ul>
-    <div class="client-data-container">        
-        <div class="right-container">
-            @if (User.Identity.IsAuthenticated)
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="client-data-container" style="width:500px;height:560px;">
+            @using (Html.BeginForm(MVC.Zamowienie.UserOrderSubmit(), FormMethod.Post, new { id = "NewAddressForm" }))
             {
-                <div class="client-type-text">Twoje dane wysyłkowe</div>
-                <div class="data-box"><div class="text">Imię: @Model.Imie</div></div>
-                <div class="data-box"><div class="text">Nazwisko: @Model.Nazwisko</div></div>
-                <div class="data-box"><div class="text">Ulica: @Model.Ulica</div></div>
-                <div class="data-box"><div class="text">Miasto: @Model.Miasto</div></div>
-                <div class="data-box"><div class="text">Numer: @Model.Numer</div></div>
-                <div class="data-box"><div class="text">Kod-Pocztowy: @Model.KodPocztowy</div></div>
-                <div class="data-box"><div class="text">Telefon: @Model.Telefon</div></div>
-            }
-            else
-            {
-                <div class="client-type-text">Zaloguj się na istniejące konto</div>
-                using (Html.BeginForm(MVC.Konto.ZalogujOrder(), FormMethod.Post, new {id = "OrderLoginForm"}))
-                {
-                    @Html.AntiForgeryToken()
-                    <div class="data-box">
-                        <label for="email" class="text">e-mail:</label>
-                        <input id="email" type="email" name="email" style="margin-right: 50px" />
+                <div class="left-container" style="width:100%">
+                    <div class="client-type-text">Moje dane adresowe</div>
+                    <div class="newaddress-box">
+                        <input type="checkbox" id="newaddress" class="css-checkbox" name="newaddress" required>
+                        <label for="newaddress" class="css-label" style="width:100%;">Chcę zmienić swoje dane adresowe</label>
                     </div>
-                    <div class="data-box">
-                        <label for="passwordLog" class="text">hasło:</label>
-                        <input id="passwordLog" type="password" name="password" style="margin-right: 50px" />
-                    </div>
-                    @Html.ValidationSummary("", new {@class = "error-summary"})
-                    <input type="submit" class="sukku-button-small" value="Zaloguj" />
-                }
-            }
-        </div>
-        @if (Model == null)
-        {
-            using (Html.BeginForm(MVC.Zamowienie.Podsumowanie(), FormMethod.Post, new {id = "NewClientForm"}))
-            {
-                <div class="left-container">
-                    <div class="client-type-text">Jestem nowym klientem</div>            
-                    <div class="data-box">
-                        <label for="email" class="text">e-mail*:</label>
-                        <input id="email" type="email" name="email" />
-                    </div>
-                    <div class="data-box">
-                        <label for="password" class="text">hasło*:</label>
-                        <input id="password" name="password" type="password" />
-                    </div>
-                    <div class="data-box">
-                        <label for="confirmPassword" class="text">potwierdź hasło*:</label>
-                        <input id="confirmPassword" name="confirmPassword" type="password" />
-                    </div>
-                    <div class="data-box">
-                        <label for="imie" class="text">imię*:</label>
-                        <input id="imie" name="imie" type="text" />
-                    </div>
-                    <div class="data-box">
-                        <label for="nazwisko" class="text">nazwisko*:</label>
-                        <input id="nazwisko" name="nazwisko" type="text" />
-                    </div>
-                    <div class="data-box">
-                        <label class="text" for="ulica">ulica*:</label>
-                        <input id="ulica" name="ulica" type="text" />
-                    </div>
-                    <div class="data-box">
-                        <label for="numer" class="text">nr domu*:</label>
-                        <input id="numer" name="numer" type="text" />
-                    </div>
-                    <div class="data-box">
-                        <label for="miasto" class="text">miasto*:</label>
-                        <input id="miasto" name="miasto" type="text" />
-                    </div>
-                    <div class="data-box">
-                        <label for="kodpocztowy" class="text">kod-pocztowy*:</label>
-                        <input id="kodpocztowy" name="kodpocztowy" type="text" />
-                    </div>
-                    <div class="data-box" style="margin-bottom: 50px">
-                        <label for="telefon" class="text">telefon*:</label>
-                        <input id="telefon" name="telefon" type="text" />
-                    </div>
-                </div>
-                <div class="clear" style="clear: both"></div>
-                <div id="checkboxes-container">
-                    <input type="checkbox" id="regulamin" class="css-checkbox" name="regulamin" required>
-                    <label for="regulamin" class="css-label">Zapoznałem/am się i akceptuję regulamin sklepu SUKKU.PL*</label>
-                    <input type="checkbox" id="daneosobowe" class="css-checkbox" name="daneosobowe" required>
-                    <label for="daneosobowe" class="css-label" style="font-size: 12px;">
-                        Wyrażam zgodę na przetwarzanie moich danych osobowych w celu rejestracji konta
-                        oraz realizacji zamówienia przez sklep internetowy SUKKU.PL prowadzony
-                        przez Smaki Orientu: Magdalena Agani-Chowaniec z siedzibą w: 32-650 Kęty,
-                        ul. Świętokrzyska 9A, która jest administratorem danych osobowych. Zgodnie z ustawą
-                        z dnia 29.08.1997r. każdy Klient ma prawo wglądu do swoich danych, ich poprawiania, zarządzania,
-                        zaprzestania przetwarzania oraza zażądania ich usunięcia. Podanie danych jest dobrowolne,
-                        ale brak zgody uniemożliwia założenie konta i realizację zamówienia.*
-                    </label>
-                </div>
-    <div class="data-box">
-        <div class="text">(*)-POLA OBOWIĄZKOWE</div>
-    </div>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm(MVC.Zamowienie.Podsumowanie(), FormMethod.Post, new { id = "NewAddressForm" }))
-            {
-
-                <div class="left-container">
-                    
-                    <div class="client-type-text">Moje nowe dane adresowe</div>
-                    <input type="checkbox" id="newaddress" class="css-checkbox" name="newaddress" required>
-                    <label for="newaddress" class="css-label" style="width:100%;">Chcę zmienić moje dane adresowe</label>
                     <div class="data-box">
                         @Html.LabelFor(m=>m.Imie,new{@class="text"}):
-                        @Html.TextBoxFor(m => m.Imie, new { disabled=true })
+                        @Html.TextBoxFor(m => m.Imie, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box">
                         @Html.LabelFor(m => m.Nazwisko, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Nazwisko, new { disabled = true })
+                        @Html.TextBoxFor(m => m.Nazwisko, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box">
                         @Html.LabelFor(m => m.Ulica, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Ulica, new { disabled = true })
+                        @Html.TextBoxFor(m => m.Ulica, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box">
                         @Html.LabelFor(m => m.Numer, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Numer, new { disabled = true })
+                        @Html.TextBoxFor(m => m.Numer, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box">
                         @Html.LabelFor(m => m.Miasto, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Miasto, new { disabled = true })
+                        @Html.TextBoxFor(m => m.Miasto, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box">
                         @Html.LabelFor(m => m.KodPocztowy, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.KodPocztowy, new { disabled = true })
+                        @Html.TextBoxFor(m => m.KodPocztowy, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                     <div class="data-box" style="margin-bottom: 50px">
                         @Html.LabelFor(m => m.Telefon, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Telefon, new { disabled = true })
+                        @Html.TextBoxFor(m => m.Telefon, new { @readonly = true, style = "background-color: #ebebeb" })
                     </div>
                 </div>
             }
+            <div id="triangle-right-big"></div><div class="cart-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+        </div>
         }
-        
-        <div id="triangle-right-big"></div><div class="cart-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
-    </div>
-</div>
-@Styles.Render("~/Content/css/ClientData.css")
-@Scripts.Render("~/Scripts/jquery.validate.js")
-@Scripts.Render("~/Scripts/OrderScripts.js")
+        else{
+            
+            <div class="client-data-container">
+                <div class="right-container">
+
+                        
+
+                    <div class="client-type-text">Zaloguj się na istniejące konto</div>
+                    @using (Html.BeginForm(MVC.Konto.ZalogujOrder(), FormMethod.Post, new {id = "OrderLoginForm"}))
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="data-box">
+                            <label for="email" class="text">e-mail:</label>
+                            <input id="email" type="email" name="email" style="margin-right: 50px" />
+                        </div>
+                        <div class="data-box">
+                            <label for="passwordLog" class="text">hasło:</label>
+                            <input id="passwordLog" type="password" name="password" style="margin-right: 50px" />
+                        </div>
+                        @Html.ValidationSummary("", new {@class = "error-summary"})
+                        <input type="submit" class="sukku-button-small" value="Zaloguj" />
+                    }
+                </div>
+                    @using (Html.BeginForm(MVC.Zamowienie.NewAddressOrder(), FormMethod.Post, new { id = "NewClientForm" }))
+                    {
+                        <div class="left-container">
+                            <div class="client-type-text">Jestem nowym klientem</div>
+                            <div class="data-box">
+                                <label for="email" class="text">e-mail*:</label>
+                                <input id="email" type="email" name="email" />
+                            </div>
+                            <div class="data-box">
+                                <label for="password" class="text">hasło*:</label>
+                                <input id="password" name="password" type="password" />
+                            </div>
+                            <div class="data-box">
+                                <label for="confirmPassword" class="text">potwierdź hasło*:</label>
+                                <input id="confirmPassword" name="confirmPassword" type="password" />
+                            </div>
+                            <div class="data-box">
+                                <label for="imie" class="text">imię*:</label>
+                                <input id="imie" name="imie" type="text" />
+                            </div>
+                            <div class="data-box">
+                                <label for="nazwisko" class="text">nazwisko*:</label>
+                                <input id="nazwisko" name="nazwisko" type="text" />
+                            </div>
+                            <div class="data-box">
+                                <label class="text" for="ulica">ulica*:</label>
+                                <input id="ulica" name="ulica" type="text" />
+                            </div>
+                            <div class="data-box">
+                                <label for="numer" class="text">nr domu*:</label>
+                                <input id="numer" name="numer" type="text" />
+                            </div>
+                            <div class="data-box">
+                                <label for="miasto" class="text">miasto*:</label>
+                                <input id="miasto" name="miasto" type="text" />
+                            </div>
+                            <div class="data-box">
+                                <label for="kodpocztowy" class="text">kod-pocztowy*:</label>
+                                <input id="kodpocztowy" name="kodpocztowy" type="text" />
+                            </div>
+                            <div class="data-box" style="margin-bottom: 50px">
+                                <label for="telefon" class="text">telefon*:</label>
+                                <input id="telefon" name="telefon" type="text" />
+                            </div>
+                        </div>
+                        <div class="clear" style="clear: both"></div>
+                        <div id="checkboxes-container">
+                            <input type="checkbox" id="regulamin" class="css-checkbox" name="regulamin" required>
+                            <label for="regulamin" class="css-label">Zapoznałem/am się i akceptuję regulamin sklepu SUKKU.PL*</label>
+                            <input type="checkbox" id="daneosobowe" class="css-checkbox" name="daneosobowe">
+                            <label for="daneosobowe" class="css-label" style="font-size: 12px;">
+                                Wyrażam zgodę na przetwarzanie moich danych osobowych w celu rejestracji konta
+                                oraz realizacji zamówienia przez sklep internetowy SUKKU.PL prowadzony
+                                przez Smaki Orientu: Magdalena Agani-Chowaniec z siedzibą w: 32-650 Kęty,
+                                ul. Świętokrzyska 9A, która jest administratorem danych osobowych. Zgodnie z ustawą
+                                z dnia 29.08.1997r. każdy Klient ma prawo wglądu do swoich danych, ich poprawiania, zarządzania,
+                                zaprzestania przetwarzania oraza zażądania ich usunięcia. Podanie danych jest dobrowolne,
+                                ale brak zgody uniemożliwia założenie konta i realizację zamówienia.*
+                            </label>
+                        </div>
+                        <div class="data-box">
+                            <div class="text">(*)-POLA OBOWIĄZKOWE</div>
+                        </div>
+                    }
+                <div id="triangle-right-big"></div><div class="cart-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+                </div>
+                }
+
+                   
+
+                
+            </div>
+
+            @Styles.Render("~/Content/css/ClientData.css")
+            @Scripts.Render("~/Scripts/jquery.validate.js")
+            @Scripts.Render("~/Scripts/OrderScripts.js")
