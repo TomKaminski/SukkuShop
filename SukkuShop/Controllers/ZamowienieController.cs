@@ -35,7 +35,11 @@ namespace SukkuShop.Controllers
         public async virtual Task<ActionResult>Krok2(Cart shoppingCart)
         {
             if (shoppingCart.PaymentId == 0 || shoppingCart.ShippingId == 0)
-                return RedirectToAction(MVC.Zamowienie.Krok1());
+            {
+                ModelState.AddModelError("", "Proszę wybrać metodę dostawy oraz metodę płatności");
+                return View(MVC.Zamowienie.Views.Krok1);
+            }
+                
             if (!shoppingCart.Lines.Any())
                 return RedirectToAction(MVC.Koszyk.Index());
             
@@ -57,42 +61,65 @@ namespace SukkuShop.Controllers
 
         public virtual async Task<ActionResult> UserOrderSubmit(Cart shoppingCart, UserAddressModel model)
         {
-            shoppingCart.OrderAdress = new OrderAdress
+            if (ModelState.IsValid)
             {
-                City = model.Miasto,
-                Name = model.Imie,
-                Nazwisko = model.Nazwisko,
-                Number = model.Numer,
-                PostalCode = model.KodPocztowy,
-                Street = model.Ulica,
-                Telefon = model.Telefon
-            };
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-            user.Name = model.Imie;
-            user.LastName = model.Nazwisko;
-            user.Number = model.Numer;
-            user.PhoneNumber = model.Telefon;
-            user.PostalCode = model.KodPocztowy;
-            user.City = model.Miasto;
-            user.Street = model.Ulica;
-            await _userManager.UpdateAsync(user);
-            return RedirectToAction(MVC.Zamowienie.Podsumowanie());
+                shoppingCart.OrderAdress = new OrderAdress
+                {
+                    City = model.Miasto,
+                    Name = model.Imie,
+                    Nazwisko = model.Nazwisko,
+                    Number = model.Numer,
+                    PostalCode = model.KodPocztowy,
+                    Street = model.Ulica,
+                    Telefon = model.Telefon
+                };
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                user.Name = model.Imie;
+                user.LastName = model.Nazwisko;
+                user.Number = model.Numer;
+                user.PhoneNumber = model.Telefon;
+                user.PostalCode = model.KodPocztowy;
+                user.City = model.Miasto;
+                user.Street = model.Ulica;
+                await _userManager.UpdateAsync(user);
+                return RedirectToAction(MVC.Zamowienie.Podsumowanie());
+            }
+            return View(MVC.Zamowienie.Views.Krok2);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public virtual ActionResult Wyloguj()
+        {
+            _authenticationManager.SignOut();
+            Session["username"] = null;
+            return RedirectToAction(MVC.Zamowienie.Krok2());
         }
 
         public async virtual Task<ActionResult> NewAddressOrder(NewOrderAddressModel model, Cart shoppingCart)
         {
-            shoppingCart.OrderAdress = new OrderAdress
+            var modelPlz = new UserAddressModel
             {
-                City = model.Miasto,
-                Name = model.Imie,
+                Imie = model.Imie,
+                Miasto = model.Miasto,
                 Nazwisko = model.Nazwisko,
-                Number = model.Numer,
-                PostalCode = model.KodPocztowy,
-                Street = model.Ulica,
+                Numer = model.Numer,
+                KodPocztowy = model.KodPocztowy,
+                Ulica = model.Ulica,
                 Telefon = model.Telefon
             };
             if (ModelState.IsValid)
             {
+                shoppingCart.OrderAdress = new OrderAdress
+                {
+                    City = model.Miasto,
+                    Name = model.Imie,
+                    Nazwisko = model.Nazwisko,
+                    Number = model.Numer,
+                    PostalCode = model.KodPocztowy,
+                    Street = model.Ulica,
+                    Telefon = model.Telefon
+                };
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -113,9 +140,9 @@ namespace SukkuShop.Controllers
                     return RedirectToAction(MVC.Zamowienie.Podsumowanie());
                 }
                 ModelState.AddModelError("", "Istnieje już użytkownik o podanym adresie Email");
+                return View(MVC.Zamowienie.Views.Krok2,modelPlz);
             }
-
-            return RedirectToAction(MVC.Zamowienie.Krok2());
+            return View(MVC.Zamowienie.Views.Krok2, modelPlz);
         }
 
         private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out OrderPaymentSummary paymentModel,

@@ -52,7 +52,8 @@ namespace SukkuShop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(MVC.Zamowienie.Views.Krok2,model);
+                ModelState.AddModelError("", "Niepełne dane");
+                return View(MVC.Zamowienie.Views.Krok2);
             }
             //if (!UserManager.IsEmailConfirmed(UserManager.FindByEmail(model.Email).Id))
             //{
@@ -69,7 +70,7 @@ namespace SukkuShop.Controllers
                     return View(MVC.Shared.Views.Blokada);
                 default:
                     ModelState.AddModelError("", "Nieprawidłowy adres email i/lub hasło");
-                    return View(MVC.Zamowienie.Views.Krok2,model);
+                    return View(MVC.Zamowienie.Views.Krok2);
             }
         }
 
