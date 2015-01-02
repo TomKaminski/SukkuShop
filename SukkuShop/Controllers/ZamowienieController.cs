@@ -218,13 +218,14 @@ namespace SukkuShop.Controllers
              //Orders.SentDate -> panel admina [czeckbox, że wysłane]?
              //Orders.OrderInfo -> wtf tutaj?
              
-             //Orders.TotalPrice -> ProductsPrice + shippingPrice + PaymentPrice                       
-             // Orders.SpecialAddress -> CZO TO JEST
-            // trzeba discounta usunac
+                           
+            // trzeba discounta usunac // Orders.SpecialAddress -> CZO TO JEST // do wyjebania
 
             //Orders.ProductsPrice -> suma SubTotalPrice z Order Details [nie umiem] :(
+            //Orders.TotalPrice -> ProductsPrice + shippingPrice + PaymentPrice         
 
             var listakurwa = new List<OrderDetails>();
+            decimal hehe = 0;
             foreach (var item in shoppingCart.Lines)
             {
                 var orderD = new OrderDetails
@@ -236,9 +237,14 @@ namespace SukkuShop.Controllers
                 orderD.SubTotalPrice = item.Quantity*productPrice;
                 _dbContext.OrderDetails.Add(orderD);
                 listakurwa.Add(orderD);
+                hehe += orderD.SubTotalPrice;
             }
+            var PaymentPrice = _dbContext.PaymentTypes.First(i=>i.PaymentId == shoppingCart.PaymentId).PaymentPrice;
+            var ShippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId).ShippingPrice; 
             var orders = new Orders
             {
+                ProductsPrice = hehe,
+                TotalPrice = hehe+PaymentPrice+ShippingPrice,
                 Name = user.Name,
                 Surname = user.LastName,
                 OrderDate = DateTime.Now,
