@@ -106,6 +106,7 @@ namespace SukkuShop.Controllers
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
             public readonly string UserOrderSubmit = "UserOrderSubmit";
+            public readonly string Wyloguj = "Wyloguj";
             public readonly string NewAddressOrder = "NewAddressOrder";
             public readonly string Podsumowanie = "Podsumowanie";
         }
@@ -116,6 +117,7 @@ namespace SukkuShop.Controllers
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
             public const string UserOrderSubmit = "UserOrderSubmit";
+            public const string Wyloguj = "Wyloguj";
             public const string NewAddressOrder = "NewAddressOrder";
             public const string Podsumowanie = "Podsumowanie";
         }
@@ -223,6 +225,17 @@ namespace SukkuShop.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             UserOrderSubmitOverride(callInfo, shoppingCart, model);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void WylogujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Wyloguj()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Wyloguj);
+            WylogujOverride(callInfo);
+            return callInfo;
         }
 
         [NonAction]

@@ -236,6 +236,7 @@
     <Compile Include="Identity\EmailService.cs" />
     <Compile Include="Infrastructure\Binders\CartModelBinder.cs" />
     <Compile Include="Infrastructure\Binders\RegisterModelBinder.cs" />
+    <Compile Include="Infrastructure\BooleanRequiredAttribute.cs" />
     <Compile Include="Infrastructure\Generic\IAppRepository.cs" />
     <Compile Include="Infrastructure\Generic\IShop.cs" />
     <Compile Include="Infrastructure\Helpers\PagingHelper.cs" />

@@ -9,6 +9,40 @@ $SeUI: Segoe UI;
 $SeL: SegoeLight;
 $SeB: SegoeBold;
 
+.logged-user-text{
+    font-family:$SeL;
+    font-size:18px;
+    text-align:center;
+    margin-bottom:10px;
+}
+
+.error-box{
+    margin: auto auto 50px;
+    width: 90%;
+    height: 300px;
+    color:red;
+    font-family:$SeB
+}
+
+.validation-summary-errors ul li{
+    padding: 10px 0 10px 20px;
+}
+
+.wyloguj-text{
+margin: 35px 140px 0;
+padding: 5px 60px;
+background-color: #f89b1d;
+/* height: 30px; */
+/* width: 200px; */
+text-align: center;
+line-height: 40px;
+font-family: Segoe UI;
+color: white;
+border-radius: 10px;
+border: none;
+cursor: pointer;
+font-size: 14px;
+}
 .left-container label.error{
 margin-left: 145px;
 }
@@ -52,10 +86,23 @@ input.error{
 
 .error-summary
 {
+    font-weight:bold;
     color:red;
-    text-align:center;
-    margin-top:15px;
     font-family: $SeUI;
+}
+
+.input-validation-error{
+    border: red solid 1px !important
+}
+
+.field-validation-error{
+    float: left;
+/* margin: auto; */
+margin-left: 145px;
+color: red;
+font-weight: bold;
+font-size: 14px;
+margin-top:2px;
 }
 
 .left-container{
@@ -115,6 +162,7 @@ margin-bottom: 20px;
 	text-transform: uppercase;
 	margin: 0;
 	color: $color_tree_poppy_approx;
+    cursor: pointer;
 }
 
 #triangle-right-big {
@@ -125,6 +173,7 @@ border-left: 15px solid #f89b1d;
 border-bottom: 11px solid transparent;
 float: right;
 margin: 0 25px 37px 15px;
+cursor:pointer;
 }
 
 .client-data-container{
@@ -192,7 +241,7 @@ text-align: center;
 
 input[type=checkbox].css-checkbox {
 	display: none;
-	+ label.css-label {
+	+ input[type=hidden] + label.css-label {
 		padding-left: 23px;
 		height: 18px;
 		line-height: 20px;
@@ -208,7 +257,7 @@ input[type=checkbox].css-checkbox {
         margin-bottom:10px;
 
 	}
-	&:checked + label.css-label {
+	&:checked + input[type=hidden] + label.css-label {
 		background-position: 0 -18px;
 	}
 }
