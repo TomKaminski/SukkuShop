@@ -348,6 +348,7 @@
     <Content Include="Content\css\Shop.min.css">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Summary.css" />
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox.png" />
