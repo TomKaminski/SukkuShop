@@ -62,6 +62,13 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ZalogujOrder()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZalogujOrder);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Aktywacja()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Aktywacja);
@@ -97,6 +104,7 @@ namespace SukkuShop.Controllers
         public class ActionNamesClass
         {
             public readonly string Zaloguj = "Zaloguj";
+            public readonly string ZalogujOrder = "ZalogujOrder";
             public readonly string Zarejestruj = "Zarejestruj";
             public readonly string Aktywacja = "Aktywacja";
             public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
@@ -114,6 +122,7 @@ namespace SukkuShop.Controllers
         public class ActionNameConstants
         {
             public const string Zaloguj = "Zaloguj";
+            public const string ZalogujOrder = "ZalogujOrder";
             public const string Zarejestruj = "Zarejestruj";
             public const string Aktywacja = "Aktywacja";
             public const string ZapomnianeHaslo = "ZapomnianeHaslo";
@@ -136,6 +145,15 @@ namespace SukkuShop.Controllers
         {
             public readonly string returnUrl = "returnUrl";
             public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_ZalogujOrder s_params_ZalogujOrder = new ActionParamsClass_ZalogujOrder();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ZalogujOrder ZalogujOrderParams { get { return s_params_ZalogujOrder; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ZalogujOrder
+        {
+            public readonly string model = "model";
+            public readonly string returnUrl = "returnUrl";
         }
         static readonly ActionParamsClass_Zarejestruj s_params_Zarejestruj = new ActionParamsClass_Zarejestruj();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -252,6 +270,19 @@ namespace SukkuShop.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
             ZalogujOverride(callInfo, returnUrl);
             return callInfo;
+        }
+
+        [NonAction]
+        partial void ZalogujOrderOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.LoginViewModel model, string returnUrl);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ZalogujOrder(SukkuShop.Models.LoginViewModel model, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZalogujOrder);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            ZalogujOrderOverride(callInfo, model, returnUrl);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [NonAction]
