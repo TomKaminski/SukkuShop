@@ -1,34 +1,12 @@
 ﻿//colors
-$color_tree_poppy_approx: #f89b1d;
+$sukkuorange: #f89b1d;
 $black: black;
 
 //fonts
-$font_0: Segoe UI;
-$font_1: Calibri;
+$SeUI: Segoe UI;
+$Calbr: Calibri;
 
-.notfound-text-big {
-	font-size: 60px;
-	font-family: $font_0;
-	color: $color_tree_poppy_approx;
-	text-align: center;
-	margin-bottom: 10px;
-}
-.notfound-text-normal {
-	text-align: center;
-	font-size: 42px;
-	color: $black;
-	font-family: $font_1;
-	margin-bottom: 10px;
-}
-.notfound-backlink {
-	text-align: center;
-	a {
-		text-decoration: none;
-		color: $color_tree_poppy_approx;
-		font-weight: bold;
-		font-family: $font_0;
-	}
-}
+
 .center {
 	bottom: 0;
 	left: 0;
@@ -37,4 +15,27 @@ $font_1: Calibri;
 	margin: auto;
 	position: absolute;
 	height: 200px;
+    .notfound-text-big {
+	    font-size: 60px;
+	    font-family: $SeUI;
+	    color: $sukkuorange;
+	    text-align: center;
+	    margin-bottom: 10px;
+    }
+    .notfound-text-normal {
+	    text-align: center;
+	    font-size: 42px;
+	    color: $black;
+	    font-family: $Calbr;
+	    margin-bottom: 10px;
+    }
+    .notfound-backlink {
+	    text-align: center;
+	    a {
+		    text-decoration: none;
+		    color: $sukkuorange;
+		    font-weight: bold;
+		    font-family: $SeUI;
+	    }
+    }
 }

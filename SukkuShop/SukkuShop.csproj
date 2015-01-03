@@ -325,6 +325,12 @@
     <Content Include="Content\css\Koszyk\Cart.min.css">
       <DependentUpon>Cart.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Sklep\ShopDetails.css">
+      <DependentUpon>ShopDetails.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Sklep\ShopDetails.min.css">
+      <DependentUpon>ShopDetails.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Zamowienie\Cart.css">
       <DependentUpon>Cart.scss</DependentUpon>
     </Content>
@@ -460,6 +466,11 @@
     <Content Include="Content\css\Zamowienie\OrderSubmitted.css.map">
       <DependentUpon>OrderSubmitted.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Sklep\ShopDetails.scss" />
+    <Content Include="Content\css\Sklep\ShopDetails.css.map">
+      <DependentUpon>ShopDetails.css</DependentUpon>
+    </Content>
+    <Content Include="Content\fonts\phagspa.ttf" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -477,7 +488,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\OrderScripts.js" />
+    <Content Include="Scripts\OrderKrok1.js" />
+    <Content Include="Scripts\OrderKrok2.js" />
     <Content Include="Scripts\podsumowanie.js" />
     <Content Include="Scripts\shopAngular.js" />
     <Content Include="Scripts\shopdetails.js" />

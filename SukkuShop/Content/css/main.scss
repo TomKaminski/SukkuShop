@@ -99,7 +99,9 @@ img {
 	float: left;
 	background-image: url(../Images/logo-header.png);
 	&:hover {
-		//Instead of the line below you could use @includetransition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+        -moz-transition: all 0.3s ease-in-out;
+        -o-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
 		transition: all 0.3s ease-in-out;
 		opacity: 0.8;
 	}
@@ -217,6 +219,7 @@ nav {
 .main-container {
 	width: 1066px;
 	margin: auto;
+    
 }
 footer {
 	margin: 60px auto 0;
@@ -235,6 +238,7 @@ footer {
 				width: 290px;
 				.footer-text-big {
 					width: 230px;
+           
 				}
 			}
 			.footer-text-big {

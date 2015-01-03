@@ -20,6 +20,26 @@ $font_6: SegoeLight;
 $font_7: SegoeBold;
 $font_8: Segoe Ui;
 
+
+@font-face {
+    font-family: $font_1;
+    src: url(../../fonts/licida_bright.ttf);
+}
+
+@font-face {
+    font-family: $font_4;
+    src: url(../../fonts/phagspa.ttf);
+}
+
+@font-face {
+    font-family: $font_2;
+    src: url(../../fonts/FTLTLT.ttf);
+}
+
+@font-face {
+    font-family: $font_3;
+    src: url(../../fonts/FoglihtenPCS.otf);
+}
 //@extend-elements
 //original selectors
 //.add-to-cart-icon img, .info-icon img, .add-to-cart-icon input
@@ -70,13 +90,7 @@ $font_8: Segoe Ui;
 	flex-wrap: wrap;
 	justify-content: flex-start;
 }
-.product-details-list-container {
-	padding-top: 20px;
-	margin: auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-}
+
 .product-list-item-box {
 	height: 191px;
 	width: 135px;
@@ -98,31 +112,7 @@ $font_8: Segoe Ui;
 	}
 }
 
-.sort-arrow-up {
-    width: 0;
-    height: 0;
-    border-right: 7px solid transparent;
-    border-bottom: 11px solid black;
-    border-left: 7px solid transparent;
-    float: right;
-    background-color: transparent;
-    cursor: pointer;
-    opacity: 0.6;
-    margin-bottom: 1px;
-}
 
-.sort-arrow-down {
-    width: 0;
-    height: 0;
-    border-right: 7px solid transparent;
-    border-top: 11px solid black;
-    border-left: 7px solid transparent;
-    float: right;
-    background-color: transparent;
-    cursor: pointer;
-    opacity: 0.6;
-    margin-top: 1px;
-}
 .product-list-item {
 	top: 2px;
 	left: 2px;
@@ -393,211 +383,13 @@ ul {
 	right: 3px;
 	bottom: 0;
 }
-.product-details-main-container {
-	width: 1066px;
-	margin: 60px auto 12px;
-	padding-bottom: 60px;
-	border-bottom: 1px solid $color_tree_poppy_approx;
-	position: relative;
-}
-.product-details-img {
-	width: 368px;
-	height: 368px;
-	margin: 36px 73px 0 55px;
-	float: left;
-	position: relative;
-	img {
-		width: 100%;
-		height: 100%;
+
+
+.info-icon img {
+	@extend %extend_1;
+	&:hover {
+		opacity: 1;
 	}
-}
-.product-details-info-container {
-	width: 415px;
-	float: left;
-	.title-box {
-		height: 48px;
-		margin-bottom: 28px;
-		font-size: 24px;
-		font-family: $font_3;
-		text-transform: uppercase;
-	}
-	.price-box {
-		margin-bottom: 10px;
-		.price-text {
-			font-family: $font_5;
-			font-size: 28px;
-			float: left;
-			margin-right: 25px;
-		}
-		.gramature-text {
-			font-family: $font_6;
-			font-size: 24px;
-			vertical-align: middle;
-			line-height: 28px;
-			color: $gray;
-		}
-	}
-	.avaibility {
-		font-weight: bold;
-		font-size: 14px;
-		text-transform: uppercase;
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	.ask-for-product {
-		font-size: 12px;
-		color: $black;
-		font-family: $font_6;
-		border-bottom: 1px solid $black;
-		&:hover {
-			text-decoration: none;
-		}
-	}
-	.quantity-box {
-		height: 34px;
-		font-size: 21px;
-		color: $black;
-		margin-top: 24px;
-		position: relative;
-		font-family: $font_6;
-	}
-	.add-to-cart-button {
-		margin-top: 24px;
-		background-color: $color_tree_poppy_approx;
-		height: 51px;
-		width: 245px;
-		margin-bottom: 5px;
-	}
-	.add-to-cart-button-gray {
-		margin-top: 24px;
-		height: 51px;
-		width: 245px;
-		margin-bottom: 5px;
-		background-color: $gray;
-		cursor: default;
-	}
-	.details-info-text {
-		font-family: $font_6;
-		font-size: 14px;
-		margin-top: 14px;
-	}
-}
-.quantity-box {
-	.quanity-text {
-		margin-right: 80px;
-		float: left;
-		position: absolute;
-		bottom: 0;
-	}
-	input {
-		width: 32px;
-		height: 30px;
-		border: 1px solid $black;
-		font-size: 21px;
-		outline: none;
-		float: left;
-		text-align: center;
-		margin-right: 9px;
-		font-family: $font_6;
-		margin-left: 123px;
-	}
-	.arrows-box {
-		width: 34px;
-		height: 34px;
-		float: left;
-	}
-	.arrow-up-box {
-		width: 34px;
-		height: 19px;
-		background-color: $color_tree_poppy_approx;
-	}
-	.arrow-down-box {
-		width: 34px;
-		height: 15px;
-		background-color: $color_tree_poppy_approx;
-	}
-	.quantity-arrow-up {
-		width: 0;
-		height: 0;
-		border-right: 7px solid transparent;
-		border-bottom: 11px solid $white;
-		border-left: 7px solid transparent;
-		background-color: transparent;
-		cursor: pointer;
-		margin: auto;
-		padding-top: 3px;
-	}
-	.quantity-arrow-down {
-		width: 0;
-		height: 0;
-		border-right: 7px solid transparent;
-		border-top: 11px solid $white;
-		border-left: 7px solid transparent;
-		background-color: transparent;
-		cursor: pointer;
-		margin: auto;
-		padding-top: 3px;
-	}
-	.quanity-text-right {
-		line-height: 34px;
-		vertical-align: middle;
-		float: left;
-		margin-left: 14px;
-	}
-}
-.add-to-cart-button-text {
-	line-height: 51px;
-	margin-left: 15px;
-	font-size: 18px;
-	color: $white;
-	text-transform: uppercase;
-	margin-right: 9px;
-	float: left;
-	font-family: $font_6;
-}
-.white-cart-icon {
-	height: 27px;
-	width: 34px;
-	margin-top: 11px;
-	background-image: url(../Images/shop/carticonwhite.png);
-	float: left;
-}
-.details-info-title {
-	font-family: $font_7;
-	font-size: 14px;
-	margin-top: 14px;
-	text-transform: uppercase;
-}
-.product-category-label-img {
-	width: 179px;
-	height: 38px;
-	background-color: $color_tree_poppy_approx;
-	font-family: $font_8;
-	font-size: 20px;
-	color: $white;
-	text-align: center;
-	line-height: 38px;
-	margin: auto;
-	position: absolute;
-	left: 100px;
-	bottom: 0;
-	text-transform: uppercase;
-}
-.product-promotion-label-img {
-	width: 179px;
-	height: 38px;
-	background-color: $color_japanese_laurel_approx;
-	font-family: $font_8;
-	font-size: 20px;
-	color: $white;
-	text-align: center;
-	line-height: 38px;
-	margin: auto;
-	position: absolute;
-	right: 0;
-	top: 0;
-	text-transform: uppercase;
-	z-index: 1000;
 }
 .flying-product-start {
 	opacity: 0.7;
@@ -605,44 +397,4 @@ ul {
 	height: 50px;
 	width: 50px;
 	z-index: 1031;
-}
-.product-detail-price-before-discount {
-	font-size: 16px;
-	text-decoration: line-through;
-}
-.add-to-cart-animation {
-	font-size: 11px;
-	color: $color_japanese_laurel_approx;
-	text-transform: uppercase;
-	margin-bottom: 15px;
-}
-.add-to-cart-animation-box {
-	height: 11px;
-}
-.info-icon img {
-	@extend %extend_1;
-	&:hover {
-		opacity: 1;
-	}
-}
-.sort-arrow-down:hover {
-	opacity: 1;
-}
-.sort-arrow-up:hover {
-	opacity: 1;
-}
-hr.hr-orange {
-	background-color: $color_tree_poppy_approx;
-	height: 1px;
-	border: 0;
-	color: $color_tree_poppy_approx;
-	border-color: $color_tree_poppy_approx;
-}
-img.lupa {
-	width: 119px;
-	height: 119px;
-	position: absolute;
-	top: 126px;
-	left: 126px;
-	opacity: 0.8;
 }

@@ -10,5 +10,6 @@
 /// <reference path="CartSummary.js" />
 /// <reference path="angular.min.js" />
 /// <reference path="shopangular.js" />
-/// <reference path="orderscripts.js" />
 /// <reference path="podsumowanie.js" />
+/// <reference path="orderkrok1.js" />
+/// <reference path="orderkrok2.js" />

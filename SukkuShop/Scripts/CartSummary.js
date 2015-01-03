@@ -43,22 +43,6 @@
         });
 
     });
-
-
-    
-
-    ////summary po dostawie, modyfikacja
-    //function dostawaSummary() {
-    //    var value2 = $('#dostawa-box-summary').text().replace(' zł', '');
-    //    var value1 = $('#price-box-json').text().replace(' zł', '');
-    //    var sum = Number(currency(value1)) + Number(currency(value2));
-    //    $("#shipping-price-summary").empty().append(currency(sum) + " zł");
-    //}
-
-
-    
-
-
     //total price po byle jakich kliknięciach
     function totalPriceJson() {
         $.ajax({
