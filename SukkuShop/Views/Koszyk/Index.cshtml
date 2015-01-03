@@ -13,28 +13,26 @@
         }
         else
         {
-                <div class="notfound-text-big">
-                    Uuuups!
-                </div>
-                <div class="notfound-text-normal">
-                    Twój koszyk jest pusty!
-                </div>
-                <div class="notfound-backlink"><a href="@Url.Action(MVC.Sklep.Produkty())">&laquo Rozpocznij zakupy! &raquo</a></div>
+            <div class="notfound-text-big">
+                Uuuups!
+            </div>
+            <div class="notfound-text-normal">
+                Twój koszyk jest pusty!
+            </div>
+            <div class="notfound-backlink"><a href="@Url.Action(MVC.Sklep.Produkty())">&laquo Rozpocznij zakupy! &raquo</a></div>
         }
     </div>
-    <a href="@Url.Action(MVC.Sklep.Produkty())">
-        <div id="cart-button-bottom">
-            <div id="triangle-left-big"></div>
-            <div class="cart-title" style="float:left; margin:0">Kontynuuj zakupy</div>
-        </div>
-    </a>
-    <a href="@Url.Action(MVC.Zamowienie.Krok1())">
-        <div id="cart-button-bottom">
+    <div>
+        <a href="@Url.Action(MVC.Sklep.Produkty())">
+                <div id="triangle-left-big"></div>
+                <div class="cart-title" style="float:left; margin:0">Kontynuuj zakupy</div>
+        </a>
+        <a href="@Url.Action(MVC.Zamowienie.Krok1())">
             <div id="triangle-right-big"></div>
             <div class="cart-title" style="float:right; margin:0">Złóż zamówienie</div>
-            <div class="clear">&nbsp;</div>
-        </div>
-    </a>
+        </a>
+        <div class="clear" style="clear: both"></div>
+    </div>
 </div>
 @Styles.Render("~/Content/css/Koszyk/Cart.css")
 @Scripts.Render("~/Scripts/CartSummary.js")

@@ -257,11 +257,11 @@ margin-bottom: 20px;
 	float: left;
 	width: 548px;
 }
-.order-summary-description-text {
+/*.order-summary-description-text {
 	font-size: 16px;
 	font-family: $font_1;
 	width: 390px;
-}
+}*/
 table.cart-table {
 	font-family: $font_1;
 	color: $black;
@@ -301,10 +301,12 @@ table.cart-table {
 		}
 	}
 }
-
-#cart-button-bottom{
+/*to chyba tez*/
+#cart-button-bottom-left{
     margin-top:25px;
 }
+
+
 input[type=radio].css-checkbox {
 	display: none;
 	+ label.css-label {
