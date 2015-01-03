@@ -59,11 +59,11 @@
                                 </ul>
                                 <div class="image-bottom-panel">
                                     <div ng-if="item.QuantityInStock != 0">
-                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnSuccess = "plz"}))
+                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions {HttpMethod = "POST", OnSuccess = "plz(data)"}))
                                         {
                                             <input type="hidden" name="id" value="{{item.Id}}" />
                                             <div class="add-to-cart-icon">
-                                                <input ng-click="flyingitem()" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                                                <input id="img{{item.Id}}" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
                                             </div>
                                         }
                                     </div>

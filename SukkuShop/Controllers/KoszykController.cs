@@ -21,7 +21,6 @@ namespace SukkuShop.Controllers
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
             var productQ = _dbContext.Products.First(m => m.ProductId == id).Quantity;
-
             var firstOrDefault = shoppingCart.Lines.FirstOrDefault(m => m.Id == id);
             if (firstOrDefault != null)
             {
@@ -40,7 +39,13 @@ namespace SukkuShop.Controllers
                 }
             }
             var value = CalcTotalValue(shoppingCart);
-            return PartialView(MVC.Shared.Views._CartInfoPartialView, value.ToString("c"));
+            var data = new
+            {
+                value,
+                id
+            };
+            return Json(data, JsonRequestBehavior.AllowGet);
+            //return PartialView(MVC.Shared.Views._CartInfoPartialView, value.ToString("c"));
         }
 
         public virtual ActionResult RemoveFromCart(int id, Cart shoppingCart)

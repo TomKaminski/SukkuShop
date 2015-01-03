@@ -1,30 +1,35 @@
-﻿function plz() {
-    var cart = jQuery(this);
-    var imgtodrag = jQuery(this).parent().parent().parent().parent().parent().find("img").eq(0);
-    if (imgtodrag) {
-        imgtodrag.clone()
-            .offset({
-                top: imgtodrag.offset().top,
-                left: imgtodrag.offset().left
-            })
-            .addClass("flying-product-start")
-            .css('position', 'absolute')
-            .appendTo(jQuery('body')).
-            animate({
-                'top': cart.offset().top + 10,
-                'left': cart.offset().left + 10,
-                'width': '10px',
-                'height': '10px',
-                'position': 'absolute'
-            }, 1000, function () {
-                jQuery(this).animate({
-                    'width': 0,
-                    'height': 0
-                }, function () {
-                    jQuery(this).detach();
+﻿function plz(data) {
+    var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
+    if (plza != data.value) {
+        $("#cart-price-header").html('koszyk ' + data.value +' zł');
+        var cart = $("#img" + data.id);
+        var imgtodrag = cart.parent().parent().parent().parent().parent().find("img").eq(0);
+        if (imgtodrag) {
+            imgtodrag.clone()
+                .offset({
+                    top: imgtodrag.offset().top,
+                    left: imgtodrag.offset().left
+                })
+                .addClass("flying-product-start")
+                .css('position', 'absolute')
+                .appendTo(jQuery('body')).
+                animate({
+                    'top': cart.offset().top + 10,
+                    'left': cart.offset().left + 10,
+                    'width': '10px',
+                    'height': '10px',
+                    'position': 'absolute'
+                }, 1000, function () {
+                    jQuery(this).animate({
+                        'width': 0,
+                        'height': 0
+                    }, function () {
+                        jQuery(this).detach();
+                    });
                 });
-            });
+        }
     }
+    
 };
 
 

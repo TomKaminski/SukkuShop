@@ -72,7 +72,7 @@
             }
         }
         <div class="add-to-cart-animation-box">
-            <div id="add-to-cart-animation" class="add-to-cart-animation segoe-semibold">Produkt został dodany do koszyka &#10004;</div>
+            <div id="add-to-cart-animation" class="add-to-cart-animation segoe-semibold"></div>
         </div>
         <hr class="hr-orange"/>
         <div class="details-info-title">szczegóły produktu</div>
@@ -105,14 +105,6 @@
             var jsSerializer = new JavaScriptSerializer();
         }
         var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
-        $('.add-to-cart-button').click(function() {
-            if (maxQuantity > 0) {
-                $('#add-to-cart-animation').stop().fadeOut();
-                $('#add-to-cart-animation').show("fast", function() {
-                    $('#add-to-cart-animation').fadeOut(5000);
-                });
-            }
-        });
 
         //Counter ++
         $('#increase_quantity').click(function() {

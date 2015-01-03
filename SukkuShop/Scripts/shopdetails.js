@@ -27,17 +27,31 @@
 
 
     //Ajax add to cart from details
-    $('.add-to-cart-button').click(function() {
+    $('.add-to-cart-button').click(function () {
         var url = $('#addtocartform').attr("action");
         var formData = $('#addtocartform').serialize();
         $.ajax({
             url: url,
             type: "POST",
             data: formData
-        }).success(function(data) {
-            var target = $('#CartTotalValue');
-            target.empty();
-            target.append(data);
+        }).success(function (data) {
+            var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
+            if (plza != data.value) {
+                $("#add-to-cart-animation").css("color", "green");
+                $("#add-to-cart-animation").html("Produkt został dodany do koszyka &#10004;");
+                $('#add-to-cart-animation').stop().fadeOut();
+                $('#add-to-cart-animation').show("fast", function() {
+                    $('#add-to-cart-animation').fadeOut(5000);
+                });
+                $("#cart-price-header").html('koszyk ' + data.value + ' zł');
+            } else {
+                $("#add-to-cart-animation").css("color", "red");
+                $("#add-to-cart-animation").html("Aktualnie nie dysponujemy wiekszą iloscią tego produktu &#10008;");
+                $('#add-to-cart-animation').stop().fadeOut();
+                $('#add-to-cart-animation').show("fast", function () {
+                    $('#add-to-cart-animation').fadeOut(5000);
+                });
+            }
         });
     });
 });
