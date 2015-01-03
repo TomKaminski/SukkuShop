@@ -260,10 +260,6 @@
     <Compile Include="Migrations\201412302111175_OrdersEnhancement.Designer.cs">
       <DependentUpon>201412302111175_OrdersEnhancement.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201412302123352_OrdersEnhancement2.cs" />
-    <Compile Include="Migrations\201412302123352_OrdersEnhancement2.Designer.cs">
-      <DependentUpon>201412302123352_OrdersEnhancement2.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201412311014203_OrderSpecialAddress.cs" />
     <Compile Include="Migrations\201412311014203_OrderSpecialAddress.Designer.cs">
       <DependentUpon>201412311014203_OrderSpecialAddress.cs</DependentUpon>
@@ -309,10 +305,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\SukkuShop.mdf" />
-    <Content Include="App_Data\SukkuShop_log.ldf">
-      <DependentUpon>SukkuShop.mdf</DependentUpon>
-    </Content>
     <Content Include="Content\css\Error\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
     </Content>
@@ -551,6 +543,7 @@
     <Content Include="Views\Zamowienie\OrderSubmitted.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\Admin\Views\AdminProduct\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
@@ -574,9 +567,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412302111175_OrdersEnhancement.resx">
       <DependentUpon>201412302111175_OrdersEnhancement.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201412302123352_OrdersEnhancement2.resx">
-      <DependentUpon>201412302123352_OrdersEnhancement2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201412311014203_OrderSpecialAddress.resx">
       <DependentUpon>201412311014203_OrderSpecialAddress.cs</DependentUpon>
