@@ -30,22 +30,3 @@
 </div>
 
 @Styles.Render("~/Content/css/Home/home.css")
-
-@section Scripts{
-    <script>
-        var counter = 15;
-        $(document).ready(function() {
-            plz();
-        });
-        function plz() {
-            if (counter > 0) {
-                counter--;
-                setTimeout(plz, 1000);
-                console.log('Counter wynosi ' + counter);
-            } else {
-                alert("Coś");
-                counter = 15;
-            }
-        }
-    </script>
-}

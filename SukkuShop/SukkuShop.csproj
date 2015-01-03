@@ -337,12 +337,6 @@
     <Content Include="Content\css\Zamowienie\ClientData.min.css">
       <DependentUpon>ClientData.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Error.css">
-      <DependentUpon>Error.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Zamowienie\Error.min.css">
-      <DependentUpon>Error.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\Home\Home.css">
       <DependentUpon>Home.scss</DependentUpon>
     </Content>
@@ -354,6 +348,12 @@
     </Content>
     <Content Include="Content\css\main.min.css">
       <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\OrderSubmitted.css">
+      <DependentUpon>OrderSubmitted.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\OrderSubmitted.min.css">
+      <DependentUpon>OrderSubmitted.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Zamowienie\Order.css">
       <DependentUpon>Order.scss</DependentUpon>
@@ -420,18 +420,10 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
-    <Content Include="Content\css\Zamowienie\Cart.scss" />
-    <Content Include="Content\css\Zamowienie\Error.scss" />
     <Content Include="Content\css\Home\Home.scss" />
     <Content Include="Content\css\main.scss" />
     <Content Include="Content\css\reset.scss" />
     <Content Include="Content\css\Sklep\Shop.scss" />
-    <Content Include="Content\css\Zamowienie\Cart.css.map">
-      <DependentUpon>Cart.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Zamowienie\Error.css.map">
-      <DependentUpon>Error.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\Home\Home.css.map">
       <DependentUpon>Home.css</DependentUpon>
     </Content>
@@ -459,6 +451,14 @@
     <Content Include="Content\css\Koszyk\Cart.scss" />
     <Content Include="Content\css\Koszyk\Cart.css.map">
       <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\Cart.scss" />
+    <Content Include="Content\css\Zamowienie\Cart.css.map">
+      <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\OrderSubmitted.scss" />
+    <Content Include="Content\css\Zamowienie\OrderSubmitted.css.map">
+      <DependentUpon>OrderSubmitted.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />

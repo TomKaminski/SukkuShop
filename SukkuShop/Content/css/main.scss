@@ -1,40 +1,40 @@
 ﻿//colors
-$color_tree_poppy_approx: #f89b1d;
+$sukkucolor: #f89b1d;
 $black: black;
-$color_stack_approx: #8d8d8d;
+$sukkugrey: #8d8d8d;
 
 //fonts
-$font_0: SegoeSemibold;
-$font_1: SegoeSemiboldIE;
-$font_2: SegoeSemilight;
-$font_3: SegoeBold;
-$font_4: SegoeBlack;
-$font_5: SegoeLight;
-$font_6: Segoe UI;
-$font_7: Calibri;
+$SeSB: SegoeSemibold;
+$SeSBIE: SegoeSemiboldIE;
+$SeSL: SegoeSemilight;
+$SeB: SegoeBold;
+$SeBlack: SegoeBlack;
+$SeL: SegoeLight;
+$SeUI: Segoe UI;
+$Calbr: Calibri;
 
 @font-face {
-    font-family: $font_1;
+    font-family: $SeSBIE;
     src: url(../fonts/SegoeSemiboldIE.eot);
 }
 
 @font-face {
-    font-family: $font_2;
+    font-family: $SeSL;
     src: url(../fonts/segoeuisl.ttf)
 }
 
 @font-face {
-    font-family: $font_3;
+    font-family: $SeB;
     src: url(../fonts/segoeuibold.ttf)
 }
 
 @font-face {
-    font-family: $font_4;
+    font-family: $SeBlack;
     src: url(../fonts/seguiblack.ttf)
 }
 
 @font-face {
-    font-family: $font_5;
+    font-family: $SeL;
     src: url(../fonts/segoeuil.ttf)
 }
 
@@ -42,16 +42,16 @@ $font_7: Calibri;
     font-family: SegoeSemibold, SegoeSemiboldIE;
 }
 @font-face {
-	font-family: $font_0;
+	font-family: $SeSB;
 	src: url(../fonts/SegoeSemibold.ttf);
 }
+
 //@extend-elements
-//original selectors
 //footer, footer a
-%extend_1 {
+%stopka-extend {
 	font-size: 15px;
-	font-family: $font_0, $font_1;
-	color: $color_stack_approx;
+	font-family: $SeSB, $SeSBIE;
+	color: $sukkugrey;
 }
 
 
@@ -82,8 +82,8 @@ header {
 			}
 			a {
 				font-size: 26px;
-				font-family: $font_6;
-				color: $color_tree_poppy_approx;
+				font-family: $SeUI;
+				color: $sukkucolor;
 				text-transform: uppercase;
 			}
 		}
@@ -133,7 +133,7 @@ nav {
 	}
 }
 .hello-text {
-	font-family: $font_7;
+	font-family: $Calbr;
 	font-weight: bold;
 	font-size: 20px;
 	color: $black;
@@ -144,7 +144,7 @@ nav {
 }
 .manage-text {
 	font-size: 11px;
-	font-family: $font_7;
+	font-family: $Calbr;
 	color: $black;
 	float: right;
 	padding-right: 10px;
@@ -152,7 +152,7 @@ nav {
 	text-decoration: none;
 }
 .login-panel-text {
-	font-family: $font_7;
+	font-family: $Calbr;
 	font-weight: bold;
 	font-size: 20px;
 	color: $black;
@@ -194,7 +194,7 @@ nav {
 	text-transform: uppercase;
 	margin-top: 5px;
 	color: $black;
-	font-family: $font_7;
+	font-family: $Calbr;
 	font-weight: bold;
 	text-decoration: none;
 	font-size: 20px;
@@ -221,7 +221,7 @@ nav {
 footer {
 	margin: 60px auto 0;
 	width: 1066px;
-	@extend %extend_1;
+	@extend %stopka-extend;
 	ul {
 		margin-top: 30px;
 		li {
@@ -229,8 +229,6 @@ footer {
 			float: left;
 			margin-right: 140px;
 			&:last-child {
-				width: 260px;
-				float: left;
 				margin-right: 140px;
 				margin-right: 0;
 				float: right;
@@ -253,7 +251,7 @@ footer {
 		}
 	}
 	a {
-		@extend %extend_1;
+		@extend %stopka-extend;
 		&:hover {
 			color: $black;
 		}
@@ -267,14 +265,14 @@ footer {
 	text-align: right;
 	margin-top: 19px;
 	&:hover {
-		border-bottom: 1px solid $color_tree_poppy_approx;
+		border-bottom: 1px solid $sukkucolor;
 	}
 	a {
 		font-size: 18px;
-		font-family: $font_7;
+		font-family: $Calbr;
 		text-transform: uppercase;
 		font-weight: bold;
-		color: $color_tree_poppy_approx;
+		color: $sukkucolor;
 		&:hover {
 			text-decoration: none;
 		}
@@ -284,16 +282,16 @@ footer {
 	width: 0;
 	height: 0;
 	border-top: 5px solid transparent;
-	border-left: 10px solid $color_tree_poppy_approx;
+	border-left: 10px solid $sukkucolor;
 	border-bottom: 5px solid transparent;
 	float: right;
 	margin-left: 5px;
 	margin-top: 5px;
 }
 .product-error-big {
-	font-family: $font_6;
+	font-family: $SeUI;
 	font-size: 38px;
-	color: $color_tree_poppy_approx;
+	color: $sukkucolor;
 	text-align: center;
 	margin-bottom: 10px;
 }
@@ -301,7 +299,7 @@ footer {
 	text-align: center;
 	font-size: 24px;
 	color: $black;
-	font-family: $font_7;
+	font-family: $Calbr;
 	margin-bottom: 10px;
 }
 *:focus {
@@ -312,9 +310,9 @@ text-align: center;
 a {
 	
 	text-decoration: none;
-	color: $color_tree_poppy_approx;
+	color: $sukkucolor;
 	font-weight: bold;
-	font-family: $font_0;
+	font-family: $SeSB;
 	&:hover {
 		text-decoration: underline;
 	}

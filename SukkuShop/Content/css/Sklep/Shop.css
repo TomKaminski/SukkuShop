@@ -18,8 +18,8 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
 
 @font-face {
   font-family: LucidaConsole;
-  src: url("../fonts/lucida_console.eot");
-  src: url("../fonts/lucida_console.eot?#iefix") format("embedded-opentype"), url("../fonts/lucida_console.svg#Lucida Console") format("svg"), url("../fonts/lucida_console.woff") format("woff"), url("../fonts/lucida_console.ttf") format("truetype");
+  src: url("../../fonts/lucida_console.eot");
+  src: url("../../fonts/lucida_console.eot?#iefix") format("embedded-opentype"), url("../../fonts/lucida_console.svg#Lucida Console") format("svg"), url("../../fonts/lucida_console.woff") format("woff"), url("../../fonts/lucida_console.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
 .product-background {
