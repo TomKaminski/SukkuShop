@@ -313,28 +313,40 @@
     <Content Include="App_Data\SukkuShop_log.ldf">
       <DependentUpon>SukkuShop.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\css\Cart.css">
-      <DependentUpon>Cart.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Cart.min.css">
-      <DependentUpon>Cart.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\ClientData.css">
-      <DependentUpon>ClientData.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\ClientData.min.css">
-      <DependentUpon>ClientData.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Error.css">
+    <Content Include="Content\css\Error\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Error.min.css">
+    <Content Include="Content\css\Error\Error.min.css">
       <DependentUpon>Error.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Home.css">
+    <Content Include="Content\css\Koszyk\Cart.css">
+      <DependentUpon>Cart.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Koszyk\Cart.min.css">
+      <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\Cart.css">
+      <DependentUpon>Cart.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\Cart.min.css">
+      <DependentUpon>Cart.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\ClientData.css">
+      <DependentUpon>ClientData.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\ClientData.min.css">
+      <DependentUpon>ClientData.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\Error.css">
+      <DependentUpon>Error.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\Error.min.css">
+      <DependentUpon>Error.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Home\Home.css">
       <DependentUpon>Home.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Home.min.css">
+    <Content Include="Content\css\Home\Home.min.css">
       <DependentUpon>Home.css</DependentUpon>
     </Content>
     <Content Include="Content\css\main.css">
@@ -343,10 +355,10 @@
     <Content Include="Content\css\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Order.css">
+    <Content Include="Content\css\Zamowienie\Order.css">
       <DependentUpon>Order.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Order.min.css">
+    <Content Include="Content\css\Zamowienie\Order.min.css">
       <DependentUpon>Order.css</DependentUpon>
     </Content>
     <Content Include="Content\css\reset.css">
@@ -355,13 +367,12 @@
     <Content Include="Content\css\reset.min.css">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Shop.css">
+    <Content Include="Content\css\Sklep\Shop.css">
       <DependentUpon>Shop.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Shop.min.css">
+    <Content Include="Content\css\Sklep\Shop.min.css">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Summary.css" />
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox.png" />
@@ -409,19 +420,19 @@
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
-    <Content Include="Content\css\Cart.scss" />
-    <Content Include="Content\css\Error.scss" />
-    <Content Include="Content\css\Home.scss" />
+    <Content Include="Content\css\Zamowienie\Cart.scss" />
+    <Content Include="Content\css\Zamowienie\Error.scss" />
+    <Content Include="Content\css\Home\Home.scss" />
     <Content Include="Content\css\main.scss" />
     <Content Include="Content\css\reset.scss" />
-    <Content Include="Content\css\Shop.scss" />
-    <Content Include="Content\css\Cart.css.map">
+    <Content Include="Content\css\Sklep\Shop.scss" />
+    <Content Include="Content\css\Zamowienie\Cart.css.map">
       <DependentUpon>Cart.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Error.css.map">
+    <Content Include="Content\css\Zamowienie\Error.css.map">
       <DependentUpon>Error.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Home.css.map">
+    <Content Include="Content\css\Home\Home.css.map">
       <DependentUpon>Home.css</DependentUpon>
     </Content>
     <Content Include="Content\css\main.css.map">
@@ -430,16 +441,24 @@
     <Content Include="Content\css\reset.css.map">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Shop.css.map">
+    <Content Include="Content\css\Sklep\Shop.css.map">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\ClientData.scss" />
-    <Content Include="Content\css\ClientData.css.map">
+    <Content Include="Content\css\Zamowienie\ClientData.scss" />
+    <Content Include="Content\css\Zamowienie\ClientData.css.map">
       <DependentUpon>ClientData.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Order.scss" />
-    <Content Include="Content\css\Order.css.map">
+    <Content Include="Content\css\Zamowienie\Order.scss" />
+    <Content Include="Content\css\Zamowienie\Order.css.map">
       <DependentUpon>Order.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Error\Error.scss" />
+    <Content Include="Content\css\Error\Error.css.map">
+      <DependentUpon>Error.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Koszyk\Cart.scss" />
+    <Content Include="Content\css\Koszyk\Cart.css.map">
+      <DependentUpon>Cart.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
@@ -524,6 +543,7 @@
     <Folder Include="Areas\Admin\Views\AdminProduct\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
     <Folder Include="Areas\Admin\Views\AdminUser\" />
+    <Folder Include="Content\css\Konto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
