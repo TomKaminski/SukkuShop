@@ -207,4 +207,5 @@ namespace SukkuShop.Models
         [Display(Name = "Hasło")]
         public string Password { get; set; }
     }
+
 }

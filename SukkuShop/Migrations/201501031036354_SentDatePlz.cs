@@ -3,16 +3,16 @@ namespace SukkuShop.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class OrdersEnhancement2 : DbMigration
+    public partial class SentDatePlz : DbMigration
     {
         public override void Up()
         {
-            AddColumn("dbo.Orders", "Discout", c => c.Decimal(nullable: false, precision: 18, scale: 2));
+            DropColumn("dbo.Orders", "SentDate");
         }
         
         public override void Down()
         {
-            DropColumn("dbo.Orders", "Discout");
+            AddColumn("dbo.Orders", "SentDate", c => c.DateTime(nullable: false));
         }
     }
 }

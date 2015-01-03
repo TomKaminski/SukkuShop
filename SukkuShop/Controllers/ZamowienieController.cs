@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
@@ -65,16 +66,6 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                shoppingCart.OrderAdress = new OrderAdress
-                {
-                    City = model.Miasto,
-                    Name = model.Imie,
-                    Nazwisko = model.Nazwisko,
-                    Number = model.Numer,
-                    PostalCode = model.KodPocztowy,
-                    Street = model.Ulica,
-                    Telefon = model.Telefon
-                };
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
                 user.Name = model.Imie;
                 user.LastName = model.Nazwisko;
@@ -112,16 +103,6 @@ namespace SukkuShop.Controllers
             };
             if (ModelState.IsValid)
             {
-                shoppingCart.OrderAdress = new OrderAdress
-                {
-                    City = model.Miasto,
-                    Name = model.Imie,
-                    Nazwisko = model.Nazwisko,
-                    Number = model.Numer,
-                    PostalCode = model.KodPocztowy,
-                    Street = model.Ulica,
-                    Telefon = model.Telefon
-                };
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -201,23 +182,25 @@ namespace SukkuShop.Controllers
             return orderitemsummary;
         }
 
-        public virtual ActionResult Podsumowanie(Cart shoppingCart)
+        [HttpGet]
+        public async virtual Task<ActionResult> Podsumowanie(Cart shoppingCart)
         {
-            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0 || shoppingCart.OrderAdress == null )
+            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0 || !User.Identity.IsAuthenticated)
                 return RedirectToAction(MVC.Koszyk.Index());
             OrderPaymentSummary paymentModel;
             OrderShippingSummary shippingModel;
             string totaltotalvalue;
             var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             var userModel = new UserAddressModel
             {
-                Imie = shoppingCart.OrderAdress.Name,
-                KodPocztowy = shoppingCart.OrderAdress.PostalCode,
-                Miasto = shoppingCart.OrderAdress.City,
-                Nazwisko = shoppingCart.OrderAdress.Nazwisko,
-                Numer = shoppingCart.OrderAdress.Number,
-                Telefon = shoppingCart.OrderAdress.Telefon,
-                Ulica = shoppingCart.OrderAdress.Street
+                Imie = user.Name,
+                KodPocztowy = user.PostalCode,
+                Miasto = user.City,
+                Nazwisko = user.LastName,
+                Numer = user.Number,
+                Telefon = user.PhoneNumber,
+                Ulica = user.Street
             };
             var orderModel = new OrderViewModelsSummary
             {
@@ -230,6 +213,63 @@ namespace SukkuShop.Controllers
             return View(orderModel);
         }
 
+        [HttpPost]
+        public virtual async Task<ActionResult> Podsumowanie(string userhints, Cart shoppingCart)
+        {
+            if (!shoppingCart.Lines.Any())
+            {
+                return RedirectToAction(MVC.Koszyk.Index());
+            }
+            shoppingCart.UserHints = userhints;
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+
+            var listakurwa = new List<OrderDetails>();
+            decimal hehe = 0;
+            foreach (var item in shoppingCart.Lines)
+            {
+                var orderD = new OrderDetails
+                {
+                    ProductId = item.Id,
+                    Quantity = item.Quantity
+                };
+                var productPrice = _dbContext.Products.First(i => i.ProductId == item.Id).Price;
+                orderD.SubTotalPrice = item.Quantity * productPrice;
+                _dbContext.OrderDetails.Add(orderD);
+                listakurwa.Add(orderD);
+                hehe += orderD.SubTotalPrice;
+                var prod = _dbContext.Products.First(m => m.ProductId == item.Id);
+                prod.Quantity -= item.Quantity;
+                _dbContext.Products.AddOrUpdate(prod);
+            }
+            var paymentPrice = _dbContext.PaymentTypes.First(i => i.PaymentId == shoppingCart.PaymentId).PaymentPrice;
+            var shippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId).ShippingPrice;
+            var orders = new Orders
+            {
+                ProductsPrice = hehe,
+                TotalPrice = hehe + paymentPrice + shippingPrice,
+                Name = user.Name,
+                Surname = user.LastName,
+                OrderDate = DateTime.Today,
+                SentDate = DateTime.Today,
+                ShippingId = shoppingCart.ShippingId,
+                PaymentId = shoppingCart.PaymentId,
+                City = user.City,
+                Street = user.Street,
+                Number = user.Number,
+                PostalCode = user.PostalCode,
+                OrderDetails = listakurwa,
+                UserId = user.Id,
+                User = user,
+                OrderInfo = "Przyjęte",
+                UserHints = shoppingCart.UserHints
+
+            };
+            _dbContext.Orders.Add(orders);
+            await _dbContext.SaveChangesAsync();
+            shoppingCart.Clear();
+            return View("OrderSubmitted",orders.OrderId);
+        }
+
         public void SetShipping(Cart shoppingCart,int id)
         {
             shoppingCart.ShippingId = id;            
@@ -238,53 +278,6 @@ namespace SukkuShop.Controllers
         public void SetPayment(Cart shoppingCart, int id)
         {
             shoppingCart.PaymentId = id;
-        }
-
-        public async void SaveToDatabase(Cart shoppingCart)
-        {
-            
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-             //Orders.SentDate -> panel admina [czeckbox, że wysłane]?
-             //Orders.OrderInfo -> wtf tutaj?
-             
-                           
-            // trzeba discounta usunac // Orders.SpecialAddress -> CZO TO JEST // do wyjebania
-
-            //Orders.ProductsPrice -> suma SubTotalPrice z Order Details [nie umiem] :(
-            //Orders.TotalPrice -> ProductsPrice + shippingPrice + PaymentPrice         
-
-            var listakurwa = new List<OrderDetails>();
-            decimal hehe = 0;
-            foreach (var item in shoppingCart.Lines)
-            {
-                var orderD = new OrderDetails
-                {
-                    ProductId = item.Id, 
-                    Quantity = item.Quantity
-                };
-                var productPrice = _dbContext.Products.First(i => i.ProductId == item.Id).Price;
-                orderD.SubTotalPrice = item.Quantity*productPrice;
-                _dbContext.OrderDetails.Add(orderD);
-                listakurwa.Add(orderD);
-                hehe += orderD.SubTotalPrice;
-            }
-            var PaymentPrice = _dbContext.PaymentTypes.First(i=>i.PaymentId == shoppingCart.PaymentId).PaymentPrice;
-            var ShippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId).ShippingPrice; 
-            var orders = new Orders
-            {
-                ProductsPrice = hehe,
-                TotalPrice = hehe+PaymentPrice+ShippingPrice,
-                Name = user.Name,
-                Surname = user.LastName,
-                OrderDate = DateTime.Now,
-                ShippingId = shoppingCart.ShippingId,
-                PaymentId = shoppingCart.PaymentId,
-                City = shoppingCart.OrderAdress.City,
-                Street = shoppingCart.OrderAdress.Street,
-                Number = shoppingCart.OrderAdress.Number,
-                PostalCode = shoppingCart.OrderAdress.PostalCode,
-                OrderDetails = listakurwa
-            };
         }
 
         private OrderViewModels OrderViewModels(Cart shoppingCart)

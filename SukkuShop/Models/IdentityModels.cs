@@ -115,14 +115,13 @@ namespace SukkuShop.Models
         public int PaymentId { get; set; }
         public decimal ProductsPrice { get; set; }
         public decimal TotalPrice { get; set; }
-        public decimal Discout { get; set; }
+        public string UserHints { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string PostalCode { get; set; }
-        public bool SpecialAddress { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
 
         public ShippingType Shipping { get; set; }

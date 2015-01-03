@@ -20,9 +20,27 @@ namespace SukkuShop.Controllers
         //[OutputCache(Duration = 1)]
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
-            shoppingCart.AddItem(id, quantity);
+            var productQ = _dbContext.Products.First(m => m.ProductId == id).Quantity;
+
+            var firstOrDefault = shoppingCart.Lines.FirstOrDefault(m => m.Id == id);
+            if (firstOrDefault != null)
+            {
+                var prodLineQ = firstOrDefault.Quantity;
+                if (prodLineQ + quantity <= productQ)
+                {
+                    shoppingCart.AddItem(id, quantity);
+                }
+            }
+            else
+            {
+                const int prodLineQ = 0;
+                if (prodLineQ + quantity <= productQ)
+                {
+                    shoppingCart.AddItem(id, quantity);
+                }
+            }
             var value = CalcTotalValue(shoppingCart);
-            return PartialView(MVC.Shared.Views._CartInfoPartialView,value.ToString("c"));
+            return PartialView(MVC.Shared.Views._CartInfoPartialView, value.ToString("c"));
         }
 
         public virtual ActionResult RemoveFromCart(int id, Cart shoppingCart)

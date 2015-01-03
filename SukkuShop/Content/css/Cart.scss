@@ -18,6 +18,32 @@ $font_2: SegoeBold;
 	vertical-align: middle;
 }
 
+
+.uwagi-box{
+    width:100%;
+    margin: 25px 0;
+}
+
+.uwagi-box .text{
+    font-size: 24px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    text-transform: uppercase;
+    /* margin: 20px 0 36px; */
+    padding-bottom: 20px; 
+    color: #f89b1d;
+}
+
+.uwagi-box textarea{
+    width:100%;
+    max-width:100%;
+    height:100px;
+    max-height:100px;
+    border:1px solid #f89b1d;
+    font-size:16px;
+    font-family:$font_1;
+    padding:3px;
+}
 //original selectors
 //table.cart-table tr th:first-child, table.cart-table tr td:first-child
 %extend_2 {

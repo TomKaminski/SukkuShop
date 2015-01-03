@@ -1,0 +1,17 @@
+﻿@model int
+@{
+    ViewBag.Title = "Zamówienie przyjęte";
+}
+
+
+    <div class="notfound-text-normal">
+        Zamówienie o numerze <span class="notfound-text-big">@Model</span> zostało przyjęte!
+</div>
+    <div class="notfound-text-normal">
+        Postępy realizacji zamówienia otrzymasz drogą mailową <br />oraz w panelu klienta.
+    </div>
+    <div class="notfound-backlink"><a href="@Url.Action(MVC.Home.Index())">&laquo Wróc do sklepu &raquo</a></div>
+
+
+@Styles.Render("~/Content/css/Error.css")
+

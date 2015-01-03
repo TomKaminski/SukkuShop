@@ -53,12 +53,20 @@
         @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
         Tel.: @Model.UserAddressModel.Telefon<br />
     </div>
-    <div class="cart-title">Płatność</div>
+    
+    <div class="cart-title" style="clear:both">Płatność</div>
     <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
     <div class="shipping-price">@Model.OrderPayment.Price zł</div>
     <div class="clear">&nbsp;</div>
     <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
-
+    <div class="uwagi-box">
+        <div class="text">uwagi</div>
+        @using (Html.BeginForm(MVC.Zamowienie.Podsumowanie(), FormMethod.Post,new{id="PodsumowanieForm"}))
+        {
+            @Html.TextArea("userhints")
+        }
+        
+    </div>
     <div class="cart-title" style="border-top:#f89b1d 1px solid">Podsumowanie</div>
     <ul id="products-summary" style="padding-bottom: 20px;">
         <li class="summary-text-bold">
@@ -68,7 +76,8 @@
     <a href="@Url.Action(MVC.Zamowienie.Krok2())">
         <div id="triangle-left-big" style="margin-top:0"></div><div class="cart-title-ending" style="float:left;">POWRÓT</div>
     </a>
-    <div id="triangle-right-big" style="margin-top:0"></div><div class="cart-title-ending" style="float:right;">Złóż zamówienie</div>
+    <div id="triangle-right-big" style="margin-top:0"></div><div class="cart-title-ending" style="float:right;" id="zlozzamowienie">Złóż zamówienie</div>
     </div>
 
 @Styles.Render("~/Content/css/Cart.css")
+@Scripts.Render("~/Scripts/podsumowanie.js")

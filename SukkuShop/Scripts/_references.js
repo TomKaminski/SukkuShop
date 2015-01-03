@@ -11,3 +11,4 @@
 /// <reference path="angular.min.js" />
 /// <reference path="shopangular.js" />
 /// <reference path="orderscripts.js" />
+/// <reference path="podsumowanie.js" />

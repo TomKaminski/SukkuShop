@@ -9,12 +9,12 @@ namespace SukkuShop.Models
 
         public int ShippingId { get; set; }
         public int PaymentId { get; set; }
-        public OrderAdress OrderAdress { get; set; }
+        public string UserHints { get; set; }
 
         public void AddItem(int id, int quantity = 1)
         {
             var line = _lineCollection.FirstOrDefault(p => p.Id == id);
-
+            
             if (line == null)
             {
                 _lineCollection.Add(new CartLine
@@ -59,15 +59,5 @@ namespace SukkuShop.Models
         }
 
         
-    }
-    public class OrderAdress
-    {
-        public string Name { get; set; }
-        public string Nazwisko { get; set; }
-        public string Telefon { get; set; }
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string Number { get; set; }
-        public string PostalCode { get; set; }
-    }            
+    }         
 }
