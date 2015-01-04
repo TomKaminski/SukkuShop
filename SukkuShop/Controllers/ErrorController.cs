@@ -8,12 +8,10 @@ namespace SukkuShop.Controllers
         {
             ActionResult result;
 
-            object model = Request.Url.PathAndQuery;
-
             if (!Request.IsAjaxRequest())
-                result = View(model);
+                result = View();
             else
-                result = PartialView("Blad404", model);
+                result = PartialView("Blad404");
 
             return result;
         }

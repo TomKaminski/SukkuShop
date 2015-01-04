@@ -100,7 +100,7 @@ namespace SukkuShop.Controllers
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
             public readonly string Wyloguj = "Wyloguj";
-            public readonly string NewAddressOrder = "NewAddressOrder";
+            public readonly string NewAddressOrder = "NowyKlient";
             public readonly string Podsumowanie = "Podsumowanie";
         }
 
@@ -110,7 +110,7 @@ namespace SukkuShop.Controllers
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
             public const string Wyloguj = "Wyloguj";
-            public const string NewAddressOrder = "NewAddressOrder";
+            public const string NewAddressOrder = "NowyKlient";
             public const string Podsumowanie = "Podsumowanie";
         }
 

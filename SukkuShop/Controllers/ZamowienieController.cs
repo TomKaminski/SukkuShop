@@ -62,6 +62,7 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
+        [ActionName("Krok2")]
         public virtual async Task<ActionResult> Krok2(Cart shoppingCart, UserAddressModel model)
         {
             if (ModelState.IsValid)
@@ -89,6 +90,9 @@ namespace SukkuShop.Controllers
             return RedirectToAction(MVC.Zamowienie.Krok2());
         }
 
+
+        [ActionName("NowyKlient")]
+        [HttpPost]
         public async virtual Task<ActionResult> NewAddressOrder(NewOrderAddressModel model, Cart shoppingCart)
         {
             var modelPlz = new UserAddressModel
@@ -128,59 +132,7 @@ namespace SukkuShop.Controllers
             return View(MVC.Zamowienie.Views.Krok2, modelPlz);
         }
 
-        private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out OrderPaymentSummary paymentModel,
-            out OrderShippingSummary shippingModel, out string totaltotalvalue)
-        {
-            var orderitemsummary = OrderViewItemsSummary(shoppingCart);
-            var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
-            var shipping = _dbContext.ShippingTypes.First(x => x.ShippingId == shoppingCart.ShippingId);
-            paymentModel = new OrderPaymentSummary
-            {
-                Name = payment.PaymentName,
-                Price = payment.PaymentPrice.ToString()
-            };
-            shippingModel = new OrderShippingSummary
-            {
-                Name = shipping.ShippingName,
-                Price = shipping.ShippingPrice.ToString()
-            };
-
-            switch (shipping.ShippingId)
-            {
-                case 1:
-                    shippingModel.Description = "Poczta Polska Kurier48 OPIS";
-                    break;
-                case 2:
-                    shippingModel.Description = "Poczta Polska Przesyłka Ekonomiczna OPIS";
-                    break;
-                case 3:
-                    shippingModel.Description = "Kurier Siódemka OPIS";
-                    break;
-                case 4:
-                    shippingModel.Description = "Paczkomaty OPIS";
-                    break;
-                case 5:
-                    shippingModel.Description = "Odbiór osobisty OPIS";
-                    break;
-            }
-
-            switch (payment.PaymentId)
-            {
-                case 1:
-                    paymentModel.Description = "Przedpłata na konto OPIS";
-                    break;
-                case 2:
-                    paymentModel.Description = "Płatność za pobraniem OPIS";
-                    break;
-                case 3:
-                    paymentModel.Description = "PAYU OPIS";
-                    break;
-            }
-            totaltotalvalue =
-                Convert.ToString(Convert.ToDecimal(orderitemsummary.TotalValue) + Convert.ToDecimal(paymentModel.Price) +
-                                 Convert.ToDecimal(shippingModel.Price));
-            return orderitemsummary;
-        }
+        
 
         [HttpGet]
         public async virtual Task<ActionResult> Podsumowanie(Cart shoppingCart)
@@ -280,6 +232,61 @@ namespace SukkuShop.Controllers
             shoppingCart.PaymentId = id;
         }
 
+
+        private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out OrderPaymentSummary paymentModel,
+            out OrderShippingSummary shippingModel, out string totaltotalvalue)
+        {
+            var orderitemsummary = OrderViewItemsSummary(shoppingCart);
+            var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
+            var shipping = _dbContext.ShippingTypes.First(x => x.ShippingId == shoppingCart.ShippingId);
+            paymentModel = new OrderPaymentSummary
+            {
+                Name = payment.PaymentName,
+                Price = payment.PaymentPrice.ToString()
+            };
+            shippingModel = new OrderShippingSummary
+            {
+                Name = shipping.ShippingName,
+                Price = shipping.ShippingPrice.ToString()
+            };
+
+            switch (shipping.ShippingId)
+            {
+                case 1:
+                    shippingModel.Description = "Poczta Polska Kurier48 OPIS";
+                    break;
+                case 2:
+                    shippingModel.Description = "Poczta Polska Przesyłka Ekonomiczna OPIS";
+                    break;
+                case 3:
+                    shippingModel.Description = "Kurier Siódemka OPIS";
+                    break;
+                case 4:
+                    shippingModel.Description = "Paczkomaty OPIS";
+                    break;
+                case 5:
+                    shippingModel.Description = "Odbiór osobisty OPIS";
+                    break;
+            }
+
+            switch (payment.PaymentId)
+            {
+                case 1:
+                    paymentModel.Description = "Przedpłata na konto OPIS";
+                    break;
+                case 2:
+                    paymentModel.Description = "Płatność za pobraniem OPIS";
+                    break;
+                case 3:
+                    paymentModel.Description = "PAYU OPIS";
+                    break;
+            }
+            totaltotalvalue =
+                Convert.ToString(Convert.ToDecimal(orderitemsummary.TotalValue) + Convert.ToDecimal(paymentModel.Price) +
+                                 Convert.ToDecimal(shippingModel.Price));
+            return orderitemsummary;
+        }
+
         private OrderViewModels OrderViewModels(Cart shoppingCart)
         {
             var productList = new List<OrderItem>();
@@ -337,13 +344,6 @@ namespace SukkuShop.Controllers
                 TotalValue = totalValue.ToString()
             };
             return model;
-        }
-        private async Task SignInAsync(ApplicationUser user, bool isPersistent)
-        {
-            _authenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie,
-                DefaultAuthenticationTypes.TwoFactorCookie);
-            _authenticationManager.SignIn(new AuthenticationProperties { IsPersistent = isPersistent },
-                await user.GenerateUserIdentityAsync(_userManager));
         }
     }
 }

@@ -143,7 +143,8 @@ namespace Links
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
-        public static readonly string OrderScripts_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderScripts.min.js") ? Url("OrderScripts.min.js") : Url("OrderScripts.js");
+        public static readonly string OrderKrok1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok1.min.js") ? Url("OrderKrok1.min.js") : Url("OrderKrok1.js");
+        public static readonly string OrderKrok2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok2.min.js") ? Url("OrderKrok2.min.js") : Url("OrderKrok2.js");
         public static readonly string podsumowanie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.js") ? Url("podsumowanie.min.js") : Url("podsumowanie.js");
         public static readonly string shopAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopAngular.min.js") ? Url("shopAngular.min.js") : Url("shopAngular.js");
         public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
@@ -159,48 +160,103 @@ namespace Links
             private const string URLPATH = "~/Content/css";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string Cart_scss = Url("Cart.scss");
-            public static readonly string Cart_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Cart.min.css") ? Url("Cart.min.css") : Url("Cart.css");
-                 
-            public static readonly string Cart_css_map = Url("Cart.css.map");
-            public static readonly string Cart_min_css = Url("Cart.min.css");
-            public static readonly string ClientData_scss = Url("ClientData.scss");
-            public static readonly string ClientData_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ClientData.min.css") ? Url("ClientData.min.css") : Url("ClientData.css");
-                 
-            public static readonly string ClientData_css_map = Url("ClientData.css.map");
-            public static readonly string ClientData_min_css = Url("ClientData.min.css");
-            public static readonly string Error_scss = Url("Error.scss");
-            public static readonly string Error_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Error.min.css") ? Url("Error.min.css") : Url("Error.css");
-                 
-            public static readonly string Error_css_map = Url("Error.css.map");
-            public static readonly string Error_min_css = Url("Error.min.css");
-            public static readonly string Home_scss = Url("Home.scss");
-            public static readonly string Home_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Home.min.css") ? Url("Home.min.css") : Url("Home.css");
-                 
-            public static readonly string Home_css_map = Url("Home.css.map");
-            public static readonly string Home_min_css = Url("Home.min.css");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Error {
+                private const string URLPATH = "~/Content/css/Error";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Error_scss = Url("Error.scss");
+                public static readonly string Error_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Error.min.css") ? Url("Error.min.css") : Url("Error.css");
+                     
+                public static readonly string Error_css_map = Url("Error.css.map");
+                public static readonly string Error_min_css = Url("Error.min.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Home {
+                private const string URLPATH = "~/Content/css/Home";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Home_scss = Url("Home.scss");
+                public static readonly string Home_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Home.min.css") ? Url("Home.min.css") : Url("Home.css");
+                     
+                public static readonly string Home_css_map = Url("Home.css.map");
+                public static readonly string Home_min_css = Url("Home.min.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Konto {
+                private const string URLPATH = "~/Content/css/Konto";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Koszyk {
+                private const string URLPATH = "~/Content/css/Koszyk";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Cart_scss = Url("Cart.scss");
+                public static readonly string Cart_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Cart.min.css") ? Url("Cart.min.css") : Url("Cart.css");
+                     
+                public static readonly string Cart_css_map = Url("Cart.css.map");
+                public static readonly string Cart_min_css = Url("Cart.min.css");
+            }
+        
             public static readonly string main_scss = Url("main.scss");
             public static readonly string main_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.css") ? Url("main.min.css") : Url("main.css");
                  
             public static readonly string main_css_map = Url("main.css.map");
             public static readonly string main_min_css = Url("main.min.css");
-            public static readonly string Order_scss = Url("Order.scss");
-            public static readonly string Order_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Order.min.css") ? Url("Order.min.css") : Url("Order.css");
-                 
-            public static readonly string Order_css_map = Url("Order.css.map");
-            public static readonly string Order_min_css = Url("Order.min.css");
             public static readonly string reset_scss = Url("reset.scss");
             public static readonly string reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/reset.min.css") ? Url("reset.min.css") : Url("reset.css");
                  
             public static readonly string reset_css_map = Url("reset.css.map");
             public static readonly string reset_min_css = Url("reset.min.css");
-            public static readonly string Shop_scss = Url("Shop.scss");
-            public static readonly string Shop_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Shop.min.css") ? Url("Shop.min.css") : Url("Shop.css");
-                 
-            public static readonly string Shop_css_map = Url("Shop.css.map");
-            public static readonly string Shop_min_css = Url("Shop.min.css");
-            public static readonly string Summary_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Summary.min.css") ? Url("Summary.min.css") : Url("Summary.css");
-                 
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Sklep {
+                private const string URLPATH = "~/Content/css/Sklep";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Shop_scss = Url("Shop.scss");
+                public static readonly string Shop_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Shop.min.css") ? Url("Shop.min.css") : Url("Shop.css");
+                     
+                public static readonly string Shop_css_map = Url("Shop.css.map");
+                public static readonly string Shop_min_css = Url("Shop.min.css");
+                public static readonly string ShopDetails_scss = Url("ShopDetails.scss");
+                public static readonly string ShopDetails_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ShopDetails.min.css") ? Url("ShopDetails.min.css") : Url("ShopDetails.css");
+                     
+                public static readonly string ShopDetails_css_map = Url("ShopDetails.css.map");
+                public static readonly string ShopDetails_min_css = Url("ShopDetails.min.css");
+            }
+        
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Zamowienie {
+                private const string URLPATH = "~/Content/css/Zamowienie";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Cart_scss = Url("Cart.scss");
+                public static readonly string Cart_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Cart.min.css") ? Url("Cart.min.css") : Url("Cart.css");
+                     
+                public static readonly string Cart_css_map = Url("Cart.css.map");
+                public static readonly string Cart_min_css = Url("Cart.min.css");
+                public static readonly string ClientData_scss = Url("ClientData.scss");
+                public static readonly string ClientData_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ClientData.min.css") ? Url("ClientData.min.css") : Url("ClientData.css");
+                     
+                public static readonly string ClientData_css_map = Url("ClientData.css.map");
+                public static readonly string ClientData_min_css = Url("ClientData.min.css");
+                public static readonly string Order_scss = Url("Order.scss");
+                public static readonly string Order_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Order.min.css") ? Url("Order.min.css") : Url("Order.css");
+                     
+                public static readonly string Order_css_map = Url("Order.css.map");
+                public static readonly string Order_min_css = Url("Order.min.css");
+                public static readonly string OrderSubmitted_scss = Url("OrderSubmitted.scss");
+                public static readonly string OrderSubmitted_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderSubmitted.min.css") ? Url("OrderSubmitted.min.css") : Url("OrderSubmitted.css");
+                     
+                public static readonly string OrderSubmitted_css_map = Url("OrderSubmitted.css.map");
+                public static readonly string OrderSubmitted_min_css = Url("OrderSubmitted.min.css");
+            }
+        
         }
     
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -218,6 +274,7 @@ namespace Links
             public static readonly string lucida_console_svg = Url("lucida_console.svg");
             public static readonly string lucida_console_ttf = Url("lucida_console.ttf");
             public static readonly string lucida_console_woff = Url("lucida_console.woff");
+            public static readonly string phagspa_ttf = Url("phagspa.ttf");
             public static readonly string SegoeSemibold_ttf = Url("SegoeSemibold.ttf");
             public static readonly string SegoeSemiboldIE_eot = Url("SegoeSemiboldIE.eot");
             public static readonly string segoeui_ttf = Url("segoeui.ttf");

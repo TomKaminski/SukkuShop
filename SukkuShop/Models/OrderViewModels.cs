@@ -105,7 +105,6 @@ namespace SukkuShop.Models
 
         public string Numer { get; set; }
 
-        public bool newaddress { get; set; }
     }
 
     public class NewOrderAddressModel
@@ -170,31 +169,7 @@ namespace SukkuShop.Models
         public bool daneosobowe { get; set; }
     }
 
-    public class ChangeOrderAddressModel
-    {
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Ulica")]
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
-        [StringLength(25, ErrorMessage = "Ulica musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
-        public string Ulica { get; set; }
-
-
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
-        [Display(Name = "Numer domu")]
-        public string NrDomu { get; set; }
-
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Miasto")]
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Miasto nie może zawierać cyfr ani znaków specjalnych")]
-        [StringLength(25, ErrorMessage = "Miasto musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
-        public string Miasto { get; set; }
-
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Kod pocztowy")]
-        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny.")]
-        public string KodPocztowy { get; set; }
-    }
+    
     public class CartUserLogin
     {
         [Required]
