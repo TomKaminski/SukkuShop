@@ -39,17 +39,15 @@
             if (plza != data.value) {
                 $("#add-to-cart-animation").css("color", "green");
                 $("#add-to-cart-animation").html("Produkt został dodany do koszyka &#10004;");
-                $('#add-to-cart-animation').stop().fadeOut();
-                $('#add-to-cart-animation').show("fast", function() {
-                    $('#add-to-cart-animation').fadeOut(5000);
+                $('#add-to-cart-animation').stop().show("slow", function() {
+                    $('#add-to-cart-animation').fadeOut(3000);
                 });
                 $("#cart-price-header").html('koszyk ' + data.value + ' zł');
             } else {
                 $("#add-to-cart-animation").css("color", "red");
                 $("#add-to-cart-animation").html("Aktualnie nie dysponujemy wiekszą iloscią tego produktu &#10008;");
-                $('#add-to-cart-animation').stop().fadeOut();
-                $('#add-to-cart-animation').show("fast", function () {
-                    $('#add-to-cart-animation').fadeOut(5000);
+                $('#add-to-cart-animation').stop().show("slow", function () {
+                    $('#add-to-cart-animation').fadeOut(3000);
                 });
             }
         });

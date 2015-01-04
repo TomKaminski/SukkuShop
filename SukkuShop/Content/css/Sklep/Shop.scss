@@ -53,6 +53,18 @@ $font_8: Segoe Ui;
 	opacity: 0.8;
 }
 
+.add-to-cart-info{
+    float: left;
+/* color: green; */
+    font-size: 28px;
+    line-height: 32px;
+    /* z-index: 1000; */
+    position: absolute;
+    /* width: 63px; */
+    /* margin: auto; */
+    left: 30px;
+}
+
 //original selectors
 //ul.shop-paginator li, ul.shop-paginator li.inner-paginator
 %extend_2 {
@@ -234,6 +246,9 @@ ul {
 	text-shadow: 2px 2px 3px $white_100;
 	font-weight: bold;
 }
+
+
+
 .image-bottom-panel {
 	height: 32px;
 	bottom: 0;

@@ -19,6 +19,17 @@
   bottom: 0;
   opacity: 0.8; }
 
+.add-to-cart-info {
+  float: left;
+  /* color: green; */
+  font-size: 28px;
+  line-height: 32px;
+  /* z-index: 1000; */
+  position: absolute;
+  /* width: 63px; */
+  /* margin: auto; */
+  left: 30px; }
+
 ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   margin: 0 4px;
   float: left;

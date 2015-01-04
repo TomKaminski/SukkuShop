@@ -1,33 +1,47 @@
 ﻿function plz(data) {
     var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
     if (plza != data.value) {
-        $("#cart-price-header").html('koszyk ' + data.value +' zł');
-        var cart = $("#img" + data.id);
-        var imgtodrag = cart.parent().parent().parent().parent().parent().find("img").eq(0);
-        if (imgtodrag) {
-            imgtodrag.clone()
-                .offset({
-                    top: imgtodrag.offset().top,
-                    left: imgtodrag.offset().left
-                })
-                .addClass("flying-product-start")
-                .css('position', 'absolute')
-                .appendTo(jQuery('body')).
-                animate({
-                    'top': cart.offset().top + 10,
-                    'left': cart.offset().left + 10,
-                    'width': '10px',
-                    'height': '10px',
-                    'position': 'absolute'
-                }, 1000, function () {
-                    jQuery(this).animate({
-                        'width': 0,
-                        'height': 0
-                    }, function () {
-                        jQuery(this).detach();
-                    });
-                });
-        }
+        var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
+        obj.css('color', 'green');
+        obj.html('&#10004;');
+        obj.stop().show("fast", function () {
+            obj.fadeOut(2500);
+        });
+        $("#cart-price-header").html('koszyk ' + data.value + ' zł');
+        //var cart = $("#img" + data.id);
+        //var imgtodrag = cart.parent().parent().parent().parent().parent().find("img").eq(0);
+        //if (imgtodrag) {
+        //    imgtodrag.clone()
+        //        .offset({
+        //            top: imgtodrag.offset().top,
+        //            left: imgtodrag.offset().left
+        //        })
+        //        .addClass("flying-product-start")
+        //        .css('position', 'absolute')
+        //        .appendTo(jQuery('body')).
+        //        animate({
+        //            'top': cart.offset().top + 10,
+        //            'left': cart.offset().left + 10,
+        //            'width': '10px',
+        //            'height': '10px',
+        //            'position': 'absolute'
+        //        }, 1000, function() {
+        //            jQuery(this).animate({
+        //                'width': 0,
+        //                'height': 0
+        //            }, function() {
+        //                jQuery(this).detach();
+        //            });
+        //        });
+        //}
+    } else {
+        var obj2 = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
+
+        obj2.css('color', 'red');
+        obj2.html('&#10008;');
+        obj2.stop().show("fast", function () {
+            obj2.fadeOut(2500);
+        });
     }
     
 };
@@ -134,6 +148,7 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
 
 
 jQuery(document).ready(function () {
+    jQuery('#add-to-cart-info').hide();
     jQuery("ul.sort-menu div.plz").click(function () {
         jQuery("ul.sort-menu div.plz").css("opacity", "0.6");
         jQuery("ul.sort-menu li.sort-box #sort-text").css("font-weight", "normal");
