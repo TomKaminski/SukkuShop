@@ -1,5 +1,4 @@
 ﻿@model SukkuShop.Models.CartProduct
-
 <tr>
     <td>
         <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><img src=@("/Content/Images/Shop/" + Model.Image + ".jpg" ) /></a>
@@ -9,14 +8,13 @@
                 Kategoria:  @Model.CategoryName
             </p>
         </div>
-        @using (Html.BeginForm("RemoveFromCart", "Koszyk", FormMethod.Get, new {id = "removeform"}))
+        @using (Html.BeginForm(MVC.Koszyk.RemoveFromCart(), FormMethod.Get, new {id = "removeform"}))
         {
             <input type="hidden" name="id" value="@Model.Id" />
             <div class="cart-delete-text">usuń</div>
         }
     </td>
     <td>@Model.Price</td>
-
     <td>
         <div class="quantity-box">
             <div id="quantity_counter">@Html.Label(Convert.ToString(Model.Quantity), new {id = "quantity" + Model.Id})</div>

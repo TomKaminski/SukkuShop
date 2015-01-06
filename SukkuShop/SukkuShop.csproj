@@ -323,11 +323,11 @@
     <Content Include="Content\css\Sklep\ShopDetails.min.css">
       <DependentUpon>ShopDetails.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Cart.css">
-      <DependentUpon>Cart.scss</DependentUpon>
+    <Content Include="Content\css\Zamowienie\podsumowanie.css">
+      <DependentUpon>podsumowanie.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Cart.min.css">
-      <DependentUpon>Cart.css</DependentUpon>
+    <Content Include="Content\css\Zamowienie\podsumowanie.min.css">
+      <DependentUpon>podsumowanie.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Zamowienie\ClientData.css">
       <DependentUpon>ClientData.scss</DependentUpon>
@@ -353,11 +353,11 @@
     <Content Include="Content\css\Zamowienie\OrderSubmitted.min.css">
       <DependentUpon>OrderSubmitted.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Order.css">
-      <DependentUpon>Order.scss</DependentUpon>
+    <Content Include="Content\css\Zamowienie\Krok1.css">
+      <DependentUpon>Krok1.scss</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Order.min.css">
-      <DependentUpon>Order.css</DependentUpon>
+    <Content Include="Content\css\Zamowienie\Krok1.min.css">
+      <DependentUpon>Krok1.css</DependentUpon>
     </Content>
     <Content Include="Content\css\reset.css">
       <DependentUpon>reset.scss</DependentUpon>
@@ -438,9 +438,9 @@
     <Content Include="Content\css\Zamowienie\ClientData.css.map">
       <DependentUpon>ClientData.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Order.scss" />
-    <Content Include="Content\css\Zamowienie\Order.css.map">
-      <DependentUpon>Order.css</DependentUpon>
+    <Content Include="Content\css\Zamowienie\Krok1.scss" />
+    <Content Include="Content\css\Zamowienie\Krok1.css.map">
+      <DependentUpon>Krok1.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Error\Error.scss" />
     <Content Include="Content\css\Error\Error.css.map">
@@ -450,9 +450,9 @@
     <Content Include="Content\css\Koszyk\Cart.css.map">
       <DependentUpon>Cart.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\Cart.scss" />
-    <Content Include="Content\css\Zamowienie\Cart.css.map">
-      <DependentUpon>Cart.css</DependentUpon>
+    <Content Include="Content\css\Zamowienie\podsumowanie.scss" />
+    <Content Include="Content\css\Zamowienie\podsumowanie.css.map">
+      <DependentUpon>podsumowanie.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Zamowienie\OrderSubmitted.scss" />
     <Content Include="Content\css\Zamowienie\OrderSubmitted.css.map">

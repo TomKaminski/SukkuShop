@@ -2,51 +2,51 @@
 @{
     ViewBag.Title = "Twoje Dane";
 }
-<div class="cart-container">
-    <div class="cart-title">Twoje zamówienie</div>
-    <ul class="cart-order-steps">
+<div class="order-container">
+    <div class="order-title">Twoje zamówienie</div>
+    <ul class="order-order-steps">
         <li>1. Produkty i wysyłka</li>
         <li class="selected">2. Dane kontaktowe</li>
         <li>3. Podsumowanie zamówienia</li>
     </ul>
     @if (User.Identity.IsAuthenticated)
     {
-        <div class="client-data-container" style="height:560px;">
-            @using (Html.BeginForm(MVC.Zamowienie.Krok2(), FormMethod.Post, new { id = "NewAddressForm" }))
+        <div class="client-data-container" style="height: 560px;">
+            @using (Html.BeginForm(MVC.Zamowienie.Krok2(), FormMethod.Post, new {id = "NewAddressForm"}))
             {
                 <div class="left-container" id="left-container-new-address">
                     <div class="client-type-text">Moje dane adresowe</div>
                     <div class="newaddress-box">
-                        @Html.CheckBox("newaddress", new { @class = "css-checkbox", id = "newaddress", required = true })
-                        <label for="newaddress" class="css-label" style="width:100%;">Chcę zmienić swoje dane adresowe</label>
+                        @Html.CheckBox("newaddress", new {@class = "css-checkbox", id = "newaddress", required = true})
+                        <label for="newaddress" class="css-label" style="width: 100%;">Chcę zmienić swoje dane adresowe</label>
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.Imie, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Imie, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Imie, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Imie, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.Nazwisko, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Nazwisko, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Nazwisko, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Nazwisko, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.Ulica, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Ulica, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Ulica, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Ulica, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.Numer, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Numer, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Numer, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Numer, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.Miasto, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Miasto, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Miasto, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Miasto, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box">
-                        @Html.LabelFor(m => m.KodPocztowy, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.KodPocztowy, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.KodPocztowy, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.KodPocztowy, new {@readonly = true, style = "background-color:#ebebeb"})
                     </div>
                     <div class="data-box" style="margin-bottom: 35px">
-                        @Html.LabelFor(m => m.Telefon, new { @class = "text" }):
-                        @Html.TextBoxFor(m => m.Telefon, new { @readonly = true, style = "background-color: #ebebeb" })
+                        @Html.LabelFor(m => m.Telefon, new {@class = "text"}):
+                        @Html.TextBoxFor(m => m.Telefon, new {@readonly = true, style = "background-color:#ebebeb"})
 
                     </div>
                 </div>
@@ -54,7 +54,7 @@
             <div class="right-container">
                 <div class="client-type-text">Zalogowany jako:</div>
                 <div class="logged-user-text">@User.Identity.Name</div>
-                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
+                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new {id = "logoutForm1"}))
                 {
                     @Html.AntiForgeryToken()
                     <a class="wyloguj-text" href="javascript:document.getElementById('logoutForm1').submit()">wyloguj</a>
@@ -64,18 +64,17 @@
                 </div>
             </div>
             <a href="@Url.Action(MVC.Zamowienie.Krok1())">
-                <div id="triangle-left-big"></div><div class="cart-title-ending" style="float:left;">POWRÓT</div>
+                <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
             </a>
-            <div id="triangle-right-big"></div><div class="cart-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+            <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
         </div>
     }
     else
     {
-
         <div class="client-data-container">
             <div class="right-container">
                 <div class="client-type-text">Zaloguj się na istniejące konto</div>
-                @using (Html.BeginForm(MVC.Konto.ZalogujOrder(), FormMethod.Post, new { id = "OrderLoginForm" }))
+                @using (Html.BeginForm(MVC.Konto.ZalogujOrder(), FormMethod.Post, new {id = "OrderLoginForm"}))
                 {
                     @Html.AntiForgeryToken()
                     <div class="data-box">
@@ -87,11 +86,10 @@
                         <input id="passwordLog" type="password" name="password" style="margin-right: 50px" />
                     </div>
                     <input type="submit" class="sukku-button-small" value="Zaloguj" />
-                    @Html.ValidationSummary("", new { @class = "error-summary" })
-
+                    @Html.ValidationSummary("", new {@class = "error-summary"})
                 }
             </div>
-            @using (Html.BeginForm(MVC.Zamowienie.NewAddressOrder(), FormMethod.Post, new { id = "NewClientForm" }))
+            @using (Html.BeginForm(MVC.Zamowienie.NewAddressOrder(), FormMethod.Post, new {id = "NewClientForm"}))
             {
                 <div class="left-container">
                     <div class="client-type-text">Jestem nowym klientem</div>
@@ -109,38 +107,38 @@
                     </div>
                     <div class="data-box">
                         <label for="imie" class="text">imię*:</label>
-                        @Html.TextBoxFor(m => m.Imie, new { id = "imie", name = "imie" })
+                        @Html.TextBoxFor(m => m.Imie, new {id = "imie", name = "imie"})
                     </div>
                     <div class="data-box">
                         <label for="nazwisko" class="text">nazwisko*:</label>
-                        @Html.TextBoxFor(m => m.Nazwisko, new { id = "nazwisko", name = "nazwisko" })
+                        @Html.TextBoxFor(m => m.Nazwisko, new {id = "nazwisko", name = "nazwisko"})
                     </div>
                     <div class="data-box">
                         <label class="text" for="ulica">ulica*:</label>
-                        @Html.TextBoxFor(m => m.Ulica, new { id = "ulica", name = "ulica" })
+                        @Html.TextBoxFor(m => m.Ulica, new {id = "ulica", name = "ulica"})
                     </div>
                     <div class="data-box">
                         <label for="numer" class="text">nr domu*:</label>
-                        @Html.TextBoxFor(m => m.Numer, new { id = "numer", name = "numer" })
+                        @Html.TextBoxFor(m => m.Numer, new {id = "numer", name = "numer"})
                     </div>
                     <div class="data-box">
                         <label for="miasto" class="text">miasto*:</label>
-                        @Html.TextBoxFor(m => m.Miasto, new { id = "miasto", name = "miasto" })
+                        @Html.TextBoxFor(m => m.Miasto, new {id = "miasto", name = "miasto"})
                     </div>
                     <div class="data-box">
                         <label for="kodpocztowy" class="text">kod-pocztowy*:</label>
-                        @Html.TextBoxFor(m => m.KodPocztowy, new { id = "kodpocztowy", name = "kodpocztowy" })
+                        @Html.TextBoxFor(m => m.KodPocztowy, new {id = "kodpocztowy", name = "kodpocztowy"})
                     </div>
                     <div class="data-box" style="margin-bottom: 50px">
                         <label for="telefon" class="text">telefon*:</label>
-                        @Html.TextBoxFor(m => m.Telefon, new { id = "telefon", name = "telefon" })
+                        @Html.TextBoxFor(m => m.Telefon, new {id = "telefon", name = "telefon"})
                     </div>
                 </div>
                 <div class="clear" style="clear: both"></div>
                 <div id="checkboxes-container">
-                    @Html.CheckBox("regulamin", new { @class = "css-checkbox", id = "regulamin", required = true })
+                    @Html.CheckBox("regulamin", new {@class = "css-checkbox", id = "regulamin", required = true})
                     <label for="regulamin" class="css-label">Zapoznałem/am się i akceptuję regulamin sklepu SUKKU.PL*</label>
-                    @Html.CheckBox("daneosobowe", new { @class = "css-checkbox", id = "daneosobowe", required = true })
+                    @Html.CheckBox("daneosobowe", new {@class = "css-checkbox", id = "daneosobowe", required = true})
                     <label for="daneosobowe" class="css-label" style="font-size: 12px;">
                         Wyrażam zgodę na przetwarzanie moich danych osobowych w celu rejestracji konta
                         oraz realizacji zamówienia przez sklep internetowy SUKKU.PL prowadzony
@@ -155,13 +153,12 @@
                     <div class="text">(*)-POLA OBOWIĄZKOWE</div>
                 </div>
             }
-            <div id="triangle-right-big"></div><div class="cart-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+            <a href="@Url.Action(MVC.Zamowienie.Krok1())">
+                <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+            </a>
+            <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
         </div>
     }
-
-
-
-
 </div>
 
 @Styles.Render("~/Content/css/Zamowienie/ClientData.css")

@@ -10,20 +10,18 @@ $Calibri: Calibri;
     text-align: center;
 	margin-bottom: 10px;
 }
-
-.order-submitted-number {
-	font-size: 60px;
-	font-family: $SeUI;
-	color: $sukkucolor;
-	@extend %text-extend;
-}
 .order-submitted-text1 {
 	font-size: 42px;
 	color: $black;
 	font-family: $Calibri;
 	@extend %text-extend;
+    .order-submitted-number {
+	    font-size: 60px;
+	    font-family: $SeUI;
+	    color: $sukkucolor;
+	    @extend %text-extend;
+    }
 }
-
 .order-submitted-text2 {
 	font-size: 42px;
 	color: $sukkucolor;

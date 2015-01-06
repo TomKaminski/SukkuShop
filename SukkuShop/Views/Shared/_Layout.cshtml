@@ -15,14 +15,12 @@
                 @Html.Action("LoginPartial", "Home", true)
                 <li>
                     @Html.Action("TotalValue", "Koszyk", true)
-
                 </li>
             </ul>
-            @Html.Action("Menu", "Nav")
+            @Html.Action(MVC.Nav.Menu())
         </nav>
         <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
         <nav id="nav-bottom" class="nav-low">
-
             @using (Html.BeginForm(MVC.Sklep.Szukaj(), FormMethod.Get))
             {
                 <div class="search">
@@ -37,7 +35,6 @@
         </nav>
         <div class="clear">&nbsp;</div>
     </header>
-
     @RenderBody()
     <footer>
         <hr />

@@ -3,11 +3,11 @@
     <li>
         <div class="manage-box">
             <div class="hello-text" style="margin-left: 8px">Witaj @Session["username"]!</div>
-            @Html.ActionLink("zarządzaj kontem", MVC.Konto.Index(), new { @class = "manage-text" })
+            @Html.ActionLink("zarządzaj kontem", MVC.Konto.Index(), new {@class = "manage-text"})
         </div>
     </li>
     <li>
-        @using (Html.BeginForm(MVC.Konto.Wyloguj(), FormMethod.Post, new { id = "logoutForm", @class = "login-panel" }))
+        @using (Html.BeginForm(MVC.Konto.Wyloguj(), FormMethod.Post, new {id = "logoutForm", @class = "login-panel"}))
         {
             @Html.AntiForgeryToken()
             <a class="login-panel-text" href="javascript:document.getElementById('logoutForm').submit()">WYLOGUJ</a>
@@ -18,8 +18,8 @@ else
 {
     <li>
         <ul class="login-container">
-            <li>@Html.ActionLink("LOGOWANIE", MVC.Konto.Zaloguj(), new { @class = "login-panel-text", style = "border-right:2px solid #8d8d8d;" })</li>
-            <li>@Html.ActionLink("REJESTRACJA", MVC.Konto.Zarejestruj(), new { @class = "login-panel-text", style = "margin-left:5px;" })</li>
+            <li>@Html.ActionLink("LOGOWANIE", MVC.Konto.Zaloguj(), new {@class = "login-panel-text", style = "border-right:2px solid #8d8d8d;"})</li>
+            <li>@Html.ActionLink("REJESTRACJA", MVC.Konto.Zarejestruj(), new {@class = "login-panel-text", style = "margin-left:5px;"})</li>
         </ul>
     </li>
 }

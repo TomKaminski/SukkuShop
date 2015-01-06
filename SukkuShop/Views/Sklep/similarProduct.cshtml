@@ -1,20 +1,20 @@
 ﻿@model SukkuShop.Models.SimilarProductModel
 <div class="product-list-item-box">
     <div class="product-list-item">
-
         <div class="product-list-item-image">
             <img src=~/@("Content/Images/Shop/"+Model.ImageName+".png") />
             <div class="image-bottom-panel">
                 @if (Model.Available)
                 {
-                    using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { UpdateTargetId = "CartTotalValue", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" }, new { id = "CartTotalValue" }))
+                    using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { HttpMethod = "POST", OnSuccess = "plz(data)"}, new { id = "CartTotalValue" }))
                     {
                         <input type="hidden" name="id" value="@Model.Id" />
                         <div class="add-to-cart-icon">
-                            <input type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
+                            <input id="@("img"+Model.Id)" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
                         </div>
                     }
                 }
+                <div class="add-to-cart-info"></div>
                 <a href="@Url.Action(MVC.Sklep.SzczegółyProduktu(Model.Id))"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
             </div>
         </div>

@@ -1,23 +1,20 @@
 ﻿@model string
-           @if (User.IsInRole("Admin"))
-           {
-               <a href="@Url.Action(MVC.Admin.AdminHome.Index())">
+@if (User.IsInRole("Admin"))
+{
+    <a href="@Url.Action(MVC.Admin.AdminHome.Index())">
+        <div class="cart-box">
+            <div class="cart-text">PANEL ADMINISTRATORA</div>
+        </div>
+    </a>
+}
+else
+{
+    <div id="CartTotalValue">
+        <a href="@Url.Action(MVC.Koszyk.Index())">
             <div class="cart-box">
-                <div class="cart-text">PANEL ADMINISTRATORA</div>
+                <div id="cart-price-header" class="cart-text">koszyk @Model</div>
+                <div class="cart-img"></div>
             </div>
         </a>
-
-
-           }
-           else
-           {
-            <div id="CartTotalValue">
-                <a href="@Url.Action(MVC.Koszyk.Index())">
-                    <div class="cart-box">
-                        <div id="cart-price-header" class="cart-text">koszyk @Model</div>
-                        <div class="cart-img"></div>
-                    </div>
-                </a>
-            </div>
-           }
-
+    </div>
+}

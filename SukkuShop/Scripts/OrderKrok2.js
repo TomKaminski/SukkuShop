@@ -22,7 +22,7 @@
         return this.optional(element) || value != param;
     }, "Proszę podać inną wartość");
 
-    $(".cart-title-ending").click(function () {
+    $(".order-title-ending").click(function () {
         if ($("#newaddress").length)
             $("#NewAddressForm").submit();
         else {

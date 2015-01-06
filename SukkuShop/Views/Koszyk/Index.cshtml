@@ -1,7 +1,7 @@
 ﻿@model SukkuShop.Models.CartViewModels
 
 @{
-    ViewBag.Title = "Twój koszyk";   
+    ViewBag.Title = "Twój koszyk";
 }
 
 <div class="cart-container">
@@ -22,19 +22,17 @@
             <div class="notfound-backlink"><a href="@Url.Action(MVC.Sklep.Produkty())">&laquo Rozpocznij zakupy! &raquo</a></div>
         }
     </div>
-    <div>
+    <div id="cart-button-bottom">
         <a href="@Url.Action(MVC.Sklep.Produkty())">
-                <div id="triangle-left-big"></div>
-                <div class="cart-title" style="float:left; margin:0">Kontynuuj zakupy</div>
+            <div id="triangle-left-big"></div>
+            <div class="cart-title" style="float: left; margin: 0">Kontynuuj zakupy</div>
         </a>
         <a href="@Url.Action(MVC.Zamowienie.Krok1())">
             <div id="triangle-right-big"></div>
-            <div class="cart-title" style="float:right; margin:0">Złóż zamówienie</div>
+            <div class="cart-title" style="float: right; margin: 0">Złóż zamówienie</div>
         </a>
         <div class="clear" style="clear: both"></div>
     </div>
 </div>
 @Styles.Render("~/Content/css/Koszyk/Cart.css")
 @Scripts.Render("~/Scripts/CartSummary.js")
-
-

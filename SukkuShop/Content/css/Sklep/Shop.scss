@@ -23,7 +23,7 @@ $font_8: Segoe Ui;
 
 @font-face {
     font-family: $font_1;
-    src: url(../../fonts/licida_bright.ttf);
+    src: url(../../fonts/lucida_bright.ttf);
 }
 
 @font-face {
@@ -53,18 +53,6 @@ $font_8: Segoe Ui;
 	opacity: 0.8;
 }
 
-.add-to-cart-info{
-    float: left;
-/* color: green; */
-    font-size: 28px;
-    line-height: 32px;
-    /* z-index: 1000; */
-    position: absolute;
-    /* width: 63px; */
-    /* margin: auto; */
-    left: 30px;
-}
-
 //original selectors
 //ul.shop-paginator li, ul.shop-paginator li.inner-paginator
 %extend_2 {
@@ -72,6 +60,8 @@ $font_8: Segoe Ui;
 	float: left;
 	width: 21px;
 }
+
+
 
 .selectedOpt{
     opacity:1;
@@ -93,55 +83,139 @@ $font_8: Segoe Ui;
 	img {
 		position: absolute;
 	}
-}
-.product-list-container {
-	padding-top: 20px;
-	width: 642px;
-	margin-left: 40%;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: flex-start;
+    .product-list-container {
+	    padding-top: 20px;
+	    width: 642px;
+	    margin-left: 40%;
+	    display: flex;
+	    flex-wrap: wrap;
+	    justify-content: flex-start;
+        .product-list-item-box {
+	        height: 191px;
+	        width: 135px;
+	        //Instead of the line below you could use @includebox-sizing($bs)
+	        box-sizing: border-box;
+	        margin-bottom: 28px;
+	        margin-right: 34px;
+	        position: relative;
+	        &:hover {
+		        border: 2px solid $color_tree_poppy_approx;
+		        top: -2px;
+		        left: -2px;
+	        }
+	        &:nth-child(4n) {
+		        margin-right: 0;
+	        }
+	        &:last-child {
+		        margin-right: 0;
+	        }
+            .product-list-item {
+	            top: 2px;
+	            left: 2px;
+	            height: 187px;
+	            width: 131px;
+	            //Instead of the line below you could use @includebox-sizing($bs)
+	            box-sizing: border-box;
+	            position: absolute;
+                .product-list-item-image {
+	                height: 127px;
+	                width: 127px;
+	                position: relative;
+	                img {
+		                position: absolute;
+	                }
+                    .image-bottom-panel {
+	                    height: 32px;
+	                    bottom: 0;
+	                    position: absolute;
+	                    width: 127px;
+                        .add-to-cart-info{
+                            float: left;
+                            font-size: 28px;
+                            line-height: 32px;
+                            position: absolute;
+                            left: 30px;
+                        }
+	                    .add-to-cart-icon {
+		                    width: 32px;
+		                    height: 32px;
+		                    position: absolute;
+		                    cursor: pointer;
+                            img {
+		                        @extend %extend_1;
+		                        &:hover {
+			                        opacity: 1;
+		                        }
+	                        }
+	                        input {
+		                        @extend %extend_1;
+	                        }
+	                    }
+	                    .info-icon {
+		                    width: 32px;
+		                    height: 32px;
+		                    position: absolute;
+		                    right: 0;
+                            img {
+	                            @extend %extend_1;
+	                            &:hover {
+		                            opacity: 1;
+	                            }
+                            }
+	                    }
+	                    &:before {
+		                    position: absolute;
+		                    background-color: $white;
+		                    opacity: 0.5;
+		                    content: '';
+		                    height: 32px;
+		                    width: 127px;
+		                    bottom: 0;
+	                    }
+                    }
+                }
+                .product-list-item-textbox {
+	                height: 54px;
+	                position: relative;
+	                margin-top: 2px;
+	                &:before {
+		                position: absolute;
+		                background-color: $color_merino_approx;
+		                opacity: 0.8;
+		                content: '';
+		                height: 54px;
+		                width: 127px;
+		                bottom: 0;
+	                }
+                    .product-title {
+	                    position: relative;
+	                    padding: 5px 3px 10px;
+	                    font-family: $font_2;
+                    }
+                    .product-price {
+	                    position: absolute;
+	                    font-size: 18px;
+	                    font-family: $font_3;
+	                    float: left;
+	                    bottom: 0;
+	                    left: 3px;
+                    }
+                    .product-discount {
+	                    color: $color_japanese_laurel_approx;
+	                    text-align: right;
+	                    position: absolute;
+	                    font-size: 18px;
+	                    font-family: $font_3;
+	                    margin-right: 5px;
+	                    right: 3px;
+	                    bottom: 0;
+                    }
+                }
+            }
+        }
+    }
 }
 
-.product-list-item-box {
-	height: 191px;
-	width: 135px;
-	//Instead of the line below you could use @includebox-sizing($bs)
-	box-sizing: border-box;
-	margin-bottom: 28px;
-	margin-right: 34px;
-	position: relative;
-	&:hover {
-		border: 2px solid $color_tree_poppy_approx;
-		top: -2px;
-		left: -2px;
-	}
-	&:nth-child(4n) {
-		margin-right: 0;
-	}
-	&:last-child {
-		margin-right: 0;
-	}
-}
-
-
-.product-list-item {
-	top: 2px;
-	left: 2px;
-	height: 187px;
-	width: 131px;
-	//Instead of the line below you could use @includebox-sizing($bs)
-	box-sizing: border-box;
-	position: absolute;
-}
-.product-list-item-image {
-	height: 127px;
-	width: 127px;
-	position: relative;
-	img {
-		position: absolute;
-	}
-}
 ul {
 	&.subcategory-menu {
 		margin: 0 auto;
@@ -176,10 +250,93 @@ ul {
 			&:first-child {
 				padding-right: 0;
 			}
+            #sort-text {
+	            float: left;
+            }
+            .price-arrow-box {
+	            float: right;
+	            display: block;
+	            width: 20px;
+	            height: 30px;
+	            margin-top: -3px;
+                .sort-arrow-up {
+                      width: 0;
+                      height: 0;
+                      border-right: 7px solid transparent;
+                      border-bottom: 11px solid black;
+                      border-left: 7px solid transparent;
+                      float: right;
+                      background-color: transparent;
+                      cursor: pointer;
+                      opacity: 0.6;
+                      margin-bottom: 1px; 
+                      &:hover {
+                        opacity: 1;
+                      }
+                }
+                .sort-arrow-down {
+                      width: 0;
+                      height: 0;
+                      border-right: 7px solid transparent;
+                      border-top: 11px solid black;
+                      border-left: 7px solid transparent;
+                      float: right;
+                      background-color: transparent;
+                      cursor: pointer;
+                      opacity: 0.6;
+                      margin-top: 1px; 
+                      &:hover {
+                        opacity: 1;
+                      }
+                }
+            }
+            .sort-arrow {
+	            width: 0;
+	            height: 0;
+	            border-top: 7px solid transparent;
+	            border-left: 11px solid $black;
+	            border-bottom: 7px solid transparent;
+	            float: right;
+	            background-color: transparent;
+	            cursor: pointer;
+	            opacity: 0.6;
+	            margin-top: 2px;
+	            margin-left: 8px;
+	            &:hover {
+		            opacity: 1;
+	            }
+            }
 		}
 	}
 	&.top-panel li {
 		height: 24px;
+        .top-panel-text-container {
+	        width: 127px;
+	        position: absolute;
+	        &:before {
+		        position: absolute;
+		        height: 24px;
+		        width: 127px;
+		        background-color: $white;
+		        opacity: 0.6;
+		        content: '';
+		        top: 0;
+	        }
+            .top-panel-text {
+	            position: relative;
+	            font-family: $font_0;
+	            line-height: 24px;
+	            vertical-align: middle;
+	            font-size: 16px;
+	            text-transform: uppercase;
+	            text-align: center;
+	            //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	            text-shadow: 2px 2px 3px $white;
+	            //Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+	            text-shadow: 2px 2px 3px $white_100;
+	            font-weight: bold;
+            }
+        }
 	}
 	&.shop-paginator li {
 		@extend %extend_2;
@@ -196,130 +353,31 @@ ul {
 		&:last-child {
 			position: relative;
 		}
-
-			.paginator-box {
-				line-height: 21px;
-				vertical-align: middle;
-				position: relative;
-				font-family: $font_1;
-				font-size: 13px;
-				text-align: center;
-				color: $white;
-				text-decoration: none;
-                cursor:pointer;
-			}
-			&:hover {
-				color: $white;
-			}
-		
-	}
-}
-
-.boldplz{
-    font-weight:bold;
-}
-
-.top-panel-text-container {
-	width: 127px;
-	position: absolute;
-	&:before {
-		position: absolute;
-		height: 24px;
-		width: 127px;
-		background-color: $white;
-		opacity: 0.6;
-		content: '';
-		top: 0;
-	}
-}
-.top-panel-text {
-	position: relative;
-	font-family: $font_0;
-	line-height: 24px;
-	vertical-align: middle;
-	font-size: 16px;
-	text-transform: uppercase;
-	text-align: center;
-	//Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	text-shadow: 2px 2px 3px $white;
-	//Instead of the line below you could use @includetext-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
-	text-shadow: 2px 2px 3px $white_100;
-	font-weight: bold;
-}
-
-
-
-.image-bottom-panel {
-	height: 32px;
-	bottom: 0;
-	position: absolute;
-	width: 127px;
-	.add-to-cart-icon {
-		width: 32px;
-		height: 32px;
-		position: absolute;
-		cursor: pointer;
-	}
-	.info-icon {
-		width: 32px;
-		height: 32px;
-		position: absolute;
-		right: 0;
-	}
-	&:before {
-		position: absolute;
-		background-color: $white;
-		opacity: 0.5;
-		content: '';
-		height: 32px;
-		width: 127px;
-		bottom: 0;
-	}
-}
-.add-to-cart-icon {
-	img {
-		@extend %extend_1;
-		&:hover {
-			opacity: 1;
+		.paginator-box {
+			line-height: 21px;
+			vertical-align: middle;
+			position: relative;
+			font-family: $font_1;
+			font-size: 13px;
+			text-align: center;
+			color: $white;
+			text-decoration: none;
+            cursor:pointer;
 		}
-	}
-	input {
-		@extend %extend_1;
-	}
-}
-.product-list-item-textbox {
-	height: 54px;
-	position: relative;
-	margin-top: 2px;
-	&:before {
-		position: absolute;
-		background-color: $color_merino_approx;
-		opacity: 0.8;
-		content: '';
-		height: 54px;
-		width: 127px;
-		bottom: 0;
+		&:hover {
+			color: $white;
+		}		
 	}
 }
-.product-title {
-	position: relative;
-	padding: 5px 3px 10px;
-	font-family: $font_2;
-}
-.product-price {
-	position: absolute;
-	font-size: 18px;
-	font-family: $font_3;
-	float: left;
-	bottom: 0;
-	left: 3px;
-}
+
 .shop-nav-container {
 	width: 1066px;
 	margin: auto;
 	position: relative;
 	margin-bottom: 20px;
 }
+
+
 #paginator {
 	float: right;
 	position: relative;
@@ -327,89 +385,33 @@ ul {
 	ul.shop-paginator {
 		position: relative;
 		left: 50%;
+        .paging-arrow-right {
+	        width: 0;
+	        height: 0;
+	        border-top: 8px solid transparent;
+	        border-left: 11px solid $color_tree_poppy_approx;
+	        border-bottom: 8px solid transparent;
+	        float: right;
+	        background-color: transparent;
+	        cursor: pointer;
+	        margin-top: 2px;
+	        margin-right: 12px;
+        }
+        .paging-arrow-left {
+	        width: 0;
+	        height: 0;
+	        border-top: 8px solid transparent;
+	        border-right: 11px solid $color_tree_poppy_approx;
+	        border-bottom: 8px solid transparent;
+	        background-color: transparent;
+	        cursor: pointer;
+	        float: left;
+	        margin-top: 2px;
+	        margin-left: 12px;
+        }
 	}
-}
-#sort-text {
-	float: left;
-}
-.sort-arrow {
-	width: 0;
-	height: 0;
-	border-top: 7px solid transparent;
-	border-left: 11px solid $black;
-	border-bottom: 7px solid transparent;
-	float: right;
-	background-color: transparent;
-	cursor: pointer;
-	opacity: 0.6;
-	margin-top: 2px;
-	margin-left: 8px;
-	&:hover {
-		opacity: 1;
-	}
-}
-.price-arrow-box {
-	float: right;
-	display: block;
-	width: 20px;
-	height: 30px;
-	margin-top: -3px;
-}
-.paging-arrow-right {
-	width: 0;
-	height: 0;
-	border-top: 8px solid transparent;
-	border-left: 11px solid $color_tree_poppy_approx;
-	border-bottom: 8px solid transparent;
-	float: right;
-	background-color: transparent;
-	cursor: pointer;
-	margin-top: 2px;
-	margin-right: 12px;
-}
-.paging-arrow-left {
-	width: 0;
-	height: 0;
-	border-top: 8px solid transparent;
-	border-right: 11px solid $color_tree_poppy_approx;
-	border-bottom: 8px solid transparent;
-	background-color: transparent;
-	cursor: pointer;
-	float: left;
-	margin-top: 2px;
-	margin-left: 12px;
-}
-.square-paginator {
-	height: 4px;
-	width: 3px;
-	background-color: $color_kangaroo_approx;
-	float: left;
-	margin-right: 2px;
-	margin-left: 2px;
-	margin-top: 15px;
-}
-.product-discount {
-	color: $color_japanese_laurel_approx;
-	text-align: right;
-	position: absolute;
-	font-size: 18px;
-	font-family: $font_3;
-	margin-right: 5px;
-	right: 3px;
-	bottom: 0;
 }
 
 
-.info-icon img {
-	@extend %extend_1;
-	&:hover {
-		opacity: 1;
-	}
-}
-.flying-product-start {
-	opacity: 0.7;
-	position: absolute;
-	height: 50px;
-	width: 50px;
-	z-index: 1031;
-}
+
+

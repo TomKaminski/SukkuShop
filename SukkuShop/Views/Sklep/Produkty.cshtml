@@ -7,9 +7,6 @@
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Scripts/shopAngular.js")
 
-<script>
-   
-</script>
 <div ng-app="shopApp">
     <div ng-controller="ShopCtrl" ng-init="init('@Model')">
         <div class="shop-nav-container">            
@@ -46,40 +43,38 @@
         </div>
         <div class="product-background">
             <img ng-src="~/Content/Images/Shop/{{imgName}}.jpg" />
-            <div class="products-container">
-                <div class="product-list-container">
-                    <div class="product-list-item-box" ng-repeat="item in productList">
-                        <div class="product-list-item">
-                            <div class="product-list-item-image" style="background-color: white;">
-                                <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.png" />
-                                <ul class="top-panel">
-                                    <li ng-if="item.Bestseller"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #875546">Bestseller</div></div></li>
-                                    <li ng-if="item.Promotion!=0"><div class="top-panel-text-container"><div class="top-panel-text" style="color: green">Promocja</div></div></li>
-                                    <li ng-if="item.Novelty"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #f36f21">Nowość</div></div></li>
-                                </ul>
-                                <div class="image-bottom-panel">
-                                    <div ng-if="item.QuantityInStock != 0">
-                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions {HttpMethod = "POST", OnSuccess = "plz(data)"}))
-                                        {
-                                            <input type="hidden" name="id" value="{{item.Id}}" />
-                                            <div class="add-to-cart-icon">
-                                                <input id="img{{item.Id}}" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width:75%" />
-                                            </div>
-                                        }
-                                    </div>
-                                    <div class="add-to-cart-info"></div>
-                                    <a ng-href="/Sklep/SzczegółyProduktu/{{item.Id}}"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
+            <div class="product-list-container">
+                <div class="product-list-item-box" ng-repeat="item in productList">
+                    <div class="product-list-item">
+                        <div class="product-list-item-image" style="background-color: white;">
+                            <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.png" />
+                            <ul class="top-panel">
+                                <li ng-if="item.Bestseller"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #875546">Bestseller</div></div></li>
+                                <li ng-if="item.Promotion!=0"><div class="top-panel-text-container"><div class="top-panel-text" style="color: green">Promocja</div></div></li>
+                                <li ng-if="item.Novelty"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #f36f21">Nowość</div></div></li>
+                            </ul>
+                            <div class="image-bottom-panel">
+                                <div ng-if="item.QuantityInStock != 0">
+                                    @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions {HttpMethod = "POST", OnSuccess = "plz(data)"}))
+                                    {
+                                        <input type="hidden" name="id" value="{{item.Id}}" />
+                                        <div class="add-to-cart-icon">
+                                            <input id="img{{item.Id}}" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width: 75%" />
+                                        </div>
+                                    }
                                 </div>
+                                <div class="add-to-cart-info"></div>
+                                <a ng-href="/Sklep/SzczegółyProduktu/{{item.Id}}"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
                             </div>
-                            <div class="product-list-item-textbox">
-                                <div class="product-title">{{item.Name}}</div>
-                                <div ng-if="item.Promotion==0">
-                                    <div class="product-price">{{item.PriceAfterDiscount | number:2}} zł</div>
-                                </div>
-                                <div ng-if="item.Promotion!=0">
-                                    <div class="product-price" style="text-decoration: line-through;">{{item.Price | number:2}} </div>
-                                    <div class="product-discount">{{item.PriceAfterDiscount | number:2}} zł</div>
-                                </div>
+                        </div>
+                        <div class="product-list-item-textbox">
+                            <div class="product-title">{{item.Name}}</div>
+                            <div ng-if="item.Promotion==0">
+                                <div class="product-price">{{item.PriceAfterDiscount | number:2}} zł</div>
+                            </div>
+                            <div ng-if="item.Promotion!=0">
+                                <div class="product-price" style="text-decoration: line-through;">{{item.Price | number:2}} </div>
+                                <div class="product-discount">{{item.PriceAfterDiscount | number:2}} zł</div>
                             </div>
                         </div>
                     </div>
@@ -107,4 +102,4 @@
     </div>
 </div>
 
-    @Styles.Render("~/Content/css/Sklep/Shop.css")
+@Styles.Render("~/Content/css/Sklep/Shop.css")

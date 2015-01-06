@@ -83,7 +83,7 @@ namespace SukkuShop.Controllers
         }
 
 
-        [DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
+        //[DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);

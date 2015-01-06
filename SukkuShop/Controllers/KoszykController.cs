@@ -17,7 +17,6 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
-        //[OutputCache(Duration = 1)]
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
             var productQ = _dbContext.Products.First(m => m.ProductId == id).Quantity;
@@ -102,13 +101,7 @@ namespace SukkuShop.Controllers
 
         private decimal CalcTotalValue(Cart shoppingCart)
         {
-            decimal sum = 0;
-            foreach (Cart.CartLine line in shoppingCart.Lines)
-            {
-                var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
-                if (firstOrDefault != null) sum += (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity;
-            }
-            return sum;
+            return (from line in shoppingCart.Lines let firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id) where firstOrDefault != null select (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity).Sum();
         }
 
         // GET: Cart

@@ -1,37 +1,38 @@
-.container {
-  width: 355px;
-  height: 355px;
-  float: left; }
-  .container .text-big {
-    margin-top: 100px;
-    margin-bottom: 20px;
-    font-size: 58px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-    color: black; }
-  .container img:hover {
-    transition: all 0.3s ease-in-out;
-    opacity: 0.8; }
-
-.container-check {
-  width: 180px;
+.main-container {
+  width: 1066px;
   margin: auto; }
-  .container-check a:hover {
-    text-decoration: none; }
-
-a .check {
-  width: 180px;
-  height: 60px;
-  border: 3px solid #6d6c6c;
-  font-size: 29px;
-  font-weight: bold;
-  text-transform: uppercase;
-  text-align: center;
-  color: #6d6c6c;
-  line-height: 60px;
-  vertical-align: middle; }
-  a .check:hover {
-    text-decoration: underline;
-    color: #6d6c6c; }
+  .main-container .container {
+    width: 355px;
+    height: 355px;
+    float: left; }
+    .main-container .container .text-big {
+      margin-top: 100px;
+      margin-bottom: 20px;
+      font-size: 58px;
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      color: black; }
+    .main-container .container img:hover {
+      transition: all 0.3s ease-in-out;
+      opacity: 0.8; }
+    .main-container .container .container-check {
+      width: 180px;
+      margin: auto; }
+      .main-container .container .container-check a:hover {
+        text-decoration: none; }
+      .main-container .container .container-check a .check {
+        width: 180px;
+        height: 60px;
+        border: 3px solid #6d6c6c;
+        font-size: 29px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: center;
+        color: #6d6c6c;
+        line-height: 60px;
+        vertical-align: middle; }
+        .main-container .container .container-check a .check:hover {
+          text-decoration: underline;
+          color: #6d6c6c; }
 

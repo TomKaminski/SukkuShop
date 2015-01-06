@@ -2,14 +2,14 @@
 @{
     ViewBag.Title = "Krok1";
 }
-<div class="cart-container">
-    <div class="cart-title">Twoje zamówienie</div>
-    <ul class="cart-order-steps">
+<div class="order-container">
+    <div class="order-title">Twoje zamówienie</div>
+    <ul class="order-order-steps">
         <li class="selected">1. Produkty i wysyłka</li>
         <li>2. Dane kontaktowe</li>
         <li>3. Podsumowanie zamówienia</li>
     </ul>
-    <table class="cart-table" cellspacing="0">
+    <table class="order-table" cellspacing="0">
         <thead>
             <tr>
                 <th>Twoje produkty</th>
@@ -27,13 +27,13 @@
                     <td>@item.Quantity szt.</td>
                     <td>@item.TotalValue</td>
                 </tr>
-            }            
+            }
         </tbody>
     </table>
     <div class="products-price-summary">@Model.TotalValue</div>
     <div>
         <div class="bottom-box">
-            <div class="cart-title">Dostawa</div>
+            <div class="order-title">Dostawa</div>
             <ul class="shipping">
                 <li>
                     <input type="radio" name="shipping" id="ship1" class="css-checkbox">
@@ -63,7 +63,7 @@
             </ul>
         </div>
         <div class="bottom-box">
-            <div class="cart-title">Płatność</div>
+            <div class="order-title">Płatność</div>
             <ul id="payment-list" class="shipping">
                 <li>
                     <input type="radio" name="payment" id="pay1" class="css-checkbox">
@@ -85,7 +85,7 @@
         </div>
         <div class="clear" style="clear: both"></div>
     </div>
-    <div class="cart-title">Podsumowanie</div>
+    <div class="order-title">Podsumowanie</div>
     <ul id="products-summary">
         <li>
             <div class="price-box" id="price-box-json">@Model.TotalValue</div><div id="text-box clear">Produkty</div>
@@ -102,13 +102,13 @@
     </ul>
     <div>
         <a href="@Url.Action(MVC.Koszyk.Index())">
-            <div id="triangle-left-big"></div><div class="cart-title-ending" style="float:left;">Powrót do koszyka</div></a>
-        <a id="nextStep" href="@Url.Action(MVC.Zamowienie.Krok2())"><div id="triangle-right-big"></div><div class="cart-title-ending" style="float:right;">Dalej</div></a>
+            <div id="triangle-left-big"></div><div class="order-title-ending" style="float:left;">Powrót do koszyka</div></a>
+        <a id="nextStep" href="@Url.Action(MVC.Zamowienie.Krok2())"><div id="triangle-right-big"></div><div class="order-title-ending" style="float:right;">Dalej</div></a>
             <div class="clear" style="clear: both"></div>
-</div>
+    </div>
 
 
 
 </div>
-@Styles.Render("~/Content/css/Zamowienie/Order.css")
+@Styles.Render("~/Content/css/Zamowienie/Krok1.css")
 @Scripts.Render("~/Scripts/OrderKrok1.js")

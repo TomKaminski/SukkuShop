@@ -1,173 +1,116 @@
-.logged-user-text {
-  font-family: SegoeLight;
-  font-size: 18px;
-  text-align: center;
-  margin-bottom: 10px; }
-
-#triangle-left-big {
-  width: 0;
-  height: 0;
-  border-top: 11px solid transparent;
-  border-right: 15px solid #f89b1d;
-  border-bottom: 11px solid transparent;
-  float: left;
-  /* margin-top: 23px; */
-  margin-right: 25px;
-  margin-left: 25px; }
-
-.error-box {
-  margin: auto auto 50px;
-  width: 90%;
-  height: 300px;
-  color: red;
-  font-family: Segoe UI; }
-
-.validation-summary-errors ul li {
-  padding: 10px 0 10px 20px; }
-
-.wyloguj-text {
-  margin: 35px 140px 0;
-  padding: 5px 60px;
-  background-color: #f89b1d;
-  /* height: 30px; */
-  /* width: 200px; */
-  text-align: center;
-  line-height: 40px;
-  font-family: Segoe UI;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-size: 14px; }
-
-.left-container label.error {
-  margin-left: 145px; }
-
-.newaddress-box {
-  width: 100%;
-  height: 40px; }
-
-.user-data-title {
-  font-family: SegoeLight;
-  text-transform: uppercase;
-  font-size: 18px; }
-
-label.error {
-  float: left;
-  /* margin: auto; */
-  margin-left: 105px;
-  color: red;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 2px; }
-
-input.error {
-  border-color: red; }
-
-.cart-container {
+.order-container {
   width: 1066px;
   margin: auto; }
-
-.cart-title {
-  font-size: 24px;
-  font-family: Segoe UI;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 20px 0 36px;
-  padding-top: 20px;
-  color: #f89b1d; }
-
-.error-summary {
-  color: red;
-  font-family: Segoe UI; }
-
-.input-validation-error {
-  border: red solid 1px !important; }
-
-.field-validation-error {
-  float: left;
-  /* margin: auto; */
-  margin-left: 145px;
-  color: red;
-  font-weight: bold;
-  font-size: 14px;
-  margin-top: 2px; }
-
-.left-container {
-  width: 50%;
-  float: left; }
-
-.right-container {
-  width: 50%;
-  float: right; }
-
-ul.cart-order-steps {
-  font-family: Segoe UI;
-  color: #f89b1d;
-  padding: 0 0 32px;
-  border-bottom: 1px solid #f89b1d;
-  font-size: 18px;
-  text-transform: uppercase;
-  margin: 0 0 23px; }
-  ul.cart-order-steps li {
-    display: inline;
-    margin-right: 81px; }
-    ul.cart-order-steps li.selected {
-      font-weight: bold; }
-
-.sukku-button-small {
-  margin: 24px 120px 0;
-  background-color: #f89b1d;
-  height: 30px;
-  width: 200px;
-  text-align: center;
-  line-height: 30px;
-  font-family: Segoe UI;
-  color: white;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer; }
-
-.sukku-button-small:hover {
-  background-color: orange; }
-
-#checkboxes-container {
-  width: 850px;
-  height: 120px;
-  margin-bottom: 20px; }
-
-.cart-title-ending {
-  font-size: 20px;
-  font-family: Segoe UI;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin: 0;
-  color: #f89b1d;
-  cursor: pointer; }
-
-#triangle-right-big {
-  width: 0;
-  height: 0;
-  border-top: 11px solid transparent;
-  border-left: 15px solid #f89b1d;
-  border-bottom: 11px solid transparent;
-  float: right;
-  margin: 0 25px 37px 15px;
-  cursor: pointer; }
-
-.client-data-container {
-  height: 870px;
-  width: 900px;
-  border: 2px solid #f89b1d;
-  margin: 45px auto 200px; }
-
-.client-type-text {
-  font-family: SegoeBold;
-  font-size: 18px;
-  color: black;
-  line-height: 82px;
-  /* margin-left: 33px; */
-  text-align: center; }
+  .order-container .order-title {
+    font-size: 24px;
+    font-family: Segoe UI;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 20px 0 36px;
+    padding-top: 20px;
+    color: #f89b1d; }
+  .order-container ul.order-order-steps {
+    font-family: Segoe UI;
+    color: #f89b1d;
+    padding: 0 0 32px;
+    border-bottom: 1px solid #f89b1d;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin: 0 0 23px; }
+    .order-container ul.order-order-steps li {
+      display: inline;
+      margin-right: 81px; }
+      .order-container ul.order-order-steps li.selected {
+        font-weight: bold; }
+  .order-container .client-data-container {
+    height: 870px;
+    width: 900px;
+    border: 2px solid #f89b1d;
+    margin: 45px auto 200px; }
+    .order-container .client-data-container .client-type-text {
+      font-family: SegoeBold;
+      font-size: 18px;
+      color: black;
+      line-height: 82px;
+      text-align: center; }
+    .order-container .client-data-container .order-title-ending {
+      font-size: 20px;
+      font-family: Segoe UI;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin: 0;
+      color: #f89b1d;
+      cursor: pointer; }
+    .order-container .client-data-container #triangle-left-big {
+      width: 0;
+      height: 0;
+      border-top: 11px solid transparent;
+      border-right: 15px solid #f89b1d;
+      border-bottom: 11px solid transparent;
+      float: left;
+      margin-right: 25px;
+      margin-left: 25px; }
+    .order-container .client-data-container #triangle-right-big {
+      width: 0;
+      height: 0;
+      border-top: 11px solid transparent;
+      border-left: 15px solid #f89b1d;
+      border-bottom: 11px solid transparent;
+      float: right;
+      margin: 0 25px 37px 15px;
+      cursor: pointer; }
+    .order-container .client-data-container .left-container {
+      width: 50%;
+      float: left; }
+      .order-container .client-data-container .left-container .newaddress-box {
+        width: 100%;
+        height: 40px; }
+      .order-container .client-data-container .left-container label.error {
+        margin-left: 145px; }
+    .order-container .client-data-container .right-container {
+      width: 50%;
+      float: right; }
+      .order-container .client-data-container .right-container .logged-user-text {
+        font-family: SegoeLight;
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 10px; }
+      .order-container .client-data-container .right-container .wyloguj-text {
+        margin: 35px 140px 0;
+        padding: 5px 60px;
+        background-color: #f89b1d;
+        /* height: 30px; */
+        /* width: 200px; */
+        text-align: center;
+        line-height: 40px;
+        font-family: Segoe UI;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        font-size: 14px; }
+      .order-container .client-data-container .right-container .sukku-button-small {
+        margin: 24px 120px 0;
+        background-color: #f89b1d;
+        height: 30px;
+        width: 200px;
+        text-align: center;
+        line-height: 30px;
+        font-family: Segoe UI;
+        color: white;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer; }
+        .order-container .client-data-container .right-container .sukku-button-small:hover {
+          background-color: orange; }
+      .order-container .client-data-container .right-container .error-box {
+        margin: auto auto 50px;
+        width: 90%;
+        height: 300px;
+        color: red;
+        font-family: Segoe UI; }
+      .order-container .client-data-container .right-container .validation-summary-errors ul li {
+        padding: 10px 0 10px 20px; }
 
 .data-box {
   width: 423px;
@@ -175,6 +118,13 @@ ul.cart-order-steps {
   height: 29px;
   font-family: SegoeLight;
   margin-top: 20px; }
+  .data-box label.error {
+    float: left;
+    color: red;
+    margin-left: 105px;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 2px; }
   .data-box input[type=text], .data-box input[type=password], .data-box input[type=email] {
     text-align: center;
     font-family: SegoeLight;
@@ -209,6 +159,19 @@ ul.cart-order-steps {
     /* margin-top: 19px; */
     vertical-align: bottom;
     float: left; }
+
+.error-summary {
+  color: red;
+  font-family: Segoe UI;
+  text-align: center; }
+
+input.error {
+  border-color: red; }
+
+#checkboxes-container {
+  width: 850px;
+  height: 120px;
+  margin-bottom: 20px; }
 
 input[type=checkbox].css-checkbox {
   display: none; }

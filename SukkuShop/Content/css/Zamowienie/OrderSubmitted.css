@@ -1,16 +1,15 @@
-.order-submitted-number, .order-submitted-text1, .order-submitted-text2, .notfound-backlink {
+.order-submitted-text1, .order-submitted-text1 .order-submitted-number, .order-submitted-text2, .notfound-backlink {
   text-align: center;
   margin-bottom: 10px; }
-
-.order-submitted-number {
-  font-size: 60px;
-  font-family: Segoe UI;
-  color: #f89b1d; }
 
 .order-submitted-text1 {
   font-size: 42px;
   color: black;
   font-family: Calibri; }
+  .order-submitted-text1 .order-submitted-number {
+    font-size: 60px;
+    font-family: Segoe UI;
+    color: #f89b1d; }
 
 .order-submitted-text2 {
   font-size: 42px;

@@ -1,0 +1,214 @@
+﻿//colors
+$color_tree_poppy_approx: #f89b1d;
+$black: black;
+$color_red_approx: red;
+$white:  white;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: SegoeLight;
+$font_2: SegoeBold;
+
+//@extend-elements
+//original selectors
+//table.order-table tr th, table.order-table tr td
+%extend_1 {
+	width: 174px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+//original selectors
+//table.order-table tr th:first-child, table.order-table tr td:first-child
+%extend_2 {
+	width: 535px;
+	text-align: left;
+	position: relative;
+}
+
+.order-container {
+	width: 1066px;
+	margin: auto;
+    .uwagi-box{
+        width:100%;
+        margin: 25px 0;
+        .text{
+            font-size: 24px;
+            font-family: Segoe UI;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding-bottom: 20px; 
+            color: #f89b1d;
+        }
+        textarea{
+            width:100%;
+            max-width:100%;
+            height:100px;
+            max-height:100px;
+            border:1px solid #f89b1d;
+            font-size:16px;
+            font-family:$font_1;
+            padding:3px;
+        }
+    }
+    .order-title {
+	    font-size: 24px;
+	    font-family: $font_0;
+	    font-weight: bold;
+	    text-transform: uppercase;
+	    margin: 20px 0 36px;
+	    padding-top: 20px;
+	    color: $color_tree_poppy_approx;
+    }
+    .order-title-ending {
+	    font-size: 20px;
+	    font-family: $font_0;
+	    font-weight: bold;
+	    text-transform: uppercase;
+	    color: $color_tree_poppy_approx;
+    }
+    ul {
+	    &.order-order-steps {
+		    font-family: $font_0;
+		    color: $color_tree_poppy_approx;
+		    padding: 0 0 32px;
+		    border-bottom: 1px solid $color_tree_poppy_approx;
+		    font-size: 18px;
+		    text-transform: uppercase;
+		    margin: 0 0 23px;
+		    li {
+			    display: inline;
+			    margin-right: 81px;
+			    &.selected {
+				    font-weight: bold;
+			    }
+		    }
+	    }
+	    &#products-summary {
+		    list-style-type: none;
+		    font-family: $font_1;
+		    font-size: 18px;
+		    text-align: right;
+		    text-transform: uppercase;
+		    border-bottom: $color_tree_poppy_approx 1px solid;
+		    padding-bottom: 20px;
+            margin-bottom:20px;
+		    li {
+			    margin-bottom: 10px;
+			    .price-box {
+				    text-align: right;
+				    width: 130px;
+				    float: right;
+			    }
+                &.summary-text-bold {
+	                font-family: $font_0;
+	                font-weight: bold;
+                }
+		    }
+		    #text-box {
+			    width: 100px;
+			    float: right;
+			    text-align: right;
+		    }
+	    }
+    }
+    table.order-table {
+	    font-family: $font_1;
+	    color: $black;
+	    margin-bottom: 20px;
+	    tr {
+		    th {
+			    font-size: 14px;
+			    text-transform: uppercase;
+			    padding-bottom: 30px;
+			    margin-bottom: 30px;
+			    border-bottom: 1px solid $color_tree_poppy_approx;
+			    @extend %extend_1;
+			    &:last-child {
+				    text-align: right;
+			    }
+			    &:first-child {
+				    @extend %extend_2;
+			    }
+		    }
+		    td {
+                .custom-product-text-container {
+	                width: 384px;
+	                float: left;
+	                position: absolute;
+	                display: table;
+	                left: 150px;
+	                height: 130px;
+	                p {
+		                display: table-cell;
+		                vertical-align: middle;
+	                }
+                }
+			    @extend %extend_1;
+			    &:last-child {
+				    text-align: right;
+			    }
+			    &:first-child {
+				    @extend %extend_2;
+			    }
+		    }
+	    }
+	    tbody tr td {
+		    padding: 20px 0;
+		    img {
+			    height: 136px;
+			    width: 136px;
+			    float: left;
+			    border: 2px solid $color_tree_poppy_approx;
+		    }
+	    }
+    }
+    .products-price-summary {
+	    font-family: $font_1;
+	    font-size: 18px;
+	    text-align: right;
+	    text-transform: uppercase;
+	    float: right;
+    }
+    .shipping-price {
+	    float: left;
+	    font-size: 12px;
+	    font-family: $font_1;
+	    width: 135px;
+	    text-align: center;
+	    line-height: 18px;
+    }
+    #triangle-right-big {
+	    width: 0;
+	    height: 0;
+	    border-top: 11px solid transparent;
+	    border-left: 15px solid $color_tree_poppy_approx;
+	    border-bottom: 11px solid transparent;
+	    float: right;
+	    margin-left: 25px;
+	    margin-top: 23px;
+    }
+    #triangle-left-big {
+	    width: 0;
+	    height: 0;
+	    border-top: 11px solid transparent;
+	    border-right: 15px solid $color_tree_poppy_approx;
+	    border-bottom: 11px solid transparent;
+	    float: left;
+	    margin-top: 23px;
+	    margin-right: 25px;
+    }
+    .order-summary-header-text {
+        margin-bottom:10px;
+	    font-size: 18px;
+	    font-family: $font_2;
+	    float: left;
+	    width: 548px;
+    }
+    .order-summary-description-text {
+        margin-bottom:5px;
+	    font-size: 16px;
+	    font-family: $font_1;
+	    width: 390px;
+    }
+}
