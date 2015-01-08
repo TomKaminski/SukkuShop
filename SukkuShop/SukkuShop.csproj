@@ -276,6 +276,14 @@
     <Compile Include="Migrations\201501031043313_SentDatePlz2.Designer.cs">
       <DependentUpon>201501031043313_SentDatePlz2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501071553592_FirmyOrder.cs" />
+    <Compile Include="Migrations\201501071553592_FirmyOrder.Designer.cs">
+      <DependentUpon>201501071553592_FirmyOrder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501071649555_FirmaPart2.cs" />
+    <Compile Include="Migrations\201501071649555_FirmaPart2.Designer.cs">
+      <DependentUpon>201501071649555_FirmaPart2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -373,7 +381,9 @@
     </Content>
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
+    <Content Include="Content\Images\checkbox-nonactive.png" />
     <Content Include="Content\Images\checkbox.png" />
+    <Content Include="Content\Images\processing.gif" />
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\1.png" />
     <Content Include="Content\Images\Shop\2.jpg" />
@@ -541,6 +551,10 @@
     <Content Include="Views\Zamowienie\Krok2.cshtml" />
     <Content Include="Views\Zamowienie\Podsumowanie.cshtml" />
     <Content Include="Views\Zamowienie\OrderSubmitted.cshtml" />
+    <Content Include="Views\Zamowienie\_NewAddressOrderPartial.cshtml" />
+    <Content Include="Views\Zamowienie\_NewAddressOrderFirmaPartial.cshtml" />
+    <Content Include="Views\Zamowienie\_ChangeAddressFirmaPartial.cshtml" />
+    <Content Include="Views\Zamowienie\_ChangeAddressPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -579,6 +593,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501031043313_SentDatePlz2.resx">
       <DependentUpon>201501031043313_SentDatePlz2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071553592_FirmyOrder.resx">
+      <DependentUpon>201501071553592_FirmyOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501071649555_FirmaPart2.resx">
+      <DependentUpon>201501071649555_FirmaPart2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -9,9 +9,10 @@ namespace SukkuShop
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            //routes.MapRoute(null, "{controller}/{action}/{category}",new
+            //routes.MapRoute(null, "{controller}/{action}/{category}/{option}", new
             //{
-            //    area = ""
+            //    area = "",
+            //    option = UrlParameter.Optional
             //},
             //new
             //{
@@ -72,7 +73,18 @@ namespace SukkuShop
             //    }
             //    );
 
-            
+            routes.MapRoute("Produkty", "{action}/{id}",
+               new
+               {
+                   controller = "Sklep",
+                   id = UrlParameter.Optional,
+                   area = ""
+               }, new
+               {
+                   controller = "Sklep",
+                   action = "Produkty"
+               }
+               );
 
             routes.MapRoute("Default", "{controller}/{action}/{id}",
                 new

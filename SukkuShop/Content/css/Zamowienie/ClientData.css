@@ -23,7 +23,7 @@
       .order-container ul.order-order-steps li.selected {
         font-weight: bold; }
   .order-container .client-data-container {
-    height: 870px;
+    height: 950px;
     width: 900px;
     border: 2px solid #f89b1d;
     margin: 45px auto 200px; }
@@ -64,7 +64,7 @@
       float: left; }
       .order-container .client-data-container .left-container .newaddress-box {
         width: 100%;
-        height: 40px; }
+        height: 20px; }
       .order-container .client-data-container .left-container label.error {
         margin-left: 145px; }
     .order-container .client-data-container .right-container {
@@ -118,10 +118,10 @@
   height: 29px;
   font-family: SegoeLight;
   margin-top: 20px; }
-  .data-box label.error {
+  .data-box .field-validation-error {
     float: left;
     color: red;
-    margin-left: 105px;
+    margin-left: 145px;
     font-weight: bold;
     font-size: 14px;
     margin-top: 2px; }
@@ -168,10 +168,25 @@
 input.error {
   border-color: red; }
 
+#checkboxes-container span.field-validation-error {
+  color: red;
+  font-family: Segoe UI;
+  font-size: 14px;
+  margin-left: 55px; }
+
 #checkboxes-container {
   width: 850px;
-  height: 120px;
+  height: 160px;
   margin-bottom: 20px; }
+  #checkboxes-container .box {
+    height: 40px; }
+  #checkboxes-container .box-big {
+    height: 115px;
+    position: relative; }
+    #checkboxes-container .box-big .field-validation-error {
+      position: absolute;
+      left: 0;
+      bottom: 0; }
 
 input[type=checkbox].css-checkbox {
   display: none; }
@@ -190,6 +205,25 @@ input[type=checkbox].css-checkbox {
     margin-left: 33px;
     margin-bottom: 10px; }
   input[type=checkbox].css-checkbox:checked + input[type=hidden] + label.css-label {
+    background-position: 0 -18px; }
+
+input[type=radio].css-checkbox {
+  display: none; }
+  input[type=radio].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18px;
+    line-height: 20px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    font-family: SegoeLight;
+    float: left;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 33px;
+    margin-bottom: 10px; }
+  input[type=radio].css-checkbox:checked + label.css-label {
     background-position: 0 -18px; }
 
 label.css-label {

@@ -40,6 +40,7 @@ namespace SukkuShop.Controllers
                _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
                    .Select(x => x.Name);
 
+                var optionlist = new List<string> {"promocje", "bestseller", "nowość"};
                 if (categorylist.Contains(id))
                     categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == id).CategoryId;
                 if(categoryId!=0)
@@ -55,12 +56,28 @@ namespace SukkuShop.Controllers
                     _shop.Products =
                         _shop.Products.Where(
                             c => c.Category == id || subcategoryList.Contains(c.Category)).ToList();
-
-                if (!categorylist.Contains(id))
+                else if (optionlist.Contains(id))
+                {
+                    switch (id)
+                    {
+                        case "bestseller":
+                            _shop.Products = _shop.Products.Where(x => x.Bestseller).ToList();
+                            break;
+                        case "promocje":
+                            _shop.Products = _shop.Products.Where(x => x.Promotion > 0).ToList();
+                            break;
+                        case "nowość":
+                            _shop.Products = _shop.Products.Where(x => x.Novelty).ToList();
+                            break;
+                        default:
+                            _shop.Products = _shop.Products;
+                            break;
+                    }
+                }
+                else if(!categorylist.Contains(id) && !optionlist.Contains(id))
                     _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(id.ToUpper())).ToList();
                 
             }
-            
             subcategoryList.Add("Wszystko");
             if (!_shop.Products.Any())
                 return View(MVC.Sklep.Views.NoProducts);
@@ -75,10 +92,9 @@ namespace SukkuShop.Controllers
 
         }
 
-        //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
+        [DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
         public virtual ActionResult Produkty(string id)
         {
-
             return View((object)id);
         }
 

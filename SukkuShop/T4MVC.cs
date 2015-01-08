@@ -235,26 +235,26 @@ namespace Links
                 private const string URLPATH = "~/Content/css/Zamowienie";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                public static readonly string Cart_scss = Url("Cart.scss");
-                public static readonly string Cart_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Cart.min.css") ? Url("Cart.min.css") : Url("Cart.css");
-                     
-                public static readonly string Cart_css_map = Url("Cart.css.map");
-                public static readonly string Cart_min_css = Url("Cart.min.css");
                 public static readonly string ClientData_scss = Url("ClientData.scss");
                 public static readonly string ClientData_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ClientData.min.css") ? Url("ClientData.min.css") : Url("ClientData.css");
                      
                 public static readonly string ClientData_css_map = Url("ClientData.css.map");
                 public static readonly string ClientData_min_css = Url("ClientData.min.css");
-                public static readonly string Order_scss = Url("Order.scss");
-                public static readonly string Order_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Order.min.css") ? Url("Order.min.css") : Url("Order.css");
+                public static readonly string Krok1_scss = Url("Krok1.scss");
+                public static readonly string Krok1_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Krok1.min.css") ? Url("Krok1.min.css") : Url("Krok1.css");
                      
-                public static readonly string Order_css_map = Url("Order.css.map");
-                public static readonly string Order_min_css = Url("Order.min.css");
+                public static readonly string Krok1_css_map = Url("Krok1.css.map");
+                public static readonly string Krok1_min_css = Url("Krok1.min.css");
                 public static readonly string OrderSubmitted_scss = Url("OrderSubmitted.scss");
                 public static readonly string OrderSubmitted_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderSubmitted.min.css") ? Url("OrderSubmitted.min.css") : Url("OrderSubmitted.css");
                      
                 public static readonly string OrderSubmitted_css_map = Url("OrderSubmitted.css.map");
                 public static readonly string OrderSubmitted_min_css = Url("OrderSubmitted.min.css");
+                public static readonly string podsumowanie_scss = Url("podsumowanie.scss");
+                public static readonly string podsumowanie_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.css") ? Url("podsumowanie.min.css") : Url("podsumowanie.css");
+                     
+                public static readonly string podsumowanie_css_map = Url("podsumowanie.css.map");
+                public static readonly string podsumowanie_min_css = Url("podsumowanie.min.css");
             }
         
         }
@@ -289,6 +289,7 @@ namespace Links
             private const string URLPATH = "~/Content/Images";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            public static readonly string checkbox_nonactive_png = Url("checkbox-nonactive.png");
             public static readonly string checkbox_png = Url("checkbox.png");
             public static readonly string content_pic1_png = Url("content-pic1.png");
             public static readonly string content_pic2_png = Url("content-pic2.png");
@@ -297,6 +298,7 @@ namespace Links
             public static readonly string footer_sukku_png = Url("footer-sukku.png");
             public static readonly string footer_user_png = Url("footer-user.png");
             public static readonly string logo_header_png = Url("logo-header.png");
+            public static readonly string processing_gif = Url("processing.gif");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Shop {
                 private const string URLPATH = "~/Content/Images/Shop";

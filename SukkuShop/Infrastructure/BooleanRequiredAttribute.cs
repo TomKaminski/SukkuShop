@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 
 namespace SukkuShop.Infrastructure
 {
@@ -9,4 +10,6 @@ namespace SukkuShop.Infrastructure
             return value != null && (bool)value;
         }
     }
+
+   
 }

@@ -99,6 +99,10 @@ namespace SukkuShop.Controllers
         {
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
+            public readonly string ChangeAddressPartial = "ChangeAddressPartial";
+            public readonly string ChangeAddressFirmaPartial = "ChangeAddressFirmaPartial";
+            public readonly string NewAddressOrderPartial = "NewAddressOrderPartial";
+            public readonly string NewAddressOrderFirmaPartial = "NewAddressOrderFirmaPartial";
             public readonly string Wyloguj = "Wyloguj";
             public readonly string NewAddressOrder = "NowyKlient";
             public readonly string Podsumowanie = "Podsumowanie";
@@ -109,6 +113,10 @@ namespace SukkuShop.Controllers
         {
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
+            public const string ChangeAddressPartial = "ChangeAddressPartial";
+            public const string ChangeAddressFirmaPartial = "ChangeAddressFirmaPartial";
+            public const string NewAddressOrderPartial = "NewAddressOrderPartial";
+            public const string NewAddressOrderFirmaPartial = "NewAddressOrderFirmaPartial";
             public const string Wyloguj = "Wyloguj";
             public const string NewAddressOrder = "NowyKlient";
             public const string Podsumowanie = "Podsumowanie";
@@ -131,6 +139,42 @@ namespace SukkuShop.Controllers
         {
             public readonly string shoppingCart = "shoppingCart";
             public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_ChangeAddressPartial s_params_ChangeAddressPartial = new ActionParamsClass_ChangeAddressPartial();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangeAddressPartial ChangeAddressPartialParams { get { return s_params_ChangeAddressPartial; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangeAddressPartial
+        {
+            public readonly string model = "model";
+            public readonly string shoppingCart = "shoppingCart";
+        }
+        static readonly ActionParamsClass_ChangeAddressFirmaPartial s_params_ChangeAddressFirmaPartial = new ActionParamsClass_ChangeAddressFirmaPartial();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangeAddressFirmaPartial ChangeAddressFirmaPartialParams { get { return s_params_ChangeAddressFirmaPartial; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangeAddressFirmaPartial
+        {
+            public readonly string model = "model";
+            public readonly string shoppingCart = "shoppingCart";
+        }
+        static readonly ActionParamsClass_NewAddressOrderPartial s_params_NewAddressOrderPartial = new ActionParamsClass_NewAddressOrderPartial();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_NewAddressOrderPartial NewAddressOrderPartialParams { get { return s_params_NewAddressOrderPartial; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_NewAddressOrderPartial
+        {
+            public readonly string model = "model";
+            public readonly string shoppingCart = "shoppingCart";
+        }
+        static readonly ActionParamsClass_NewAddressOrderFirmaPartial s_params_NewAddressOrderFirmaPartial = new ActionParamsClass_NewAddressOrderFirmaPartial();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_NewAddressOrderFirmaPartial NewAddressOrderFirmaPartialParams { get { return s_params_NewAddressOrderFirmaPartial; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_NewAddressOrderFirmaPartial
+        {
+            public readonly string model = "model";
+            public readonly string shoppingCart = "shoppingCart";
         }
         static readonly ActionParamsClass_NewAddressOrder s_params_NewAddressOrder = new ActionParamsClass_NewAddressOrder();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -160,11 +204,19 @@ namespace SukkuShop.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _ChangeAddressFirmaPartial = "_ChangeAddressFirmaPartial";
+                public readonly string _ChangeAddressPartial = "_ChangeAddressPartial";
+                public readonly string _NewAddressOrderFirmaPartial = "_NewAddressOrderFirmaPartial";
+                public readonly string _NewAddressOrderPartial = "_NewAddressOrderPartial";
                 public readonly string Krok1 = "Krok1";
                 public readonly string Krok2 = "Krok2";
                 public readonly string OrderSubmitted = "OrderSubmitted";
                 public readonly string Podsumowanie = "Podsumowanie";
             }
+            public readonly string _ChangeAddressFirmaPartial = "~/Views/Zamowienie/_ChangeAddressFirmaPartial.cshtml";
+            public readonly string _ChangeAddressPartial = "~/Views/Zamowienie/_ChangeAddressPartial.cshtml";
+            public readonly string _NewAddressOrderFirmaPartial = "~/Views/Zamowienie/_NewAddressOrderFirmaPartial.cshtml";
+            public readonly string _NewAddressOrderPartial = "~/Views/Zamowienie/_NewAddressOrderPartial.cshtml";
             public readonly string Krok1 = "~/Views/Zamowienie/Krok1.cshtml";
             public readonly string Krok2 = "~/Views/Zamowienie/Krok2.cshtml";
             public readonly string OrderSubmitted = "~/Views/Zamowienie/OrderSubmitted.cshtml";
@@ -202,16 +254,112 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
+        partial void ChangeAddressPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ChangeAddressPartial()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeAddressPartial);
+            ChangeAddressPartialOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChangeAddressPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.UserAddressModel model, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ChangeAddressPartial(SukkuShop.Models.UserAddressModel model, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeAddressPartial);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            ChangeAddressPartialOverride(callInfo, model, shoppingCart);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChangeAddressFirmaPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ChangeAddressFirmaPartial()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeAddressFirmaPartial);
+            ChangeAddressFirmaPartialOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChangeAddressFirmaPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.FirmaAddressModel model, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ChangeAddressFirmaPartial(SukkuShop.Models.FirmaAddressModel model, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeAddressFirmaPartial);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            ChangeAddressFirmaPartialOverride(callInfo, model, shoppingCart);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void NewAddressOrderPartialOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult NewAddressOrderPartial()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.NewAddressOrderPartial);
+            NewAddressOrderPartialOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void NewAddressOrderPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrderPartial(SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrderPartial);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            NewAddressOrderPartialOverride(callInfo, model, shoppingCart);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void NewAddressOrderFirmaPartialOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult NewAddressOrderFirmaPartial()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.NewAddressOrderFirmaPartial);
+            NewAddressOrderFirmaPartialOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void NewAddressOrderFirmaPartialOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.NewOrderAddressFirmaModel model, SukkuShop.Models.Cart shoppingCart);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrderFirmaPartial(SukkuShop.Models.NewOrderAddressFirmaModel model, SukkuShop.Models.Cart shoppingCart)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrderFirmaPartial);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
+            NewAddressOrderFirmaPartialOverride(callInfo, model, shoppingCart);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
         partial void Krok2Override(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Krok2(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
+        public override System.Web.Mvc.ActionResult Krok2(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             Krok2Override(callInfo, shoppingCart, model);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]

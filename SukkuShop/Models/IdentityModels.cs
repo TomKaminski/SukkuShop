@@ -29,6 +29,8 @@ namespace SukkuShop.Models
             Orders = new List<Orders>();
         }
 
+        public string NazwaFirmy { get; set; }
+        public int Nip { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }
@@ -116,6 +118,8 @@ namespace SukkuShop.Models
         public decimal ProductsPrice { get; set; }
         public decimal TotalPrice { get; set; }
         public string UserHints { get; set; }
+        public string NazwaFirmy { get; set; }
+        public int NIP { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string City { get; set; }

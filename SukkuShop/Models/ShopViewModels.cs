@@ -92,5 +92,4 @@ namespace SukkuShop.Models
         public decimal PriceAfterDiscount { get; set; }
         public bool Available { get; set; }
     }
-
 }

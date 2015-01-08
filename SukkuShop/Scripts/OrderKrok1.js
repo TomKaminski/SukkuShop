@@ -48,6 +48,29 @@ $("input:radio[name=shipping]").click(function () {
     $('#dostawa-box-summary').empty().append(value + ' zł');
     var target = $('#shipping-price-summary');
     target.empty().append(currency(sum) + " zł");
+    if (id == 5) {
+        $("input:radio[name=payment]").each(function () {
+            $(this).attr('checked', false);
+        });
+        $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay4]").attr('disabled', false);
+        $("input:radio[id=pay3]").attr('disabled', true);
+        $("input:radio[id=pay2]").attr('disabled', true);
+        $('#payment-box-summary').empty().append('WYBIERZ');
+    } else {
+        $("input:radio[name=payment]").each(function () {
+            $(this).attr('checked', false);
+        });
+        $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay4]").attr('disabled', true);
+        $("input:radio[id=pay3]").attr('disabled', false);
+        $("input:radio[id=pay2]").attr('disabled', false);
+        $('#payment-box-summary').empty().append('WYBIERZ');
+    }
     priceSummary();
 });
 
