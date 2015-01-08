@@ -70,6 +70,8 @@
     .order-container .client-data-container .right-container {
       width: 50%;
       float: right; }
+      .order-container .client-data-container .right-container .data-box .field-validation-error {
+        margin-left: 105px; }
       .order-container .client-data-container .right-container .logged-user-text {
         font-family: SegoeLight;
         font-size: 18px;

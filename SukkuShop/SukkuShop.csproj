@@ -555,6 +555,7 @@
     <Content Include="Views\Zamowienie\_NewAddressOrderFirmaPartial.cshtml" />
     <Content Include="Views\Zamowienie\_ChangeAddressFirmaPartial.cshtml" />
     <Content Include="Views\Zamowienie\_ChangeAddressPartial.cshtml" />
+    <Content Include="Views\Zamowienie\_LoginOrderPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

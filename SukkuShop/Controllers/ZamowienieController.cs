@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SukkuShop.Identity;
 using SukkuShop.Models;
@@ -24,6 +25,35 @@ namespace SukkuShop.Controllers
             _signInManager = signInManager;
             _userManager = userManager;
             _dbContext = dbContext;
+        }
+
+
+        [HttpGet]
+        public virtual ActionResult ZalogujOrder()
+        {
+            return PartialView("_LoginOrderPartial");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public virtual async Task<ActionResult> ZalogujOrder(LoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        var user = await _userManager.FindByEmailAsync(model.Email);
+                        Session["username"] = user.Name;
+                        return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Krok2())));
+                    default:
+                        ModelState.AddModelError("", "Nieprawidłowy adres email i/lub hasło");
+                        return PartialView("_LoginOrderPartial", model);
+                }
+            }
+            return PartialView("_LoginOrderPartial", model);
         }
 
         public virtual ActionResult Krok1(Cart shoppingCart)
@@ -235,28 +265,6 @@ namespace SukkuShop.Controllers
             return PartialView("_NewAddressOrderFirmaPartial", model);
         }
 
-
-        [HttpPost]
-        [ActionName("Krok2")]
-        public virtual ActionResult Krok2(Cart shoppingCart, UserAddressModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                shoppingCart.UserAddressModel = new CartAddressModel
-                {
-                    Imie = model.Imie,
-                    KodPocztowy = model.KodPocztowy,
-                    Miasto = model.Miasto,
-                    Nazwisko = model.Nazwisko,
-                    Numer = model.Numer,
-                    Telefon = model.Telefon,
-                    Ulica = model.Ulica
-                };
-                return RedirectToAction(MVC.Zamowienie.Podsumowanie());
-            }
-            return View(MVC.Zamowienie.Views.Krok2);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual ActionResult Wyloguj()
@@ -266,52 +274,7 @@ namespace SukkuShop.Controllers
             return RedirectToAction(MVC.Zamowienie.Krok2());
         }
 
-
-        [ActionName("NowyKlient")]
-        [HttpPost]
-        public async virtual Task<ActionResult> NewAddressOrder(NewOrderAddressModel model, Cart shoppingCart)
-        {
-            var modelPlz = new CartAddressModel
-            {
-                Imie = model.Imie,
-                Miasto = model.Miasto,
-                Nazwisko = model.Nazwisko,
-                Numer = model.Numer,
-                KodPocztowy = model.KodPocztowy,
-                Ulica = model.Ulica,
-                Telefon = model.Telefon
-            };
-            
-            if (ModelState.IsValid)
-            {
-                shoppingCart.UserAddressModel = modelPlz;
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Name = model.Imie,
-                    LastName = model.Nazwisko,
-                    PhoneNumber = model.Telefon,
-                    Street = model.Ulica,
-                    PostalCode = model.KodPocztowy,
-                    City = model.Miasto,
-                    Number = model.Numer
-                };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false, false);
-                    Session["username"] = user.Name;
-                    return RedirectToAction(MVC.Zamowienie.Podsumowanie());
-                }
-                ModelState.AddModelError("", "Istnieje już użytkownik o podanym adresie Email");
-                return View(MVC.Zamowienie.Views.Krok2,modelPlz);
-            }
-            return View(MVC.Zamowienie.Views.Krok2, modelPlz);
-        }
-
-        
-
+       
         [HttpGet]
         public async virtual Task<ActionResult> Podsumowanie(Cart shoppingCart)
         {
@@ -321,8 +284,10 @@ namespace SukkuShop.Controllers
             OrderShippingSummary shippingModel;
             string totaltotalvalue;
             var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
-            var userModel = new UserAddressModel
+            var userModel = new CartAddressModel
             {
+                NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
+                Nip = shoppingCart.UserAddressModel.Nip,
                 Imie = shoppingCart.UserAddressModel.Imie,
                 KodPocztowy = shoppingCart.UserAddressModel.KodPocztowy,
                 Miasto = shoppingCart.UserAddressModel.Miasto,
@@ -331,6 +296,7 @@ namespace SukkuShop.Controllers
                 Telefon = shoppingCart.UserAddressModel.Telefon,
                 Ulica = shoppingCart.UserAddressModel.Ulica
             };
+            
             var orderModel = new OrderViewModelsSummary
             {
                 OrderViewItemsTotal = orderitemsummary,
@@ -339,6 +305,8 @@ namespace SukkuShop.Controllers
                 UserAddressModel = userModel,
                 TotalTotalValue = totaltotalvalue
             };
+            if (shoppingCart.UserAddressModel.Nip != 0)
+                orderModel.Firma = true;
             return View(orderModel);
         }
 
@@ -376,7 +344,7 @@ namespace SukkuShop.Controllers
             {
                 ProductsPrice = hehe,
                 TotalPrice = hehe + paymentPrice + shippingPrice,
-                Name = user.Name,
+                Name = shoppingCart.UserAddressModel.Imie,
                 Surname = shoppingCart.UserAddressModel.Nazwisko,
                 OrderDate = DateTime.Today,
                 SentDate = DateTime.Today,
@@ -390,8 +358,9 @@ namespace SukkuShop.Controllers
                 UserId = user.Id,
                 User = user,
                 OrderInfo = "Przyjęte",
-                UserHints = shoppingCart.UserHints
-
+                UserHints = shoppingCart.UserHints,
+                NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
+                NIP = shoppingCart.UserAddressModel.Nip
             };
             _dbContext.Orders.Add(orders);
             await _dbContext.SaveChangesAsync();

@@ -45,29 +45,7 @@ namespace SukkuShop.Controllers
             return View();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public virtual async Task<ActionResult> ZalogujOrder(LoginViewModel model, string returnUrl)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
-                switch (result)
-                {
-                    case SignInStatus.Success:
-                        var user = await _userManager.FindByEmailAsync(model.Email);
-                        Session["username"] = user.Name;
-                        return RedirectToAction(MVC.Zamowienie.Krok2());
-                    case SignInStatus.LockedOut:
-                        return View(MVC.Shared.Views.Blokada);
-                    default:
-                        ModelState.AddModelError("", "Nieprawidłowy adres email i/lub hasło");
-                        return View(MVC.Zamowienie.Views.Krok2);
-                }
-            }            
-            return View(MVC.Zamowienie.Views.Krok2);
-        }
+        
 
         // POST: /Account/Login
         [HttpPost]

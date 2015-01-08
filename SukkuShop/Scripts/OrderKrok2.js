@@ -1,4 +1,5 @@
 ﻿function clientDataAjaxSuccess() {
+    hideAjaxLoader();
     if ($("input[id=NewAccount]").is(":checked")) {
         $("#newaddress-replace input[type=password]").attr("disabled", false);
     } else {
@@ -8,12 +9,17 @@
 }
 
 function clientDataAjaxSuccessChangeAddress() {
+    hideAjaxLoader();
     if ($("input[id=newaddress]").is(":checked")) {
+        $("#radio-boxes").children("label").css("background-image", "url(/Content/Images/checkbox.png)");
+        $("#radio-boxes").children("input").attr("disabled", false);
         $("#left-container-new-address").children().children("input[type=text]").each(function () {
             $(this).css("background-color", "white");
             $(this).attr("readonly", false);
         });
     } else {
+        $("#radio-boxes").children("label").css("background-image", "url(/Content/Images/checkbox-nonactive.png)");
+        $("#radio-boxes").children("input").attr("disabled", true);
         $("#left-container-new-address").children().children("input[type=text]").each(function () {
             $(this).css("background-color", "#ebebeb");
             $(this).attr("readonly", true);
@@ -164,7 +170,7 @@ $(document).ready(function () {
         return this.optional(element) || value != param;
     }, "Proszę podać inną wartość");
 
-    $(".order-title-ending").click(function () {
+    $("#finalizuj").click(function () {
         if ($("#newaddress").length)
             if ($("input[id=firmafalse]").is(":checked"))
                 $("#ChangeAddressForm").submit();

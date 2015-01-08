@@ -14,20 +14,20 @@
         <div class="client-data-container" style="height: 560px;">
             <div id="changeaddress-replace">
                 @{
-                    if (Model == true)
-                    {
-                        Html.RenderAction(MVC.Zamowienie.ChangeAddressFirmaPartial());
-                    }
-                    else
-                    {
-                        Html.RenderAction(MVC.Zamowienie.ChangeAddressPartial());
-                    }
-                } 
+        if (Model == true)
+        {
+            Html.RenderAction(MVC.Zamowienie.ChangeAddressFirmaPartial());
+        }
+        else
+        {
+            Html.RenderAction(MVC.Zamowienie.ChangeAddressPartial());
+        }
+                }
             </div>
             <div class="right-container">
                 <div class="client-type-text">Zalogowany jako:</div>
                 <div class="logged-user-text">@User.Identity.Name</div>
-                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new {id = "logoutForm1"}))
+                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
                 {
                     @Html.AntiForgeryToken()
                     <a class="wyloguj-text" href="javascript:document.getElementById('logoutForm1').submit()">wyloguj</a>
@@ -39,7 +39,9 @@
             <a href="@Url.Action(MVC.Zamowienie.Krok1())">
                 <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
             </a>
-            <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+            <div id="finalizuj">
+                <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+            </div>
         </div>
     }
     else
@@ -47,31 +49,21 @@
         <div class="client-data-container">
             <div class="right-container">
                 <div class="client-type-text">Zaloguj się na istniejące konto</div>
-                    @using (Html.BeginForm(MVC.Konto.ZalogujOrder(), FormMethod.Post, new { id = "OrderLoginForm" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <div class="data-box">
-                            <label for="email" class="text">e-mail:</label>
-                            <input id="email" type="email" name="email" style="margin-right: 50px" />
-                        </div>
-                        <div class="data-box">
-                            <label for="passwordLog" class="text">hasło:</label>
-                            <input id="passwordLog" type="password" name="password" style="margin-right: 50px" />
-                        </div>
-                        <input type="submit" class="sukku-button-small" value="Zaloguj" />
-                        @Html.ValidationSummary("", new { @class = "error-summary" })
-                        
-                    }
+                <div id="login-replace">
+                    @{Html.RenderAction(MVC.Zamowienie.ZalogujOrder());}
+                </div>
             </div>
             <div id="newaddress-replace">
                 @{
-                    Html.RenderAction(MVC.Zamowienie.NewAddressOrderPartial());
+        Html.RenderAction(MVC.Zamowienie.NewAddressOrderPartial());
                 }
             </div>
             <a href="@Url.Action(MVC.Zamowienie.Krok1())">
                 <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
             </a>
-            <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right;">FINALIZUJ ZAMÓWIENIE</div>
+            <div id="finalizuj">
+                <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+            </div>
         </div>
     }
 </div>

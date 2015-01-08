@@ -69,13 +69,6 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrder()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrder);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Podsumowanie()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Podsumowanie);
@@ -97,6 +90,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string ZalogujOrder = "ZalogujOrder";
             public readonly string Krok1 = "Krok1";
             public readonly string Krok2 = "Krok2";
             public readonly string ChangeAddressPartial = "ChangeAddressPartial";
@@ -104,13 +98,13 @@ namespace SukkuShop.Controllers
             public readonly string NewAddressOrderPartial = "NewAddressOrderPartial";
             public readonly string NewAddressOrderFirmaPartial = "NewAddressOrderFirmaPartial";
             public readonly string Wyloguj = "Wyloguj";
-            public readonly string NewAddressOrder = "NowyKlient";
             public readonly string Podsumowanie = "Podsumowanie";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string ZalogujOrder = "ZalogujOrder";
             public const string Krok1 = "Krok1";
             public const string Krok2 = "Krok2";
             public const string ChangeAddressPartial = "ChangeAddressPartial";
@@ -118,11 +112,19 @@ namespace SukkuShop.Controllers
             public const string NewAddressOrderPartial = "NewAddressOrderPartial";
             public const string NewAddressOrderFirmaPartial = "NewAddressOrderFirmaPartial";
             public const string Wyloguj = "Wyloguj";
-            public const string NewAddressOrder = "NowyKlient";
             public const string Podsumowanie = "Podsumowanie";
         }
 
 
+        static readonly ActionParamsClass_ZalogujOrder s_params_ZalogujOrder = new ActionParamsClass_ZalogujOrder();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ZalogujOrder ZalogujOrderParams { get { return s_params_ZalogujOrder; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ZalogujOrder
+        {
+            public readonly string model = "model";
+            public readonly string returnUrl = "returnUrl";
+        }
         static readonly ActionParamsClass_Krok1 s_params_Krok1 = new ActionParamsClass_Krok1();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Krok1 Krok1Params { get { return s_params_Krok1; } }
@@ -138,7 +140,6 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Krok2
         {
             public readonly string shoppingCart = "shoppingCart";
-            public readonly string model = "model";
         }
         static readonly ActionParamsClass_ChangeAddressPartial s_params_ChangeAddressPartial = new ActionParamsClass_ChangeAddressPartial();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -176,15 +177,6 @@ namespace SukkuShop.Controllers
             public readonly string model = "model";
             public readonly string shoppingCart = "shoppingCart";
         }
-        static readonly ActionParamsClass_NewAddressOrder s_params_NewAddressOrder = new ActionParamsClass_NewAddressOrder();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_NewAddressOrder NewAddressOrderParams { get { return s_params_NewAddressOrder; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_NewAddressOrder
-        {
-            public readonly string model = "model";
-            public readonly string shoppingCart = "shoppingCart";
-        }
         static readonly ActionParamsClass_Podsumowanie s_params_Podsumowanie = new ActionParamsClass_Podsumowanie();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Podsumowanie PodsumowanieParams { get { return s_params_Podsumowanie; } }
@@ -206,6 +198,7 @@ namespace SukkuShop.Controllers
             {
                 public readonly string _ChangeAddressFirmaPartial = "_ChangeAddressFirmaPartial";
                 public readonly string _ChangeAddressPartial = "_ChangeAddressPartial";
+                public readonly string _LoginOrderPartial = "_LoginOrderPartial";
                 public readonly string _NewAddressOrderFirmaPartial = "_NewAddressOrderFirmaPartial";
                 public readonly string _NewAddressOrderPartial = "_NewAddressOrderPartial";
                 public readonly string Krok1 = "Krok1";
@@ -215,6 +208,7 @@ namespace SukkuShop.Controllers
             }
             public readonly string _ChangeAddressFirmaPartial = "~/Views/Zamowienie/_ChangeAddressFirmaPartial.cshtml";
             public readonly string _ChangeAddressPartial = "~/Views/Zamowienie/_ChangeAddressPartial.cshtml";
+            public readonly string _LoginOrderPartial = "~/Views/Zamowienie/_LoginOrderPartial.cshtml";
             public readonly string _NewAddressOrderFirmaPartial = "~/Views/Zamowienie/_NewAddressOrderFirmaPartial.cshtml";
             public readonly string _NewAddressOrderPartial = "~/Views/Zamowienie/_NewAddressOrderPartial.cshtml";
             public readonly string Krok1 = "~/Views/Zamowienie/Krok1.cshtml";
@@ -228,6 +222,30 @@ namespace SukkuShop.Controllers
     public partial class T4MVC_ZamowienieController : SukkuShop.Controllers.ZamowienieController
     {
         public T4MVC_ZamowienieController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void ZalogujOrderOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ZalogujOrder()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZalogujOrder);
+            ZalogujOrderOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ZalogujOrderOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.LoginViewModel model, string returnUrl);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ZalogujOrder(SukkuShop.Models.LoginViewModel model, string returnUrl)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZalogujOrder);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "returnUrl", returnUrl);
+            ZalogujOrderOverride(callInfo, model, returnUrl);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [NonAction]
         partial void Krok1Override(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart);
@@ -350,19 +368,6 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void Krok2Override(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult Krok2(SukkuShop.Models.Cart shoppingCart, SukkuShop.Models.UserAddressModel model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Krok2);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            Krok2Override(callInfo, shoppingCart, model);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void WylogujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
@@ -371,19 +376,6 @@ namespace SukkuShop.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Wyloguj);
             WylogujOverride(callInfo);
             return callInfo;
-        }
-
-        [NonAction]
-        partial void NewAddressOrderOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart);
-
-        [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> NewAddressOrder(SukkuShop.Models.NewOrderAddressModel model, SukkuShop.Models.Cart shoppingCart)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.NewAddressOrder);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
-            NewAddressOrderOverride(callInfo, model, shoppingCart);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [NonAction]

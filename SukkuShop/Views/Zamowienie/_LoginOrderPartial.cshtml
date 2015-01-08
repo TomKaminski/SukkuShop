@@ -1,0 +1,23 @@
+﻿@model SukkuShop.Models.LoginViewModel
+
+@using (Ajax.BeginForm(MVC.Zamowienie.ZalogujOrder(), new AjaxOptions { UpdateTargetId = "login-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnBegin = "showAjaxLoader()", OnSuccess = "hideAjaxLoader()" }, new { id = "LoginOrderForm" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="data-box">
+        @Html.LabelFor(m => m.Email, "e-mail:", new { @class = "text" })
+        @Html.TextBoxFor(m => m.Email, new { name = "email", style = "margin-right: 50px" })
+        @Html.ValidationMessageFor(m=>m.Email)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Password, "hasło:", new { @class = "text" })
+        @Html.PasswordFor(m => m.Password, new { name = "hasło", style="margin-right: 50px"})
+        @Html.ValidationMessageFor(m => m.Password)
+    </div>
+    <div class="newaddress-box">
+        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "css-checkbox" })
+        @Html.LabelFor(m => m.RememberMe, "Nie wylogowuj mnie", new { @class = "css-label", style="margin-left: 137px;margin-top: 10px;" })
+    </div>
+    <input type="submit" class="sukku-button-small" value="Zaloguj" />
+    @Html.ValidationSummary(true,"", new { @class = "error-summary" })
+
+}

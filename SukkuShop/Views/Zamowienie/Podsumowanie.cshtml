@@ -45,7 +45,15 @@
     <div class="clear">&nbsp;</div>
     <div class="order-summary-description-text">@Model.OrderShipping.Description</div>
     <div class="order-title">Adres dostawy</div>
-    <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+    @if (Model.Firma)
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy @Model.UserAddressModel.Nip</div>
+    }
+    else
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+    }
+    
     <div class="clear">&nbsp;</div>
     <div class="order-summary-description-text">
         ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
