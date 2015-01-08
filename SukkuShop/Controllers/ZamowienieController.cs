@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SukkuShop.Identity;
 using SukkuShop.Models;
@@ -26,6 +27,35 @@ namespace SukkuShop.Controllers
             _dbContext = dbContext;
         }
 
+
+        [HttpGet]
+        public virtual ActionResult ZalogujOrder()
+        {
+            return PartialView("_LoginOrderPartial");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public virtual async Task<ActionResult> ZalogujOrder(LoginViewModel model, string returnUrl)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                switch (result)
+                {
+                    case SignInStatus.Success:
+                        var user = await _userManager.FindByEmailAsync(model.Email);
+                        Session["username"] = user.Name;
+                        return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Krok2())));
+                    default:
+                        ModelState.AddModelError("", "Nieprawidłowy adres email i/lub hasło");
+                        return PartialView("_LoginOrderPartial", model);
+                }
+            }
+            return PartialView("_LoginOrderPartial", model);
+        }
+
         public virtual ActionResult Krok1(Cart shoppingCart)
         {
             if (!shoppingCart.Lines.Any())
@@ -44,41 +74,195 @@ namespace SukkuShop.Controllers
                 
             if (!shoppingCart.Lines.Any())
                 return RedirectToAction(MVC.Koszyk.Index());
-            
+            bool? model = null;
             if (User.Identity.IsAuthenticated)
             {
-                var model = new UserAddressModel();
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                model.Imie = user.Name ?? "Nie podano";
-                model.Nazwisko = user.LastName ?? "Nie podano";
-                model.Ulica = user.Street ?? "Nie podano";
-                model.Telefon = user.PhoneNumber ?? "Nie podano";
-                model.KodPocztowy = user.PostalCode ?? "Nie podano";
-                model.Miasto = user.City ?? "Nie podano";
-                model.Numer = user.Number ?? "Nie podano";
+                model = user.Nip != 0;
                 return View(model);
             }
-            return View();
+            return View(model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult ChangeAddressPartial()
+        {
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
+
+            var model = new UserAddressModel
+            {
+                Imie = user.Name ?? "Nie podano",
+                Nazwisko = user.LastName ?? "Nie podano",
+                Ulica = user.Street ?? "Nie podano",
+                Telefon = user.PhoneNumber ?? "Nie podano",
+                KodPocztowy = user.PostalCode ?? "Nie podano",
+                Miasto = user.City ?? "Nie podano",
+                Numer = user.Number ?? "Nie podano"
+            };
+            return PartialView("_ChangeAddressPartial",model);
         }
 
         [HttpPost]
-        [ActionName("Krok2")]
-        public virtual async Task<ActionResult> Krok2(Cart shoppingCart, UserAddressModel model)
+        public virtual ActionResult ChangeAddressPartial(UserAddressModel model, Cart shoppingCart)
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                user.Name = model.Imie;
-                user.LastName = model.Nazwisko;
-                user.Number = model.Numer;
-                user.PhoneNumber = model.Telefon;
-                user.PostalCode = model.KodPocztowy;
-                user.City = model.Miasto;
-                user.Street = model.Ulica;
-                await _userManager.UpdateAsync(user);
-                return RedirectToAction(MVC.Zamowienie.Podsumowanie());
+                shoppingCart.UserAddressModel = new CartAddressModel
+                {
+                    Imie = model.Imie,
+                    KodPocztowy = model.KodPocztowy,
+                    Miasto = model.Miasto,
+                    Nazwisko = model.Nazwisko,
+                    Numer = model.Numer,
+                    Telefon = model.Telefon,
+                    Ulica = model.Ulica
+                };
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
             }
-            return View(MVC.Zamowienie.Views.Krok2);
+            return PartialView("_ChangeAddressPartial",model);
+        }
+
+        [HttpGet]
+        public virtual ActionResult ChangeAddressFirmaPartial()
+        {
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
+
+            var model = new FirmaAddressModel
+            {
+                NazwaFirmy = user.NazwaFirmy ?? "Nie podano",
+                Nip = user.Nip == 0 ? "Nie podano" : user.Nip.ToString(),
+                Ulica = user.Street ?? "Nie podano",
+                Telefon = user.PhoneNumber ?? "Nie podano",
+                KodPocztowy = user.PostalCode ?? "Nie podano",
+                Miasto = user.City ?? "Nie podano",
+                Numer = user.Number ?? "Nie podano"
+            };
+            return PartialView("_ChangeAddressFirmaPartial", model);
+        }
+
+        [HttpPost]
+        public virtual ActionResult ChangeAddressFirmaPartial(FirmaAddressModel model, Cart shoppingCart)
+        {
+            if (ModelState.IsValid)
+            {
+                shoppingCart.UserAddressModel = new CartAddressModel
+                {
+                    NazwaFirmy = model.NazwaFirmy,
+                    KodPocztowy = model.KodPocztowy,
+                    Miasto = model.Miasto,
+                    Nip = Convert.ToInt32(model.Nip),
+                    Numer = model.Numer,
+                    Telefon = model.Telefon,
+                    Ulica = model.Ulica
+                };
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
+            }
+            return PartialView("_ChangeAddressFirmaPartial", model);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult NewAddressOrderPartial()
+        {
+            return PartialView("_NewAddressOrderPartial");
+        }
+
+        [HttpPost]
+        public virtual async Task<ActionResult> NewAddressOrderPartial(NewOrderAddressModel model, Cart shoppingCart)
+        {
+            if (!model.NewAccount)
+                ModelState["Password"].Errors.Clear();
+            
+            if (ModelState.IsValid)
+            {
+                shoppingCart.UserAddressModel = new CartAddressModel
+                {
+                    Imie = model.Imie,
+                    KodPocztowy = model.KodPocztowy,
+                    Miasto = model.Miasto,
+                    Nazwisko = model.Nazwisko,
+                    Numer = model.Numer,
+                    Telefon = model.Telefon,
+                    Ulica = model.Ulica
+                };
+                if (model.NewAccount)
+                {
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        Name = model.Imie,
+                        LastName = model.Nazwisko,
+                        PhoneNumber = model.Telefon,
+                        Street = model.Ulica,
+                        PostalCode = model.KodPocztowy,
+                        City = model.Miasto,
+                        Number = model.Numer
+                    };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, false, false);
+                        Session["username"] = user.Name;
+                        return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
+                    }
+                    ModelState.AddModelError("Email", "Istnieje już taki użytkownik!");
+                    return PartialView("_NewAddressOrderPartial", model);
+                }
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
+            }
+            return PartialView("_NewAddressOrderPartial", model);
+        }
+
+        [HttpGet]
+        public virtual PartialViewResult NewAddressOrderFirmaPartial()
+        {
+            return PartialView("_NewAddressOrderFirmaPartial");
+        }
+
+        [HttpPost]
+        public virtual async Task<ActionResult> NewAddressOrderFirmaPartial(NewOrderAddressFirmaModel model, Cart shoppingCart)
+        {
+            if (!model.NewAccount)
+                ModelState["Password"].Errors.Clear();
+            if (ModelState.IsValid)
+            {
+                shoppingCart.UserAddressModel = new CartAddressModel
+                {
+                    NazwaFirmy = model.NazwaFirmy,
+                    KodPocztowy = model.KodPocztowy,
+                    Miasto = model.Miasto,
+                    Nip = model.Nip,
+                    Numer = model.Numer,
+                    Telefon = model.Telefon,
+                    Ulica = model.Ulica
+                };
+                if (model.NewAccount)
+                {
+                    var user = new ApplicationUser
+                    {
+                        UserName = model.Email,
+                        Email = model.Email,
+                        NazwaFirmy = model.NazwaFirmy,
+                        Nip = model.Nip,
+                        PhoneNumber = model.Telefon,
+                        Street = model.Ulica,
+                        PostalCode = model.KodPocztowy,
+                        City = model.Miasto,
+                        Number = model.Numer
+                    };
+                    var result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, false, false);
+                        Session["username"] = user.Name;
+                        return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
+                    }
+                    ModelState.AddModelError("Email","Istnieje już taki użytkownik!");
+                    return PartialView("_NewAddressOrderFirmaPartial", model);
+                }
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Zamowienie.Podsumowanie())));
+            }
+            return PartialView("_NewAddressOrderFirmaPartial", model);
         }
 
         [HttpPost]
@@ -90,70 +274,29 @@ namespace SukkuShop.Controllers
             return RedirectToAction(MVC.Zamowienie.Krok2());
         }
 
-
-        [ActionName("NowyKlient")]
-        [HttpPost]
-        public async virtual Task<ActionResult> NewAddressOrder(NewOrderAddressModel model, Cart shoppingCart)
-        {
-            var modelPlz = new UserAddressModel
-            {
-                Imie = model.Imie,
-                Miasto = model.Miasto,
-                Nazwisko = model.Nazwisko,
-                Numer = model.Numer,
-                KodPocztowy = model.KodPocztowy,
-                Ulica = model.Ulica,
-                Telefon = model.Telefon
-            };
-            if (ModelState.IsValid)
-            {
-                var user = new ApplicationUser
-                {
-                    UserName = model.Email,
-                    Email = model.Email,
-                    Name = model.Imie,
-                    LastName = model.Nazwisko,
-                    PhoneNumber = model.Telefon,
-                    Street = model.Ulica,
-                    PostalCode = model.KodPocztowy,
-                    City = model.Miasto,
-                    Number = model.Numer
-                };
-                var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    await _signInManager.SignInAsync(user, false, false);
-                    Session["username"] = user.Name;
-                    return RedirectToAction(MVC.Zamowienie.Podsumowanie());
-                }
-                ModelState.AddModelError("", "Istnieje już użytkownik o podanym adresie Email");
-                return View(MVC.Zamowienie.Views.Krok2,modelPlz);
-            }
-            return View(MVC.Zamowienie.Views.Krok2, modelPlz);
-        }
-
-        
-
+       
         [HttpGet]
         public async virtual Task<ActionResult> Podsumowanie(Cart shoppingCart)
         {
-            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0 || !User.Identity.IsAuthenticated)
+            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0)
                 return RedirectToAction(MVC.Koszyk.Index());
             OrderPaymentSummary paymentModel;
             OrderShippingSummary shippingModel;
             string totaltotalvalue;
             var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-            var userModel = new UserAddressModel
+            var userModel = new CartAddressModel
             {
-                Imie = user.Name,
-                KodPocztowy = user.PostalCode,
-                Miasto = user.City,
-                Nazwisko = user.LastName,
-                Numer = user.Number,
-                Telefon = user.PhoneNumber,
-                Ulica = user.Street
+                NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
+                Nip = shoppingCart.UserAddressModel.Nip,
+                Imie = shoppingCart.UserAddressModel.Imie,
+                KodPocztowy = shoppingCart.UserAddressModel.KodPocztowy,
+                Miasto = shoppingCart.UserAddressModel.Miasto,
+                Nazwisko = shoppingCart.UserAddressModel.Nazwisko,
+                Numer = shoppingCart.UserAddressModel.Numer,
+                Telefon = shoppingCart.UserAddressModel.Telefon,
+                Ulica = shoppingCart.UserAddressModel.Ulica
             };
+            
             var orderModel = new OrderViewModelsSummary
             {
                 OrderViewItemsTotal = orderitemsummary,
@@ -162,6 +305,8 @@ namespace SukkuShop.Controllers
                 UserAddressModel = userModel,
                 TotalTotalValue = totaltotalvalue
             };
+            if (shoppingCart.UserAddressModel.Nip != 0)
+                orderModel.Firma = true;
             return View(orderModel);
         }
 
@@ -199,22 +344,23 @@ namespace SukkuShop.Controllers
             {
                 ProductsPrice = hehe,
                 TotalPrice = hehe + paymentPrice + shippingPrice,
-                Name = user.Name,
-                Surname = user.LastName,
+                Name = shoppingCart.UserAddressModel.Imie,
+                Surname = shoppingCart.UserAddressModel.Nazwisko,
                 OrderDate = DateTime.Today,
                 SentDate = DateTime.Today,
                 ShippingId = shoppingCart.ShippingId,
                 PaymentId = shoppingCart.PaymentId,
-                City = user.City,
-                Street = user.Street,
-                Number = user.Number,
-                PostalCode = user.PostalCode,
+                City = shoppingCart.UserAddressModel.Miasto,
+                Street = shoppingCart.UserAddressModel.Ulica,
+                Number = shoppingCart.UserAddressModel.Numer,
+                PostalCode = shoppingCart.UserAddressModel.KodPocztowy,
                 OrderDetails = listakurwa,
                 UserId = user.Id,
                 User = user,
                 OrderInfo = "Przyjęte",
-                UserHints = shoppingCart.UserHints
-
+                UserHints = shoppingCart.UserHints,
+                NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
+                NIP = shoppingCart.UserAddressModel.Nip
             };
             _dbContext.Orders.Add(orders);
             await _dbContext.SaveChangesAsync();

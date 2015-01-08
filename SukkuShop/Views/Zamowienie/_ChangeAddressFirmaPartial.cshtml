@@ -1,0 +1,54 @@
+﻿@model SukkuShop.Models.FirmaAddressModel
+
+@using (Ajax.BeginForm(MVC.Zamowienie.ChangeAddressFirmaPartial(), new AjaxOptions { UpdateTargetId = "changeaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccessChangeAddress()", OnBegin = "showAjaxLoader()" }, new { id = "ChangeAddressFirmaForm" }))
+{
+    <div class="left-container" id="left-container-new-address">
+        <div class="client-type-text">Moje dane adresowe</div>
+        <div class="newaddress-box">
+            @Html.CheckBoxFor(m => m.newaddress, new { @class = "css-checkbox"})
+            @Html.LabelFor(m => m.newaddress, "Chcę wysłać jednorazowo na inny adres", new { @class = "css-label" })
+        </div>
+        <div class="newaddress-box" id="radio-boxes">
+            @Html.RadioButtonFor(m => m.Firma, false, new { @class = "css-checkbox", id = "firmafalse" })
+            @Html.LabelFor(m => m.Firma, "osoba prywatna", new { @class = "css-label", @for = "firmafalse", style = "margin-left:55px" })
+            @Html.RadioButtonFor(m => m.Firma, true, new { @class = "css-checkbox", id = "firmatrue", @checked = true })
+            @Html.LabelFor(m => m.Firma, "firma", new { @class = "css-label", @for = "firmatrue" })
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.NazwaFirmy, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.NazwaFirmy, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.NazwaFirmy)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Nip, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.Nip, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.Nip)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Ulica, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.Ulica, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.Ulica)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Numer, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.Numer, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.Numer)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Miasto, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.Miasto, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.Miasto)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.KodPocztowy, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.KodPocztowy, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.KodPocztowy)
+        </div>
+        <div class="data-box" style="margin-bottom: 35px">
+            @Html.LabelFor(m => m.Telefon, new { @class = "text" }):
+            @Html.TextBoxFor(m => m.Telefon, new { @readonly = true, style = "background-color:#ebebeb" })
+            @Html.ValidationMessageFor(m => m.Telefon)
+        </div>
+    </div>
+}
+

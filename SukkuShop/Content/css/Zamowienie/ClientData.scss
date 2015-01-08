@@ -40,7 +40,7 @@ $SeB: SegoeBold;
 	    }
     }
     .client-data-container{
-        height: 870px;
+        height: 950px;
         width: 900px;
         border: 2px solid #f89b1d;
         margin: 45px auto 200px;
@@ -85,7 +85,7 @@ $SeB: SegoeBold;
             float:left;
             .newaddress-box{
                 width:100%;
-                height:40px;
+                height:20px;
             }
             label.error{
                 margin-left: 145px;
@@ -94,6 +94,11 @@ $SeB: SegoeBold;
         .right-container {
             width:50%;
             float:right;
+            .data-box{
+                .field-validation-error{
+                    margin-left:105px;
+                }
+            }
             .logged-user-text{
                 font-family:$SeL;
                 font-size:18px;
@@ -152,10 +157,10 @@ $SeB: SegoeBold;
     height: 29px;
     font-family: SegoeLight;
     margin-top: 20px;
-    label.error{
+    .field-validation-error{
         float: left;
         color: red;
-        margin-left:105px;
+        margin-left:145px;
         font-weight: bold;
         font-size: 14px;
         margin-top:2px;
@@ -212,10 +217,29 @@ input.error{
     border-color:red;
 }
 
+#checkboxes-container span.field-validation-error{
+    color:red;
+    font-family: $SeUI;
+    font-size:14px;
+    margin-left:55px;
+}
+
 #checkboxes-container{
     width: 850px;
-    height: 120px;
-    margin-bottom: 20px;   
+    height: 160px;
+    margin-bottom: 20px;
+    .box{
+        height:40px;
+    }
+    .box-big{
+        height:115px;
+        position:relative;
+        .field-validation-error{
+            position: absolute;
+            left: 0;
+            bottom: 0;
+        }
+    }  
 }
 
 
@@ -237,6 +261,28 @@ input[type=checkbox].css-checkbox {
         margin-bottom:10px;
 	}
 	&:checked + input[type=hidden] + label.css-label {
+		background-position: 0 -18px;
+	}
+}
+
+input[type=radio].css-checkbox {
+	display: none;
+	+ label.css-label {
+		padding-left: 23px;
+		height: 18px;
+		line-height: 20px;
+		display: inline-block;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		font-size: 14px;
+		font-family: $SeL;
+		float: left;
+		vertical-align: middle;
+		cursor: pointer;
+        margin-left:33px;
+        margin-bottom:10px;
+	}
+	&:checked + label.css-label {
 		background-position: 0 -18px;
 	}
 }

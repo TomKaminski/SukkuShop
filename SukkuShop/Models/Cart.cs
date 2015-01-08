@@ -10,6 +10,7 @@ namespace SukkuShop.Models
         public int ShippingId { get; set; }
         public int PaymentId { get; set; }
         public string UserHints { get; set; }
+        public CartAddressModel UserAddressModel { get; set; }
 
         public void AddItem(int id, int quantity = 1)
         {

@@ -93,7 +93,6 @@ $font_8: Segoe Ui;
         .product-list-item-box {
 	        height: 191px;
 	        width: 135px;
-	        //Instead of the line below you could use @includebox-sizing($bs)
 	        box-sizing: border-box;
 	        margin-bottom: 28px;
 	        margin-right: 34px;
@@ -114,7 +113,6 @@ $font_8: Segoe Ui;
 	            left: 2px;
 	            height: 187px;
 	            width: 131px;
-	            //Instead of the line below you could use @includebox-sizing($bs)
 	            box-sizing: border-box;
 	            position: absolute;
                 .product-list-item-image {
@@ -368,6 +366,9 @@ ul {
 			color: $white;
 		}		
 	}
+}
+.balbla{
+
 }
 
 .shop-nav-container {

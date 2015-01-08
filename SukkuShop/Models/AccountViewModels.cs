@@ -15,7 +15,7 @@ namespace SukkuShop.Models
     {
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Email")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "To nie jest adres Email")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
