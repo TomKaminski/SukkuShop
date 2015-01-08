@@ -2,30 +2,34 @@
 @{
     ViewBag.Title = "Zarejestruj";
 }
-<h2 style="font-weight: bold; margin:20px 0; text-align: center">Stwórz konto</h2>
-@using (Html.BeginForm(MVC.Konto.Zarejestruj(), FormMethod.Post))
-{
-    <div style="text-align: center">
-        @Html.ValidationSummary("")
-        @Html.AntiForgeryToken()
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email)
-        <br />
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password)
-        <br />
-        @Html.LabelFor(m => m.ConfirmPassword)
-        @Html.PasswordFor(m => m.ConfirmPassword)
-        <br />
-        @Html.LabelFor(m => m.Name)
-        @Html.TextBoxFor(m => m.Name)
-        <br />
-        @Html.LabelFor(m => m.LastName)
-        @Html.TextBoxFor(m => m.LastName)
-        <br />
-        @Html.LabelFor(m => m.Phone)
-        @Html.TextBoxFor(m => m.Phone)
-        <br />
-        <input type="submit" value="Zarejestruj" />
+<h2>Rejestracja</h2>
+
+<div class="register-background">
+    <img src="~/Content/Images/Panels/left.jpg" />
+    <div class="register-cont">
+        @using (Html.BeginForm(MVC.Konto.Zarejestruj(), FormMethod.Post))
+        {
+            @Html.ValidationSummary("")
+            @Html.AntiForgeryToken()
+            <div class="register-box">
+                <div class="data-box">
+                    @Html.LabelFor(m => m.Email, "e-mail", new {@class = "text"})
+                    @Html.TextBoxFor(m => m.Email, new {@type = "email"})
+                </div>
+                <div class="data-box">
+                    @Html.LabelFor(m => m.Password, "haslo", new {@class = "text"})
+                    @Html.TextBoxFor(m => m.Password, new {@type = "password"})
+                </div>
+                <div class="data-box">
+                    @Html.LabelFor(m => m.ConfirmPassword, "powtórz hasło", new {@class = "text"})
+                    @Html.PasswordFor(m => m.ConfirmPassword, new {@type = "password"})
+                </div>
+            </div>
+    <div class="zarejestruj">
+        <div class="text">ZAREJESTRUJ</div><div id="triangle-right-big"></div>
     </div>
-}
+        }
+    </div>
+</div>
+
+@Styles.Render("~/Content/css/Konto/Register.css")

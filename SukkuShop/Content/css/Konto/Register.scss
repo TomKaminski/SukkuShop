@@ -1,0 +1,87 @@
+﻿//colors
+$orangeplz: #ff730c;
+$color_tree_poppy_approx: #f89b1d;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: SegoeLight;
+$font_2: SegoeBold;
+
+h2 {
+   font-weight: bold; 
+   margin:100px 0 20px 0; 
+   text-align: center;
+   color:$orangeplz;
+   font-family: $font_2;
+   font-size: 24px;
+   text-transform: uppercase;
+}
+.register-background {
+	height: 752px;
+	max-width: 1600px;
+	margin: auto;
+	position: relative;
+	img {
+		position: absolute;
+        top: 70px;
+	}
+}
+.register-cont  {
+    height: 310px;
+    width: 650px;
+    border: 2px solid $color_tree_poppy_approx;
+    margin: 15px auto 200px;
+    position:relative;
+        .register-box{
+        width: 430px;
+        height: 130px;
+        margin: 75px 0 0 65px;
+    }
+}
+.data-box{
+    width: 410px;
+    height: 29px;
+    margin-top: 15px;
+    font-family: $font_0;
+    .text{        
+        font-family:$font_1;
+        font-size: 18px;
+        float: left;
+        line-height: 29px;
+    }
+    input[type=password], input[type=email] {
+        text-align: center;
+        font-family: SegoeLight;
+        width: 267px;
+        border: 1px solid #cccccc;
+        float: right;
+        height: 27px;
+        padding: 0;
+    }
+}
+.zarejestruj{
+    float:right;
+    margin-right: 30px;
+    margin-top: 30px;
+    height: 20px;
+      .text {
+            float:left;
+	        font-size: 20px;
+	        font-family: $font_2;
+	        font-weight: bold;
+	        text-transform: uppercase;
+	        margin: 0;
+	        color: $color_tree_poppy_approx;
+            cursor: pointer;
+            }
+}
+#triangle-right-big {
+	        width: 0;
+            height: 0;
+            border-top: 11px solid transparent;
+            border-left: 15px solid #f89b1d;
+            border-bottom: 11px solid transparent;
+            float: right;
+            margin: 0 25px 37px 15px;
+            cursor:pointer;
+        }

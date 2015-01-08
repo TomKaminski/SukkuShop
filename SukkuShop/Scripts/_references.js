@@ -13,3 +13,4 @@
 /// <reference path="podsumowanie.js" />
 /// <reference path="orderkrok1.js" />
 /// <reference path="orderkrok2.js" />
+/// <reference path="konto.js" />

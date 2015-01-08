@@ -2,22 +2,38 @@
 @{
     ViewBag.Title = "Zaloguj";
 }
-<h2 style="font-weight: bold; margin:20px 0; text-align: center">Zaloguj się</h2>
-@using (Html.BeginForm(MVC.Konto.Zaloguj(), FormMethod.Post))
-{
-    <div style="text-align: center">
-        @Html.ValidationSummary("")
-        @Html.AntiForgeryToken()
-        @Html.LabelFor(m => m.Email)
-        @Html.TextBoxFor(m => m.Email)
-        <br/>
-        @Html.LabelFor(m => m.Password)
-        @Html.PasswordFor(m => m.Password)
-        <br />
-        @Html.LabelFor(m => m.RememberMe)
-        @Html.CheckBoxFor(m => m.RememberMe)
-        <input type="submit" value="Zaloguj" />
+<h2>Logowanie</h2>
+
+
+<div class="login-background">
+    <img src="~/Content/Images/Panels/left.jpg" />
+    <div class="login-cont">
+        @using (Html.BeginForm(MVC.Konto.Zaloguj(), FormMethod.Post, new {id = "LoginForm"}))
+        {
+            @Html.ValidationSummary("")
+            @Html.AntiForgeryToken()
+            <div class="login-box">
+                <div class="data-box">
+                    @Html.LabelFor(m => m.Email, "e-mail", new {@class = "text"})
+                    @Html.TextBoxFor(m => m.Email, new {@type = "email"})
+                </div>
+                <div class="data-box">
+                    @Html.LabelFor(m => m.Password, "haslo", new {@class = "text"})
+                    @Html.TextBoxFor(m => m.Password, new {@type = "password"})
+                </div>
+                <div class="remember-box-cointainter">
+                    @Html.CheckBoxFor(m => m.RememberMe, new {@class = "css-checkbox", required = true})
+                    @Html.LabelFor(m => m.RememberMe, "ZAPAMIETAJ MNIE", new {@class = "css-label"})
+
+                </div>
+            </div>
+            <div class="zaloguj">
+                <div class="text">ZALOGUJ</div><div id="triangle-right-big"></div>
+            </div>
+        }
+        <div class="success-text">jesteś zalogowany!</div>
     </div>
-}
-
-
+    
+</div>
+@Styles.Render("~/Content/css/Konto/Login.css")
+@Scripts.Render("~/Scripts/Konto.js")

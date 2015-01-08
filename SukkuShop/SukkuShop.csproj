@@ -311,6 +311,18 @@
     <Content Include="Content\css\Error\Error.min.css">
       <DependentUpon>Error.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\Login.css">
+      <DependentUpon>Login.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Login.min.css">
+      <DependentUpon>Login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Register.css">
+      <DependentUpon>Register.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Register.min.css">
+      <DependentUpon>Register.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Koszyk\Cart.css">
       <DependentUpon>Cart.scss</DependentUpon>
     </Content>
@@ -322,12 +334,6 @@
     </Content>
     <Content Include="Content\css\Sklep\ShopDetails.min.css">
       <DependentUpon>ShopDetails.css</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Zamowienie\podsumowanie.css">
-      <DependentUpon>podsumowanie.scss</DependentUpon>
-    </Content>
-    <Content Include="Content\css\Zamowienie\podsumowanie.min.css">
-      <DependentUpon>podsumowanie.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Zamowienie\ClientData.css">
       <DependentUpon>ClientData.scss</DependentUpon>
@@ -371,9 +377,13 @@
     <Content Include="Content\css\Sklep\Shop.min.css">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Zamowienie\podsumowanie.css" />
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox.png" />
+    <Content Include="Content\Images\Panels\left.jpg" />
+    <Content Include="Content\Images\Panels\eye.png" />
+    <Content Include="Content\Images\Panels\pepper.jpg" />
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\1.png" />
     <Content Include="Content\Images\Shop\2.jpg" />
@@ -450,10 +460,6 @@
     <Content Include="Content\css\Koszyk\Cart.css.map">
       <DependentUpon>Cart.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\podsumowanie.scss" />
-    <Content Include="Content\css\Zamowienie\podsumowanie.css.map">
-      <DependentUpon>podsumowanie.css</DependentUpon>
-    </Content>
     <Content Include="Content\css\Zamowienie\OrderSubmitted.scss" />
     <Content Include="Content\css\Zamowienie\OrderSubmitted.css.map">
       <DependentUpon>OrderSubmitted.css</DependentUpon>
@@ -463,6 +469,15 @@
       <DependentUpon>ShopDetails.css</DependentUpon>
     </Content>
     <Content Include="Content\fonts\phagspa.ttf" />
+    <Content Include="Content\css\Konto\Login.scss" />
+    <Content Include="Content\css\Konto\Login.css.map">
+      <DependentUpon>Login.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\podsumowanie.scss" />
+    <Content Include="Content\css\Konto\Register.scss" />
+    <Content Include="Content\css\Konto\Register.css.map">
+      <DependentUpon>Register.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -478,6 +493,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Konto.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\OrderKrok1.js" />
@@ -548,7 +564,6 @@
     <Folder Include="Areas\Admin\Views\AdminProduct\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
     <Folder Include="Areas\Admin\Views\AdminUser\" />
-    <Folder Include="Content\css\Konto\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
