@@ -98,6 +98,10 @@ $SeB: SegoeBold;
                 .field-validation-error{
                     margin-left:105px;
                 }
+                label.error{
+                    margin-left:105px;
+                }
+
             }
             .logged-user-text{
                 font-family:$SeL;
@@ -157,7 +161,7 @@ $SeB: SegoeBold;
     height: 29px;
     font-family: SegoeLight;
     margin-top: 20px;
-    .field-validation-error{
+    .field-validation-error, label.error{
         float: left;
         color: red;
         margin-left:145px;
@@ -214,8 +218,12 @@ $SeB: SegoeBold;
 }
 
 input.error{
-    border-color:red;
+    border-color:red !important;
 }
+
+                .input-validation-error{
+                    border: 1px solid red !important;
+                }
 
 #checkboxes-container span.field-validation-error{
     color:red;

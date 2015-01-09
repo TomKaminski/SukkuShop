@@ -1,6 +1,6 @@
 ﻿@model SukkuShop.Models.UserAddressModel
 
-@using (Ajax.BeginForm(MVC.Zamowienie.ChangeAddressPartial(), new AjaxOptions { UpdateTargetId = "changeaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccessChangeAddress()", OnBegin = "showAjaxLoader()" }, new { id = "ChangeAddressForm" }))
+@using (Ajax.BeginForm(MVC.Zamowienie.ChangeAddressPartial(), new AjaxOptions { UpdateTargetId = "changeaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccessChangeAddress()", OnBegin = "showAjaxLoader()", OnComplete = "allFormDelegate()" }, new { id = "ChangeAddressForm" }))
 {
     <div class="left-container" id="left-container-new-address">
         <div class="client-type-text">Moje dane adresowe</div>

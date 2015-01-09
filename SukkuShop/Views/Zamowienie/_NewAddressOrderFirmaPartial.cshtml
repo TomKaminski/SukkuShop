@@ -1,6 +1,6 @@
 ﻿@model SukkuShop.Models.NewOrderAddressFirmaModel
 
-@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderFirmaPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()", OnFailure = "onError(xhr, status, error)" }, new { id = "NewClientFormFirma" }))
+@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderFirmaPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()", OnFailure = "onError(xhr, status, error)", OnComplete = "allFormDelegate()" }, new { id = "NewClientFormFirma" }))
 {
     <div class="left-container">
         <div class="client-type-text">Jestem nowym klientem</div>
@@ -56,12 +56,12 @@
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Password, "hasło*:", new { @class = "text" })
-            @Html.PasswordFor(m => m.Password, new { name = "hasło", disabled = true })
+            @Html.PasswordFor(m => m.Password, new { disabled = true })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="data-box" style="margin-bottom: 25px">
             @Html.LabelFor(m => m.ConfirmPassword, "powtórz hasło*:", new { @class = "text" })
-            @Html.PasswordFor(m => m.ConfirmPassword, new { name = "confirmpassword", disabled = true })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { disabled = true })
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>

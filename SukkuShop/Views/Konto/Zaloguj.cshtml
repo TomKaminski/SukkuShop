@@ -18,8 +18,8 @@
                     @Html.TextBoxFor(m => m.Email, new {@type = "email"})
                 </div>
                 <div class="data-box">
-                    @Html.LabelFor(m => m.Password, "haslo", new {@class = "text"})
-                    @Html.TextBoxFor(m => m.Password, new {@type = "password"})
+                    @Html.LabelFor(m => m.PasswordLogin, "haslo", new {@class = "text"})
+                    @Html.TextBoxFor(m => m.PasswordLogin, new { @type = "password" })
                 </div>
                 <div class="remember-box-cointainter">
                     @Html.CheckBoxFor(m => m.RememberMe, new {@class = "css-checkbox", required = true})

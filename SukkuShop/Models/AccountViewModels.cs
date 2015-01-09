@@ -21,7 +21,7 @@ namespace SukkuShop.Models
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [DataType(DataType.Password)]
         [Display(Name = "Hasło")]
-        public string Password { get; set; }
+        public string PasswordLogin { get; set; }
 
         [Display(Name = "Nie wylogowuj mnie")]
         public bool RememberMe { get; set; }

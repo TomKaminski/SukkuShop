@@ -9,9 +9,9 @@
         @Html.ValidationMessageFor(m=>m.Email)
     </div>
     <div class="data-box">
-        @Html.LabelFor(m => m.Password, "hasło:", new { @class = "text" })
-        @Html.PasswordFor(m => m.Password, new { name = "hasło", style="margin-right: 50px"})
-        @Html.ValidationMessageFor(m => m.Password)
+        @Html.LabelFor(m => m.PasswordLogin, "hasło:", new { @class = "text" })
+        @Html.PasswordFor(m => m.PasswordLogin, new { style = "margin-right: 50px" })
+        @Html.ValidationMessageFor(m => m.PasswordLogin)
     </div>
     <div class="newaddress-box">
         @Html.CheckBoxFor(m => m.RememberMe, new { @class = "css-checkbox" })

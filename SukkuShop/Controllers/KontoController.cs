@@ -61,7 +61,7 @@ namespace SukkuShop.Controllers
             //{
             //    return View("NonActiveAccount", (object) model.Email);
             //}
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+            var result = await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:

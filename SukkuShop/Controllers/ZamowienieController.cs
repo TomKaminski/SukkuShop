@@ -41,7 +41,7 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, false);
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
                 switch (result)
                 {
                     case SignInStatus.Success:
@@ -196,7 +196,8 @@ namespace SukkuShop.Controllers
                         Street = model.Ulica,
                         PostalCode = model.KodPocztowy,
                         City = model.Miasto,
-                        Number = model.Numer
+                        Number = model.Numer,
+                        KontoFirmowe = false
                     };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
@@ -248,7 +249,8 @@ namespace SukkuShop.Controllers
                         Street = model.Ulica,
                         PostalCode = model.KodPocztowy,
                         City = model.Miasto,
-                        Number = model.Numer
+                        Number = model.Numer,
+                        KontoFirmowe = true
                     };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)

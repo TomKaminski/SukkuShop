@@ -1,6 +1,6 @@
 ﻿@model SukkuShop.Models.NewOrderAddressModel
 
-@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()" }, new { id = "NewClientForm" }))
+@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()", OnComplete = "allFormDelegate()" }, new { id = "NewClientForm" }))
 {
     <div class="left-container">
         <div class="client-type-text">Jestem nowym klientem</div>
@@ -12,42 +12,42 @@
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Email, "e-mail*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Email, new { name = "email" })
+            @Html.TextBoxFor(m => m.Email, new {  })
             @Html.ValidationMessageFor(m => m.Email)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Imie, "imię*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Imie, new { name = "imie" })
+            @Html.TextBoxFor(m => m.Imie, new {  })
             @Html.ValidationMessageFor(m => m.Imie)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Nazwisko, "nazwisko*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Nazwisko, new { name = "nazwisko" })
+            @Html.TextBoxFor(m => m.Nazwisko, new { })
             @Html.ValidationMessageFor(m => m.Nazwisko)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Ulica, "ulica*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Ulica, new { name = "ulica" })
+            @Html.TextBoxFor(m => m.Ulica, new {  })
             @Html.ValidationMessageFor(m => m.Ulica)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Numer, "numer*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Numer, new { name = "numer" })
+            @Html.TextBoxFor(m => m.Numer, new { })
             @Html.ValidationMessageFor(m => m.Numer)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Miasto, "miasto*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Miasto, new { name = "miasto" })
+            @Html.TextBoxFor(m => m.Miasto, new {  })
             @Html.ValidationMessageFor(m => m.Miasto)
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.KodPocztowy, "kod pocztowy*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.KodPocztowy, new { name = "kodpocztowy" })
+            @Html.TextBoxFor(m => m.KodPocztowy, new {  })
             @Html.ValidationMessageFor(m => m.KodPocztowy)
         </div>
         <div class="data-box" style="margin-bottom: 25px">
             @Html.LabelFor(m => m.Telefon, "telefon*:", new { @class = "text" })
-            @Html.TextBoxFor(m => m.Telefon, new { name = "telefon" })
+            @Html.TextBoxFor(m => m.Telefon, new {  })
             @Html.ValidationMessageFor(m => m.Telefon)
         </div>
         <div class="newaddress-box">
@@ -56,12 +56,12 @@
         </div>
         <div class="data-box">
             @Html.LabelFor(m => m.Password, "hasło*:", new { @class = "text" })
-            @Html.PasswordFor(m => m.Password, new { name = "hasło", disabled = true })
+            @Html.PasswordFor(m => m.Password, new { disabled = true })
             @Html.ValidationMessageFor(m => m.Password)
         </div>
         <div class="data-box" style="margin-bottom: 25px">
             @Html.LabelFor(m => m.ConfirmPassword, "powtórz hasło*:", new { @class = "text" })
-            @Html.PasswordFor(m => m.ConfirmPassword, new { name = "confirmpassword", disabled = true })
+            @Html.PasswordFor(m => m.ConfirmPassword, new { disabled = true })
             @Html.ValidationMessageFor(m => m.ConfirmPassword)
         </div>
     </div>

@@ -72,6 +72,8 @@
       float: right; }
       .order-container .client-data-container .right-container .data-box .field-validation-error {
         margin-left: 105px; }
+      .order-container .client-data-container .right-container .data-box label.error {
+        margin-left: 105px; }
       .order-container .client-data-container .right-container .logged-user-text {
         font-family: SegoeLight;
         font-size: 18px;
@@ -120,7 +122,7 @@
   height: 29px;
   font-family: SegoeLight;
   margin-top: 20px; }
-  .data-box .field-validation-error {
+  .data-box .field-validation-error, .data-box label.error {
     float: left;
     color: red;
     margin-left: 145px;
@@ -168,7 +170,10 @@
   text-align: center; }
 
 input.error {
-  border-color: red; }
+  border-color: red !important; }
+
+.input-validation-error {
+  border: 1px solid red !important; }
 
 #checkboxes-container span.field-validation-error {
   color: red;

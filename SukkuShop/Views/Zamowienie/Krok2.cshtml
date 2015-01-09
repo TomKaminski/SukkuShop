@@ -14,15 +14,8 @@
         <div class="client-data-container" style="height: 560px;">
             <div id="changeaddress-replace">
                 @{
-        if (Model == true)
-        {
-            Html.RenderAction(MVC.Zamowienie.ChangeAddressFirmaPartial());
-        }
-        else
-        {
-            Html.RenderAction(MVC.Zamowienie.ChangeAddressPartial());
-        }
-                }
+                    Html.RenderAction(Model == true ? MVC.Zamowienie.ChangeAddressFirmaPartial() : MVC.Zamowienie.ChangeAddressPartial());
+                } 
             </div>
             <div class="right-container">
                 <div class="client-type-text">Zalogowany jako:</div>
