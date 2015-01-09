@@ -38,12 +38,16 @@ namespace SukkuShop.Infrastructure
 
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
-            if (value.Equals(OtherProperty))
+            if (value != null)
             {
-                return new ValidationResult(
-                    FormatErrorMessage(validationContext.DisplayName));
+                if (value.Equals(OtherProperty))
+                {
+                    return new ValidationResult(
+                        FormatErrorMessage(validationContext.DisplayName));
+                }
+                return ValidationResult.Success;
             }
-            return ValidationResult.Success;
+            return new ValidationResult("");
         }
     }
 }

@@ -141,6 +141,7 @@ namespace Links
         public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
         public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        public static readonly string Konto_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Konto.min.js") ? Url("Konto.min.js") : Url("Konto.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
         public static readonly string OrderKrok1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok1.min.js") ? Url("OrderKrok1.min.js") : Url("OrderKrok1.js");
@@ -189,6 +190,16 @@ namespace Links
                 private const string URLPATH = "~/Content/css/Konto";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Login_scss = Url("Login.scss");
+                public static readonly string Login_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Login.min.css") ? Url("Login.min.css") : Url("Login.css");
+                     
+                public static readonly string Login_css_map = Url("Login.css.map");
+                public static readonly string Login_min_css = Url("Login.min.css");
+                public static readonly string Register_scss = Url("Register.scss");
+                public static readonly string Register_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.css") ? Url("Register.min.css") : Url("Register.css");
+                     
+                public static readonly string Register_css_map = Url("Register.css.map");
+                public static readonly string Register_min_css = Url("Register.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -250,11 +261,9 @@ namespace Links
                      
                 public static readonly string OrderSubmitted_css_map = Url("OrderSubmitted.css.map");
                 public static readonly string OrderSubmitted_min_css = Url("OrderSubmitted.min.css");
-                public static readonly string podsumowanie_scss = Url("podsumowanie.scss");
                 public static readonly string podsumowanie_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.css") ? Url("podsumowanie.min.css") : Url("podsumowanie.css");
                      
-                public static readonly string podsumowanie_css_map = Url("podsumowanie.css.map");
-                public static readonly string podsumowanie_min_css = Url("podsumowanie.min.css");
+                public static readonly string podsumowanie_scss = Url("podsumowanie.scss");
             }
         
         }
@@ -298,7 +307,6 @@ namespace Links
             public static readonly string footer_sukku_png = Url("footer-sukku.png");
             public static readonly string footer_user_png = Url("footer-user.png");
             public static readonly string logo_header_png = Url("logo-header.png");
-            public static readonly string processing_gif = Url("processing.gif");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Shop {
                 private const string URLPATH = "~/Content/Images/Shop";

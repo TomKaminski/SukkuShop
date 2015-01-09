@@ -231,7 +231,7 @@ namespace SukkuShop.Controllers
                     NazwaFirmy = model.NazwaFirmy,
                     KodPocztowy = model.KodPocztowy,
                     Miasto = model.Miasto,
-                    Nip = model.Nip,
+                    Nip = Convert.ToInt32(model.Nip),
                     Numer = model.Numer,
                     Telefon = model.Telefon,
                     Ulica = model.Ulica
@@ -243,7 +243,7 @@ namespace SukkuShop.Controllers
                         UserName = model.Email,
                         Email = model.Email,
                         NazwaFirmy = model.NazwaFirmy,
-                        Nip = model.Nip,
+                        Nip = Convert.ToInt32(model.Nip),
                         PhoneNumber = model.Telefon,
                         Street = model.Ulica,
                         PostalCode = model.KodPocztowy,

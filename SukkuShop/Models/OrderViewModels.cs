@@ -72,28 +72,28 @@ namespace SukkuShop.Models
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Imie nie może zawierać cyfr ani znaków specjalnych")]
         [Display(Name = "Imię")]
-        [StringLength(25, ErrorMessage = "Imie musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        [StringLength(25, ErrorMessage = "Imie musi mieć conajmniej 2 znaki.", MinimumLength = 2)]
         [NotEqualTo("Nie podano",ErrorMessage = "Zła wartość")]
         public string Imie { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Nazwisko nie może zawierać cyfr ani znaków specjalnych")]
         [Display(Name = "Nazwisko")]
-        [StringLength(25, ErrorMessage = "Nazwisko musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        [StringLength(25, ErrorMessage = "Nazwisko musi mieć conajmniej 2 znaki.", MinimumLength = 2)]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string Nazwisko { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż0-9]*[-, ]{0,1}[A-Ża-ż0-9]*[-, ]{0,1}[A-Ża-ż0-9]*$", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
         [Display(Name = "Ulica")]
-        [StringLength(25, ErrorMessage = "Ulica musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        [StringLength(25, ErrorMessage = "Ulica musi mieć conajmniej 2 znaki.", MinimumLength = 2)]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string Ulica { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Miasto nie może zawierać cyfr ani znaków specjalnych")]
         [Display(Name = "Miasto")]
-        [StringLength(25, ErrorMessage = "Miasto musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        [StringLength(25, ErrorMessage = "Miasto musi mieć conajmniej 2 znaki.", MinimumLength = 2)]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string Miasto { get; set; }
 
@@ -107,12 +107,14 @@ namespace SukkuShop.Models
             ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
         [Display(Name = "Telefon")]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         public string Telefon { get; set; }
 
         public bool Firma { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$",ErrorMessage = "Podaj poprawny numer domu.")]
         public string Numer { get; set; }
 
         public bool newaddress { get; set; }
@@ -129,9 +131,8 @@ namespace SukkuShop.Models
         public string NazwaFirmy { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [MinLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba")]
-        [MaxLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba")]
         [Display(Name = "NIP")]
+        [StringLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba.", MinimumLength = 10)]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string Nip { get; set; }
 
@@ -165,6 +166,7 @@ namespace SukkuShop.Models
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$", ErrorMessage = "Podaj poprawny numer domu.")]
         public string Numer { get; set; }
 
         public bool newaddress { get; set; }
@@ -209,6 +211,7 @@ namespace SukkuShop.Models
         public string Ulica { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$", ErrorMessage = "Podaj poprawny numer domu.")]
         public string Numer { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
@@ -263,10 +266,9 @@ namespace SukkuShop.Models
         public string NazwaFirmy { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [MinLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba")]
-        [MaxLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba")]
         [Display(Name = "NIP")]
-        public int Nip { get; set; }
+        [StringLength(10, ErrorMessage = "NIP to 10 cyfrowa liczba.", MinimumLength = 10)]
+        public string Nip { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Display(Name = "Ulica")]
@@ -275,6 +277,7 @@ namespace SukkuShop.Models
         public string Ulica { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$", ErrorMessage = "Podaj poprawny numer domu.")]
         public string Numer { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
@@ -320,47 +323,47 @@ namespace SukkuShop.Models
 
     public class CartAddressModel
     {
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Nazwa Firmy")]
-        [StringLength(25, ErrorMessage = "Nazwa firmy musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Display(Name = "Nazwa Firmy")]
+        //[StringLength(25, ErrorMessage = "Nazwa firmy musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
         public string NazwaFirmy { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [MinLength(10)]
-        [MaxLength(10)]
-        [Display(Name = "NIP")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[MinLength(10)]
+        //[MaxLength(10)]
+        //[Display(Name = "NIP")]
         public int Nip { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Imie nie może zawierać cyfr ani znaków specjalnych")]
-        [Display(Name = "Imię")]
-        [StringLength(25, ErrorMessage = "Imie musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        //[RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Imie nie może zawierać cyfr ani znaków specjalnych")]
+        //[Display(Name = "Imię")]
+        //[StringLength(25, ErrorMessage = "Imie musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
         public string Imie { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Nazwisko nie może zawierać cyfr ani znaków specjalnych")]
-        [Display(Name = "Nazwisko")]
-        [StringLength(25, ErrorMessage = "Nazwisko musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        //[RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Nazwisko nie może zawierać cyfr ani znaków specjalnych")]
+        //[Display(Name = "Nazwisko")]
+        //[StringLength(25, ErrorMessage = "Nazwisko musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
         public string Nazwisko { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
-        [Display(Name = "Ulica")]
-        [StringLength(25, ErrorMessage = "Ulica musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
+        //[Display(Name = "Ulica")]
+        //[StringLength(25, ErrorMessage = "Ulica musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
         public string Ulica { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
-        [Display(Name = "Miasto")]
-        [StringLength(25, ErrorMessage = "Miasto musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[RegularExpression("^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$", ErrorMessage = "Ulica nie może zawierać cyfr ani znaków specjalnych")]
+        //[Display(Name = "Miasto")]
+        //[StringLength(25, ErrorMessage = "Miasto musi mieć przynajmniej 2 znaki.", MinimumLength = 2)]
         public string Miasto { get; set; }
 
-        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [Display(Name = "Kod pocztowy")]
-        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny.")]
+        //[Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        //[Display(Name = "Kod pocztowy")]
+        //[RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny.")]
         public string KodPocztowy { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
-            ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
-        [Display(Name = "Telefon")]
+        //[RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
+        //    ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        //[Display(Name = "Telefon")]
         public string Telefon { get; set; }
 
 

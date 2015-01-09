@@ -8,6 +8,10 @@
     }
 }
 
+function onError(xhr, status, error) {
+    console.log(xhr.responseText);
+}
+
 function clientDataAjaxSuccessChangeAddress() {
     hideAjaxLoader();
     if ($("input[id=newaddress]").is(":checked")) {
