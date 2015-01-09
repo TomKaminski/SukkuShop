@@ -103,11 +103,10 @@ namespace SukkuShop.Models
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string KodPocztowy { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
-            ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
         [Display(Name = "Telefon")]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [Phone(ErrorMessage = "Numer telefonu jest niepoprawny")]
         public string Telefon { get; set; }
 
         public bool Firma { get; set; }
@@ -156,10 +155,10 @@ namespace SukkuShop.Models
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         public string KodPocztowy { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
-            ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
         [Display(Name = "Telefon")]
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
+        [Phone(ErrorMessage = "Numer telefonu jest niepoprawny")]
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         public string Telefon { get; set; }
 
         public bool Firma { get; set; }
@@ -225,9 +224,9 @@ namespace SukkuShop.Models
         [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny.")]
         public string KodPocztowy { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
-            ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        [Phone(ErrorMessage = "Numer telefonu jest niepoprawny")]
         [Display(Name = "Telefon")]
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         public string Telefon { get; set; }
 
         [BooleanRequired(ErrorMessage = "Proszę, zaakceptuj regulamin sklepu")]
@@ -291,9 +290,9 @@ namespace SukkuShop.Models
         [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny.")]
         public string KodPocztowy { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{8}|[1-9][0-9]{2}\\s[0-9]{3}\\s[0-9]{3}$",
-            ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        [Phone(ErrorMessage = "Numer telefonu jest niepoprawny")]
         [Display(Name = "Telefon")]
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         public string Telefon { get; set; }
 
         [BooleanRequired(ErrorMessage = "Proszę, zaakceptuj regulamin sklepu")]
