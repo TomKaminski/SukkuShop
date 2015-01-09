@@ -332,7 +332,7 @@ namespace SukkuShop.Models
         //[MinLength(10)]
         //[MaxLength(10)]
         //[Display(Name = "NIP")]
-        public int Nip { get; set; }
+        public string Nip { get; set; }
 
         //[RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Imie nie może zawierać cyfr ani znaków specjalnych")]
         //[Display(Name = "Imię")]

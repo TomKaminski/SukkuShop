@@ -30,13 +30,14 @@ namespace SukkuShop.Models
         }
 
         public string NazwaFirmy { get; set; }
-        public int Nip { get; set; }
+        public string AccNip { get; set; }
         public string Name { get; set; }
         public string LastName { get; set; }
         public string City { get; set; }
         public string Street { get; set; }
         public string Number { get; set; }
         public string PostalCode { get; set; }
+        public bool KontoFirmowe { get; set; }
         public ICollection<Orders> Orders { get; set; }
     }
 
@@ -119,7 +120,7 @@ namespace SukkuShop.Models
         public decimal TotalPrice { get; set; }
         public string UserHints { get; set; }
         public string NazwaFirmy { get; set; }
-        public int NIP { get; set; }
+        public string OrderNip { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string City { get; set; }

@@ -284,6 +284,14 @@
     <Compile Include="Migrations\201501071649555_FirmaPart2.Designer.cs">
       <DependentUpon>201501071649555_FirmaPart2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501091306426_NipString.cs" />
+    <Compile Include="Migrations\201501091306426_NipString.Designer.cs">
+      <DependentUpon>201501091306426_NipString.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501091309268_NipString2.cs" />
+    <Compile Include="Migrations\201501091309268_NipString2.Designer.cs">
+      <DependentUpon>201501091309268_NipString2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -611,6 +619,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501071649555_FirmaPart2.resx">
       <DependentUpon>201501071649555_FirmaPart2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501091306426_NipString.resx">
+      <DependentUpon>201501091306426_NipString.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501091309268_NipString2.resx">
+      <DependentUpon>201501091309268_NipString2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

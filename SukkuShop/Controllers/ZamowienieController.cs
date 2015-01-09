@@ -78,7 +78,7 @@ namespace SukkuShop.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                model = user.Nip != 0;
+                model = user.AccNip == null;
                 return View(model);
             }
             return View(model);
@@ -130,7 +130,7 @@ namespace SukkuShop.Controllers
             var model = new FirmaAddressModel
             {
                 NazwaFirmy = user.NazwaFirmy ?? "Nie podano",
-                Nip = user.Nip == 0 ? "Nie podano" : user.Nip.ToString(),
+                Nip = user.AccNip ?? "Nie podano",
                 Ulica = user.Street ?? "Nie podano",
                 Telefon = user.PhoneNumber ?? "Nie podano",
                 KodPocztowy = user.PostalCode ?? "Nie podano",
@@ -150,7 +150,7 @@ namespace SukkuShop.Controllers
                     NazwaFirmy = model.NazwaFirmy,
                     KodPocztowy = model.KodPocztowy,
                     Miasto = model.Miasto,
-                    Nip = Convert.ToInt32(model.Nip),
+                    Nip = model.Nip,
                     Numer = model.Numer,
                     Telefon = model.Telefon,
                     Ulica = model.Ulica
@@ -231,7 +231,7 @@ namespace SukkuShop.Controllers
                     NazwaFirmy = model.NazwaFirmy,
                     KodPocztowy = model.KodPocztowy,
                     Miasto = model.Miasto,
-                    Nip = Convert.ToInt32(model.Nip),
+                    Nip = model.Nip,
                     Numer = model.Numer,
                     Telefon = model.Telefon,
                     Ulica = model.Ulica
@@ -243,7 +243,7 @@ namespace SukkuShop.Controllers
                         UserName = model.Email,
                         Email = model.Email,
                         NazwaFirmy = model.NazwaFirmy,
-                        Nip = Convert.ToInt32(model.Nip),
+                        AccNip = model.Nip,
                         PhoneNumber = model.Telefon,
                         Street = model.Ulica,
                         PostalCode = model.KodPocztowy,
@@ -305,7 +305,7 @@ namespace SukkuShop.Controllers
                 UserAddressModel = userModel,
                 TotalTotalValue = totaltotalvalue
             };
-            if (shoppingCart.UserAddressModel.Nip != 0)
+            if (shoppingCart.UserAddressModel.Nip != null)
                 orderModel.Firma = true;
             return View(orderModel);
         }
@@ -360,7 +360,7 @@ namespace SukkuShop.Controllers
                 OrderInfo = "Przyjęte",
                 UserHints = shoppingCart.UserHints,
                 NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
-                NIP = shoppingCart.UserAddressModel.Nip
+                OrderNip = shoppingCart.UserAddressModel.Nip
             };
             _dbContext.Orders.Add(orders);
             await _dbContext.SaveChangesAsync();
