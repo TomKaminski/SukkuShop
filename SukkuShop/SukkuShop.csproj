@@ -333,6 +333,18 @@
     <Content Include="Content\css\Konto\KontoNieaktywne.min.css">
       <DependentUpon>KontoNieaktywne.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\Resetuj.css">
+      <DependentUpon>Resetuj.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Resetuj.min.css">
+      <DependentUpon>Resetuj.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\ZapomnianeHaslo.css">
+      <DependentUpon>ZapomnianeHaslo.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\ZapomnianeHaslo.min.css">
+      <DependentUpon>ZapomnianeHaslo.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Konto\Login.css">
       <DependentUpon>Login.scss</DependentUpon>
     </Content>
@@ -525,6 +537,14 @@
     <Content Include="Content\css\Konto\KontoNieaktywne.css.map">
       <DependentUpon>KontoNieaktywne.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\ZapomnianeHaslo.scss" />
+    <Content Include="Content\css\Konto\ZapomnianeHaslo.css.map">
+      <DependentUpon>ZapomnianeHaslo.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Resetuj.scss" />
+    <Content Include="Content\css\Konto\Resetuj.css.map">
+      <DependentUpon>Resetuj.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -541,6 +561,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\KontoNieaktywne.js" />
+    <Content Include="Scripts\Resetuj.js" />
     <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
@@ -550,6 +571,7 @@
     <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\shopAngular.js" />
     <Content Include="Scripts\shopdetails.js" />
+    <Content Include="Scripts\ZapomnianeHaslo.js" />
     <Content Include="Scripts\_references.js" />
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
@@ -614,6 +636,10 @@
     <Content Include="Views\Konto\_ChangePassword.cshtml" />
     <Content Include="Views\Konto\RegisterSuccess.cshtml" />
     <Content Include="Views\Konto\KontoNieaktywne.cshtml" />
+    <Content Include="Views\Konto\KontoAktywne.cshtml" />
+    <Content Include="Views\Shared\_Blad.cshtml" />
+    <Content Include="Views\Konto\_ZapomnianeHasloPartial.cshtml" />
+    <Content Include="Views\Konto\_ResetujHasloPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

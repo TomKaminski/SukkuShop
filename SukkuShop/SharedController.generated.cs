@@ -37,12 +37,14 @@ namespace T4MVC
             public class _ViewNamesClass
             {
                 public readonly string _AdminPanel = "_AdminPanel";
+                public readonly string _Blad = "_Blad";
                 public readonly string _CartInfoPartialView = "_CartInfoPartialView";
                 public readonly string _Layout = "_Layout";
                 public readonly string _LoginPartial = "_LoginPartial";
                 public readonly string Blokada = "Blokada";
             }
             public readonly string _AdminPanel = "~/Views/Shared/_AdminPanel.cshtml";
+            public readonly string _Blad = "~/Views/Shared/_Blad.cshtml";
             public readonly string _CartInfoPartialView = "~/Views/Shared/_CartInfoPartialView.cshtml";
             public readonly string _Layout = "~/Views/Shared/_Layout.cshtml";
             public readonly string _LoginPartial = "~/Views/Shared/_LoginPartial.cshtml";

@@ -65,14 +65,18 @@ namespace SukkuShop.Models
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
+
+        public string result { get; set; }
     }
 
     public class ForgotPasswordViewModel
     {
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "To nie jest adres email.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public string result { get; set; }
     }
 
     public class SetPasswordViewModel

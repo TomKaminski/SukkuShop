@@ -1,0 +1,40 @@
+﻿@model SukkuShop.Models.ResetPasswordViewModel
+@using (Ajax.BeginForm(MVC.Konto.ResetujHaslo(), new AjaxOptions { UpdateTargetId = "replace", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnBegin = "showAjaxLoader()", OnSuccess = "SendEmailSuccess()" }, new { id = "ResetujHasloForm" }))
+{
+    <div class="validation-box">
+        @if (Model.result == null)
+        {
+            @Html.ValidationSummary(true)
+        }
+        else if (Model.result == "NoUser")
+        {
+            <div>Nie istnieje użytkownik o podanym adresie email &#10007;.</div>
+        }
+        else
+        {
+            <div style="color:green">Hasło zostało zmienione &#10003;.</div>
+        }
+    </div>
+    @Html.AntiForgeryToken()
+    <div class="resetuj-box">
+        <div class="data-box">
+            @Html.LabelFor(m => m.Email, "e-mail", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Email, new { @type = "email" })
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Password, "haslo", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Password, new { @type = "password" })
+            @Html.ValidationMessageFor(m => m.Password)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.ConfirmPassword, "powtórz hasło", new { @class = "text" })
+            @Html.TextBoxFor(m => m.ConfirmPassword, new { @type = "password" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword)
+        </div>
+        @Html.HiddenFor(m=>m.Code)
+    </div>
+    <div class="resetuj">
+        <div class="text">Ustaw hasło</div><div id="triangle-right-big"></div>
+    </div>
+}

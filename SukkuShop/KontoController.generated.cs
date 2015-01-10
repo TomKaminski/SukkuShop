@@ -101,7 +101,6 @@ namespace SukkuShop.Controllers
             public readonly string Zarejestruj = "Zarejestruj";
             public readonly string Aktywacja = "Aktywacja";
             public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
-            public readonly string ZapomnianeHasloPotwierdzenie = "ZapomnianeHasloPotwierdzenie";
             public readonly string ResetujHaslo = "ResetujHaslo";
             public readonly string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public readonly string Wyloguj = "Wyloguj";
@@ -119,7 +118,6 @@ namespace SukkuShop.Controllers
             public const string Zarejestruj = "Zarejestruj";
             public const string Aktywacja = "Aktywacja";
             public const string ZapomnianeHaslo = "ZapomnianeHaslo";
-            public const string ZapomnianeHasloPotwierdzenie = "ZapomnianeHasloPotwierdzenie";
             public const string ResetujHaslo = "ResetujHaslo";
             public const string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public const string Wyloguj = "Wyloguj";
@@ -218,7 +216,9 @@ namespace SukkuShop.Controllers
                 public readonly string _ChangePassword = "_ChangePassword";
                 public readonly string _ChangeUserFirmaInfoViewModel = "_ChangeUserFirmaInfoViewModel";
                 public readonly string _ChangeUserInfoViewModel = "_ChangeUserInfoViewModel";
+                public readonly string _ZapomnianeHasloPartial = "_ZapomnianeHasloPartial";
                 public readonly string Index = "Index";
+                public readonly string KontoAktywne = "KontoAktywne";
                 public readonly string KontoNieaktywne = "KontoNieaktywne";
                 public readonly string RegisterSuccess = "RegisterSuccess";
                 public readonly string ResetujHaslo = "ResetujHaslo";
@@ -232,7 +232,9 @@ namespace SukkuShop.Controllers
             public readonly string _ChangePassword = "~/Views/Konto/_ChangePassword.cshtml";
             public readonly string _ChangeUserFirmaInfoViewModel = "~/Views/Konto/_ChangeUserFirmaInfoViewModel.cshtml";
             public readonly string _ChangeUserInfoViewModel = "~/Views/Konto/_ChangeUserInfoViewModel.cshtml";
+            public readonly string _ZapomnianeHasloPartial = "~/Views/Konto/_ZapomnianeHasloPartial.cshtml";
             public readonly string Index = "~/Views/Konto/Index.cshtml";
+            public readonly string KontoAktywne = "~/Views/Konto/KontoAktywne.cshtml";
             public readonly string KontoNieaktywne = "~/Views/Konto/KontoNieaktywne.cshtml";
             public readonly string RegisterSuccess = "~/Views/Konto/RegisterSuccess.cshtml";
             public readonly string ResetujHaslo = "~/Views/Konto/ResetujHaslo.cshtml";
@@ -344,17 +346,6 @@ namespace SukkuShop.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ZapomnianeHasloOverride(callInfo, model);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        [NonAction]
-        partial void ZapomnianeHasloPotwierdzenieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult ZapomnianeHasloPotwierdzenie()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZapomnianeHasloPotwierdzenie);
-            ZapomnianeHasloPotwierdzenieOverride(callInfo);
-            return callInfo;
         }
 
         [NonAction]

@@ -8,7 +8,7 @@
     font-size: 400px;
     color: #f89b1d;
     float: left;
-    margin-left: 50px; }
+    margin-left: 60px; }
   .register-success-box .text-green {
     color: red;
     font-family: Segoe UI;
@@ -28,7 +28,7 @@
     font-size: 20px;
     text-decoration: underline;
     position: absolute;
-    right: 130px;
+    right: 150px;
     bottom: 75px; }
   .register-success-box .link-text2 {
     color: #f89b1d;

@@ -1,7 +1,17 @@
-﻿
+﻿@model SukkuShop.Models.ResetPasswordViewModel
 @{
-    ViewBag.Title = "ResetujHaslo";
+    ViewBag.Title = "Resetuj hasło";
 }
 
-<h2>ResetujHaslo</h2>
-
+<div class="resetuj-background">
+    <h2>Resetuj hasło</h2>
+    <img src="~/Content/Images/Panels/left.jpg" />
+    <div class="resetuj-cont">
+        <div id="replace">
+            @{ Html.RenderPartial("_ResetujHasloPartial", Model); }
+        </div>
+    </div>
+</div>
+@Styles.Render("~/Content/css/Konto/Resetuj.css")
+@Scripts.Render("~/Scripts/jquery.validate.js")
+@Scripts.Render("~/Scripts/Resetuj.js")

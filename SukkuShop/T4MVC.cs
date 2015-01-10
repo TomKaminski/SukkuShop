@@ -149,8 +149,10 @@ namespace Links
         public static readonly string OrderKrok2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok2.min.js") ? Url("OrderKrok2.min.js") : Url("OrderKrok2.js");
         public static readonly string podsumowanie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.js") ? Url("podsumowanie.min.js") : Url("podsumowanie.js");
         public static readonly string Register_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.js") ? Url("Register.min.js") : Url("Register.js");
+        public static readonly string Resetuj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Resetuj.min.js") ? Url("Resetuj.min.js") : Url("Resetuj.js");
         public static readonly string shopAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopAngular.min.js") ? Url("shopAngular.min.js") : Url("shopAngular.js");
         public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
+        public static readonly string ZapomnianeHaslo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ZapomnianeHaslo.min.js") ? Url("ZapomnianeHaslo.min.js") : Url("ZapomnianeHaslo.js");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -212,6 +214,16 @@ namespace Links
                      
                 public static readonly string RegisterSuccess_css_map = Url("RegisterSuccess.css.map");
                 public static readonly string RegisterSuccess_min_css = Url("RegisterSuccess.min.css");
+                public static readonly string Resetuj_scss = Url("Resetuj.scss");
+                public static readonly string Resetuj_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Resetuj.min.css") ? Url("Resetuj.min.css") : Url("Resetuj.css");
+                     
+                public static readonly string Resetuj_css_map = Url("Resetuj.css.map");
+                public static readonly string Resetuj_min_css = Url("Resetuj.min.css");
+                public static readonly string ZapomnianeHaslo_scss = Url("ZapomnianeHaslo.scss");
+                public static readonly string ZapomnianeHaslo_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ZapomnianeHaslo.min.css") ? Url("ZapomnianeHaslo.min.css") : Url("ZapomnianeHaslo.css");
+                     
+                public static readonly string ZapomnianeHaslo_css_map = Url("ZapomnianeHaslo.css.map");
+                public static readonly string ZapomnianeHaslo_min_css = Url("ZapomnianeHaslo.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

@@ -16,3 +16,5 @@
 /// <reference path="login.js" />
 /// <reference path="register.js" />
 /// <reference path="kontonieaktywne.js" />
+/// <reference path="zapomnianehaslo.js" />
+/// <reference path="resetuj.js" />

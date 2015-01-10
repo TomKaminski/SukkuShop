@@ -124,7 +124,7 @@ namespace SukkuShop.Controllers
                 return View(MVC.Error.Views.Error);
             }
             var result = await _userManager.ConfirmEmailAsync(userId, code);
-            return RedirectToAction(result.Succeeded ? MVC.Konto.Zaloguj() : MVC.Konto.Zarejestruj());
+            return View(result.Succeeded ? MVC.Konto.Views.KontoAktywne : MVC.Shared.Views._Blad);
         }
 
         //
@@ -132,7 +132,8 @@ namespace SukkuShop.Controllers
         [AllowAnonymous]
         public virtual ActionResult ZapomnianeHaslo()
         {
-            return View();
+            var model = new ForgotPasswordViewModel();
+            return View(model);
         }
 
         //
@@ -141,29 +142,22 @@ namespace SukkuShop.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> ZapomnianeHaslo(ForgotPasswordViewModel model)
-        {
+        {            
             if (ModelState.IsValid)
             {
+                model.result = "Sent";
                 var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)
                 {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return View(MVC.Konto.Views.ZapomnianeHasloPotwierdzenie);
+                    model.result = "NoUser";
+                    return PartialView("_ZapomnianeHasloPartial", model);
                 }
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetujHaslo", "Konto", new {userId = user.Id, code}, Request.Url.Scheme);
                 await _userManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
-                return RedirectToAction(MVC.Konto.ZapomnianeHasloPotwierdzenie());
+                return PartialView("_ZapomnianeHasloPartial", model);
             }
-            return View(model);
-        }
-
-        //
-        // GET: /Account/ForgotPasswordConfirmation
-        [AllowAnonymous]
-        public virtual ActionResult ZapomnianeHasloPotwierdzenie()
-        {
-            return View();
+            return PartialView("_ZapomnianeHasloPartial",model);
         }
 
         //
@@ -171,7 +165,11 @@ namespace SukkuShop.Controllers
         [AllowAnonymous]
         public virtual ActionResult ResetujHaslo(string code)
         {
-            return code == null ? View(MVC.Error.Views.Error) : View();
+            var model = new ResetPasswordViewModel
+            {
+                Code = code
+            };
+            return code == null ? View(MVC.Error.Views.Error) : View(model);
         }
 
         //
@@ -183,21 +181,22 @@ namespace SukkuShop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("_ResetujHasloPartial",model);
             }
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
             {
-                // Don't reveal that the user does not exist
-                return RedirectToAction(MVC.Konto.ResetujHasloPotwierdzenie());
+                model.result = "NoUser";
+                return PartialView("_ResetujHasloPartial", model);
             }
             var result = await _userManager.ResetPasswordAsync(user.Id, model.Code, model.Password);
             if (result.Succeeded)
             {
-                return RedirectToAction(MVC.Konto.ResetujHasloPotwierdzenie());
+                model.result = "Sent";
+                return PartialView("_ResetujHasloPartial", model);
             }
             AddErrors(result);
-            return View();
+            return PartialView("_ResetujHasloPartial", model);
         }
 
         //
