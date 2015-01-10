@@ -1,4 +1,5 @@
-﻿function clientDataAjaxSuccess() {
+﻿//Nie przeszła walidacja na serverze podczas tworzenia nowego konta
+function clientDataAjaxSuccess() {
     hideAjaxLoader();
     if ($("input[id=NewAccount]").is(":checked")) {
         $("#newaddress-replace input[type=password]").attr("disabled", false);
@@ -7,17 +8,7 @@
     }
 }
 
-function allFormDelegate() {
-    newClientForm();
-    newClientFormFirma();
-    newAddressForm();
-    newAddressFormFirma();
-}
-
-function onError(xhr, status, error) {
-    console.log(xhr.responseText);
-}
-
+//Nie przeszła walidacja na serverze podczas podawania nowego adresu dla zalogowanego usera
 function clientDataAjaxSuccessChangeAddress() {
     hideAjaxLoader();
     if ($("input[id=newaddress]").is(":checked")) {
@@ -38,6 +29,20 @@ function clientDataAjaxSuccessChangeAddress() {
     }
 }
 
+//function allFormDelegate() {
+//    newClientForm();
+//    newClientFormFirma();
+//    newAddressForm();
+//    newAddressFormFirma();
+//}
+
+function onError(xhr, status, error) {
+    alert(error);
+    console.log(xhr.responseText);
+}
+
+
+
 function newAddressCheckbox() {
     if ($("input[id=newaddress]").is(":checked")) {
         $("#radio-boxes").children("label").css("background-image", "url(/Content/Images/checkbox.png)");
@@ -51,29 +56,13 @@ function newAddressCheckbox() {
     } else {
         $("#radio-boxes").children("label").css("background-image", "url(/Content/Images/checkbox-nonactive.png)");
         $("#radio-boxes").children("input").attr("disabled", true);
-        $("#left-container-new-address").children().children("input[type=text]").each(function () {
-            
+        $("#left-container-new-address").children().children("input[type=text]").each(function () {            
             $(this).css("background-color", "#ebebeb");
             $(this).attr("readonly", true);
         });
     }
 }
 
-function changeAddressTextboxes() {
-    if ($("#newaddress").is(":checked")) {
-        $("#left-container-new-address").children().children("input[type=text]").each(function () {
-            $(this).css("background-color", "white");
-            $(this).attr("readonly", false);
-
-        });
-
-    } else {
-        $("#left-container-new-address").children().children("input[type=text]").each(function () {
-            $(this).css("background-color", "#ebebeb");
-            $(this).attr("readonly", true);
-        });
-    }
-}
 
 function showAjaxLoader() {
     var loaderDiv = $("#ajax-processing");
@@ -92,10 +81,10 @@ function hideAjaxLoader() {
 $(document).ready(function () {
 
     newAddressCheckbox();
-    changeAddressTextboxes();
     newAddressForm();
     newClientForm();
     newClientFormFirma();
+    newAddressFormFirma();
 
     $("#ajax-processing").hide();
 

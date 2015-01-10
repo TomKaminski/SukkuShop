@@ -2,38 +2,43 @@
 @{
     ViewBag.Title = "Zaloguj";
 }
-<h2>Logowanie</h2>
+
 
 
 <div class="login-background">
+    <h2>Logowanie</h2>
     <img src="~/Content/Images/Panels/left.jpg" />
     <div class="login-cont">
         @using (Html.BeginForm(MVC.Konto.Zaloguj(), FormMethod.Post, new {id = "LoginForm"}))
         {
-            @Html.ValidationSummary("")
+            <div class="validation-box">
+                @Html.ValidationSummary(true)
+            </div>            
             @Html.AntiForgeryToken()
             <div class="login-box">
                 <div class="data-box">
                     @Html.LabelFor(m => m.Email, "e-mail", new {@class = "text"})
                     @Html.TextBoxFor(m => m.Email, new {@type = "email"})
+                    @Html.ValidationMessageFor(m=>m.Email)
                 </div>
                 <div class="data-box">
                     @Html.LabelFor(m => m.PasswordLogin, "haslo", new {@class = "text"})
                     @Html.TextBoxFor(m => m.PasswordLogin, new { @type = "password" })
+                    @Html.ValidationMessageFor(m => m.PasswordLogin)
                 </div>
                 <div class="remember-box-cointainter">
                     @Html.CheckBoxFor(m => m.RememberMe, new {@class = "css-checkbox", required = true})
                     @Html.LabelFor(m => m.RememberMe, "ZAPAMIETAJ MNIE", new {@class = "css-label"})
-
                 </div>
+                @Html.ActionLink("odzyskaj hasło",MVC.Konto.ZapomnianeHaslo(),new{@class="forgot-link"})
             </div>
             <div class="zaloguj">
                 <div class="text">ZALOGUJ</div><div id="triangle-right-big"></div>
             </div>
         }
-        <div class="success-text">jesteś zalogowany!</div>
     </div>
     
 </div>
 @Styles.Render("~/Content/css/Konto/Login.css")
-@Scripts.Render("~/Scripts/Konto.js")
+@Scripts.Render("~/Scripts/jquery.validate.js")
+@Scripts.Render("~/Scripts/Login.js")

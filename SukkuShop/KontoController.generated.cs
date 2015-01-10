@@ -73,13 +73,6 @@ namespace SukkuShop.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResetujHaslo);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public KontoController Actions { get { return MVC.Konto; } }
@@ -104,10 +97,10 @@ namespace SukkuShop.Controllers
             public readonly string ResetujHaslo = "ResetujHaslo";
             public readonly string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public readonly string Wyloguj = "Wyloguj";
-            public readonly string EdytujDane = "EdytujDane";
             public readonly string Index = "Index";
             public readonly string ZmienHaslo = "ZmienHaslo";
-            public readonly string UstawHaslo = "UstawHaslo";
+            public readonly string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
+            public readonly string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -121,10 +114,10 @@ namespace SukkuShop.Controllers
             public const string ResetujHaslo = "ResetujHaslo";
             public const string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public const string Wyloguj = "Wyloguj";
-            public const string EdytujDane = "EdytujDane";
             public const string Index = "Index";
             public const string ZmienHaslo = "ZmienHaslo";
-            public const string UstawHaslo = "UstawHaslo";
+            public const string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
+            public const string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
         }
 
 
@@ -171,22 +164,6 @@ namespace SukkuShop.Controllers
             public readonly string code = "code";
             public readonly string model = "model";
         }
-        static readonly ActionParamsClass_EdytujDane s_params_EdytujDane = new ActionParamsClass_EdytujDane();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_EdytujDane EdytujDaneParams { get { return s_params_EdytujDane; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_EdytujDane
-        {
-            public readonly string model = "model";
-        }
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index
-        {
-            public readonly string message = "message";
-        }
         static readonly ActionParamsClass_ZmienHaslo s_params_ZmienHaslo = new ActionParamsClass_ZmienHaslo();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_ZmienHaslo ZmienHasloParams { get { return s_params_ZmienHaslo; } }
@@ -195,11 +172,19 @@ namespace SukkuShop.Controllers
         {
             public readonly string model = "model";
         }
-        static readonly ActionParamsClass_UstawHaslo s_params_UstawHaslo = new ActionParamsClass_UstawHaslo();
+        static readonly ActionParamsClass_ChangeUserInfoViewModel s_params_ChangeUserInfoViewModel = new ActionParamsClass_ChangeUserInfoViewModel();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_UstawHaslo UstawHasloParams { get { return s_params_UstawHaslo; } }
+        public ActionParamsClass_ChangeUserInfoViewModel ChangeUserInfoViewModelParams { get { return s_params_ChangeUserInfoViewModel; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_UstawHaslo
+        public class ActionParamsClass_ChangeUserInfoViewModel
+        {
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_ChangeUserFirmaInfoViewModel s_params_ChangeUserFirmaInfoViewModel = new ActionParamsClass_ChangeUserFirmaInfoViewModel();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangeUserFirmaInfoViewModel ChangeUserFirmaInfoViewModelParams { get { return s_params_ChangeUserFirmaInfoViewModel; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangeUserFirmaInfoViewModel
         {
             public readonly string model = "model";
         }
@@ -213,8 +198,12 @@ namespace SukkuShop.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string EdytujDane = "EdytujDane";
+                public readonly string _ChangePassword = "_ChangePassword";
+                public readonly string _ChangeUserFirmaInfoViewModel = "_ChangeUserFirmaInfoViewModel";
+                public readonly string _ChangeUserInfoViewModel = "_ChangeUserInfoViewModel";
                 public readonly string Index = "Index";
+                public readonly string KontoNieaktywne = "KontoNieaktywne";
+                public readonly string RegisterSuccess = "RegisterSuccess";
                 public readonly string ResetujHaslo = "ResetujHaslo";
                 public readonly string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
                 public readonly string UstawHaslo = "UstawHaslo";
@@ -222,10 +211,13 @@ namespace SukkuShop.Controllers
                 public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
                 public readonly string ZapomnianeHasloPotwierdzenie = "ZapomnianeHasloPotwierdzenie";
                 public readonly string Zarejestruj = "Zarejestruj";
-                public readonly string ZmienHaslo = "ZmienHaslo";
             }
-            public readonly string EdytujDane = "~/Views/Konto/EdytujDane.cshtml";
+            public readonly string _ChangePassword = "~/Views/Konto/_ChangePassword.cshtml";
+            public readonly string _ChangeUserFirmaInfoViewModel = "~/Views/Konto/_ChangeUserFirmaInfoViewModel.cshtml";
+            public readonly string _ChangeUserInfoViewModel = "~/Views/Konto/_ChangeUserInfoViewModel.cshtml";
             public readonly string Index = "~/Views/Konto/Index.cshtml";
+            public readonly string KontoNieaktywne = "~/Views/Konto/KontoNieaktywne.cshtml";
+            public readonly string RegisterSuccess = "~/Views/Konto/RegisterSuccess.cshtml";
             public readonly string ResetujHaslo = "~/Views/Konto/ResetujHaslo.cshtml";
             public readonly string ResetujHasloPotwierdzenie = "~/Views/Konto/ResetujHasloPotwierdzenie.cshtml";
             public readonly string UstawHaslo = "~/Views/Konto/UstawHaslo.cshtml";
@@ -233,7 +225,6 @@ namespace SukkuShop.Controllers
             public readonly string ZapomnianeHaslo = "~/Views/Konto/ZapomnianeHaslo.cshtml";
             public readonly string ZapomnianeHasloPotwierdzenie = "~/Views/Konto/ZapomnianeHasloPotwierdzenie.cshtml";
             public readonly string Zarejestruj = "~/Views/Konto/Zarejestruj.cshtml";
-            public readonly string ZmienHaslo = "~/Views/Konto/ZmienHaslo.cshtml";
         }
     }
 
@@ -384,37 +375,13 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void EdytujDaneOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> EdytujDane()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EdytujDane);
-            EdytujDaneOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        [NonAction]
-        partial void EdytujDaneOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangeUserInfoViewModel model);
-
-        [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> EdytujDane(SukkuShop.Models.ChangeUserInfoViewModel model)
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.EdytujDane);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EdytujDaneOverride(callInfo, model);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
-
-        [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Controllers.KontoController.ManageMessageId? message);
-
-        [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index(SukkuShop.Controllers.KontoController.ManageMessageId? message)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "message", message);
-            IndexOverride(callInfo, message);
+            IndexOverride(callInfo);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
@@ -442,25 +409,48 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void UstawHasloOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void ChangeUserInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult UstawHaslo()
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserInfoViewModel()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UstawHaslo);
-            UstawHasloOverride(callInfo);
-            return callInfo;
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserInfoViewModel);
+            ChangeUserInfoViewModelOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
         [NonAction]
-        partial void UstawHasloOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.SetPasswordViewModel model);
+        partial void ChangeUserInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangeUserInfoViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> UstawHaslo(SukkuShop.Models.SetPasswordViewModel model)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserInfoViewModel(SukkuShop.Models.ChangeUserInfoViewModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UstawHaslo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserInfoViewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            UstawHasloOverride(callInfo, model);
+            ChangeUserInfoViewModelOverride(callInfo, model);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void ChangeUserFirmaInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserFirmaInfoViewModel()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserFirmaInfoViewModel);
+            ChangeUserFirmaInfoViewModelOverride(callInfo);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+
+        [NonAction]
+        partial void ChangeUserFirmaInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangeUserFirmaInfoViewModel model);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserFirmaInfoViewModel(SukkuShop.Models.ChangeUserFirmaInfoViewModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserFirmaInfoViewModel);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ChangeUserFirmaInfoViewModelOverride(callInfo, model);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

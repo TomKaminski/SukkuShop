@@ -1,0 +1,61 @@
+$orangeplz: #f89b1d;
+
+.register-success-box {
+width: 968px;
+height: 400px;
+border: 3px solid $orangeplz;
+margin: 75px auto;
+position: relative;
+
+.tick {
+font-size: 400px;
+color: $orangeplz;
+float: left;
+margin-left: 50px;
+}
+
+.text-green {
+color: red;
+font-family: Segoe UI;
+font-size: 36px;
+font-weight: bold;
+text-align: center;
+margin-top: 85px;
+line-height: 40px;
+margin-bottom: 30px;
+}
+
+.text-normal {
+font-family: SegoeLight;
+font-size: 24px;
+text-align: center;
+}
+
+.link-text {
+color: #f89b1d;
+font-family: SegoeBlack;
+font-size: 20px;
+text-decoration: underline;
+position: absolute;
+right: 130px;
+bottom: 75px;
+}
+
+.link-text2 {
+color: #f89b1d;
+font-family: SegoeBlack;
+font-size: 20px;
+text-decoration: underline;
+position: absolute;
+right: 170px;
+bottom: 65px;
+}
+
+.complete-text {
+font-family: Segoe UI;
+font-weight: bold;
+color: green;
+text-align: center;
+margin-top:40px;
+}
+}

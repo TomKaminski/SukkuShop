@@ -1,6 +1,6 @@
 ﻿@model SukkuShop.Models.NewOrderAddressModel
 
-@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()", OnComplete = "allFormDelegate()" }, new { id = "NewClientForm" }))
+@using (Ajax.BeginForm(MVC.Zamowienie.NewAddressOrderPartial(), new AjaxOptions { UpdateTargetId = "newaddress-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnSuccess = "clientDataAjaxSuccess()", OnBegin = "showAjaxLoader()", OnComplete = "newClientForm()" }, new { id = "NewClientForm" }))
 {
     <div class="left-container">
         <div class="client-type-text">Jestem nowym klientem</div>

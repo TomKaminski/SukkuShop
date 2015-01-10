@@ -13,7 +13,7 @@ namespace SukkuShop.Identity
             // Credentials:
             const string credentialUserName = "sukkusklep@gmail.com";
             const string sentFrom = "sukkusklep@gmail.com";
-            var pwd = ConfigurationManager.AppSettings["mailpassword"];
+            const string pwd = "sukku123";
 
             // Configure the client:
             var client =

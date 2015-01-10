@@ -197,7 +197,8 @@ namespace SukkuShop.Controllers
                         PostalCode = model.KodPocztowy,
                         City = model.Miasto,
                         Number = model.Numer,
-                        KontoFirmowe = false
+                        KontoFirmowe = false,
+                        EmailConfirmed = true
                     };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
@@ -250,7 +251,8 @@ namespace SukkuShop.Controllers
                         PostalCode = model.KodPocztowy,
                         City = model.Miasto,
                         Number = model.Numer,
-                        KontoFirmowe = true
+                        KontoFirmowe = true,
+                        EmailConfirmed = true
                     };
                     var result = await _userManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)

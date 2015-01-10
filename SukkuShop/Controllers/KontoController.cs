@@ -24,15 +24,15 @@ namespace SukkuShop.Controllers
             _authenticationManager = authenticationManager;
         }
 
-        //[AllowAnonymous]
-        //public async Task<ActionResult> ResendActivationEmail(string email)
-        //{
-        //    var userid = UserManager.FindByEmail(email).Id;
-        //    var code = await UserManager.GenerateEmailConfirmationTokenAsync(userid);
-        //    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userid, code }, Request.Url.Scheme);
-        //    await UserManager.SendEmailAsync(userid, "Confirm your account", ActivationMailBuilder(callbackUrl));
-        //    return RedirectToAction("Login");
-        //}
+        [AllowAnonymous]
+        public virtual async Task<ActionResult> ResendActivationEmail(string email)
+        {
+            var userid = _userManager.FindByEmail(email).Id;
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(userid);
+            var callbackUrl = Url.Action(MVC.Konto.Aktywacja(userid,code), Request.Url.Scheme);
+            await _userManager.SendEmailAsync(userid, "Confirm your account", ActivationMailBuilder(callbackUrl));
+            return new EmptyResult();
+        }
 
 
         // GET: /Account/Login
@@ -57,10 +57,10 @@ namespace SukkuShop.Controllers
             {
                 return View(model);
             }
-            //if (!UserManager.IsEmailConfirmed(UserManager.FindByEmail(model.Email).Id))
-            //{
-            //    return View("NonActiveAccount", (object) model.Email);
-            //}
+            if (!_userManager.IsEmailConfirmed(_userManager.FindByEmail(model.Email).Id))
+            {
+                return View("KontoNieaktywne", (object)model.Email);
+            }
             var result = await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
             switch (result)
             {
@@ -98,21 +98,17 @@ namespace SukkuShop.Controllers
                 {
                     UserName = model.Email,
                     Email = model.Email,
-                    Name = model.Name,
-                    LastName = model.LastName,
-                    PhoneNumber = model.Phone
+                    KontoFirmowe = model.KontoFirmowe
                 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code }, Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", ActivationMailBuilder(callbackUrl));
-                    await _signInManager.SignInAsync(user, false, false);
-                    Session["username"] = user.Name;
-                    return RedirectToAction(MVC.Home.Index());
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action(MVC.Konto.Aktywacja(user.Id, code), Request.Url.Scheme); 
+                    await _userManager.SendEmailAsync(user.Id, "Aktywacja konta", ActivationMailBuilder(callbackUrl));
+                    return View(MVC.Konto.Views.RegisterSuccess);
                 }
-                AddErrors(result);
+                ModelState.AddModelError("", "Istnieje już użytkownik o podanym adresie Email.");
             }
             return View(model);
         }
@@ -128,7 +124,7 @@ namespace SukkuShop.Controllers
                 return View(MVC.Error.Views.Error);
             }
             var result = await _userManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "PotwierdzonyMail" : "Blad");
+            return RedirectToAction(result.Succeeded ? MVC.Konto.Zaloguj() : MVC.Konto.Zarejestruj());
         }
 
         //
@@ -224,110 +220,30 @@ namespace SukkuShop.Controllers
         }
 
 
-        ////////////MANAGE///////////////
-        public virtual async Task<ActionResult> EdytujDane()
+        ////////////MANAGE//////////////
+        
+        // GET: DaneOsobowe main view
+        public virtual async Task<ActionResult> Index()
         {
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-            var userInfo = new ChangeUserInfoViewModel
-            {
-                Name = user.Name,
-                City = user.City,
-                LastName = user.LastName,
-                Number = user.Number,
-                Phone = user.PhoneNumber,
-                PostalCode = user.PostalCode,
-                Street = user.Street
-            };
-            return View(userInfo);
-        }
-
-        [HttpPost]
-        public virtual async Task<ActionResult> EdytujDane(ChangeUserInfoViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                user.City = model.City;
-                user.LastName = model.LastName;
-                user.Name = model.Name;
-                user.PostalCode = model.PostalCode;
-                user.Number = model.Number;
-                user.PhoneNumber = model.Phone;
-                user.Street = model.Street;
-                await _userManager.UpdateAsync(user);
-                return RedirectToAction(MVC.Konto.Index());
-            }
-            return View(model);
+            return View(user.KontoFirmowe);
         }
 
 
-        //
-        // GET: /Manage/Index
-        public virtual async Task<ActionResult> Index(ManageMessageId? message)
-        {
-            ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess
-                    ? "Your password has been changed."
-                    : message == ManageMessageId.SetPasswordSuccess
-                        ? "Your password has been set."
-                        : message == ManageMessageId.SetTwoFactorSuccess
-                            ? "Your two-factor authentication provider has been set."
-                            : message == ManageMessageId.Error
-                                ? "An error has occurred."
-                                : message == ManageMessageId.AddPhoneSuccess
-                                    ? "Your phone number was added."
-                                    : message == ManageMessageId.RemovePhoneSuccess
-                                        ? "Your phone number was removed."
-                                        : "";
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-            ;
-            var isNull = false;
-
-            var userInfo = new ChangeUserInfoViewModel
-            {
-                Name = user.Name,
-                City = user.City,
-                LastName = user.LastName,
-                Number = user.Number,
-                Phone = user.PhoneNumber,
-                PostalCode = user.PostalCode,
-                Street = user.Street
-            };
-
-            foreach (var prop in userInfo.GetType().GetProperties())
-            {
-                var propertyValue = prop.GetValue(userInfo);
-                if (propertyValue == null)
-                    isNull = true;
-            }
-            var model = new IndexViewModel
-            {
-                HasPassword = HasPassword(),
-                BrowserRemembered =
-                    await _authenticationManager.TwoFactorBrowserRememberedAsync(User.Identity.GetUserId()),
-                ChangeUserInfoViewModel = userInfo,
-                IsNull = isNull
-            };
-            return View(model);
-        }
-
-
-        //
-        // GET: /Manage/ChangePassword
+        // GET: Zmień hasło
+        [HttpGet]
         public virtual ActionResult ZmienHaslo()
         {
-            return View();
+            return PartialView("_ChangePassword");
         }
-
-        //
-        // POST: /Manage/ChangePassword
+        // POST: Zmień hasło
         [HttpPost]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> ZmienHaslo(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return PartialView("_ChangePassword",model);
             }
             var result =
                 await
@@ -340,51 +256,129 @@ namespace SukkuShop.Controllers
                 {
                     await SignInAsync(user, isPersistent: false);
                 }
-                return RedirectToAction(MVC.Konto.Index(ManageMessageId.ChangePasswordSuccess));
+                return RedirectToAction(MVC.Konto.Index());
             }
             AddErrors(result);
-            return View(model);
+            return PartialView("_ChangePassword");
         }
 
-        //
-        // GET: /Manage/SetPassword
-        public virtual ActionResult UstawHaslo()
+        //GET: User data - konto osobiste
+        [HttpGet]
+        public virtual async Task<ActionResult> ChangeUserInfoViewModel()
         {
-            return View();
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var model = new ChangeUserInfoViewModel
+            {
+                City = user.City ?? "Nie podano",
+                Email = user.Email,
+                LastName = user.LastName ?? "Nie podano",
+                Name = user.Name ?? "Nie podano",
+                Number = user.Number ?? "Nie podano",
+                Phone = user.PhoneNumber ?? "Nie podano",
+                PostalCode = user.PostalCode ?? "Nie podano",
+                Street = user.Street ?? "Nie podano"
+            };
+            return PartialView("_ChangeUserInfoViewModel", model);
         }
 
-        //
-        // POST: /Manage/SetPassword
+        //POST: change User data - konto osobiste
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public virtual async Task<ActionResult> UstawHaslo(SetPasswordViewModel model)
+        public virtual async Task<ActionResult> ChangeUserInfoViewModel(ChangeUserInfoViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var result =
-                    await _userManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
-                if (result.Succeeded)
-                {
-                    var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
-                    if (user != null)
-                    {
-                        await SignInAsync(user, isPersistent: false);
-                    }
-                    return RedirectToAction(MVC.Konto.Index(ManageMessageId.SetPasswordSuccess));
-                }
-                AddErrors(result);
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                user.City = model.City;
+                user.LastName = model.LastName;
+                user.Name = model.Name;
+                user.PostalCode = model.PostalCode;
+                user.Number = model.Number;
+                user.PhoneNumber = model.Phone;
+                user.Street = model.Street;
+                user.KontoFirmowe = false;
+                await _userManager.UpdateAsync(user);
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Home.Index())));
             }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
+            return PartialView("_ChangeUserInfoViewModel", model);
         }
+
+        //GET: User data - konto firmowe
+        [HttpGet]
+        public virtual async Task<ActionResult> ChangeUserFirmaInfoViewModel()
+        {
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var model = new ChangeUserFirmaInfoViewModel
+            {
+                City = user.City ?? "Nie podano",
+                Email = user.Email,
+                NazwaFirmy = user.NazwaFirmy ?? "Nie podano",
+                Nip = user.AccNip ?? "Nie podano",
+                Number = user.Number ?? "Nie podano",
+                Phone = user.PhoneNumber ?? "Nie podano",
+                PostalCode = user.PostalCode ?? "Nie podano",
+                Street = user.Street ?? "Nie podano"
+            };
+            return PartialView("_ChangeUserFirmaInfoViewModel", model);
+        }
+
+        //GET: change User data - konto firmowe
+        [HttpPost]
+        public virtual async Task<ActionResult> ChangeUserFirmaInfoViewModel(ChangeUserFirmaInfoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                user.City = model.City;
+                user.NazwaFirmy = model.NazwaFirmy;
+                user.AccNip = model.Nip;
+                user.PostalCode = model.PostalCode;
+                user.Number = model.Number;
+                user.PhoneNumber = model.Phone;
+                user.Street = model.Street;
+                user.KontoFirmowe = true;
+                await _userManager.UpdateAsync(user);
+                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Home.Index())));
+            }
+            return PartialView("_ChangeUserFirmaInfoViewModel", model);
+        }
+
+        ////
+        //// GET: /Manage/SetPassword
+        //public virtual ActionResult UstawHaslo()
+        //{
+        //    return View();
+        //}
+
+        ////
+        //// POST: /Manage/SetPassword
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public virtual async Task<ActionResult> UstawHaslo(SetPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result =
+        //            await _userManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
+        //        if (result.Succeeded)
+        //        {
+        //            var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+        //            if (user != null)
+        //            {
+        //                await SignInAsync(user, isPersistent: false);
+        //            }
+        //            return RedirectToAction(MVC.Konto.Index());
+        //        }
+        //        AddErrors(result);
+        //    }
+        //    return View(model);
+        //}
 
         #region Helpers
 
         private static string ActivationMailBuilder(string callbackUrl)
         {
             var body = new StringBuilder();
-            body.Append("Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+            body.Append("Aktywuj swoje konto klikając <a href=\"" + callbackUrl + "\">tutaj</a>");
             return body.ToString();
         }
 

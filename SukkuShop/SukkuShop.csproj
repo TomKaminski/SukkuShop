@@ -327,6 +327,12 @@
     <Content Include="Content\css\Error\Error.min.css">
       <DependentUpon>Error.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\KontoNieaktywne.css">
+      <DependentUpon>KontoNieaktywne.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\KontoNieaktywne.min.css">
+      <DependentUpon>KontoNieaktywne.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Konto\Login.css">
       <DependentUpon>Login.scss</DependentUpon>
     </Content>
@@ -338,6 +344,12 @@
     </Content>
     <Content Include="Content\css\Konto\Register.min.css">
       <DependentUpon>Register.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\RegisterSuccess.css">
+      <DependentUpon>RegisterSuccess.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\RegisterSuccess.min.css">
+      <DependentUpon>RegisterSuccess.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Koszyk\Cart.css">
       <DependentUpon>Cart.scss</DependentUpon>
@@ -393,11 +405,21 @@
     <Content Include="Content\css\Sklep\Shop.min.css">
       <DependentUpon>Shop.css</DependentUpon>
     </Content>
-    <Content Include="Content\css\Zamowienie\podsumowanie.css" />
+    <Content Include="Content\css\Zamowienie\podsumowanie.css">
+      <DependentUpon>podsumowanie.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Zamowienie\podsumowanie.min.css">
+      <DependentUpon>podsumowanie.css</DependentUpon>
+    </Content>
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox-nonactive.png" />
     <Content Include="Content\Images\checkbox.png" />
+    <Content Include="Content\Images\cinnamon-sticks.jpg" />
+    <Content Include="Content\Images\Panels\eye.png" />
+    <Content Include="Content\Images\Panels\left.jpg" />
+    <Content Include="Content\Images\Panels\pepper.jpg" />
+    <Content Include="Content\Images\processing.gif" />
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\1.png" />
     <Content Include="Content\Images\Shop\2.jpg" />
@@ -492,6 +514,17 @@
     <Content Include="Content\css\Konto\Register.css.map">
       <DependentUpon>Register.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Zamowienie\podsumowanie.css.map">
+      <DependentUpon>podsumowanie.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\RegisterSuccess.scss" />
+    <Content Include="Content\css\Konto\RegisterSuccess.css.map">
+      <DependentUpon>RegisterSuccess.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\KontoNieaktywne.scss" />
+    <Content Include="Content\css\Konto\KontoNieaktywne.css.map">
+      <DependentUpon>KontoNieaktywne.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
@@ -507,12 +540,14 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\Konto.js" />
+    <Content Include="Scripts\KontoNieaktywne.js" />
+    <Content Include="Scripts\Login.js" />
     <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\OrderKrok1.js" />
     <Content Include="Scripts\OrderKrok2.js" />
     <Content Include="Scripts\podsumowanie.js" />
+    <Content Include="Scripts\Register.js" />
     <Content Include="Scripts\shopAngular.js" />
     <Content Include="Scripts\shopdetails.js" />
     <Content Include="Scripts\_references.js" />
@@ -536,9 +571,7 @@
     <Content Include="Views\Konto\ZapomnianeHasloPotwierdzenie.cshtml" />
     <Content Include="Views\Konto\ResetujHaslo.cshtml" />
     <Content Include="Views\Konto\ResetujHasloPotwierdzenie.cshtml" />
-    <Content Include="Views\Konto\EdytujDane.cshtml" />
     <Content Include="Views\Konto\Index.cshtml" />
-    <Content Include="Views\Konto\ZmienHaslo.cshtml" />
     <Content Include="Views\Konto\UstawHaslo.cshtml" />
     <Content Include="Views\Shared\Blokada.cshtml" />
     <Content Include="Views\Error\Error.cshtml" />
@@ -576,6 +609,11 @@
     <Content Include="Views\Zamowienie\_ChangeAddressFirmaPartial.cshtml" />
     <Content Include="Views\Zamowienie\_ChangeAddressPartial.cshtml" />
     <Content Include="Views\Zamowienie\_LoginOrderPartial.cshtml" />
+    <Content Include="Views\Konto\_ChangeUserInfoViewModel.cshtml" />
+    <Content Include="Views\Konto\_ChangeUserFirmaInfoViewModel.cshtml" />
+    <Content Include="Views\Konto\_ChangePassword.cshtml" />
+    <Content Include="Views\Konto\RegisterSuccess.cshtml" />
+    <Content Include="Views\Konto\KontoNieaktywne.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

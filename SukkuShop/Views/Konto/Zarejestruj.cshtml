@@ -2,34 +2,48 @@
 @{
     ViewBag.Title = "Zarejestruj";
 }
-<h2>Rejestracja</h2>
+
 
 <div class="register-background">
+    <h2>Rejestracja</h2>
     <img src="~/Content/Images/Panels/left.jpg" />
     <div class="register-cont">
-        @using (Html.BeginForm(MVC.Konto.Zarejestruj(), FormMethod.Post))
+        @using (Html.BeginForm(MVC.Konto.Zarejestruj(), FormMethod.Post,new{id="RegisterForm"}))
         {
-            @Html.ValidationSummary("")
+            <div class="validation-box">
+                @Html.ValidationSummary(true)
+            </div>
             @Html.AntiForgeryToken()
             <div class="register-box">
                 <div class="data-box">
                     @Html.LabelFor(m => m.Email, "e-mail", new {@class = "text"})
                     @Html.TextBoxFor(m => m.Email, new {@type = "email"})
+                    @Html.ValidationMessageFor(m => m.Email)
                 </div>
                 <div class="data-box">
-                    @Html.LabelFor(m => m.Password, "haslo", new {@class = "text"})
-                    @Html.TextBoxFor(m => m.Password, new {@type = "password"})
+                    @Html.LabelFor(m => m.Password, "hasło", new {@class = "text"})
+                    @Html.PasswordFor(m => m.Password)
+                    @Html.ValidationMessageFor(m => m.Password)
                 </div>
                 <div class="data-box">
                     @Html.LabelFor(m => m.ConfirmPassword, "powtórz hasło", new {@class = "text"})
-                    @Html.PasswordFor(m => m.ConfirmPassword, new {@type = "password"})
+                    @Html.PasswordFor(m => m.ConfirmPassword)
+                    @Html.ValidationMessageFor(m => m.Password)
+                </div>
+                <div class="radiobtn-box">
+                    @Html.RadioButtonFor(m => m.KontoFirmowe, false, new { @class = "css-checkbox", id = "firmafalse", @checked = true })
+                    @Html.LabelFor(m => m.KontoFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
+                    @Html.RadioButtonFor(m => m.KontoFirmowe, true, new { @class = "css-checkbox", id = "firmatrue" })
+                    @Html.LabelFor(m => m.KontoFirmowe, "firma", new { @class = "css-label", @for = "firmatrue" })
                 </div>
             </div>
-    <div class="zarejestruj">
-        <div class="text">ZAREJESTRUJ</div><div id="triangle-right-big"></div>
-    </div>
+            <div class="zarejestruj">
+                <div class="text">ZAREJESTRUJ</div><div id="triangle-right-big"></div>
+            </div>
         }
     </div>
 </div>
 
 @Styles.Render("~/Content/css/Konto/Register.css")
+@Scripts.Render("~/Scripts/jquery.validate.js")
+@Scripts.Render("~/Scripts/Register.js")

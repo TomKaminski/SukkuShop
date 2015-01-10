@@ -141,12 +141,14 @@ namespace Links
         public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
         public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
-        public static readonly string Konto_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Konto.min.js") ? Url("Konto.min.js") : Url("Konto.js");
+        public static readonly string KontoNieaktywne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/KontoNieaktywne.min.js") ? Url("KontoNieaktywne.min.js") : Url("KontoNieaktywne.js");
+        public static readonly string Login_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Login.min.js") ? Url("Login.min.js") : Url("Login.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
         public static readonly string OrderKrok1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok1.min.js") ? Url("OrderKrok1.min.js") : Url("OrderKrok1.js");
         public static readonly string OrderKrok2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok2.min.js") ? Url("OrderKrok2.min.js") : Url("OrderKrok2.js");
         public static readonly string podsumowanie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.js") ? Url("podsumowanie.min.js") : Url("podsumowanie.js");
+        public static readonly string Register_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.js") ? Url("Register.min.js") : Url("Register.js");
         public static readonly string shopAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopAngular.min.js") ? Url("shopAngular.min.js") : Url("shopAngular.js");
         public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
     }
@@ -190,6 +192,11 @@ namespace Links
                 private const string URLPATH = "~/Content/css/Konto";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string KontoNieaktywne_scss = Url("KontoNieaktywne.scss");
+                public static readonly string KontoNieaktywne_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/KontoNieaktywne.min.css") ? Url("KontoNieaktywne.min.css") : Url("KontoNieaktywne.css");
+                     
+                public static readonly string KontoNieaktywne_css_map = Url("KontoNieaktywne.css.map");
+                public static readonly string KontoNieaktywne_min_css = Url("KontoNieaktywne.min.css");
                 public static readonly string Login_scss = Url("Login.scss");
                 public static readonly string Login_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Login.min.css") ? Url("Login.min.css") : Url("Login.css");
                      
@@ -200,6 +207,11 @@ namespace Links
                      
                 public static readonly string Register_css_map = Url("Register.css.map");
                 public static readonly string Register_min_css = Url("Register.min.css");
+                public static readonly string RegisterSuccess_scss = Url("RegisterSuccess.scss");
+                public static readonly string RegisterSuccess_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegisterSuccess.min.css") ? Url("RegisterSuccess.min.css") : Url("RegisterSuccess.css");
+                     
+                public static readonly string RegisterSuccess_css_map = Url("RegisterSuccess.css.map");
+                public static readonly string RegisterSuccess_min_css = Url("RegisterSuccess.min.css");
             }
         
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -261,9 +273,11 @@ namespace Links
                      
                 public static readonly string OrderSubmitted_css_map = Url("OrderSubmitted.css.map");
                 public static readonly string OrderSubmitted_min_css = Url("OrderSubmitted.min.css");
+                public static readonly string podsumowanie_scss = Url("podsumowanie.scss");
                 public static readonly string podsumowanie_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.css") ? Url("podsumowanie.min.css") : Url("podsumowanie.css");
                      
-                public static readonly string podsumowanie_scss = Url("podsumowanie.scss");
+                public static readonly string podsumowanie_css_map = Url("podsumowanie.css.map");
+                public static readonly string podsumowanie_min_css = Url("podsumowanie.min.css");
             }
         
         }
@@ -300,6 +314,7 @@ namespace Links
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string checkbox_nonactive_png = Url("checkbox-nonactive.png");
             public static readonly string checkbox_png = Url("checkbox.png");
+            public static readonly string cinnamon_sticks_jpg = Url("cinnamon-sticks.jpg");
             public static readonly string content_pic1_png = Url("content-pic1.png");
             public static readonly string content_pic2_png = Url("content-pic2.png");
             public static readonly string content_pic3_png = Url("content-pic3.png");
@@ -307,6 +322,17 @@ namespace Links
             public static readonly string footer_sukku_png = Url("footer-sukku.png");
             public static readonly string footer_user_png = Url("footer-user.png");
             public static readonly string logo_header_png = Url("logo-header.png");
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Panels {
+                private const string URLPATH = "~/Content/Images/Panels";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string eye_png = Url("eye.png");
+                public static readonly string left_jpg = Url("left.jpg");
+                public static readonly string pepper_jpg = Url("pepper.jpg");
+            }
+        
+            public static readonly string processing_gif = Url("processing.gif");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Shop {
                 private const string URLPATH = "~/Content/Images/Shop";
