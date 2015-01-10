@@ -56,6 +56,13 @@ namespace SukkuShop.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ResendActivationEmail()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResendActivationEmail);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Zaloguj()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Zaloguj);
@@ -89,6 +96,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
+            public readonly string ResendActivationEmail = "ResendActivationEmail";
             public readonly string Zaloguj = "Zaloguj";
             public readonly string Zarejestruj = "Zarejestruj";
             public readonly string Aktywacja = "Aktywacja";
@@ -106,6 +114,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
+            public const string ResendActivationEmail = "ResendActivationEmail";
             public const string Zaloguj = "Zaloguj";
             public const string Zarejestruj = "Zarejestruj";
             public const string Aktywacja = "Aktywacja";
@@ -121,6 +130,14 @@ namespace SukkuShop.Controllers
         }
 
 
+        static readonly ActionParamsClass_ResendActivationEmail s_params_ResendActivationEmail = new ActionParamsClass_ResendActivationEmail();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ResendActivationEmail ResendActivationEmailParams { get { return s_params_ResendActivationEmail; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ResendActivationEmail
+        {
+            public readonly string email = "email";
+        }
         static readonly ActionParamsClass_Zaloguj s_params_Zaloguj = new ActionParamsClass_Zaloguj();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Zaloguj ZalogujParams { get { return s_params_Zaloguj; } }
@@ -232,6 +249,18 @@ namespace SukkuShop.Controllers
     public partial class T4MVC_KontoController : SukkuShop.Controllers.KontoController
     {
         public T4MVC_KontoController() : base(Dummy.Instance) { }
+
+        [NonAction]
+        partial void ResendActivationEmailOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string email);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ResendActivationEmail(string email)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResendActivationEmail);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "email", email);
+            ResendActivationEmailOverride(callInfo, email);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [NonAction]
         partial void ZalogujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string returnUrl);

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "RegisterSuccess";
+}
+
+<div class="register-success-box">
+    <div class="tick">&#10004;</div>
+    <div class="text-green">REJESTRACJA ZAKOŃCZONA <br />POMYŚLNIE</div>
+    <div class="text-normal">Na adres podany przy rejestracji został wysłany<br/>mail aktywacyjny. Dziękujemy za utworzenie konta<br/>w serwisie SUKKU</div>
+    @Html.ActionLink("Przejdź do strony głównej sklepu.",MVC.Home.Index(),new{@class="link-text"})
+</div>
+
+@Styles.Render("~/Content/css/Konto/RegisterSuccess.css")

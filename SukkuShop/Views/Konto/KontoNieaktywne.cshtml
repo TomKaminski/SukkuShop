@@ -1,0 +1,17 @@
+﻿@model string
+@{
+    ViewBag.Title = "Konto nieaktywne";
+}
+
+<div class="register-success-box">
+    <div class="tick">&#10006;</div>
+    <div class="text-green">KONTO NIEAKTYWNE</div>
+    <div class="text-normal">Konto zarejestrowane na adres: <span style="font-weight: bold">@Model</span><br /> nie zostało jeszcze aktywowane.<br /> Aby korzystać z konta, aktywuj je,<br /> poprzez wiadomość wysłaną na Twoją pocztę.</div>
+    <div id="send-email-box">
+        <a class="link-text" id="sendemail-link" href="@Url.Action(MVC.Konto.ResendActivationEmail(Model))">Wyślij ponownie kod aktywacyjny</a>
+    </div>
+</div>
+
+@Styles.Render("~/Content/css/Konto/KontoNieaktywne.css")
+@Scripts.Render("~/Scripts/KontoNieaktywne.js")
+
