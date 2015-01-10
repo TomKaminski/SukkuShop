@@ -327,6 +327,12 @@
     <Content Include="Content\css\Error\Error.min.css">
       <DependentUpon>Error.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\Details.css">
+      <DependentUpon>Details.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Details.min.css">
+      <DependentUpon>Details.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Konto\KontoNieaktywne.css">
       <DependentUpon>KontoNieaktywne.scss</DependentUpon>
     </Content>
@@ -544,6 +550,10 @@
     <Content Include="Content\css\Konto\Resetuj.scss" />
     <Content Include="Content\css\Konto\Resetuj.css.map">
       <DependentUpon>Resetuj.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\Details.scss" />
+    <Content Include="Content\css\Konto\Details.css.map">
+      <DependentUpon>Details.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />

@@ -1,7 +1,93 @@
-﻿
+﻿@model SukkuShop.Models.ChangeUserInfoViewModel
 @{
     ViewBag.Title = "Index";
 }
+<div class="details-container">
+    <ul class="choice">
+        <li class="selected">Dane osobowe</li>
+        <li>historia zamowień</li>
+    </ul>
+    <div class="change-container">
+        <div class="switch-box">
+            @Html.RadioButton("osoba", "firmafalse", new { @class = "css-checkbox", required = true, id = "firmafalse" })
+            @Html.Label("osoba", "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
+            @Html.RadioButton("firma", "firmatrue", new { @class = "css-checkbox", required = true, id = "firmatrue" })
+            @Html.Label("firma", "firma", new { @class = "css-label", @for = "firmatrue", style = "margin-left:33px" })
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div class="data-container">
+            <div class="main-text">Edytuj dane osobowe</div>
+            <div class="clear">&nbsp;</div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Name, "imię*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Name, new { name = "imie" })
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.LastName, "nazwisko*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.LastName, new { name = "nazwisko" })
+                @Html.ValidationMessageFor(m => m.LastName)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Street, "ulica*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Street, new { name = "ulica" })
+                @Html.ValidationMessageFor(m => m.Street)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Number, "numer*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Number, new { name = "numer" })
+                @Html.ValidationMessageFor(m => m.Number)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.City, "miasto*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.City, new { name = "miasto" })
+                @Html.ValidationMessageFor(m => m.City)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.PostalCode, "kod pocztowy*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.PostalCode, new { name = "kodpocztowy" })
+                @Html.ValidationMessageFor(m => m.PostalCode)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Phone, "telefon*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Phone, new { name = "telefon" })
+                @Html.ValidationMessageFor(m => m.Phone)
+            </div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Email, "e-mail*:", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Email, new { name = "email" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="save">
+                <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+            </div>
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div class="data-container">
+            <div class="main-text">Zmień swoje haslo</div>
+            <div class="clear">&nbsp;</div>
+            <div class="data-box">
+                @Html.Label("oldpassword", "stare hasło:", new { @class = "text" })
+                @Html.TextBox("oldpassword")
+                @*@Html.ValidationMessageFor(m => m.PostalCode)*@
+            </div>
+            <div class="data-box">
+                @Html.Label("newpassword", "nowe haslo:", new { @class = "text" })
+                @Html.TextBox("newpassword")
+                @*@Html.ValidationMessageFor(m => m.Phone)*@
+            </div>
+            <div class="data-box">
+                @Html.Label("confirmpassword", "potwórz hasło:", new { @class = "text" })
+                @Html.TextBox("confirmpassword")
+                @*@Html.ValidationMessageFor(m => m.Email)*@
+            </div>
+            <div class="save" style="margin-bottom: 35px">
+                <div class="text">zmień hasło</div><div id="triangle-right-big"></div>
+            </div>
+        </div>
 
-<h2>Index</h2>
-
+        <div class="clear">&nbsp;</div>
+    </div>
+</div>
+@Styles.Render("~/Content/css/Konto/Details.css")
+@Scripts.Render("~/Scripts/Konto.js")
