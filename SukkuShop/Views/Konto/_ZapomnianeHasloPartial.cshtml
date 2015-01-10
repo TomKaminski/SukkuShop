@@ -1,0 +1,34 @@
+﻿@model SukkuShop.Models.ForgotPasswordViewModel
+<div class="login-cont">
+    @using (Ajax.BeginForm(MVC.Konto.ZapomnianeHaslo(), new AjaxOptions {UpdateTargetId = "replace",InsertionMode = InsertionMode.Replace,HttpMethod = "Post", OnBegin = "showAjaxLoader()", OnSuccess = "SendEmailSuccess(data)", OnFailure = "SendEmailFailure()" }, new { id = "ZapomnianeHasloForm" }))
+    {
+        <div class="validation-box">
+            @if (Model.result == null)
+            {
+                @Html.ValidationSummary(true)
+            }
+            else if (Model.result == "NoUser")
+            {
+                <div>Nie istnieje użytkownik o podanym adresie email &#10007;.</div>
+            }
+            else
+            {
+                <div style="color:green">Wiadomość została wysłana na Twoją pocztę &#10003;.</div>
+            }
+        </div>
+        @Html.AntiForgeryToken()
+        <div class="login-box">
+            <div class="text-big">Proszę podać adres e-mail, który został użyty przy tworzeniu konta.</div>
+            <div class="data-box">
+                @Html.LabelFor(m => m.Email, "e-mail", new { @class = "text" })
+                @Html.TextBoxFor(m => m.Email, new { @type = "email" })
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="clear" style="clear:both"></div>
+        </div>
+        <div class="przypomnij">
+            <div class="text">Przypomnij hasło</div><div id="triangle-right-big"></div>
+        </div>
+    }
+</div>
+

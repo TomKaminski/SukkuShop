@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Konto aktywowane";
+}
+
+<div class="register-success-box">
+    <div class="icon-unlock-alt tick"></div>
+    <div class="text-green">KONTO ZOSTAŁO <br />AKTYWOWANE</div>
+    <div class="text-normal">Twoje konto zostało pomyślnie aktywowane.<br />Już teraz możesz przejść do panelu użytkownika,<br />aby uzupełnić swoje dane osobowe.</div>
+    @Html.ActionLink("Przejdź do panelu użytkownika.", MVC.Konto.Index(), new { @class = "link-text2" })
+</div>
+
+@Styles.Render("~/Content/css/Konto/RegisterSuccess.css")
+

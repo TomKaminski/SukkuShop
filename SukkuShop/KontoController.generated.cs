@@ -216,6 +216,7 @@ namespace SukkuShop.Controllers
                 public readonly string _ChangePassword = "_ChangePassword";
                 public readonly string _ChangeUserFirmaInfoViewModel = "_ChangeUserFirmaInfoViewModel";
                 public readonly string _ChangeUserInfoViewModel = "_ChangeUserInfoViewModel";
+                public readonly string _ResetujHasloPartial = "_ResetujHasloPartial";
                 public readonly string _ZapomnianeHasloPartial = "_ZapomnianeHasloPartial";
                 public readonly string Index = "Index";
                 public readonly string KontoAktywne = "KontoAktywne";
@@ -232,6 +233,7 @@ namespace SukkuShop.Controllers
             public readonly string _ChangePassword = "~/Views/Konto/_ChangePassword.cshtml";
             public readonly string _ChangeUserFirmaInfoViewModel = "~/Views/Konto/_ChangeUserFirmaInfoViewModel.cshtml";
             public readonly string _ChangeUserInfoViewModel = "~/Views/Konto/_ChangeUserInfoViewModel.cshtml";
+            public readonly string _ResetujHasloPartial = "~/Views/Konto/_ResetujHasloPartial.cshtml";
             public readonly string _ZapomnianeHasloPartial = "~/Views/Konto/_ZapomnianeHasloPartial.cshtml";
             public readonly string Index = "~/Views/Konto/Index.cshtml";
             public readonly string KontoAktywne = "~/Views/Konto/KontoAktywne.cshtml";

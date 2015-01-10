@@ -1,0 +1,146 @@
+﻿//colors
+$orangeplz: #f89b1d;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: SegoeLight;
+$font_2: SegoeBold;
+
+.login-background {
+	max-width: 1600px;
+	margin: auto;
+	position: relative;
+    h2 {
+       font-weight: bold; 
+       padding:50px 0 20px 0; 
+       text-align: center;
+       color:$orangeplz;
+       font-family: $font_2;
+       font-size: 24px;
+       text-transform: uppercase;
+    }
+	img {
+		position: absolute;
+        top:0;
+        max-width:none;
+        max-height:none;
+        z-index:-1;
+	}
+    .login-cont  {
+        height: 275px;
+        width: 650px;
+        border: 2px solid $orangeplz;
+        margin: 15px auto 100px;
+        background-color:white;
+        position:relative;
+        .validation-box{
+            margin-top: 35px;
+            height: 16px;
+            text-align: center;
+            font-family: Segoe UI;
+            color: red;
+        }
+        .przypomnij{
+            float:right;
+            margin-right: 30px;
+            margin-top: 10px;
+            height: 20px;
+            .text {
+                float:left;
+	            font-size: 20px;
+	            font-family: $font_2;
+	            font-weight: bold;
+	            text-transform: uppercase;
+	            margin: 0;
+	            color: $orangeplz;
+                cursor: pointer;
+            }
+            #triangle-right-big {
+	            width: 0;
+                height: 0;
+                border-top: 11px solid transparent;
+                border-left: 15px solid #f89b1d;
+                border-bottom: 11px solid transparent;
+                float: right;
+                margin: 0 25px 37px 15px;
+                cursor:pointer;
+            }
+        }
+        .success-text{
+            font-family: $font_2;
+            font-weight: bold;
+            font-size: 16px;
+            color: #088106;
+            position:absolute;
+            bottom: 20px;
+            left:255px;
+        }
+        .login-box{
+            margin: 40px 0 40px 65px;
+            a.forgot-link{
+                text-decoration:underline;
+                font-size:12px;
+                color:black;
+                font-family:$font_1;
+                margin-left:143px;
+                margin-top:5px;
+            }
+                .text-big{        
+                    font-family:$font_0;
+                    font-size: 18px;
+                    float: left;
+                    margin-bottom:20px
+                }
+                .text{        
+                    font-family:$font_1;
+                    font-size: 18px;
+                    float: left;
+                    line-height: 29px;
+                }
+            .data-box{
+                width: 410px;
+                height: 29px;
+                margin-top: 20px;
+                font-family: $font_0;
+                .input-validation-error,input.error{
+                    border: 1px solid red !important;
+                }
+                .field-validation-error,label.error{
+                    margin-left:143px;
+                    color:red;
+                    font-weight:bold;
+                    font-size:14px;
+                    font-family:$font_1
+                }
+                
+                input[type=email] {
+                    text-align: center;
+                    font-family: SegoeLight;
+                    width: 267px;
+                    border: 1px solid #cccccc;
+                    float: right;
+                    height: 27px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
