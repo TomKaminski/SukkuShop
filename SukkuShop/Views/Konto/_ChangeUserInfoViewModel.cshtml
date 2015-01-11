@@ -1,2 +1,74 @@
 ﻿@model SukkuShop.Models.ChangeUserInfoViewModel
+@using (Ajax.BeginForm(MVC.Konto.ChangeUserInfoViewModel(), new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "showAjaxLoader()", OnComplete = "hideAjaxLoader()", OnFailure = "onError(xhr, status, error)" }, new { id = "changeUserInfoForm" }))
+{
 
+<div class="clear">&nbsp;</div>
+<div class="data-container">
+    <div class="main-text">Edytuj dane osobowe</div>
+    <div class="validation-box">
+        @if (Model.Success == null)
+        {
+            @Html.ValidationSummary(true)
+        }
+        else if (Model.Success == false)
+        {
+            <div>Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;.</div>
+        }
+        else
+        {
+            <div style="color:green">Konto zostało auktualnione &#10003;.</div>
+        }
+    </div>   
+    <div class="switch-box">
+        @Html.RadioButtonFor(m => m.CzyFirmowe, false, new { @class = "css-checkbox", id = "firmafalse", @checked = true })
+        @Html.LabelFor(m => m.CzyFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
+        @Html.RadioButtonFor(m => m.CzyFirmowe, true, new { @class = "css-checkbox", id = "firmatrue" })
+        @Html.LabelFor(m => m.CzyFirmowe, "firma", new { @class = "css-label", @for = "firmatrue", style = "margin-left:33px" })
+    </div>
+    <div class="clear">&nbsp;</div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Name, "imię*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.LastName, "nazwisko*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.LastName)
+        @Html.ValidationMessageFor(m => m.LastName)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Street, "ulica*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.Street)
+        @Html.ValidationMessageFor(m => m.Street)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Number, "numer*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.Number)
+        @Html.ValidationMessageFor(m => m.Number)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.City, "miasto*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.City)
+        @Html.ValidationMessageFor(m => m.City)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.PostalCode, "kod pocztowy*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.PostalCode)
+        @Html.ValidationMessageFor(m => m.PostalCode)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Phone, "telefon*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.Phone)
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+    <div class="data-box">
+        @Html.LabelFor(m => m.Email, "e-mail*:", new {@class = "text"})
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+    <div class="save" id="save-nofirma">
+        <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+    </div>
+</div>
+<div class="clear">&nbsp;</div>
+}

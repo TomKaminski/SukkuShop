@@ -194,6 +194,11 @@ namespace Links
                 private const string URLPATH = "~/Content/css/Konto";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string Details_scss = Url("Details.scss");
+                public static readonly string Details_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Details.min.css") ? Url("Details.min.css") : Url("Details.css");
+                     
+                public static readonly string Details_css_map = Url("Details.css.map");
+                public static readonly string Details_min_css = Url("Details.min.css");
                 public static readonly string KontoNieaktywne_scss = Url("KontoNieaktywne.scss");
                 public static readonly string KontoNieaktywne_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/KontoNieaktywne.min.css") ? Url("KontoNieaktywne.min.css") : Url("KontoNieaktywne.css");
                      

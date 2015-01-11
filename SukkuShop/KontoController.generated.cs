@@ -102,7 +102,6 @@ namespace SukkuShop.Controllers
             public readonly string Aktywacja = "Aktywacja";
             public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
             public readonly string ResetujHaslo = "ResetujHaslo";
-            public readonly string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public readonly string Wyloguj = "Wyloguj";
             public readonly string Index = "Index";
             public readonly string ZmienHaslo = "ZmienHaslo";
@@ -119,7 +118,6 @@ namespace SukkuShop.Controllers
             public const string Aktywacja = "Aktywacja";
             public const string ZapomnianeHaslo = "ZapomnianeHaslo";
             public const string ResetujHaslo = "ResetujHaslo";
-            public const string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
             public const string Wyloguj = "Wyloguj";
             public const string Index = "Index";
             public const string ZmienHaslo = "ZmienHaslo";
@@ -375,17 +373,6 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void ResetujHasloPotwierdzenieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.ActionResult ResetujHasloPotwierdzenie()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResetujHasloPotwierdzenie);
-            ResetujHasloPotwierdzenieOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
         partial void WylogujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
@@ -400,11 +387,11 @@ namespace SukkuShop.Controllers
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Index()
+        public override System.Web.Mvc.ActionResult Index()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]
@@ -422,58 +409,58 @@ namespace SukkuShop.Controllers
         partial void ZmienHasloOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangePasswordViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ZmienHaslo(SukkuShop.Models.ChangePasswordViewModel model)
+        public override System.Web.Mvc.ActionResult ZmienHaslo(SukkuShop.Models.ChangePasswordViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZmienHaslo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ZmienHasloOverride(callInfo, model);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]
         partial void ChangeUserInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserInfoViewModel()
+        public override System.Web.Mvc.ActionResult ChangeUserInfoViewModel()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserInfoViewModel);
             ChangeUserInfoViewModelOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]
         partial void ChangeUserInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangeUserInfoViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserInfoViewModel(SukkuShop.Models.ChangeUserInfoViewModel model)
+        public override System.Web.Mvc.ActionResult ChangeUserInfoViewModel(SukkuShop.Models.ChangeUserInfoViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserInfoViewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ChangeUserInfoViewModelOverride(callInfo, model);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]
         partial void ChangeUserFirmaInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserFirmaInfoViewModel()
+        public override System.Web.Mvc.ActionResult ChangeUserFirmaInfoViewModel()
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserFirmaInfoViewModel);
             ChangeUserFirmaInfoViewModelOverride(callInfo);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
         [NonAction]
         partial void ChangeUserFirmaInfoViewModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.ChangeUserFirmaInfoViewModel model);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> ChangeUserFirmaInfoViewModel(SukkuShop.Models.ChangeUserFirmaInfoViewModel model)
+        public override System.Web.Mvc.ActionResult ChangeUserFirmaInfoViewModel(SukkuShop.Models.ChangeUserFirmaInfoViewModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserFirmaInfoViewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ChangeUserFirmaInfoViewModelOverride(callInfo, model);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+            return callInfo;
         }
 
     }

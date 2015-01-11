@@ -1,3 +1,9 @@
+.validation-box {
+  height: 16px;
+  text-align: center;
+  font-family: Segoe UI;
+  color: red; }
+
 .details-container {
   width: 1066px;
   margin: auto; }
@@ -25,9 +31,8 @@
     margin: 15px auto 200px;
     position: relative; }
     .details-container .change-container .switch-box {
-      margin: 30px 25px auto; }
+      margin: 30px 0 auto; }
     .details-container .change-container .main-text {
-      float: left;
       text-transform: uppercase;
       font-family: SegoeBold;
       font-size: 16px;
@@ -40,7 +45,15 @@
         width: 423px;
         height: 29px;
         font-family: SegoeLight;
-        margin-top: 20px; }
+        margin-top: 22px; }
+        .details-container .change-container .data-container .data-box .input-validation-error, .details-container .change-container .data-container .data-box input.error {
+          border: 1px solid red !important; }
+        .details-container .change-container .data-container .data-box .field-validation-error, .details-container .change-container .data-container .data-box label.error {
+          margin-left: 143px;
+          color: red;
+          font-weight: bold;
+          font-size: 14px;
+          font-family: SegoeLight; }
         .details-container .change-container .data-container .data-box .field-validation-error {
           float: left;
           color: red;
@@ -119,8 +132,7 @@ input[type=radio].css-checkbox {
     font-family: Segoe UI;
     float: left;
     vertical-align: middle;
-    cursor: pointer;
-    margin-bottom: 10px; }
+    cursor: pointer; }
   input[type=radio].css-checkbox:checked + label.css-label {
     background-position: 0 -18px; }
 

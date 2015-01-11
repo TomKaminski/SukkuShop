@@ -200,14 +200,6 @@ namespace SukkuShop.Controllers
         }
 
         //
-        // GET: /Account/ResetPasswordConfirmation
-        [AllowAnonymous]
-        public virtual ActionResult ResetujHasloPotwierdzenie()
-        {
-            return View();
-        }
-
-        //
         // POST: /Account/LogOff
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -222,9 +214,9 @@ namespace SukkuShop.Controllers
         ////////////MANAGE//////////////
         
         // GET: DaneOsobowe main view
-        public virtual async Task<ActionResult> Index()
+        public virtual ActionResult Index()
         {
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
             return View(user.KontoFirmowe);
         }
 
@@ -233,39 +225,38 @@ namespace SukkuShop.Controllers
         [HttpGet]
         public virtual ActionResult ZmienHaslo()
         {
-            return PartialView("_ChangePassword");
+            var model = new ChangePasswordViewModel();
+            return PartialView("_ChangePassword",model);
         }
         // POST: Zmień hasło
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual async Task<ActionResult> ZmienHaslo(ChangePasswordViewModel model)
+        public virtual ActionResult ZmienHaslo(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return PartialView("_ChangePassword",model);
             }
-            var result =
-                await
-                    _userManager.ChangePasswordAsync(int.Parse(User.Identity.GetUserId()), model.OldPassword,
-                        model.NewPassword);
+            var result = _userManager.ChangePassword(int.Parse(User.Identity.GetUserId()), model.OldPassword,model.NewPassword);
             if (result.Succeeded)
             {
-                var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
+                var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
                 if (user != null)
                 {
-                    await SignInAsync(user, isPersistent: false);
+                    _signInManager.SignIn(user,false,false);
                 }
-                return RedirectToAction(MVC.Konto.Index());
+                model.Success = true;
+                return PartialView("_ChangePassword", model);
             }
-            AddErrors(result);
-            return PartialView("_ChangePassword");
+            model.Success = false;
+            return PartialView("_ChangePassword",model);
         }
 
         //GET: User data - konto osobiste
         [HttpGet]
-        public virtual async Task<ActionResult> ChangeUserInfoViewModel()
+        public virtual ActionResult ChangeUserInfoViewModel()
         {
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
             var model = new ChangeUserInfoViewModel
             {
                 City = user.City ?? "Nie podano",
@@ -275,18 +266,23 @@ namespace SukkuShop.Controllers
                 Number = user.Number ?? "Nie podano",
                 Phone = user.PhoneNumber ?? "Nie podano",
                 PostalCode = user.PostalCode ?? "Nie podano",
-                Street = user.Street ?? "Nie podano"
+                Street = user.Street ?? "Nie podano",
+                Success = null
             };
             return PartialView("_ChangeUserInfoViewModel", model);
         }
 
         //POST: change User data - konto osobiste
         [HttpPost]
-        public virtual async Task<ActionResult> ChangeUserInfoViewModel(ChangeUserInfoViewModel model)
+        public virtual ActionResult ChangeUserInfoViewModel(ChangeUserInfoViewModel model)
         {
+            var userExists = _userManager.FindByEmail(model.Email);
+            if(userExists!=null)
+                if(userExists.Id!=User.Identity.GetUserId<int>())
+                    ModelState.AddModelError("Email","Adres email jest używany!");
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                var user = _userManager.FindById(User.Identity.GetUserId<int>());
                 user.City = model.City;
                 user.LastName = model.LastName;
                 user.Name = model.Name;
@@ -295,17 +291,18 @@ namespace SukkuShop.Controllers
                 user.PhoneNumber = model.Phone;
                 user.Street = model.Street;
                 user.KontoFirmowe = false;
-                await _userManager.UpdateAsync(user);
-                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Home.Index())));
+                var result = _userManager.Update(user);
+                model.Success = result.Succeeded;
+                return PartialView("_ChangeUserInfoViewModel", model);
             }
             return PartialView("_ChangeUserInfoViewModel", model);
         }
 
         //GET: User data - konto firmowe
         [HttpGet]
-        public virtual async Task<ActionResult> ChangeUserFirmaInfoViewModel()
+        public virtual ActionResult ChangeUserFirmaInfoViewModel()
         {
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
             var model = new ChangeUserFirmaInfoViewModel
             {
                 City = user.City ?? "Nie podano",
@@ -315,18 +312,23 @@ namespace SukkuShop.Controllers
                 Number = user.Number ?? "Nie podano",
                 Phone = user.PhoneNumber ?? "Nie podano",
                 PostalCode = user.PostalCode ?? "Nie podano",
-                Street = user.Street ?? "Nie podano"
+                Street = user.Street ?? "Nie podano",
+                Success = null
             };
             return PartialView("_ChangeUserFirmaInfoViewModel", model);
         }
 
         //GET: change User data - konto firmowe
         [HttpPost]
-        public virtual async Task<ActionResult> ChangeUserFirmaInfoViewModel(ChangeUserFirmaInfoViewModel model)
+        public virtual ActionResult ChangeUserFirmaInfoViewModel(ChangeUserFirmaInfoViewModel model)
         {
+            var userExists = _userManager.FindByEmail(model.Email);
+            if (userExists != null)
+                if (userExists.Id != User.Identity.GetUserId<int>())
+                    ModelState.AddModelError("Email", "Adres email jest używany!");
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
+                var user = _userManager.FindById(User.Identity.GetUserId<int>());
                 user.City = model.City;
                 user.NazwaFirmy = model.NazwaFirmy;
                 user.AccNip = model.Nip;
@@ -335,8 +337,9 @@ namespace SukkuShop.Controllers
                 user.PhoneNumber = model.Phone;
                 user.Street = model.Street;
                 user.KontoFirmowe = true;
-                await _userManager.UpdateAsync(user);
-                return JavaScript(string.Format("document.location = '{0}';", Url.Action(MVC.Home.Index())));
+                var result = _userManager.Update(user);
+                model.Success = result.Succeeded;
+                return PartialView("_ChangeUserFirmaInfoViewModel", model);
             }
             return PartialView("_ChangeUserFirmaInfoViewModel", model);
         }
@@ -420,26 +423,26 @@ namespace SukkuShop.Controllers
         }
 
 
-        private bool HasPassword()
-        {
-            var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
-            if (user != null)
-            {
-                return user.PasswordHash != null;
-            }
-            return false;
-        }
+        //private bool HasPassword()
+        //{
+        //    var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
+        //    if (user != null)
+        //    {
+        //        return user.PasswordHash != null;
+        //    }
+        //    return false;
+        //}
 
-        public enum ManageMessageId
-        {
-            AddPhoneSuccess,
-            ChangePasswordSuccess,
-            SetTwoFactorSuccess,
-            SetPasswordSuccess,
-            RemoveLoginSuccess,
-            RemovePhoneSuccess,
-            Error
-        }
+        //public enum ManageMessageId
+        //{
+        //    AddPhoneSuccess,
+        //    ChangePasswordSuccess,
+        //    SetTwoFactorSuccess,
+        //    SetPasswordSuccess,
+        //    RemoveLoginSuccess,
+        //    RemovePhoneSuccess,
+        //    Error
+        //}
 
         #endregion
     }

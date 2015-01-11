@@ -100,19 +100,19 @@ namespace SukkuShop.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Imie nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
         [Display(Name = "Imię")]
         public string Name { get; set; }
 
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Nazwisko nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Miasto nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [RegularExpression("[A-Za-z0-9]*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż0-9]*$*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
@@ -127,6 +127,10 @@ namespace SukkuShop.Models
         [Display(Name = "Kod pocztowy")]
         [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
         public string PostalCode { get; set; }
+
+        public bool? Success { get; set; }
+
+        public bool CzyFirmowe { get; set; }
     }
 
 
@@ -137,19 +141,19 @@ namespace SukkuShop.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [RegularExpression("[A-Za-z0-9]*", ErrorMessage = "Nazwa firmy nie może zawierać znaków specjalnych")]
+        [RegularExpression("[A-Za-z0-9]*", ErrorMessage = "Nazwa nie może zawierać znaków specjalnych")]
         [Display(Name = "Nazwa firmy")]
         public string NazwaFirmy { get; set; }
 
-        [RegularExpression("[0-9]{10}*", ErrorMessage = "Numer NIP to 10 cyfrowa liczba.")]
+        [RegularExpression("^[0-9]{10}$|^Nie podano$", ErrorMessage = "Numer NIP to 10 cyfrowa liczba.")]
         [Display(Name = "NIP")]
         public string Nip { get; set; }
 
-        [RegularExpression("[A-Za-z]*", ErrorMessage = "Miasto nie może zawierać cyfr ani znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [RegularExpression("[A-Za-z0-9]*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż0-9]*$*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
@@ -164,6 +168,10 @@ namespace SukkuShop.Models
         [Display(Name = "Kod pocztowy")]
         [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
         public string PostalCode { get; set; }
+
+        public bool? Success { get; set; }
+
+        public bool CzyFirmowe { get; set; }
     }
 
     public class ChangePasswordViewModel
@@ -183,5 +191,7 @@ namespace SukkuShop.Models
         [Display(Name = "Potwierdź nowe hasło")]
         [Compare("NewPassword", ErrorMessage = "Nowe hasła nie są takie same.")]
         public string ConfirmPassword { get; set; }
+
+        public bool? Success { get; set; }
     }
 }
