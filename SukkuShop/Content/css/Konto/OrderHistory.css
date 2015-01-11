@@ -51,3 +51,12 @@
         font-size: 18px;
         color: #268e09; }
 
+.img-container {
+  width: 1066px;
+  margin: auto;
+  border-bottom: 0; }
+  .img-container .img-box {
+    height: 426px;
+    width: 640px;
+    margin: auto; }
+

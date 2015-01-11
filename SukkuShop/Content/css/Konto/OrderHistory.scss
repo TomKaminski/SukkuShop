@@ -87,4 +87,15 @@ $font_2: SegoeBold;
 			    }
 	    }
     }
+}
+
+.img-container{
+    width: 1066px;
+    margin:auto;
+    border-bottom:0;
+    .img-box{
+        height:426px;
+        width: 640px;
+        margin:auto;    
     }
+}
