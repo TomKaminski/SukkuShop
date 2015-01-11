@@ -8,6 +8,7 @@ $font_1: SegoeLight;
 $font_2: SegoeBold;
 
         .validation-box{
+            margin-top:20px;
             height: 16px;
             text-align: center;
             font-family: Segoe UI;
@@ -49,14 +50,13 @@ $font_2: SegoeBold;
     position:relative;
     .switch-box
     {       
-        margin: 30px 0 auto;
+        margin: 20px 0 auto;
     }
     .main-text
         {
         text-transform:uppercase;
         font-family:$font_2;
         font-size: 16px;
-        margin-bottom: 10px;
         color: $orangeplz;
        }
     .data-container{
@@ -154,7 +154,6 @@ $font_2: SegoeBold;
         }
     }
 }
-
 
 input[type=radio].css-checkbox {
 	display: none;

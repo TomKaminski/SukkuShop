@@ -339,6 +339,12 @@
     <Content Include="Content\css\Konto\KontoNieaktywne.min.css">
       <DependentUpon>KontoNieaktywne.css</DependentUpon>
     </Content>
+    <Content Include="Content\css\Konto\OrderHistory.css">
+      <DependentUpon>OrderHistory.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\OrderHistory.min.css">
+      <DependentUpon>OrderHistory.css</DependentUpon>
+    </Content>
     <Content Include="Content\css\Konto\Resetuj.css">
       <DependentUpon>Resetuj.scss</DependentUpon>
     </Content>
@@ -459,6 +465,7 @@
     <Content Include="Content\Images\Shop\lupa.png" />
     <Content Include="Content\web\DaneKlientaKoszyk.html" />
     <Content Include="Content\web\OrderDetails.html" />
+    <Content Include="Content\web\OrderHistory.html" />
     <Content Include="Content\web\OrderSummary.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -554,6 +561,10 @@
     <Content Include="Content\css\Konto\Details.scss" />
     <Content Include="Content\css\Konto\Details.css.map">
       <DependentUpon>Details.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\Konto\OrderHistory.scss" />
+    <Content Include="Content\css\Konto\OrderHistory.css.map">
+      <DependentUpon>OrderHistory.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\angular.js" />

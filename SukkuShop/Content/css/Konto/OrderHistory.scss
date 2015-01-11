@@ -1,0 +1,90 @@
+﻿//colors
+$orangeplz: #ff730c;
+$color_tree_poppy_approx: #f89b1d;
+$greyplz: #bababa;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: SegoeLight;
+$font_2: SegoeBold;
+
+%extend_1 {
+	width: 280px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+//original selectors
+//table.order-table tr th:first-child, table.order-table tr td:first-child
+%extend_2 {
+	width: 185px;
+	text-align: left;
+	position: relative;
+}
+
+.details-container
+{  
+    width: 1066px;
+    margin:auto;
+    ul{
+        &.choice
+            {
+            margin-top: 80px;
+            padding-left:160px;
+            text-align:center;
+            height: 66px;
+            text-transform:uppercase;
+            color:$color_tree_poppy_approx;
+            font-family: $font_0;
+            font-size:24px;
+            border-bottom: 1px solid $color_tree_poppy_approx;
+            border-top: 1px solid $color_tree_poppy_approx;
+            li {
+                margin-right:160px;
+                    margin-top:20px;
+			        display: inline-block;
+			        &.selected {
+				            font-weight: bold;
+			                  }
+                }
+            } 
+       }
+    table.history-table
+        {
+        font-family:$font_1;
+        font-size:24px;
+        tr{
+            th{
+                text-transform:lowercase;
+                border-bottom: 1px solid $greyplz;
+                @extend %extend_1;
+			    &:last-child {
+                    width:310px;
+				    text-align: right;
+			    }
+			    &:first-child {
+				    @extend %extend_2;
+			    }
+            }
+        }
+        tbody tr td {
+		    /*padding: 20px 0;*/
+            line-height: 54px;
+            font-family:$font_2;
+            text-align:center;
+            border-bottom: 1px solid $greyplz;
+            a.see{
+                color:$greyplz;
+                font-size:11px;
+            }
+            &:last-child {
+				    text-align: right;
+                 font-size:18px;
+                color:#268e09;
+			    }
+			    &:first-child {
+				    @extend %extend_2;
+			    }
+	    }
+    }
+    }
