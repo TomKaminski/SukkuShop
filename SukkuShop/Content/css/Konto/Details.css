@@ -26,6 +26,8 @@
       display: inline-block; }
       .details-container ul.choice li.selected {
         font-weight: bold; }
+      .details-container ul.choice li a {
+        color: #f89b1d; }
   .details-container .change-container {
     width: 480px;
     border: 2px solid #f89b1d;

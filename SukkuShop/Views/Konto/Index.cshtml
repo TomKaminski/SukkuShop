@@ -1,11 +1,11 @@
 ﻿@model bool
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dane osobowe";
 }
 <div class="details-container">
     <ul class="choice">
-        <li class="selected">Dane osobowe</li>
-        <li>historia zamowień</li>
+        <li class="selected"><a href="@Url.Action(MVC.Konto.DaneOsobowe())">dane osobowe</a></li>
+        <li><a href="@Url.Action(MVC.Konto.HistoriaZamowien())">historia zamowień</a></li>
     </ul>
     <div class="change-container">
         <div id="replace">

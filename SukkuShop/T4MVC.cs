@@ -141,6 +141,7 @@ namespace Links
         public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
         public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        public static readonly string Konto_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Konto.min.js") ? Url("Konto.min.js") : Url("Konto.js");
         public static readonly string KontoNieaktywne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/KontoNieaktywne.min.js") ? Url("KontoNieaktywne.min.js") : Url("KontoNieaktywne.js");
         public static readonly string Login_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Login.min.js") ? Url("Login.min.js") : Url("Login.js");
         public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
@@ -209,6 +210,11 @@ namespace Links
                      
                 public static readonly string Login_css_map = Url("Login.css.map");
                 public static readonly string Login_min_css = Url("Login.min.css");
+                public static readonly string OrderHistory_scss = Url("OrderHistory.scss");
+                public static readonly string OrderHistory_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderHistory.min.css") ? Url("OrderHistory.min.css") : Url("OrderHistory.css");
+                     
+                public static readonly string OrderHistory_css_map = Url("OrderHistory.css.map");
+                public static readonly string OrderHistory_min_css = Url("OrderHistory.min.css");
                 public static readonly string Register_scss = Url("Register.scss");
                 public static readonly string Register_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.css") ? Url("Register.min.css") : Url("Register.css");
                      
@@ -378,6 +384,7 @@ namespace Links
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
             public static readonly string DaneKlientaKoszyk_html = Url("DaneKlientaKoszyk.html");
             public static readonly string OrderDetails_html = Url("OrderDetails.html");
+            public static readonly string OrderHistory_html = Url("OrderHistory.html");
             public static readonly string OrderSummary_html = Url("OrderSummary.html");
         }
     

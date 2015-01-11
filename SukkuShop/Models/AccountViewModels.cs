@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SukkuShop.Models
 {
@@ -100,32 +102,37 @@ namespace SukkuShop.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
+        [RegularExpression("^[A-Ża-ż]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
+        [StringLength(20, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Imię")]
         public string Name { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
+        [RegularExpression("^[A-Ża-ż -]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
+        [StringLength(30, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
+        [RegularExpression("^[A-Ża-ż -]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
+        [StringLength(50, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [RegularExpression("^[A-Ża-ż0-9]*$*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż -0-9]*$|^Nie podano$", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [StringLength(20, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
+        [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 1)]
         [Display(Name = "Numer domu")]
         public string Number { get; set; }
 
-        [Phone(ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        [RegularExpression("^[1-9][0-9]{8}$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
 
         [Display(Name = "Kod pocztowy")]
-        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
+        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
         public string PostalCode { get; set; }
 
         public bool? Success { get; set; }
@@ -141,32 +148,37 @@ namespace SukkuShop.Models
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [RegularExpression("[A-Za-z0-9]*", ErrorMessage = "Nazwa nie może zawierać znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż 0-9-]*$|^Nie podano$", ErrorMessage = "Nazwa nie może zawierać znaków specjalnych")]
+        [StringLength(50, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Nazwa firmy")]
         public string NazwaFirmy { get; set; }
 
         [RegularExpression("^[0-9]{10}$|^Nie podano$", ErrorMessage = "Numer NIP to 10 cyfrowa liczba.")]
+        [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 10)]
         [Display(Name = "NIP")]
         public string Nip { get; set; }
 
-        [RegularExpression("^[A-Ża-ż]*$", ErrorMessage = "Nieprawidłowa wartość")]
+        [RegularExpression("^[A-Ża-ż -]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
+        [StringLength(50, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [RegularExpression("^[A-Ża-ż0-9]*$*", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [RegularExpression("^[A-Ża-ż -0-9]*$|^Nie podano$", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
+        [StringLength(20, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 
-        [RegularExpression("^[1-9][0-9]{0,3}[A-Z]{0,1}$", ErrorMessage = "Numer domu jest niepoprawny")]
+        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
+        [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 1)]
         [Display(Name = "Numer domu")]
         public string Number { get; set; }
 
-        [Phone(ErrorMessage = "Telefon powinien składać się z 9 cyfr")]
+        [RegularExpression("^[1-9][0-9]{8}$|^Nie podano$",ErrorMessage = "Numer domu jest niepoprawny")]
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
 
         [Display(Name = "Kod pocztowy")]
-        [RegularExpression("[0-9]{2}-[0-9]{3}", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
+        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
         public string PostalCode { get; set; }
 
         public bool? Success { get; set; }
@@ -177,6 +189,7 @@ namespace SukkuShop.Models
     public class ChangePasswordViewModel
     {
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [StringLength(100, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Stare hasło")]
         public string OldPassword { get; set; }
@@ -193,5 +206,26 @@ namespace SukkuShop.Models
         public string ConfirmPassword { get; set; }
 
         public bool? Success { get; set; }
+    }
+
+    public class AccountOrderItemModel
+    {
+        public int Id { get; set; }
+        public DateTime OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string ActualState { get; set; }
+    }
+
+    public class AccountOrderItemViewModel
+    {
+        public int Id { get; set; }
+        public string OrderDate { get; set; }
+        public decimal TotalPrice { get; set; }
+        public string ActualState { get; set; }
+    }
+
+    public class AccountOrdersViewModel
+    {
+        public List<AccountOrderItemModel> AccountOrdersList { get; set; }
     }
 }

@@ -100,21 +100,23 @@ function changeFirmaInfo() {
     $("#changeFirmaInfoForm").validate({
         rules: {
             NazwaFirmy: {
-                minlength: 2
+                minlength: 2,
+                regex: /^[A-Ża-ż 0-9-]*$|^Nie podano$/
             },
             Nip: {
-                minlength: 10
+                minlength: 10,
+                regex: /^[0-9]{10}$|^Nie podano$/
             },
             Street: {
                 minlength: 2,
-                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż -0-9]*$|^Nie podano$/
             },
             Number: {
                 regex: /^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$/
             },
             City: {
                 minlength: 2,
-                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$|^Nie podano$/
             },
             Phone: {
                 regex: /^[1-9][0-9]{8}$|^Nie podano$/
@@ -130,9 +132,11 @@ function changeFirmaInfo() {
         messages: {
             NazwaFirmy: {
                 minlength: "Nazwa firmy musi zawierać conajmniej 2 znaki.",
+                regex: "Nazwa firmy jest niepoprawna."
             },
             Nip: {
-                minlength: "Nip to 10 cyfr.",
+                minlength: "NIP to 10 cyfr.",
+                regex: "NIP jest niepoprawny."
             },
             Street: {
                 minlength: "Ulica musi zawierać conajmniej 2 znaki.",
@@ -163,21 +167,23 @@ function changeuserInfo() {
     $("#changeUserInfoForm").validate({
         rules: {
             Name: {
-                minlength: 2
+                minlength: 2,
+                regex: /^[A-Ża-ż]*$|^Nie podano$/
             },
             LastName: {
-                minlength: 2
+                minlength: 2,
+                regex: /^[A-Ża-ż -]*$|^Nie podano$/
             },
             Street: {
                 minlength: 2,
-                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$|^Nie podano$/
             },
             Number: {
                 regex: /^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$/
             },
             City: {
                 minlength: 2,
-                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$/
+                regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$|^Nie podano$/
             },
             Phone: {
                 regex: /^[1-9][0-9]{8}$|^Nie podano$/
@@ -192,10 +198,12 @@ function changeuserInfo() {
         },
         messages: {
             Name: {
-                minlength: "Nazwa firmy musi zawierać conajmniej 2 znaki.",
+                minlength: "Imie musi zawierać conajmniej 2 znaki.",
+                regex: "Imie jest niepoprawne."
             },
             LastName: {
                 minlength: "Nazwisko musi zawierać conajmniej 2 znaki.",
+                regex: "Nazwisko jest niepoprawne."
             },
             Street: {
                 minlength: "Ulica musi zawierać conajmniej 2 znaki.",

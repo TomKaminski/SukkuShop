@@ -103,10 +103,11 @@ namespace SukkuShop.Controllers
             public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
             public readonly string ResetujHaslo = "ResetujHaslo";
             public readonly string Wyloguj = "Wyloguj";
-            public readonly string Index = "Index";
+            public readonly string DaneOsobowe = "DaneOsobowe";
             public readonly string ZmienHaslo = "ZmienHaslo";
             public readonly string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public readonly string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
+            public readonly string HistoriaZamowien = "HistoriaZamowien";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -119,10 +120,11 @@ namespace SukkuShop.Controllers
             public const string ZapomnianeHaslo = "ZapomnianeHaslo";
             public const string ResetujHaslo = "ResetujHaslo";
             public const string Wyloguj = "Wyloguj";
-            public const string Index = "Index";
+            public const string DaneOsobowe = "DaneOsobowe";
             public const string ZmienHaslo = "ZmienHaslo";
             public const string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public const string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
+            public const string HistoriaZamowien = "HistoriaZamowien";
         }
 
 
@@ -216,12 +218,12 @@ namespace SukkuShop.Controllers
                 public readonly string _ChangeUserInfoViewModel = "_ChangeUserInfoViewModel";
                 public readonly string _ResetujHasloPartial = "_ResetujHasloPartial";
                 public readonly string _ZapomnianeHasloPartial = "_ZapomnianeHasloPartial";
+                public readonly string HistoriaZamowien = "HistoriaZamowien";
                 public readonly string Index = "Index";
                 public readonly string KontoAktywne = "KontoAktywne";
                 public readonly string KontoNieaktywne = "KontoNieaktywne";
                 public readonly string RegisterSuccess = "RegisterSuccess";
                 public readonly string ResetujHaslo = "ResetujHaslo";
-                public readonly string ResetujHasloPotwierdzenie = "ResetujHasloPotwierdzenie";
                 public readonly string UstawHaslo = "UstawHaslo";
                 public readonly string Zaloguj = "Zaloguj";
                 public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
@@ -233,12 +235,12 @@ namespace SukkuShop.Controllers
             public readonly string _ChangeUserInfoViewModel = "~/Views/Konto/_ChangeUserInfoViewModel.cshtml";
             public readonly string _ResetujHasloPartial = "~/Views/Konto/_ResetujHasloPartial.cshtml";
             public readonly string _ZapomnianeHasloPartial = "~/Views/Konto/_ZapomnianeHasloPartial.cshtml";
+            public readonly string HistoriaZamowien = "~/Views/Konto/HistoriaZamowien.cshtml";
             public readonly string Index = "~/Views/Konto/Index.cshtml";
             public readonly string KontoAktywne = "~/Views/Konto/KontoAktywne.cshtml";
             public readonly string KontoNieaktywne = "~/Views/Konto/KontoNieaktywne.cshtml";
             public readonly string RegisterSuccess = "~/Views/Konto/RegisterSuccess.cshtml";
             public readonly string ResetujHaslo = "~/Views/Konto/ResetujHaslo.cshtml";
-            public readonly string ResetujHasloPotwierdzenie = "~/Views/Konto/ResetujHasloPotwierdzenie.cshtml";
             public readonly string UstawHaslo = "~/Views/Konto/UstawHaslo.cshtml";
             public readonly string Zaloguj = "~/Views/Konto/Zaloguj.cshtml";
             public readonly string ZapomnianeHaslo = "~/Views/Konto/ZapomnianeHaslo.cshtml";
@@ -384,13 +386,13 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void DaneOsoboweOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult DaneOsobowe()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DaneOsobowe);
+            DaneOsoboweOverride(callInfo);
             return callInfo;
         }
 
@@ -460,6 +462,17 @@ namespace SukkuShop.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ChangeUserFirmaInfoViewModel);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ChangeUserFirmaInfoViewModelOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void HistoriaZamowienOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult HistoriaZamowien()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.HistoriaZamowien);
+            HistoriaZamowienOverride(callInfo);
             return callInfo;
         }
 

@@ -324,6 +324,10 @@ namespace SukkuShop.Controllers
             shoppingCart.UserHints = userhints;
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
 
+            int? userId = null;
+            if (user != null)
+                userId = user.Id;
+
             var listakurwa = new List<OrderDetails>();
             decimal hehe = 0;
             foreach (var item in shoppingCart.Lines)
@@ -359,8 +363,7 @@ namespace SukkuShop.Controllers
                 Number = shoppingCart.UserAddressModel.Numer,
                 PostalCode = shoppingCart.UserAddressModel.KodPocztowy,
                 OrderDetails = listakurwa,
-                UserId = user.Id,
-                User = user,
+                UserId = userId,
                 OrderInfo = "Przyjęte",
                 UserHints = shoppingCart.UserHints,
                 NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,

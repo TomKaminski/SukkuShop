@@ -292,6 +292,10 @@
     <Compile Include="Migrations\201501091309268_NipString2.Designer.cs">
       <DependentUpon>201501091309268_NipString2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501112235225_nullableOrder.cs" />
+    <Compile Include="Migrations\201501112235225_nullableOrder.Designer.cs">
+      <DependentUpon>201501112235225_nullableOrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -661,6 +665,7 @@
     <Content Include="Views\Shared\_Blad.cshtml" />
     <Content Include="Views\Konto\_ZapomnianeHasloPartial.cshtml" />
     <Content Include="Views\Konto\_ResetujHasloPartial.cshtml" />
+    <Content Include="Views\Konto\HistoriaZamowien.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -710,6 +715,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501091309268_NipString2.resx">
       <DependentUpon>201501091309268_NipString2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501112235225_nullableOrder.resx">
+      <DependentUpon>201501112235225_nullableOrder.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

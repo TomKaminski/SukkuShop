@@ -39,6 +39,7 @@ $font_2: SegoeBold;
             font-size:24px;
             border-bottom: 1px solid $color_tree_poppy_approx;
             border-top: 1px solid $color_tree_poppy_approx;
+            margin-bottom:20px;
             li {
                 margin-right:160px;
                     margin-top:20px;
@@ -46,6 +47,9 @@ $font_2: SegoeBold;
 			        &.selected {
 				            font-weight: bold;
 			                  }
+                }
+                a{
+                    color:$color_tree_poppy_approx;
                 }
             } 
        }
@@ -81,6 +85,7 @@ $font_2: SegoeBold;
 				    text-align: right;
                  font-size:18px;
                 color:#268e09;
+                text-transform:lowercase;
 			    }
 			    &:first-child {
 				    @extend %extend_2;
@@ -93,9 +98,10 @@ $font_2: SegoeBold;
     width: 1066px;
     margin:auto;
     border-bottom:0;
+    margin-top: 1px;
     .img-box{
         height:426px;
-        width: 640px;
+        width: 536px;
         margin:auto;    
     }
 }

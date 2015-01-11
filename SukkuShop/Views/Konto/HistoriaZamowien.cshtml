@@ -1,0 +1,46 @@
+﻿@model List<SukkuShop.Models.AccountOrderItemViewModel>
+@{
+    ViewBag.Title = "Historia zamówień";
+}
+
+<div class="details-container">
+    <ul class="choice">
+        <li><a href="@Url.Action(MVC.Konto.DaneOsobowe())">dane osobowe</a></li>
+        <li class="selected"><a href="@Url.Action(MVC.Konto.HistoriaZamowien())">historia zamowień</a></li>
+    </ul>
+    @if (Model.Count > 0)
+    {
+        <table class="history-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>nr zamówienia</th>
+                    <th>data</th>
+                    <th>kwota</th>
+                    <th></th>
+                    <th>stan realizacji</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.OrderDate</td>
+                        <td>@item.TotalPrice PLN</td>
+                        <td><a href="#" class="see">podgląd zamówienia</a></td>
+                        <td>@item.ActualState</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    
+</div>
+<div class="img-container">
+    <div class="img-box">
+        <img src="@Url.Content("~/Content/Images/Panels/pepper.jpg")" />
+    </div>
+</div>
+
+@Styles.Render("~/Content/css/Konto/OrderHistory.css")
+

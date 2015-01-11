@@ -110,7 +110,7 @@ namespace SukkuShop.Models
             
         [Key]
         public int OrderId { get; set; }
-        public int UserId { get; set; }
+        public int? UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime SentDate { get; set; }
         public string OrderInfo { get; set; }

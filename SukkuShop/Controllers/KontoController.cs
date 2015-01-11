@@ -1,4 +1,6 @@
-﻿using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -15,13 +17,15 @@ namespace SukkuShop.Controllers
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAuthenticationManager _authenticationManager;
+        private readonly ApplicationDbContext _dbContext;
 
         public KontoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
-            IAuthenticationManager authenticationManager)
+            IAuthenticationManager authenticationManager, ApplicationDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authenticationManager = authenticationManager;
+            _dbContext = dbContext;
         }
 
         [AllowAnonymous]
@@ -214,10 +218,10 @@ namespace SukkuShop.Controllers
         ////////////MANAGE//////////////
         
         // GET: DaneOsobowe main view
-        public virtual ActionResult Index()
+        public virtual ActionResult DaneOsobowe()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
-            return View(user.KontoFirmowe);
+            return View("Index",user.KontoFirmowe);
         }
 
 
@@ -342,6 +346,25 @@ namespace SukkuShop.Controllers
                 return PartialView("_ChangeUserFirmaInfoViewModel", model);
             }
             return PartialView("_ChangeUserFirmaInfoViewModel", model);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public virtual ActionResult HistoriaZamowien()
+        {
+            var userId = _userManager.FindById(User.Identity.GetUserId<int>()).Id;
+            var model = _dbContext.Orders.Where(m => m.UserId == userId).Select(x => new AccountOrderItemModel
+            {
+                ActualState = x.OrderInfo,
+                Id = x.OrderId,
+                OrderDate = x.OrderDate,
+                TotalPrice = x.TotalPrice
+            }).ToList();
+            var viewModel = model.Select(itemModel => new AccountOrderItemViewModel
+            {
+                ActualState = itemModel.ActualState, Id = itemModel.Id, OrderDate = itemModel.OrderDate.ToShortDateString(), TotalPrice = itemModel.TotalPrice
+            }).ToList();
+            return View(viewModel);
         }
 
         ////

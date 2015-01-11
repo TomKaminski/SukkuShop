@@ -123,7 +123,7 @@ $(document).ready(function () {
         newAddressCheckbox();
     });
 
-    $(".client-data-container").delegate(".data-box input", "click", function () {
+    $(".client-data-container").delegate(".data-box input", "focus", function () {
         if ($(this).val() == "Nie podano" && !($(this).is("[disabled='disabled']")) && !($(this).is("[readonly='readonly']"))) {
             $(this).val("");
             $(this).siblings(".field-validation-error").html('');
