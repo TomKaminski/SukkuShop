@@ -1,7 +1,15 @@
 ﻿
 @{
-    ViewBag.Title = "_Blad";
+    ViewBag.Title = "Błąd";
 }
 
-<h2>_Blad</h2>
+<div class="register-success-box">
+    <i class="icon-frown tick"></i>
+    <div class="text-green">WYSTĄPIŁ BŁĄD</div>
+    <div class="text-normal">System Sukku.pl napotkał na błąd,<br /> z którym nie może sobie poradzić. <br />Przepraszamy, pracujemy nad tym!</div>
+    <div id="send-email-box">
+        <a class="link-text" id="sendemail-link" href="@Url.Action(MVC.Home.Index())">Wróć do strony głównej</a>
+    </div>
+</div>
+@Styles.Render("~/Content/css/Konto/KontoNieaktywne.css")
 

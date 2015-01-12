@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -33,8 +33,8 @@ namespace SukkuShop.Controllers
         {
             var userid = _userManager.FindByEmail(email).Id;
             var code = await _userManager.GenerateEmailConfirmationTokenAsync(userid);
-            var callbackUrl = Url.Action(MVC.Konto.Aktywacja(userid,code), Request.Url.Scheme);
-            await _userManager.SendEmailAsync(userid, "Confirm your account", ActivationMailBuilder(callbackUrl));
+            var callbackUrl = Url.Action(MVC.Konto.Aktywacja(userid, code), Request.Url.Scheme);
+            ActivationMailBuilder(callbackUrl, email);
             return new EmptyResult();
         }
 
@@ -49,7 +49,6 @@ namespace SukkuShop.Controllers
             return View();
         }
 
-        
 
         // POST: /Account/Login
         [HttpPost]
@@ -63,9 +62,10 @@ namespace SukkuShop.Controllers
             }
             if (!_userManager.IsEmailConfirmed(_userManager.FindByEmail(model.Email).Id))
             {
-                return View("KontoNieaktywne", (object)model.Email);
+                return View("KontoNieaktywne", (object) model.Email);
             }
-            var result = await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
+            var result =
+                await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -108,8 +108,8 @@ namespace SukkuShop.Controllers
                 if (result.Succeeded)
                 {
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    var callbackUrl = Url.Action(MVC.Konto.Aktywacja(user.Id, code), Request.Url.Scheme); 
-                    await _userManager.SendEmailAsync(user.Id, "Aktywacja konta", ActivationMailBuilder(callbackUrl));
+                    var callbackUrl = Url.Action(MVC.Konto.Aktywacja(user.Id, code), Request.Url.Scheme);
+                    ActivationMailBuilder(callbackUrl, model.Email);
                     return View(MVC.Konto.Views.RegisterSuccess);
                 }
                 ModelState.AddModelError("", "Istnieje już użytkownik o podanym adresie Email.");
@@ -125,7 +125,7 @@ namespace SukkuShop.Controllers
         {
             if (code == null)
             {
-                return View(MVC.Error.Views.Error);
+                return View(MVC.Shared.Views._Blad);
             }
             var result = await _userManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? MVC.Konto.Views.KontoAktywne : MVC.Shared.Views._Blad);
@@ -146,7 +146,7 @@ namespace SukkuShop.Controllers
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> ZapomnianeHaslo(ForgotPasswordViewModel model)
-        {            
+        {
             if (ModelState.IsValid)
             {
                 model.result = "Sent";
@@ -158,10 +158,10 @@ namespace SukkuShop.Controllers
                 }
                 var code = await _userManager.GeneratePasswordResetTokenAsync(user.Id);
                 var callbackUrl = Url.Action("ResetujHaslo", "Konto", new {userId = user.Id, code}, Request.Url.Scheme);
-                await _userManager.SendEmailAsync(user.Id, "Reset Password", ResetPasswordMailBuilder(callbackUrl));
+                ResetPasswordMailBuilder(callbackUrl, model.Email);
                 return PartialView("_ZapomnianeHasloPartial", model);
             }
-            return PartialView("_ZapomnianeHasloPartial",model);
+            return PartialView("_ZapomnianeHasloPartial", model);
         }
 
         //
@@ -185,7 +185,7 @@ namespace SukkuShop.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("_ResetujHasloPartial",model);
+                return PartialView("_ResetujHasloPartial", model);
             }
             var user = await _userManager.FindByNameAsync(model.Email);
             if (user == null)
@@ -216,48 +216,55 @@ namespace SukkuShop.Controllers
 
 
         ////////////MANAGE//////////////
-        
+
         // GET: DaneOsobowe main view
+        [HttpGet]
+        [Authorize]
         public virtual ActionResult DaneOsobowe()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
-            return View("Index",user.KontoFirmowe);
+            return View("Index", user.KontoFirmowe);
         }
 
 
         // GET: Zmień hasło
         [HttpGet]
+        [Authorize]
         public virtual ActionResult ZmienHaslo()
         {
             var model = new ChangePasswordViewModel();
-            return PartialView("_ChangePassword",model);
+            return PartialView("_ChangePassword", model);
         }
+
         // POST: Zmień hasło
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public virtual ActionResult ZmienHaslo(ChangePasswordViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                return PartialView("_ChangePassword",model);
+                return PartialView("_ChangePassword", model);
             }
-            var result = _userManager.ChangePassword(int.Parse(User.Identity.GetUserId()), model.OldPassword,model.NewPassword);
+            var result = _userManager.ChangePassword(int.Parse(User.Identity.GetUserId()), model.OldPassword,
+                model.NewPassword);
             if (result.Succeeded)
             {
                 var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
                 if (user != null)
                 {
-                    _signInManager.SignIn(user,false,false);
+                    _signInManager.SignIn(user, false, false);
                 }
                 model.Success = true;
                 return PartialView("_ChangePassword", model);
             }
             model.Success = false;
-            return PartialView("_ChangePassword",model);
+            return PartialView("_ChangePassword", model);
         }
 
         //GET: User data - konto osobiste
         [HttpGet]
+        [Authorize]
         public virtual ActionResult ChangeUserInfoViewModel()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
@@ -278,12 +285,13 @@ namespace SukkuShop.Controllers
 
         //POST: change User data - konto osobiste
         [HttpPost]
+        [Authorize]
         public virtual ActionResult ChangeUserInfoViewModel(ChangeUserInfoViewModel model)
         {
             var userExists = _userManager.FindByEmail(model.Email);
-            if(userExists!=null)
-                if(userExists.Id!=User.Identity.GetUserId<int>())
-                    ModelState.AddModelError("Email","Adres email jest używany!");
+            if (userExists != null)
+                if (userExists.Id != User.Identity.GetUserId<int>())
+                    ModelState.AddModelError("Email", "Adres email jest używany!");
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindById(User.Identity.GetUserId<int>());
@@ -304,6 +312,7 @@ namespace SukkuShop.Controllers
 
         //GET: User data - konto firmowe
         [HttpGet]
+        [Authorize]
         public virtual ActionResult ChangeUserFirmaInfoViewModel()
         {
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
@@ -324,6 +333,7 @@ namespace SukkuShop.Controllers
 
         //GET: change User data - konto firmowe
         [HttpPost]
+        [Authorize]
         public virtual ActionResult ChangeUserFirmaInfoViewModel(ChangeUserFirmaInfoViewModel model)
         {
             var userExists = _userManager.FindByEmail(model.Email);
@@ -362,9 +372,89 @@ namespace SukkuShop.Controllers
             }).ToList();
             var viewModel = model.Select(itemModel => new AccountOrderItemViewModel
             {
-                ActualState = itemModel.ActualState, Id = itemModel.Id, OrderDate = itemModel.OrderDate.ToShortDateString(), TotalPrice = itemModel.TotalPrice
+                ActualState = itemModel.ActualState,
+                Id = itemModel.Id,
+                OrderDate = itemModel.OrderDate.ToShortDateString(),
+                TotalPrice = itemModel.TotalPrice
             }).ToList();
             return View(viewModel);
+        }
+
+        public virtual ActionResult AnulujZamówienie(int id)
+        {
+            var order = _dbContext.Orders.First(m => m.OrderId == id);
+            if (order.OrderInfo!="Wysłano")
+            {
+                order.OrderInfo = "Anulowano";
+                var orderItems = _dbContext.OrderDetails.Where(x => x.OrderId == id);
+                foreach (var item in orderItems)
+                {
+                    var prod = _dbContext.Products.First(m => m.ProductId == item.ProductId);
+                    prod.Quantity += item.Quantity;
+                    prod.OrdersCount++;
+                    _dbContext.Products.AddOrUpdate(prod);
+                }
+            }
+            return RedirectToAction(MVC.Konto.HistoriaZamowien());
+        }
+
+        [Authorize]
+        [HttpGet]
+        public virtual ActionResult SzczegółyZamówienia(int id)
+        {
+            var userId = _userManager.FindById(User.Identity.GetUserId<int>());
+            var order = _dbContext.Orders.First(m => m.OrderId == id);
+            if (userId.Id != order.UserId)
+                return RedirectToAction(MVC.Konto.HistoriaZamowien());
+            var paymentModel = _dbContext.PaymentTypes.Where(m => m.PaymentId == order.PaymentId)
+                .Select(k => new OrderPaymentSummary
+                {
+                    Description = k.PaymentDescription,
+                    Name = k.PaymentName,
+                    Price = k.PaymentPrice.ToString()
+                }).First();
+            var shippingModel = _dbContext.ShippingTypes.Where(m => m.ShippingId == order.ShippingId)
+                .Select(k => new OrderShippingSummary
+                {
+                    Description = k.ShippingDescription,
+                    Name = k.ShippingName,
+                    Price = k.ShippingPrice.ToString()
+                }).First();
+            var orderProductsList = _dbContext.OrderDetails.Where(k => k.OrderId == order.OrderId).Select(x => new OrderItemSummary
+                {                    
+                    Name = x.Products.Description,
+                    Image = x.Products.ImageName,
+                    Price = x.Products.Price.ToString(),
+                    Quantity = x.Quantity,
+                    TotalValue = x.SubTotalPrice.ToString()
+                }).ToList();
+            var orderProductsPrice= orderProductsList.Sum(itemSummary => Convert.ToDecimal(itemSummary.TotalValue.Replace('.', ',')));
+            var model = new AccountOrderViewModelsSummary
+            {
+                Id = id,
+                Firma = userId.KontoFirmowe,
+                OrderPayment = paymentModel,
+                OrderShipping = shippingModel,
+                TotalTotalValue = order.TotalPrice.ToString("c"),
+                UserAddressModel = new CartAddressModel
+                {
+                    Imie = order.Name,
+                    KodPocztowy = order.PostalCode,
+                    Miasto = order.City,
+                    NazwaFirmy = order.NazwaFirmy,
+                    Nazwisko = order.Surname,
+                    Nip = order.OrderNip,
+                    Numer = order.Number,
+                    Telefon = order.Phone,
+                    Ulica = order.Street
+                },
+                OrderViewItemsTotal = new OrderViewItemsTotal
+                {
+                    OrderProductList = orderProductsList,
+                    TotalValue = orderProductsPrice.ToString("c")                        
+                }
+            };
+            return View(model);
         }
 
         ////
@@ -400,24 +490,25 @@ namespace SukkuShop.Controllers
 
         #region Helpers
 
-        private static string ActivationMailBuilder(string callbackUrl)
+        private void ActivationMailBuilder(string callbackUrl, string sendTo)
         {
-            var body = new StringBuilder();
-            body.Append("Aktywuj swoje konto klikając <a href=\"" + callbackUrl + "\">tutaj</a>");
-            return body.ToString();
+            var email = new ActivationEmail
+            {
+                CallbackUrl = callbackUrl,
+                To = sendTo
+            };
+            email.Send();
         }
 
-        private static string ResetPasswordMailBuilder(string callbackUrl)
+        private void ResetPasswordMailBuilder(string callbackUrl, string sendTo)
         {
-            var body = new StringBuilder();
-            body.Append("Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-            return body.ToString();
+            var email = new ResetEmail
+            {
+                CallbackUrl = callbackUrl,
+                To = sendTo
+            };
+            email.Send();
         }
-
-        //private IAuthenticationManager AuthenticationManager
-        //{
-        //    get { return HttpContext.GetOwinContext().Authentication; }
-        //}
 
         private void AddErrors(IdentityResult result)
         {
@@ -444,28 +535,6 @@ namespace SukkuShop.Controllers
             _authenticationManager.SignIn(new AuthenticationProperties {IsPersistent = isPersistent},
                 await user.GenerateUserIdentityAsync(_userManager));
         }
-
-
-        //private bool HasPassword()
-        //{
-        //    var user = _userManager.FindById(int.Parse(User.Identity.GetUserId()));
-        //    if (user != null)
-        //    {
-        //        return user.PasswordHash != null;
-        //    }
-        //    return false;
-        //}
-
-        //public enum ManageMessageId
-        //{
-        //    AddPhoneSuccess,
-        //    ChangePasswordSuccess,
-        //    SetTwoFactorSuccess,
-        //    SetPasswordSuccess,
-        //    RemoveLoginSuccess,
-        //    RemovePhoneSuccess,
-        //    Error
-        //}
 
         #endregion
     }

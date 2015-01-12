@@ -34,6 +34,7 @@ public static partial class MVC
     public static SukkuShop.Controllers.NavController Nav = new SukkuShop.Controllers.T4MVC_NavController();
     public static SukkuShop.Controllers.SklepController Sklep = new SukkuShop.Controllers.T4MVC_SklepController();
     public static SukkuShop.Controllers.ZamowienieController Zamowienie = new SukkuShop.Controllers.T4MVC_ZamowienieController();
+    public static T4MVC.EmailsController Emails = new T4MVC.EmailsController();
     public static T4MVC.SharedController Shared = new T4MVC.SharedController();
 }
 

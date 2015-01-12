@@ -1,0 +1,12 @@
+﻿@model SukkuShop.Models.OrderSumEmail
+Content-Type: text/plain; charset=utf-8
+
+Dziękujemy za złożenie zamówienia w sklepie SUKKU.PL.
+
+Łączna kwota zamówienia wyniosła @Model.OrderViewModelsSummary.TotalTotalValue
+
+Wybrana metoda przesyłki: @Model.OrderViewModelsSummary.OrderShipping.Name
+
+Wybrana metoda płatności: @Model.OrderViewModelsSummary.OrderPayment.Name
+
+

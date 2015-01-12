@@ -224,8 +224,37 @@ namespace SukkuShop.Models
         public string ActualState { get; set; }
     }
 
-    public class AccountOrdersViewModel
+    //public class AccountOrdersViewModel
+    //{
+    //    public List<AccountOrderItemModel> AccountOrdersList { get; set; }
+    //}
+
+    //public class AccountOrderDetailsViewModel
+    //{
+    //    public int PaymentId { get; set; }
+    //    public int ShippingId { get; set; }
+    //    public string TotalPrice { get; set; }
+    //    public List<AccountOrderItemDetailsModel> ItemList { get; set; }
+    //}
+
+    //public class AccountOrderItemDetailsModel
+    //{
+    //    public string ImageName { get; set; }
+    //    public string Name { get; set; }
+    //    public string Id { get; set; }
+    //    public string Price { get; set; }
+    //    public string Quantity { get; set; }
+    //    public string SubTotalPrice { get; set; }
+    //}
+
+    public class AccountOrderViewModelsSummary
     {
-        public List<AccountOrderItemModel> AccountOrdersList { get; set; }
+        public OrderViewItemsTotal OrderViewItemsTotal { get; set; }
+        public CartAddressModel UserAddressModel { get; set; }
+        public OrderShippingSummary OrderShipping { get; set; }
+        public OrderPaymentSummary OrderPayment { get; set; }
+        public string TotalTotalValue { get; set; }
+        public bool Firma { get; set; }
+        public int Id { get; set; }
     }
 }

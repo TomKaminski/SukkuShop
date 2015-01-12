@@ -1,0 +1,34 @@
+﻿@model SukkuShop.Models.OrderSumEmail
+Content-Type: text/html; charset=utf-8
+
+<style>
+    img {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<div style="width:132px;height:188px;margin:auto">
+    @Html.EmbedImage("/Content/Images/logo-header.png")
+</div>
+
+<div style="color:orange;text-align: center;font-size:40px;font-family: Segoe UI;font-weight: bold">Dziękujemy za złożenie zamówienia w naszym sklepie!</div>
+
+<div style="color:black;font-family:Segoe UI;font-size:20px;text-align:left">Poniżej przedstawiamy listę zamówionych przez Państwa produktów</div>
+@foreach (var item in Model.OrderViewModelsSummary.OrderViewItemsTotal.OrderProductList)
+{
+    <div style="width:100%;height:50px;border-top:1px solid grey; font-family: Segoe UI">
+        <div style="width:25%;float:left;height:100%">
+            @Html.EmbedImage("~/Content/Images/Shop/"+item.Image+".jpg")
+        </div>
+        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
+            @item.Name
+        </div>
+        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
+            @item.Quantity szt.
+        </div>
+        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
+            @item.TotalValue PLN
+        </div>
+    </div>
+}

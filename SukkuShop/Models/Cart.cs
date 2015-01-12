@@ -11,6 +11,7 @@ namespace SukkuShop.Models
         public int PaymentId { get; set; }
         public string UserHints { get; set; }
         public CartAddressModel UserAddressModel { get; set; }
+        public string Email { get; set; }
 
         public void AddItem(int id, int quantity = 1)
         {

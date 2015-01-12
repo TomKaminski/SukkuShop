@@ -102,6 +102,12 @@
       <HintPath>..\packages\Newtonsoft.Json.6.0.5\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.1\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
@@ -221,6 +227,9 @@
     <Compile Include="Controllers\NavController.cs" />
     <Compile Include="Controllers\SklepController.cs" />
     <Compile Include="Controllers\ZamowienieController.cs" />
+    <Compile Include="EmailsController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="ErrorController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -296,10 +305,23 @@
     <Compile Include="Migrations\201501112235225_nullableOrder.Designer.cs">
       <DependentUpon>201501112235225_nullableOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501121827340_shipping_payment_description.cs" />
+    <Compile Include="Migrations\201501121827340_shipping_payment_description.Designer.cs">
+      <DependentUpon>201501121827340_shipping_payment_description.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501121849160_orderPhone.cs" />
+    <Compile Include="Migrations\201501121849160_orderPhone.Designer.cs">
+      <DependentUpon>201501121849160_orderPhone.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501122130376_orderEmail.cs" />
+    <Compile Include="Migrations\201501122130376_orderEmail.Designer.cs">
+      <DependentUpon>201501122130376_orderEmail.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\CartViewModels.cs" />
+    <Compile Include="Models\EmailModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\Shop.cs" />
@@ -666,6 +688,20 @@
     <Content Include="Views\Konto\_ZapomnianeHasloPartial.cshtml" />
     <Content Include="Views\Konto\_ResetujHasloPartial.cshtml" />
     <Content Include="Views\Konto\HistoriaZamowien.cshtml" />
+    <Content Include="Views\Emails\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\Activation.cshtml" />
+    <Content Include="Views\Emails\Activation.Text.cshtml" />
+    <Content Include="Views\Emails\Activation.Html.cshtml" />
+    <Content Include="Views\Emails\Reset.Text.cshtml" />
+    <Content Include="Views\Emails\Reset.Html.cshtml" />
+    <Content Include="Views\Emails\Reset.cshtml" />
+    <Content Include="Views\Konto\SzczegółyZamówienia.cshtml" />
+    <Content Include="Views\Emails\OrderSum.cshtml" />
+    <Content Include="Views\Emails\OrderSum.Html.cshtml" />
+    <Content Include="Views\Emails\OrderSum.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -718,6 +754,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501112235225_nullableOrder.resx">
       <DependentUpon>201501112235225_nullableOrder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501121827340_shipping_payment_description.resx">
+      <DependentUpon>201501121827340_shipping_payment_description.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501121849160_orderPhone.resx">
+      <DependentUpon>201501121849160_orderPhone.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501122130376_orderEmail.resx">
+      <DependentUpon>201501122130376_orderEmail.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

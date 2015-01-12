@@ -127,6 +127,8 @@ namespace SukkuShop.Models
         public string Street { get; set; }
         public string Number { get; set; }
         public string PostalCode { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
 
         public ShippingType Shipping { get; set; }
@@ -142,6 +144,7 @@ namespace SukkuShop.Models
         public int ShippingId { get; set; }
         public string ShippingName { get; set; }
         public decimal ShippingPrice { get; set; }
+        public string ShippingDescription { get; set; }
     }
 
     [Table("PaymentTypes")]
@@ -151,6 +154,7 @@ namespace SukkuShop.Models
         public int PaymentId { get; set; }
         public string PaymentName { get; set; }
         public decimal PaymentPrice { get; set; }
+        public string PaymentDescription { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, RoleIntPk, int,
@@ -214,17 +218,17 @@ namespace SukkuShop.Models
                     );
 
                 context.PaymentTypes.AddOrUpdate(p => p.PaymentId,
-                        new PaymentType { PaymentId = 1, PaymentName = "Przedpłata na konto", PaymentPrice = 0 },
-                        new PaymentType { PaymentId = 2, PaymentName = "Płatność za pobraniem", PaymentPrice = 5 },
-                        new PaymentType { PaymentId = 3, PaymentName = "PayU", PaymentPrice = 1 }
+                        new PaymentType { PaymentId = 1, PaymentName = "Przedpłata na konto", PaymentPrice = 0,PaymentDescription = "Przedpłata na konto OPIS"},
+                        new PaymentType { PaymentId = 2, PaymentName = "Płatność za pobraniem", PaymentPrice = 5, PaymentDescription = "Płatność za pobraniem OPIS" },
+                        new PaymentType { PaymentId = 3, PaymentName = "PayU", PaymentPrice = 1, PaymentDescription = "PayU OPIS" }
                     );
 
                 context.ShippingTypes.AddOrUpdate(p => p.ShippingId,
-                    new ShippingType { ShippingId = 1, ShippingName = "Poczta Polska Kurier48", ShippingPrice = 8 },
-                    new ShippingType { ShippingId = 2, ShippingName = "Poczta Polska Przesyłka Ekonomiczna", ShippingPrice = 7 },
-                    new ShippingType { ShippingId = 3, ShippingName = "Kurier Siódemka", ShippingPrice = 12 },
-                    new ShippingType { ShippingId = 4, ShippingName = "Paczkomaty", ShippingPrice = 5 },
-                    new ShippingType { ShippingId = 5, ShippingName = "Odbiór osobisty", ShippingPrice = 0 }
+                    new ShippingType { ShippingId = 1, ShippingName = "Poczta Polska Kurier48", ShippingPrice = 8,ShippingDescription = "Poczta Polsa Kurier48 OPIS"},
+                    new ShippingType { ShippingId = 2, ShippingName = "Poczta Polska Przesyłka Ekonomiczna", ShippingPrice = 7, ShippingDescription = "Poczta Polska Przesyłka Ekonomiczna OPIS" },
+                    new ShippingType { ShippingId = 3, ShippingName = "Kurier Siódemka", ShippingPrice = 12 ,ShippingDescription = "Kurier Siódemka OPIS"},
+                    new ShippingType { ShippingId = 4, ShippingName = "Paczkomaty", ShippingPrice = 5, ShippingDescription = "Paczkomaty OPIS" },
+                    new ShippingType { ShippingId = 5, ShippingName = "Odbiór osobisty", ShippingPrice = 0, ShippingDescription = "Odbiór osobisty OPIS" }
                     );
                 base.Seed(context);
             }

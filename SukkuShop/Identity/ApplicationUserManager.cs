@@ -32,7 +32,7 @@ namespace SukkuShop.Identity
             UserLockoutEnabledByDefault = true;
             DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
             MaxFailedAccessAttemptsBeforeLockout = 5;
-            EmailService = new EmailService();
+            //EmailService = new EmailService();
 
             var dataProtectionProvider = Startup.DataProtectionProvider;
             if (dataProtectionProvider != null)

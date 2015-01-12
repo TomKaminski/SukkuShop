@@ -7,7 +7,7 @@ namespace SukkuShop.Controllers
 
     public partial class HomeController : Controller
     {
-        //[DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
+        [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Index()
         {
             return View();

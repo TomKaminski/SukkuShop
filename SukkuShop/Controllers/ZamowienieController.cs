@@ -107,6 +107,7 @@ namespace SukkuShop.Controllers
         {
             if (ModelState.IsValid)
             {
+                shoppingCart.Email = User.Identity.Name;
                 shoppingCart.UserAddressModel = new CartAddressModel
                 {
                     Imie = model.Imie,
@@ -143,8 +144,10 @@ namespace SukkuShop.Controllers
         [HttpPost]
         public virtual ActionResult ChangeAddressFirmaPartial(FirmaAddressModel model, Cart shoppingCart)
         {
+
             if (ModelState.IsValid)
             {
+                shoppingCart.Email = User.Identity.Name;
                 shoppingCart.UserAddressModel = new CartAddressModel
                 {
                     NazwaFirmy = model.NazwaFirmy,
@@ -174,6 +177,7 @@ namespace SukkuShop.Controllers
             
             if (ModelState.IsValid)
             {
+                shoppingCart.Email = model.Email;
                 shoppingCart.UserAddressModel = new CartAddressModel
                 {
                     Imie = model.Imie,
@@ -228,6 +232,7 @@ namespace SukkuShop.Controllers
                 ModelState["Password"].Errors.Clear();
             if (ModelState.IsValid)
             {
+                shoppingCart.Email = model.Email;
                 shoppingCart.UserAddressModel = new CartAddressModel
                 {
                     NazwaFirmy = model.NazwaFirmy,
@@ -280,7 +285,7 @@ namespace SukkuShop.Controllers
 
        
         [HttpGet]
-        public async virtual Task<ActionResult> Podsumowanie(Cart shoppingCart)
+        public virtual ActionResult Podsumowanie(Cart shoppingCart)
         {
             if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0)
                 return RedirectToAction(MVC.Koszyk.Index());
@@ -344,14 +349,16 @@ namespace SukkuShop.Controllers
                 hehe += orderD.SubTotalPrice;
                 var prod = _dbContext.Products.First(m => m.ProductId == item.Id);
                 prod.Quantity -= item.Quantity;
+                prod.OrdersCount++;
                 _dbContext.Products.AddOrUpdate(prod);
             }
-            var paymentPrice = _dbContext.PaymentTypes.First(i => i.PaymentId == shoppingCart.PaymentId).PaymentPrice;
-            var shippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId).ShippingPrice;
+            var paymentPrice = _dbContext.PaymentTypes.First(i => i.PaymentId == shoppingCart.PaymentId);
+            var shippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId);
             var orders = new Orders
             {
+                Email = shoppingCart.Email,
                 ProductsPrice = hehe,
-                TotalPrice = hehe + paymentPrice + shippingPrice,
+                TotalPrice = hehe + paymentPrice.PaymentPrice + shippingPrice.ShippingPrice,
                 Name = shoppingCart.UserAddressModel.Imie,
                 Surname = shoppingCart.UserAddressModel.Nazwisko,
                 OrderDate = DateTime.Today,
@@ -367,10 +374,48 @@ namespace SukkuShop.Controllers
                 OrderInfo = "Przyjęte",
                 UserHints = shoppingCart.UserHints,
                 NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
-                OrderNip = shoppingCart.UserAddressModel.Nip
+                OrderNip = shoppingCart.UserAddressModel.Nip,
+                Phone = shoppingCart.UserAddressModel.Telefon
             };
             _dbContext.Orders.Add(orders);
             await _dbContext.SaveChangesAsync();
+            var email = new OrderSumEmail
+            {
+                To = shoppingCart.Email,
+                CallbackUrl = Url.Action(MVC.Konto.HistoriaZamowien()),
+                Id = orders.OrderId,
+                OrderViewModelsSummary = new OrderViewModelsSummary
+                {
+                    Firma = shoppingCart.UserAddressModel.Nip != null,
+                    TotalTotalValue = (hehe + paymentPrice.PaymentPrice + shippingPrice.ShippingPrice).ToString("c"),
+                    OrderPayment = new OrderPaymentSummary
+                    {
+                        Description = paymentPrice.PaymentDescription,
+                        Name = paymentPrice.PaymentName,
+                        Price = paymentPrice.PaymentPrice.ToString("c")
+                    },
+                    OrderShipping = new OrderShippingSummary
+                    {
+                        Description = shippingPrice.ShippingDescription,
+                        Name = shippingPrice.ShippingName,
+                        Price = shippingPrice.ShippingPrice.ToString("c")
+                    },
+                    UserAddressModel = shoppingCart.UserAddressModel,
+                    OrderViewItemsTotal = new OrderViewItemsTotal
+                    {
+                        TotalValue = hehe.ToString("c"),
+                        OrderProductList = listakurwa.Select(m => new OrderItemSummary
+                        {
+                            Image = m.Products.ImageName,
+                            Name = m.Products.Name,
+                            Price = m.Products.Price.ToString(),
+                            Quantity = m.Quantity,
+                            TotalValue = m.SubTotalPrice.ToString()
+                        }).ToList()
+                    }
+                }
+            };
+            email.Send();
             shoppingCart.Clear();
             return View("OrderSubmitted",orders.OrderId);
         }
@@ -395,45 +440,15 @@ namespace SukkuShop.Controllers
             paymentModel = new OrderPaymentSummary
             {
                 Name = payment.PaymentName,
-                Price = payment.PaymentPrice.ToString()
+                Price = payment.PaymentPrice.ToString(),
+                Description = payment.PaymentDescription
             };
             shippingModel = new OrderShippingSummary
             {
                 Name = shipping.ShippingName,
-                Price = shipping.ShippingPrice.ToString()
-            };
-
-            switch (shipping.ShippingId)
-            {
-                case 1:
-                    shippingModel.Description = "Poczta Polska Kurier48 OPIS";
-                    break;
-                case 2:
-                    shippingModel.Description = "Poczta Polska Przesyłka Ekonomiczna OPIS";
-                    break;
-                case 3:
-                    shippingModel.Description = "Kurier Siódemka OPIS";
-                    break;
-                case 4:
-                    shippingModel.Description = "Paczkomaty OPIS";
-                    break;
-                case 5:
-                    shippingModel.Description = "Odbiór osobisty OPIS";
-                    break;
-            }
-
-            switch (payment.PaymentId)
-            {
-                case 1:
-                    paymentModel.Description = "Przedpłata na konto OPIS";
-                    break;
-                case 2:
-                    paymentModel.Description = "Płatność za pobraniem OPIS";
-                    break;
-                case 3:
-                    paymentModel.Description = "PAYU OPIS";
-                    break;
-            }
+                Price = shipping.ShippingPrice.ToString(),
+                Description = shipping.ShippingDescription
+            };            
             totaltotalvalue =
                 Convert.ToString(Convert.ToDecimal(orderitemsummary.TotalValue) + Convert.ToDecimal(paymentModel.Price) +
                                  Convert.ToDecimal(shippingModel.Price));

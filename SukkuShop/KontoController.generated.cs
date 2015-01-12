@@ -80,6 +80,18 @@ namespace SukkuShop.Controllers
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ResetujHaslo);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult AnulujZamówienie()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AnulujZamówienie);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult SzczegółyZamówienia()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SzczegółyZamówienia);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public KontoController Actions { get { return MVC.Konto; } }
@@ -108,6 +120,8 @@ namespace SukkuShop.Controllers
             public readonly string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public readonly string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
             public readonly string HistoriaZamowien = "HistoriaZamowien";
+            public readonly string AnulujZamówienie = "AnulujZamówienie";
+            public readonly string SzczegółyZamówienia = "SzczegółyZamówienia";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -125,6 +139,8 @@ namespace SukkuShop.Controllers
             public const string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public const string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
             public const string HistoriaZamowien = "HistoriaZamowien";
+            public const string AnulujZamówienie = "AnulujZamówienie";
+            public const string SzczegółyZamówienia = "SzczegółyZamówienia";
         }
 
 
@@ -203,6 +219,22 @@ namespace SukkuShop.Controllers
         {
             public readonly string model = "model";
         }
+        static readonly ActionParamsClass_AnulujZamówienie s_params_AnulujZamówienie = new ActionParamsClass_AnulujZamówienie();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AnulujZamówienie AnulujZamówienieParams { get { return s_params_AnulujZamówienie; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AnulujZamówienie
+        {
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SzczegółyZamówienia s_params_SzczegółyZamówienia = new ActionParamsClass_SzczegółyZamówienia();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SzczegółyZamówienia SzczegółyZamówieniaParams { get { return s_params_SzczegółyZamówienia; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SzczegółyZamówienia
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -224,6 +256,7 @@ namespace SukkuShop.Controllers
                 public readonly string KontoNieaktywne = "KontoNieaktywne";
                 public readonly string RegisterSuccess = "RegisterSuccess";
                 public readonly string ResetujHaslo = "ResetujHaslo";
+                public readonly string SzczegółyZamówienia = "SzczegółyZamówienia";
                 public readonly string UstawHaslo = "UstawHaslo";
                 public readonly string Zaloguj = "Zaloguj";
                 public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
@@ -241,6 +274,7 @@ namespace SukkuShop.Controllers
             public readonly string KontoNieaktywne = "~/Views/Konto/KontoNieaktywne.cshtml";
             public readonly string RegisterSuccess = "~/Views/Konto/RegisterSuccess.cshtml";
             public readonly string ResetujHaslo = "~/Views/Konto/ResetujHaslo.cshtml";
+            public readonly string SzczegółyZamówienia = "~/Views/Konto/SzczegółyZamówienia.cshtml";
             public readonly string UstawHaslo = "~/Views/Konto/UstawHaslo.cshtml";
             public readonly string Zaloguj = "~/Views/Konto/Zaloguj.cshtml";
             public readonly string ZapomnianeHaslo = "~/Views/Konto/ZapomnianeHaslo.cshtml";
@@ -473,6 +507,30 @@ namespace SukkuShop.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.HistoriaZamowien);
             HistoriaZamowienOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void AnulujZamówienieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult AnulujZamówienie(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AnulujZamówienie);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            AnulujZamówienieOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SzczegółyZamówieniaOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult SzczegółyZamówienia(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SzczegółyZamówienia);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SzczegółyZamówieniaOverride(callInfo, id);
             return callInfo;
         }
 
