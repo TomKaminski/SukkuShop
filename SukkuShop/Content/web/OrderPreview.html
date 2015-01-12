@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Podgląd zamowienia</title>
+    <link rel="stylesheet" type="text/css" href="../css/Konto/OrderPreview.css">
+</head>
+<body>
+    <div class="order-container">
+        <div class="title">Podgląd zamówienia</div>
+        <div class="options-container">
+            <div class="left-box">
+                Data zamówienia: <p>25-01-2014</p>
+            </div>
+            <div class="right-box">
+                Numer zamówienia: <p>123456</p>
+            </div>
+            <div class="left-box">
+                Stan realizacji: <p style="color: green">przyjęte</p>
+            </div>
+            <div class="right-box">
+                <p class="cancel">Anuluj Zamówienie</p>
+            </div>
+            <div class="clear">&nbsp; </div>
+        </div>
+       
+        <table class="order-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Twoje produkty</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                    <th>Suma</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <img img src="../Images/Shop/1.jpg" />
+                        <div class="custom-product-text-container">
+                            <p>
+                                <span style="font-size: 18px; line-height: 25px;">Product1</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>75,00zł</td>
+                    <td>2 szt.</td>
+                    <td>150,00 zł</td>
+                <tr>
+                    <td>
+                        <img img src="../Images/Shop/2.jpg" />
+                        <div class="custom-product-text-container">
+                            <p>
+                                <span style="font-size: 18px; line-height: 25px;">Product2</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>75,00zł</td>
+                    <td>2 szt.</td>
+                    <td>150,00 zł</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="products-price-summary"><span style="margin-right: 15px">Razem</span> 300,00 zł</div>
+        <div class="order-title">Dostawa</div>
+        <div class="order-summary-header-text">Shipping Nejm</div>
+        <div class="shipping-price">Sziping prajs zł</div>
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">Sziping Description</div>
+        <div class="order-title">Adres dostawy</div>
+        <!--@if (Model.Firma)
+        {-->
+        <!--<div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy <br />NIP @Model.UserAddressModel.Nip</div>-->
+        <!--}
+        else
+        {-->
+        <div class="order-summary-header-text">Imie Nazwisko</div>
+        <!--}-->
+
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">
+            ul. Zameczek 15<br />
+            11-111 Zameczkowo<br />
+            Tel.: 123456789<br />
+        </div>
+
+        <div class="order-title" style="clear: both">Płatność</div>
+        <div class="order-summary-header-text">Typ Pajmentu</div>
+        <div class="shipping-price">Hajs za pajment zł</div>
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">Opis pajmentu</div>
+        <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
+        <ul id="products-summary" style="padding-bottom: 20px;">
+            <li class="summary-text-bold">
+                <div id="price-box">Razem: <span style="color: #f89b1d">Total hajs za pajment</span></div>
+            </li>
+        </ul>
+        <a href="@Url.Action(MVC.Zamowienie.Krok2())">
+            <div id="triangle-left-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+        </a>
+        
+    </div>
+</body>
+</html>
