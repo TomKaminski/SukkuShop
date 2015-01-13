@@ -312,7 +312,7 @@ namespace SukkuShop.Controllers
                 OrderPayment = paymentModel,
                 OrderShipping = shippingModel,
                 UserAddressModel = userModel,
-                TotalTotalValue = totaltotalvalue
+                TotalTotalValue = String.Format("{0:0.00}", totaltotalvalue)
             };
             if (shoppingCart.UserAddressModel.Nip != null)
                 orderModel.Firma = true;
@@ -337,20 +337,22 @@ namespace SukkuShop.Controllers
             decimal hehe = 0;
             foreach (var item in shoppingCart.Lines)
             {
+                var product = _dbContext.Products.First(i => i.ProductId == item.Id);
+                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
+                var priceFloored = Math.Floor(price * 100) / 100;
                 var orderD = new OrderDetails
                 {
                     ProductId = item.Id,
-                    Quantity = item.Quantity
+                    Quantity = item.Quantity,
+                    ProdPrice = priceFloored,
+                    SubTotalPrice = item.Quantity*priceFloored
                 };
-                var productPrice = _dbContext.Products.First(i => i.ProductId == item.Id).Price;
-                orderD.SubTotalPrice = item.Quantity * productPrice;
                 _dbContext.OrderDetails.Add(orderD);
                 listakurwa.Add(orderD);
                 hehe += orderD.SubTotalPrice;
-                var prod = _dbContext.Products.First(m => m.ProductId == item.Id);
-                prod.Quantity -= item.Quantity;
-                prod.OrdersCount++;
-                _dbContext.Products.AddOrUpdate(prod);
+                product.Quantity -= item.Quantity;
+                product.OrdersCount++;
+                _dbContext.Products.AddOrUpdate(product);
             }
             var paymentPrice = _dbContext.PaymentTypes.First(i => i.PaymentId == shoppingCart.PaymentId);
             var shippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId);
@@ -410,7 +412,8 @@ namespace SukkuShop.Controllers
                             Name = m.Products.Name,
                             Price = m.Products.Price.ToString(),
                             Quantity = m.Quantity,
-                            TotalValue = m.SubTotalPrice.ToString()
+                            TotalValue = m.SubTotalPrice.ToString(),
+                            Packing = m.Products.Packing
                         }).ToList()
                     }
                 }
@@ -448,10 +451,11 @@ namespace SukkuShop.Controllers
                 Name = shipping.ShippingName,
                 Price = shipping.ShippingPrice.ToString(),
                 Description = shipping.ShippingDescription
-            };            
-            totaltotalvalue =
-                Convert.ToString(Convert.ToDecimal(orderitemsummary.TotalValue) + Convert.ToDecimal(paymentModel.Price) +
-                                 Convert.ToDecimal(shippingModel.Price));
+            };
+            var value = Convert.ToDecimal(orderitemsummary.TotalValue.Replace(".",",").Replace(" zł","")) + Convert.ToDecimal(paymentModel.Price) +
+                        Convert.ToDecimal(shippingModel.Price);
+            totaltotalvalue = value.ToString();
+            
             return orderitemsummary;
         }
 
@@ -463,18 +467,20 @@ namespace SukkuShop.Controllers
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
+                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
+                var priceFloored = Math.Floor(price * 100) / 100;
+
                 productList.Add(new OrderItem
                 {
                     Name = product.Name,
                     Price =
-                        ((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price).ToString("c"),
+                        priceFloored.ToString("c"),
                     Quantity = item.Quantity,
                     TotalValue =
-                        (((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price) * item.Quantity)
-                            .ToString("c")
+                        (priceFloored*item.Quantity).ToString("c"),
+                            Packing = product.Packing
                 });
-                totalValue += ((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price) *
-                              item.Quantity;
+                totalValue += (priceFloored * item.Quantity);
             }
             var model = new OrderViewModels
             {
@@ -492,24 +498,25 @@ namespace SukkuShop.Controllers
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
+                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
+                var priceFloored = Math.Floor(price * 100) / 100;
                 productList.Add(new OrderItemSummary
                 {
                     Name = product.Name,
                     Price =
-                        ((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price).ToString("c"),
+                        priceFloored.ToString("c"),
                     Quantity = item.Quantity,
                     TotalValue =
-                        (((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price) * item.Quantity)
-                            .ToString("c"),
-                    Image=product.ImageName
+                        (priceFloored * item.Quantity).ToString("c"),
+                    Image=product.ImageName,
+                    Packing = product.Packing
                 });
-                totalValue += ((product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price) *
-                              item.Quantity;
+                totalValue += (priceFloored * item.Quantity);
             }
             var model = new OrderViewItemsTotal
             {
                 OrderProductList = productList,
-                TotalValue = totalValue.ToString()
+                TotalValue = totalValue.ToString("c").Replace(",", ".")
             };
             return model;
         }

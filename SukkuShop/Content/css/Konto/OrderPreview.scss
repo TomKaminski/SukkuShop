@@ -26,6 +26,17 @@ $font_2: SegoeBold;
 	position: relative;
 }
 
+.button-options{
+    margin:0 10px;
+    float:left;
+    cursor:pointer;
+    padding:3px 7px;
+    color:white;
+    border:none;
+    border-radius:20px;
+    font-size:14px;
+}
+
 %extend_3
 {
     font-size: 16px;

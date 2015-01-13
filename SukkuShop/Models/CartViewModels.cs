@@ -20,5 +20,6 @@ namespace SukkuShop.Models
         public string Description { get; set; }
         public string Image { get; set; }
         public int MaxQuantity { get; set; }
+        public string Packing { get; set; }
     }
 }

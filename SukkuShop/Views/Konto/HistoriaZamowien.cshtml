@@ -27,8 +27,17 @@
                         <td>@item.Id</td>
                         <td>@item.OrderDate</td>
                         <td>@item.TotalPrice PLN</td>
-                        <td><a href="#" class="see">podgląd zamówienia</a></td>
-                        <td>@item.ActualState</td>
+                        <td><a href="@Url.Action(MVC.Konto.SzczegółyZamówienia(item.Id))" class="see">podgląd zamówienia</a></td>
+                        <td>
+                            @if (item.ActualState == "Anulowano")
+                            {
+                                <span style="color: red">@item.ActualState</span>
+                            }
+                            else
+                            {
+                                @item.ActualState
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

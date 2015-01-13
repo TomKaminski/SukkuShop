@@ -4,5 +4,103 @@
     ViewBag.Title = "SzczegółyZamówienia";
 }
 
-<h2>SzczegółyZamówienia</h2>
+<div class="order-container">
+    <div class="title">Podgląd zamówienia</div>
+    <div class="options-container">
+        <div class="left-box">
+            Data zamówienia: <p>@Model.OrderDat</p>
+        </div>
+        <div class="right-box" id="id-box">
+            Numer zamówienia: <p>@Model.Id</p>
+        </div>
+        <div class="left-box" style="margin-bottom: 14px">
+            Stan zamówienia:
+            @if (Model.OrderInfo == "Anulowano")
+            {
+                <p style="color: red">@Model.OrderInfo</p>
+            }
+            else
+            {
+                <p id="order-info" style="color: green">@Model.OrderInfo</p>
+            }
+        </div>
+        <div class="right-box" id="anuluj-box">
+            @if (Model.OrderInfo != "Anulowano")
+            {
+                <p class="cancel" id="cancel-start" style="cursor:pointer">ANULUJ ZAMÓWIENIE</p>
+            }            
+        </div>
+        <div class="clear">&nbsp; </div>
+    </div>
 
+    <table class="order-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Twoje produkty</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderViewItemsTotal.OrderProductList)
+            {
+                <tr>
+                    <td>
+                        <img img src="@Url.Content("~/Content/Images/Shop/"+item.Image+".jpg")" alt="produkt" />
+                        <div class="custom-product-text-container">
+                            <p>
+                                <span style="font-size: 18px; line-height: 25px;">@item.Name</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>@item.Price zł</td>
+                    <td>@item.Quantity szt. x @item.Packing</td>
+                    <td>@item.TotalValue zł</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="products-price-summary"><span style="margin-right: 15px">Razem</span> @Model.OrderViewItemsTotal.TotalValue</div>
+    <div class="order-title">Dostawa</div>
+    <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
+    <div class="shipping-price">@Model.OrderShipping.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">@Model.OrderShipping.Description</div>
+    <div class="order-title">Adres dostawy</div>
+    @if (Model.Firma)
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy <br />NIP @Model.UserAddressModel.Nip</div>
+    }
+    else
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+    }
+
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">
+        ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
+        @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
+        Tel.: @Model.UserAddressModel.Telefon<br />
+    </div>
+
+    <div class="order-title" style="clear: both">Płatność</div>
+    <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
+    <div class="shipping-price">@Model.OrderPayment.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
+    <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
+    <ul id="products-summary" style="padding-bottom: 20px;">
+        <li class="summary-text-bold">
+            <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue</span></div>
+        </li>
+    </ul>
+    <a href="@Url.Action(MVC.Konto.HistoriaZamowien())">
+        <div id="triangle-left-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+    </a>
+
+</div>
+
+
+@Styles.Render("~/Content/css/Konto/OrderPreview.css")
+@Scripts.Render("~/Scripts/AccSzczegZam.js")

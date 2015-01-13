@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Models;
@@ -37,7 +38,8 @@ namespace SukkuShop.Controllers
                     shoppingCart.AddItem(id, quantity);
                 }
             }
-            var value = CalcTotalValue(shoppingCart);
+            var valuee = CalcTotalValue(shoppingCart);
+            var value = String.Format("{0:0.00}", valuee);
             var data = new
             {
                 value,
@@ -101,7 +103,18 @@ namespace SukkuShop.Controllers
 
         private decimal CalcTotalValue(Cart shoppingCart)
         {
-            return (from line in shoppingCart.Lines let firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id) where firstOrDefault != null select (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*line.Quantity ?? firstOrDefault.Price*line.Quantity).Sum();
+            decimal sum = 0;
+            foreach (var line in shoppingCart.Lines)
+            {
+                var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
+                if (firstOrDefault != null)
+                {
+                    var price = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100)) ?? firstOrDefault.Price;
+                    var priceFloored = Math.Floor(price*100)/100;
+                    sum += priceFloored*line.Quantity;
+                }
+            }
+            return sum;
         }
 
         // GET: Cart
@@ -114,34 +127,22 @@ namespace SukkuShop.Controllers
         private CartViewModels CartViewModels(Cart shoppingCart)
         {
             var productList = new List<CartProduct>();
-            decimal totalValue = 0;
             foreach (var item in shoppingCart.Lines)
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 var categoryName = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == product.CategoryId).Name;
                 if (product == null) continue;
+                var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
+                var priceFloored = Math.Floor(price*100)/100;
                 productList.Add(new CartProduct
                 {
-                    Id = product.ProductId,
-                    Description = product.Description,
-                    Name = product.Name,
-                    Price =
-                        ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price).ToString("c"),
-                    Quantity = item.Quantity,
-                    TotalValue =
-                        (((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*item.Quantity)
-                            .ToString("c"),
-                    Image = product.ImageName,
-                    MaxQuantity = product.Quantity,
-                    CategoryName = categoryName
+                    Id = product.ProductId, Description = product.Description, Name = product.Name, Price = price.ToString("c"), Quantity = item.Quantity, TotalValue = (priceFloored*item.Quantity).ToString("c"), Image = product.ImageName, MaxQuantity = product.Quantity, CategoryName = categoryName, Packing = product.Packing
                 });
-                totalValue += ((product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price)*
-                              item.Quantity;
             }
             var model = new CartViewModels
             {
                 CartProductsList = productList,
-                TotalValue = totalValue.ToString("c").Replace(",",".")
+                TotalValue = CalcTotalValue(shoppingCart).ToString("c").Replace(",",".")
             };
             return model;
         }

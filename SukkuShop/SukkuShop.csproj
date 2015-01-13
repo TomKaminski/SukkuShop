@@ -225,6 +225,7 @@
     <Compile Include="Controllers\KontoController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\PreviewController.cs" />
     <Compile Include="Controllers\SklepController.cs" />
     <Compile Include="Controllers\ZamowienieController.cs" />
     <Compile Include="EmailsController.generated.cs">
@@ -316,6 +317,10 @@
     <Compile Include="Migrations\201501122130376_orderEmail.cs" />
     <Compile Include="Migrations\201501122130376_orderEmail.Designer.cs">
       <DependentUpon>201501122130376_orderEmail.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501131943030_orderprodprice.cs" />
+    <Compile Include="Migrations\201501131943030_orderprodprice.Designer.cs">
+      <DependentUpon>201501131943030_orderprodprice.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -604,6 +609,7 @@
       <DependentUpon>OrderPreview.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\CartSummary.js" />
@@ -713,6 +719,9 @@
     <Content Include="Views\Emails\OrderSum.cshtml" />
     <Content Include="Views\Emails\OrderSum.Html.cshtml" />
     <Content Include="Views\Emails\OrderSum.Text.cshtml" />
+    <Content Include="Views\Emails\OrderCancel.cshtml" />
+    <Content Include="Views\Emails\OrderCancel.Html.cshtml" />
+    <Content Include="Views\Emails\OrderCancel.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -720,6 +729,7 @@
     <Folder Include="Areas\Admin\Views\AdminProduct\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
     <Folder Include="Areas\Admin\Views\AdminUser\" />
+    <Folder Include="Views\Preview\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -774,6 +784,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501122130376_orderEmail.resx">
       <DependentUpon>201501122130376_orderEmail.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501131943030_orderprodprice.resx">
+      <DependentUpon>201501131943030_orderprodprice.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

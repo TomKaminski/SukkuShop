@@ -1,9 +1,11 @@
 ﻿@model SukkuShop.Models.ResetEmail
 Content-Type: text/html; charset=utf-8
 
-<div style="width:132px;height:188px;margin:auto">
-    @Html.EmbedImage("/Content/Images/logo-header.png")
-</div>
+<a href="@Url.Action(MVC.Home.Index())">
+    <div style="width:132px;height:188px;margin:auto">
+        @Html.EmbedImage("/Content/Images/logo-header.png")
+    </div>
+</a>
 
 <div style="color:orange;text-align: center;font-size:40px;font-family: Segoe UI;font-weight: bold">Prośba o zresetowanie hasła.</div>
 <div style="color:black;text-align: center;font-size:40px;font-family:Segoe UI">Aby zresetować swoje hasło, kliknij na przycisk poniżej.</div>

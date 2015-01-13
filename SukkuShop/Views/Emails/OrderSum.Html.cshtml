@@ -1,34 +1,95 @@
 ﻿@model SukkuShop.Models.OrderSumEmail
 Content-Type: text/html; charset=utf-8
+<html>
+    <head>
+        <title>Zamówienie przyjęte!</title>
+    </head>
+    <body>
+        <div style="width: 800px">
+            <a href="@Url.Action(MVC.Home.Index())">
+                <div style="width: 132px; height: 188px; margin: auto">
+                    @Html.EmbedImage("/Content/Images/logo-header.png")
+                </div>
+            </a>
 
-<style>
-    img {
-        width: 100%;
-        height: 100%;
-    }
-</style>
+            <div style="color: orange; text-align: center; font-size: 30px; font-family: Segoe UI; font-weight: bold; margin-bottom: 30px">Dziękujemy za złożenie zamówienia w naszym sklepie!</div>
+            <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">
+                O postępach zamówienia zostaniesz poinformowany drogą mailową.
+                Postępy zamówienia możesz również monitorować z panelu klienta,
+                jeżeli je posiadasz.
+            </div>
+            <div style="color: black; font-family: Segoe UI; font-size: 15px; text-align: left; margin-bottom: 10px;font-weight: bold">Poniżej zobaczysz szczegóły Twojego zamówienia:</div>
+            <table style="border-top: 2px solid orange; font-family: Segoe UI; margin-bottom: 10px; border-bottom: 1px solid orange" cellspacing="0">
+                <thead>
+                    <tr style="height: 2em; border-bottom: 2px solid orange">
+                        <th style="width: 125px; line-height: 2em; border-bottom: 2px solid orange">Produkt</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Nazwa</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Ilość</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderViewModelsSummary.OrderViewItemsTotal.OrderProductList)
+                    {
+                        <tr style="border-bottom: 1px solid orange">
+                            <td style="max-height: 100px; text-align: center; border-bottom: 1px solid orange">@Html.EmbedImage("~/Content/Images/Shop/" + item.Image + "small.jpg")</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Name</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Quantity szt. x @item.Packing</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.TotalValue zł</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: right; color:black;font-weight: bold;font-family:Segoe UI;margin-bottom: 20px">Produkty RAZEM: <span style="color:orange">@Model.OrderViewModelsSummary.OrderViewItemsTotal.TotalValue</span></div>
+            <table style="width: 800px; border-top: 2px solid orange;margin-bottom: 10px; font-family: Segoe UI; border-bottom: 2px solid orange;" cellspacing="0">
+                <thead>
+                    <tr style="height: 2em; border-bottom: 1px solid orange;">
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Dane osobowe</th>
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Wysyłka</th>
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Płatność</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    <tr>
+                        <td style="width: 33%; height: 100px; line-height: 20px;border-right:2px solid orange ">
+                            @if (Model.OrderViewModelsSummary.Firma)
+                            {
+                                <span style="font-weight: bold;">@Model.OrderViewModelsSummary.UserAddressModel.NazwaFirmy NIP: @Model.OrderViewModelsSummary.UserAddressModel.Nip</span>
+                                <br />
+                                @Model.OrderViewModelsSummary.UserAddressModel.KodPocztowy
+                                @Model.OrderViewModelsSummary.UserAddressModel.Miasto<br />
+                                @:ul. @Model.OrderViewModelsSummary.UserAddressModel.Ulica @Model.OrderViewModelsSummary.UserAddressModel.Numer <br />
+                                @:tel: @Model.OrderViewModelsSummary.UserAddressModel.Telefon
+                            }
+                            else
+                            {
+                                <span style="font-weight: bold;">@Model.OrderViewModelsSummary.UserAddressModel.Imie @Model.OrderViewModelsSummary.UserAddressModel.Nazwisko</span>
+                                <br />
+                                @Model.OrderViewModelsSummary.UserAddressModel.KodPocztowy
+                                @Model.OrderViewModelsSummary.UserAddressModel.Miasto<br />
+                                @:ul. @Model.OrderViewModelsSummary.UserAddressModel.Ulica @Model.OrderViewModelsSummary.UserAddressModel.Numer <br />
+                                @:tel: @Model.OrderViewModelsSummary.UserAddressModel.Telefon
+                            }
+                        </td>
+                        <td style="width: 33%; height: 100px; line-height: 25px;border-right:2px solid orange ">
+                            <span style="font-weight: bold">@Model.OrderViewModelsSummary.OrderShipping.Name</span><br />
 
-<div style="width:132px;height:188px;margin:auto">
-    @Html.EmbedImage("/Content/Images/logo-header.png")
-</div>
+                            @Model.OrderViewModelsSummary.OrderShipping.Price<br />
+                            @Model.OrderViewModelsSummary.OrderShipping.Description
+                        </td>
+                        <td style="width: 33%; height: 100px; line-height: 20px; ">
+                            <span style="font-weight: bold">@Model.OrderViewModelsSummary.OrderPayment.Name</span><br />
 
-<div style="color:orange;text-align: center;font-size:40px;font-family: Segoe UI;font-weight: bold">Dziękujemy za złożenie zamówienia w naszym sklepie!</div>
+                            @Model.OrderViewModelsSummary.OrderPayment.Price<br />
+                            @Model.OrderViewModelsSummary.OrderPayment.Description
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: right; color:black;font-weight: bold;font-family:Segoe UI;margin-bottom: 20px">RAZEM: <span style="color:orange">@Model.OrderViewModelsSummary.TotalTotalValue</span></div>
 
-<div style="color:black;font-family:Segoe UI;font-size:20px;text-align:left">Poniżej przedstawiamy listę zamówionych przez Państwa produktów</div>
-@foreach (var item in Model.OrderViewModelsSummary.OrderViewItemsTotal.OrderProductList)
-{
-    <div style="width:100%;height:50px;border-top:1px solid grey; font-family: Segoe UI">
-        <div style="width:25%;float:left;height:100%">
-            @Html.EmbedImage("~/Content/Images/Shop/"+item.Image+".jpg")
+            <div style="color: orange; text-align: center; font-size: 20px; font-family: Segoe UI; font-weight: bold">Dziękujemy za złożenie zamówienia, zapraszamy ponownie!</div>
         </div>
-        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
-            @item.Name
-        </div>
-        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
-            @item.Quantity szt.
-        </div>
-        <div style="width:25%;float:left;height:100%;line-height: 50px;text-align: center">
-            @item.TotalValue PLN
-        </div>
-    </div>
-}
+    </body>
+
+</html>

@@ -19,3 +19,4 @@
 /// <reference path="zapomnianehaslo.js" />
 /// <reference path="resetuj.js" />
 /// <reference path="konto.js" />
+/// <reference path="accszczegzam.js" />

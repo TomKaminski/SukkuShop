@@ -21,4 +21,10 @@ namespace SukkuShop.Models
         public string CallbackUrl { get; set; }
         public OrderViewModelsSummary OrderViewModelsSummary { get; set; }
     }
+
+    public class OrderCancelEmail : Email
+    {
+        public string To { get; set; }
+        public int Id { get; set; }
+    }
 }

@@ -24,6 +24,7 @@ namespace SukkuShop.Models
         public int Quantity { get; set; }
         public string Price { get; set; }
         public string TotalValue { get; set; }
+        public string Packing { get; set; }
     }
 
     public class OrderViewItemsTotal
@@ -64,6 +65,7 @@ namespace SukkuShop.Models
         public string Price { get; set; }
         public string TotalValue { get; set; }
         public string Image { get; set; }
+        public string Packing { get; set; }
     }
 
 

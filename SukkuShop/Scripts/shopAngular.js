@@ -1,4 +1,9 @@
-﻿function plz(data) {
+﻿function currency(n) {
+    n = parseFloat(n);
+    return isNaN(n) ? false : n.toFixed(2);
+}
+
+function plz(data) {
     var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
     if (plza != data.value) {
         var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');

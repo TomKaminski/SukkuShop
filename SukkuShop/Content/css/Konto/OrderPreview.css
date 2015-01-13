@@ -8,6 +8,16 @@
   text-align: left;
   position: relative; }
 
+.button-options {
+  margin: 0 10px;
+  float: left;
+  cursor: pointer;
+  padding: 3px 7px;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px; }
+
 .order-container .options-container .left-box, .order-container .options-container .right-box {
   font-size: 16px;
   font-weight: bold;

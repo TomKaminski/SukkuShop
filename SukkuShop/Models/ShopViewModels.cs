@@ -91,5 +91,6 @@ namespace SukkuShop.Models
         public string ImageName { get; set; }
         public decimal PriceAfterDiscount { get; set; }
         public bool Available { get; set; }
+        public int? Promotion { get; set; }
     }
 }

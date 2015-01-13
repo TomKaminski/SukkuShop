@@ -253,7 +253,9 @@ namespace SukkuShop.Models
         public CartAddressModel UserAddressModel { get; set; }
         public OrderShippingSummary OrderShipping { get; set; }
         public OrderPaymentSummary OrderPayment { get; set; }
+        public string OrderDat { get; set; }
         public string TotalTotalValue { get; set; }
+        public string OrderInfo { get; set; }
         public bool Firma { get; set; }
         public int Id { get; set; }
     }

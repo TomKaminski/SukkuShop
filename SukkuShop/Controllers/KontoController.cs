@@ -199,7 +199,7 @@ namespace SukkuShop.Controllers
                 model.result = "Sent";
                 return PartialView("_ResetujHasloPartial", model);
             }
-            AddErrors(result);
+            ModelState.AddModelError("", "Klucz nie pasuje do adresu email.");
             return PartialView("_ResetujHasloPartial", model);
         }
 
@@ -382,6 +382,7 @@ namespace SukkuShop.Controllers
 
         public virtual ActionResult AnulujZamówienie(int id)
         {
+            
             var order = _dbContext.Orders.First(m => m.OrderId == id);
             if (order.OrderInfo!="Wysłano")
             {
@@ -394,8 +395,23 @@ namespace SukkuShop.Controllers
                     prod.OrdersCount++;
                     _dbContext.Products.AddOrUpdate(prod);
                 }
+                _dbContext.Orders.AddOrUpdate(order);
+                try
+                {
+                    _dbContext.SaveChanges();
+                    var email = new OrderCancelEmail
+                    {
+                        To = User.Identity.Name,
+                        Id = id
+                    };
+                    email.Send();
+                }
+                catch (Exception)
+                {
+                    return Json(false, JsonRequestBehavior.AllowGet);
+                }
             }
-            return RedirectToAction(MVC.Konto.HistoriaZamowien());
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         [Authorize]
@@ -424,9 +440,10 @@ namespace SukkuShop.Controllers
                 {                    
                     Name = x.Products.Description,
                     Image = x.Products.ImageName,
-                    Price = x.Products.Price.ToString(),
+                    Price = x.ProdPrice.ToString(),
                     Quantity = x.Quantity,
-                    TotalValue = x.SubTotalPrice.ToString()
+                    TotalValue = x.SubTotalPrice.ToString(),
+                    Packing = x.Products.Packing
                 }).ToList();
             var orderProductsPrice= orderProductsList.Sum(itemSummary => Convert.ToDecimal(itemSummary.TotalValue.Replace('.', ',')));
             var model = new AccountOrderViewModelsSummary
@@ -436,6 +453,8 @@ namespace SukkuShop.Controllers
                 OrderPayment = paymentModel,
                 OrderShipping = shippingModel,
                 TotalTotalValue = order.TotalPrice.ToString("c"),
+                OrderInfo = order.OrderInfo,
+                OrderDat = order.OrderDate.ToShortDateString(),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,

@@ -150,7 +150,7 @@ $font_2: SegoeBold;
 	            cursor: pointer;
             }
             .quantity-box {
-	            width: 90px;
+	            width: 150px;
 	            margin: auto;
 	            #quantity_counter {
 		            width: 24px;
@@ -161,7 +161,7 @@ $font_2: SegoeBold;
 		            float: left;
 		            text-align: center;
 		            font-family: $font_1;
-		            margin-right: 6px;
+		            margin-right: 4px;
 		            vertical-align: middle;
 		            line-height: 24px;
 	            }
@@ -207,7 +207,7 @@ $font_2: SegoeBold;
 		            line-height: 24px;
 		            vertical-align: middle;
 		            float: left;
-		            margin-left: 10px;
+		            margin-right: 10px;
 	            }
             }
 	    }

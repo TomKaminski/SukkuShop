@@ -94,6 +94,7 @@ namespace SukkuShop.Models
         public int ProductId { get; set; }
         public int OrderId { get; set; }
         public int Quantity { get; set; }
+        public decimal ProdPrice { get; set; }
         public decimal SubTotalPrice { get; set; }
         public virtual Products Products { get; set; }
 

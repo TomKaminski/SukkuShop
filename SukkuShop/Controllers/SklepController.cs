@@ -92,7 +92,7 @@ namespace SukkuShop.Controllers
 
         }
 
-        [DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
+        //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
         public virtual ActionResult Produkty(string id)
         {
             return View((object)id);
@@ -120,10 +120,17 @@ namespace SukkuShop.Controllers
                             ImageName = j.ImageName,
                             Name = j.Name,
                             Price = j.Price,
-                            PriceAfterDiscount = j.Price - ((j.Price * j.Promotion) / 100) ?? j.Price,
-                            Available = j.Quantity > 0
+                            Available = j.Quantity > 0,
+                            Promotion = j.Promotion
                         }).OrderBy(x => Guid.NewGuid()).Take(4);
-
+            foreach (var itemSimilar in similarProducts)
+            {
+                var priceSimilar = (itemSimilar.Price - ((itemSimilar.Price * itemSimilar.Promotion) / 100)) ?? itemSimilar.Price;
+                var similarFloored = Math.Floor(priceSimilar * 100) / 100;
+                itemSimilar.PriceAfterDiscount = similarFloored;
+            }
+            var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
+            var priceFloored = Math.Floor(price*100)/100;
             var model = new ProductDetailsViewModel
             {
                 Product = new ProductDetailModel
@@ -133,7 +140,7 @@ namespace SukkuShop.Controllers
                     ImageName = product.ImageName,
                     Name = product.Name,
                     Price = product.Price,
-                    PriceAfterDiscount = product.Price-((product.Promotion*product.Price)/100)??product.Price,
+                    PriceAfterDiscount = priceFloored,
                     Promotion = product.Promotion ?? 0,
                     QuantityInStock = product.Quantity,
                     Packing = product.Packing,
