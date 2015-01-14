@@ -61,13 +61,26 @@
             }
             else if (Model.Success == false)
             {
-                <div>Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;</div>
+                <div class="bubble">
+                    <p>
+                        Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;
+                    </p>
+                </div>
             }
             else
             {
-                <div style="color:green">Konto zostało auktualnione &#10003;</div>
+                <div style="color:green" class="bubble">
+                    <p>
+                        Konto zostało auktualnione &#10003;<br />
+                        @if (ViewBag.EmailChanged == true)
+                        {
+                            @:Potwierdzenie zmiany adresu email zostało wysłane na Twój nowy adres!
+                        }
+                    </p>
+                </div>
             }
         </div>
+
         <div class="save" id="save-nofirma" style="margin-left:0">
             <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
         </div>

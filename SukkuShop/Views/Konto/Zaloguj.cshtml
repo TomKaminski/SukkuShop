@@ -11,6 +11,7 @@
     <div class="login-cont">
         @using (Html.BeginForm(MVC.Konto.Zaloguj(), FormMethod.Post, new {id = "LoginForm"}))
         {
+            @Html.Hidden("returnUrl", (string)ViewBag.ReturnUrl)
             <div class="validation-box">
                 @Html.ValidationSummary(true)
             </div>            

@@ -1,0 +1,17 @@
+﻿@model SukkuShop.Models.ChangeEmail
+Content-Type: text/html; charset=utf-8
+
+<a href="@Url.Action(MVC.Home.Index())">
+    <div style="width:132px;height:188px;margin:auto">
+        @Html.EmbedImage("/Content/Images/logo-header.png")
+    </div>
+</a>
+
+<div style="color:orange;text-align: center;font-size:40px;font-family: Segoe UI;font-weight: bold">Prośba o zmianę adresu email.</div>
+<div style="color:black;text-align: center;font-size:40px;font-family:Segoe UI">Jeżeli otrzymałeś tego maila to prawdopodobnie chcesz zmienić adres email swojego konta w serwisie sukku.pl.<br/>obecny email: @Model.OldEmail<br/>nowy email:@Model.To</div>
+<div style="color:orange;text-align: center;font-size:40px;font-family: Segoe UI;font-weight: bold">Aby zmienić email, kliknij przycisk poniżej, jeżeli nie chcesz tego robić - usuń tę wiadomość.</div>
+
+<a style="text-decoration: none" href="@Model.CallbackUrl">
+    <div style="width:200px;height:50px;border-radius: 20px;border:none; line-height:50px;background-color:orange;color:white;font-family:Segoe UI;font-weight: bold;font-size: 25px;margin:50px auto;text-align: center;text-decoration: none">ZMIEŃ EMAIL</div>
+</a>
+<div style="color:black">Jeżeli nie jesteś właściwym adresatem tej wiadomości, zignoruj ją.</div>

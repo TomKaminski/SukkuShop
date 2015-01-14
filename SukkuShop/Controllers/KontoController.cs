@@ -3,6 +3,7 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -60,16 +61,20 @@ namespace SukkuShop.Controllers
             {
                 return View(model);
             }
-            if (!_userManager.IsEmailConfirmed(_userManager.FindByEmail(model.Email).Id))
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
-                return View("KontoNieaktywne", (object) model.Email);
+                if (!user.EmailConfirmed)
+                {
+                    return View("KontoNieaktywne", (object)model.Email);
+                }
             }
+            
             var result =
                 await _signInManager.PasswordSignInAsync(model.Email, model.PasswordLogin, model.RememberMe, false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    var user = await _userManager.FindByEmailAsync(model.Email);
                     Session["username"] = user.Name;
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
@@ -242,6 +247,7 @@ namespace SukkuShop.Controllers
         [Authorize]
         public virtual ActionResult ZmienHaslo(ChangePasswordViewModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return PartialView("_ChangePassword", model);
@@ -258,8 +264,36 @@ namespace SukkuShop.Controllers
                 model.Success = true;
                 return PartialView("_ChangePassword", model);
             }
-            model.Success = false;
+            ModelState.AddModelError("OldPassword","Nieprawidłowe hasło.");
             return PartialView("_ChangePassword", model);
+        }
+
+        //
+        // GET: /Account/ConfirmEmail
+        [AllowAnonymous]
+        public virtual ActionResult ZmianaEmaila(int userId, string code,string newEmail)
+        {
+            if (code == null)
+                return View(MVC.Shared.Views._Blad);            
+            var result =  _userManager.VerifyUserToken(userId, "ChangeEmail", code);
+            if (result)
+            {
+                var user = _userManager.FindById(userId);
+                user.Email = newEmail;
+                user.UserName = newEmail;
+                _userManager.Update(user);
+                _userManager.UpdateSecurityStamp(userId);
+                _authenticationManager.IfNotNull(manager => manager.SignOut());
+                Session["username"] = null;
+                return RedirectToAction(MVC.Konto.ChangeEmailSuccess(newEmail));
+            }
+            return View(MVC.Shared.Views._Blad);
+        }
+
+        [AllowAnonymous]
+        public virtual ViewResult ChangeEmailSuccess(string model)
+        {
+            return View((object) model);
         }
 
         //GET: User data - konto osobiste
@@ -303,6 +337,13 @@ namespace SukkuShop.Controllers
                 user.PhoneNumber = model.Telefon;
                 user.Street = model.Ulica;
                 user.KontoFirmowe = false;
+                if (user.Email != model.Email)
+                {
+                    var code = _userManager.GenerateUserToken("ChangeEmail", user.Id);
+                    var callbackUrl = Url.Action("ZmianaEmaila", "Konto", new { userId = user.Id, code,newEmail = model.Email,oldEmail = user.Email }, Request.Url.Scheme);
+                    ChangeEmailMailBuilder(callbackUrl, model.Email, user.Email);
+                    ViewBag.EmailChanged = true;
+                }                
                 var result = _userManager.Update(user);
                 model.Success = result.Succeeded;
                 return PartialView("_ChangeUserInfoViewModel", model);
@@ -351,6 +392,13 @@ namespace SukkuShop.Controllers
                 user.PhoneNumber = model.Telefon;
                 user.Street = model.Ulica;
                 user.KontoFirmowe = true;
+                if (user.Email != model.Email)
+                {
+                    var code = _userManager.GenerateUserToken("ChangeEmail", user.Id);
+                    var callbackUrl = Url.Action("ZmianaEmaila", "Konto", new { userId = user.Id, code, newEmail = model.Email, oldEmail = user.Email }, Request.Url.Scheme);
+                    ChangeEmailMailBuilder(callbackUrl, model.Email, user.Email);
+                    ViewBag.EmailChanged = true;
+                }     
                 var result = _userManager.Update(user);
                 model.Success = result.Succeeded;
                 return PartialView("_ChangeUserFirmaInfoViewModel", model);
@@ -476,37 +524,6 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        ////
-        //// GET: /Manage/SetPassword
-        //public virtual ActionResult UstawHaslo()
-        //{
-        //    return View();
-        //}
-
-        ////
-        //// POST: /Manage/SetPassword
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public virtual async Task<ActionResult> UstawHaslo(SetPasswordViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        var result =
-        //            await _userManager.AddPasswordAsync(int.Parse(User.Identity.GetUserId()), model.NewPassword);
-        //        if (result.Succeeded)
-        //        {
-        //            var user = await _userManager.FindByIdAsync(int.Parse(User.Identity.GetUserId()));
-        //            if (user != null)
-        //            {
-        //                await SignInAsync(user, isPersistent: false);
-        //            }
-        //            return RedirectToAction(MVC.Konto.Index());
-        //        }
-        //        AddErrors(result);
-        //    }
-        //    return View(model);
-        //}
-
         #region Helpers
 
         private void ActivationMailBuilder(string callbackUrl, string sendTo)
@@ -529,6 +546,16 @@ namespace SukkuShop.Controllers
             email.Send();
         }
 
+        private void ChangeEmailMailBuilder(string callbackUrl, string sendTo,string oldEmail)
+        {
+            var email = new ChangeEmail
+            {
+                CallbackUrl = callbackUrl,
+                To = sendTo,
+                OldEmail = oldEmail
+            };
+            email.Send();
+        }
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)

@@ -1,0 +1,13 @@
+﻿@model string
+@{
+    ViewBag.Title = "Zmieniłeś swój adres email!";
+}
+
+<div class="register-success-box">
+    <div class="tick">&#10004;</div>
+    <div class="text-green">ZMIANA ADRESU EMAIL ZAKOŃCZONA POMYŚLNIE!</div>
+    <div class="text-normal">Zmieniłeś adres email swojego konta na @Model</div>
+    @Html.ActionLink("Zaloguj się do swojego konta",MVC.Konto.Zaloguj(),new{@class="link-text"})
+</div>
+
+@Styles.Render("~/Content/css/Konto/RegisterSuccess.css")

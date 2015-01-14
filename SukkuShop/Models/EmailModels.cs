@@ -27,4 +27,12 @@ namespace SukkuShop.Models
         public string To { get; set; }
         public int Id { get; set; }
     }
+
+    public class ChangeEmail : Email
+    {
+        public string To { get; set; }
+        public int Id { get; set; }
+        public string OldEmail { get; set; }
+        public string CallbackUrl { get; set; }
+    }
 }

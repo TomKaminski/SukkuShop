@@ -5,9 +5,9 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
-    public class PreviewController : Controller
+    public partial class PreviewController : Controller
     {
-        public ActionResult Example()
+        public virtual ActionResult Example()
         {
             var list = new List<OrderItemSummary>
             {

@@ -82,6 +82,18 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult ZmianaEmaila()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZmianaEmaila);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ViewResult ChangeEmailSuccess()
+        {
+            return new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ChangeEmailSuccess);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult AnulujZamówienie()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.AnulujZamówienie);
@@ -117,6 +129,8 @@ namespace SukkuShop.Controllers
             public readonly string Wyloguj = "Wyloguj";
             public readonly string DaneOsobowe = "DaneOsobowe";
             public readonly string ZmienHaslo = "ZmienHaslo";
+            public readonly string ZmianaEmaila = "ZmianaEmaila";
+            public readonly string ChangeEmailSuccess = "ChangeEmailSuccess";
             public readonly string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public readonly string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
             public readonly string HistoriaZamowien = "HistoriaZamowien";
@@ -136,6 +150,8 @@ namespace SukkuShop.Controllers
             public const string Wyloguj = "Wyloguj";
             public const string DaneOsobowe = "DaneOsobowe";
             public const string ZmienHaslo = "ZmienHaslo";
+            public const string ZmianaEmaila = "ZmianaEmaila";
+            public const string ChangeEmailSuccess = "ChangeEmailSuccess";
             public const string ChangeUserInfoViewModel = "ChangeUserInfoViewModel";
             public const string ChangeUserFirmaInfoViewModel = "ChangeUserFirmaInfoViewModel";
             public const string HistoriaZamowien = "HistoriaZamowien";
@@ -203,6 +219,24 @@ namespace SukkuShop.Controllers
         {
             public readonly string model = "model";
         }
+        static readonly ActionParamsClass_ZmianaEmaila s_params_ZmianaEmaila = new ActionParamsClass_ZmianaEmaila();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ZmianaEmaila ZmianaEmailaParams { get { return s_params_ZmianaEmaila; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ZmianaEmaila
+        {
+            public readonly string userId = "userId";
+            public readonly string code = "code";
+            public readonly string newEmail = "newEmail";
+        }
+        static readonly ActionParamsClass_ChangeEmailSuccess s_params_ChangeEmailSuccess = new ActionParamsClass_ChangeEmailSuccess();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangeEmailSuccess ChangeEmailSuccessParams { get { return s_params_ChangeEmailSuccess; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangeEmailSuccess
+        {
+            public readonly string model = "model";
+        }
         static readonly ActionParamsClass_ChangeUserInfoViewModel s_params_ChangeUserInfoViewModel = new ActionParamsClass_ChangeUserInfoViewModel();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_ChangeUserInfoViewModel ChangeUserInfoViewModelParams { get { return s_params_ChangeUserInfoViewModel; } }
@@ -250,6 +284,7 @@ namespace SukkuShop.Controllers
                 public readonly string _ChangeUserInfoViewModel = "_ChangeUserInfoViewModel";
                 public readonly string _ResetujHasloPartial = "_ResetujHasloPartial";
                 public readonly string _ZapomnianeHasloPartial = "_ZapomnianeHasloPartial";
+                public readonly string ChangeEmailSuccess = "ChangeEmailSuccess";
                 public readonly string HistoriaZamowien = "HistoriaZamowien";
                 public readonly string Index = "Index";
                 public readonly string KontoAktywne = "KontoAktywne";
@@ -268,6 +303,7 @@ namespace SukkuShop.Controllers
             public readonly string _ChangeUserInfoViewModel = "~/Views/Konto/_ChangeUserInfoViewModel.cshtml";
             public readonly string _ResetujHasloPartial = "~/Views/Konto/_ResetujHasloPartial.cshtml";
             public readonly string _ZapomnianeHasloPartial = "~/Views/Konto/_ZapomnianeHasloPartial.cshtml";
+            public readonly string ChangeEmailSuccess = "~/Views/Konto/ChangeEmailSuccess.cshtml";
             public readonly string HistoriaZamowien = "~/Views/Konto/HistoriaZamowien.cshtml";
             public readonly string Index = "~/Views/Konto/Index.cshtml";
             public readonly string KontoAktywne = "~/Views/Konto/KontoAktywne.cshtml";
@@ -450,6 +486,32 @@ namespace SukkuShop.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZmienHaslo);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ZmienHasloOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ZmianaEmailaOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int userId, string code, string newEmail);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult ZmianaEmaila(int userId, string code, string newEmail)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZmianaEmaila);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userId", userId);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "code", code);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "newEmail", newEmail);
+            ZmianaEmailaOverride(callInfo, userId, code, newEmail);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChangeEmailSuccessOverride(T4MVC_System_Web_Mvc_ViewResult callInfo, string model);
+
+        [NonAction]
+        public override System.Web.Mvc.ViewResult ChangeEmailSuccess(string model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ChangeEmailSuccess);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            ChangeEmailSuccessOverride(callInfo, model);
             return callInfo;
         }
 

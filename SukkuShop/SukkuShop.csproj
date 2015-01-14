@@ -335,6 +335,9 @@
     <Compile Include="NavController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="PreviewController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
@@ -723,6 +726,10 @@
     <Content Include="Views\Emails\OrderCancel.cshtml" />
     <Content Include="Views\Emails\OrderCancel.Html.cshtml" />
     <Content Include="Views\Emails\OrderCancel.Text.cshtml" />
+    <Content Include="Views\Emails\Change.cshtml" />
+    <Content Include="Views\Emails\Change.Html.cshtml" />
+    <Content Include="Views\Emails\Change.Text.cshtml" />
+    <Content Include="Views\Konto\ChangeEmailSuccess.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

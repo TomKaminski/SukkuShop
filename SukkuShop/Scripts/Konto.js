@@ -9,7 +9,6 @@
 
 function hideAjaxLoader() {
     $("#ajax-processing").hide();
-    $("div.validation-box div").fadeOut(5000);
 }
 
 function onError(xhr, status, error) {

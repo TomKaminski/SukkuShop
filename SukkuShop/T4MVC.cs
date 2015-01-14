@@ -32,6 +32,7 @@ public static partial class MVC
     public static SukkuShop.Controllers.KontoController Konto = new SukkuShop.Controllers.T4MVC_KontoController();
     public static SukkuShop.Controllers.KoszykController Koszyk = new SukkuShop.Controllers.T4MVC_KoszykController();
     public static SukkuShop.Controllers.NavController Nav = new SukkuShop.Controllers.T4MVC_NavController();
+    public static SukkuShop.Controllers.PreviewController Preview = new SukkuShop.Controllers.T4MVC_PreviewController();
     public static SukkuShop.Controllers.SklepController Sklep = new SukkuShop.Controllers.T4MVC_SklepController();
     public static SukkuShop.Controllers.ZamowienieController Zamowienie = new SukkuShop.Controllers.T4MVC_ZamowienieController();
     public static T4MVC.EmailsController Emails = new T4MVC.EmailsController();
@@ -127,6 +128,7 @@ namespace Links
         public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
+        public static readonly string AccSzczegZam_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AccSzczegZam.min.js") ? Url("AccSzczegZam.min.js") : Url("AccSzczegZam.js");
         public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
         public static readonly string angular_min_js = Url("angular.min.js");
         public static readonly string CartSummary_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CartSummary.min.js") ? Url("CartSummary.min.js") : Url("CartSummary.js");
@@ -216,6 +218,11 @@ namespace Links
                      
                 public static readonly string OrderHistory_css_map = Url("OrderHistory.css.map");
                 public static readonly string OrderHistory_min_css = Url("OrderHistory.min.css");
+                public static readonly string OrderPreview_scss = Url("OrderPreview.scss");
+                public static readonly string OrderPreview_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderPreview.min.css") ? Url("OrderPreview.min.css") : Url("OrderPreview.css");
+                     
+                public static readonly string OrderPreview_css_map = Url("OrderPreview.css.map");
+                public static readonly string OrderPreview_min_css = Url("OrderPreview.min.css");
                 public static readonly string Register_scss = Url("Register.scss");
                 public static readonly string Register_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.css") ? Url("Register.min.css") : Url("Register.css");
                      
@@ -386,6 +393,7 @@ namespace Links
             public static readonly string DaneKlientaKoszyk_html = Url("DaneKlientaKoszyk.html");
             public static readonly string OrderDetails_html = Url("OrderDetails.html");
             public static readonly string OrderHistory_html = Url("OrderHistory.html");
+            public static readonly string OrderPreview_html = Url("OrderPreview.html");
             public static readonly string OrderSummary_html = Url("OrderSummary.html");
         }
     
