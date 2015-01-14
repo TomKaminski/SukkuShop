@@ -1,4 +1,5 @@
 ﻿//colors
+@import "KontoNieaktywne";
 $color_tree_poppy_approx: #f89b1d;
 $black: black;
 $color_red_approx: red;
@@ -27,14 +28,12 @@ $font_2: SegoeBold;
 }
 
 .button-options{
-    margin:0 10px;
+    margin:0 5px;
     float:left;
     cursor:pointer;
-    padding:3px 7px;
     color:white;
-    border:2px solid #f89b1d;
-    border-radius:20px;
-    font-size:14px;
+    /*border:2px solid #f89b1d;*/
+    font-size:16px;
 }
 
 %extend_3

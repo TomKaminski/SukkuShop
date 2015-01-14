@@ -2,64 +2,67 @@
 @{
     ViewBag.Title = "Twoje Dane";
 }
-    <div class="order-container">
-        <div class="order-title">Twoje zamówienie</div>
-        <ul class="order-order-steps">
-            <li>1. Produkty i wysyłka</li>
-            <li class="selected">2. Dane kontaktowe</li>
-            <li>3. Podsumowanie zamówienia</li>
-        </ul>
-        @if (User.Identity.IsAuthenticated)
-        {
-            <div class="client-data-container" style="height: 560px;">
-                <div id="changeaddress-replace">
-                    @{
-                        Html.RenderAction(Model == true ? MVC.Zamowienie.ChangeAddressFirmaPartial() : MVC.Zamowienie.ChangeAddressPartial());
-                    }
-                </div>
-                <div class="right-container">
-                    <div class="client-type-text">Zalogowany jako:</div>
-                    <div class="logged-user-text">@User.Identity.Name</div>
-                    @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
-                    {
-                        @Html.AntiForgeryToken()
-                        <a class="wyloguj-text" href="javascript:document.getElementById('logoutForm1').submit()">wyloguj</a>
-                    }
-                    <div class="error-box">
-                        @Html.ValidationSummary()
-                    </div>
-                </div>
-                <a href="@Url.Action(MVC.Zamowienie.Krok1())">
-                    <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
-                </a>
-                <div id="finalizuj">
-                    <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+<div class="order-container">
+    <div class="order-title">Twoje zamówienie</div>
+    <ul class="order-order-steps">
+        <li>1. Produkty i wysyłka</li>
+        <li class="selected">2. Dane kontaktowe</li>
+        <li>3. Podsumowanie zamówienia</li>
+    </ul>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="client-data-container" style="height: 560px;">
+            <div id="changeaddress-replace">
+                @{
+        Html.RenderAction(Model == true ? MVC.Zamowienie.ChangeAddressFirmaPartial() : MVC.Zamowienie.ChangeAddressPartial());
+                }
+            </div>
+            <div class="right-container">
+                <div class="client-type-text">Zalogowany jako:</div>
+                <div class="logged-user-text">@User.Identity.Name</div>
+                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a class="wyloguj-text-form" href="javascript:document.getElementById('logoutForm1').submit()">
+                        <div id="triangle-right-big"></div>
+                        <div class="order-title-ending" style="float: right">WYLOGUJ</div>
+                    </a>
+                }
+                <div class="error-box">
+                    @Html.ValidationSummary()
                 </div>
             </div>
-        }
-        else
-        {
-            <div class="client-data-container">
-                <div class="right-container">
-                    <div class="client-type-text">Zaloguj się na istniejące konto</div>
-                    <div id="login-replace">
-                        @{Html.RenderAction(MVC.Zamowienie.ZalogujOrder());}
-                    </div>
-                </div>
-                <div id="newaddress-replace">
-                    @{
-                        Html.RenderAction(MVC.Zamowienie.NewAddressOrderPartial());
-                    }
-                </div>
-                <a href="@Url.Action(MVC.Zamowienie.Krok1())">
-                    <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
-                </a>
-                <div id="finalizuj">
-                    <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+            <a href="@Url.Action(MVC.Zamowienie.Krok1())">
+                <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+            </a>
+            <div id="finalizuj">
+                <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="client-data-container">
+            <div class="right-container">
+                <div class="client-type-text">Zaloguj się na istniejące konto</div>
+                <div id="login-replace">
+                    @{Html.RenderAction(MVC.Zamowienie.ZalogujOrder());}
                 </div>
             </div>
-        }
-    </div>
+            <div id="newaddress-replace">
+                @{
+        Html.RenderAction(MVC.Zamowienie.NewAddressOrderPartial());
+                }
+            </div>
+            <a href="@Url.Action(MVC.Zamowienie.Krok1())">
+                <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+            </a>
+            <div id="finalizuj">
+                <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">FINALIZUJ ZAMÓWIENIE</div>
+            </div>
+        </div>
+    }
+</div>
 
 @Styles.Render("~/Content/css/Zamowienie/ClientData.css")
 @Scripts.Render("~/Scripts/jquery.validate.js")

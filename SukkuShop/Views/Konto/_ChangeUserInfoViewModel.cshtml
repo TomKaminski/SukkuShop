@@ -5,20 +5,7 @@
 <div class="clear">&nbsp;</div>
 <div class="data-container">
     <div class="main-text">Edytuj dane osobowe</div>
-    <div class="validation-box">
-        @if (Model.Success == null)
-        {
-            @Html.ValidationSummary(true)
-        }
-        else if (Model.Success == false)
-        {
-            <div>Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;.</div>
-        }
-        else
-        {
-            <div style="color:green">Konto zostało auktualnione &#10003;.</div>
-        }
-    </div>   
+     
     <div class="switch-box">
         @Html.RadioButtonFor(m => m.CzyFirmowe, false, new { @class = "css-checkbox", id = "firmafalse", @checked = true })
         @Html.LabelFor(m => m.CzyFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
@@ -66,8 +53,24 @@
         @Html.TextBoxFor(m => m.Email)
         @Html.ValidationMessageFor(m => m.Email)
     </div>
-    <div class="save" id="save-nofirma">
-        <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+    <div>
+        <div class="validation-box" style="float:left">
+            @if (Model.Success == null)
+            {
+                @Html.ValidationSummary(true)
+            }
+            else if (Model.Success == false)
+            {
+                <div>Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;</div>
+            }
+            else
+            {
+                <div style="color:green">Konto zostało auktualnione &#10003;</div>
+            }
+        </div>
+        <div class="save" id="save-nofirma" style="margin-left:0">
+            <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+        </div>
     </div>
 </div>
 <div class="clear">&nbsp;</div>

@@ -126,7 +126,11 @@ $SeB: SegoeBold;
                 cursor: pointer;
                 font-size: 14px;
             }
-            .sukku-button-small{
+                #zaloguj{
+                    margin-top: 45px;
+                    margin-right: 20px;
+                }
+            /*.sukku-button-small{
                 margin: 24px 120px 0;
                 background-color: #f89b1d;
                 height: 30px;
@@ -141,15 +145,19 @@ $SeB: SegoeBold;
                 &:hover{
                     background-color:orange
                 }
-            }
+            }*/
             .error-box{
-                margin: auto auto 50px;
+                margin: 100px auto auto 50px;
                 width: 90%;
                 height: 300px;
                 color:red;
                 font-family:$SeUI
             }
-
+            .wyloguj-text-form{
+                float: right;
+margin-right: 10px;
+margin-top: 20px;
+            }
             .validation-summary-errors ul li{
                 padding: 10px 0 10px 20px;
             }

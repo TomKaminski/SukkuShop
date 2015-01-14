@@ -1,4 +1,5 @@
-﻿//Nie przeszła walidacja na serverze podczas tworzenia nowego konta
+﻿/// <reference path="OrderKrok1.js" />
+//Nie przeszła walidacja na serverze podczas tworzenia nowego konta
 function clientDataAjaxSuccess() {
     hideAjaxLoader();
     if ($("input[id=NewAccount]").is(":checked")) {
@@ -93,6 +94,10 @@ $(document).ready(function () {
             left: e.pageX + 20,
             top: e.pageY
         });
+    });
+
+    $("#zaloguj").click(function() {
+        $("#LoginOrderForm").submit();
     });
 
     $.validator.addMethod("regex", function (value, element, regexpr) {
