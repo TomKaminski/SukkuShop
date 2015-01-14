@@ -331,6 +331,7 @@
     <Compile Include="Models\OrderViewModels.cs" />
     <Compile Include="Models\Shop.cs" />
     <Compile Include="Models\ShopViewModels.cs" />
+    <Compile Include="Models\_SharedModels.cs" />
     <Compile Include="NavController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>

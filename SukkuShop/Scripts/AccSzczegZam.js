@@ -13,7 +13,7 @@ function hideAjaxLoader() {
 
 $(document).ready(function () {
     $("#anuluj-box").delegate("#cancel-start","click",function () {
-        $(this).empty().append("<span style='color:#f89b1d;'><div style='float:left;margin-right:10px;margin-left:120px'>Czy jesteś pewien?</div> <div id='yes' class='button-options' style='background-color:green;'>TAK &#10004;</div><div id='no' class='button-options' style='background-color:red;'>NIE &#10008;</div></span>");
+        $(this).empty().append("<span style='color:#f89b1d;'><div style='float:left;margin-right:10px;margin-left:120px;line-height:24px'>Czy jesteś pewien?</div> <div id='yes' class='button-options' style='background-color:transparent;color:green'>TAK &#10004;</div><div id='no' class='button-options' style='background-color:transparent;color:red'>NIE &#10008;</div></span>");
     });
 
     $(document).bind('mousemove', function (e) {

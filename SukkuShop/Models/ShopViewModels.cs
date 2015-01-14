@@ -34,15 +34,10 @@ namespace SukkuShop.Models
         public string CurrentSearch { get; set; }
     }
 
-    public class ProductModel
+    public class ProductModel:SharedProductModels
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public int? Promotion { get; set; }
-        public decimal Price { get; set; }
-        public string ImageName { get; set; }
         public int QuantityInStock { get; set; }
-        public decimal PriceAfterDiscount { get; set; }
         public bool Bestseller { get; set; }
         public bool Novelty { get; set; }
         public string Category { get; set; }
@@ -50,15 +45,10 @@ namespace SukkuShop.Models
         public int OrdersCount { get; set; }
     }
 
-    public class ProductViewModel
+    public class ProductViewModel:SharedProductModels
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public int Promotion { get; set; }
-        public string Price { get; set; }
-        public string ImageName { get; set; }
         public int QuantityInStock { get; set; }
-        public string PriceAfterDiscount { get; set; }
         public bool Bestseller { get; set; }
         public bool Novelty { get; set; }
     }
@@ -69,27 +59,18 @@ namespace SukkuShop.Models
         public ProductDetailModel Product { get; set; }
     }
 
-    public class ProductDetailModel
+    public class ProductDetailModel:SharedProductModels
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
         public int Promotion { get; set; }
-        public decimal Price { get; set; }
-        public string ImageName { get; set; }
         public int QuantityInStock { get; set; }
-        public decimal PriceAfterDiscount { get; set; }
         public string Category { get; set; }
         public string Packing  { get; set; }
         public string Description { get; set; }
     }
 
-    public class SimilarProductModel
+    public class SimilarProductModel:SharedProductModels
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public decimal Price { get; set; }
-        public string ImageName { get; set; }
-        public decimal PriceAfterDiscount { get; set; }
+        
         public bool Available { get; set; }
         public int? Promotion { get; set; }
     }

@@ -14,7 +14,7 @@
   cursor: pointer;
   padding: 3px 7px;
   color: white;
-  border: none;
+  border: 2px solid #f89b1d;
   border-radius: 20px;
   font-size: 14px; }
 

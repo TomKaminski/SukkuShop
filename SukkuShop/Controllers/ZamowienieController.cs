@@ -289,8 +289,8 @@ namespace SukkuShop.Controllers
         {
             if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0)
                 return RedirectToAction(MVC.Koszyk.Index());
-            OrderPaymentSummary paymentModel;
-            OrderShippingSummary shippingModel;
+            SharedShippingOrderSummaryModels paymentModel;
+            SharedShippingOrderSummaryModels shippingModel;
             string totaltotalvalue;
             var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
             var userModel = new CartAddressModel
@@ -390,13 +390,13 @@ namespace SukkuShop.Controllers
                 {
                     Firma = shoppingCart.UserAddressModel.Nip != null,
                     TotalTotalValue = (hehe + paymentPrice.PaymentPrice + shippingPrice.ShippingPrice).ToString("c"),
-                    OrderPayment = new OrderPaymentSummary
+                    OrderPayment = new SharedShippingOrderSummaryModels
                     {
                         Description = paymentPrice.PaymentDescription,
                         Name = paymentPrice.PaymentName,
                         Price = paymentPrice.PaymentPrice.ToString("c")
                     },
-                    OrderShipping = new OrderShippingSummary
+                    OrderShipping = new SharedShippingOrderSummaryModels
                     {
                         Description = shippingPrice.ShippingDescription,
                         Name = shippingPrice.ShippingName,
@@ -434,19 +434,19 @@ namespace SukkuShop.Controllers
         }
 
 
-        private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out OrderPaymentSummary paymentModel,
-            out OrderShippingSummary shippingModel, out string totaltotalvalue)
+        private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out SharedShippingOrderSummaryModels paymentModel,
+            out SharedShippingOrderSummaryModels shippingModel, out string totaltotalvalue)
         {
             var orderitemsummary = OrderViewItemsSummary(shoppingCart);
             var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
             var shipping = _dbContext.ShippingTypes.First(x => x.ShippingId == shoppingCart.ShippingId);
-            paymentModel = new OrderPaymentSummary
+            paymentModel = new SharedShippingOrderSummaryModels
             {
                 Name = payment.PaymentName,
                 Price = payment.PaymentPrice.ToString(),
                 Description = payment.PaymentDescription
             };
-            shippingModel = new OrderShippingSummary
+            shippingModel = new SharedShippingOrderSummaryModels
             {
                 Name = shipping.ShippingName,
                 Price = shipping.ShippingPrice.ToString(),

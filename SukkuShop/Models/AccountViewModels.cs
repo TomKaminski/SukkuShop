@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace SukkuShop.Models
@@ -77,7 +76,6 @@ namespace SukkuShop.Models
         [EmailAddress(ErrorMessage = "To nie jest adres email.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
-
         public string result { get; set; }
     }
 
@@ -95,7 +93,7 @@ namespace SukkuShop.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class ChangeUserInfoViewModel
+    public class ChangeUserInfoViewModel:SharedAddressModels
     {
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [EmailAddress]
@@ -111,37 +109,12 @@ namespace SukkuShop.Models
         [StringLength(30, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
-
-        [RegularExpression("^[A-Ża-ż -]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
-        [StringLength(50, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
-        [Display(Name = "Miasto")]
-        public string City { get; set; }
-
-        [RegularExpression("^[A-Ża-ż -0-9]*$|^Nie podano$", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
-        [StringLength(20, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
-        [Display(Name = "Ulica")]
-        public string Street { get; set; }
-
-        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
-        [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 1)]
-        [Display(Name = "Numer domu")]
-        public string Number { get; set; }
-
-        [RegularExpression("^[1-9][0-9]{8}$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
-        [Display(Name = "Telefon")]
-        public string Phone { get; set; }
-
-        [Display(Name = "Kod pocztowy")]
-        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
-        public string PostalCode { get; set; }
-
         public bool? Success { get; set; }
-
         public bool CzyFirmowe { get; set; }
     }
 
 
-    public class ChangeUserFirmaInfoViewModel
+    public class ChangeUserFirmaInfoViewModel:SharedAddressModels
     {
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [EmailAddress]
@@ -157,32 +130,7 @@ namespace SukkuShop.Models
         [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 10)]
         [Display(Name = "NIP")]
         public string Nip { get; set; }
-
-        [RegularExpression("^[A-Ża-ż -]*$|^Nie podano$", ErrorMessage = "Nieprawidłowa wartość")]
-        [StringLength(50, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
-        [Display(Name = "Miasto")]
-        public string City { get; set; }
-
-        [RegularExpression("^[A-Ża-ż -0-9]*$|^Nie podano$", ErrorMessage = "Ulica nie może zawierać znaków specjalnych")]
-        [StringLength(20, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 2)]
-        [Display(Name = "Ulica")]
-        public string Street { get; set; }
-
-        [RegularExpression("^[1-9][0-9]{0,4}[A-Ża-ż]{0,1}[/]?[0-9]*$|^Nie podano$", ErrorMessage = "Numer domu jest niepoprawny")]
-        [StringLength(10, ErrorMessage = "{0} musi zawierać przynajmniej {2} znaków.", MinimumLength = 1)]
-        [Display(Name = "Numer domu")]
-        public string Number { get; set; }
-
-        [RegularExpression("^[1-9][0-9]{8}$|^Nie podano$",ErrorMessage = "Numer domu jest niepoprawny")]
-        [Display(Name = "Telefon")]
-        public string Phone { get; set; }
-
-        [Display(Name = "Kod pocztowy")]
-        [RegularExpression("^[0-9]{2}-[0-9]{3}$", ErrorMessage = "Kod pocztowy jest niepoprawny (xx-xxx)")]
-        public string PostalCode { get; set; }
-
         public bool? Success { get; set; }
-
         public bool CzyFirmowe { get; set; }
     }
 
@@ -224,35 +172,12 @@ namespace SukkuShop.Models
         public string ActualState { get; set; }
     }
 
-    //public class AccountOrdersViewModel
-    //{
-    //    public List<AccountOrderItemModel> AccountOrdersList { get; set; }
-    //}
-
-    //public class AccountOrderDetailsViewModel
-    //{
-    //    public int PaymentId { get; set; }
-    //    public int ShippingId { get; set; }
-    //    public string TotalPrice { get; set; }
-    //    public List<AccountOrderItemDetailsModel> ItemList { get; set; }
-    //}
-
-    //public class AccountOrderItemDetailsModel
-    //{
-    //    public string ImageName { get; set; }
-    //    public string Name { get; set; }
-    //    public string Id { get; set; }
-    //    public string Price { get; set; }
-    //    public string Quantity { get; set; }
-    //    public string SubTotalPrice { get; set; }
-    //}
-
     public class AccountOrderViewModelsSummary
     {
         public OrderViewItemsTotal OrderViewItemsTotal { get; set; }
         public CartAddressModel UserAddressModel { get; set; }
-        public OrderShippingSummary OrderShipping { get; set; }
-        public OrderPaymentSummary OrderPayment { get; set; }
+        public SharedShippingOrderSummaryModels OrderShipping { get; set; }
+        public SharedShippingOrderSummaryModels OrderPayment { get; set; }
         public string OrderDat { get; set; }
         public string TotalTotalValue { get; set; }
         public string OrderInfo { get; set; }

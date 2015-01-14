@@ -270,14 +270,14 @@ namespace SukkuShop.Controllers
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
             var model = new ChangeUserInfoViewModel
             {
-                City = user.City ?? "Nie podano",
+                Miasto = user.City ?? "Nie podano",
                 Email = user.Email,
                 LastName = user.LastName ?? "Nie podano",
                 Name = user.Name ?? "Nie podano",
-                Number = user.Number ?? "Nie podano",
-                Phone = user.PhoneNumber ?? "Nie podano",
-                PostalCode = user.PostalCode ?? "Nie podano",
-                Street = user.Street ?? "Nie podano",
+                Numer = user.Number ?? "Nie podano",
+                Telefon = user.PhoneNumber ?? "Nie podano",
+                KodPocztowy = user.PostalCode ?? "Nie podano",
+                Ulica = user.Street ?? "Nie podano",
                 Success = null
             };
             return PartialView("_ChangeUserInfoViewModel", model);
@@ -295,13 +295,13 @@ namespace SukkuShop.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindById(User.Identity.GetUserId<int>());
-                user.City = model.City;
+                user.City = model.Miasto;
                 user.LastName = model.LastName;
                 user.Name = model.Name;
-                user.PostalCode = model.PostalCode;
-                user.Number = model.Number;
-                user.PhoneNumber = model.Phone;
-                user.Street = model.Street;
+                user.PostalCode = model.KodPocztowy;
+                user.Number = model.Numer;
+                user.PhoneNumber = model.Telefon;
+                user.Street = model.Ulica;
                 user.KontoFirmowe = false;
                 var result = _userManager.Update(user);
                 model.Success = result.Succeeded;
@@ -318,14 +318,14 @@ namespace SukkuShop.Controllers
             var user = _userManager.FindById(User.Identity.GetUserId<int>());
             var model = new ChangeUserFirmaInfoViewModel
             {
-                City = user.City ?? "Nie podano",
+                Miasto = user.City ?? "Nie podano",
                 Email = user.Email,
                 NazwaFirmy = user.NazwaFirmy ?? "Nie podano",
                 Nip = user.AccNip ?? "Nie podano",
-                Number = user.Number ?? "Nie podano",
-                Phone = user.PhoneNumber ?? "Nie podano",
-                PostalCode = user.PostalCode ?? "Nie podano",
-                Street = user.Street ?? "Nie podano",
+                Numer = user.Number ?? "Nie podano",
+                Telefon = user.PhoneNumber ?? "Nie podano",
+                KodPocztowy = user.PostalCode ?? "Nie podano",
+                Ulica = user.Street ?? "Nie podano",
                 Success = null
             };
             return PartialView("_ChangeUserFirmaInfoViewModel", model);
@@ -343,13 +343,13 @@ namespace SukkuShop.Controllers
             if (ModelState.IsValid)
             {
                 var user = _userManager.FindById(User.Identity.GetUserId<int>());
-                user.City = model.City;
+                user.City = model.Miasto;
                 user.NazwaFirmy = model.NazwaFirmy;
                 user.AccNip = model.Nip;
-                user.PostalCode = model.PostalCode;
-                user.Number = model.Number;
-                user.PhoneNumber = model.Phone;
-                user.Street = model.Street;
+                user.PostalCode = model.KodPocztowy;
+                user.Number = model.Numer;
+                user.PhoneNumber = model.Telefon;
+                user.Street = model.Ulica;
                 user.KontoFirmowe = true;
                 var result = _userManager.Update(user);
                 model.Success = result.Succeeded;
@@ -423,14 +423,14 @@ namespace SukkuShop.Controllers
             if (userId.Id != order.UserId)
                 return RedirectToAction(MVC.Konto.HistoriaZamowien());
             var paymentModel = _dbContext.PaymentTypes.Where(m => m.PaymentId == order.PaymentId)
-                .Select(k => new OrderPaymentSummary
+                .Select(k => new SharedShippingOrderSummaryModels
                 {
                     Description = k.PaymentDescription,
                     Name = k.PaymentName,
                     Price = k.PaymentPrice.ToString()
                 }).First();
             var shippingModel = _dbContext.ShippingTypes.Where(m => m.ShippingId == order.ShippingId)
-                .Select(k => new OrderShippingSummary
+                .Select(k => new SharedShippingOrderSummaryModels
                 {
                     Description = k.ShippingDescription,
                     Name = k.ShippingName,

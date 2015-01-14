@@ -46,13 +46,13 @@ namespace SukkuShop.Controllers
                 {
                     Firma = false,
                     TotalTotalValue = (150).ToString("c"),
-                    OrderPayment = new OrderPaymentSummary
+                    OrderPayment = new SharedShippingOrderSummaryModels
                     {
                         Description = "Payment opis",
                         Name = "Payment name",
                         Price = (55.21).ToString("c")
                     },
-                    OrderShipping = new OrderShippingSummary
+                    OrderShipping = new SharedShippingOrderSummaryModels
                     {
                         Description = "Shipping Opis",
                         Name = "Shipping name",
