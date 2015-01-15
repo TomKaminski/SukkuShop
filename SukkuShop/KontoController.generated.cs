@@ -292,7 +292,6 @@ namespace SukkuShop.Controllers
                 public readonly string RegisterSuccess = "RegisterSuccess";
                 public readonly string ResetujHaslo = "ResetujHaslo";
                 public readonly string SzczegółyZamówienia = "SzczegółyZamówienia";
-                public readonly string UstawHaslo = "UstawHaslo";
                 public readonly string Zaloguj = "Zaloguj";
                 public readonly string ZapomnianeHaslo = "ZapomnianeHaslo";
                 public readonly string ZapomnianeHasloPotwierdzenie = "ZapomnianeHasloPotwierdzenie";
@@ -311,7 +310,6 @@ namespace SukkuShop.Controllers
             public readonly string RegisterSuccess = "~/Views/Konto/RegisterSuccess.cshtml";
             public readonly string ResetujHaslo = "~/Views/Konto/ResetujHaslo.cshtml";
             public readonly string SzczegółyZamówienia = "~/Views/Konto/SzczegółyZamówienia.cshtml";
-            public readonly string UstawHaslo = "~/Views/Konto/UstawHaslo.cshtml";
             public readonly string Zaloguj = "~/Views/Konto/Zaloguj.cshtml";
             public readonly string ZapomnianeHaslo = "~/Views/Konto/ZapomnianeHaslo.cshtml";
             public readonly string ZapomnianeHasloPotwierdzenie = "~/Views/Konto/ZapomnianeHasloPotwierdzenie.cshtml";

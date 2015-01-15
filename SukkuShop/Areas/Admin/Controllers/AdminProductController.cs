@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -16,10 +18,35 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         // GET: Admin/AdminProduct
         public virtual ActionResult Index()
-        {
+        {            
             return View();
         }
 
+        public virtual ActionResult UploadFile()
+        {
+            var myFile = Request.Files["MyFile"];
+            var isUploaded = false;
+            var message = "File upload failed";
+
+            if (myFile != null && myFile.ContentLength != 0)
+            {
+                var pathForSaving = Server.MapPath("~/Uploads");
+                if (CreateFolderIfNeeded(pathForSaving))
+                {
+                    try
+                    {
+                        myFile.SaveAs(Path.Combine(pathForSaving, myFile.FileName));
+                        isUploaded = true;
+                        message = "File uploaded successfully!";
+                    }
+                    catch (Exception ex)
+                    {
+                        message = string.Format("File upload failed: {0}", ex.Message);
+                    }
+                }
+            }
+            return Json(new { isUploaded = isUploaded, message = message }, "text/html");
+        }
         [HttpGet]
         public virtual ActionResult Create()
         {
@@ -116,6 +143,23 @@ namespace SukkuShop.Areas.Admin.Controllers
             var prod = _dbContext.Products.Find(id);
 
             return View(prod);
+        }
+
+        private bool CreateFolderIfNeeded(string path)
+        {
+            var result = true;
+            if (!Directory.Exists(path))
+            {
+                try
+                {
+                    Directory.CreateDirectory(path);
+                }
+                catch (Exception)
+                {
+                    result = false;
+                }
+            }
+            return result;
         }
     }
 }

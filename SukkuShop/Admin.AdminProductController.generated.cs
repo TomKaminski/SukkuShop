@@ -95,6 +95,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string UploadFile = "UploadFile";
             public readonly string Create = "Create";
             public readonly string Delete = "Delete";
             public readonly string DeletePost = "Delete";
@@ -106,6 +107,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string UploadFile = "UploadFile";
             public const string Create = "Create";
             public const string Delete = "Delete";
             public const string DeletePost = "Delete";
@@ -165,7 +167,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Areas/Admin/Views/AdminProduct/Index.cshtml";
         }
     }
 
@@ -182,6 +186,17 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void UploadFileOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult UploadFile()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UploadFile);
+            UploadFileOverride(callInfo);
             return callInfo;
         }
 

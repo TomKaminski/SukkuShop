@@ -1,0 +1,82 @@
+﻿@model SukkuShop.Areas.Admin.Models.FileUploadModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    #image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        vertical-align: middle;
+    }
+    .helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+</style>
+
+<input type="text" id="tbx-file-path" value="No file chosen..." readonly="readonly" />
+@Html.TextBoxFor(m => m.MyFile, new { id = "upload-control", type = "file", onchange = "onFileSelected(event)" })
+
+<a href="#" id="start-upload">Start upload</a>
+
+<div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;">
+    <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek</div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        var jqXHRData;
+
+        $(document).ready(function () {
+            'use strict';
+            $('#upload-control').fileupload({
+                url: '/Admin/AdminProduct/UploadFile',
+                dataType: 'json',
+                add: function (e, data) {
+                    jqXHRData = data;
+                },
+                done: function (event, data) {
+                    if (data.result.isUploaded) {
+                        $("#tbx-file-path").val("No file chosen...");
+                    }
+                    else {
+
+                    }
+                    alert(data.result.message);
+                },
+                fail: function (event, data) {
+                    if (data.files[0].error) {
+                        alert(data.files[0].error);
+                    }
+                }
+            });
+        });
+
+        $("#image-container").click(function() {
+            $("#upload-control").click();            
+        });
+
+        function onFileSelected(event) {
+            var selectedFile = event.target.files[0];
+            var reader = new FileReader();
+
+            reader.onload = function (eventt) {
+                $("#image-container").empty().append("<span class='helper'></span><img id='loadedImage' />");
+                $("#loadedImage").attr("src", eventt.target.result);
+            };
+
+            reader.readAsDataURL(selectedFile);
+        }
+
+        $("#start-upload").on('click', function () {
+            if (jqXHRData) {
+                jqXHRData.submit();
+            }
+            return false;
+        });
+    </script>
+}
