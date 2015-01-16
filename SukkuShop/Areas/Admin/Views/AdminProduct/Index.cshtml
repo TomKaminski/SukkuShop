@@ -1,10 +1,13 @@
-﻿@model SukkuShop.Areas.Admin.Models.FileUploadModel
+﻿@model SukkuShop.Areas.Admin.Models.ProductUploadModel
 @{
     ViewBag.Title = "Index";
 }
 
 <style>
-    #image-container img {
+    #image-container,#image-container-small {
+        position: relative;
+    }
+    #image-container img,#image-container-small img {
         max-width: 100%;
         max-height: 100%;
         vertical-align: middle;
@@ -16,67 +19,92 @@
     }
 </style>
 
-<input type="text" id="tbx-file-path" value="No file chosen..." readonly="readonly" />
-@Html.TextBoxFor(m => m.MyFile, new { id = "upload-control", type = "file", onchange = "onFileSelected(event)" })
+@using (Html.BeginForm(MVC.Admin.AdminProduct.UploadFile(), FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+{
+    @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)",style="visibility: hidden" })
+    @Html.TextBoxFor(m => m.ImageNormal, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
+    <a href="#" id="start-upload">Start upload</a>
+}
 
-<a href="#" id="start-upload">Start upload</a>
 
-<div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;">
+<div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;margin-bottom:50px;">
     <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek</div>
 </div>
+
+<div id="image-container-small" style="width:250px;height:250px;border:3px royalblue dotted;position:relative;margin:auto;">
+    <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 250px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek small</div>
+</div>
+
 
 
 
 @section scripts{
     <script type="text/javascript">
-        var jqXHRData;
-
-        $(document).ready(function () {
-            'use strict';
-            $('#upload-control').fileupload({
-                url: '/Admin/AdminProduct/UploadFile',
-                dataType: 'json',
-                add: function (e, data) {
-                    jqXHRData = data;
-                },
-                done: function (event, data) {
-                    if (data.result.isUploaded) {
-                        $("#tbx-file-path").val("No file chosen...");
-                    }
-                    else {
-
-                    }
-                    alert(data.result.message);
-                },
-                fail: function (event, data) {
-                    if (data.files[0].error) {
-                        alert(data.files[0].error);
-                    }
-                }
-            });
-        });
-
-        $("#image-container").click(function() {
-            $("#upload-control").click();            
-        });
-
         function onFileSelected(event) {
             var selectedFile = event.target.files[0];
             var reader = new FileReader();
+            var readerTarget = event.target.id;
+            reader.onload = function(eventt) {
+                var img = new Image();;
+                if (readerTarget == "ImageBig") {
+                    img.src = eventt.target.result;
+                    if (img.width == 500 && img.height == 500) {
+                        $("#image-container").empty().append("<span class='helper'></span><img id='loadedImageBig' />");
+                        $("#loadedImageBig").attr("src", eventt.target.result);
+                        $("#image-container").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
+                        $("#image-container").css("border-color", "royalblue");
+                    } else {
+                        $("#ImageBig").val('');
+                        $("#image-container").css("border-color", "red");
+                        $("#image-container").html("<div style='color:red;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px'>Załaduj poprawny obrazek (500x500)</div>");
+                        e.stopImmediatePropagation();
+                    }
 
-            reader.onload = function (eventt) {
-                $("#image-container").empty().append("<span class='helper'></span><img id='loadedImage' />");
-                $("#loadedImage").attr("src", eventt.target.result);
+                } else if (readerTarget == "ImageNormal") {
+                    img.src = eventt.target.result;
+                    if (img.width == 250 && img.height == 250) {
+                        $("#image-container-small").empty().append("<span class='helper'></span><img id='loadedImageSmall' />");
+                        $("#loadedImageSmall").attr("src", eventt.target.result);
+                        $("#image-container-small").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
+                        $("#image-container-small").css("border-color", "royalblue");
+                    } else {
+                        $("#ImageNormal").val('');
+                        $("#image-container-small").css("border-color", "red");
+                        $("#image-container-small").html("<div style='color:red;font-weight: bold;text-align: center;line-height: 250px;font-family: Segoe UI;font-size: 13px'>Załaduj poprawny obrazek (250x250)</div>");
+                        e.stopImmediatePropagation();
+                    }                        
+                }
             };
-
             reader.readAsDataURL(selectedFile);
         }
 
-        $("#start-upload").on('click', function () {
-            if (jqXHRData) {
-                jqXHRData.submit();
-            }
-            return false;
+        $("#start-upload").on('click', function() {
+            $("#UploadForm").submit();
+        });
+
+        $("#image-container-small").click(function () {
+            if ($(this).children("img").length == 0)
+                $("#ImageNormal").click();
+        });
+
+        $("#image-container").click(function () {
+            if ($(this).children("img").length == 0)
+                $("#ImageBig").click();
+        });
+
+        $("#image-container").delegate("#delete-img", "click", function (e) {
+            $("#ImageBig").val('');
+            $(this).parent().html("<div style='color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px'>Załaduj obrazek</div>");
+            e.stopImmediatePropagation();
+        });
+
+        $("#image-container-small").delegate("#delete-img", "click", function (e) {
+            $("#ImageNormal").val('');
+            $(this).parent().html("<div style='color:royalblue;font-weight: bold;text-align: center;line-height: 250px;font-family: Segoe UI;font-size: 25px'>Załaduj obrazek</div>");
+            e.stopImmediatePropagation();
+        });
+
+        $(document).ready(function() {                
         });
     </script>
 }

@@ -56,6 +56,12 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult UploadFile()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UploadFile);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult Delete()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Delete);
@@ -116,6 +122,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
 
+        static readonly ActionParamsClass_UploadFile s_params_UploadFile = new ActionParamsClass_UploadFile();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_UploadFile UploadFileParams { get { return s_params_UploadFile; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_UploadFile
+        {
+            public readonly string model = "model";
+        }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
@@ -190,13 +204,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void UploadFileOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void UploadFileOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductUploadModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult UploadFile()
+        public override System.Web.Mvc.ActionResult UploadFile(SukkuShop.Areas.Admin.Models.ProductUploadModel model)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UploadFile);
-            UploadFileOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            UploadFileOverride(callInfo, model);
             return callInfo;
         }
 
