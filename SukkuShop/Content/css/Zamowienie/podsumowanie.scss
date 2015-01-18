@@ -26,9 +26,21 @@ $font_2: SegoeBold;
 	position: relative;
 }
 
+
+
+
 .order-container {
 	width: 1066px;
 	margin: auto;
+.error-message{
+text-align: center;
+color:red;
+font-family:Segoe UI;
+font-size:20px;
+padding-bottom:25px;
+border-bottom:1px solid #f89b1d;
+margin-bottom:25px;
+}
     .uwagi-box{
         width:100%;
         margin: 25px 0;
@@ -161,6 +173,23 @@ $font_2: SegoeBold;
 			    float: left;
 			    border: 2px solid $color_tree_poppy_approx;
 		    }
+&.submit-error,&.remove-item-error{
+    padding:16px 0 !important;
+    border-top:1px dotted red !important;
+    border-bottom:1px dotted red !important;
+    position:relative;
+    .submit-error-tick{
+        position:absolute;
+        width:22px;
+        height:22px;
+        line-height:22px;
+        font-size:18px;
+        background-color:red;
+        top:0;
+        right:0;
+        color:white
+    }
+}
 	    }
     }
     .products-price-summary {

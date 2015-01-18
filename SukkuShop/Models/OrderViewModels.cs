@@ -30,7 +30,7 @@ namespace SukkuShop.Models
     public class OrderViewItemsTotal
     {
         public List<OrderItemSummary> OrderProductList { get; set; }
-        public string TotalValue { get; set; }
+        public decimal TotalValue { get; set; }
     }
 
     public class OrderViewModelsSummary
@@ -39,18 +39,24 @@ namespace SukkuShop.Models
         public CartAddressModel UserAddressModel { get; set; }
         public SharedShippingOrderSummaryModels OrderShipping { get; set; }
         public SharedShippingOrderSummaryModels OrderPayment { get; set; }
-        public string TotalTotalValue { get; set; }
+        public decimal TotalTotalValue { get; set; }
         public bool Firma { get; set; }
+        public string UserHints { get; set; }
+        public bool HasErrors { get; set; }
     }
 
     public class OrderItemSummary
     {
         public string Name { get; set; }
         public int Quantity { get; set; }
-        public string Price { get; set; }
-        public string TotalValue { get; set; }
+        public decimal Price { get; set; }
+        public decimal TotalValue { get; set; }
         public string Image { get; set; }
         public string Packing { get; set; }
+        public int Id { get; set; }
+        public bool ItemRemoved { get; set; }
+        public int OldQuantity { get; set; }
+        public bool QuantityChanged { get; set; }
     }
 
 
@@ -161,6 +167,10 @@ namespace SukkuShop.Models
         public string Nip { get; set; }
         public string Imie { get; set; }
         public string Nazwisko { get; set; }
+        
+        [Required(ErrorMessage = "Pole {0} jest wymagane.")]
+        [EmailAddress]
+        public string Email { get; set; }
 
     }
 

@@ -4,8 +4,8 @@
 }
 
 function plz(data) {
-    var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
-    if (plza != data.value) {
+    var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
+    if (parseFloat(plza) != parseFloat(data.value)) {
         var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
         obj.css('color', 'green');
         obj.html('&#10004;');

@@ -1,11 +1,13 @@
-﻿using System;
+﻿#region
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.UI;
-using DevTrends.MvcDonutCaching;
 using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
+
+#endregion
 
 namespace SukkuShop.Controllers
 {
@@ -22,7 +24,7 @@ namespace SukkuShop.Controllers
 
         // GET: Produkty
 
-        public virtual ActionResult GetProductByCategory(string id=null)
+        public virtual ActionResult GetProductByCategory(string id = null)
         {
             //getallproducts
             GetAllProducts();
@@ -37,19 +39,18 @@ namespace SukkuShop.Controllers
             if (id != null)
             {
                 var categorylist =
-               _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
-                   .Select(x => x.Name);
+                    _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
+                        .Select(x => x.Name);
 
                 var optionlist = new List<string> {"promocje", "bestseller", "nowość"};
                 if (categorylist.Contains(id))
                     categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == id).CategoryId;
-                if(categoryId!=0)
+                if (categoryId != 0)
                     subcategoryList =
                         _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
                             .Select(j => j.Name)
                             .Distinct()
                             .ToList();
-
 
 
                 if (categorylist.Contains(id))
@@ -74,9 +75,8 @@ namespace SukkuShop.Controllers
                             break;
                     }
                 }
-                else if(!categorylist.Contains(id) && !optionlist.Contains(id))
+                else if (!categorylist.Contains(id) && !optionlist.Contains(id))
                     _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(id.ToUpper())).ToList();
-                
             }
             subcategoryList.Add("Wszystko");
             if (!_shop.Products.Any())
@@ -89,13 +89,12 @@ namespace SukkuShop.Controllers
                 subcategoryList
             };
             return Json(obj, JsonRequestBehavior.AllowGet);
-
         }
 
         //[DonutOutputCache(Duration=86400,Location = OutputCacheLocation.Server,VaryByParam = "id")]
         public virtual ActionResult Produkty(string id)
         {
-            return View((object)id);
+            return View((object) id);
         }
 
 
@@ -108,25 +107,39 @@ namespace SukkuShop.Controllers
 
             var category =
                 _dbContext.Categories.First(x => x.CategoryId == product.CategoryId);
+            var subCategories = new List<int>();
+            if (category.UpperCategoryId == 0)
+            {
+                subCategories =
+                    _dbContext.Categories.Where(m => m.UpperCategoryId == category.CategoryId)
+                        .Select(x => x.CategoryId)
+                        .ToList();
+            }
 
-            var categoryName = category.UpperCategoryId == 0 ? category : _dbContext.Categories.First(x => x.CategoryId == category.UpperCategoryId);
+            var similarProducts2 =
+                _dbContext.Products.Where(
+                    x =>
+                        (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId)) &&
+                        x.ProductId != product.ProductId).ToList();
+
             var similarProducts =
                 _dbContext.Products.Where(
                     x =>
-                        (x.Categories.UpperCategoryId==categoryName.CategoryId || x.Categories.CategoryId==categoryName.CategoryId) &&
-                        x.ProductId != product.ProductId).Select(j=>new SimilarProductModel
+                        (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId)) &&
+                        x.ProductId != product.ProductId).Select(j => new SimilarProductModel
                         {
                             Id = j.ProductId,
                             ImageName = j.ImageName,
                             Name = j.Name,
                             Price = j.Price,
-                            Available = j.Quantity > 0,
+                            Available = j.Quantity - j.ReservedQuantity > 0,
                             Promotion = j.Promotion
-                        }).OrderBy(x => Guid.NewGuid()).Take(4);
+                        }).OrderBy(k => Guid.NewGuid()).Take(4).ToList();
             foreach (var itemSimilar in similarProducts)
             {
-                var priceSimilar = (itemSimilar.Price - ((itemSimilar.Price * itemSimilar.Promotion) / 100)) ?? itemSimilar.Price;
-                var similarFloored = Math.Floor(priceSimilar * 100) / 100;
+                var priceSimilar = (itemSimilar.Price - ((itemSimilar.Price*itemSimilar.Promotion)/100)) ??
+                                   itemSimilar.Price;
+                var similarFloored = Math.Floor(priceSimilar*100)/100;
                 itemSimilar.PriceAfterDiscount = similarFloored;
             }
             var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
@@ -135,8 +148,8 @@ namespace SukkuShop.Controllers
             {
                 Product = new ProductDetailModel
                 {
-                    Category = categoryName.Name,
-                    Id=product.ProductId,
+                    Category = category.Name,
+                    Id = product.ProductId,
                     ImageName = product.ImageName,
                     Name = product.Name,
                     Price = product.Price,
@@ -144,7 +157,8 @@ namespace SukkuShop.Controllers
                     Promotion = product.Promotion ?? 0,
                     QuantityInStock = product.Quantity,
                     Packing = product.Packing,
-                    Description = product.Description
+                    Description = product.Description,
+                    ReservedQuantity = product.ReservedQuantity
                 },
                 SimilarProducts = similarProducts
             };
@@ -198,12 +212,14 @@ namespace SukkuShop.Controllers
             //    CurrentSubCategory = null,
             //    CurrentSearch = search
             //});
-            return View("Produkty", (object)id);
+            return View("Produkty", (object) id);
         }
 
         public virtual ActionResult Szukaj()
         {
-            return !String.IsNullOrEmpty(Request["search"]) ? RedirectToAction(MVC.Sklep.Wyszukaj(Request["search"])) : RedirectToAction(MVC.Sklep.Produkty(null));
+            return !String.IsNullOrEmpty(Request["search"])
+                ? RedirectToAction(MVC.Sklep.Wyszukaj(Request["search"]))
+                : RedirectToAction(MVC.Sklep.Produkty(null));
         }
 
         public virtual ActionResult RedirectToLocal(string returnUrl)
@@ -224,11 +240,11 @@ namespace SukkuShop.Controllers
                 Price = x.Price,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price * x.Promotion) / 100) ?? x.Price,
+                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount,
-                QuantityInStock = x.Quantity
+                QuantityInStock = x.Quantity - x.ReservedQuantity
             }).ToList();
         }
     }

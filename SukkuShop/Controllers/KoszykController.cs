@@ -20,12 +20,16 @@ namespace SukkuShop.Controllers
         [HttpPost]
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
-            var productQ = _dbContext.Products.First(m => m.ProductId == id).Quantity;
+            var productQ = _dbContext.Products.Where(m => m.ProductId == id).Select(n=>new
+            {
+                n.Quantity,n.ReservedQuantity
+            }).First();
+
             var firstOrDefault = shoppingCart.Lines.FirstOrDefault(m => m.Id == id);
             if (firstOrDefault != null)
             {
                 var prodLineQ = firstOrDefault.Quantity;
-                if (prodLineQ + quantity <= productQ)
+                if (prodLineQ + quantity <= productQ.Quantity-productQ.ReservedQuantity)
                 {
                     shoppingCart.AddItem(id, quantity);
                 }
@@ -33,7 +37,7 @@ namespace SukkuShop.Controllers
             else
             {
                 const int prodLineQ = 0;
-                if (prodLineQ + quantity <= productQ)
+                if (prodLineQ + quantity <= productQ.Quantity-productQ.ReservedQuantity)
                 {
                     shoppingCart.AddItem(id, quantity);
                 }
@@ -63,11 +67,12 @@ namespace SukkuShop.Controllers
             {
                 k.Price,
                 k.Quantity,
-                k.Promotion
+                k.Promotion,
+                k.ReservedQuantity
             }).First();
             
             var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
-            if (firstOrDefault.Quantity <= quantity) return Json(false);
+            if (firstOrDefault.Quantity-firstOrDefault.ReservedQuantity <= quantity) return Json(false);
             shoppingCart.AddItem(id);
             var data = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*(quantity+1) ??
                        firstOrDefault.Price*(quantity+1);

@@ -183,7 +183,7 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Podsumowanie
         {
             public readonly string shoppingCart = "shoppingCart";
-            public readonly string userhints = "userhints";
+            public readonly string model = "model";
         }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -390,15 +390,15 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void PodsumowanieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string userhints, SukkuShop.Models.Cart shoppingCart);
+        partial void PodsumowanieOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.OrderViewModelsSummary model, SukkuShop.Models.Cart shoppingCart);
 
         [NonAction]
-        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Podsumowanie(string userhints, SukkuShop.Models.Cart shoppingCart)
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Podsumowanie(SukkuShop.Models.OrderViewModelsSummary model, SukkuShop.Models.Cart shoppingCart)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Podsumowanie);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "userhints", userhints);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
-            PodsumowanieOverride(callInfo, userhints, shoppingCart);
+            PodsumowanieOverride(callInfo, model, shoppingCart);
             return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 

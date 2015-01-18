@@ -15,25 +15,25 @@ namespace SukkuShop.Controllers
                 {
                     Image = "1",
                     Name = "produkt 1",
-                    Price = "15.12",
+                    Price = 15.12m,
                     Quantity = 5,
-                    TotalValue = 130.ToString("c")
+                    TotalValue = 130m
                 },
                 new OrderItemSummary
                 {
                     Image = "1",
-                    Name = "produkt 4",
-                    Price = "15.12",
+                    Name = "produkt 1",
+                    Price = 15.12m,
                     Quantity = 5,
-                    TotalValue = (130.51).ToString("c")
+                    TotalValue = 130m
                 },
                 new OrderItemSummary
                 {
                     Image = "1",
-                    Name = "produkt 2",
-                    Price = "15.12",
+                    Name = "produkt 1",
+                    Price = 15.12m,
                     Quantity = 5,
-                    TotalValue = 130.ToString("c")
+                    TotalValue = 130m
                 }
             };
             var email = new OrderSumEmail
@@ -45,18 +45,18 @@ namespace SukkuShop.Controllers
                 OrderViewModelsSummary = new OrderViewModelsSummary
                 {
                     Firma = false,
-                    TotalTotalValue = (150).ToString("c"),
+                    TotalTotalValue = 150,
                     OrderPayment = new SharedShippingOrderSummaryModels
                     {
                         Description = "Payment opis",
                         Name = "Payment name",
-                        Price = (55.21).ToString("c")
+                        Price = 55.21m
                     },
                     OrderShipping = new SharedShippingOrderSummaryModels
                     {
                         Description = "Shipping Opis",
                         Name = "Shipping name",
-                        Price = (545.21).ToString("c")
+                        Price = 55.21m
                     },
                     UserAddressModel = new CartAddressModel
                     {
@@ -72,7 +72,7 @@ namespace SukkuShop.Controllers
                     },
                     OrderViewItemsTotal = new OrderViewItemsTotal
                     {
-                        TotalValue = (421.21).ToString("c"),
+                        TotalValue = 55.21m,
                         OrderProductList = list
                     }
                 }

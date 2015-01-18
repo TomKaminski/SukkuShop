@@ -2,89 +2,148 @@
 @{
     ViewBag.Title = "Podsumowanie";
 }
-
-<div class="order-container">
-    <div class="order-title">Twój koszyk</div>
-    <ul class="order-order-steps">
-        <li>1. Koszyk</li>
-        <li>2. Twoje dane</li>
-        <li class="selected">3. Potwierdzenie zamówienia</li>
-    </ul>
-    <table class="order-table" cellspacing="0">
-        <thead>
-            <tr>
-                <th>Twoje produkty</th>
-                <th>Cena</th>
-                <th>Ilość</th>
-                <th>Suma</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.OrderViewItemsTotal.OrderProductList)
-            {
-                <tr>
-                    <td>
-                        <img img src=@("/Content/Images/Shop/" + item.Image + ".jpg" ) />
-                        <div class="custom-product-text-container">
-                            <p>
-                                <span style="font-size: 18px; line-height: 25px;">@item.Name</span>
-                            </p>
-                        </div>
-                    </td>
-                    <td>@item.Price</td>
-                    <td>@item.Quantity szt. x @item.Packing</td>
-                    <td>@item.TotalValue</td>
-                </tr>
-            }                        
-        </tbody>
-    </table>
-    <div class="products-price-summary"><span style="margin-right: 15px">Razem</span> @Model.OrderViewItemsTotal.TotalValue</div>
-    <div class="order-title">Dostawa</div>
-    <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
-    <div class="shipping-price">@Model.OrderShipping.Price zł</div>
-    <div class="clear">&nbsp;</div>
-    <div class="order-summary-description-text">@Model.OrderShipping.Description</div>
-    <div class="order-title">Adres dostawy</div>
-    @if (Model.Firma)
-    {
-        <div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy <br/>NIP @Model.UserAddressModel.Nip</div>
-    }
-    else
-    {
-        <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
-    }
-    
-    <div class="clear">&nbsp;</div>
-    <div class="order-summary-description-text">
-        ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
-        @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
-        Tel.: @Model.UserAddressModel.Telefon<br />
-    </div>
-    
-    <div class="order-title" style="clear: both">Płatność</div>
-    <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
-    <div class="shipping-price">@Model.OrderPayment.Price zł</div>
-    <div class="clear">&nbsp;</div>
-    <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
-    <div class="uwagi-box">
-        <div class="text">uwagi</div>
-        @using (Html.BeginForm(MVC.Zamowienie.Podsumowanie(), FormMethod.Post, new {id = "PodsumowanieForm"}))
+@using (Html.BeginForm(MVC.Zamowienie.Podsumowanie(), FormMethod.Post,new{id="OrderSubmit"}))
+{
+    <div class="order-container">
+        <div class="order-title">Twoje zamówienie</div>
+        <ul class="order-order-steps">
+            <li>1. Produkty i wysyłka</li>
+            <li>2. Twoje dane</li>
+            <li class="selected">3. Potwierdzenie zamówienia</li>
+        </ul>
+        @if (Model.HasErrors)
         {
-            @Html.TextArea("userhints")
+            <div class="error-message">
+                Wystąpił problem podczas finalizacji Twojego zamówienia. Prawdopodobnie ktoś Cię uprzedził i zabrakło części produktów, których potrzebujesz. System zmodyfikował Twoje zamówienie - zatwierdź te zmiany.
+            </div>
         }
         
-    </div>
-    <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
-    <ul id="products-summary" style="padding-bottom: 20px;">
-        <li class="summary-text-bold">
-            <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue zł</span></div>
-        </li>
-    </ul>
-    <a href="@Url.Action(MVC.Zamowienie.Krok2())">
-        <div id="triangle-left-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
-    </a>
-    <div id="triangle-right-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: right; cursor: pointer" id="zlozzamowienie">Złóż zamówienie</div>
-</div>
+        <table class="order-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Twoje produkty</th>
+                    <th>Cena</th>
+                    <th>Ilość</th>
+                    <th>Suma</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.OrderViewItemsTotal.OrderProductList.Count; i++)
+                {
+                    
+                    <tr style="@(Model.OrderViewItemsTotal.OrderProductList[i].ItemRemoved?"border:1px dotted red !important":"")">
+                        <td>
+                            
+                            <img img src=@("/Content/Images/Shop/" + Model.OrderViewItemsTotal.OrderProductList[i].Image + ".jpg" ) />
+                            <div class="custom-product-text-container">
+                                <p>
+                                    <span style="font-size: 18px; line-height: 25px;">@Model.OrderViewItemsTotal.OrderProductList[i].Name</span>
+                                </p>
+                            </div>
+                        </td>
+                        <td>@Model.OrderViewItemsTotal.OrderProductList[i].Price.ToString("0.00") zł</td>
+                        @if (Model.OrderViewItemsTotal.OrderProductList[i].QuantityChanged)
+                        {
+                            <td id="quantity-cell" class="submit-error">
+                                <span style="color:red;font-weight: bold" id="new-quantity">@Model.OrderViewItemsTotal.OrderProductList[i].Quantity szt. x @Model.OrderViewItemsTotal.OrderProductList[i].Packing </span><br />
+                                <span style="text-decoration: line-through" id="old-quantity">@Model.OrderViewItemsTotal.OrderProductList[i].OldQuantity szt. x @Model.OrderViewItemsTotal.OrderProductList[i].Packing</span>                                
+                            </td>
 
+                        }
+                        else if (Model.OrderViewItemsTotal.OrderProductList[i].ItemRemoved)
+                        {
+                            <td id="quantity-cell" class="remove-item-error">
+                                <span style="color:red;font-weight: bold" id="new-quantity">Brak produktu, przepraszamy</span><br />
+                            </td>
+                        }
+                        else
+                        {
+                            <td id="quantity-cell">
+                                <div id="quantity-replace">@Model.OrderViewItemsTotal.OrderProductList[i].Quantity szt. x @Model.OrderViewItemsTotal.OrderProductList[i].Packing</div>
+                                
+
+                            </td>
+                        }
+
+                        <td>@Model.OrderViewItemsTotal.OrderProductList[i].TotalValue.ToString("0.00") zł</td>
+                    </tr>
+                    <input type="hidden" name=@("OrderViewItemsTotal.OrderProductList["+i+"].Quantity") value="@Model.OrderViewItemsTotal.OrderProductList[i].Quantity">
+                    <input type="hidden" name=@("OrderViewItemsTotal.OrderProductList["+i+"].TotalValue") value="@Model.OrderViewItemsTotal.OrderProductList[i].TotalValue">
+                    <input type="hidden" name=@("OrderViewItemsTotal.OrderProductList["+i+"].ItemRemoved") value="@Model.OrderViewItemsTotal.OrderProductList[i].ItemRemoved.ToString()">
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Id)
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Name)
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Price)
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Packing)
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Image)
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].Quantity, new { value = Model.OrderViewItemsTotal.OrderProductList[i].Quantity })
+                    @Html.HiddenFor(m => m.OrderViewItemsTotal.OrderProductList[i].TotalValue, new { value = Model.OrderViewItemsTotal.OrderProductList[i].TotalValue })
+                }
+            </tbody>
+        </table>
+        <div class="products-price-summary"><span style="margin-right: 15px">Razem</span> @Model.OrderViewItemsTotal.TotalValue.ToString("0.00") zł</div>
+        <div class="order-title">Dostawa</div>
+        <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
+        <div class="shipping-price">@Model.OrderShipping.Price zł</div>
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">@Model.OrderShipping.Description</div>
+        <div class="order-title">Adres dostawy</div>
+        @if (Model.Firma)
+        {
+            <div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy <br/>NIP @Model.UserAddressModel.Nip</div>
+        }
+        else
+        {
+            <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+        }
+    
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">
+            ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
+            @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
+            Tel.: @Model.UserAddressModel.Telefon<br />
+        </div>
+    
+        <div class="order-title" style="clear: both">Płatność</div>
+        <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
+        <div class="shipping-price">@Model.OrderPayment.Price zł</div>
+        <div class="clear">&nbsp;</div>
+        <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
+        <div class="uwagi-box">
+            <div class="text">uwagi</div>
+            @Html.TextAreaFor(m => m.UserHints)        
+        </div>
+        <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
+        <ul id="products-summary" style="padding-bottom: 20px;">
+            <li class="summary-text-bold">
+                <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue zł</span></div>
+            </li>
+        </ul>
+        <a href="@Url.Action(MVC.Zamowienie.Krok2())">
+            <div id="triangle-left-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+        </a>
+        <div id="triangle-right-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: right; cursor: pointer" id="zlozzamowienie">Złóż zamówienie</div>
+    </div>
+    <input type="hidden" name=@("OrderViewItemsTotal.TotalValue") value="@Model.OrderViewItemsTotal.TotalValue">
+    <input type="hidden" name=@("TotalTotalValue") value="@Model.TotalTotalValue">
+    @Html.HiddenFor(m => m.Firma)
+    @Html.HiddenFor(m => m.OrderShipping.Description)
+    @Html.HiddenFor(m => m.OrderShipping.Name)
+    @Html.HiddenFor(m => m.OrderShipping.Price)
+    @Html.HiddenFor(m => m.OrderPayment.Description)
+    @Html.HiddenFor(m => m.OrderPayment.Name)
+    @Html.HiddenFor(m => m.OrderPayment.Price)
+    @Html.HiddenFor(m => m.UserAddressModel.Imie)
+    @Html.HiddenFor(m => m.UserAddressModel.Nip)
+    @Html.HiddenFor(m => m.UserAddressModel.NazwaFirmy)
+    @Html.HiddenFor(m => m.UserAddressModel.Nazwisko)
+    @Html.HiddenFor(m => m.UserAddressModel.Telefon)
+    @Html.HiddenFor(m => m.UserAddressModel.Ulica)
+    @Html.HiddenFor(m => m.UserAddressModel.Miasto)
+    @Html.HiddenFor(m => m.UserAddressModel.KodPocztowy)
+    @Html.HiddenFor(m => m.UserAddressModel.Numer)
+    @Html.HiddenFor(m => m.OrderShipping.Id)
+    @Html.HiddenFor(m => m.OrderPayment.Id)
+    @Html.HiddenFor(m=>m.UserAddressModel.Email)
+}
 @Styles.Render("~/Content/css/Zamowienie/podsumowanie.css")
 @Scripts.Render("~/Scripts/podsumowanie.js")

@@ -67,8 +67,10 @@ namespace SukkuShop.Models
         public string Name { get; set; }
         public decimal Price { get; set; }
         public int Quantity { get; set; }
+        public int ReservedQuantity { get; set; }
         public int CategoryId { get; set; }
         public string ImageName { get; set; }
+        public string IconName { get; set; }
         public string Producer { get; set; }
         public int? Promotion { get; set; }
         public string Description { get; set; }

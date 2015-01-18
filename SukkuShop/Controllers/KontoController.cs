@@ -475,25 +475,25 @@ namespace SukkuShop.Controllers
                 {
                     Description = k.PaymentDescription,
                     Name = k.PaymentName,
-                    Price = k.PaymentPrice.ToString()
+                    Price = k.PaymentPrice
                 }).First();
             var shippingModel = _dbContext.ShippingTypes.Where(m => m.ShippingId == order.ShippingId)
                 .Select(k => new SharedShippingOrderSummaryModels
                 {
                     Description = k.ShippingDescription,
                     Name = k.ShippingName,
-                    Price = k.ShippingPrice.ToString()
+                    Price = k.ShippingPrice
                 }).First();
             var orderProductsList = _dbContext.OrderDetails.Where(k => k.OrderId == order.OrderId).Select(x => new OrderItemSummary
                 {                    
                     Name = x.Products.Description,
                     Image = x.Products.ImageName,
-                    Price = x.ProdPrice.ToString(),
+                    Price = x.ProdPrice,
                     Quantity = x.Quantity,
-                    TotalValue = x.SubTotalPrice.ToString(),
+                    TotalValue = x.SubTotalPrice,
                     Packing = x.Products.Packing
                 }).ToList();
-            var orderProductsPrice= orderProductsList.Sum(itemSummary => Convert.ToDecimal(itemSummary.TotalValue.Replace('.', ',')));
+            var orderProductsPrice= orderProductsList.Sum(itemSummary => itemSummary.TotalValue);
             var model = new AccountOrderViewModelsSummary
             {
                 Id = id,
@@ -518,7 +518,7 @@ namespace SukkuShop.Controllers
                 OrderViewItemsTotal = new OrderViewItemsTotal
                 {
                     OrderProductList = orderProductsList,
-                    TotalValue = orderProductsPrice.ToString("c")                        
+                    TotalValue = orderProductsPrice                       
                 }
             };
             return View(model);

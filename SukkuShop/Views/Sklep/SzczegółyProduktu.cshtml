@@ -39,7 +39,7 @@
                 <span style="color: red">PRODUK NIEDOSTEPNY</span>
             }
         </div>
-        @if (Model.Product.QuantityInStock == 0)
+        @if (Model.Product.QuantityInStock <= 0)
         {
             <a href="#" class="ask-for-product">zapytaj o dostępność</a>
         }
@@ -56,7 +56,7 @@
                 </div>
                 <div class="quanity-text-right">szt.</div>
             </div>
-            if (Model.Product.QuantityInStock != 0)
+            if (Model.Product.QuantityInStock > 0)
             {
                 <div class="add-to-cart-button">
                     <div class="add-to-cart-button-text">Dodaj do koszyka</div>
@@ -104,7 +104,7 @@
         @{
             var jsSerializer = new JavaScriptSerializer();
         }
-        var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock);
+        var maxQuantity = @jsSerializer.Serialize(Model.Product.QuantityInStock-Model.Product.ReservedQuantity);
 
         //Counter ++
         $('#increase_quantity').click(function() {

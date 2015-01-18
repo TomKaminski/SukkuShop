@@ -36,8 +36,8 @@
             type: "POST",
             data: formData
         }).success(function (data) {
-            var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
-            if (plza != data.value) {
+            var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
+            if (parseFloat(plza) != parseFloat(data.value)) {
                 $("#add-to-cart-animation").css("color", "green");
                 $("#add-to-cart-animation").html("Produkt został dodany do koszyka &#10004;");
                 $('#add-to-cart-animation').stop().show("slow", function() {

@@ -291,7 +291,7 @@ namespace SukkuShop.Controllers
                 return RedirectToAction(MVC.Koszyk.Index());
             SharedShippingOrderSummaryModels paymentModel;
             SharedShippingOrderSummaryModels shippingModel;
-            string totaltotalvalue;
+            decimal totaltotalvalue;
             var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
             var userModel = new CartAddressModel
             {
@@ -303,7 +303,8 @@ namespace SukkuShop.Controllers
                 Nazwisko = shoppingCart.UserAddressModel.Nazwisko,
                 Numer = shoppingCart.UserAddressModel.Numer,
                 Telefon = shoppingCart.UserAddressModel.Telefon,
-                Ulica = shoppingCart.UserAddressModel.Ulica
+                Ulica = shoppingCart.UserAddressModel.Ulica,
+                Email = shoppingCart.Email
             };
             
             var orderModel = new OrderViewModelsSummary
@@ -312,7 +313,7 @@ namespace SukkuShop.Controllers
                 OrderPayment = paymentModel,
                 OrderShipping = shippingModel,
                 UserAddressModel = userModel,
-                TotalTotalValue = String.Format("{0:0.00}", totaltotalvalue)
+                TotalTotalValue = totaltotalvalue
             };
             if (shoppingCart.UserAddressModel.Nip != null)
                 orderModel.Firma = true;
@@ -320,13 +321,10 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult> Podsumowanie(string userhints, Cart shoppingCart)
+        public virtual async Task<ActionResult> Podsumowanie(OrderViewModelsSummary model,Cart shoppingCart)
         {
-            if (!shoppingCart.Lines.Any())
-            {
-                return RedirectToAction(MVC.Koszyk.Index());
-            }
-            shoppingCart.UserHints = userhints;
+            
+            
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
 
             int? userId = null;
@@ -335,84 +333,123 @@ namespace SukkuShop.Controllers
 
             var listakurwa = new List<OrderDetails>();
             decimal hehe = 0;
-            foreach (var item in shoppingCart.Lines)
+            foreach (var item in model.OrderViewItemsTotal.OrderProductList.ToList())
             {
-                var product = _dbContext.Products.First(i => i.ProductId == item.Id);
-                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = Math.Floor(price * 100) / 100;
-                var orderD = new OrderDetails
+                if (!item.ItemRemoved)
                 {
-                    ProductId = item.Id,
-                    Quantity = item.Quantity,
-                    ProdPrice = priceFloored,
-                    SubTotalPrice = item.Quantity*priceFloored
-                };
-                _dbContext.OrderDetails.Add(orderD);
-                listakurwa.Add(orderD);
-                hehe += orderD.SubTotalPrice;
-                product.Quantity -= item.Quantity;
-                product.OrdersCount++;
-                _dbContext.Products.AddOrUpdate(product);
+                    var product = _dbContext.Products.First(i => i.ProductId == item.Id);
+                    if (product.Quantity - product.ReservedQuantity >= item.Quantity)
+                    {
+                        var orderD = new OrderDetails
+                        {
+                            ProductId = item.Id,
+                            Quantity = item.Quantity,
+                            ProdPrice = item.Price,
+                            SubTotalPrice = item.TotalValue
+                        };
+                        _dbContext.OrderDetails.Add(orderD);
+                        listakurwa.Add(orderD);
+                        hehe += item.TotalValue;
+                        product.ReservedQuantity += item.Quantity;
+                        product.OrdersCount++;
+                        _dbContext.Products.AddOrUpdate(product);
+                    }
+                    else
+                    {
+                        if (product.Quantity - product.ReservedQuantity <= 0)
+                        {
+                            item.ItemRemoved = true;
+                            model.HasErrors = true;
+                        }
+                        else if (product.Quantity - product.ReservedQuantity < item.Quantity)
+                        {
+
+                            item.QuantityChanged = true;
+                            item.OldQuantity = item.Quantity;
+                            item.Quantity = product.Quantity - product.ReservedQuantity;
+                            item.TotalValue = item.Price*item.Quantity;
+                            shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id).Quantity = item.Quantity;
+                            model.HasErrors = true;
+                            hehe += item.TotalValue;
+                        }
+                    }
+                }
+                else
+                {
+                    model.OrderViewItemsTotal.OrderProductList.Remove(item);
+                    
+                }             
             }
-            var paymentPrice = _dbContext.PaymentTypes.First(i => i.PaymentId == shoppingCart.PaymentId);
-            var shippingPrice = _dbContext.ShippingTypes.First(i => i.ShippingId == shoppingCart.ShippingId);
+            if (model.HasErrors)
+            {
+                model.OrderViewItemsTotal.TotalValue = hehe;
+                model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price;
+                return View(model);                
+            }
+            if (model.OrderViewItemsTotal.OrderProductList.Count == 0)
+            {
+                shoppingCart.Clear();
+                return RedirectToAction(MVC.Koszyk.Index());
+            }
+            var paymentPrice = model.OrderPayment;
+            var shippingPrice = model.OrderShipping;
             var orders = new Orders
             {
-                Email = shoppingCart.Email,
+                Email = model.UserAddressModel.Email,
                 ProductsPrice = hehe,
-                TotalPrice = hehe + paymentPrice.PaymentPrice + shippingPrice.ShippingPrice,
-                Name = shoppingCart.UserAddressModel.Imie,
-                Surname = shoppingCart.UserAddressModel.Nazwisko,
+                TotalPrice = hehe + paymentPrice.Price + shippingPrice.Price,
+                Name = model.UserAddressModel.Imie,
+                Surname = model.UserAddressModel.Nazwisko,
                 OrderDate = DateTime.Today,
                 SentDate = DateTime.Today,
-                ShippingId = shoppingCart.ShippingId,
-                PaymentId = shoppingCart.PaymentId,
-                City = shoppingCart.UserAddressModel.Miasto,
-                Street = shoppingCart.UserAddressModel.Ulica,
-                Number = shoppingCart.UserAddressModel.Numer,
-                PostalCode = shoppingCart.UserAddressModel.KodPocztowy,
+                ShippingId = model.OrderShipping.Id,
+                PaymentId = model.OrderPayment.Id,
+                City = model.UserAddressModel.Miasto,
+                Street = model.UserAddressModel.Ulica,
+                Number = model.UserAddressModel.Numer,
+                PostalCode = model.UserAddressModel.KodPocztowy,
                 OrderDetails = listakurwa,
                 UserId = userId,
                 OrderInfo = "Przyjęte",
-                UserHints = shoppingCart.UserHints,
-                NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
-                OrderNip = shoppingCart.UserAddressModel.Nip,
-                Phone = shoppingCart.UserAddressModel.Telefon
+                UserHints = model.UserHints,
+                NazwaFirmy = model.UserAddressModel.NazwaFirmy,
+                OrderNip = model.UserAddressModel.Nip,
+                Phone = model.UserAddressModel.Telefon
             };
             _dbContext.Orders.Add(orders);
             await _dbContext.SaveChangesAsync();
             var email = new OrderSumEmail
             {
-                To = shoppingCart.Email,
+                To = model.UserAddressModel.Email,
                 CallbackUrl = Url.Action(MVC.Konto.HistoriaZamowien()),
                 Id = orders.OrderId,
                 OrderViewModelsSummary = new OrderViewModelsSummary
                 {
-                    Firma = shoppingCart.UserAddressModel.Nip != null,
-                    TotalTotalValue = (hehe + paymentPrice.PaymentPrice + shippingPrice.ShippingPrice).ToString("c"),
+                    Firma = model.UserAddressModel.Nip != null,
+                    TotalTotalValue = hehe + paymentPrice.Price + shippingPrice.Price,
                     OrderPayment = new SharedShippingOrderSummaryModels
                     {
-                        Description = paymentPrice.PaymentDescription,
-                        Name = paymentPrice.PaymentName,
-                        Price = paymentPrice.PaymentPrice.ToString("c")
+                        Description = paymentPrice.Description,
+                        Name = paymentPrice.Name,
+                        Price = paymentPrice.Price
                     },
                     OrderShipping = new SharedShippingOrderSummaryModels
                     {
-                        Description = shippingPrice.ShippingDescription,
-                        Name = shippingPrice.ShippingName,
-                        Price = shippingPrice.ShippingPrice.ToString("c")
+                        Description = shippingPrice.Description,
+                        Name = shippingPrice.Name,
+                        Price = shippingPrice.Price
                     },
-                    UserAddressModel = shoppingCart.UserAddressModel,
+                    UserAddressModel = model.UserAddressModel,
                     OrderViewItemsTotal = new OrderViewItemsTotal
                     {
-                        TotalValue = hehe.ToString("c"),
+                        TotalValue = hehe,
                         OrderProductList = listakurwa.Select(m => new OrderItemSummary
                         {
                             Image = m.Products.ImageName,
                             Name = m.Products.Name,
-                            Price = m.Products.Price.ToString(),
+                            Price = m.Products.Price,
                             Quantity = m.Quantity,
-                            TotalValue = m.SubTotalPrice.ToString(),
+                            TotalValue = m.SubTotalPrice,
                             Packing = m.Products.Packing
                         }).ToList()
                     }
@@ -435,7 +472,7 @@ namespace SukkuShop.Controllers
 
 
         private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out SharedShippingOrderSummaryModels paymentModel,
-            out SharedShippingOrderSummaryModels shippingModel, out string totaltotalvalue)
+            out SharedShippingOrderSummaryModels shippingModel, out decimal totaltotalvalue)
         {
             var orderitemsummary = OrderViewItemsSummary(shoppingCart);
             var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
@@ -443,18 +480,19 @@ namespace SukkuShop.Controllers
             paymentModel = new SharedShippingOrderSummaryModels
             {
                 Name = payment.PaymentName,
-                Price = payment.PaymentPrice.ToString(),
-                Description = payment.PaymentDescription
+                Price = payment.PaymentPrice,
+                Description = payment.PaymentDescription,
+                Id = payment.PaymentId
             };
             shippingModel = new SharedShippingOrderSummaryModels
             {
                 Name = shipping.ShippingName,
-                Price = shipping.ShippingPrice.ToString(),
-                Description = shipping.ShippingDescription
+                Price = shipping.ShippingPrice,
+                Description = shipping.ShippingDescription,
+                Id=shipping.ShippingId
             };
-            var value = Convert.ToDecimal(orderitemsummary.TotalValue.Replace(".",",").Replace(" zł","")) + Convert.ToDecimal(paymentModel.Price) +
-                        Convert.ToDecimal(shippingModel.Price);
-            totaltotalvalue = value.ToString();
+            var value = orderitemsummary.TotalValue + paymentModel.Price + shippingModel.Price;
+            totaltotalvalue = value;
             
             return orderitemsummary;
         }
@@ -499,24 +537,23 @@ namespace SukkuShop.Controllers
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
                 var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = Math.Floor(price * 100) / 100;
+                var priceFloored = decimal.Round(Math.Floor(price * 100) / 100,2);
                 productList.Add(new OrderItemSummary
                 {
                     Name = product.Name,
-                    Price =
-                        priceFloored.ToString("c"),
+                    Price = decimal.Round(priceFloored,2),
                     Quantity = item.Quantity,
-                    TotalValue =
-                        (priceFloored * item.Quantity).ToString("c"),
+                    TotalValue = priceFloored * item.Quantity,
                     Image=product.ImageName,
-                    Packing = product.Packing
+                    Packing = product.Packing,
+                    Id = product.ProductId
                 });
                 totalValue += (priceFloored * item.Quantity);
             }
             var model = new OrderViewItemsTotal
             {
                 OrderProductList = productList,
-                TotalValue = totalValue.ToString("c").Replace(",", ".")
+                TotalValue = decimal.Round(totalValue,2)
             };
             return model;
         }
