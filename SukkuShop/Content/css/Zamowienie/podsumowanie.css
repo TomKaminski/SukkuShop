@@ -23,6 +23,26 @@ img.grayscale {
     padding-bottom: 25px;
     border-bottom: 1px solid #f89b1d;
     margin-bottom: 25px; }
+    .order-container .error-message .error-box {
+      margin-top: 20px;
+      text-align: center; }
+      .order-container .error-message .error-box #triangle-right-big {
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-left: 11px solid #f89b1d;
+        border-bottom: 7px solid transparent;
+        float: right;
+        margin-left: 10px;
+        margin-top: 1px; }
+      .order-container .error-message .error-box .order-title-ending {
+        font-size: 16px;
+        font-family: Segoe UI;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #f89b1d;
+        float: right;
+        cursor: pointer; }
   .order-container .uwagi-box {
     width: 100%;
     margin: 25px 0; }

@@ -42,6 +42,31 @@ font-size:20px;
 padding-bottom:25px;
 border-bottom:1px solid #f89b1d;
 margin-bottom:25px;
+    .error-box
+        {
+        
+        margin-top:20px;
+        text-align:center;
+        #triangle-right-big{
+        width: 0;
+	    height: 0;
+	    border-top: 7px solid transparent;
+	    border-left: 11px solid $color_tree_poppy_approx;
+	    border-bottom: 7px solid transparent;
+	    float: right;
+	    margin-left: 10px;
+	    margin-top: 1px;
+        }
+        .order-title-ending {
+	    font-size: 16px;
+	    font-family: $font_0;
+	    font-weight: bold;
+	    text-transform: uppercase;
+	    color: $color_tree_poppy_approx;
+        float: right; 
+        cursor: pointer;
+    }
+    }
 }
     .uwagi-box{
         width:100%;

@@ -11,15 +11,19 @@
             <li>2. Twoje dane</li>
             <li class="selected">3. Potwierdzenie zamówienia</li>
         </ul>
-        @if (Model.HasErrors)
-        {
+        @*@if (Model.HasErrors)*@
+        @*{*@
             <div class="error-message">
                 Wystąpił problem podczas finalizacji Twojego zamówienia. Prawdopodobnie ktoś Cię uprzedził i zabrakło części produktów, których potrzebujesz. System zmodyfikował Twoje zamówienie.
                 <a href="@Url.Action(MVC.Koszyk.Index())">
-                    <div id="triangle-right-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: right; cursor: pointer" id="zlozzamowienie">Powrót do koszyka</div>
+                    <div class="error-box">
+                        <div id="triangle-right-big"></div><div class="order-title-ending"  id="zlozzamowienie">Powrót do koszyka</div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
                 </a>
             </div>
-        }
+        @*}*@
         
         <table class="order-table" cellspacing="0">
             <thead>
