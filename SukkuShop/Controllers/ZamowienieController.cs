@@ -287,7 +287,7 @@ namespace SukkuShop.Controllers
         [HttpGet]
         public virtual ActionResult Podsumowanie(Cart shoppingCart)
         {
-            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0)
+            if (!shoppingCart.Lines.Any() || shoppingCart.ShippingId == 0 || shoppingCart.PaymentId == 0 || shoppingCart.UserAddressModel==null)
                 return RedirectToAction(MVC.Koszyk.Index());
             SharedShippingOrderSummaryModels paymentModel;
             SharedShippingOrderSummaryModels shippingModel;
