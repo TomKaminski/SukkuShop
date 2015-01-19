@@ -368,7 +368,9 @@ namespace SukkuShop.Controllers
                             item.OldQuantity = item.Quantity;
                             item.Quantity = product.Quantity - product.ReservedQuantity;
                             item.TotalValue = item.Price*item.Quantity;
-                            shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id).Quantity = item.Quantity;
+                            var firstOrDefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id);
+                            if (firstOrDefault != null)
+                                firstOrDefault.Quantity = item.Quantity;
                             model.HasErrors = true;
                             hehe += item.TotalValue;
                         }

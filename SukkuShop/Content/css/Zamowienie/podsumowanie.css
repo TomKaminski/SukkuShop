@@ -8,6 +8,10 @@
   text-align: left;
   position: relative; }
 
+img.grayscale {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%); }
+
 .order-container {
   width: 1066px;
   margin: auto; }
@@ -119,20 +123,19 @@
         float: left;
         border: 2px solid #f89b1d; }
       .order-container table.order-table tbody tr td.submit-error, .order-container table.order-table tbody tr td.remove-item-error {
-        padding: 16px 0 !important;
-        border-top: 1px dotted red !important;
-        border-bottom: 1px dotted red !important;
-        position: relative; }
-        .order-container table.order-table tbody tr td.submit-error .submit-error-tick, .order-container table.order-table tbody tr td.remove-item-error .submit-error-tick {
-          position: absolute;
-          width: 22px;
-          height: 22px;
-          line-height: 22px;
-          font-size: 18px;
-          background-color: red;
-          top: 0;
-          right: 0;
-          color: white; }
+        /*padding:16px 0 !important;
+        position:relative;*/
+        /*.submit-error-tick{
+            position:absolute;
+            width:22px;
+            height:22px;
+            line-height:22px;
+            font-size:18px;
+            background-color:red;
+            top:0;
+            right:0;
+            color:white
+        }*/ }
   .order-container .products-price-summary {
     font-family: SegoeLight;
     font-size: 18px;

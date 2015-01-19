@@ -27,7 +27,10 @@ $font_2: SegoeBold;
 }
 
 
-
+img.grayscale { 
+    -webkit-filter: grayscale(100%); 
+    filter: grayscale(100%); 
+}
 
 .order-container {
 	width: 1066px;
@@ -174,11 +177,9 @@ margin-bottom:25px;
 			    border: 2px solid $color_tree_poppy_approx;
 		    }
 &.submit-error,&.remove-item-error{
-    padding:16px 0 !important;
-    border-top:1px dotted red !important;
-    border-bottom:1px dotted red !important;
-    position:relative;
-    .submit-error-tick{
+    /*padding:16px 0 !important;
+    position:relative;*/
+    /*.submit-error-tick{
         position:absolute;
         width:22px;
         height:22px;
@@ -188,7 +189,7 @@ margin-bottom:25px;
         top:0;
         right:0;
         color:white
-    }
+    }*/
 }
 	    }
     }

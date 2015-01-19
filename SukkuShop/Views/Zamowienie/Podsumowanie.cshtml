@@ -14,7 +14,10 @@
         @if (Model.HasErrors)
         {
             <div class="error-message">
-                Wystąpił problem podczas finalizacji Twojego zamówienia. Prawdopodobnie ktoś Cię uprzedził i zabrakło części produktów, których potrzebujesz. System zmodyfikował Twoje zamówienie - zatwierdź te zmiany.
+                Wystąpił problem podczas finalizacji Twojego zamówienia. Prawdopodobnie ktoś Cię uprzedził i zabrakło części produktów, których potrzebujesz. System zmodyfikował Twoje zamówienie.
+                <a href="@Url.Action(MVC.Koszyk.Index())">
+                    <div id="triangle-right-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: right; cursor: pointer" id="zlozzamowienie">Powrót do koszyka</div>
+                </a>
             </div>
         }
         
@@ -31,10 +34,10 @@
                 @for (var i = 0; i < Model.OrderViewItemsTotal.OrderProductList.Count; i++)
                 {
                     
-                    <tr style="@(Model.OrderViewItemsTotal.OrderProductList[i].ItemRemoved?"border:1px dotted red !important":"")">
+                    <tr>
                         <td>
                             
-                            <img img src=@("/Content/Images/Shop/" + Model.OrderViewItemsTotal.OrderProductList[i].Image + ".jpg" ) />
+                            <img class="@(Model.OrderViewItemsTotal.OrderProductList[i].ItemRemoved?"grayscale":"")" src=@("/Content/Images/Shop/" + Model.OrderViewItemsTotal.OrderProductList[i].Image + ".jpg" ) />
                             <div class="custom-product-text-container">
                                 <p>
                                     <span style="font-size: 18px; line-height: 25px;">@Model.OrderViewItemsTotal.OrderProductList[i].Name</span>
