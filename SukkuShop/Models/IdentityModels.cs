@@ -65,15 +65,23 @@ namespace SukkuShop.Models
         [Key]
         public int ProductId { get; set; }
         public string Name { get; set; }
-        public decimal Price { get; set; }
-        public int Quantity { get; set; }
+        public decimal? Price { get; set; }
+        public int? Quantity { get; set; }
+
+        [DefaultValue(typeof(int), "0")]
         public int ReservedQuantity { get; set; }
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
         public string ImageName { get; set; }
         public string IconName { get; set; }
-        public string Producer { get; set; }
+
+        [DefaultValue(typeof(int), "0")]
         public int? Promotion { get; set; }
         public string Description { get; set; }
+
+        [DefaultValue(typeof(bool),"True")]
+        public bool Published { get; set; }
+        public bool IsComplete { get; set; }
+        public bool WrongModel { get; set; }
 
         [DisplayName("Sposób pakowania")]
         public string Packing { get; set; }

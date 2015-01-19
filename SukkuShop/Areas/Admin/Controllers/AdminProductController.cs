@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity.Migrations;
 using System.IO;
+using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SukkuShop.Areas.Admin.Models;
 using SukkuShop.Models;
+using ImageResizer;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
@@ -25,21 +28,39 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual ActionResult UploadFile(ProductUploadModel model)
         {
+            var product = new Products
+            {
+                Quantity = model.Quantity,
+                CategoryId = model.Category,
+                Name = model.Title,
+                DateAdded = DateTime.Now,
+                Description = model.Description,
+                Published = false,
+                Packing = model.Packing,
+                Promotion = model.Promotion,
+                Price = model.Price,    
+                ReservedQuantity = 0
+            };
+            _dbContext.Products.AddOrUpdate(product);
+            _dbContext.SaveChanges();
+            var prod = _dbContext.Products.OrderByDescending(x => x.ProductId).First();
             if (model.ImageBig != null && model.ImageBig.ContentLength != 0)
             {
-                var pathForSaving = Server.MapPath("~/Uploads");
-                if (CreateFolderIfNeeded(pathForSaving))
+                var pathForSaving = Server.MapPath("~/Content/Images/Shop/");
+                var imageBig = new ImageJob(model.ImageBig, pathForSaving + prod.ProductId + "_normal", new Instructions("maxwidth=700&maxheight=700&format=jpg"))
                 {
-                    try
-                    {
-                        model.ImageNormal.SaveAs(Path.Combine(pathForSaving, model.ImageNormal.FileName));
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
+                    CreateParentDirectory = true,
+                    AddFileExtension = true
+                };
+                imageBig.Build();
+                var imageSmall = new ImageJob(model.ImageBig, pathForSaving + prod.ProductId + "_small", new Instructions("maxwidth=127&maxheight=127&format=jpg"))
+                {
+                    CreateParentDirectory = true,
+                    AddFileExtension = true
+                };
+                imageSmall.Build();
             }
-            return View();
+            return View("Index",model);
         }
         [HttpGet]
         public virtual ActionResult Create()
@@ -63,8 +84,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     OrdersCount = 0,
                     Packing = model.Packing,
                     Price=model.Price,
-                    Promotion = model.Promotion,
-                    Producer = model.Producer                    
+                    Promotion = model.Promotion                  
                 };
                 if (item.Quantity < 0)
                     item.Quantity = 0;
@@ -123,7 +143,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             item.Name = model.Name;
             item.ImageName = model.ImageName;
             item.Packing = model.Packing;
-            item.Producer = model.Producer;
             item.Promotion = model.Promotion;
             
             _dbContext.SaveChanges();

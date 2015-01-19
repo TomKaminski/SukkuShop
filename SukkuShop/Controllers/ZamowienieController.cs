@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Transactions;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -321,105 +324,121 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
-        public virtual async Task<ActionResult> Podsumowanie(OrderViewModelsSummary model,Cart shoppingCart)
+        public virtual async Task<ActionResult> Podsumowanie(OrderViewModelsSummary model, Cart shoppingCart)
         {
-            
-            
-            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
 
+
+            var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             int? userId = null;
             if (user != null)
                 userId = user.Id;
-
+            var orders = new Orders();
             var listakurwa = new List<OrderDetails>();
             decimal hehe = 0;
-            foreach (var item in model.OrderViewItemsTotal.OrderProductList.ToList())
-            {
-                if (!item.ItemRemoved)
-                {
-                    var product = _dbContext.Products.First(i => i.ProductId == item.Id);
-                    if (product.Quantity - product.ReservedQuantity >= item.Quantity)
-                    {
-                        var orderD = new OrderDetails
-                        {
-                            ProductId = item.Id,
-                            Quantity = item.Quantity,
-                            ProdPrice = item.Price,
-                            SubTotalPrice = item.TotalValue
-                        };
-                        _dbContext.OrderDetails.Add(orderD);
-                        listakurwa.Add(orderD);
-                        hehe += item.TotalValue;
-                        product.ReservedQuantity += item.Quantity;
-                        product.OrdersCount++;
-                        _dbContext.Products.AddOrUpdate(product);
-                    }
-                    else
-                    {
-                        if (product.Quantity - product.ReservedQuantity <= 0)
-                        {
-                            item.ItemRemoved = true;
-                            model.HasErrors = true;
-                        }
-                        else if (product.Quantity - product.ReservedQuantity < item.Quantity)
-                        {
-
-                            item.QuantityChanged = true;
-                            item.OldQuantity = item.Quantity;
-                            item.Quantity = product.Quantity - product.ReservedQuantity;
-                            item.TotalValue = item.Price*item.Quantity;
-                            var firstOrDefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id);
-                            if (firstOrDefault != null)
-                                firstOrDefault.Quantity = item.Quantity;
-                            model.HasErrors = true;
-                            hehe += item.TotalValue;
-                        }
-                    }
-                }
-                else
-                {
-                    model.OrderViewItemsTotal.OrderProductList.Remove(item);
-                    
-                }             
-            }
-            if (model.HasErrors)
-            {
-                model.OrderViewItemsTotal.TotalValue = hehe;
-                model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price;
-                return View(model);                
-            }
-            if (model.OrderViewItemsTotal.OrderProductList.Count == 0)
-            {
-                shoppingCart.Clear();
-                return RedirectToAction(MVC.Koszyk.Index());
-            }
             var paymentPrice = model.OrderPayment;
             var shippingPrice = model.OrderShipping;
-            var orders = new Orders
+            using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-                Email = model.UserAddressModel.Email,
-                ProductsPrice = hehe,
-                TotalPrice = hehe + paymentPrice.Price + shippingPrice.Price,
-                Name = model.UserAddressModel.Imie,
-                Surname = model.UserAddressModel.Nazwisko,
-                OrderDate = DateTime.Today,
-                SentDate = DateTime.Today,
-                ShippingId = model.OrderShipping.Id,
-                PaymentId = model.OrderPayment.Id,
-                City = model.UserAddressModel.Miasto,
-                Street = model.UserAddressModel.Ulica,
-                Number = model.UserAddressModel.Numer,
-                PostalCode = model.UserAddressModel.KodPocztowy,
-                OrderDetails = listakurwa,
-                UserId = userId,
-                OrderInfo = "Przyjęte",
-                UserHints = model.UserHints,
-                NazwaFirmy = model.UserAddressModel.NazwaFirmy,
-                OrderNip = model.UserAddressModel.Nip,
-                Phone = model.UserAddressModel.Telefon
-            };
-            _dbContext.Orders.Add(orders);
-            await _dbContext.SaveChangesAsync();
+
+                try
+                {
+                    foreach (var item in model.OrderViewItemsTotal.OrderProductList.ToList())
+                    {
+                        if (!item.ItemRemoved)
+                        {
+                            var product = _dbContext.Products.First(i => i.ProductId == item.Id);
+                            
+                            if (product.Quantity - product.ReservedQuantity >= item.Quantity)
+                            {
+                                var orderD = new OrderDetails
+                                {
+                                    ProductId = item.Id,
+                                    Quantity = item.Quantity,
+                                    ProdPrice = item.Price,
+                                    SubTotalPrice = item.TotalValue
+                                };
+                                _dbContext.OrderDetails.Add(orderD);
+                                listakurwa.Add(orderD);
+                                hehe += item.TotalValue;
+                                product.ReservedQuantity += item.Quantity;
+                                product.OrdersCount++;
+                                _dbContext.Products.AddOrUpdate(product);
+                            }
+                            else
+                            {
+                                if (product.Quantity - product.ReservedQuantity <= 0)
+                                {
+                                    item.ItemRemoved = true;
+                                    model.HasErrors = true;
+                                }
+                                else if (product.Quantity - product.ReservedQuantity < item.Quantity)
+                                {
+
+                                    item.QuantityChanged = true;
+                                    item.OldQuantity = item.Quantity;
+                                    item.Quantity = product.Quantity??0 - product.ReservedQuantity;
+                                    item.TotalValue = item.Price*item.Quantity;
+                                    var firstOrDefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id);
+                                    if (firstOrDefault != null)
+                                        firstOrDefault.Quantity = item.Quantity;
+                                    model.HasErrors = true;
+                                    hehe += item.TotalValue;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            model.OrderViewItemsTotal.OrderProductList.Remove(item);
+
+                        }
+                    }
+                    if (model.HasErrors)
+                    {
+                        model.OrderViewItemsTotal.TotalValue = hehe;
+                        model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price;
+                        return View(model);
+                    }
+                    if (model.OrderViewItemsTotal.OrderProductList.Count == 0)
+                    {
+                        shoppingCart.Clear();
+                        return RedirectToAction(MVC.Koszyk.Index());
+                    }
+
+                    orders = new Orders
+                    {
+                        Email = model.UserAddressModel.Email,
+                        ProductsPrice = hehe,
+                        TotalPrice = hehe + paymentPrice.Price + shippingPrice.Price,
+                        Name = model.UserAddressModel.Imie,
+                        Surname = model.UserAddressModel.Nazwisko,
+                        OrderDate = DateTime.Today,
+                        SentDate = DateTime.Today,
+                        ShippingId = model.OrderShipping.Id,
+                        PaymentId = model.OrderPayment.Id,
+                        City = model.UserAddressModel.Miasto,
+                        Street = model.UserAddressModel.Ulica,
+                        Number = model.UserAddressModel.Numer,
+                        PostalCode = model.UserAddressModel.KodPocztowy,
+                        OrderDetails = listakurwa,
+                        UserId = userId,
+                        OrderInfo = "Przyjęte",
+                        UserHints = model.UserHints,
+                        NazwaFirmy = model.UserAddressModel.NazwaFirmy,
+                        OrderNip = model.UserAddressModel.Nip,
+                        Phone = model.UserAddressModel.Telefon
+                    };
+                    _dbContext.Orders.Add(orders);
+                    await _dbContext.SaveChangesAsync();
+                    transaction.Complete();
+                }
+                catch(Exception ex)
+                {
+                    if (ex.GetType() != typeof(UpdateException))
+                    {
+                    }
+                }
+                
+            }
             var email = new OrderSumEmail
             {
                 To = model.UserAddressModel.Email,
@@ -449,7 +468,7 @@ namespace SukkuShop.Controllers
                         {
                             Image = m.Products.ImageName,
                             Name = m.Products.Name,
-                            Price = m.Products.Price,
+                            Price = m.Products.Price??0,
                             Quantity = m.Quantity,
                             TotalValue = m.SubTotalPrice,
                             Packing = m.Products.Packing
@@ -508,7 +527,7 @@ namespace SukkuShop.Controllers
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
                 var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = Math.Floor(price * 100) / 100;
+                var priceFloored = Math.Floor((price??0) * 100) / 100;
 
                 productList.Add(new OrderItem
                 {
@@ -539,7 +558,7 @@ namespace SukkuShop.Controllers
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
                 var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = decimal.Round(Math.Floor(price * 100) / 100,2);
+                var priceFloored = decimal.Round(Math.Floor((price??0) * 100) / 100,2);
                 productList.Add(new OrderItemSummary
                 {
                     Name = product.Name,

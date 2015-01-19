@@ -10,7 +10,7 @@
         <div class="product-promotion-label-img">PROMOCJA -@Model.Product.Promotion%</div>
     }
     <div class="product-details-img" style="background-color:white;">
-        <img id="product-image-details" src=~/@("Content/Images/Shop/"+Model.Product.ImageName+".png") data-zoom-image="@Url.Content("~/Content/Images/Shop/" + Model.Product.ImageName+".jpg")">
+        <img id="product-image-details" src=~/@("Content/Images/Shop/"+Model.Product.ImageName+".jpg") data-zoom-image="@Url.Content("~/Content/Images/Shop/" + Model.Product.ImageName+".jpg")">
         <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
         <div class="product-category-label-img">@Model.Product.Category</div>
     </div>
@@ -30,7 +30,7 @@
             <div class="gramature-text">(@Model.Product.Packing)</div>
         </div>
         <div class="avaibility segoe-semibold">
-            @if (Model.Product.QuantityInStock > 0)
+            @if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity > 0)
             {
                 <span style="color: green">PRODUKT DOSTĘPNY (@Model.Product.QuantityInStock)</span>
             }
@@ -39,7 +39,7 @@
                 <span style="color: red">PRODUK NIEDOSTEPNY</span>
             }
         </div>
-        @if (Model.Product.QuantityInStock <= 0)
+        @if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity <= 0)
         {
             <a href="#" class="ask-for-product">zapytaj o dostępność</a>
         }
@@ -56,7 +56,7 @@
                 </div>
                 <div class="quanity-text-right">szt.</div>
             </div>
-            if (Model.Product.QuantityInStock > 0)
+            if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity > 0)
             {
                 <div class="add-to-cart-button">
                     <div class="add-to-cart-button-text">Dodaj do koszyka</div>

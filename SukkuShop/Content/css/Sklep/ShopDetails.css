@@ -37,7 +37,7 @@
   .product-details-main-container .product-details-img {
     width: 368px;
     height: 368px;
-    margin: 36px 73px 0 55px;
+    margin: 0 73px 0 55px;
     float: left;
     position: relative; }
     .product-details-main-container .product-details-img img {
@@ -51,7 +51,7 @@
       left: 126px;
       opacity: 0.8; }
     .product-details-main-container .product-details-img .product-category-label-img {
-      width: 179px;
+      padding: 0 20px;
       height: 38px;
       background-color: #f89b1d;
       font-family: Segoe Ui;
@@ -60,7 +60,6 @@
       text-align: center;
       line-height: 38px;
       margin: auto;
-      position: absolute;
       left: 100px;
       bottom: 0;
       text-transform: uppercase; }

@@ -22,3 +22,4 @@
 /// <reference path="konto.js" />
 /// <reference path="accszczegzam.js" />
 /// <reference path="jquery-ui-1.9.0.min.js" />
+/// <reference path="../areas/admin/scripts/adminproduct.js" />

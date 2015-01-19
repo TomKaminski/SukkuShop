@@ -61,7 +61,15 @@ $font_8: Segoe Ui;
 	width: 21px;
 }
 
+#no-products-angular{
 
+width:1066px;margin:auto;text-align: right !important;
+.product-error-big,.product-error-normal,#product-error{
+text-align:right;
+
+}
+
+}
 
 .selectedOpt{
     opacity:1;
@@ -82,7 +90,11 @@ $font_8: Segoe Ui;
 	padding-top: 40px;
 	img {
 		position: absolute;
+
 	}
+    img#big{
+z-index:-50;
+    }
     .product-list-container {
 	    padding-top: 20px;
 	    width: 642px;

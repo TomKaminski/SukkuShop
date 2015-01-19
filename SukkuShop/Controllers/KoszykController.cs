@@ -115,7 +115,7 @@ namespace SukkuShop.Controllers
                 if (firstOrDefault != null)
                 {
                     var price = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100)) ?? firstOrDefault.Price;
-                    var priceFloored = Math.Floor(price*100)/100;
+                    var priceFloored = Math.Floor((price??0)*100)/100;
                     sum += priceFloored*line.Quantity;
                 }
             }
@@ -138,10 +138,10 @@ namespace SukkuShop.Controllers
                 var categoryName = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == product.CategoryId).Name;
                 if (product == null) continue;
                 var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
-                var priceFloored = Math.Floor(price*100)/100;
+                var priceFloored = Math.Floor((price??0)*100)/100;
                 productList.Add(new CartProduct
                 {
-                    Id = product.ProductId, Description = product.Description, Name = product.Name, Price = price.ToString("c"), Quantity = item.Quantity, TotalValue = (priceFloored*item.Quantity).ToString("c"), Image = product.ImageName, MaxQuantity = product.Quantity, CategoryName = categoryName, Packing = product.Packing
+                    Id = product.ProductId, Description = product.Description, Name = product.Name, Price = price.ToString(), Quantity = item.Quantity, TotalValue = (priceFloored*item.Quantity).ToString("c"), Image = product.ImageName, MaxQuantity = product.Quantity??0, CategoryName = categoryName, Packing = product.Packing
                 });
             }
             var model = new CartViewModels

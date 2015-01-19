@@ -79,8 +79,6 @@ namespace SukkuShop.Controllers
                     _shop.Products = _shop.Products.Where(c => c.Name.ToUpper().Contains(id.ToUpper())).ToList();
             }
             subcategoryList.Add("Wszystko");
-            if (!_shop.Products.Any())
-                return View(MVC.Sklep.Views.NoProducts);
             var obj = new
             {
                 categoryId,
@@ -101,7 +99,7 @@ namespace SukkuShop.Controllers
         //[DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id)
         {
-            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id && x.Published && !x.WrongModel);
             if (product == null)
                 return View(MVC.Sklep.Views.NoProducts);
 
@@ -116,22 +114,16 @@ namespace SukkuShop.Controllers
                         .ToList();
             }
 
-            var similarProducts2 =
-                _dbContext.Products.Where(
-                    x =>
-                        (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId)) &&
-                        x.ProductId != product.ProductId).ToList();
-
             var similarProducts =
                 _dbContext.Products.Where(
                     x =>
-                        (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId)) &&
+                        (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId??-1)) &&
                         x.ProductId != product.ProductId).Select(j => new SimilarProductModel
                         {
                             Id = j.ProductId,
-                            ImageName = j.ImageName,
+                            ImageName = j.IconName,
                             Name = j.Name,
-                            Price = j.Price,
+                            Price = j.Price??0,
                             Available = j.Quantity - j.ReservedQuantity > 0,
                             Promotion = j.Promotion
                         }).OrderBy(k => Guid.NewGuid()).Take(4).ToList();
@@ -143,7 +135,7 @@ namespace SukkuShop.Controllers
                 itemSimilar.PriceAfterDiscount = similarFloored;
             }
             var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
-            var priceFloored = Math.Floor(price*100)/100;
+            var priceFloored = Math.Floor((price??0)*100)/100;
             var model = new ProductDetailsViewModel
             {
                 Product = new ProductDetailModel
@@ -152,10 +144,10 @@ namespace SukkuShop.Controllers
                     Id = product.ProductId,
                     ImageName = product.ImageName,
                     Name = product.Name,
-                    Price = product.Price,
+                    Price = product.Price??0,
                     PriceAfterDiscount = priceFloored,
                     Promotion = product.Promotion ?? 0,
-                    QuantityInStock = product.Quantity,
+                    QuantityInStock = product.Quantity??0,
                     Packing = product.Packing,
                     Description = product.Description,
                     ReservedQuantity = product.ReservedQuantity
@@ -233,18 +225,18 @@ namespace SukkuShop.Controllers
 
         private void GetAllProducts()
         {
-            _shop.Products = _dbContext.Products.Select(x => new ProductModel
+            _shop.Products = _dbContext.Products.Where(k=>k.Published && !k.WrongModel).Select(x => new ProductModel
             {
                 Name = x.Name,
-                ImageName = x.ImageName,
-                Price = x.Price,
+                ImageName = x.IconName,
+                Price = x.Price??0,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price,
+                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price??0,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount,
-                QuantityInStock = x.Quantity - x.ReservedQuantity
+                QuantityInStock = (x.Quantity??0) - x.ReservedQuantity
             }).ToList();
         }
     }

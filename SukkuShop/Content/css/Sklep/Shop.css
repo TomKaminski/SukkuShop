@@ -24,6 +24,13 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   float: left;
   width: 21px; }
 
+#no-products-angular {
+  width: 1066px;
+  margin: auto;
+  text-align: right !important; }
+  #no-products-angular .product-error-big, #no-products-angular .product-error-normal, #no-products-angular #product-error {
+    text-align: right; }
+
 .selectedOpt {
   opacity: 1;
   font-weight: bold; }
@@ -42,6 +49,8 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   padding-top: 40px; }
   .product-background img {
     position: absolute; }
+  .product-background img#big {
+    z-index: -50; }
   .product-background .product-list-container {
     padding-top: 20px;
     width: 642px;

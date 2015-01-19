@@ -46,6 +46,9 @@
     <Reference Include="DevTrends.MvcDonutCaching">
       <HintPath>..\packages\MvcDonutCaching.1.3.0\lib\net40\DevTrends.MvcDonutCaching.dll</HintPath>
     </Reference>
+    <Reference Include="ImageResizer">
+      <HintPath>..\packages\ImageResizer.3.4.3\lib\ImageResizer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.0\lib\net45\Microsoft.Owin.dll</HintPath>
@@ -112,6 +115,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -327,6 +331,14 @@
     <Compile Include="Migrations\201501171349141_ImageIcon.Designer.cs">
       <DependentUpon>201501171349141_ImageIcon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501191515118_ProductLife.cs" />
+    <Compile Include="Migrations\201501191515118_ProductLife.Designer.cs">
+      <DependentUpon>201501191515118_ProductLife.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501192137277_nullableProd.cs" />
+    <Compile Include="Migrations\201501192137277_nullableProd.Designer.cs">
+      <DependentUpon>201501192137277_nullableProd.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -361,6 +373,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\AdminProduct.css">
+      <DependentUpon>AdminProduct.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminProduct.min.css">
+      <DependentUpon>AdminProduct.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Content\css\Error\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
     </Content>
@@ -618,6 +637,10 @@
       <DependentUpon>OrderPreview.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\AdminProduct\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\css\AdminProduct.scss" />
+    <Content Include="Areas\Admin\Content\css\AdminProduct.css.map">
+      <DependentUpon>AdminProduct.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
@@ -803,6 +826,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501171349141_ImageIcon.resx">
       <DependentUpon>201501171349141_ImageIcon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501191515118_ProductLife.resx">
+      <DependentUpon>201501191515118_ProductLife.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501192137277_nullableProd.resx">
+      <DependentUpon>201501192137277_nullableProd.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
