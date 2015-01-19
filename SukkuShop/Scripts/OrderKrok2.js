@@ -96,9 +96,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#zaloguj").click(function() {
-        $("#LoginOrderForm").submit();
-    });
 
     $.validator.addMethod("regex", function (value, element, regexpr) {
         return regexpr.test(value);
@@ -122,6 +119,10 @@ $(document).ready(function () {
                 $("#NewClientFormFirma").submit();
             }
         }
+    });
+
+    $("#login-replace").delegate("#zaloguj", "click", function() {
+        $("#LoginOrderForm").submit();
     });
 
     $("#changeaddress-replace").delegate("input[id=newaddress]", "click", function () {
