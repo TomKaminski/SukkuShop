@@ -2,9 +2,7 @@
 
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
-using System.IO;
 using System.Linq;
 using System.Web.Mvc;
 using ImageResizer;
@@ -25,7 +23,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         // GET: Admin/AdminProduct
-        
+
         public virtual ActionResult Index()
         {
             return View();
@@ -41,7 +39,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 x.WrongModel,
                 x.IsComplete,
                 x.CategoryId,
-                upper=x.Categories.UpperCategoryId
+                upper = x.Categories.UpperCategoryId
             });
 
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
@@ -69,17 +67,33 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var category = model.Category == 0 ? null : model.Category;
+                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
+                if (price == null || category == null || model.Packing == null)
+                {
+                    if (model.PublishAfterCreate)
+                    {
+                        ModelState.AddModelError("PublishAfterCreate",
+                            "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
+                        GetDropDownLists(model);
+                        return View(model);
+                    }
+                }
+
+                if (model.SubCategory != 0)
+                    category = model.SubCategory;
+
                 var product = new Products
                 {
                     Quantity = model.Quantity,
-                    CategoryId = model.Category,
+                    CategoryId = category,
                     Name = model.Title,
                     DateAdded = DateTime.Now,
                     Description = model.Description,
-                    Published = false,
+                    Published = model.PublishAfterCreate,
                     Packing = model.Packing,
                     Promotion = model.Promotion,
-                    Price = Convert.ToDecimal(model.Price.Replace(".",",")),
+                    Price = price,
                     ReservedQuantity = 0
                 };
                 _dbContext.Products.AddOrUpdate(product);
@@ -105,7 +119,6 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 prod.IconName = prod.ProductId + "_small";
                 prod.ImageName = prod.ProductId + "_normal";
-                prod.Published = false;
                 prod.IsComplete = true;
                 foreach (var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(prod, null) == null))
                     prod.IsComplete = false;
@@ -113,11 +126,17 @@ namespace SukkuShop.Areas.Admin.Controllers
                 {
                     prod.WrongModel = true;
                     prod.IsComplete = false;
-                }   
+                }
                 _dbContext.Products.AddOrUpdate(prod);
                 _dbContext.SaveChanges();
                 return View("Index");
             }
+            GetDropDownLists(model);
+            return View(model);
+        }
+
+        private void GetDropDownLists(ProductUploadModel model)
+        {
             var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
@@ -130,17 +149,19 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Selected = true
             });
             ViewBag.CategoryList = categoryList;
-            var subcategoryList = new List<SelectListItem>
+            var subCategoryList = new List<SelectListItem>
             {
-                new SelectListItem{Text = "-",Value = null,Selected = true}
+                new SelectListItem {Text = "-", Value = "0", Selected = true}
             };
-            var subcategoryList2 = _dbContext.Categories.Where(x => x.UpperCategoryId == model.Category).Select(k => new SelectListItem
-            {
-                Text = k.Name,
-                Value = k.CategoryId.ToString()
-            }).ToList();
-            subcategoryList.AddRange(subcategoryList2);
-            return View(model);
+
+            var subCategoryList2 =
+                _dbContext.Categories.Where(x => x.UpperCategoryId == model.Category).Select(k => new SelectListItem
+                {
+                    Text = k.Name,
+                    Value = k.CategoryId.ToString()
+                }).ToList();
+            subCategoryList.AddRange(subCategoryList2);
+            ViewBag.SubCategoryList = subCategoryList;
         }
 
         [HttpGet]
@@ -149,7 +170,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
-                Value = k.CategoryId.ToString()            
+                Value = k.CategoryId.ToString()
             }).ToList();
             categoryList.Add(new SelectListItem
             {
@@ -157,10 +178,10 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Value = "0",
                 Selected = true
             });
-                ViewBag.CategoryList = categoryList;
+            ViewBag.CategoryList = categoryList;
             var subCategoryList = new List<SelectListItem>
             {
-                new SelectListItem {Text = "-", Value = null, Selected = true}
+                new SelectListItem {Text = "-", Value = "0", Selected = true}
             };
             ViewBag.SubCategoryList = subCategoryList;
             return View();
@@ -183,8 +204,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(subcategoryList, JsonRequestBehavior.AllowGet);
         }
 
-        
-        
 
         [HttpGet]
         public virtual ActionResult Delete(int id)
@@ -242,23 +261,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             var prod = _dbContext.Products.Find(id);
 
             return View(prod);
-        }
-
-        private bool CreateFolderIfNeeded(string path)
-        {
-            var result = true;
-            if (!Directory.Exists(path))
-            {
-                try
-                {
-                    Directory.CreateDirectory(path);
-                }
-                catch (Exception)
-                {
-                    result = false;
-                }
-            }
-            return result;
         }
     }
 }
