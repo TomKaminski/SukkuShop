@@ -379,6 +379,18 @@
     <Content Include="Areas\Admin\Content\css\AdminProduct.min.css">
       <DependentUpon>AdminProduct.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\reset.css">
+      <DependentUpon>reset.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\reset.min.css">
+      <DependentUpon>reset.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Areas\Admin\Scripts\productListAngular.js" />
     <Content Include="Content\css\Error\Error.css">
@@ -643,6 +655,14 @@
       <DependentUpon>AdminProduct.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\AdminProduct\Create.cshtml" />
+    <Content Include="Areas\Admin\Content\css\main.scss" />
+    <Content Include="Areas\Admin\Content\css\main.css.map">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\reset.scss" />
+    <Content Include="Areas\Admin\Content\css\reset.css.map">
+      <DependentUpon>reset.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
