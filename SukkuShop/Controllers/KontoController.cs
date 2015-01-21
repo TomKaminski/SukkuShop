@@ -503,6 +503,8 @@ namespace SukkuShop.Controllers
                 TotalTotalValue = order.TotalPrice.ToString("c"),
                 OrderInfo = order.OrderInfo,
                 OrderDat = order.OrderDate.ToShortDateString(),
+                Discount = order.Discount,
+                DiscountValue = (order.TotalPrice-(orderProductsPrice + shippingModel.Price + paymentModel.Price)).ToString("c"),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,

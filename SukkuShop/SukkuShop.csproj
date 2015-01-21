@@ -339,6 +339,14 @@
     <Compile Include="Migrations\201501192137277_nullableProd.Designer.cs">
       <DependentUpon>201501192137277_nullableProd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201501211203480_rabat.cs" />
+    <Compile Include="Migrations\201501211203480_rabat.Designer.cs">
+      <DependentUpon>201501211203480_rabat.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201501211212171_discount.cs" />
+    <Compile Include="Migrations\201501211212171_discount.Designer.cs">
+      <DependentUpon>201501211212171_discount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -834,6 +842,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501192137277_nullableProd.resx">
       <DependentUpon>201501192137277_nullableProd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501211203480_rabat.resx">
+      <DependentUpon>201501211203480_rabat.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201501211212171_discount.resx">
+      <DependentUpon>201501211212171_discount.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

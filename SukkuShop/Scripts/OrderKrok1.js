@@ -28,10 +28,11 @@
 
 //price summary na dole, modyfikacja
 function priceSummary() {
-    var value1 = $('#price-box-json').text().replace(' zł', '').replace(',', '.');
+    var value1 = $('#price-box-json').text().replace('/&nbsp;/g', '').replace(' zł', '').replace(',', '.');
     var value2 = $('#dostawa-box-summary').text().replace(' zł', '');
     var value3 = $('#payment-box-summary').text().replace(' zł', '');
-    var sum = Number(currency(value1)) + Number(currency(value2)) + Number(currency(value3));
+    var value4 = $('#rabat-box').text().replace(' zł', '').replace('-','');
+    var sum = Number(currency(value1)) + Number(currency(value2)) + Number(currency(value3)-Number(currency(value4)));
     $("#total-price-summary").empty().append(currency(sum) + " zł");
 }
 

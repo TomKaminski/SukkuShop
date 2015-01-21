@@ -183,5 +183,7 @@ namespace SukkuShop.Models
         public string OrderInfo { get; set; }
         public bool Firma { get; set; }
         public int Id { get; set; }
+        public string DiscountValue { get; set; }
+        public int Discount { get; set; }
     }
 }

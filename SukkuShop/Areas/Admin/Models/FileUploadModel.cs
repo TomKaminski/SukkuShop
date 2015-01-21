@@ -16,6 +16,7 @@ namespace SukkuShop.Areas.Admin.Models
         public int? Promotion { get; set; }
         public string Packing { get; set; }
         public int? Category { get; set; }
+        public int? SubCategory { get; set; }
         public int? Quantity { get; set; }
         public string Description { get; set; }
     }

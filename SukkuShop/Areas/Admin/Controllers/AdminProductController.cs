@@ -1,6 +1,7 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Migrations;
 using System.IO;
@@ -63,7 +64,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult UploadFile(ProductUploadModel model)
+        [HttpPost]
+        public virtual ActionResult Create(ProductUploadModel model)
         {
             if (ModelState.IsValid)
             {
@@ -114,43 +116,75 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }   
                 _dbContext.Products.AddOrUpdate(prod);
                 _dbContext.SaveChanges();
+                return View("Index");
             }
-            return View("Index", model);
+            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            {
+                Text = k.Name,
+                Value = k.CategoryId.ToString()
+            }).ToList();
+            categoryList.Add(new SelectListItem
+            {
+                Text = "-",
+                Value = null,
+                Selected = true
+            });
+            ViewBag.CategoryList = categoryList;
+            var subcategoryList = new List<SelectListItem>
+            {
+                new SelectListItem{Text = "-",Value = null,Selected = true}
+            };
+            var subcategoryList2 = _dbContext.Categories.Where(x => x.UpperCategoryId == model.Category).Select(k => new SelectListItem
+            {
+                Text = k.Name,
+                Value = k.CategoryId.ToString()
+            }).ToList();
+            subcategoryList.AddRange(subcategoryList2);
+            return View(model);
         }
 
         [HttpGet]
         public virtual ActionResult Create()
         {
+            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            {
+                Text = k.Name,
+                Value = k.CategoryId.ToString()            
+            }).ToList();
+            categoryList.Add(new SelectListItem
+            {
+                Text = "-",
+                Value = "0",
+                Selected = true
+            });
+                ViewBag.CategoryList = categoryList;
+            var subCategoryList = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "-", Value = null, Selected = true}
+            };
+            ViewBag.SubCategoryList = subCategoryList;
             return View();
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public virtual ActionResult Create(Products model)
+        [HttpGet]
+        public virtual JsonResult GetSubCategoryList(int id)
         {
-            if (ModelState.IsValid)
+            var subcategoryList = new List<object>
             {
-                var item = new Products
-                {
-                    DateAdded = DateTime.Now,
-                    CategoryId = model.CategoryId,
-                    ImageName = model.ImageName,
-                    Name = model.Name,
-                    OrderDetails = new Collection<OrderDetails>(),
-                    OrdersCount = 0,
-                    Packing = model.Packing,
-                    Price = model.Price,
-                    Promotion = model.Promotion
-                };
-                if (item.Quantity < 0)
-                    item.Quantity = 0;
-                _dbContext.Products.Add(item);
-                _dbContext.SaveChanges();
-
-                return RedirectToAction("Index", "Home", new {area = "Admin"});
-            }
-            return View(model);
+                new {Text = "-", Value = 0}
+            };
+            if (id == 0) return Json(subcategoryList, JsonRequestBehavior.AllowGet);
+            var subcategoryList2 = _dbContext.Categories.Where(x => x.UpperCategoryId == id).Select(k => new
+            {
+                Text = k.Name,
+                Value = k.CategoryId
+            }).ToList();
+            subcategoryList.AddRange(subcategoryList2);
+            return Json(subcategoryList, JsonRequestBehavior.AllowGet);
         }
+
+        
+        
 
         [HttpGet]
         public virtual ActionResult Delete(int id)

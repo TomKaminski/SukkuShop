@@ -56,9 +56,9 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult UploadFile()
+        public virtual System.Web.Mvc.JsonResult GetSubCategoryList()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UploadFile);
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetSubCategoryList);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -101,8 +101,9 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string UploadFile = "UploadFile";
+            public readonly string GetProductList = "GetProductList";
             public readonly string Create = "Create";
+            public readonly string GetSubCategoryList = "GetSubCategoryList";
             public readonly string Delete = "Delete";
             public readonly string DeletePost = "Delete";
             public readonly string Edit = "Edit";
@@ -113,8 +114,9 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string UploadFile = "UploadFile";
+            public const string GetProductList = "GetProductList";
             public const string Create = "Create";
+            public const string GetSubCategoryList = "GetSubCategoryList";
             public const string Delete = "Delete";
             public const string DeletePost = "Delete";
             public const string Edit = "Edit";
@@ -122,14 +124,6 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
 
-        static readonly ActionParamsClass_UploadFile s_params_UploadFile = new ActionParamsClass_UploadFile();
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_UploadFile UploadFileParams { get { return s_params_UploadFile; } }
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_UploadFile
-        {
-            public readonly string model = "model";
-        }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
@@ -137,6 +131,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionParamsClass_Create
         {
             public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_GetSubCategoryList s_params_GetSubCategoryList = new ActionParamsClass_GetSubCategoryList();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_GetSubCategoryList GetSubCategoryListParams { get { return s_params_GetSubCategoryList; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_GetSubCategoryList
+        {
+            public readonly string id = "id";
         }
         static readonly ActionParamsClass_Delete s_params_Delete = new ActionParamsClass_Delete();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -181,8 +183,10 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Create = "Create";
                 public readonly string Index = "Index";
             }
+            public readonly string Create = "~/Areas/Admin/Views/AdminProduct/Create.cshtml";
             public readonly string Index = "~/Areas/Admin/Views/AdminProduct/Index.cshtml";
         }
     }
@@ -204,14 +208,25 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void UploadFileOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductUploadModel model);
+        partial void GetProductListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult UploadFile(SukkuShop.Areas.Admin.Models.ProductUploadModel model)
+        public override System.Web.Mvc.JsonResult GetProductList()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.UploadFile);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetProductList);
+            GetProductListOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductUploadModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Create(SukkuShop.Areas.Admin.Models.ProductUploadModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            UploadFileOverride(callInfo, model);
+            CreateOverride(callInfo, model);
             return callInfo;
         }
 
@@ -227,14 +242,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Products model);
+        partial void GetSubCategoryListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create(SukkuShop.Models.Products model)
+        public override System.Web.Mvc.JsonResult GetSubCategoryList(int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            CreateOverride(callInfo, model);
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetSubCategoryList);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            GetSubCategoryListOverride(callInfo, id);
             return callInfo;
         }
 

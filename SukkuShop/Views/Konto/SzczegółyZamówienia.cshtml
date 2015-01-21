@@ -91,6 +91,9 @@
     <div class="order-summary-description-text">@Model.OrderPayment.Description</div>
     <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
     <ul id="products-summary" style="padding-bottom: 20px;">
+        <li>
+            <div id="price-box">Rabat: @Model.DiscountValue (@Model.Discount%)</div>
+        </li>
         <li class="summary-text-bold">
             <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue</span></div>
         </li>

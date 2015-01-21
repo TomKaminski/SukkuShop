@@ -38,6 +38,7 @@ namespace SukkuShop.Models
         public string Number { get; set; }
         public string PostalCode { get; set; }
         public bool KontoFirmowe { get; set; }
+        public int Rabat { get; set; }
         public ICollection<Orders> Orders { get; set; }
     }
 
@@ -140,6 +141,7 @@ namespace SukkuShop.Models
         public string PostalCode { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public int Discount { get; set; }
         public ICollection<OrderDetails> OrderDetails { get; set; }
 
         public ShippingType Shipping { get; set; }

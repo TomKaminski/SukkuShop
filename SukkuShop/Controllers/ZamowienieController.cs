@@ -6,7 +6,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using System.Web.Mvc;
-using Microsoft.Ajax.Utilities;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -295,7 +294,13 @@ namespace SukkuShop.Controllers
             SharedShippingOrderSummaryModels paymentModel;
             SharedShippingOrderSummaryModels shippingModel;
             decimal totaltotalvalue;
-            var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue);
+            var discount=0;
+            var user =  _userManager.FindById(User.Identity.GetUserId<int>());
+            if (user != null)
+            {
+                discount = user.Rabat;
+            }
+            var orderitemsummary = OrderViewItemsTotal(shoppingCart, out paymentModel, out shippingModel, out totaltotalvalue,discount);
             var userModel = new CartAddressModel
             {
                 NazwaFirmy = shoppingCart.UserAddressModel.NazwaFirmy,
@@ -316,7 +321,10 @@ namespace SukkuShop.Controllers
                 OrderPayment = paymentModel,
                 OrderShipping = shippingModel,
                 UserAddressModel = userModel,
-                TotalTotalValue = totaltotalvalue
+                TotalTotalValue = totaltotalvalue - Convert.ToDecimal((orderitemsummary.TotalValue * discount) / 100),
+                Discount = discount,
+                DiscountValue = Convert.ToDecimal((orderitemsummary.TotalValue * discount) / 100).ToString("c").Replace(",", ".")
+
             };
             if (shoppingCart.UserAddressModel.Nip != null)
                 orderModel.Firma = true;
@@ -330,16 +338,21 @@ namespace SukkuShop.Controllers
 
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             int? userId = null;
+            var discount = 0;
             if (user != null)
+            {
                 userId = user.Id;
+                discount = user.Rabat;
+            }
+                
             var orders = new Orders();
             var listakurwa = new List<OrderDetails>();
             decimal hehe = 0;
+            decimal discountVal = 0;
             var paymentPrice = model.OrderPayment;
             var shippingPrice = model.OrderShipping;
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
-
                 try
                 {
                     foreach (var item in model.OrderViewItemsTotal.OrderProductList.ToList())
@@ -392,10 +405,11 @@ namespace SukkuShop.Controllers
 
                         }
                     }
+                    discountVal = Convert.ToDecimal(hehe * discount / 100);
                     if (model.HasErrors)
                     {
                         model.OrderViewItemsTotal.TotalValue = hehe;
-                        model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price;
+                        model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price - discountVal;
                         return View(model);
                     }
                     if (model.OrderViewItemsTotal.OrderProductList.Count == 0)
@@ -403,12 +417,12 @@ namespace SukkuShop.Controllers
                         shoppingCart.Clear();
                         return RedirectToAction(MVC.Koszyk.Index());
                     }
-
+                    
                     orders = new Orders
                     {
                         Email = model.UserAddressModel.Email,
                         ProductsPrice = hehe,
-                        TotalPrice = hehe + paymentPrice.Price + shippingPrice.Price,
+                        TotalPrice = (hehe + paymentPrice.Price + shippingPrice.Price) - discountVal,
                         Name = model.UserAddressModel.Imie,
                         Surname = model.UserAddressModel.Nazwisko,
                         OrderDate = DateTime.Today,
@@ -425,7 +439,8 @@ namespace SukkuShop.Controllers
                         UserHints = model.UserHints,
                         NazwaFirmy = model.UserAddressModel.NazwaFirmy,
                         OrderNip = model.UserAddressModel.Nip,
-                        Phone = model.UserAddressModel.Telefon
+                        Phone = model.UserAddressModel.Telefon,
+                        Discount = discount
                     };
                     _dbContext.Orders.Add(orders);
                     await _dbContext.SaveChangesAsync();
@@ -447,7 +462,9 @@ namespace SukkuShop.Controllers
                 OrderViewModelsSummary = new OrderViewModelsSummary
                 {
                     Firma = model.UserAddressModel.Nip != null,
-                    TotalTotalValue = hehe + paymentPrice.Price + shippingPrice.Price,
+                    TotalTotalValue = orders.TotalPrice,
+                    Discount = discount,
+                    DiscountValue = discountVal.ToString("c"),
                     OrderPayment = new SharedShippingOrderSummaryModels
                     {
                         Description = paymentPrice.Description,
@@ -493,8 +510,9 @@ namespace SukkuShop.Controllers
 
 
         private OrderViewItemsTotal OrderViewItemsTotal(Cart shoppingCart, out SharedShippingOrderSummaryModels paymentModel,
-            out SharedShippingOrderSummaryModels shippingModel, out decimal totaltotalvalue)
+            out SharedShippingOrderSummaryModels shippingModel, out decimal totaltotalvalue,int discount)
         {
+
             var orderitemsummary = OrderViewItemsSummary(shoppingCart);
             var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
             var shipping = _dbContext.ShippingTypes.First(x => x.ShippingId == shoppingCart.ShippingId);
@@ -513,13 +531,17 @@ namespace SukkuShop.Controllers
                 Id=shipping.ShippingId
             };
             var value = orderitemsummary.TotalValue + paymentModel.Price + shippingModel.Price;
-            totaltotalvalue = value;
+            totaltotalvalue = value-(value*Convert.ToDecimal(discount/100));
             
             return orderitemsummary;
         }
 
         private OrderViewModels OrderViewModels(Cart shoppingCart)
         {
+            var discount = 0;
+            var user = _userManager.FindById(User.Identity.GetUserId<int>());
+            if (user != null)
+                discount = user.Rabat;
             var productList = new List<OrderItem>();
             decimal totalValue = 0;
             foreach (var item in shoppingCart.Lines)
@@ -544,7 +566,9 @@ namespace SukkuShop.Controllers
             var model = new OrderViewModels
             {
                 OrderProductList = productList,
-                TotalValue = totalValue.ToString("c").Replace(",", ".")
+                TotalValue = totalValue.ToString("c").Replace(",", "."),
+                Discount = discount,
+                DiscountValue = Convert.ToDecimal((totalValue*discount)/100).ToString("c").Replace(",",".")
             };
             return model;
         }

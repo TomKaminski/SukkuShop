@@ -401,6 +401,54 @@ namespace Links
     
     }
 
+
+    [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+    public static partial class Areas {
+        private const string URLPATH = "~/Areas";
+        public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+        public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+    
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public static partial class Admin {
+            private const string URLPATH = "~/Areas/Admin";
+            public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+            public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Scripts {
+                private const string URLPATH = "~/Areas/Admin/Scripts";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
+                public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
+            }
+        
+        }
+    }
+
+    public static partial class Areas {
+    
+        public static partial class Admin {
+            [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+            public static class Content {
+                private const string URLPATH = "~/Areas/Admin/Content";
+                public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class css {
+                    private const string URLPATH = "~/Areas/Admin/Content/css";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string AdminProduct_scss = Url("AdminProduct.scss");
+                    public static readonly string AdminProduct_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.css") ? Url("AdminProduct.min.css") : Url("AdminProduct.css");
+                         
+                    public static readonly string AdminProduct_css_map = Url("AdminProduct.css.map");
+                    public static readonly string AdminProduct_min_css = Url("AdminProduct.min.css");
+                }
+            
+            }
+        
+        }
+    }
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
     public static partial class Bundles
     {

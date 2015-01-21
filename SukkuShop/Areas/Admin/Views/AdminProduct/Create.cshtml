@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm(MVC.Admin.AdminProduct.UploadFile(), FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
 {
     @Html.ValidationSummary()
     @Html.LabelFor(m => m.Title)
@@ -17,17 +17,19 @@
     @Html.LabelFor(m => m.Quantity)
     @Html.TextBoxFor(m => m.Quantity)
     @Html.LabelFor(m => m.Category)
-    @Html.TextBoxFor(m => m.Category)
+    @Html.DropDownListFor(m=>m.Category,(List<SelectListItem>)ViewBag.CategoryList,new{id="MainCategoryList"})
+    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
     @Html.LabelFor(m => m.Description)
     @Html.TextAreaFor(m => m.Description)
     @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
     <a href="#" id="start-upload">Start upload</a>
-}
+    }
 
 
-<div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;margin-bottom:50px;">
-    <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek</div>
-</div>
+        <div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;margin-bottom:50px;">
+            <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek</div>
+        </div>
 
-@Styles.Render("~/Areas/Admin/Content/css/AdminProduct.css")
-@Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")
+        @Styles.Render("~/Areas/Admin/Content/css/AdminProduct.css")
+        @Scripts.Render("~/Scripts/jquery.validate.js")
+        @Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")

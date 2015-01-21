@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Security.AccessControl;
 using SukkuShop.Infrastructure;
 
 namespace SukkuShop.Models
@@ -16,6 +17,8 @@ namespace SukkuShop.Models
     {
         public List<OrderItem> OrderProductList { get; set; }
         public string TotalValue { get; set; }
+        public int Discount { get; set; }
+        public string DiscountValue { get; set; }
     }
 
     public class OrderItem
@@ -43,6 +46,8 @@ namespace SukkuShop.Models
         public bool Firma { get; set; }
         public string UserHints { get; set; }
         public bool HasErrors { get; set; }
+        public int Discount { get; set; }
+        public string DiscountValue { get; set; }
     }
 
     public class OrderItemSummary

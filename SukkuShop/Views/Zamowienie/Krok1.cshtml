@@ -94,12 +94,20 @@
         <li>
             <div class="price-box" id="price-box-json">@Model.TotalValue</div><div id="text-box clear">Produkty</div>
         </li>
+        @if (Model.Discount > 0)
+        {
+            <li>
+                <div class="price-box" id="rabat-box">-@Model.DiscountValue (@Model.Discount%)</div><div id="text-box">Rabat</div><div class="clear" style="clear: both;"></div>
+            </li>
+        }
+        
         <li>
             <div class="price-box" id="dostawa-box-summary">WYBIERZ</div><div id="text-box">Dostawa</div><div id="validShipment" class="invalidradio">Proszę wybrać formę dostawy!</div><div class="clear" style="clear: both;"></div>
         </li>
         <li>
             <div class="price-box" id="payment-box-summary">WYBIERZ</div><div id="text-box">Płatność</div><div id="validPayment" class="invalidradio">Proszę wybrać formę płatności!</div><div class="clear" style="clear: both"></div>
         </li>
+
         <li class="summary-text-bold">
             <div class="price-box" id="total-price-summary" style="color:#f89b1d">N/A</div><div id="text-box clear">Razem</div>
         </li>

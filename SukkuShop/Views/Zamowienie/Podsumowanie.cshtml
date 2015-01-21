@@ -121,8 +121,23 @@
         </div>
         <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
         <ul id="products-summary" style="padding-bottom: 20px;">
+            <li>
+                <div class="price-box" id="price-box-json">@Model.OrderViewItemsTotal.TotalValue.ToString("c")</div><div id="text-box clear">Produkty</div>
+            </li>
+            @if (Model.Discount > 0)
+            {
+                <li>
+                    <div class="price-box" id="rabat-box">-@Model.DiscountValue (@Model.Discount%)</div><div id="text-box">Rabat</div><div class="clear" style="clear: both;"></div>
+                </li>
+            }
+            <li>
+                <div class="price-box" id="dostawa-box-summary">@Model.OrderShipping.Price zł</div><div id="text-box">Dostawa</div><div class="clear" style="clear: both;"></div>
+            </li>
+            <li>
+                <div class="price-box" id="payment-box-summary">@Model.OrderPayment.Price zł</div><div id="text-box">Płatność</div><div class="clear" style="clear: both"></div>
+            </li>
             <li class="summary-text-bold">
-                <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue zł</span></div>
+                <div class="price-box" style="color:#f89b1d">@Model.TotalTotalValue.ToString("c")</div><div id="text-box clear">Razem</div>
             </li>
         </ul>
         <a href="@Url.Action(MVC.Zamowienie.Krok2())">
@@ -151,6 +166,7 @@
     @Html.HiddenFor(m => m.OrderShipping.Id)
     @Html.HiddenFor(m => m.OrderPayment.Id)
     @Html.HiddenFor(m=>m.UserAddressModel.Email)
+    
 }
 @Styles.Render("~/Content/css/Zamowienie/podsumowanie.css")
 @Scripts.Render("~/Scripts/podsumowanie.js")
