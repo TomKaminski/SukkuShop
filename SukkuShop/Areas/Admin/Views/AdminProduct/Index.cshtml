@@ -1,32 +1,74 @@
-﻿@model SukkuShop.Areas.Admin.Models.ProductUploadModel
-@{
-    ViewBag.Title = "Index";
+﻿@{
+    ViewBag.Title = "Lista produktów";
 }
+@Scripts.Render("~/Scripts/angular.js")
+@Scripts.Render("~/Areas/Admin/Scripts/productListAngular.js")
 
-@using (Html.BeginForm(MVC.Admin.AdminProduct.UploadFile(), FormMethod.Post, new { id = "UploadForm", enctype = "multipart/form-data" }))
-{
-    @Html.LabelFor(m=>m.Title)
-    @Html.TextBoxFor(m=>m.Title)
-    @Html.LabelFor(m => m.Price)
-    @Html.TextBoxFor(m => m.Price)
-    @Html.LabelFor(m => m.Packing)
-    @Html.TextBoxFor(m => m.Packing)
-    @Html.LabelFor(m => m.Promotion)
-    @Html.TextBoxFor(m => m.Promotion)
-    @Html.LabelFor(m => m.Quantity)
-    @Html.TextBoxFor(m => m.Quantity)
-    @Html.LabelFor(m => m.Category)
-    @Html.TextBoxFor(m => m.Category)
-    @Html.LabelFor(m=>m.Description)
-    @Html.TextAreaFor(m=>m.Description)
-    @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)",style="visibility: hidden" })
-    <a href="#" id="start-upload">Start upload</a>
-}
+<style>
+    .selectedOpt {
+        margin-left: 20px;
+    }
+    .bolded {
+        font-weight: bold !important;
+    }
+    .unbold {
+        font-weight: normal;
+    }
 
+</style>
+<div ng-app="adminApp">
+    <div ng-controller="AdminProdCtrl" ng-init="init()">
+        
+        <input type="text" ng-model="textFilter" ng-change="filterByName()" />
+        <label for="published">Na sklepie</label>
+        <input type="checkbox" ng-model="published" id="published" ng-change="filterByCheckboxes()"/>
 
-<div id="image-container" style="width:500px;height:500px;border:3px royalblue dotted;position:relative;margin:auto;margin-bottom:50px;">
-    <div style="color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px">Załaduj obrazek</div>
+        <label for="wrongmodel">Błędne</label>
+        <input type="checkbox" ng-model="wrongmodel" id="wrongmodel" ng-change="filterByCheckboxes()"  />
+
+        <label for="isready">Gotowe do wystawienia</label>
+        <input type="checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
+
+        <ul>
+            <li ng-class="{ 'bolded': 0 == selectedCategory }" ng-click="itemClicked(0)">Wszystko</li>
+            <li ng-repeat="category in categories" ng-class="{ 'bolded': category.CategoryId == selectedCategory }"
+                ng-click="itemClicked(category.CategoryId,$event)">
+                {{category.Name}}
+                <ul>
+                    <li ng-repeat="subcategory in category.subcategories" class="selectedOpt unbold" ng-class="{ 'bolded': subcategory.CategoryId == selectedCategory}"
+                        ng-click="itemClicked(subcategory.CategoryId,$event)">
+                        {{subcategory.Name}}
+                    </li>
+                </ul>
+            </li>
+        </ul>
+        <table style="width:800px">
+            <tr ng-repeat="item in productsList">
+                <td>{{item.ProductId}}</td>
+                <td>{{item.Name}}</td>
+                <td>{{item.IsComplete}}</td>
+                <td>{{item.WrongModel}}</td>
+                <td>{{item.Published}}</td>
+            </tr>
+        </table>
+        <div id="paginator" ng-if="pages>1">
+            <ul class="shop-paginator">
+                <li>
+                    <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
+                </li>
+                <li class="inner-paginator" ng-repeat="page in tableOfPages" style="display: inline-block">
+                    <div ng-if="page==currentPage">
+                        <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
+                    </div>
+                    <div ng-if="page!=currentPage">
+                        <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
 </div>
 
-@Styles.Render("~/Areas/Admin/Content/css/AdminProduct.css")
-@Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")

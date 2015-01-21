@@ -380,6 +380,7 @@
       <DependentUpon>AdminProduct.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
+    <Content Include="Areas\Admin\Scripts\productListAngular.js" />
     <Content Include="Content\css\Error\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
     </Content>
@@ -641,6 +642,7 @@
     <Content Include="Areas\Admin\Content\css\AdminProduct.css.map">
       <DependentUpon>AdminProduct.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\AdminProduct\Create.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
