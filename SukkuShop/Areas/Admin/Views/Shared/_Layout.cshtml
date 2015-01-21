@@ -1,26 +1,31 @@
 ﻿<!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Styles.Render("~/Areas/Admin/Content/css/AdminProduct.css")
-    @Scripts.Render("~/bundles/jquery")
-</head>
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Sukku</title>
+        <link rel="stylesheet" type="text/css" href="../../Content/css/main.css">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+        @Scripts.Render("~/bundles/jquery")
+       
+    </head>
 <body>
-    <div id="admin-header">
-    </div>
-
-    <div class="admin-container">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
-
+    <header>
+        <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
+        <nav id="nav-top" class="nav-top">
+            Panel Adminal
+            
+        </nav>
+        <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
+        <nav id="nav-bottom" class="nav-low">
+            
+            Aasdsadsadas
+        </nav>
+        <div class="clear">&nbsp;</div>
+    </header>
+    @RenderBody()
     @RenderSection("scripts", required: false)
-</body>
+ </body>
+
 </html>
+
+
