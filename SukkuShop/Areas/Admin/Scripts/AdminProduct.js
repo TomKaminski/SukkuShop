@@ -10,11 +10,9 @@
                 $("#image-container").empty().append("<span class='helper'></span><img id='loadedImageBig' />");
                 $("#loadedImageBig").attr("src", eventt.target.result);
                 $("#image-container").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
-                $("#image-container").css("border-color", "royalblue");
+                $("#image-container").css("border-color", "#999999");
             } else {
                 $("#ImageBig").val('');
-                $("#image-container").css("border-color", "red");
-                $("#image-container").html("<div style='color:red;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px'>Załaduj poprawny obrazek (500x500)</div>");
                 e.stopImmediatePropagation();
             }
         }
@@ -33,7 +31,7 @@ $("#image-container").click(function () {
 
 $("#image-container").delegate("#delete-img", "click", function (e) {
     $("#ImageBig").val('');
-    $(this).parent().html("<div style='color:royalblue;font-weight: bold;text-align: center;line-height: 500px;font-family: Segoe UI;font-size: 25px'>Załaduj obrazek</div>");
+    $(this).parent().html("<div class='bubble'><p>Wstaw zdjęcie <br /><span style='font-size: 30px;text-transform: none;'>MIN. 500x500</span></p></div>");
     e.stopImmediatePropagation();
 });
 $(document).ready(function () {
