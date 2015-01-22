@@ -684,6 +684,7 @@
     <Content Include="Areas\Admin\Content\css\AdminProductsList.css.map">
       <DependentUpon>AdminProductsList.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\AdminProduct\GetCategoriesCreateEditProduct.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Web;
 
 namespace SukkuShop.Areas.Admin.Models
@@ -20,5 +21,18 @@ namespace SukkuShop.Areas.Admin.Models
         public int? Quantity { get; set; }
         public string Description { get; set; }
         public bool PublishAfterCreate { get; set; }
+    }
+
+    public class CateogriesCreateEditProduct
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+    }
+
+    public class CategoriesEditCreateProductModel
+    {
+        public string Name { get; set; }
+        public int Id { get; set; }
+        public List<CateogriesCreateEditProduct> SubCategoryList { get; set; }
     }
 }

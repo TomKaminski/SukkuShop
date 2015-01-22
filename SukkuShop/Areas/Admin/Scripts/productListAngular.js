@@ -3,24 +3,21 @@ var itemsPerPage = 10;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
-    $scope.init = function () {
+    $scope.init = function (id) {
         $scope.selectedIndex = 1;
-        $scope.selectedCategory = 0;
+        $scope.selectedCategory = parseInt(id);
         $scope.currentPage = 1;
         $scope.currentFilter = 0;
         $scope.textFilter = "";
         $scope.published = false;
         $scope.isready = false;
         $scope.wrongmodel = false;
-
         $http.get("/Admin/AdminProduct/GetProductList").success(function (data) {
             $scope.productsTotal = data.products;
             $scope.productsOperative = $scope.productsTotal;
             $scope.categories = data.categories;
             $scope.productsList = filterProducts($scope.productsTotal);
         });
-
-
     };
 
     $scope.filterByCheckboxes = function () {

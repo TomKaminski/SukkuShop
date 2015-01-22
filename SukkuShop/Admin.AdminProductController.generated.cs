@@ -103,6 +103,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string Index = "Index";
             public readonly string GetProductList = "GetProductList";
             public readonly string Create = "Create";
+            public readonly string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
             public readonly string GetSubCategoryList = "GetSubCategoryList";
             public readonly string Delete = "Delete";
             public readonly string DeletePost = "Delete";
@@ -116,6 +117,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             public const string Index = "Index";
             public const string GetProductList = "GetProductList";
             public const string Create = "Create";
+            public const string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
             public const string GetSubCategoryList = "GetSubCategoryList";
             public const string Delete = "Delete";
             public const string DeletePost = "Delete";
@@ -124,6 +126,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
 
+        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Index
+        {
+            public readonly string id = "id";
+        }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
@@ -184,9 +194,11 @@ namespace SukkuShop.Areas.Admin.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Create = "Create";
+                public readonly string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
                 public readonly string Index = "Index";
             }
             public readonly string Create = "~/Areas/Admin/Views/AdminProduct/Create.cshtml";
+            public readonly string GetCategoriesCreateEditProduct = "~/Areas/Admin/Views/AdminProduct/GetCategoriesCreateEditProduct.cshtml";
             public readonly string Index = "~/Areas/Admin/Views/AdminProduct/Index.cshtml";
         }
     }
@@ -197,13 +209,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         public T4MVC_AdminProductController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index()
+        public override System.Web.Mvc.ActionResult Index(int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
-            IndexOverride(callInfo);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            IndexOverride(callInfo, id);
             return callInfo;
         }
 
@@ -238,6 +251,17 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
             CreateOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GetCategoriesCreateEditProductOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult GetCategoriesCreateEditProduct()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetCategoriesCreateEditProduct);
+            GetCategoriesCreateEditProductOverride(callInfo);
             return callInfo;
         }
 

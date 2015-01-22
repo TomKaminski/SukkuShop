@@ -24,10 +24,10 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         // GET: Admin/AdminProduct
 
-        public virtual ActionResult Index()
+        public virtual ActionResult Index(int id = 0)
         {
             ViewBag.SelectedOpt = 1;
-            return View();
+            return View(id);
         }
 
         public virtual JsonResult GetProductList()
@@ -189,6 +189,22 @@ namespace SukkuShop.Areas.Admin.Controllers
             };
             ViewBag.SubCategoryList = subCategoryList;
             return View();
+        }
+
+        [HttpGet]
+        public virtual ActionResult GetCategoriesCreateEditProduct()
+        {
+            var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new CategoriesEditCreateProductModel
+            {
+                Id = k.CategoryId,
+                Name = k.Name,
+                SubCategoryList = _dbContext.Categories.Where(m => m.UpperCategoryId == k.CategoryId).Select(p => new CateogriesCreateEditProduct
+                {
+                    Id = p.CategoryId,
+                    Name = p.Name
+                }).ToList()
+            }).ToList();
+            return PartialView(categories);
         }
 
         [HttpGet]
