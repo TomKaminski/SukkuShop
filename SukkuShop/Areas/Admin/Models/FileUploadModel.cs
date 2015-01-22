@@ -19,5 +19,6 @@ namespace SukkuShop.Areas.Admin.Models
         public int? SubCategory { get; set; }
         public int? Quantity { get; set; }
         public string Description { get; set; }
+        public bool PublishAfterCreate { get; set; }
     }
 }

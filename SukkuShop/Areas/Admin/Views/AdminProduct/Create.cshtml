@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 
-@using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
+@using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm" }))
 {
     @Html.ValidationSummary()
     @Html.LabelFor(m => m.Title)
@@ -22,6 +22,8 @@
     @Html.LabelFor(m => m.Description)
     @Html.TextAreaFor(m => m.Description)
     @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
+    @Html.LabelFor(m=>m.PublishAfterCreate,"Publikuj po dodaniu")
+    @Html.CheckBoxFor(m=>m.PublishAfterCreate)
     <a href="#" id="start-upload">Start upload</a>
     }
 

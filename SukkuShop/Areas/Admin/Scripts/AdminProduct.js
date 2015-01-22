@@ -37,6 +37,10 @@ $("#image-container").delegate("#delete-img", "click", function (e) {
     e.stopImmediatePropagation();
 });
 $(document).ready(function () {
+    $.validator.addMethod("regex", function (value, element, regexpr) {
+        return regexpr.test(value);
+    }, "Nieprawidłowa wartość");
+
     $("select#MainCategoryList").change(function () {
         $.getJSON("/Admin/AdminProduct/GetSubCategoryList", { id: $(this).val(), ajax: 'true' }, function (j) {
             var options = '';
@@ -46,68 +50,51 @@ $(document).ready(function () {
             $("select#SubCategoryList").html(options);
         });
     });
+
+    $("#CreateProductForm").validate({
+        rules: {
+            Title: {
+                required: true,
+                minlength: 2
+            },
+            Price: {
+                regex: /^[1-9][0-9]*[,.][0-9]{2}$/
+            },
+            Packing: {
+                minlength: 2,
+                regex: /^[1-9]{1}[0-9]*[a-żA-Ż]+$/,
+            },
+            Promotion: {
+                min: 0,
+                max: 100,
+            },
+            Quantity: {
+                min: 0
+            }
+        },
+        messages: {
+            Title: {
+                required: "Nazwa produktu jest wymagana.",
+                minlength: "Nazwa produktu musi zawierać conajmniej 2 znaki.",
+            },
+            Price: {
+                regex: "Zły format ceny!"
+            },
+            Packing: {
+                minlength: "Sposób pakowania musi zawierać conajmniej 2 znaki.",
+                regex: "Zły format!"
+            },
+            Promotion: {
+                min: "Promocja powinna zawierać się w przedziale 0-100",
+                max: "Promocja powinna zawierać się w przedziale 0-100"
+            },
+            Quantity: {
+                min: "Minimalna wartość to 0"
+            }
+        }
+    });
 });
 
-//function CreateProductForm() {
-//    $("#CreateProductForm").validate({
-//        rules: {
-//            Title: {
-//                required: true,
-//                minlength: 2
-//            },
-//            Price: {
-//                regex:/^[1-9][0-9]*[,.][0-9]{2}$/
-//            },
-//            Packing: {
-//                minlength: 2,
-//                regex: /^[1-9]{1}[0-9]*[a-żA-Ż]+$/,
-//            },
-//            Promotion: {
-//                min: 0,
-//                max: 100,
-//            },
-//            Quantity: {
-//                min: 0
-//            },
-//            Telefon: {
-//                required: true,
-//                regex: /^[1-9][0-9]{8}$/,
-//                notEqual: "Nie podano"
-//            },
-//            KodPocztowy: {
-//                required: true,
-//                regex: /^[0-9]{2}-[0-9]{3}$/,
-//                notEqual: "Nie podano"
-//            }
-
-//        },
-//        messages: {
-//            Title: {
-//                required: "Nazwa produktu jest wymagana.",
-//                minlength: "Nazwa produktu musi zawierać conajmniej 2 znaki.",
-//            },
-//            Price: {
-//                regex: "Zły format ceny!"
-//            },
-//            Packing: {
-//                minlength: "Sposób pakowania musi zawierać conajmniej 2 znaki.",
-//                regex: "Zły format!"
-//            },
-//            Promotion: {
-//                min: "Promocja powinna zawierać się w przedziale 0-100",
-//                max: "Promocja powinna zawierać się w przedziale 0-100"
-//            },
-//            Quantity: {
-//                min: "Minimalna wartość to 0"
-//            },
-//            Telefon: {
-//                required: "Numer telefonu jest wymagany.",
-//                regex: "Numer telefonu jest niepoprawny."
-//            },
-//            KodPocztowy: {
-//                required: "Kod pocztowy jest wymagany.",
-//                regex: "Kod pocztowy jest niepoprawny."
-//            }
-//        }
-//    });
-//}
+function CreateProductForm() {
+    
+}
