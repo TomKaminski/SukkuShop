@@ -17,11 +17,11 @@
         <a href="@Url.Action(MVC.Home.Index())"><div class="header-logo"></div></a>
         <nav id="nav-bottom" class="nav-low">
             <ul class="nav-list">
-                <li class="selected"> Produkty </li>
-                <li> Zamówienia </li>
-                <li> Użytkownicy</li>
-                <li> Strona główna</li>
-                <li> Sekcja Informacyjna</li>
+                <li id="1"> <a class="@(ViewBag.SelectedOpt==1?"selected":"")" href="@Url.Action(MVC.Admin.AdminProduct.Index())">Produkty</a> </li>
+                <li id="2"> <a href="">Zamówienia</a> </li>
+                <li id="3"> <a class="@(ViewBag.SelectedOpt==3?"selected":"")" href="@Url.Action(MVC.Admin.AdminUser.Index())">Użytkownicy</a></li>
+                <li id="4"> <a href="">Strona główna</a></li>
+                <li id="5"> <a href="">Sekcja informacyjna</a></li>
             </ul>           
                
         </nav>

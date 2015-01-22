@@ -420,6 +420,7 @@ namespace Links
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
+                public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
             }
         
         }
@@ -443,6 +444,16 @@ namespace Links
                          
                     public static readonly string AdminProduct_css_map = Url("AdminProduct.css.map");
                     public static readonly string AdminProduct_min_css = Url("AdminProduct.min.css");
+                    public static readonly string main_scss = Url("main.scss");
+                    public static readonly string main_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.css") ? Url("main.min.css") : Url("main.css");
+                         
+                    public static readonly string main_css_map = Url("main.css.map");
+                    public static readonly string main_min_css = Url("main.min.css");
+                    public static readonly string reset_scss = Url("reset.scss");
+                    public static readonly string reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/reset.min.css") ? Url("reset.min.css") : Url("reset.css");
+                         
+                    public static readonly string reset_css_map = Url("reset.css.map");
+                    public static readonly string reset_min_css = Url("reset.min.css");
                 }
             
             }

@@ -408,6 +408,7 @@
     <Content Include="Areas\Admin\Content\web\AdminProductsList.html" />
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Areas\Admin\Scripts\productListAngular.js" />
+    <Content Include="Areas\Admin\Scripts\userListAngular.js" />
     <Content Include="Content\css\Error\Error.css">
       <DependentUpon>Error.scss</DependentUpon>
     </Content>
@@ -805,7 +806,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\AdminRole\" />
-    <Folder Include="Areas\Admin\Views\AdminUser\" />
     <Folder Include="Views\Preview\" />
   </ItemGroup>
   <ItemGroup>

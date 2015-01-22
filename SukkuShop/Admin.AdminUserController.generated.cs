@@ -26,9 +26,6 @@ namespace SukkuShop.Areas.Admin.Controllers
     public partial class AdminUserController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminUserController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected AdminUserController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -74,12 +71,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string GetUserList = "GetUserList";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string GetUserList = "GetUserList";
         }
 
 
@@ -93,7 +92,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Areas/Admin/Views/AdminUser/Index.cshtml";
         }
     }
 
@@ -110,6 +111,17 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GetUserListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult GetUserList()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetUserList);
+            GetUserListOverride(callInfo);
             return callInfo;
         }
 
