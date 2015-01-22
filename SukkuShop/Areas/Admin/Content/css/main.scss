@@ -190,12 +190,9 @@ body {
 	    }
     }
 }
-    .selectedOpt {
-        margin-left: 20px;
-    }
-    .bolded {
-        font-weight: bold !important;
-    }
-    .unbold {
-        font-weight: normal;
-    }
+.bolded {
+    text-decoration: underline;
+}
+.unbold {
+    text-decoration: none !important;
+}

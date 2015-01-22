@@ -1,81 +1,91 @@
 ﻿@{
     ViewBag.Title = "Lista produktów";
 }
+@Styles.Render("~/Areas/Admin/Content/css/AdminProductsList.css")
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Areas/Admin/Scripts/productListAngular.js")
 <style>
-    #plz th a {
-        opacity:0.5
-    }
-    #plz th a.selected {
-        opacity:1
-    }
+    #plz th a { opacity: 0.5; }
+
+    #plz th a.selected { opacity: 1; }
 </style>
-@Html.ActionLink("Dodaj produkt",MVC.Admin.AdminProduct.Create())
+
+
 <div ng-app="adminApp">
     <div ng-controller="AdminProdCtrl" ng-init="init()">
-        
-        <input type="text" ng-model="textFilter" ng-change="filterByName()" />
-        <label for="published">Na sklepie</label>
-        <input type="checkbox" ng-model="published" id="published" ng-change="filterByCheckboxes()"/>
+        <div class="panel-cont">
+            <div class="side-nav">
+                @*@Html.ActionLink("Dodaj produkt", MVC.Admin.AdminProduct.Create())*@
+                <div class="search-box">
+                    <input type="text" ng-model="textFilter" ng-change="filterByName()" placeholder="WYSZUKAJ" />
+                </div>
+                <div class="category-main">Kategorie</div>
+                <div class="category-box">
+                    <ul class="main-list">
+                        <li ng-class="{ 'bolded': 0 == selectedCategory }" ng-click="itemClicked(0)">Wszystko</li>
+                        <li ng-repeat="category in categories">
+                            <a ng-class="{ 'bolded': category.CategoryId == selectedCategory }"
+                               ng-click="itemClicked(category.CategoryId,$event)">{{category.Name}}</a>
+                            <ul>
+                                <li ng-repeat="subcategory in category.subcategories" >
+                                    <a ng-class="{ 'bolded': subcategory.CategoryId == selectedCategory, 'unbold': subcategory.CategoryId != selectedCategory}"
+                                       ng-click="itemClicked(subcategory.CategoryId,$event)">{{subcategory.Name}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="main-cont">
+                <label for="published">Na sklepie</label>
+                <input type="checkbox" ng-model="published" id="published" ng-change="filterByCheckboxes()" />
 
-        <label for="wrongmodel">Błędne</label>
-        <input type="checkbox" ng-model="wrongmodel" id="wrongmodel" ng-change="filterByCheckboxes()"  />
+                <label for="wrongmodel">Błędne</label>
+                <input type="checkbox" ng-model="wrongmodel" id="wrongmodel" ng-change="filterByCheckboxes()" />
 
-        <label for="isready">Gotowe do wystawienia</label>
-        <input type="checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
-
-        <ul>
-            <li ng-class="{ 'bolded': 0 == selectedCategory }" ng-click="itemClicked(0)">Wszystko</li>
-            <li ng-repeat="category in categories" ng-class="{ 'bolded': category.CategoryId == selectedCategory }"
-                ng-click="itemClicked(category.CategoryId,$event)">
-                {{category.Name}}
-                <ul>
-                    <li ng-repeat="subcategory in category.subcategories" class="selectedOpt unbold" ng-class="{ 'bolded': subcategory.CategoryId == selectedCategory}"
-                        ng-click="itemClicked(subcategory.CategoryId,$event)">
-                        {{subcategory.Name}}
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <table style="width:800px">
-            <tr id="plz">
-                <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)">góra</a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)">dół</a></th>
-                <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)">góra</a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)">dół</a></th>
-                <th>Ilosc Zamówień <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)">góra</a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)">dół</a></th>
-                <th>Kompletny</th>
-                <th>Błędny</th>
-                <th>Opublikowany</th>
-                <th>Można usunąć?</th>
-            </tr>
-            <tr ng-repeat="item in productsList">
-                <td>{{item.ProductId}}</td>
-                <td>{{item.Name}}</td>
-                <td>{{item.orders}}</td>
-                <td>{{item.IsComplete}}</td>
-                <td>{{item.WrongModel}}</td>
-                <td>{{item.Published}}</td>
-                <td>CanDelete? {{item.canDelete}}</td>
-            </tr>
-        </table>
-        <div id="paginator" ng-if="pages>1">
-            <ul class="shop-paginator">
-                <li>
-                    <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
-                </li>
-                <li class="inner-paginator" ng-repeat="page in tableOfPages" style="display: inline-block">
-                    <div ng-if="page==currentPage">
-                        <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
-                    </div>
-                    <div ng-if="page!=currentPage">
-                        <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
-                    </div>
-                </li>
-                <li>
-                    <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
-                </li>
-            </ul>
+                <label for="isready">Gotowe do wystawienia</label>
+                <input type="checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
+                <table style="width: 800px">
+                    <tr id="plz">
+                        <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)">góra</a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)">dół</a></th>
+                        <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)">góra</a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)">dół</a></th>
+                        <th>Ilosc Zamówień <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)">góra</a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)">dół</a></th>
+                        <th>Kompletny</th>
+                        <th>Błędny</th>
+                        <th>Opublikowany</th>
+                        <th>Można usunąć?</th>
+                    </tr>
+                    <tr ng-repeat="item in productsList">
+                        <td>{{item.ProductId}}</td>
+                        <td>{{item.Name}}</td>
+                        <td>{{item.orders}}</td>
+                        <td>{{item.IsComplete}}</td>
+                        <td>{{item.WrongModel}}</td>
+                        <td>{{item.Published}}</td>
+                        <td>CanDelete? {{item.canDelete}}</td>
+                    </tr>
+                </table>
+                <div id="paginator" ng-if="pages>1">
+                    <ul class="shop-paginator">
+                        <li>
+                            <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
+                        </li>
+                        <li class="inner-paginator" ng-repeat="page in tableOfPages" style="display: inline-block">
+                            <div ng-if="page==currentPage">
+                                <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
+                            </div>
+                            <div ng-if="page!=currentPage">
+                                <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+    
 

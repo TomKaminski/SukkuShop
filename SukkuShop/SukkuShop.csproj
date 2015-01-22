@@ -381,6 +381,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\AdminProductsList.css">
+      <DependentUpon>AdminProductsList.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminProductsList.min.css">
+      <DependentUpon>AdminProductsList.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\CreateProduct.css">
       <DependentUpon>CreateProduct.scss</DependentUpon>
     </Content>
@@ -399,6 +405,7 @@
     <Content Include="Areas\Admin\Content\css\reset.min.css">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\web\AdminProductsList.html" />
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Areas\Admin\Scripts\productListAngular.js" />
     <Content Include="Areas\Admin\Scripts\userListAngular.js" />
@@ -672,6 +679,10 @@
     <Content Include="Areas\Admin\Views\AdminUser\Index.cshtml" />
     <Content Include="Areas\Admin\Content\css\CreateProduct.css.map">
       <DependentUpon>CreateProduct.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminProductsList.scss" />
+    <Content Include="Areas\Admin\Content\css\AdminProductsList.css.map">
+      <DependentUpon>AdminProductsList.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />

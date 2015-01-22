@@ -69,17 +69,21 @@ body{
                 font-size:22px;
                 text-transform:uppercase;
                 color:$sukkucolor; 
+                
                 li{
-                    padding-top:35px;
+                    margin-top:20px;
+                    cursor:pointer;
                 }
                 ul li{
                      list-style-type:none;
-                     padding-top:30px;
+                     margin-top:10px;
+                        cursor:pointer;
                 }
              }
         }
         .main-cont{
-            width:846px;
+            width:844px;
+            float:left;
             }
         }
     }

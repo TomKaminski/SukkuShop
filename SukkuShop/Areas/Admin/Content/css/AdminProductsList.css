@@ -50,10 +50,13 @@ body .panel-cont {
       text-transform: uppercase;
       color: #f89b1d; }
       body .panel-cont .side-nav ul.main-list li {
-        padding-top: 35px; }
+        margin-top: 20px;
+        cursor: pointer; }
       body .panel-cont .side-nav ul.main-list ul li {
         list-style-type: none;
-        padding-top: 30px; }
+        margin-top: 10px;
+        cursor: pointer; }
   body .panel-cont .main-cont {
-    width: 846px; }
+    width: 844px;
+    float: left; }
 
