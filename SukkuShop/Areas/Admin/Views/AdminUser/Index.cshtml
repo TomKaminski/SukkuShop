@@ -1,0 +1,50 @@
+﻿
+@{
+    ViewBag.Title = "Lista użytkowników";
+}
+
+@Scripts.Render("~/Scripts/angular.js")
+@Scripts.Render("~/Areas/Admin/Scripts/userListAngular.js")
+
+<div ng-app="adminApp">
+    <div ng-controller="AdminUserCtrl" ng-init="init()">
+
+        <input type="text" ng-model="textFilter" ng-change="filterByName()" />
+        
+        <table style="width:800px">
+            <tr>
+                <th>ID Użytkownika <a href="" ng-click="orderByMhm('Id',false)">góra</a><a href="" ng-click="orderByMhm('Id',true)">dół</a></th>
+                <th>Nazwa użytkownika <a href="" ng-click="orderByMhm('Email',false)">góra</a><a href="" ng-click="orderByMhm('Email',true)">dół</a></th>
+                <th>Ilość zamówień<a href="" ng-click="orderByMhm('Orders',false)">góra</a><a href="" ng-click="orderByMhm('Orders',true)">dół</a></th>
+                <th>Przydziel rabat</th>
+                <th></th>
+            </tr>
+            <tr ng-repeat="item in usersList">
+                <td>{{item.Id}}</td>
+                <td>{{item.Email}}</td>
+                <td>{{item.Orders}}</td>
+                <td>{{item.Rabat}}</td>
+                <td>{{item.HasDiscount}}</td>
+            </tr>
+        </table>
+        <div id="paginator" ng-if="pages>1">
+            <ul class="shop-paginator">
+                <li>
+                    <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
+                </li>
+                <li class="inner-paginator" ng-repeat="page in tableOfPages" style="display: inline-block">
+                    <div ng-if="page==currentPage">
+                        <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
+                    </div>
+                    <div ng-if="page!=currentPage">
+                        <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
+                    </div>
+                </li>
+                <li>
+                    <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -24,3 +24,4 @@
 /// <reference path="jquery-ui-1.9.0.min.js" />
 /// <reference path="../areas/admin/scripts/adminproduct.js" />
 /// <reference path="../areas/admin/scripts/productlistangular.js" />
+/// <reference path="../areas/admin/scripts/userlistangular.js" />

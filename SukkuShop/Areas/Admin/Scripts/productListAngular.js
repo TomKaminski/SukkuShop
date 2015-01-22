@@ -1,11 +1,4 @@
-﻿function currency(n) {
-    n = parseFloat(n);
-    return isNaN(n) ? false : n.toFixed(2);
-}
-
-
-
-var adminApp = angular.module("adminApp", []);
+﻿var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 10;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
