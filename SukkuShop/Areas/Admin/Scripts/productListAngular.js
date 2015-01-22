@@ -2,7 +2,9 @@
 var itemsPerPage = 10;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
+    var orderBy = $filter('orderBy');
     $scope.init = function () {
+        $scope.selectedIndex = 1;
         $scope.selectedCategory = 0;
         $scope.currentPage = 1;
         $scope.currentFilter = 0;
@@ -26,6 +28,13 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.productsList = filterProducts($scope.productsTotal);
 
     };
+
+    $scope.orderByMhm = function (mhm, reverse, index) {
+        $scope.selectedIndex = index;
+        $scope.currentPage = 1;
+        var filtered = orderBy($scope.productsTotal, mhm, reverse);
+        $scope.productsList = filterProducts(filtered);
+    }
 
     $scope.itemClicked = function (id, $event) {
         $scope.textFilter = "";

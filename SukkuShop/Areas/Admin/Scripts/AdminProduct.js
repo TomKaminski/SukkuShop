@@ -58,11 +58,11 @@ $(document).ready(function () {
                 minlength: 2
             },
             Price: {
-                regex: /^[1-9][0-9]*[,.][0-9]{2}$/
+                regex: /^[1-9][0-9]*[,.][0-9]{2}$|^$/
             },
             Packing: {
                 minlength: 2,
-                regex: /^[1-9]{1}[0-9]*[a-żA-Ż]+$/,
+                regex: /^[1-9][0-9]*[,.][0-9]{2}$|^$/,
             },
             Promotion: {
                 min: 0,

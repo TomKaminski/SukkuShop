@@ -94,14 +94,17 @@ body {
                     margin-right:20px;
                     display:inline;
                     font:$SeUI;
-                    color:$sukkucolor;
+                    a{
+                        color:$sukkucolor;
+                        &.selected{
+                            font-weight: bold;   
+                        }
+                    }
                     font-family:$SeUI;
                     font-size: 16px;
                     text-transform: uppercase;   
                 }
-                li.selected{
-                    font-weight: bold;   
-                }
+                
             }
         }
         .nav-top {

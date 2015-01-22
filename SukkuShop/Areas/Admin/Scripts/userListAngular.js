@@ -4,6 +4,7 @@ var itemsPerPage = 10;
 adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
     $scope.init = function () {
+        $scope.selectedIndex = 1;
         $scope.currentPage = 1;
         $scope.textFilter = "";
         $http.get("/Admin/AdminUser/GetUserList").success(function (data) {
@@ -28,8 +29,9 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
         $scope.usersList = filterUsers(filterByNameTab);
     }
 
-    $scope.orderByMhm = function (mhm, reverse) {
-        
+    $scope.orderByMhm = function (mhm, reverse, index) {
+        $scope.selectedIndex = index;
+        $scope.currentPage = 1;
         var filtered = orderBy($scope.usersTotal, mhm, reverse);
         $scope.usersList = filterUsers(filtered);
     }

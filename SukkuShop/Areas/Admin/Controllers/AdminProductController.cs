@@ -26,6 +26,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual ActionResult Index()
         {
+            ViewBag.SelectedOpt = 1;
             return View();
         }
 
@@ -39,7 +40,9 @@ namespace SukkuShop.Areas.Admin.Controllers
                 x.WrongModel,
                 x.IsComplete,
                 x.CategoryId,
-                upper = x.Categories.UpperCategoryId
+                upper = x.Categories.UpperCategoryId,
+                canDelete = x.OrderDetails.Count==0,
+                orders = x.OrdersCount
             });
 
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
@@ -167,6 +170,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [HttpGet]
         public virtual ActionResult Create()
         {
+            ViewBag.SelectedOpt = 1;
             var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,

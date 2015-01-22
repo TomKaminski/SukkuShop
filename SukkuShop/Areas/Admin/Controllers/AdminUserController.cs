@@ -17,6 +17,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual ActionResult Index()
         {
+            ViewBag.SelectedOpt = 3;
             return View();
         }
 

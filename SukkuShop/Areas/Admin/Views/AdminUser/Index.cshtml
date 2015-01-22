@@ -1,21 +1,26 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Lista użytkowników";
 }
 
 @Scripts.Render("~/Scripts/angular.js")
 @Scripts.Render("~/Areas/Admin/Scripts/userListAngular.js")
 
+<style>
+    #plz th a { opacity: 0.5; }
+
+    #plz th a.selected { opacity: 1; }
+</style>
+
 <div ng-app="adminApp">
     <div ng-controller="AdminUserCtrl" ng-init="init()">
 
         <input type="text" ng-model="textFilter" ng-change="filterByName()" />
         
-        <table style="width:800px">
-            <tr>
-                <th>ID Użytkownika <a href="" ng-click="orderByMhm('Id',false)">góra</a><a href="" ng-click="orderByMhm('Id',true)">dół</a></th>
-                <th>Nazwa użytkownika <a href="" ng-click="orderByMhm('Email',false)">góra</a><a href="" ng-click="orderByMhm('Email',true)">dół</a></th>
-                <th>Ilość zamówień<a href="" ng-click="orderByMhm('Orders',false)">góra</a><a href="" ng-click="orderByMhm('Orders',true)">dół</a></th>
+        <table style="width: 800px">
+            <tr id="plz">
+                <th>ID Użytkownika <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('Id',false,1)">góra</a><a href="" ng-class="{'selected': selectedIndex==2}" ng-click="orderByMhm('Id',true,2)">dół</a></th>
+                <th>Nazwa użytkownika <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Email',false,3)">góra</a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Email',true,4)">dół</a></th>
+                <th>Ilość zamówień<a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('Orders',false,5)">góra</a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('Orders',true,6)">dół</a></th>
                 <th>Przydziel rabat</th>
                 <th></th>
             </tr>
@@ -47,4 +52,3 @@
         </div>
     </div>
 </div>
-

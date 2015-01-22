@@ -1,24 +1,30 @@
-@font-face {
+﻿@font-face {
   font-family: SegoeSemiboldIE;
   src: url(../fonts/SegoeSemiboldIE.eot); }
+
 @font-face {
   font-family: SegoeSemilight;
   src: url(../fonts/segoeuisl.ttf); }
+
 @font-face {
   font-family: SegoeBold;
   src: url(../fonts/segoeuibold.ttf); }
+
 @font-face {
   font-family: SegoeBlack;
   src: url(../fonts/seguiblack.ttf); }
+
 @font-face {
   font-family: SegoeLight;
   src: url(../fonts/segoeuil.ttf); }
+
 .segoe-semibold {
   font-family: SegoeSemibold, SegoeSemiboldIE; }
 
 @font-face {
   font-family: SegoeSemibold;
   src: url(../fonts/SegoeSemibold.ttf); }
+
 img {
   max-width: 100%;
   max-height: 100%; }
@@ -33,7 +39,7 @@ a {
   float: left;
   width: 50px;
   height: 50px;
-  background-image: url("../Images/processing.gif");
+  background-image: url('../Images/processing.gif');
   background-size: 100% 100%; }
 
 body {
@@ -54,12 +60,13 @@ body {
           margin-right: 20px;
           display: inline;
           font: Segoe UI;
-          color: #f89b1d;
           font-family: Segoe UI;
           font-size: 16px;
           text-transform: uppercase; }
-        body header .nav-low ul.nav-list li.selected {
-          font-weight: bold; }
+          body header .nav-low ul.nav-list li a {
+            color: #f89b1d; }
+            body header .nav-low ul.nav-list li a.selected {
+              font-weight: bold; }
     body header .nav-top {
       padding-top: 178px;
       width: 802px;
@@ -85,7 +92,8 @@ body {
       float: left;
       background-image: url(../../../../Content/Images/logo-header.png); }
       body header .header-logo:hover {
-        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+                transition: all 0.3s ease-in-out;
         opacity: 0.8; }
     body header ul#shop-category {
       float: left;
@@ -136,4 +144,4 @@ body {
 
 .unbold {
   font-weight: normal; }
-
+/*# sourceMappingURL=main.css.map */
