@@ -39,6 +39,29 @@ $(document).ready(function () {
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");
 
+    mainselectchange();
+
+    $(".textbox-container input").keyup(function () {
+        if ($(this).val() == "")
+            $(this).siblings('.icon-pencil').css('visibility', 'visible');
+        else
+            $(this).siblings('.icon-pencil').css('visibility', 'hidden');
+    });
+
+    $("#price-textbox").keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && e.which != 44 && e.which != 46 && (e.which < 48 || e.which > 57))
+            return false;
+        if ($('#price-textbox').val().length == 0 && e.which == 48)
+            return false;
+    });
+
+    $("#quantity-textbox").keypress(function (e) {
+        if (e.which != 8 && e.which != 0  && (e.which < 48 || e.which > 57))
+            return false;
+        if ($('#quantity-textbox').val().length == 0 && e.which == 48)
+            return false;
+    });
+
     $("select#MainCategoryList").change(function () {
         $.getJSON("/Admin/AdminProduct/GetSubCategoryList", { id: $(this).val(), ajax: 'true' }, function (j) {
             var options = '';
@@ -60,7 +83,7 @@ $(document).ready(function () {
             },
             Packing: {
                 minlength: 2,
-                regex: /^[1-9][0-9]*[,.][0-9]{2}$|^$/,
+                regex: /^[1-9][0-9]*[A-Ża-ż]{2}$|^$/,
             },
             Promotion: {
                 min: 0,
@@ -93,6 +116,19 @@ $(document).ready(function () {
     });
 });
 
-function CreateProductForm() {
-    
+
+function mainselectchange() {
+    var plz = $("#MainCategoryList").val();
+    if (plz != "0") {
+        $("#sublist").removeClass("plz");
+        $("#sublist").css("background", "url('../../../../Areas/Admin/Content/Images/selectboxbtn.png') no-repeat right center");        
+        $("#sublist select").css("color", "#f89b1d");
+        $("#sublist select").attr("disabled",false);
+    } else {
+        $("#sublist").removeAttr("style");
+        $("#sublist select").removeAttr("style");
+        $("#sublist select").attr("disabled", true);
+        $("#sublist").addClass("plz");
+    }
+        
 }

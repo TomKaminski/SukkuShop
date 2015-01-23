@@ -405,6 +405,8 @@
     <Content Include="Areas\Admin\Content\css\reset.min.css">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\Images\selectboxbtn-nonactive.png" />
+    <Content Include="Areas\Admin\Content\Images\selectboxbtn.png" />
     <Content Include="Areas\Admin\Content\web\AdminProductsList.html" />
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Areas\Admin\Scripts\productListAngular.js" />

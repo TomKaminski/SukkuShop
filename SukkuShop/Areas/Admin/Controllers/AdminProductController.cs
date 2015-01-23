@@ -147,14 +147,14 @@ namespace SukkuShop.Areas.Admin.Controllers
             }).ToList();
             categoryList.Add(new SelectListItem
             {
-                Text = "-",
+                Text = "Wybierz kategorię",
                 Value = null,
                 Selected = true
             });
             ViewBag.CategoryList = categoryList;
             var subCategoryList = new List<SelectListItem>
             {
-                new SelectListItem {Text = "-", Value = "0", Selected = true}
+                new SelectListItem {Text = "Wybierz podkategorię", Value = "0", Selected = true}
             };
 
             var subCategoryList2 =
@@ -171,21 +171,25 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual ActionResult Create()
         {
             ViewBag.SelectedOpt = 1;
+            var list = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Wybierz kategorię",
+                    Value = "0",
+                    Selected = true
+                }
+            };
             var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
                 Value = k.CategoryId.ToString()
             }).ToList();
-            categoryList.Add(new SelectListItem
-            {
-                Text = "-",
-                Value = "0",
-                Selected = true
-            });
-            ViewBag.CategoryList = categoryList;
+            list.AddRange(categoryList);
+            ViewBag.CategoryList = list;
             var subCategoryList = new List<SelectListItem>
             {
-                new SelectListItem {Text = "-", Value = "0", Selected = true}
+                new SelectListItem {Text = "Wybierz podkategorię", Value = "0", Selected = true}
             };
             ViewBag.SubCategoryList = subCategoryList;
             return View();
@@ -212,7 +216,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var subcategoryList = new List<object>
             {
-                new {Text = "-", Value = 0}
+                new {Text = "Wybierz podkategorię", Value = 0}
             };
             if (id == 0) return Json(subcategoryList, JsonRequestBehavior.AllowGet);
             var subcategoryList2 = _dbContext.Categories.Where(x => x.UpperCategoryId == id).Select(k => new
