@@ -39,14 +39,14 @@
                 </div>
             </div>
             <div class="main-cont">
-                <label for="published">Na sklepie</label>
-                <input type="checkbox" ng-model="published" id="published" ng-change="filterByCheckboxes()" />
-
-                <label for="wrongmodel">Błędne</label>
-                <input type="checkbox" ng-model="wrongmodel" id="wrongmodel" ng-change="filterByCheckboxes()" />
-
-                <label for="isready">Gotowe do wystawienia</label>
-                <input type="checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
+                <div class="top-cont">
+                    <input type="checkbox" class="css-checkbox" ng-model="published" id="published" ng-change="filterByCheckboxes()" />
+                    <label for="published" class="css-label">Na sklepie</label>
+                    <input type="checkbox" class="css-checkbox" ng-model="wrongmodel" id="wrongmodel" ng-change="filterByCheckboxes()" />
+                    <label for="wrongmodel" class="css-label">Błędne</label>
+                    <input type="checkbox" class="css-checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
+                    <label for="isready" class="css-label">Gotowe do wystawienia</label>
+                </div>
                 <table style="width: 800px">
                     <tr id="plz">
                         <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)">góra</a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)">dół</a></th>
