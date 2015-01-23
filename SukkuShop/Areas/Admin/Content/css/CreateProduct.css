@@ -4,6 +4,42 @@
   .main-box .create-prod-box {
     width: 844px;
     float: right; }
+    .main-box .create-prod-box .bottom-container {
+      margin-left: 94px; }
+      .main-box .create-prod-box .bottom-container textarea {
+        padding: 5px 10px;
+        margin-top: 30px;
+        border: 1px solid #f89b1d;
+        max-width: 590px;
+        max-height: 125px;
+        font-family: SegoeLight;
+        width: 590px;
+        height: 125px;
+        font-size: 14px; }
+      .main-box .create-prod-box .bottom-container .prom-text {
+        font-size: 26px;
+        margin-top: 40px;
+        font-family: SegoeSemibold;
+        color: #f89b1d;
+        float: left; }
+      .main-box .create-prod-box .bottom-container #prom-textbox {
+        width: 40px;
+        text-align: center;
+        border: 1px solid black;
+        color: black;
+        font-size: 20px;
+        padding: 5px 0;
+        font-weight: normal;
+        font-family: SegoeLight;
+        float: right;
+        margin-top: 35px;
+        margin-right: 20px; }
+      .main-box .create-prod-box .bottom-container .fapencil {
+        float: right;
+        color: #f89b1d;
+        margin-right: 50px;
+        font-size: 30px;
+        margin-top: 40px; }
   .main-box .side-nav {
     float: left;
     width: 220px;
@@ -95,7 +131,7 @@
     width: 358px;
     float: left; }
     .main-box .left-container-edit .styled-select {
-      height: 26px;
+      height: 25px;
       overflow: hidden;
       width: 230px;
       border: 1px solid #f89b1d;
@@ -136,16 +172,20 @@
       font-size: 26px;
       position: relative;
       font-family: SegoeSemibold, SegoeSemiboldIE; }
-      .main-box .left-container-edit .textbox-container#title input[type=text] {
-        width: 319px;
-        font-weight: bold;
-        font-family: Segoe UI; }
+      .main-box .left-container-edit .textbox-container#title {
+        margin-bottom: 20px; }
+        .main-box .left-container-edit .textbox-container#title input[type=text] {
+          width: 319px;
+          font-weight: bold;
+          font-family: Segoe UI; }
       .main-box .left-container-edit .textbox-container#price input[type=text] {
         width: 80px;
-        text-align: right; }
+        text-align: right;
+        margin-top: 15px; }
       .main-box .left-container-edit .textbox-container#packing input[type=text] {
         width: 150px;
-        text-transform: none; }
+        text-transform: none;
+        margin-top: 10px; }
       .main-box .left-container-edit .textbox-container#quantity input[type=text] {
         width: 50px;
         text-align: center;
@@ -153,6 +193,7 @@
         color: black;
         font-size: 20px;
         padding: 5px 0;
+        margin-top: 5px;
         font-weight: normal;
         font-family: SegoeLight; }
         .main-box .left-container-edit .textbox-container#quantity input[type=text]::-webkit-input-placeholder {
@@ -197,5 +238,7 @@
       font-size: 16px;
       font-weight: bold;
       color: #cc3333;
-      font-family: Segoe UI; }
+      font-family: Segoe UI;
+      visibility: hidden;
+      margin-bottom: 90px; }
 

@@ -7,13 +7,15 @@
         if (readerTarget == "ImageBig") {
             img.src = eventt.target.result;
             if (img.width > 500 && img.height > 500 && img.height == img.width) {
+                $(".bad-image").css("visibility", "hidden");
                 $("#image-container").empty().append("<span class='helper'></span><img id='loadedImageBig' />");
                 $("#loadedImageBig").attr("src", eventt.target.result);
                 $("#image-container").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
                 $("#image-container").css("border-color", "#999999");
             } else {
+                $(".bad-image").css("visibility","visible");
                 $("#ImageBig").val('');
-                e.stopImmediatePropagation();
+                //e.stopImmediatePropagation();
             }
         }
     };
@@ -39,6 +41,7 @@ $(document).ready(function () {
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");
 
+
     mainselectchange();
 
     $(".textbox-container input").keyup(function () {
@@ -48,7 +51,7 @@ $(document).ready(function () {
             $(this).siblings('.icon-pencil').css('visibility', 'hidden');
     });
 
-    $("#price-textbox").keypress(function (e) {
+    $("#price-textbox,#prom-textbox").keypress(function (e) {
         if (e.which != 8 && e.which != 0 && e.which != 44 && e.which != 46 && (e.which < 48 || e.which > 57))
             return false;
         if ($('#price-textbox').val().length == 0 && e.which == 48)
