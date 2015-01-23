@@ -1,40 +1,74 @@
-﻿@model SukkuShop.Areas.Admin.Models.ProductUploadModel
+﻿@using System.Web.UI.WebControls
+@model SukkuShop.Areas.Admin.Models.ProductUploadModel
 @{
     ViewBag.Title = "Index";
 }
 <div class="main-box">
+    @Html.Action(MVC.Admin.AdminProduct.GetCategoriesCreateEditProduct())
     <div class="create-prod-box">
         <div id="image-container">
             <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span></p></div>
         </div>
-        @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm" }))
-        {
-            @Html.ValidationSummary()
-            @Html.LabelFor(m => m.Title)
-            @Html.TextBoxFor(m => m.Title)
-            @Html.LabelFor(m => m.Price)
-            @Html.TextBoxFor(m => m.Price)
-            @Html.LabelFor(m => m.Packing)
-            @Html.TextBoxFor(m => m.Packing)
-            @Html.LabelFor(m => m.Promotion)
-            @Html.TextBoxFor(m => m.Promotion)
-            @Html.LabelFor(m => m.Quantity)
-            @Html.TextBoxFor(m => m.Quantity)
-            @Html.LabelFor(m => m.Category)
-            @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList" })
-            @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
-            @Html.LabelFor(m => m.Description)
-            @Html.TextAreaFor(m => m.Description)
-            @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
-            @Html.LabelFor(m => m.PublishAfterCreate, "Publikuj po dodaniu")
-            @Html.CheckBoxFor(m => m.PublishAfterCreate)
-            <a href="#" id="start-upload">Start upload</a>
-        }
+        <div class="left-container-edit">
+            <div class="bad-image">ZŁE ZDJĘCIE</div>
+            @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm" }))
+            {
+                @Html.ValidationSummary()
+                <div class="textbox-container" id="title">
+                    @Html.TextBoxFor(m => m.Title, new { placeholder = "NAZWA PRODUKTU" })
+                    <div class="icon-pencil"></div>
+                </div>
+                <div class="styled-select">
+                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList",onchange="mainselectchange()" })
+                </div>
+                <br />
+                <div class="styled-select plz" id="sublist">
+                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
+                </div>
+                    <div class="textbox-container" id="price">
+                        CENA @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) PLN
+                        <div class="icon-pencil"></div>
+                    </div>
+                    <div class="textbox-container" id="quantity">
+                        ILOŚĆ @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) szt.
+                        <div class="icon-pencil"></div>
+                    </div>
+
+                    <div class="textbox-container" id="packing">
+                        @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE" })
+                        <div class="icon-pencil"></div>
+                    </div>
+                    @*<div class="textbox-container" id="title">
+
+                            <div class="icon-pencil"></div>
+                        </div>
+                        <div class="textbox-container" id="title">
+
+                            <div class="icon-pencil"></div>
+                        </div>
+                        <div class="textbox-container" id="title">
+
+                            <div class="icon-pencil"></div>
+                        </div>*@
 
 
-        
-    </div>
-</div>
-@Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")
-@Scripts.Render("~/Scripts/jquery.validate.js")
-@Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")
+                    @*@Html.LabelFor(m => m.Promotion)
+                        @Html.TextBoxFor(m => m.Promotion)
+
+                        @Html.LabelFor(m => m.Category)
+
+                        @Html.LabelFor(m => m.Description)*@
+                    @*@Html.TextAreaFor(m => m.Description)*@
+                    @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
+                    @Html.LabelFor(m => m.PublishAfterCreate, "Publikuj po dodaniu")
+                    @Html.CheckBoxFor(m => m.PublishAfterCreate)
+                    <a href="#" id="start-upload">Start upload</a>
+                    }
+                </div>
+
+
+            </div>
+        </div>
+        @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")
+        @Scripts.Render("~/Scripts/jquery.validate.js")
+        @Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")

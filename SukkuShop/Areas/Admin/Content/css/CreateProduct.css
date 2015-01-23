@@ -2,13 +2,76 @@
   width: 1066px;
   margin: auto; }
   .main-box .create-prod-box {
-    width: 846px;
+    width: 844px;
     float: right; }
+  .main-box .side-nav {
+    float: left;
+    width: 220px;
+    border-right: 2px solid #f89b1d;
+    height: 750px; }
+    .main-box .side-nav .search-box {
+      width: 190px;
+      float: left;
+      margin-right: 30px;
+      border-bottom: 1px solid black; }
+      .main-box .side-nav .search-box input[type=text] {
+        border: none;
+        font-size: 16px;
+        font-family: Segoe UI;
+        float: left;
+        width: 170px;
+        outline: none; }
+      .main-box .side-nav .search-box .search-arrow {
+        width: 0;
+        height: 0;
+        border-top: 7px solid transparent;
+        border-left: 11px solid black;
+        border-bottom: 7px solid transparent;
+        background-color: transparent;
+        border-right: 0;
+        float: left;
+        cursor: pointer;
+        opacity: 0.6;
+        margin-top: 4px;
+        margin-left: 5px;
+        margin-right: -12px; }
+        .main-box .side-nav .search-box .search-arrow:hover {
+          opacity: 1; }
+    .main-box .side-nav .category-main {
+      margin-top: 50px;
+      font-family: Segoe UI;
+      font-weight: bold;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #8d8d8d; }
+    .main-box .side-nav ul.main-list {
+      margin-left: -15px;
+      list-style-type: none;
+      font-family: Segoe UI;
+      font-weight: bold;
+      font-size: 22px;
+      text-transform: uppercase;
+      color: #f89b1d; }
+      .main-box .side-nav ul.main-list li {
+        margin-top: 20px;
+        cursor: pointer; }
+        .main-box .side-nav ul.main-list li a {
+          color: #f89b1d; }
+      .main-box .side-nav ul.main-list ul li {
+        list-style-type: none;
+        margin-top: 10px;
+        cursor: pointer; }
+        .main-box .side-nav ul.main-list ul li a {
+          color: #f89b1d; }
   .main-box #image-container {
+    margin-right: 22px;
+    margin-left: 94px;
     position: relative;
     width: 366px;
     height: 366px;
-    border: 2px #999999 solid; }
+    border: 2px #999999 solid;
+    float: left;
+    cursor: pointer; }
     .main-box #image-container img {
       max-width: 100%;
       max-height: 100%;
@@ -28,4 +91,111 @@
         font-weight: bold;
         line-height: 32px;
         text-transform: uppercase; }
+  .main-box .left-container-edit {
+    width: 358px;
+    float: left; }
+    .main-box .left-container-edit .styled-select {
+      height: 26px;
+      overflow: hidden;
+      width: 230px;
+      border: 1px solid #f89b1d;
+      background: url("../Images/selectboxbtn.png") no-repeat right center; }
+      .main-box .left-container-edit .styled-select select {
+        background: transparent;
+        border: none;
+        font-size: 14px;
+        height: 26px;
+        padding: 0 5px;
+        /* If you add too much padding here, the options won't show in IE */
+        width: 232px;
+        text-align: center;
+        font-family: Segoe Ui;
+        -webkit-appearance: none;
+        color: #f89b1d;
+        font-weight: bold;
+        line-height: 26px;
+        -moz-appearance: none; }
+        .main-box .left-container-edit .styled-select select option {
+          color: black;
+          border-right: 1px solid  #f89b1d !important;
+          border-left: 1px solid  #f89b1d !important; }
+          .main-box .left-container-edit .styled-select select option:first-child {
+            border-top: 1px solid  #f89b1d !important; }
+          .main-box .left-container-edit .styled-select select option:last-child {
+            border-bottom: 1px solid  #f89b1d !important; }
+      .main-box .left-container-edit .styled-select.plz {
+        border: 1px solid #999999; }
+      .main-box .left-container-edit .styled-select#sublist {
+        background: url("../Images/selectboxbtn-nonactive.png") no-repeat right center;
+        width: 200px; }
+        .main-box .left-container-edit .styled-select#sublist select {
+          color: #999999;
+          width: 202px; }
+    .main-box .left-container-edit .textbox-container {
+      color: #f89b1d;
+      font-size: 26px;
+      position: relative;
+      font-family: SegoeSemibold, SegoeSemiboldIE; }
+      .main-box .left-container-edit .textbox-container#title input[type=text] {
+        width: 319px;
+        font-weight: bold;
+        font-family: Segoe UI; }
+      .main-box .left-container-edit .textbox-container#price input[type=text] {
+        width: 80px;
+        text-align: right; }
+      .main-box .left-container-edit .textbox-container#packing input[type=text] {
+        width: 150px;
+        text-transform: none; }
+      .main-box .left-container-edit .textbox-container#quantity input[type=text] {
+        width: 50px;
+        text-align: center;
+        border: 1px solid black;
+        color: black;
+        font-size: 20px;
+        padding: 5px 0;
+        font-weight: normal;
+        font-family: SegoeLight; }
+        .main-box .left-container-edit .textbox-container#quantity input[type=text]::-webkit-input-placeholder {
+          /* WebKit browsers */
+          color: black; }
+        .main-box .left-container-edit .textbox-container#quantity input[type=text]:-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: black;
+          opacity: 1; }
+        .main-box .left-container-edit .textbox-container#quantity input[type=text]::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: black;
+          opacity: 1; }
+        .main-box .left-container-edit .textbox-container#quantity input[type=text]:-ms-input-placeholder {
+          /* Internet Explorer 10+ */
+          color: black; }
+      .main-box .left-container-edit .textbox-container#title .icon-pencil {
+        position: absolute;
+        bottom: 5px;
+        right: 80px; }
+      .main-box .left-container-edit .textbox-container input[type=text] {
+        font-family: SegoeSemibold, SegoeSemiboldIE;
+        font-size: 26px;
+        color: #f89b1d;
+        border: none;
+        text-transform: uppercase; }
+        .main-box .left-container-edit .textbox-container input[type=text]::-webkit-input-placeholder {
+          /* WebKit browsers */
+          color: #f89b1d; }
+        .main-box .left-container-edit .textbox-container input[type=text]:-moz-placeholder {
+          /* Mozilla Firefox 4 to 18 */
+          color: #f89b1d;
+          opacity: 1; }
+        .main-box .left-container-edit .textbox-container input[type=text]::-moz-placeholder {
+          /* Mozilla Firefox 19+ */
+          color: #f89b1d;
+          opacity: 1; }
+        .main-box .left-container-edit .textbox-container input[type=text]:-ms-input-placeholder {
+          /* Internet Explorer 10+ */
+          color: #f89b1d; }
+    .main-box .left-container-edit .bad-image {
+      font-size: 16px;
+      font-weight: bold;
+      color: #cc3333;
+      font-family: Segoe UI; }
 

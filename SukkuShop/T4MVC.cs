@@ -439,11 +439,16 @@ namespace Links
                     private const string URLPATH = "~/Areas/Admin/Content/css";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-                    public static readonly string AdminProduct_scss = Url("AdminProduct.scss");
-                    public static readonly string AdminProduct_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.css") ? Url("AdminProduct.min.css") : Url("AdminProduct.css");
+                    public static readonly string AdminProductsList_scss = Url("AdminProductsList.scss");
+                    public static readonly string AdminProductsList_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProductsList.min.css") ? Url("AdminProductsList.min.css") : Url("AdminProductsList.css");
                          
-                    public static readonly string AdminProduct_css_map = Url("AdminProduct.css.map");
-                    public static readonly string AdminProduct_min_css = Url("AdminProduct.min.css");
+                    public static readonly string AdminProductsList_css_map = Url("AdminProductsList.css.map");
+                    public static readonly string AdminProductsList_min_css = Url("AdminProductsList.min.css");
+                    public static readonly string CreateProduct_scss = Url("CreateProduct.scss");
+                    public static readonly string CreateProduct_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CreateProduct.min.css") ? Url("CreateProduct.min.css") : Url("CreateProduct.css");
+                         
+                    public static readonly string CreateProduct_css_map = Url("CreateProduct.css.map");
+                    public static readonly string CreateProduct_min_css = Url("CreateProduct.min.css");
                     public static readonly string main_scss = Url("main.scss");
                     public static readonly string main_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.css") ? Url("main.min.css") : Url("main.css");
                          
@@ -454,6 +459,14 @@ namespace Links
                          
                     public static readonly string reset_css_map = Url("reset.css.map");
                     public static readonly string reset_min_css = Url("reset.min.css");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class web {
+                    private const string URLPATH = "~/Areas/Admin/Content/web";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string AdminProductsList_html = Url("AdminProductsList.html");
                 }
             
             }
