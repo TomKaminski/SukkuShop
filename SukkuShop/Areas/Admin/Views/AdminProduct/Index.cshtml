@@ -47,25 +47,32 @@
                     <input type="checkbox" class="css-checkbox" ng-model="isready" id="isready" ng-change="filterByCheckboxes()" />
                     <label for="isready" class="css-label">Gotowe do wystawienia</label>
                 </div>
-                <table style="width: 800px">
-                    <tr id="plz">
-                        <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)">góra</a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)">dół</a></th>
-                        <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)">góra</a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)">dół</a></th>
-                        <th>Ilosc Zamówień <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)">góra</a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)">dół</a></th>
-                        <th>Kompletny</th>
-                        <th>Błędny</th>
-                        <th>Opublikowany</th>
-                        <th>Można usunąć?</th>
-                    </tr>
-                    <tr ng-repeat="item in productsList">
-                        <td>{{item.ProductId}}</td>
-                        <td>{{item.Name}}</td>
-                        <td>{{item.orders}}</td>
-                        <td>{{item.IsComplete}}</td>
-                        <td>{{item.WrongModel}}</td>
-                        <td>{{item.Published}}</td>
-                        <td>CanDelete? {{item.canDelete}}</td>
-                    </tr>
+                <div class="add-product">
+                    Dodaj Produkt
+                </div>
+                <table class="main-table">
+                    <thead id="plz">
+                        <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)"><div class="icon-arrow-up up"></div></a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)"><div class="icon-arrow-down down"></div></a></th>
+                        <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)"><div class="icon-arrow-down down"></div></a></th>
+                        <th>Ilość <br />Zamówień <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
+                        <th class="blank">Status</th>
+                        <th class="blank"></th>
+                        <th class="blank"></th>
+                        <th class="blank"></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in productsList">
+                            <td>{{item.ProductId}}.</td>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.orders}}</td>
+                            @*<td class="share">publikuj<div class="icon-mail-forward" style="float: right; margin-right:10px"></div></td>*@
+                            @*<td class="deta">szczegóły<div class="icon-info" style="float: right; margin-right:10px"></div></td>*@
+                            <td class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="float: right; margin-right:10px"></div></td>
+                            <td class="state">Gotowy do publikacji</td>
+                            <td><div class="icon-pencil pencil"></div></td>
+                            <td><div class="icon-trash trash"></div></td>
+                        </tr>
+                    </tbody>
                 </table>
                 <div id="paginator" ng-if="pages>1">
                     <ul class="shop-paginator">
