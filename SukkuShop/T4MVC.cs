@@ -462,6 +462,15 @@ namespace Links
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+                public static class Images {
+                    private const string URLPATH = "~/Areas/Admin/Content/Images";
+                    public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
+                    public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string selectboxbtn_nonactive_png = Url("selectboxbtn-nonactive.png");
+                    public static readonly string selectboxbtn_png = Url("selectboxbtn.png");
+                }
+            
+                [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
                 public static class web {
                     private const string URLPATH = "~/Areas/Admin/Content/web";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }

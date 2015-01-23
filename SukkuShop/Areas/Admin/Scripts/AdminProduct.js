@@ -42,6 +42,12 @@ $(document).ready(function () {
     }, "Nieprawidłowa wartość");
 
 
+    $('#prom-textbox').on('change keyup paste', function () {
+        if ($('#prom-textbox').val() > 100) {
+            $(this).val(100);
+        }
+    });
+
     mainselectchange();
 
     $(".textbox-container input").keyup(function () {
@@ -82,7 +88,6 @@ $(document).ready(function () {
                 minlength: 2
             },
             Price: {
-                regex: /^[1-9][0-9]*[,.][0-9]{2}$|^$/
             },
             Packing: {
                 minlength: 2,
@@ -102,7 +107,6 @@ $(document).ready(function () {
                 minlength: "Nazwa produktu musi zawierać conajmniej 2 znaki.",
             },
             Price: {
-                regex: "Zły format ceny!"
             },
             Packing: {
                 minlength: "Sposób pakowania musi zawierać conajmniej 2 znaki.",

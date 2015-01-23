@@ -169,9 +169,13 @@
           width: 202px; }
     .main-box .left-container-edit .textbox-container {
       color: #f89b1d;
-      font-size: 26px;
       position: relative;
-      font-family: SegoeSemibold, SegoeSemiboldIE; }
+      font-family: SegoeSemibold, SegoeSemiboldIE;
+      font-size: 26px; }
+      .main-box .left-container-edit .textbox-container .error {
+        color: red;
+        font-family: Segoe Ui;
+        font-size: 15px; }
       .main-box .left-container-edit .textbox-container#title {
         margin-bottom: 20px; }
         .main-box .left-container-edit .textbox-container#title input[type=text] {
@@ -181,11 +185,13 @@
       .main-box .left-container-edit .textbox-container#price input[type=text] {
         width: 80px;
         text-align: right;
-        margin-top: 15px; }
+        margin-top: 15px;
+        font-size: 26px; }
       .main-box .left-container-edit .textbox-container#packing input[type=text] {
         width: 150px;
         text-transform: none;
-        margin-top: 10px; }
+        margin-top: 10px;
+        font-size: 20px; }
       .main-box .left-container-edit .textbox-container#quantity input[type=text] {
         width: 50px;
         text-align: center;
@@ -212,8 +218,9 @@
           color: black; }
       .main-box .left-container-edit .textbox-container#title .icon-pencil {
         position: absolute;
-        bottom: 5px;
-        right: 80px; }
+        top: 9px;
+        right: 80px;
+        font-size: 26px; }
       .main-box .left-container-edit .textbox-container input[type=text] {
         font-family: SegoeSemibold, SegoeSemiboldIE;
         font-size: 26px;

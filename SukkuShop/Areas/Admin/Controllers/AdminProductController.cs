@@ -82,7 +82,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                         return View(model);
                     }
                 }
-
+                price = Math.Floor((price ?? 0) * 100) / 100;
                 if (model.SubCategory != 0)
                     category = model.SubCategory;
 
@@ -195,7 +195,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             return View();
         }
 
-        [HttpGet]
         public virtual ActionResult GetCategoriesCreateEditProduct()
         {
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new CategoriesEditCreateProductModel

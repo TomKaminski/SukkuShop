@@ -12,7 +12,6 @@ namespace SukkuShop.Areas.Admin.Models
         [Required(ErrorMessage = "Nazwa produktu jest wymagana")]
         public string Title { get; set; }
 
-        [RegularExpression("^[1-9][0-9]*[,.][0-9]{2}$",ErrorMessage = "Format ceny jest nieprawidłowy!")]
         public string Price { get; set; }
         public int? Promotion { get; set; }
         public string Packing { get; set; }
