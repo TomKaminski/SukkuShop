@@ -3,12 +3,12 @@ var itemsPerPage = 10;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
-    $scope.init = function (id) {
+    $scope.init = function (name,id) {
         $scope.selectedIndex = 1;
         $scope.selectedCategory = parseInt(id);
         $scope.currentPage = 1;
         $scope.currentFilter = 0;
-        $scope.textFilter = "";
+        $scope.textFilter = name;
         $scope.published = false;
         $scope.isready = false;
         $scope.wrongmodel = false;

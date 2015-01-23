@@ -1,10 +1,8 @@
 ﻿function onFileSelected(event) {
     var selectedFile = event.target.files[0];
     var reader = new FileReader();
-    var readerTarget = event.target.id;
     reader.onload = function (eventt) {
         var img = new Image();
-        if (readerTarget == "ImageBig") {
             img.src = eventt.target.result;
             if (img.width > 500 && img.height > 500 && img.height == img.width) {
                 $(".bad-image").css("visibility", "hidden");
@@ -17,12 +15,19 @@
                 $("#ImageBig").val('');
                 //e.stopImmediatePropagation();
             }
-        }
+        
     };
     reader.readAsDataURL(selectedFile);
 }
 
+
 $("#start-upload").on('click', function () {
+    if ($(".css-checkbox").is(":checked"))
+        if ($("#packing-textbox").val() == "" || $("#MainCategoryList").val() == "0" || $("#price-textbox").val() == "") {
+            $(".error-plz").css("visibility", "visible");
+            return false;
+        }
+    $(".error-plz").css("visibility", "hidden");
     $("#CreateProductForm").submit();
 });
 
@@ -40,7 +45,6 @@ $(document).ready(function () {
     $.validator.addMethod("regex", function (value, element, regexpr) {
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");
-
 
     $('#prom-textbox').on('change keyup paste', function () {
         if ($('#prom-textbox').val() > 100) {
@@ -88,10 +92,11 @@ $(document).ready(function () {
                 minlength: 2
             },
             Price: {
+                regex:/^[1-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
             },
             Packing: {
                 minlength: 2,
-                regex: /^[1-9][0-9]*[A-Ża-ż]{2}$|^$/,
+                regex: /^[1-9][0-9]*[A-Ża-ż]{1,2}$|^$/,
             },
             Promotion: {
                 min: 0,
@@ -107,6 +112,7 @@ $(document).ready(function () {
                 minlength: "Nazwa produktu musi zawierać conajmniej 2 znaki.",
             },
             Price: {
+                regex: "Zły format!"
             },
             Packing: {
                 minlength: "Sposób pakowania musi zawierać conajmniej 2 znaki.",

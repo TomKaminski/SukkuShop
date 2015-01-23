@@ -14,7 +14,7 @@
 
 
 <div ng-app="adminApp">
-    <div ng-controller="AdminProdCtrl" ng-init="init('@Model')">
+    <div ng-controller="AdminProdCtrl" ng-init="init('@ViewBag.Name','@Model')">
         <div class="panel-cont">
             <div class="side-nav">
                 @*@Html.ActionLink("Dodaj produkt", MVC.Admin.AdminProduct.Create())*@

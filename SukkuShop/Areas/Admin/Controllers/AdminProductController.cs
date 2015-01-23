@@ -24,9 +24,10 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         // GET: Admin/AdminProduct
 
-        public virtual ActionResult Index(int id = 0)
+        public virtual ActionResult Index(string name,int id = 0)
         {
             ViewBag.SelectedOpt = 1;
+            ViewBag.Name = name;
             return View(id);
         }
 
@@ -132,7 +133,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 _dbContext.Products.AddOrUpdate(prod);
                 _dbContext.SaveChanges();
-                return View("Index");
+                ViewBag.Name = prod.Name;
+                return View("Index",0);
             }
             GetDropDownLists(model);
             return View(model);

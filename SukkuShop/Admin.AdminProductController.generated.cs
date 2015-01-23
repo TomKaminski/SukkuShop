@@ -56,6 +56,12 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult Index()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult GetSubCategoryList()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetSubCategoryList);
@@ -132,6 +138,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_Index
         {
+            public readonly string name = "name";
             public readonly string id = "id";
         }
         static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
@@ -209,14 +216,15 @@ namespace SukkuShop.Areas.Admin.Controllers
         public T4MVC_AdminProductController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string name, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(int id)
+        public override System.Web.Mvc.ActionResult Index(string name, int id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            IndexOverride(callInfo, id);
+            IndexOverride(callInfo, name, id);
             return callInfo;
         }
 

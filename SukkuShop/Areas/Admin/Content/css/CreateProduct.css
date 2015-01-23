@@ -170,14 +170,14 @@
     .main-box .left-container-edit .textbox-container {
       color: #f89b1d;
       position: relative;
-      font-family: SegoeSemibold, SegoeSemiboldIE;
-      font-size: 26px; }
+      font-family: SegoeSemibold, SegoeSemiboldIE; }
       .main-box .left-container-edit .textbox-container .error {
         color: red;
         font-family: Segoe Ui;
         font-size: 15px; }
       .main-box .left-container-edit .textbox-container#title {
-        margin-bottom: 20px; }
+        margin-bottom: 20px;
+        height: 40px; }
         .main-box .left-container-edit .textbox-container#title input[type=text] {
           width: 319px;
           font-weight: bold;
@@ -187,11 +187,23 @@
         text-align: right;
         margin-top: 15px;
         font-size: 26px; }
+      .main-box .left-container-edit .textbox-container#packing {
+        height: 40px; }
+      .main-box .left-container-edit .textbox-container#packing .icon-pencil {
+        position: absolute;
+        left: 160px;
+        top: 15px; }
+      .main-box .left-container-edit .textbox-container label#price-textbox-error {
+        position: absolute;
+        left: 220px;
+        bottom: 5px; }
       .main-box .left-container-edit .textbox-container#packing input[type=text] {
         width: 150px;
         text-transform: none;
         margin-top: 10px;
-        font-size: 20px; }
+        font-size: 26px;
+        height: 35px;
+        margin-right: 200px; }
       .main-box .left-container-edit .textbox-container#quantity input[type=text] {
         width: 50px;
         text-align: center;
@@ -226,7 +238,7 @@
         font-size: 26px;
         color: #f89b1d;
         border: none;
-        text-transform: uppercase; }
+        text-transform: none; }
         .main-box .left-container-edit .textbox-container input[type=text]::-webkit-input-placeholder {
           /* WebKit browsers */
           color: #f89b1d; }
@@ -298,4 +310,14 @@ label.css-label {
   float: right;
   margin-left: 15px;
   margin-top: 29px; }
+
+.text-edit {
+  font-size: 26px; }
+
+.error-plz {
+  color: red;
+  font-family: Segoe Ui;
+  font-size: 20px;
+  text-align: center;
+  visibility: hidden; }
 

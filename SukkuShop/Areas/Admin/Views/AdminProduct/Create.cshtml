@@ -9,11 +9,10 @@
         <div id="image-container">
             <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span></p></div>
         </div>
-        @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm" }))
+        @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
         {
             <div class="left-container-edit">
                 <div class="bad-image">ZŁE ZDJĘCIE</div>
-
                 @Html.ValidationSummary()
                 <div class="textbox-container" id="title">
                     @Html.TextBoxFor(m => m.Title, new { placeholder = "NAZWA PRODUKTU" })
@@ -26,17 +25,21 @@
                     @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
                 </div>
                 <div class="textbox-container" id="price">
-                    CENA @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) PLN
-                    <div class="icon-pencil"></div>
-                </div>
+                    <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
+    PLN</span>
+                    <div class="icon-pencil text-edit"></div>
+</div>
                 <div class="textbox-container" id="quantity">
-                    ILOŚĆ @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) szt.
-                    <div class="icon-pencil"></div>
-                </div>
+                    <span class="text-edit">
+                        ILOŚĆ</span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
+    szt.</span>
+                    <div class="icon-pencil text-edit"></div>
+</div>
 
                 <div class="textbox-container" id="packing">
-                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE" })
-                    <div class="icon-pencil"></div>
+                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE",id="packing-textbox" })
+                    <div class="icon-pencil text-edit"></div>
+                    
                 </div>
                 @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
 
@@ -57,6 +60,7 @@
                     <div id="start-upload">
                         <div id="triangle-right"></div><div class="zapisz-text">ZAPISZ</div>
                     </div>
+                    
                 </div>
             </div>
     <div class="clear"></div>
@@ -64,7 +68,7 @@
    
         }
     </div>
-
+    <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
 </div>
 @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")
 @Scripts.Render("~/Scripts/jquery.validate.js")

@@ -5,15 +5,15 @@
     <div class="category-main">Kategorie</div>
     <div class="category-box">
         <ul class="main-list">
-            <li><a href="@Url.Action(MVC.Admin.AdminProduct.Index())">Wszystko</a></li>
+            <li><a href="@Url.Action(MVC.Admin.AdminProduct.Index(""))">Wszystko</a></li>
             @foreach (var item in Model)
             {
                 <li>
-                    <a href="@Url.Action(MVC.Admin.AdminProduct.Index(item.Id))">@item.Name</a>
+                    <a href="@Url.Action(MVC.Admin.AdminProduct.Index("",item.Id))">@item.Name</a>
                     <ul>
                         @foreach (var subitem in item.SubCategoryList)
                         {
-                            <li><a href="@Url.Action(MVC.Admin.AdminProduct.Index(subitem.Id))">@subitem.Name</a></li>
+                            <li><a href="@Url.Action(MVC.Admin.AdminProduct.Index("",subitem.Id))">@subitem.Name</a></li>
                         }
                     </ul>
                 </li>
