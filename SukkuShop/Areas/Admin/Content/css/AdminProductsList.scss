@@ -214,9 +214,9 @@ input[type=checkbox].css-checkbox {
 	                user-select: none;
                 }
 
-                .shop-paginator li {
+        ul.shop-paginator li {
 		@extend %extend_2;
-		.inner-paginator {
+		&.inner-paginator {
 			@extend %extend_2;
 			&:before {
 				position: absolute;
@@ -236,7 +236,7 @@ input[type=checkbox].css-checkbox {
 			font-family: $SeUI;
 			font-size: 13px;
 			text-align: center;
-			color: $sukkucolor;
+			color: white;
 			text-decoration: none;
             cursor:pointer;
 		}
