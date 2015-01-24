@@ -3,12 +3,12 @@
     ViewBag.Title = "Index";
 }
 <div class="main-box">
-    @Html.Action(MVC.Admin.AdminProduct.GetCategoriesCreateEditProduct())
+    @Html.Action(MVC.Admin.Produkty.GetCategoriesCreateEditProduct())
     <div class="create-prod-box">
         <div id="image-container">
             <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span></p></div>
         </div>
-        @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm(MVC.Admin.Produkty.Dodaj(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
         {
             <div class="left-container-edit">
                 <div class="bad-image">ZŁE ZDJĘCIE</div>

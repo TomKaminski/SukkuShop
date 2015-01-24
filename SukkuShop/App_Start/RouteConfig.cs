@@ -93,7 +93,8 @@ namespace SukkuShop
                     action = "Index",
                     id = UrlParameter.Optional,
                     area = ""
-                }
+                },                
+                new[] { "SukkuShop.Controllers" }
                 );
 
             routes.MapRoute(

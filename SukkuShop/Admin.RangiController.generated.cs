@@ -23,10 +23,13 @@ using System.Web.Routing;
 using T4MVC;
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public partial class AdminUserController
+    public partial class RangiController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected AdminUserController(Dummy d) { }
+        public RangiController() { }
+
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        protected RangiController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -56,13 +59,13 @@ namespace SukkuShop.Areas.Admin.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminUserController Actions { get { return MVC.Admin.AdminUser; } }
+        public RangiController Actions { get { return MVC.Admin.Rangi; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "AdminUser";
+        public readonly string Name = "Rangi";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "AdminUser";
+        public const string NameConst = "Rangi";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -71,14 +74,12 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
-            public readonly string GetUserList = "GetUserList";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
-            public const string GetUserList = "GetUserList";
         }
 
 
@@ -92,16 +93,14 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Areas/Admin/Views/AdminUser/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AdminUserController : SukkuShop.Areas.Admin.Controllers.AdminUserController
+    public partial class T4MVC_RangiController : SukkuShop.Areas.Admin.Controllers.RangiController
     {
-        public T4MVC_AdminUserController() : base(Dummy.Instance) { }
+        public T4MVC_RangiController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
@@ -111,17 +110,6 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void GetUserListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult GetUserList()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetUserList);
-            GetUserListOverride(callInfo);
             return callInfo;
         }
 

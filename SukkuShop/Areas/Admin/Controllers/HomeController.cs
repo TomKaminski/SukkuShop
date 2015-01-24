@@ -3,9 +3,9 @@
 namespace SukkuShop.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public partial class AdminRoleController : Controller
+    public partial class HomeController : Controller
     {
-        // GET: Admin/AdminRole
+        // GET: Admin/AdminHome
         public virtual ActionResult Index()
         {
             return View();

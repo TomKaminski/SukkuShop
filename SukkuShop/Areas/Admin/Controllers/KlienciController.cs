@@ -5,18 +5,18 @@ using SukkuShop.Models;
 namespace SukkuShop.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public partial class AdminUserController : Controller
+    public partial class KlienciController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public AdminUserController(ApplicationDbContext dbContext)
+        public KlienciController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         // GET: Admin/AdminUser/Index
 
-        public virtual ActionResult Index()
+        public virtual ActionResult Lista()
         {
             ViewBag.SelectedOpt = 3;
             return View();

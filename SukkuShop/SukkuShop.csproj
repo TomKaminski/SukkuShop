@@ -198,16 +198,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Admin.AdminHomeController.generated.cs">
+    <Compile Include="Admin.HomeController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Admin.AdminProductController.generated.cs">
+    <Compile Include="Admin.KlienciController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Admin.AdminRoleController.generated.cs">
+    <Compile Include="Admin.ProduktyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Admin.AdminUserController.generated.cs">
+    <Compile Include="Admin.RangiController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Admin.SharedController.generated.cs">
@@ -220,10 +220,10 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminHomeController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminProductController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminRoleController.cs" />
-    <Compile Include="Areas\Admin\Controllers\AdminUserController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProduktyController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RangiController.cs" />
+    <Compile Include="Areas\Admin\Controllers\KlienciController.cs" />
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
@@ -586,7 +586,7 @@
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminHome\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Content\css\Home\Home.scss" />
     <Content Include="Content\css\main.scss" />
     <Content Include="Content\css\reset.scss" />
@@ -668,9 +668,9 @@
     <Content Include="Content\css\Konto\OrderPreview.css.map">
       <DependentUpon>OrderPreview.css</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\AdminProduct\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Produkty\Lista.cshtml" />
     <Content Include="Areas\Admin\Content\css\CreateProduct.scss" />
-    <Content Include="Areas\Admin\Views\AdminProduct\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Produkty\Dodaj.cshtml" />
     <Content Include="Areas\Admin\Content\css\main.scss" />
     <Content Include="Areas\Admin\Content\css\main.css.map">
       <DependentUpon>main.css</DependentUpon>
@@ -679,7 +679,7 @@
     <Content Include="Areas\Admin\Content\css\reset.css.map">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\AdminUser\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Klienci\Lista.cshtml" />
     <Content Include="Areas\Admin\Content\css\CreateProduct.css.map">
       <DependentUpon>CreateProduct.css</DependentUpon>
     </Content>
@@ -687,8 +687,8 @@
     <Content Include="Areas\Admin\Content\css\AdminProductsList.css.map">
       <DependentUpon>AdminProductsList.css</DependentUpon>
     </Content>
-    <Content Include="Areas\Admin\Views\AdminProduct\GetCategoriesCreateEditProduct.cshtml" />
-    <Content Include="Areas\Admin\Views\AdminProduct\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Produkty\GetCategoriesCreateEditProduct.cshtml" />
+    <Content Include="Areas\Admin\Views\Produkty\Edytuj.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
@@ -811,7 +811,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Views\AdminRole\" />
+    <Folder Include="Areas\Admin\Views\Rangi\" />
     <Folder Include="Views\Preview\" />
   </ItemGroup>
   <ItemGroup>

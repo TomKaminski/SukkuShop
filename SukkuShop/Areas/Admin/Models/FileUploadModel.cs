@@ -43,8 +43,6 @@ namespace SukkuShop.Areas.Admin.Models
         public bool TrueImageDeleted { get; set; }
     }
 
-
-
     public class CateogriesCreateEditProduct
     {
         public string Name { get; set; }

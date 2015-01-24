@@ -3,7 +3,7 @@
     ViewBag.Title = "Edit";
 }
 <div class="main-box">
-    @Html.Action(MVC.Admin.AdminProduct.GetCategoriesCreateEditProduct())
+    @Html.Action(MVC.Admin.Produkty.GetCategoriesCreateEditProduct())
     <div class="create-prod-box">
         <div id="image-container">
             @if (Model.Image != null)
@@ -22,7 +22,7 @@
                 </div>
             }
         </div>
-        @using (Html.BeginForm(MVC.Admin.AdminProduct.Edit(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm(MVC.Admin.Produkty.Edytuj(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
         {
             @Html.HiddenFor(m=>m.TrueImageDeleted)
             @Html.HiddenFor(m=>m.Id)
@@ -42,16 +42,16 @@
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
-                        PLN
-                    </span>
+                                                                                                                                               PLN
+                                                                                                                                           </span>
                     <div class="icon-pencil text-edit"></div>
                 </div>
                 <div class="textbox-container" id="quantity">
                     <span class="text-edit">
                         ILOŚĆ
                     </span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
-                        szt.
-                    </span>
+                                                                                                                    szt.
+                                                                                                                </span>
                     <div class="icon-pencil text-edit"></div>
                 </div>
 
@@ -70,29 +70,29 @@
                 <div class="icon-pencil fapencil"></div>
                 <div class="prom-text" style="float:right;margin-right: 20px">%</div>
                 @Html.TextBoxFor(m => m.Promotion, new { placeholder = 0, id = "prom-textbox" })
+                <div>
+                    <div style="float:right;">
+                        @Html.CheckBoxFor(m => m.PublishAfterCreate, new { @class = "css-checkbox" })
+                        @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep", new { @class = "css-label", style = "margin-top:40px;" })
 
-                <div style="float:right;">
-                    @Html.CheckBoxFor(m => m.PublishAfterCreate, new { @class = "css-checkbox" })
-                    @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep", new { @class = "css-label", style = "margin-top:40px;" })
-
-                    <br />
-                    <div class="clear" style="clear:both"></div>
-                    <div id="start-upload">
-                        <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ I ZAPISZ</div>
+                        <br />
+                        <div class="clear" style="clear:both"></div>
+                        <div id="start-upload">
+                            <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ I ZAPISZ</div>
+                        </div>
+                        <div class="clear" style="clear:both"></div>
+                        <a href="@Url.Action(MVC.Admin.Produkty.Lista(Model.Title))">
+                            <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ BEZ ZAPISU</div>
+                        </a>
                     </div>
                     <div class="clear" style="clear:both"></div>
-                    <a href="@Url.Action(MVC.Admin.AdminProduct.Index(Model.Title))">
-                        <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ BEZ ZAPISU</div>
-                    </a>
                 </div>
-            </div>
-            <div class="clear"></div>
-
-
+                <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
+            </div>               
         }
-    </div>
-    <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
+    </div>        
 </div>
+
 @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")
 @Scripts.Render("~/Scripts/jquery.validate.js")
 @Scripts.Render("~/Areas/Admin/Scripts/AdminEditProduct.js")

@@ -7,7 +7,7 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
         $scope.selectedIndex = 1;
         $scope.currentPage = 1;
         $scope.textFilter = "";
-        $http.get("/Admin/AdminUser/GetUserList").success(function (data) {
+        $http.get("/Admin/Klienci/GetUserList").success(function (data) {
             $scope.usersTotal = data;
             $scope.usersOperative = $scope.usersTotal;
             $scope.usersList = filterUsers($scope.usersTotal);

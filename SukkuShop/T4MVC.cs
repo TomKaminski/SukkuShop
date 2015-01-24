@@ -45,10 +45,10 @@ namespace T4MVC
     public class AdminClass
     {
         public readonly string Name = "Admin";
-        public SukkuShop.Areas.Admin.Controllers.AdminHomeController AdminHome = new SukkuShop.Areas.Admin.Controllers.T4MVC_AdminHomeController();
-        public SukkuShop.Areas.Admin.Controllers.AdminProductController AdminProduct = new SukkuShop.Areas.Admin.Controllers.T4MVC_AdminProductController();
-        public SukkuShop.Areas.Admin.Controllers.AdminRoleController AdminRole = new SukkuShop.Areas.Admin.Controllers.T4MVC_AdminRoleController();
-        public SukkuShop.Areas.Admin.Controllers.AdminUserController AdminUser = new SukkuShop.Areas.Admin.Controllers.T4MVC_AdminUserController();
+        public SukkuShop.Areas.Admin.Controllers.HomeController Home = new SukkuShop.Areas.Admin.Controllers.T4MVC_HomeController();
+        public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
+        public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
+        public SukkuShop.Areas.Admin.Controllers.RangiController Rangi = new SukkuShop.Areas.Admin.Controllers.T4MVC_RangiController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
 }

@@ -23,13 +23,13 @@ using System.Web.Routing;
 using T4MVC;
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public partial class AdminHomeController
+    public partial class HomeController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminHomeController() { }
+        public HomeController() { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected AdminHomeController(Dummy d) { }
+        protected HomeController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -59,13 +59,13 @@ namespace SukkuShop.Areas.Admin.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminHomeController Actions { get { return MVC.Admin.AdminHome; } }
+        public HomeController Actions { get { return MVC.Admin.Home; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "AdminHome";
+        public readonly string Name = "Home";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "AdminHome";
+        public const string NameConst = "Home";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -95,14 +95,14 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 public readonly string Index = "Index";
             }
-            public readonly string Index = "~/Areas/Admin/Views/AdminHome/Index.cshtml";
+            public readonly string Index = "~/Areas/Admin/Views/Home/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AdminHomeController : SukkuShop.Areas.Admin.Controllers.AdminHomeController
+    public partial class T4MVC_HomeController : SukkuShop.Areas.Admin.Controllers.HomeController
     {
-        public T4MVC_AdminHomeController() : base(Dummy.Instance) { }
+        public T4MVC_HomeController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);

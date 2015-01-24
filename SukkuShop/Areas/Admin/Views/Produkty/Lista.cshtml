@@ -47,7 +47,7 @@
                     <label for="isready" class="css-label">Gotowe do wystawienia</label>
                 </div>
                 <div class="add-product">
-                    @Html.ActionLink("Dodaj produkt", MVC.Admin.AdminProduct.Create(), new {@class = "add-product"}) <div class="icon-plus-sign" style="font-size: 25px"></div>
+                    @Html.ActionLink("Dodaj produkt", MVC.Admin.Produkty.Dodaj(), new { @class = "add-product" }) <div class="icon-plus-sign" style="font-size: 25px"></div>
                 </div>
                 <table class="main-table">
                     <thead id="plz">
@@ -86,7 +86,7 @@
                                 </div>
                             </td>
                             <td ng-click="unpublish(item.ProductId)" ng-if="item.Published && !item.WrongModel" class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>                           
-                            <td><a ng-href="@Url.Action("Edit")/{{item.ProductId}}" class="icon-pencil pencil"></a></td>
+                            <td><a ng-href="@Url.Action("Edytuj")/{{item.ProductId}}" class="icon-pencil pencil"></a></td>
                             <td ng-if="item.orders==0 && item.canDelete==false"><a ng-click="deleteitemask(item.ProductId)" class="icon-trash trash"></a></td>
                             <td ng-if="item.orders==0 && item.canDelete==true"><a ng-click="deleteitem(item.ProductId)" class="icon-check-sign trash-yes"></a><a ng-click="nodeleteitem(item.ProductId)" class="icon-remove-sign trash-no"></a></td>
 

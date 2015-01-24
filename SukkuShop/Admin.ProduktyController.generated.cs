@@ -23,10 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public partial class AdminProductController
+    public partial class ProduktyController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected AdminProductController(Dummy d) { }
+        protected ProduktyController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -56,9 +56,9 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Index()
+        public virtual System.Web.Mvc.ActionResult Lista()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Lista);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -74,9 +74,9 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult GetInfoAboutWrongModel()
+        public virtual System.Web.Mvc.ActionResult DeleteProduct()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetInfoAboutWrongModel);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DeleteProduct);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -86,19 +86,19 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Edit()
+        public virtual System.Web.Mvc.ActionResult Edytuj()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edytuj);
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public AdminProductController Actions { get { return MVC.Admin.AdminProduct; } }
+        public ProduktyController Actions { get { return MVC.Admin.Produkty; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "AdminProduct";
+        public readonly string Name = "Produkty";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "AdminProduct";
+        public const string NameConst = "Produkty";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -106,37 +106,37 @@ namespace SukkuShop.Areas.Admin.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNamesClass
         {
-            public readonly string Index = "Index";
+            public readonly string Lista = "Lista";
             public readonly string GetProductList = "GetProductList";
             public readonly string PublishProduct = "PublishProduct";
             public readonly string UnpublishProduct = "UnpublishProduct";
-            public readonly string GetInfoAboutWrongModel = "GetInfoAboutWrongModel";
-            public readonly string Create = "Create";
+            public readonly string DeleteProduct = "DeleteProduct";
+            public readonly string Dodaj = "Dodaj";
             public readonly string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
             public readonly string GetSubCategoryList = "GetSubCategoryList";
-            public readonly string Edit = "Edit";
+            public readonly string Edytuj = "Edytuj";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
-            public const string Index = "Index";
+            public const string Lista = "Lista";
             public const string GetProductList = "GetProductList";
             public const string PublishProduct = "PublishProduct";
             public const string UnpublishProduct = "UnpublishProduct";
-            public const string GetInfoAboutWrongModel = "GetInfoAboutWrongModel";
-            public const string Create = "Create";
+            public const string DeleteProduct = "DeleteProduct";
+            public const string Dodaj = "Dodaj";
             public const string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
             public const string GetSubCategoryList = "GetSubCategoryList";
-            public const string Edit = "Edit";
+            public const string Edytuj = "Edytuj";
         }
 
 
-        static readonly ActionParamsClass_Index s_params_Index = new ActionParamsClass_Index();
+        static readonly ActionParamsClass_Lista s_params_Lista = new ActionParamsClass_Lista();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Index IndexParams { get { return s_params_Index; } }
+        public ActionParamsClass_Lista ListaParams { get { return s_params_Lista; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Index
+        public class ActionParamsClass_Lista
         {
             public readonly string name = "name";
             public readonly string id = "id";
@@ -157,19 +157,19 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_GetInfoAboutWrongModel s_params_GetInfoAboutWrongModel = new ActionParamsClass_GetInfoAboutWrongModel();
+        static readonly ActionParamsClass_DeleteProduct s_params_DeleteProduct = new ActionParamsClass_DeleteProduct();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_GetInfoAboutWrongModel GetInfoAboutWrongModelParams { get { return s_params_GetInfoAboutWrongModel; } }
+        public ActionParamsClass_DeleteProduct DeleteProductParams { get { return s_params_DeleteProduct; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_GetInfoAboutWrongModel
+        public class ActionParamsClass_DeleteProduct
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Create s_params_Create = new ActionParamsClass_Create();
+        static readonly ActionParamsClass_Dodaj s_params_Dodaj = new ActionParamsClass_Dodaj();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Create CreateParams { get { return s_params_Create; } }
+        public ActionParamsClass_Dodaj DodajParams { get { return s_params_Dodaj; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Create
+        public class ActionParamsClass_Dodaj
         {
             public readonly string model = "model";
         }
@@ -181,11 +181,11 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string id = "id";
         }
-        static readonly ActionParamsClass_Edit s_params_Edit = new ActionParamsClass_Edit();
+        static readonly ActionParamsClass_Edytuj s_params_Edytuj = new ActionParamsClass_Edytuj();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public ActionParamsClass_Edit EditParams { get { return s_params_Edit; } }
+        public ActionParamsClass_Edytuj EdytujParams { get { return s_params_Edytuj; } }
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public class ActionParamsClass_Edit
+        public class ActionParamsClass_Edytuj
         {
             public readonly string id = "id";
             public readonly string model = "model";
@@ -200,33 +200,33 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Create = "Create";
-                public readonly string Edit = "Edit";
+                public readonly string Dodaj = "Dodaj";
+                public readonly string Edytuj = "Edytuj";
                 public readonly string GetCategoriesCreateEditProduct = "GetCategoriesCreateEditProduct";
-                public readonly string Index = "Index";
+                public readonly string Lista = "Lista";
             }
-            public readonly string Create = "~/Areas/Admin/Views/AdminProduct/Create.cshtml";
-            public readonly string Edit = "~/Areas/Admin/Views/AdminProduct/Edit.cshtml";
-            public readonly string GetCategoriesCreateEditProduct = "~/Areas/Admin/Views/AdminProduct/GetCategoriesCreateEditProduct.cshtml";
-            public readonly string Index = "~/Areas/Admin/Views/AdminProduct/Index.cshtml";
+            public readonly string Dodaj = "~/Areas/Admin/Views/Produkty/Dodaj.cshtml";
+            public readonly string Edytuj = "~/Areas/Admin/Views/Produkty/Edytuj.cshtml";
+            public readonly string GetCategoriesCreateEditProduct = "~/Areas/Admin/Views/Produkty/GetCategoriesCreateEditProduct.cshtml";
+            public readonly string Lista = "~/Areas/Admin/Views/Produkty/Lista.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_AdminProductController : SukkuShop.Areas.Admin.Controllers.AdminProductController
+    public partial class T4MVC_ProduktyController : SukkuShop.Areas.Admin.Controllers.ProduktyController
     {
-        public T4MVC_AdminProductController() : base(Dummy.Instance) { }
+        public T4MVC_ProduktyController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string name, int id);
+        partial void ListaOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string name, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Index(string name, int id)
+        public override System.Web.Mvc.ActionResult Lista(string name, int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Lista);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            IndexOverride(callInfo, name, id);
+            ListaOverride(callInfo, name, id);
             return callInfo;
         }
 
@@ -266,37 +266,37 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void GetInfoAboutWrongModelOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+        partial void DeleteProductOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult GetInfoAboutWrongModel(int id)
+        public override System.Web.Mvc.ActionResult DeleteProduct(int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetInfoAboutWrongModel);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.DeleteProduct);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GetInfoAboutWrongModelOverride(callInfo, id);
+            DeleteProductOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductUploadModel model);
+        partial void DodajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductUploadModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create(SukkuShop.Areas.Admin.Models.ProductUploadModel model)
+        public override System.Web.Mvc.ActionResult Dodaj(SukkuShop.Areas.Admin.Models.ProductUploadModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dodaj);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            CreateOverride(callInfo, model);
+            DodajOverride(callInfo, model);
             return callInfo;
         }
 
         [NonAction]
-        partial void CreateOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+        partial void DodajOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Create()
+        public override System.Web.Mvc.ActionResult Dodaj()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Create);
-            CreateOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Dodaj);
+            DodajOverride(callInfo);
             return callInfo;
         }
 
@@ -324,26 +324,26 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+        partial void EdytujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Edit(int id)
+        public override System.Web.Mvc.ActionResult Edytuj(int id)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edytuj);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            EditOverride(callInfo, id);
+            EdytujOverride(callInfo, id);
             return callInfo;
         }
 
         [NonAction]
-        partial void EditOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductEditModel model);
+        partial void EdytujOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Areas.Admin.Models.ProductEditModel model);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult Edit(SukkuShop.Areas.Admin.Models.ProductEditModel model)
+        public override System.Web.Mvc.ActionResult Edytuj(SukkuShop.Areas.Admin.Models.ProductEditModel model)
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edit);
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Edytuj);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
-            EditOverride(callInfo, model);
+            EdytujOverride(callInfo, model);
             return callInfo;
         }
 

@@ -84,7 +84,7 @@ $(document).ready(function () {
     });
 
     $("select#MainCategoryList").change(function () {
-        $.getJSON("/Admin/AdminProduct/GetSubCategoryList", { id: $(this).val(), ajax: 'true' }, function (j) {
+        $.getJSON("/Admin/Produkty/GetSubCategoryList", { id: $(this).val(), ajax: 'true' }, function (j) {
             var options = '';
             for (var i = 0; i < j.length; i++) {
                 options += '<option value="' + j[i].Value + '">' + j[i].Text + '</option>';

@@ -6,11 +6,9 @@
     }
     loaderDiv.show();
 }
-
 function hideAjaxLoader() {
     jQuery("#ajax-processing").hide();
 }
-
 jQuery(document).ready(function() {
     jQuery(document).bind('mousemove', function(e) {
         jQuery('#ajax-processing').css({
@@ -21,10 +19,11 @@ jQuery(document).ready(function() {
 });
 
 var adminApp = angular.module("adminApp", []);
-var itemsPerPage = 10;
+var itemsPerPage = 12;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
+
     $scope.init = function (name,id) {
         $scope.selectedIndex = 1;
         $scope.selectedCategory = parseInt(id);
@@ -35,7 +34,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.isready = false;
         $scope.wrongmodel = false;
         $scope.infoboxActive = false;
-        $http.get("/Admin/AdminProduct/GetProductList").success(function (data) {
+        $http.get("/Admin/Produkty/GetProductList").success(function (data) {
             $scope.productsTotal = data.products;
             $scope.productsOperative = $scope.productsTotal;
             $scope.categories = data.categories;
@@ -77,21 +76,18 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
             // multiple items found
         }
     }
+
     $scope.deleteitem = function (id) {
-        if ($scope.infoboxActive == false) {
-            
-        
+        if ($scope.infoboxActive == false) {                    
         showAjaxLoader();
-        $http.post('/Admin/AdminProduct/DeleteProduct', { id: id }).
+            $http.post('/Admin/Produkty/DeleteProduct', { id: id }).
           success(function (data) {
               if (data == true) {
                   $scope.productsTotal = $.grep($scope.productsTotal, function (e) { return e.ProductId != id; });
                   $scope.productsList=filterProducts($scope.productsTotal);
               }
               hideAjaxLoader();
-          }
-
-          ).
+          }).
           error(function (data) {
           });
         }
@@ -138,7 +134,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
     $scope.publish = function (id) {
         if ($scope.infoboxActive == false) {
             showAjaxLoader();
-            $http.post('/Admin/AdminProduct/PublishProduct', { id: id }).
+            $http.post('/Admin/Produkty/PublishProduct', { id: id }).
                 success(function(data) {
                     if (data == true) {
                         var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
@@ -150,6 +146,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
                         }
                     }
                     hideAjaxLoader();
+                    $scope.productsList = filterProducts($scope.productsOperative);
                 }).
                 error(function(data) {
 
@@ -160,7 +157,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
     $scope.unpublish = function (id) {
         if ($scope.infoboxActive == false) {
             showAjaxLoader();
-            $http.post('/Admin/AdminProduct/UnpublishProduct', { id: id }).
+            $http.post('/Admin/Produkty/UnpublishProduct', { id: id }).
                 success(function(data) {
                     if (data == true) {
                         var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
@@ -171,6 +168,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
                             // multiple items found
                         }
                     }
+                    $scope.productsList = filterProducts($scope.productsOperative);
                     hideAjaxLoader();
                 }).
                 error(function(data) {
@@ -198,7 +196,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.productsList = filterProducts(filterByNameTab);
     }
 
-     function filterProducts(tab) {
+    function filterProducts(tab) {
          var productsBeforeFilter = [];
          var products = [];
          if ($scope.selectedCategory != 0) {
@@ -231,5 +229,4 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.tableOfPages = pages;
         return products.slice($scope.currentPage * itemsPerPage - itemsPerPage, $scope.currentPage * itemsPerPage);
      }
-
 });

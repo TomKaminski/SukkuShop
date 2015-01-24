@@ -14,27 +14,26 @@ using SukkuShop.Models;
 namespace SukkuShop.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
-    public partial class AdminProductController : Controller
+    public partial class ProduktyController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
 
-        public AdminProductController(ApplicationDbContext dbContext)
+        public ProduktyController(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
 
         // GET: Admin/AdminProduct
-
-        public virtual ActionResult Index(string name,int id = 0)
+        public virtual ActionResult Lista(string name, int id = 0)
         {
             ViewBag.SelectedOpt = 1;
             ViewBag.Name = name;
             return View(id);
         }
 
+        //Angular GET products
         public virtual JsonResult GetProductList()
         {
-
             var products = _dbContext.Products.Select(x => new
             {
                 x.ProductId,
@@ -53,11 +52,9 @@ namespace SukkuShop.Areas.Admin.Controllers
                     category = x.CategoryId == null ? "Brak kategorii" : "",
                     packing = x.Packing == null ? "Brak metody pakowania" : "",
                     opis = x.Description == null ? "Brak opisu" : "",
-                    img = x.ImageName == null ? "Brak zdjęcia":""
-                    
+                    img = x.ImageName == null ? "Brak zdjęcia" : ""
                 }
             });
-
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
             {
                 k.CategoryId,
@@ -78,6 +75,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
+        //Angular publish product
         public virtual ActionResult PublishProduct(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
@@ -88,9 +86,10 @@ namespace SukkuShop.Areas.Admin.Controllers
                 _dbContext.SaveChanges();
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
-            return Json(false, JsonRequestBehavior.AllowGet);               
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
+        //Angular Unpublish product
         public virtual ActionResult UnpublishProduct(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
@@ -104,26 +103,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual ActionResult GetInfoAboutWrongModel(int id)
-        {
-            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
-            if (product != null)
-            {
-                var price = product.Price == null ? "Brak ceny" : null;
-                var category = product.CategoryId == null ? "Brak kategorii" : null;
-                var packing = product.Packing == null ? "Brak metody pakowania" : null;
-                var data = new
-                {
-                    price,
-                    category,
-                    packing
-                };
-                return Json(data, JsonRequestBehavior.AllowGet);
-            }
-            const string error = "Błąd wczytywania danych";
-            return Json(error, JsonRequestBehavior.AllowGet);
-        }
-
+        //Angular delete product
         public virtual ActionResult DeleteProduct(int id)
         {
             var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
@@ -134,25 +114,25 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(true);
         }
 
+        //Create product POST
         [HttpPost]
-        public virtual ActionResult Create(ProductUploadModel model)
+        public virtual ActionResult Dodaj(ProductUploadModel model)
         {
             if (ModelState.IsValid)
             {
                 var category = model.Category == 0 ? null : model.Category;
-                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
-                if (price == null || category == null || model.Packing == null)
+                var price = model.Price == null
+                    ? (decimal?) null
+                    : Math.Floor((Convert.ToDecimal(model.Price.Replace(".", ",")))*100)/100;
+
+                if ((price == null || category == null || model.Packing == null) && model.PublishAfterCreate)
                 {
-                    if (model.PublishAfterCreate)
-                    {
-                        ModelState.AddModelError("PublishAfterCreate",
-                            "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
-                        GetDropDownLists(model);
-                        return View(model);
-                    }
+                    ModelState.AddModelError("PublishAfterCreate",
+                        "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
+                    GetDropDownLists(model.Category);
+                    return View(model);                    
                 }
-                if(price!=null)
-                    price = Math.Floor((decimal)price * 100) / 100;
+
                 if (model.SubCategory != 0)
                     category = model.SubCategory;
 
@@ -169,8 +149,10 @@ namespace SukkuShop.Areas.Admin.Controllers
                     Price = price,
                     ReservedQuantity = 0
                 };
+
                 _dbContext.Products.AddOrUpdate(product);
                 _dbContext.SaveChanges();
+
                 var prod = _dbContext.Products.OrderByDescending(x => x.ProductId).First();
                 if (model.ImageBig != null && model.ImageBig.ContentLength != 0)
                 {
@@ -192,7 +174,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     prod.IconName = prod.ProductId + "_small";
                     prod.ImageName = prod.ProductId + "_normal";
                 }
-                
+
                 prod.IsComplete = true;
                 foreach (var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(prod, null) == null))
                     prod.IsComplete = false;
@@ -203,13 +185,14 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 _dbContext.Products.AddOrUpdate(prod);
                 _dbContext.SaveChanges();
-                return RedirectToAction(MVC.Admin.AdminProduct.Index(prod.Name));
+                return RedirectToAction(MVC.Admin.Produkty.Lista(prod.Name));
             }
-            GetDropDownLists(model);
+            GetDropDownLists(model.Category);
             return View(model);
         }
 
-        private void GetDropDownLists(ProductUploadModel model)
+        //Get category lists if model validation fails
+        private void GetDropDownLists(int? id)
         {
             var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
@@ -229,7 +212,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             };
 
             var subCategoryList2 =
-                _dbContext.Categories.Where(x => x.UpperCategoryId == model.Category).Select(k => new SelectListItem
+                _dbContext.Categories.Where(x => x.UpperCategoryId == id).Select(k => new SelectListItem
                 {
                     Text = k.Name,
                     Value = k.CategoryId.ToString()
@@ -238,8 +221,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             ViewBag.SubCategoryList = subCategoryList;
         }
 
+        //Create product GET
         [HttpGet]
-        public virtual ActionResult Create()
+        public virtual ActionResult Dodaj()
         {
             ViewBag.SelectedOpt = 1;
             var list = new List<SelectListItem>
@@ -266,21 +250,27 @@ namespace SukkuShop.Areas.Admin.Controllers
             return View();
         }
 
+        //Left panel with categories for CREATE/EDIT view
         public virtual ActionResult GetCategoriesCreateEditProduct()
         {
-            var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new CategoriesEditCreateProductModel
-            {
-                Id = k.CategoryId,
-                Name = k.Name,
-                SubCategoryList = _dbContext.Categories.Where(m => m.UpperCategoryId == k.CategoryId).Select(p => new CateogriesCreateEditProduct
-                {
-                    Id = p.CategoryId,
-                    Name = p.Name
-                }).ToList()
-            }).ToList();
+            var categories =
+                _dbContext.Categories.Where(x => x.UpperCategoryId == 0)
+                    .Select(k => new CategoriesEditCreateProductModel
+                    {
+                        Id = k.CategoryId,
+                        Name = k.Name,
+                        SubCategoryList =
+                            _dbContext.Categories.Where(m => m.UpperCategoryId == k.CategoryId)
+                                .Select(p => new CateogriesCreateEditProduct
+                                {
+                                    Id = p.CategoryId,
+                                    Name = p.Name
+                                }).ToList()
+                    }).ToList();
             return PartialView(categories);
         }
 
+        //Jquery ajax, get subcategory list after main category changes
         [HttpGet]
         public virtual JsonResult GetSubCategoryList(int id)
         {
@@ -298,10 +288,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(subcategoryList, JsonRequestBehavior.AllowGet);
         }
 
-
-  
-
-        public virtual ActionResult Edit(int id)
+        //EDIT GET
+        [HttpGet]
+        public virtual ActionResult Edytuj(int id)
         {
             ViewBag.SelectedOpt = 1;
             var item = _dbContext.Products.Find(id);
@@ -318,11 +307,11 @@ namespace SukkuShop.Areas.Admin.Controllers
                 PublishAfterCreate = item.Published,
                 Id = item.ProductId,
                 Title = item.Name
-
             };
             return View(model);
         }
 
+        //Get category list for edit view (selected)
         private void GetCategoryListEdit(Products item)
         {
             var category = _dbContext.Categories.Find(item.CategoryId);
@@ -372,15 +361,16 @@ namespace SukkuShop.Areas.Admin.Controllers
             ViewBag.SubCategoryList = subCategoryList;
         }
 
+        //EDIT POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult Edit(ProductEditModel model)
+        public virtual ActionResult Edytuj(ProductEditModel model)
         {
             var product = _dbContext.Products.Find(model.Id);
             if (ModelState.IsValid)
-            {                
+            {
                 var category = model.Category == 0 ? null : model.Category;
-                var price = model.Price == null ? (decimal?)null : Convert.ToDecimal(model.Price.Replace(".", ","));
+                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
                 if (price == null || category == null || model.Packing == null)
                 {
                     if (model.PublishAfterCreate)
@@ -391,8 +381,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                         return View(model);
                     }
                 }
-                if(price!=null)
-                    price = Math.Floor(((decimal) price) * 100) / 100;
+                if (price != null)
+                    price = Math.Floor(((decimal) price)*100)/100;
                 if (model.SubCategory != 0)
                     category = model.SubCategory;
 
@@ -409,7 +399,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     product.IconName = null;
                     product.ImageName = null;
                 }
-                    
+
                 if (model.ImageBig != null && model.ImageBig.ContentLength != 0)
                 {
                     var pathForSaving = Server.MapPath("~/Content/Images/Shop/");
@@ -432,7 +422,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 product.WrongModel = false;
                 product.IsComplete = true;
-                foreach (var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(product, null) == null))
+                foreach (
+                    var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(product, null) == null))
                     product.IsComplete = false;
                 if (product.Price == null || product.CategoryId == null || product.Packing == null)
                 {
@@ -442,7 +433,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 _dbContext.Products.AddOrUpdate(product);
                 _dbContext.SaveChanges();
-                return RedirectToAction(MVC.Admin.AdminProduct.Index(product.Name));
+                return RedirectToAction(MVC.Admin.Produkty.Lista(product.Name));
             }
             GetCategoryListEdit(product);
             return View(model);
