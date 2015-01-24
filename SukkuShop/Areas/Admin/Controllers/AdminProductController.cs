@@ -151,7 +151,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                         return View(model);
                     }
                 }
-                price = Math.Floor((price ?? 0) * 100) / 100;
+                if(price!=null)
+                    price = Math.Floor((decimal)price * 100) / 100;
                 if (model.SubCategory != 0)
                     category = model.SubCategory;
 
@@ -390,7 +391,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                         return View(model);
                     }
                 }
-                price = Math.Floor((price ?? 0) * 100) / 100;
+                if(price!=null)
+                    price = Math.Floor(((decimal) price) * 100) / 100;
                 if (model.SubCategory != 0)
                     category = model.SubCategory;
 
