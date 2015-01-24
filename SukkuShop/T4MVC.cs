@@ -418,6 +418,7 @@ namespace Links
                 private const string URLPATH = "~/Areas/Admin/Scripts";
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                public static readonly string AdminEditProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminEditProduct.min.js") ? Url("AdminEditProduct.min.js") : Url("AdminEditProduct.js");
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");

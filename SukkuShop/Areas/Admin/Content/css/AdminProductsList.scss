@@ -91,29 +91,24 @@ body{
         .main-cont{
             width:844px;
             float:left;
-
             .top-cont{
                 float:left;
                 margin-bottom:30px;
                 width: 600px;                
             }
             .add-product{
-                border:1px solid #458B00;
                 text-transform:uppercase;
-                text-align:center;
-                float:right;
                 font-family:$SeUI;
                 font-weight:bold;
                 color:#458B00;
-                padding:20px;
+                font-size:25px
             }
             .main-table{
                 width:840px;
-                margin-left:33px;
 
                 thead th{
                     font-family:$SeUI;
-                    width:50px;
+                    
                     color:$sukkucolor;
                     text-align: center;
                     text-transform:uppercase;
@@ -137,7 +132,21 @@ body{
                     font-size:16px;
                     text-transform:uppercase;
                     text-align: center;
-
+position:relative;
+                    a{
+                        cursor:pointer;
+&.trash-yes{
+                        color:green;
+                        font-size:30px;
+                        margin-right:5px
+                        }
+&.trash-no{
+                            color:red;
+font-size:30px;
+}
+                        &:hover{text-decoration:none;}
+                        
+                    }
                     .trash{
                         color:$sukkucolor;
                         font-size:30px;
@@ -149,21 +158,30 @@ body{
                     +.state{
                         font-size:10px;
                         color:$sukkugrey;
+
                     }
                     +.deta{
                             color:$sukkugrey;
                             font-size:10px;
                             font-weight:bold;
+                            line-height:20px;
+                            cursor:pointer;
                     }
                     +.share{
                             color:green;
                             font-size:10px;
                             font-weight:bold;
+                            line-height:20px;
+                            cursor:pointer;
+                
                         }
                     +.take-out{
                             color:red;
                             font-size:10px;
                             font-weight:bold;
+                            line-height:20px;
+cursor:pointer;
+                        
                     }
                 }
             }
@@ -230,7 +248,7 @@ input[type=checkbox].css-checkbox {
 	margin:auto;
 	ul.shop-paginator {
 		position: relative;
-		left: 50%;
+		left: 35%;
         .paging-arrow-right {
 	        width: 0;
 	        height: 0;
@@ -258,5 +276,35 @@ input[type=checkbox].css-checkbox {
 	}
 }
 
+.info-box-plz{
+    position: absolute;
+width: 180px;
+border: 2px solid #f89b1d;
+background: white;
+top: 25px;
+z-index: 100;
+cursor: default;
+left: -60px;
+    ul{
+padding: 5px 20px;
+margin: 0;
+text-align: left;
+li{padding:0;
+color: $sukkucolor;
+font-weight:bold;
+}
+    }
+    .close-info-box{
+        color:black;
+        font-size:20px;
+        padding:5px;
+        opacity:0.5;
+        float:right;
+        &:hover{
+        opacity:1;
+        cursor:pointer;
+    }
+    }
+}
         
 

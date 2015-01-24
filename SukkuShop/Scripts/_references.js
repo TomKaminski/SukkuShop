@@ -25,3 +25,4 @@
 /// <reference path="../areas/admin/scripts/adminproduct.js" />
 /// <reference path="../areas/admin/scripts/productlistangular.js" />
 /// <reference path="../areas/admin/scripts/userlistangular.js" />
+/// <reference path="../areas/admin/scripts/admineditproduct.js" />

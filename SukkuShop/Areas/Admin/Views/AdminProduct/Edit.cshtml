@@ -1,15 +1,32 @@
-﻿@model SukkuShop.Areas.Admin.Models.ProductUploadModel
+﻿@model SukkuShop.Areas.Admin.Models.ProductEditModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Edit";
 }
 <div class="main-box">
     @Html.Action(MVC.Admin.AdminProduct.GetCategoriesCreateEditProduct())
     <div class="create-prod-box">
         <div id="image-container">
-            <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span></p></div>
+            @if (Model.Image != null)
+            {
+                <div class="default-img">Przywróć domyślne</div>
+                <div id="trueimg-box">
+                    <img id="trueimg" src=~/@("Content/Images/Shop/"+Model.Image+".jpg") />
+                    <div id='hide-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>
+                    <div id="tekst-noimg"></div>
+                </div>
+            }
+            else
+            {
+                <div id="trueimg-box">
+                    <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span><br/></p></div>
+                </div>
+            }
         </div>
-        @using (Html.BeginForm(MVC.Admin.AdminProduct.Create(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
+        @using (Html.BeginForm(MVC.Admin.AdminProduct.Edit(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
         {
+            @Html.HiddenFor(m=>m.TrueImageDeleted)
+            @Html.HiddenFor(m=>m.Id)
+            @Html.AntiForgeryToken()
             <div class="left-container-edit">
                 <div class="bad-image">ZŁE ZDJĘCIE</div>
                 @Html.ValidationSummary()
@@ -25,20 +42,23 @@
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
-    PLN</span>
+                        PLN
+                    </span>
                     <div class="icon-pencil text-edit"></div>
-</div>
+                </div>
                 <div class="textbox-container" id="quantity">
                     <span class="text-edit">
-                        ILOŚĆ</span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
-    szt.</span>
+                        ILOŚĆ
+                    </span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
+                        szt.
+                    </span>
                     <div class="icon-pencil text-edit"></div>
-</div>
+                </div>
 
                 <div class="textbox-container" id="packing">
-                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE",id="packing-textbox" })
+                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE", id = "packing-textbox" })
                     <div class="icon-pencil text-edit"></div>
-                    
+
                 </div>
                 @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
 
@@ -52,23 +72,31 @@
                 @Html.TextBoxFor(m => m.Promotion, new { placeholder = 0, id = "prom-textbox" })
 
                 <div style="float:right;">
-                    @Html.CheckBoxFor(m => m.PublishAfterCreate,new{@class="css-checkbox"})
-                    @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep",new{@class="css-label",style="margin-top:40px;"})
-                    
-                    <br/>
+                    @Html.CheckBoxFor(m => m.PublishAfterCreate, new { @class = "css-checkbox" })
+                    @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep", new { @class = "css-label", style = "margin-top:40px;" })
+
+                    <br />
+                    <div class="clear" style="clear:both"></div>
                     <div id="start-upload">
-                        <div id="triangle-right"></div><div class="zapisz-text">ZAPISZ</div>
+                        <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ I ZAPISZ</div>
                     </div>
-                    
+                    <div class="clear" style="clear:both"></div>
+                    <a href="@Url.Action(MVC.Admin.AdminProduct.Index(Model.Title))">
+                        <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ BEZ ZAPISU</div>
+                    </a>
                 </div>
             </div>
-    <div class="clear"></div>
-   
-   
+            <div class="clear"></div>
+
+
         }
     </div>
     <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
 </div>
 @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")
 @Scripts.Render("~/Scripts/jquery.validate.js")
-@Scripts.Render("~/Areas/Admin/Scripts/AdminProduct.js")
+@Scripts.Render("~/Areas/Admin/Scripts/AdminEditProduct.js")
+
+
+
+

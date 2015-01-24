@@ -1,4 +1,26 @@
-﻿var adminApp = angular.module("adminApp", []);
+﻿function showAjaxLoader() {
+    var loaderDiv = jQuery("#ajax-processing");
+    if (loaderDiv.length === 0) {
+        jQuery("body").append("<div id='ajax-processing'></div>");
+        loaderDiv = jQuery("#ajax-processing");
+    }
+    loaderDiv.show();
+}
+
+function hideAjaxLoader() {
+    jQuery("#ajax-processing").hide();
+}
+
+jQuery(document).ready(function() {
+    jQuery(document).bind('mousemove', function(e) {
+        jQuery('#ajax-processing').css({
+            left: e.pageX + 20,
+            top: e.pageY
+        });
+    });
+});
+
+var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 10;
 
 adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
@@ -12,6 +34,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.published = false;
         $scope.isready = false;
         $scope.wrongmodel = false;
+        $scope.infoboxActive = false;
         $http.get("/Admin/AdminProduct/GetProductList").success(function (data) {
             $scope.productsTotal = data.products;
             $scope.productsOperative = $scope.productsTotal;
@@ -33,6 +56,73 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.productsList = filterProducts(filtered);
     }
 
+    $scope.deleteitemask = function (id) {
+        if ($scope.infoboxActive == false) {
+            var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
+            if (result.length == 0) {
+            } else if (result.length == 1) {
+                result[0].canDelete = true;
+            } else {
+                // multiple items found
+            }
+        }
+    }
+
+    $scope.nodeleteitem = function (id) {
+        var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
+        if (result.length == 0) {
+        } else if (result.length == 1) {
+            result[0].canDelete = false;
+        } else {
+            // multiple items found
+        }
+    }
+    $scope.deleteitem = function (id) {
+        if ($scope.infoboxActive == false) {
+            
+        
+        showAjaxLoader();
+        $http.post('/Admin/AdminProduct/DeleteProduct', { id: id }).
+          success(function (data) {
+              if (data == true) {
+                  $scope.productsTotal = $.grep($scope.productsTotal, function (e) { return e.ProductId != id; });
+                  $scope.productsList=filterProducts($scope.productsTotal);
+              }
+              hideAjaxLoader();
+          }
+
+          ).
+          error(function (data) {
+          });
+        }
+    }
+
+    $scope.getinfo = function (id) {
+        if ($scope.infoboxActive == false) {
+            $scope.infoboxActive = true;
+            var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
+            if (result.length == 0) {
+            } else if (result.length == 1) {
+                result[0].showinfo = true;
+            } else {
+                // multiple items found
+            }
+        }
+    }
+
+    $scope.closeinfobox = function (id, $event) {
+        $scope.infoboxActive = false;
+        var result = $.grep($scope.productsTotal, function (plz) { return plz.ProductId == id; });
+        if (result.length == 0) {
+        } else if (result.length == 1) {
+            result[0].showinfo = false;
+        } else {
+            // multiple items found
+        }
+        if ($event)
+            $event.stopPropagation();
+    }
+
     $scope.itemClicked = function (id, $event) {
         $scope.textFilter = "";
         if (id == $scope.selectedCategory) 
@@ -43,6 +133,50 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.productsList = filterProducts($scope.productsTotal);
         if ($event) 
             $event.stopPropagation();
+    }
+
+    $scope.publish = function (id) {
+        if ($scope.infoboxActive == false) {
+            showAjaxLoader();
+            $http.post('/Admin/AdminProduct/PublishProduct', { id: id }).
+                success(function(data) {
+                    if (data == true) {
+                        var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
+                        if (result.length == 0) {
+                        } else if (result.length == 1) {
+                            result[0].Published = true;
+                        } else {
+                            // multiple items found
+                        }
+                    }
+                    hideAjaxLoader();
+                }).
+                error(function(data) {
+
+                });
+        }
+    }
+
+    $scope.unpublish = function (id) {
+        if ($scope.infoboxActive == false) {
+            showAjaxLoader();
+            $http.post('/Admin/AdminProduct/UnpublishProduct', { id: id }).
+                success(function(data) {
+                    if (data == true) {
+                        var result = $.grep($scope.productsTotal, function(e) { return e.ProductId == id; });
+                        if (result.length == 0) {
+                        } else if (result.length == 1) {
+                            result[0].Published = false;
+                        } else {
+                            // multiple items found
+                        }
+                    }
+                    hideAjaxLoader();
+                }).
+                error(function(data) {
+
+                });
+        }
     }
 
     $scope.setPage = function (page) {

@@ -2,6 +2,7 @@
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public partial class AdminHomeController : Controller
     {
         // GET: Admin/AdminHome

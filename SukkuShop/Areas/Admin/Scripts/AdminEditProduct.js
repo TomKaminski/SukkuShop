@@ -3,19 +3,20 @@
     var reader = new FileReader();
     reader.onload = function (eventt) {
         var img = new Image();
-            img.src = eventt.target.result;
-            if (img.width > 500 && img.height > 500 && img.height == img.width) {
-                $(".bad-image").css("visibility", "hidden");
-                $("#image-container").empty().append("<span class='helper'></span><img id='loadedImageBig' />");
-                $("#loadedImageBig").attr("src", eventt.target.result);
-                $("#image-container").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
-                $("#image-container").css("border-color", "#999999");
-            } else {
-                $(".bad-image").css("visibility","visible");
-                $("#ImageBig").val('');
-                //e.stopImmediatePropagation();
-            }
-        
+        img.src = eventt.target.result;
+        if (img.width > 500 && img.height > 500 && img.height == img.width) {
+            $("#trueimg-box").hide();
+            $(".bad-image").css("visibility", "hidden");
+            $("#image-container").append("<img id='loadedImageBig' />");
+            $("#loadedImageBig").attr("src", eventt.target.result);
+            $("#image-container").append("<div id='delete-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>");
+            $("#image-container").css("border-color", "#999999");
+        } else {
+            $(".bad-image").css("visibility", "visible");
+            $("#ImageBig").val('');
+            //e.stopImmediatePropagation();
+        }
+
     };
     reader.readAsDataURL(selectedFile);
 }
@@ -32,13 +33,37 @@ $("#start-upload").on('click', function () {
 });
 
 $("#image-container").click(function () {
-    if ($(this).children("img").length == 0)
+    if ($(this).children("img#loadedImageBig").length==0 && !$("img#trueimg").is(":visible"))
         $("#ImageBig").click();
+});
+
+$("#image-container").delegate("#hide-img", "click", function (e) {
+    $("#trueimg").hide();
+    $(".default-img").show();
+    $(this).hide();
+    $("#TrueImageDeleted").val('True');
+    $("#tekst-noimg").show().html("<div class='bubble'><p>Wstaw zdjęcie <br /><span style='font-size: 30px;text-transform: none;'>MIN. 500x500</span></p></div>");
+    e.stopImmediatePropagation();
+});
+
+$(".default-img").click(function(e) {
+    $("#trueimg-box").show();
+    $("#loadedImageBig").remove();
+    $("#delete-img").remove();
+    $("#trueimg").show();
+    $("#TrueImageDeleted").val('False');
+    $("#tekst-noimg").hide();
+    $(this).hide();
+    $("#hide-img").show();
+    e.stopImmediatePropagation();
 });
 
 $("#image-container").delegate("#delete-img", "click", function (e) {
     $("#ImageBig").val('');
-    $(this).parent().html("<div class='bubble'><p>Wstaw zdjęcie <br /><span style='font-size: 30px;text-transform: none;'>MIN. 500x500</span></p></div>");
+    $("#loadedImageBig").remove();
+    $("#tekst-noimg").show();
+    $("#trueimg-box").show();
+    $("#delete-img").remove();
     e.stopImmediatePropagation();
 });
 $(document).ready(function () {
@@ -52,15 +77,16 @@ $(document).ready(function () {
         }
     });
 
-    $(".textbox-container input").each(function () {
+    $(".default-img").hide();
+    mainselectchange();
+    $("#TrueImageDeleted").val('False');
+    $(".textbox-container input").each(function() {
         if ($(this).val() == "") {
             $(this).siblings('.icon-pencil').css('visibility', 'visible');
         } else {
             $(this).siblings('.icon-pencil').css('visibility', 'hidden');
         }
     });
-
-    mainselectchange();
 
     $(".textbox-container input").keyup(function () {
         if ($(this).val() == "")
@@ -77,7 +103,7 @@ $(document).ready(function () {
     });
 
     $("#quantity-textbox").keypress(function (e) {
-        if (e.which != 8 && e.which != 0  && (e.which < 48 || e.which > 57))
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57))
             return false;
         if ($('#quantity-textbox').val().length == 0 && e.which == 48)
             return false;
@@ -100,7 +126,7 @@ $(document).ready(function () {
                 minlength: 2
             },
             Price: {
-                regex:/^[1-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
+                regex: /^[1-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
             },
             Packing: {
                 minlength: 2,
@@ -142,14 +168,14 @@ function mainselectchange() {
     var plz = $("#MainCategoryList").val();
     if (plz != "0") {
         $("#sublist").removeClass("plz");
-        $("#sublist").css("background", "url('../../../../Areas/Admin/Content/Images/selectboxbtn.png') no-repeat right center");        
+        $("#sublist").css("background", "url('../../../../Areas/Admin/Content/Images/selectboxbtn.png') no-repeat right center");
         $("#sublist select").css("color", "#f89b1d");
-        $("#sublist select").attr("disabled",false);
+        $("#sublist select").attr("disabled", false);
     } else {
         $("#sublist").removeAttr("style");
         $("#sublist select").removeAttr("style");
         $("#sublist select").attr("disabled", true);
         $("#sublist").addClass("plz");
     }
-        
+
 }

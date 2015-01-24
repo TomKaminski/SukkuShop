@@ -321,3 +321,13 @@ label.css-label {
   text-align: center;
   visibility: hidden; }
 
+.default-img {
+  position: absolute;
+  bottom: -20px;
+  color: red;
+  font-family: Segoe UI;
+  font-size: 16px;
+  cursor: pointer; }
+  .default-img:hover {
+    text-decoration: underline; }
+

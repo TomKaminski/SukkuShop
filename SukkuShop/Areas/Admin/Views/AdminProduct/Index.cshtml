@@ -17,7 +17,6 @@
     <div ng-controller="AdminProdCtrl" ng-init="init('@ViewBag.Name','@Model')">
         <div class="panel-cont">
             <div class="side-nav">
-                @*@Html.ActionLink("Dodaj produkt", MVC.Admin.AdminProduct.Create())*@
                 <div class="search-box">
                     <input type="text" ng-model="textFilter" ng-change="filterByName()" placeholder="WYSZUKAJ" />
                 </div>
@@ -48,30 +47,50 @@
                     <label for="isready" class="css-label">Gotowe do wystawienia</label>
                 </div>
                 <div class="add-product">
-                    Dodaj Produkt
+                    @Html.ActionLink("Dodaj produkt", MVC.Admin.AdminProduct.Create(), new {@class = "add-product"}) <div class="icon-plus-sign" style="font-size: 25px"></div>
                 </div>
                 <table class="main-table">
                     <thead id="plz">
                         <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)"><div class="icon-arrow-up up"></div></a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)"><div class="icon-arrow-down down"></div></a></th>
                         <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)"><div class="icon-arrow-down down"></div></a></th>
-                        <th>Ilość <br />Zamówień <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
+                        <th>Ilość zam. <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
                         <th class="blank">Status</th>
                         <th class="blank"></th>
                         <th class="blank"></th>
                         <th class="blank"></th>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in productsList">
+                        <tr ng-repeat="item in productsList">
                             <td>{{item.ProductId}}.</td>
-                        <td>{{item.Name}}</td>
-                        <td>{{item.orders}}</td>
-                            @*<td class="share">publikuj<div class="icon-mail-forward" style="float: right; margin-right:10px"></div></td>*@
-                            @*<td class="deta">szczegóły<div class="icon-info" style="float: right; margin-right:10px"></div></td>*@
-                            <td class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="float: right; margin-right:10px"></div></td>
-                            <td class="state">Gotowy do publikacji</td>
-                            <td><div class="icon-pencil pencil"></div></td>
-                            <td><div class="icon-trash trash"></div></td>
-                    </tr>
+                            <td>{{item.Name}}</td>
+                            <td>{{item.orders}}</td>
+                            <td class="state">
+                                <div ng-if="item.Published && !item.WrongModel">Na sklepie</div>
+                                <div ng-if="item.WrongModel">Wymaga edycji</div>
+                                <div ng-if="!item.WrongModel && !item.Published">Gotowy do publikacji</div>
+                            </td>
+                            <td ng-click="publish(item.ProductId)" ng-if="!item.WrongModel && !item.Published" class="share">
+                                publikuj
+                                <div class="icon-mail-forward" style="margin-left: 5px; font-size: 17px"></div>
+                            </td>
+                            <td ng-click="getinfo(item.ProductId)" ng-if="item.WrongModel" class="deta">
+                                szczegóły
+                                <div class="icon-info" style="margin-left: 5px; font-size: 17px"></div>
+                                <div ng-if="item.showinfo==true" class="info-box-plz">
+                                    <div ng-click="closeinfobox(item.ProductId,$event)" class="close-info-box icon-remove"></div>
+                                    <ul>
+                                        <li ng-repeat="row in item.data" ng-if="row!=''">
+                                            {{row}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td ng-click="unpublish(item.ProductId)" ng-if="item.Published && !item.WrongModel" class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>                           
+                            <td><a ng-href="@Url.Action("Edit")/{{item.ProductId}}" class="icon-pencil pencil"></a></td>
+                            <td ng-if="item.orders==0 && item.canDelete==false"><a ng-click="deleteitemask(item.ProductId)" class="icon-trash trash"></a></td>
+                            <td ng-if="item.orders==0 && item.canDelete==true"><a ng-click="deleteitem(item.ProductId)" class="icon-check-sign trash-yes"></a><a ng-click="nodeleteitem(item.ProductId)" class="icon-remove-sign trash-no"></a></td>
+
+                        </tr>
                     </tbody>
                 </table>
                 <div id="paginator" ng-if="pages>1">

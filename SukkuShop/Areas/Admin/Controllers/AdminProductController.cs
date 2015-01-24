@@ -13,6 +13,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public partial class AdminProductController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
@@ -33,6 +34,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult GetProductList()
         {
+
             var products = _dbContext.Products.Select(x => new
             {
                 x.ProductId,
@@ -42,8 +44,18 @@ namespace SukkuShop.Areas.Admin.Controllers
                 x.IsComplete,
                 x.CategoryId,
                 upper = x.Categories.UpperCategoryId,
-                canDelete = x.OrderDetails.Count==0,
-                orders = x.OrdersCount
+                canDelete = false,
+                orders = x.OrdersCount,
+                showinfo = false,
+                data = new
+                {
+                    price = x.Price == null ? "Brak ceny" : "",
+                    category = x.CategoryId == null ? "Brak kategorii" : "",
+                    packing = x.Packing == null ? "Brak metody pakowania" : "",
+                    opis = x.Description == null ? "Brak opisu" : "",
+                    img = x.ImageName == null ? "Brak zdjęcia":""
+                    
+                }
             });
 
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
@@ -64,6 +76,62 @@ namespace SukkuShop.Areas.Admin.Controllers
                 categories
             };
             return Json(data, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult PublishProduct(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            if (product != null)
+            {
+                product.Published = true;
+                _dbContext.Products.AddOrUpdate(product);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);               
+        }
+
+        public virtual ActionResult UnpublishProduct(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            if (product != null)
+            {
+                product.Published = false;
+                _dbContext.Products.AddOrUpdate(product);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult GetInfoAboutWrongModel(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            if (product != null)
+            {
+                var price = product.Price == null ? "Brak ceny" : null;
+                var category = product.CategoryId == null ? "Brak kategorii" : null;
+                var packing = product.Packing == null ? "Brak metody pakowania" : null;
+                var data = new
+                {
+                    price,
+                    category,
+                    packing
+                };
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            const string error = "Błąd wczytywania danych";
+            return Json(error, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual ActionResult DeleteProduct(int id)
+        {
+            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            if (product == null) return Json(false);
+            if (product.OrderDetails.Count != 0) return Json(false);
+            _dbContext.Products.Remove(product);
+            _dbContext.SaveChanges();
+            return Json(true);
         }
 
         [HttpPost]
@@ -120,9 +188,10 @@ namespace SukkuShop.Areas.Admin.Controllers
                         AddFileExtension = true
                     };
                     imageSmall.Build();
+                    prod.IconName = prod.ProductId + "_small";
+                    prod.ImageName = prod.ProductId + "_normal";
                 }
-                prod.IconName = prod.ProductId + "_small";
-                prod.ImageName = prod.ProductId + "_normal";
+                
                 prod.IsComplete = true;
                 foreach (var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(prod, null) == null))
                     prod.IsComplete = false;
@@ -133,8 +202,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
                 _dbContext.Products.AddOrUpdate(prod);
                 _dbContext.SaveChanges();
-                ViewBag.Name = prod.Name;
-                return View("Index",0);
+                return RedirectToAction(MVC.Admin.AdminProduct.Index(prod.Name));
             }
             GetDropDownLists(model);
             return View(model);
@@ -230,62 +298,152 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
 
 
-        [HttpGet]
-        public virtual ActionResult Delete(int id)
-        {
-            var item = _dbContext.Products.Find(id);
-            return View(item);
-        }
-
-        [HttpPost]
-        [ActionName("Delete")]
-        public virtual ActionResult DeletePost(int id)
-        {
-            var item = _dbContext.Products.Find(id);
-            if (item == null)
-            {
-                return HttpNotFound();
-            }
-            _dbContext.Products.Remove(item);
-            _dbContext.SaveChanges();
-
-            return RedirectToAction("Index", "Home", new {area = "Admin"});
-        }
+  
 
         public virtual ActionResult Edit(int id)
         {
+            ViewBag.SelectedOpt = 1;
             var item = _dbContext.Products.Find(id);
-            if (item == null)
+            GetCategoryListEdit(item);
+
+            var model = new ProductEditModel
             {
-                return HttpNotFound();
+                Description = item.Description,
+                Image = item.ImageName,
+                Packing = item.Packing,
+                Price = item.Price.ToString(),
+                Promotion = item.Promotion,
+                Quantity = item.Quantity,
+                PublishAfterCreate = item.Published,
+                Id = item.ProductId,
+                Title = item.Name
+
+            };
+            return View(model);
+        }
+
+        private void GetCategoryListEdit(Products item)
+        {
+            var category = _dbContext.Categories.Find(item.CategoryId);
+            var list = new List<SelectListItem>
+            {
+                new SelectListItem
+                {
+                    Text = "Wybierz kategorię",
+                    Value = "0",
+                    Selected = 0 == item.CategoryId || item.CategoryId == null
+                }
+            };
+
+            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            {
+                Text = k.Name,
+                Value = k.CategoryId.ToString(),
+                Selected = false
+            }).ToList();
+            list.AddRange(categoryList);
+            foreach (var selectListItem in list)
+            {
+                if (category == null) continue;
+                if (Convert.ToInt32(selectListItem.Value) == category.CategoryId ||
+                    Convert.ToInt32(selectListItem.Value) == category.UpperCategoryId)
+                    selectListItem.Selected = true;
             }
-            return View(item);
+            ViewBag.CategoryList = list;
+            var subCategoryList = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "Wybierz podkategorię", Value = "0", Selected = 0 == item.CategoryId}
+            };
+
+            if (category != null)
+            {
+                var subCategoryList2 =
+                    _dbContext.Categories.Where(x => x.UpperCategoryId == category.UpperCategoryId)
+                        .Select(k => new SelectListItem
+                        {
+                            Text = k.Name,
+                            Value = k.CategoryId.ToString(),
+                            Selected = category.UpperCategoryId != 0 && (k.CategoryId == item.CategoryId)
+                        }).ToList();
+                subCategoryList.AddRange(subCategoryList2);
+            }
+
+            ViewBag.SubCategoryList = subCategoryList;
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public virtual ActionResult Edit(Products model)
+        public virtual ActionResult Edit(ProductEditModel model)
         {
-            var item = _dbContext.Products.Find(model.ProductId);
-            item.Price = model.Price;
-            item.Quantity = model.Quantity;
-            item.CategoryId = model.CategoryId;
-            item.Name = model.Name;
-            item.ImageName = model.ImageName;
-            item.Packing = model.Packing;
-            item.Promotion = model.Promotion;
+            var product = _dbContext.Products.Find(model.Id);
+            if (ModelState.IsValid)
+            {                
+                var category = model.Category == 0 ? null : model.Category;
+                var price = model.Price == null ? (decimal?)null : Convert.ToDecimal(model.Price.Replace(".", ","));
+                if (price == null || category == null || model.Packing == null)
+                {
+                    if (model.PublishAfterCreate)
+                    {
+                        ModelState.AddModelError("PublishAfterCreate",
+                            "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
+                        GetCategoryListEdit(product);
+                        return View(model);
+                    }
+                }
+                price = Math.Floor((price ?? 0) * 100) / 100;
+                if (model.SubCategory != 0)
+                    category = model.SubCategory;
 
-            _dbContext.SaveChanges();
 
-            return RedirectToAction("Index", "Home", new {area = "Admin"});
-        }
-
-        [HttpGet]
-        public virtual ActionResult Details(int id)
-        {
-            var prod = _dbContext.Products.Find(id);
-
-            return View(prod);
+                product.Price = price;
+                product.CategoryId = category;
+                product.Description = model.Description;
+                product.Name = model.Title;
+                product.Quantity = model.Quantity;
+                product.Packing = model.Packing;
+                product.Published = model.PublishAfterCreate;
+                if (model.TrueImageDeleted)
+                {
+                    product.IconName = null;
+                    product.ImageName = null;
+                }
+                    
+                if (model.ImageBig != null && model.ImageBig.ContentLength != 0)
+                {
+                    var pathForSaving = Server.MapPath("~/Content/Images/Shop/");
+                    var imageBig = new ImageJob(model.ImageBig, pathForSaving + product.ProductId + "_normal",
+                        new Instructions("maxwidth=700&maxheight=700&format=jpg"))
+                    {
+                        CreateParentDirectory = true,
+                        AddFileExtension = true
+                    };
+                    imageBig.Build();
+                    var imageSmall = new ImageJob(model.ImageBig, pathForSaving + product.ProductId + "_small",
+                        new Instructions("maxwidth=127&maxheight=127&format=jpg"))
+                    {
+                        CreateParentDirectory = true,
+                        AddFileExtension = true
+                    };
+                    imageSmall.Build();
+                    product.IconName = product.ProductId + "_small";
+                    product.ImageName = product.ProductId + "_normal";
+                }
+                product.WrongModel = false;
+                product.IsComplete = true;
+                foreach (var prop in product.GetType().GetProperties().Where(prop => prop.GetValue(product, null) == null))
+                    product.IsComplete = false;
+                if (product.Price == null || product.CategoryId == null || product.Packing == null)
+                {
+                    product.WrongModel = true;
+                    product.IsComplete = false;
+                    product.Published = false;
+                }
+                _dbContext.Products.AddOrUpdate(product);
+                _dbContext.SaveChanges();
+                return RedirectToAction(MVC.Admin.AdminProduct.Index(product.Name));
+            }
+            GetCategoryListEdit(product);
+            return View(model);
         }
     }
 }

@@ -4,6 +4,7 @@ using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public partial class AdminUserController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
