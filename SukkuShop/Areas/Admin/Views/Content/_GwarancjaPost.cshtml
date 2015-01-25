@@ -1,0 +1,7 @@
+﻿@model SukkuShop.Areas.Admin.Models.RegulaminModel
+@Ajax.ActionLink("Zakończ edycję (bez zapisu)", MVC.Admin.Content.GwarancjaAjaxPost(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace })
+@using (Html.BeginForm(MVC.Admin.Content.Gwarancja(), FormMethod.Post, new { validateRequest = "false" }))
+{
+    @Html.TextArea("Text", Model.Text)
+    <p><input type="submit" value="Zapisz" /></p>
+}

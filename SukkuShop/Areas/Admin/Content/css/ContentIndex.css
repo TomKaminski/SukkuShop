@@ -1,0 +1,49 @@
+.main-container {
+  width: 1066px;
+  margin: auto;
+  margin-bottom: 50px; }
+  .main-container a {
+    text-decoration: none; }
+  .main-container h1 {
+    font-size: 32px;
+    text-align: center;
+    padding-bottom: 20px;
+    color: #ff6600;
+    font-weight: bold;
+    font-family: Segoe UI; }
+  .main-container .content-box-big {
+    width: 800px;
+    height: 150px;
+    background-color: white;
+    border: 2px solid #ff6600;
+    margin: 10px auto;
+    border-radius: 5px; }
+    .main-container .content-box-big .tekst {
+      line-height: 150px;
+      color: #ff6600;
+      font-family: SegoeBold;
+      font-size: 40px; }
+    .main-container .content-box-big:hover {
+      background-color: #ff6600; }
+      .main-container .content-box-big:hover .tekst {
+        color: white; }
+      .main-container .content-box-big:hover .icon {
+        color: white; }
+    .main-container .content-box-big .icon {
+      font-size: 100px;
+      color: #ff6600;
+      line-height: 150px; }
+  .main-container a:nth-child(even) .content-box-big .tekst {
+    text-align: right;
+    padding-right: 120px; }
+  .main-container a:nth-child(even) .content-box-big .icon {
+    float: left;
+    padding-left: 120px; }
+  .main-container a:nth-child(odd) .content-box-big .tekst {
+    text-align: left;
+    padding-left: 120px;
+    float: left; }
+  .main-container a:nth-child(odd) .content-box-big .icon {
+    float: right;
+    padding-right: 120px; }
+

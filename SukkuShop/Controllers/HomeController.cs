@@ -1,4 +1,5 @@
-﻿using System.Web.Mvc;
+﻿using System.Web;
+using System.Web.Mvc;
 using System.Web.UI;
 using DevTrends.MvcDonutCaching;
 
@@ -19,12 +20,12 @@ namespace SukkuShop.Controllers
             return PartialView(MVC.Shared.Views._LoginPartial);
         }
 
-
-
-        [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Regulamin()
         {
-            return View();
+            var path = Server.MapPath("~/Content/web/regulamin.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));
+            
+            return View(model);
         }
 
         [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]

@@ -1,0 +1,71 @@
+$sukkucolor: #f89b1d;
+
+.main-container {
+    width:1066px;
+    margin:auto;
+    margin-bottom:50px;
+a{
+text-decoration:none;
+}
+    h1{
+        font-size:32px;
+        text-align:center;
+        padding-bottom:20px;
+        color:#ff6600;
+        font-weight:bold;
+        font-family:Segoe UI;
+    }
+.content-box-big{
+        width:800px;
+        height:150px;
+        background-color:white;
+        border:2px solid #ff6600;
+        margin:10px auto;        
+        border-radius:5px;
+        .tekst{
+            line-height:150px;
+            color:#ff6600;
+            font-family:SegoeBold;
+            font-size:40px;
+        }
+        &:hover{
+            background-color:#ff6600;
+            .tekst{
+                color:white;
+            }      
+            .icon{
+                color:white;
+            }      
+        }
+        .icon{
+            font-size:100px;
+            color:#ff6600;
+            line-height:150px;
+        }
+}
+    
+    a:nth-child(even) .content-box-big{
+        .tekst{
+            text-align:right;
+            padding-right:120px;
+        }
+.icon{
+    float:left;
+    padding-left:120px;
+}
+    }
+    a:nth-child(odd) .content-box-big{
+        .tekst{
+            text-align:left;
+            padding-left:120px;
+            float:left;
+        }
+.icon{
+    float:right;
+    padding-right:120px;
+}
+    }
+
+
+    
+}

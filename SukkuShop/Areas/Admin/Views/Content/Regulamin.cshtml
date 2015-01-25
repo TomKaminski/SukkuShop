@@ -1,0 +1,17 @@
+﻿@model SukkuShop.Areas.Admin.Models.RegulaminModel
+@{
+    ViewBag.Title = "Regulamin";
+}
+
+@Scripts.Render("~/ckeditor/ckeditor.js")
+@Scripts.Render("~/ckeditor/adapters/jquery.js")
+@Scripts.Render("~/Areas/Admin/Scripts/RegulaminEditor.js")
+
+<div style="width:1066px;margin:auto" id="regulamin-replace">
+    @Ajax.ActionLink("Edytuj regulamin",MVC.Admin.Content.RegulaminAjaxGet(),new AjaxOptions{UpdateTargetId = "regulamin-replace",HttpMethod = "POST",InsertionMode = InsertionMode.Replace,OnComplete = "SetEditor()"})
+    @Model.Text
+</div>
+
+
+
+

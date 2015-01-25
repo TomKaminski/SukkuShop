@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="main-container">
+    <h1>Zarządzaj wszystkimi dokumentami sklepu z jednego miejsca</h1>
+    <a href="@Url.Action(MVC.Admin.Content.Regulamin())">
+        <div class="content-box-big"><div class="icon-list-alt icon"></div><div class="tekst">Regulamin</div></div>
+    </a>
+    <a href="@Url.Action(MVC.Admin.Content.PolitykaPrywatnosci())">
+        <div class="content-box-big"><div class="tekst">Polityka prywatności</div><div class="icon-camera icon"></div></div>
+    </a>
+    <a href="@Url.Action(MVC.Admin.Content.Gwarancja())">
+        <div class="content-box-big"><div class="icon-shield icon"></div><div class="tekst">Gwarancja</div></div>
+    </a>
+    <a href="@Url.Action(MVC.Admin.Content.Reklamacje())">
+        <div class="content-box-big"><div class="tekst">Reklamacje</div><div class="icon-legal icon"></div></div>
+    </a>
+    <a href="@Url.Action(MVC.Admin.Content.ZwrotTowarow())">
+        <div class="content-box-big"><div class="icon-retweet icon"></div><div class="tekst">Zwrot towarów</div></div>
+    </a>
+</div>
+
+@Styles.Render("~/Areas/Admin/Content/css/ContentIndex.css")
+

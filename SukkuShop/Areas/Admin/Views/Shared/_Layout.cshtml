@@ -21,11 +21,11 @@
                 <li id="2"> <a href="">Zamówienia</a> </li>
                 <li id="3"> <a class="@(ViewBag.SelectedOpt==3?"selected":"")" href="@Url.Action(MVC.Admin.Klienci.Lista())">Użytkownicy</a></li>
                 <li id="4"> <a href="">Strona główna</a></li>
-                <li id="5"> <a href="">Sekcja informacyjna</a></li>
+                <li id="5"> <a class="@(ViewBag.SelectedOpt == 5 ? "selected" : "")" href="@Url.Action(MVC.Admin.Content.Index())">Sekcja informacyjna</a></li>
             </ul>           
                
         </nav>
-        <div class="clear">&nbsp;</div>
+        <div class="clear" style="clear: both;float:none;height:0">&nbsp;</div>
     </header>
     @RenderBody()
     @RenderSection("scripts", required: false)

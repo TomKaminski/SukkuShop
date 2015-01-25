@@ -45,6 +45,7 @@ namespace T4MVC
     public class AdminClass
     {
         public readonly string Name = "Admin";
+        public SukkuShop.Areas.Admin.Controllers.ContentController Content = new SukkuShop.Areas.Admin.Controllers.T4MVC_ContentController();
         public SukkuShop.Areas.Admin.Controllers.HomeController Home = new SukkuShop.Areas.Admin.Controllers.T4MVC_HomeController();
         public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
         public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
@@ -421,6 +422,7 @@ namespace Links
                 public static readonly string AdminEditProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminEditProduct.min.js") ? Url("AdminEditProduct.min.js") : Url("AdminEditProduct.js");
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
+                public static readonly string RegulaminEditor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegulaminEditor.min.js") ? Url("RegulaminEditor.min.js") : Url("RegulaminEditor.js");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
             }
         
@@ -445,6 +447,11 @@ namespace Links
                          
                     public static readonly string AdminProductsList_css_map = Url("AdminProductsList.css.map");
                     public static readonly string AdminProductsList_min_css = Url("AdminProductsList.min.css");
+                    public static readonly string ContentIndex_scss = Url("ContentIndex.scss");
+                    public static readonly string ContentIndex_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.css") ? Url("ContentIndex.min.css") : Url("ContentIndex.css");
+                         
+                    public static readonly string ContentIndex_css_map = Url("ContentIndex.css.map");
+                    public static readonly string ContentIndex_min_css = Url("ContentIndex.min.css");
                     public static readonly string CreateProduct_scss = Url("CreateProduct.scss");
                     public static readonly string CreateProduct_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CreateProduct.min.css") ? Url("CreateProduct.min.css") : Url("CreateProduct.css");
                          
