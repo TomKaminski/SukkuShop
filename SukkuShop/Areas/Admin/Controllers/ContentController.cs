@@ -241,7 +241,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 Text = text
             };
-            return PartialView("_ZwrotTowarowGet", model);
+            return PartialView("_ZwrotTowarowPost", model);
         }
 
         public virtual PartialViewResult ZwrotTowarowAjaxPost()
@@ -254,7 +254,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 Text = text
             };
-            return PartialView("_ZwrotTowarowPost", model);
+            return PartialView("_ZwrotTowarowGet", model);
         }
 
         [HttpPost, ValidateInput(false)]

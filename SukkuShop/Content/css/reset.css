@@ -1,77 +1,153 @@
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline; }
+/*%extend_1 {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
 
+
+html {
+	@extend %extend_1;
+}
 body {
-  line-height: 1; }
-
+	@extend %extend_1;
+	line-height: 1;
+}
+div {
+	@extend %extend_1;
+}
+span {
+	@extend %extend_1;
+}
+h1 {
+	@extend %extend_1;
+}
+h2 {
+	@extend %extend_1;
+}
+h3 {
+	@extend %extend_1;
+}
+h4 {
+	@extend %extend_1;
+}
+h5 {
+	@extend %extend_1;
+}
+h6 {
+	@extend %extend_1;
+}
+p {
+	@extend %extend_1;
+}
 blockquote {
-  quotes: none; }
-  blockquote:before {
-    content: '';
-    content: none; }
-  blockquote:after {
-    content: '';
-    content: none; }
-
+	@extend %extend_1;
+	quotes: none;
+	&:before {
+		content: '';
+		content: none;
+	}
+	&:after {
+		content: '';
+		content: none;
+	}
+}
+pre {
+	@extend %extend_1;
+}
+a {
+	@extend %extend_1;
+}
+img {
+	@extend %extend_1;
+}
+ins {
+	@extend %extend_1;
+}
+kbd {
+	@extend %extend_1;
+}
 q {
-  quotes: none; }
-  q:before {
-    content: '';
-    content: none; }
-  q:after {
-    content: '';
-    content: none; }
-
-ol {
-  list-style: none; }
+	@extend %extend_1;
+	quotes: none;
+	&:before {
+		content: '';
+		content: none;
+	}
+	&:after {
+		content: '';
+		content: none;
+	}
+}
 
 ul {
-  list-style: none; }
+	@extend %extend_1;
+	list-style: none;
+}
+li {
+	@extend %extend_1;
+}
+
+form {
+	@extend %extend_1;
+}
+label {
+	@extend %extend_1;
+}
 
 table {
-  border-collapse: collapse;
-  border-spacing: 0; }
+	@extend %extend_1;
+	border-collapse: collapse;
+	border-spacing: 0;
+}
 
-article {
-  display: block; }
-
-aside {
-  display: block; }
-
-details {
-  display: block; }
-
-figure {
-  display: block; }
-
-figcaption {
-  display: block; }
+tbody {
+	@extend %extend_1;
+}
+tfoot {
+	@extend %extend_1;
+}
+thead {
+	@extend %extend_1;
+}
+tr {
+	@extend %extend_1;
+}
+th {
+	@extend %extend_1;
+}
+td {
+	@extend %extend_1;
+}
 
 footer {
-  display: block; }
-
+	@extend %extend_1;
+	display: block;
+}
 header {
-  display: block; }
-
+	@extend %extend_1;
+	display: block;
+}
 hgroup {
-  display: block; }
-
-menu {
-  display: block; }
+	@extend %extend_1;
+	display: block;
+}
 
 nav {
-  display: block; }
+	@extend %extend_1;
+	display: block;
+}
 
 section {
-  display: block; }
+	@extend %extend_1;
+	display: block;
+}
 
 .clear {
-  float: none;
-  clear: both;
-  height: 0; }
+	float: none;
+	clear: both;
+	height: 0;
+}*/
 

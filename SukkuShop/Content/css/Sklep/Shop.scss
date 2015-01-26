@@ -227,10 +227,14 @@ z-index:-50;
 }
 
 ul {
+list-style-type: none;
+padding: 0;
 	&.subcategory-menu {
 		margin: 0 auto;
 		position: absolute;
 		z-index: 100;
+list-style-type: none;
+padding: 0;
 		li {
 			margin-bottom: 20px;
                 cursor:pointer;
@@ -245,7 +249,6 @@ ul {
 		}
 	}
 	&.sort-menu {
-		margin-bottom: -30px;
 		li.sort-box {
 			padding-right: 14px;
 			display: inline;
@@ -272,9 +275,9 @@ ul {
                 .sort-arrow-up {
                       width: 0;
                       height: 0;
-                      border-right: 7px solid transparent;
+                      border-right: 8px solid transparent;
                       border-bottom: 11px solid black;
-                      border-left: 7px solid transparent;
+                      border-left: 8px solid transparent;
                       float: right;
                       background-color: transparent;
                       cursor: pointer;
@@ -287,9 +290,9 @@ ul {
                 .sort-arrow-down {
                       width: 0;
                       height: 0;
-                      border-right: 7px solid transparent;
+                      border-right: 8px solid transparent;
                       border-top: 11px solid black;
-                      border-left: 7px solid transparent;
+                      border-left: 8px solid transparent;
                       float: right;
                       background-color: transparent;
                       cursor: pointer;
@@ -303,9 +306,9 @@ ul {
             .sort-arrow {
 	            width: 0;
 	            height: 0;
-	            border-top: 7px solid transparent;
+	            border-top: 8px solid transparent;
 	            border-left: 11px solid $black;
-	            border-bottom: 7px solid transparent;
+	            border-bottom: 8px solid transparent;
 	            float: right;
 	            background-color: transparent;
 	            cursor: pointer;
@@ -318,7 +321,9 @@ ul {
             }
 		}
 	}
-	&.top-panel li {
+	&.top-panel {
+margin: 0;
+li {
 		height: 24px;
         .top-panel-text-container {
 	        width: 127px;
@@ -347,7 +352,7 @@ ul {
 	            font-weight: bold;
             }
         }
-	}
+	}}
 	&.shop-paginator li {
 		@extend %extend_2;
 		&.inner-paginator {

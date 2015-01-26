@@ -404,6 +404,12 @@
     <Content Include="Areas\Admin\Content\css\CreateProduct.min.css">
       <DependentUpon>CreateProduct.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\EditorView.css">
+      <DependentUpon>EditorView.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\EditorView.min.css">
+      <DependentUpon>EditorView.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\main.css">
       <DependentUpon>main.scss</DependentUpon>
     </Content>
@@ -896,6 +902,10 @@
     <Content Include="Areas\Admin\Views\Content\_GwarancjaPost.cshtml" />
     <Content Include="Areas\Admin\Views\Content\_ZwrotTowarowGet.cshtml" />
     <Content Include="Areas\Admin\Views\Content\_ZwrotTowarowPost.cshtml" />
+    <Content Include="Areas\Admin\Content\css\EditorView.scss" />
+    <Content Include="Areas\Admin\Content\css\EditorView.css.map">
+      <DependentUpon>EditorView.css</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />

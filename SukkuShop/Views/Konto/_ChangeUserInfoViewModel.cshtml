@@ -2,7 +2,6 @@
 @using (Ajax.BeginForm(MVC.Konto.ChangeUserInfoViewModel(), new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "showAjaxLoader()", OnComplete = "hideAjaxLoader()", OnFailure = "onError(xhr, status, error)" }, new { id = "changeUserInfoForm" }))
 {
 
-<div class="clear">&nbsp;</div>
 <div class="data-container">
     <div class="main-text">Edytuj dane osobowe</div>
      
@@ -53,6 +52,7 @@
         @Html.TextBoxFor(m => m.Email)
         @Html.ValidationMessageFor(m => m.Email)
     </div>
+    <div class="clear">&nbsp;</div>
     <div>
         <div class="validation-box" style="float:left">
             @if (Model.Success == null)
@@ -84,7 +84,9 @@
         <div class="save" id="save-nofirma" style="margin-left:0">
             <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
         </div>
+        <div class="clear">&nbsp;</div>
     </div>
+    <div class="clear">&nbsp;</div>
 </div>
 <div class="clear">&nbsp;</div>
 }

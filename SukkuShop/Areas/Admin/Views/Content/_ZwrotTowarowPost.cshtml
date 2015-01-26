@@ -1,7 +1,12 @@
 ﻿@model SukkuShop.Areas.Admin.Models.RegulaminModel
-@Ajax.ActionLink("Zakończ edycję (bez zapisu)", MVC.Admin.Content.ZwrotTowarowAjaxPost(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace })
-@using (Html.BeginForm(MVC.Admin.Content.ZwrotTowarow(), FormMethod.Post, new { validateRequest = "false" }))
+<div style="margin-bottom: 15px">
+    <div id="triangle-left"></div>
+    @Ajax.ActionLink("Zakończ edycję (bez zapisu)", MVC.Admin.Content.ZwrotTowarowAjaxPost(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace }, new { @class = "sukku-link" })
+    <div id="triangle-right"></div>
+    <a class="sukku-link" style="float:right;cursor:pointer" id="saveDoc">Zapisz dokument</a>
+    <div style="clear: both;float:none;height:0"></div>
+</div>
+@using (Html.BeginForm(MVC.Admin.Content.ZwrotTowarow(), FormMethod.Post, new { id = "saveDocForm" }))
 {
     @Html.TextArea("Text", Model.Text)
-    <p><input type="submit" value="Zapisz" /></p>
 }

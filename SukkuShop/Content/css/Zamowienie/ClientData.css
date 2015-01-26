@@ -48,6 +48,7 @@
       border-right: 15px solid #f89b1d;
       border-bottom: 11px solid transparent;
       float: left;
+      margin-top: 4px;
       margin-right: 25px;
       margin-left: 25px; }
     .order-container .client-data-container #triangle-right-big {
@@ -57,7 +58,7 @@
       border-left: 15px solid #f89b1d;
       border-bottom: 11px solid transparent;
       float: right;
-      margin: 0 25px 37px 15px;
+      margin: 4px 25px 37px 15px;
       cursor: pointer; }
     .order-container .client-data-container .left-container {
       width: 50%;
@@ -113,7 +114,7 @@
         margin-top: 45px;
         margin-right: 20px; }
       .order-container .client-data-container .right-container .error-box {
-        margin: 100px auto auto 50px;
+        margin: 94px auto auto 50px;
         width: 90%;
         height: 300px;
         color: red;

@@ -124,22 +124,29 @@ body {
                 #triangle-right {
 	                width: 0;
 	                height: 0;
-	                border-top: 5px solid transparent;
+	                border-top: 8px solid transparent;
 	                border-left: 10px solid $sukkucolor;
-	                border-bottom: 5px solid transparent;
+	                border-bottom: 8px solid transparent;
 	                float: right;
 	                margin-left: 5px;
-	                margin-top: 5px;
+	                margin-top: 3px;
                 }
             }
         }
         nav {
+            ul{
+                list-style-type:none;
+margin-top: 0;
+                li{
+                    display:inline
+                }
+            }
 	        width: 802px;
 	        float: left;
             .cart-box {
 	            opacity: 0.6;
 	            margin-right: 7px;
-	            margin-top: 68px;
+	            margin-top: 62px;
 	            &:hover {
 		            opacity: 1;
 	            }
@@ -233,7 +240,7 @@ body {
         }
 	    ul#shop-category {
 		    float: left;
-		    margin-top: 51px;
+		    margin-top: 44px;
 		    li {
 			    display: inline;
 			    margin-right: 38px;
@@ -254,11 +261,13 @@ body {
 	    width: 1066px;
 	    @extend %stopka-extend;
 	    ul {
-		    margin-top: 30px;
+            padding:0;
+            list-style-type:none;
+		    margin-top: 25px;
 		    li {
 			    width: 240px;
 			    float: left;
-			    margin-right: 140px;
+			    margin-right: 120px;
 			    &:last-child {
 				    margin-right: 140px;
 				    margin-right: 0;
@@ -275,7 +284,7 @@ body {
 				    color: $black;
 				    width: 160px;
 				    float: left;
-				    margin-bottom: 30px;
+				    margin-bottom: 28px;
 			    }
 			    img {
 				    float: right;

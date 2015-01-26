@@ -1,19 +1,15 @@
-﻿@font-face {
+@font-face {
   font-family: LucidaBright;
   src: url(../../fonts/lucida_bright.ttf); }
-
 @font-face {
   font-family: Microsoft PhagsPa;
   src: url(../../fonts/phagspa.ttf); }
-
 @font-face {
   font-family: FootlightMTLight;
   src: url(../../fonts/FTLTLT.ttf); }
-
 @font-face {
   font-family: FoglihtenPCS;
   src: url(../../fonts/FoglihtenPCS.otf); }
-
 .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon img, .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon input, .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .info-icon img {
   position: absolute;
   margin: auto;
@@ -41,11 +37,10 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
 
 @font-face {
   font-family: LucidaConsole;
-  src: url('../../fonts/lucida_console.eot');
-  src: url('../../fonts/lucida_console.eot?#iefix') format('embedded-opentype'), url('../../fonts/lucida_console.svg#Lucida Console') format('svg'), url('../../fonts/lucida_console.woff') format('woff'), url('../../fonts/lucida_console.ttf') format('truetype');
+  src: url("../../fonts/lucida_console.eot");
+  src: url("../../fonts/lucida_console.eot?#iefix") format("embedded-opentype"), url("../../fonts/lucida_console.svg#Lucida Console") format("svg"), url("../../fonts/lucida_console.woff") format("woff"), url("../../fonts/lucida_console.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
-
 .product-background {
   height: 752px;
   max-width: 1600px;
@@ -60,17 +55,9 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
     padding-top: 20px;
     width: 642px;
     margin-left: 40%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-            justify-content: flex-start; }
+    flex-wrap: wrap;
+    justify-content: flex-start; }
     .product-background .product-list-container .product-list-item-box {
       height: 191px;
       width: 135px;
@@ -165,21 +152,24 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
             right: 3px;
             bottom: 0; }
 
-ul.subcategory-menu {
-  margin: 0 auto;
-  position: absolute;
-  z-index: 100; }
-  ul.subcategory-menu li {
-    margin-bottom: 20px;
-    cursor: pointer;
-    font-family: Microsoft PhagsPa;
-    font-size: 22px;
-    color: #f89b1d;
-    text-transform: uppercase; }
-    ul.subcategory-menu li:last-child {
-      margin-right: 0; }
-ul.sort-menu {
-  margin-bottom: -30px; }
+ul {
+  list-style-type: none;
+  padding: 0; }
+  ul.subcategory-menu {
+    margin: 0 auto;
+    position: absolute;
+    z-index: 100;
+    list-style-type: none;
+    padding: 0; }
+    ul.subcategory-menu li {
+      margin-bottom: 20px;
+      cursor: pointer;
+      font-family: Microsoft PhagsPa;
+      font-size: 22px;
+      color: #f89b1d;
+      text-transform: uppercase; }
+      ul.subcategory-menu li:last-child {
+        margin-right: 0; }
   ul.sort-menu li.sort-box {
     padding-right: 14px;
     display: inline;
@@ -203,9 +193,9 @@ ul.sort-menu {
       ul.sort-menu li.sort-box .price-arrow-box .sort-arrow-up {
         width: 0;
         height: 0;
-        border-right: 7px solid transparent;
+        border-right: 8px solid transparent;
         border-bottom: 11px solid black;
-        border-left: 7px solid transparent;
+        border-left: 8px solid transparent;
         float: right;
         background-color: transparent;
         cursor: pointer;
@@ -216,9 +206,9 @@ ul.sort-menu {
       ul.sort-menu li.sort-box .price-arrow-box .sort-arrow-down {
         width: 0;
         height: 0;
-        border-right: 7px solid transparent;
+        border-right: 8px solid transparent;
         border-top: 11px solid black;
-        border-left: 7px solid transparent;
+        border-left: 8px solid transparent;
         float: right;
         background-color: transparent;
         cursor: pointer;
@@ -229,9 +219,9 @@ ul.sort-menu {
     ul.sort-menu li.sort-box .sort-arrow {
       width: 0;
       height: 0;
-      border-top: 7px solid transparent;
+      border-top: 8px solid transparent;
       border-left: 11px solid black;
-      border-bottom: 7px solid transparent;
+      border-bottom: 8px solid transparent;
       float: right;
       background-color: transparent;
       cursor: pointer;
@@ -240,50 +230,52 @@ ul.sort-menu {
       margin-left: 8px; }
       ul.sort-menu li.sort-box .sort-arrow:hover {
         opacity: 1; }
-ul.top-panel li {
-  height: 24px; }
-  ul.top-panel li .top-panel-text-container {
-    width: 127px;
-    position: absolute; }
-    ul.top-panel li .top-panel-text-container:before {
-      position: absolute;
-      height: 24px;
-      width: 127px;
-      background-color: white;
-      opacity: 0.6;
-      content: '';
-      top: 0; }
-    ul.top-panel li .top-panel-text-container .top-panel-text {
-      position: relative;
-      font-family: LucidaConsole;
-      line-height: 24px;
-      vertical-align: middle;
-      font-size: 16px;
-      text-transform: uppercase;
-      text-align: center;
-      text-shadow: 2px 2px 3px white;
-      text-shadow: 2px 2px 3px white;
-      font-weight: bold; }
-ul.shop-paginator li.inner-paginator:before {
-  position: absolute;
-  background: #f89b1d;
-  content: '';
-  width: 21px;
-  height: 21px; }
-ul.shop-paginator li:last-child {
-  position: relative; }
-ul.shop-paginator li .paginator-box {
-  line-height: 21px;
-  vertical-align: middle;
-  position: relative;
-  font-family: LucidaBright;
-  font-size: 13px;
-  text-align: center;
-  color: white;
-  text-decoration: none;
-  cursor: pointer; }
-ul.shop-paginator li:hover {
-  color: white; }
+  ul.top-panel {
+    margin: 0; }
+    ul.top-panel li {
+      height: 24px; }
+      ul.top-panel li .top-panel-text-container {
+        width: 127px;
+        position: absolute; }
+        ul.top-panel li .top-panel-text-container:before {
+          position: absolute;
+          height: 24px;
+          width: 127px;
+          background-color: white;
+          opacity: 0.6;
+          content: '';
+          top: 0; }
+        ul.top-panel li .top-panel-text-container .top-panel-text {
+          position: relative;
+          font-family: LucidaConsole;
+          line-height: 24px;
+          vertical-align: middle;
+          font-size: 16px;
+          text-transform: uppercase;
+          text-align: center;
+          text-shadow: 2px 2px 3px white;
+          text-shadow: 2px 2px 3px white;
+          font-weight: bold; }
+  ul.shop-paginator li.inner-paginator:before {
+    position: absolute;
+    background: #f89b1d;
+    content: '';
+    width: 21px;
+    height: 21px; }
+  ul.shop-paginator li:last-child {
+    position: relative; }
+  ul.shop-paginator li .paginator-box {
+    line-height: 21px;
+    vertical-align: middle;
+    position: relative;
+    font-family: LucidaBright;
+    font-size: 13px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    cursor: pointer; }
+  ul.shop-paginator li:hover {
+    color: white; }
 
 .shop-nav-container {
   width: 1066px;
@@ -320,4 +312,4 @@ ul.shop-paginator li:hover {
       float: left;
       margin-top: 2px;
       margin-left: 12px; }
-/*# sourceMappingURL=Shop.css.map */
+

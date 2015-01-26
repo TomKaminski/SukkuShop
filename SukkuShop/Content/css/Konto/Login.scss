@@ -39,6 +39,10 @@ $font_2: SegoeBold;
             text-align: center;
             font-family: Segoe UI;
             color: red;
+            ul{
+                list-style-type:none;
+                padding:0;
+            }
         }
         .zaloguj{
             float:right;
@@ -62,7 +66,7 @@ $font_2: SegoeBold;
                 border-left: 15px solid #f89b1d;
                 border-bottom: 11px solid transparent;
                 float: right;
-                margin: 0 25px 37px 15px;
+                margin: 4px 25px 37px 15px;
                 cursor:pointer;
             }
         }

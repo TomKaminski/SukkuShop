@@ -55,7 +55,7 @@ margin-bottom:25px;
 	    border-bottom: 7px solid transparent;
 	    float: right;
 	    margin-left: 10px;
-	    margin-top: 1px;
+	    margin-top: 5px;
         }
         .order-title-ending {
 	    font-size: 16px;
@@ -240,7 +240,8 @@ margin-bottom:25px;
 	    border-bottom: 11px solid transparent;
 	    float: right;
 	    margin-left: 25px;
-	    margin-top: 23px;
+	    
+margin-top:5px;margin-top: 23px;
     }
     #triangle-left-big {
 	    width: 0;
@@ -249,6 +250,7 @@ margin-bottom:25px;
 	    border-right: 15px solid $color_tree_poppy_approx;
 	    border-bottom: 11px solid transparent;
 	    float: left;
+        margin-top:5px;
 	    margin-top: 23px;
 	    margin-right: 25px;
     }

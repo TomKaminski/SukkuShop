@@ -34,7 +34,7 @@ img.grayscale {
         border-bottom: 7px solid transparent;
         float: right;
         margin-left: 10px;
-        margin-top: 1px; }
+        margin-top: 5px; }
       .order-container .error-message .error-box .order-title-ending {
         font-size: 16px;
         font-family: Segoe UI;
@@ -177,6 +177,7 @@ img.grayscale {
     border-bottom: 11px solid transparent;
     float: right;
     margin-left: 25px;
+    margin-top: 5px;
     margin-top: 23px; }
   .order-container #triangle-left-big {
     width: 0;
@@ -185,6 +186,7 @@ img.grayscale {
     border-right: 15px solid #f89b1d;
     border-bottom: 11px solid transparent;
     float: left;
+    margin-top: 5px;
     margin-top: 23px;
     margin-right: 25px; }
   .order-container .order-summary-header-text {

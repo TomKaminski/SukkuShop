@@ -1,3 +1,7 @@
 ﻿@model SukkuShop.Areas.Admin.Models.RegulaminModel
-@Ajax.ActionLink("Edytuj regulamin", MVC.Admin.Content.RegulaminAjaxGet(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnComplete = "SetEditor()" })
+<div>
+    <div id="triangle-right"></div>
+    @Ajax.ActionLink("Edytuj regulamin", MVC.Admin.Content.RegulaminAjaxGet(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnComplete = "SetEditor()" }, new { @class = "sukku-link", style = "float:right" })
+    <div style="clear: both;float:none;height:0"></div>
+</div>
 @Model.Text

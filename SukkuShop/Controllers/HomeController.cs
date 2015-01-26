@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.IO;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.UI;
 using DevTrends.MvcDonutCaching;
@@ -22,28 +23,30 @@ namespace SukkuShop.Controllers
 
         public virtual ViewResult Regulamin()
         {
-            var path = Server.MapPath("~/Content/web/regulamin.html");
-            var model = new HtmlString(System.IO.File.ReadAllText(path));
-            
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/regulamin.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));            
             return View(model);
         }
 
-        [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Dostawa()
         {
-            return View();
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/gwarancja.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));           
+            return View(model);
         }
 
-        [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult Platnosci()
         {
-            return View();
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/zwrottowarow.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));  
+            return View(model);
         }
 
-        [DonutOutputCache(Duration = 86400, Location = OutputCacheLocation.Server)]
         public virtual ViewResult PolitykaPrywatnosci()
         {
-            return View();
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/politykaprywatnosci.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));  
+            return View(model);
         }
     }
 }

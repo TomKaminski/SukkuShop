@@ -29,6 +29,9 @@
       text-align: center;
       font-family: Segoe UI;
       color: red; }
+      .login-background .login-cont .validation-box ul {
+        list-style-type: none;
+        padding: 0; }
     .login-background .login-cont .zaloguj {
       float: right;
       margin-right: 30px;
@@ -50,7 +53,7 @@
         border-left: 15px solid #f89b1d;
         border-bottom: 11px solid transparent;
         float: right;
-        margin: 0 25px 37px 15px;
+        margin: 4px 25px 37px 15px;
         cursor: pointer; }
     .login-background .login-cont .success-text {
       font-family: SegoeBold;

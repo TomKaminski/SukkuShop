@@ -69,6 +69,7 @@ $SeB: SegoeBold;
             border-right: 15px solid #f89b1d;
             border-bottom: 11px solid transparent;
             float: left;
+            margin-top:4px;
             margin-right: 25px;
             margin-left: 25px;
         }
@@ -79,7 +80,8 @@ $SeB: SegoeBold;
             border-left: 15px solid #f89b1d;
             border-bottom: 11px solid transparent;
             float: right;
-            margin: 0 25px 37px 15px;
+                            margin: 4px 25px 37px 15px;
+
             cursor:pointer;
         }
         .left-container{
@@ -147,7 +149,7 @@ $SeB: SegoeBold;
                 }
             }*/
             .error-box{
-                margin: 100px auto auto 50px;
+                margin: 94px auto auto 50px;
                 width: 90%;
                 height: 300px;
                 color:red;

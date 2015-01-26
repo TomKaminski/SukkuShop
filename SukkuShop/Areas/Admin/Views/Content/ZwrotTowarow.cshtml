@@ -2,13 +2,16 @@
 @{
     ViewBag.Title = "Regulamin";
 }
-
+@Styles.Render("~/Areas/Admin/Content/css/EditorView.css")
 @Scripts.Render("~/ckeditor/ckeditor.js")
 @Scripts.Render("~/ckeditor/adapters/jquery.js")
 @Scripts.Render("~/Areas/Admin/Scripts/RegulaminEditor.js")
 <div style="width:1066px;margin:auto" id="regulamin-replace">
-    @Ajax.ActionLink("Edytuj", MVC.Admin.Content.ZwrotTowarow(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnComplete = "SetEditor()" })
-    @Model.Text
+    <div>
+        <div id="triangle-right"></div>
+        @Ajax.ActionLink("Edytuj tekst", MVC.Admin.Content.ZwrotTowarowAjaxGet(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnComplete = "SetEditor()" }, new { @class = "sukku-link", style = "float:right" })
+        <div style="clear: both;float:none;height:0"></div>
+    </div>    @Model.Text
 </div>
 
 
