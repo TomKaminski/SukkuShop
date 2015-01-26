@@ -6,4 +6,5 @@
 CKEDITOR.editorConfig = function( config ) {
     config.language = 'pl';
     config.font_names = 'Segoe UI/Segoe UI;' + config.font_names;
+    config.removePlugins = 'flash,scayt,about,language,bidi,wsc';
 };

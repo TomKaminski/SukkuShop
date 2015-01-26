@@ -178,7 +178,8 @@ body {
         opacity: 0.8; }
     body header ul#shop-category {
       float: left;
-      margin-top: 44px; }
+      margin-top: 44px;
+      padding: 0; }
       body header ul#shop-category li {
         display: inline;
         margin-right: 38px; }
