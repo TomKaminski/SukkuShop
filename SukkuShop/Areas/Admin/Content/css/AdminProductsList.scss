@@ -19,6 +19,10 @@ $SeUI: Segoe UI;
     list-style-type:none;
 }
 
+    #plz th a { opacity: 0.5; }
+
+    #plz th a.selected { opacity: 1; }
+
 body{
     .panel-cont{
         width:1066px;
@@ -27,7 +31,6 @@ body{
             float:left;
             width:220px;
             border-right:2px solid $sukkucolor;  
-            height:750px;
             .search-box{
                 width:190px;
                 float:left;

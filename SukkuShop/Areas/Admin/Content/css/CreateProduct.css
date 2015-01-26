@@ -43,8 +43,7 @@
   .main-box .side-nav {
     float: left;
     width: 220px;
-    border-right: 2px solid #f89b1d;
-    height: 750px; }
+    border-right: 2px solid #f89b1d; }
     .main-box .side-nav .search-box {
       width: 190px;
       float: left;

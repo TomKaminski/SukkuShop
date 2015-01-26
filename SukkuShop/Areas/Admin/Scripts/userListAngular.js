@@ -1,4 +1,36 @@
-﻿var adminApp = angular.module("adminApp", []);
+﻿function showAjaxLoader() {
+    var loaderDiv = jQuery("#ajax-processing");
+    if (loaderDiv.length === 0) {
+        jQuery("body").append("<div id='ajax-processing'></div>");
+        loaderDiv = jQuery("#ajax-processing");
+    }
+    loaderDiv.show();
+}
+
+function showAjaxTick() {
+    var loaderDiv = jQuery("#ajax-completetick");
+    if (loaderDiv.length === 0) {
+        jQuery("body").append("<div id='ajax-completetick'>&#10004;</div>");
+        loaderDiv = jQuery("#ajax-completetick");
+    }
+    loaderDiv.show();
+    jQuery("#ajax-completetick").fadeOut(3000);
+}
+
+function hideAjaxLoader() {
+    jQuery("#ajax-processing").hide();
+}
+
+jQuery(document).ready(function () {
+    jQuery(document).bind('mousemove', function (e) {
+        jQuery('#ajax-processing,#ajax-completetick').css({
+            left: e.pageX + 20,
+            top: e.pageY
+        });
+    });
+});
+
+var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 10;
 
 adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
@@ -13,6 +45,44 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
             $scope.usersList = filterUsers($scope.usersTotal);
         });
     };
+
+    $scope.keyPressRabat = function ($event) {
+        if ($event.which != 8 && $event.which != 0 && ($event.which < 48 || $event.which > 57)) {
+            $event.preventDefault();
+            return false;
+        }            
+        return true;
+    }
+
+    $scope.validateInput = function (rabat,$index)
+    {
+        if (rabat > 100) 
+            $scope.usersList[$index].Rabat = 100;        
+    }
+
+    $scope.setDiscount = function (id,rabat) {
+
+            showAjaxLoader();
+            $http.post('/Admin/Klienci/SetDiscount', { id: id, rabat: rabat }).
+                success(function (data) {
+                    if (data == true) {
+                        var result = $.grep($scope.usersTotal, function (e) { return e.Id == id; });
+                        if (result.length == 0) {
+                        } else if (result.length == 1) {
+                            result[0].Rabat = rabat;
+                        } else {
+                            // multiple items found
+                        }
+                    }
+                    hideAjaxLoader();
+                    showAjaxTick();
+                    $scope.usersList = filterUsers($scope.usersOperative);
+                }).
+                error(function (data) {
+
+                });
+        
+    }
 
     $scope.setPage = function (page) {
         if (page <= 0)

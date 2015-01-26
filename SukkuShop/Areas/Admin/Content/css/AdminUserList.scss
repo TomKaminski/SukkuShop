@@ -1,0 +1,177 @@
+//colors
+$sukkucolor: #f89b1d;
+$black: black;
+$sukkugrey: #8d8d8d;
+
+//fonts
+$SeSB: SegoeSemibold;
+$SeSBIE: SegoeSemiboldIE;
+$SeSL: SegoeSemilight;
+$SeB: SegoeBold;
+$SeBlack: SegoeBlack;
+$SeL: SegoeLight;
+$SeUI: Segoe UI;   
+
+%extend_2 {
+	margin: 0 4px;
+	float: left;
+	width: 21px;
+    list-style-type:none;
+}
+
+#ajax-completetick{
+    position:absolute;
+    float:left;
+    width:50px;
+    height:50px;
+    color:green;
+    font-size:50px;
+}
+
+.icon{
+margin-left: 5px; color: grey;font-size:20px;cursor:pointer
+}
+ body {
+        .main-cont{
+            width:1066px;
+            margin: auto;
+            .search-box{
+                width:175px;
+                float:left;
+                margin-right:30px;
+                border-bottom: 1px solid $black;
+                margin-bottom:25px;
+                input[type=text]{
+                    border:none;
+                    font-size:16px;
+                    font-family: $SeUI;
+                    float:left;
+                    width:170px;
+                    outline:none;
+                }
+            }
+            .main-table{
+                width:1066px;
+                thead th{
+                    font-family:$SeUI;
+                    color:$black;
+                    text-align: center;
+                    text-transform:uppercase;
+                    font-weight:bold;
+                    font-size:16px;
+                    +.blank{
+                        color:$sukkucolor;
+                    }
+                    .up{
+                        color:$sukkugrey;
+                        line-height:2em;
+                    }
+                    .down{
+                        color:$sukkugrey;
+                        line-height:2em;
+                    }
+                }
+                tbody td{
+                    color:$black;
+                    font-family:$SeUI;
+                    font-size:16px;
+                    text-transform:uppercase;
+                    text-align: center;
+                    position:relative;
+                    margin-bottom:5px;
+                     .save-text{
+                            float:right;
+                            margin-right:30px;
+line-height: 30px;
+                            a{
+                                color:$sukkucolor;
+                            }
+                        }
+                    a{
+                        cursor:pointer;
+                        &:hover{text-decoration:none;
+
+                        }                        
+            }
+         }
+       }
+     }
+ }
+ ul.shop-paginator li {
+		@extend %extend_2;
+		&.inner-paginator {
+			@extend %extend_2;
+			&:before {
+				position: absolute;
+				background: $sukkucolor;
+				content: '';
+				width: 21px;
+				height: 21px;
+			}
+		}
+		&:last-child {
+			position: relative;
+		}
+		.paginator-box {
+			line-height: 21px;
+			vertical-align: middle;
+			position: relative;
+			font-family: $SeUI;
+			font-size: 13px;
+			text-align: center;
+			color: white;
+			text-decoration: none;
+            cursor:pointer;
+		}
+		&:hover {
+			color: white;
+		}		
+	}
+    #paginator {	
+	margin:auto;
+	ul.shop-paginator {
+		position: relative;
+		left: 45%;
+        .paging-arrow-right {
+	        width: 0;
+	        height: 0;
+	        border-top: 8px solid transparent;
+	        border-left: 11px solid $sukkucolor;
+	        border-bottom: 8px solid transparent;
+	        float: right;
+	        background-color: transparent;
+	        cursor: pointer;
+	        margin-top: 2px;
+	        margin-right: 12px;
+        }
+        .paging-arrow-left {
+	        width: 0;
+	        height: 0;
+	        border-top: 8px solid transparent;
+	        border-right: 11px solid $sukkucolor;
+	        border-bottom: 8px solid transparent;
+	        background-color: transparent;
+	        cursor: pointer;
+	        float: left;
+	        margin-top: 2px;
+	        margin-left: 12px;
+        }
+	}
+}
+    input[type=text].rabat{
+        text-align:center;
+        width:25px;
+height:25px;
+border:1px solid black;
+font-family:SegoeLight;
+color:black;
+font-size:16px;
+    }
+
+    #plz th a {
+        opacity: 0.5;
+    }
+
+        #plz th a.selected {
+            opacity: 1;
+        }

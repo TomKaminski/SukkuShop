@@ -18,14 +18,14 @@
             else
             {
                 <div id="trueimg-box">
-                    <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span><br/></p></div>
+                    <div class="bubble"><p>Wstaw zdjęcie <br /><span style="font-size: 30px;text-transform: none;">MIN. 500x500</span><br /></p></div>
                 </div>
             }
         </div>
         @using (Html.BeginForm(MVC.Admin.Produkty.Edytuj(), FormMethod.Post, new { id = "CreateProductForm", enctype = "multipart/form-data" }))
         {
-            @Html.HiddenFor(m=>m.TrueImageDeleted)
-            @Html.HiddenFor(m=>m.Id)
+            @Html.HiddenFor(m => m.TrueImageDeleted)
+            @Html.HiddenFor(m => m.Id)
             @Html.AntiForgeryToken()
             <div class="left-container-edit">
                 <div class="bad-image">ZŁE ZDJĘCIE</div>
@@ -35,23 +35,23 @@
                     <div class="icon-pencil"></div>
                 </div>
                 <div class="styled-select" style="margin-bottom: 10px;">
-                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })
+                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })<selectlistitem>
                 </div>
                 <div class="styled-select plz" id="sublist">
-                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
+                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })<selectlistitem>
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
-                                                                                                                                               PLN
-                                                                                                                                           </span>
+                        PLN
+                    </span>
                     <div class="icon-pencil text-edit"></div>
                 </div>
                 <div class="textbox-container" id="quantity">
                     <span class="text-edit">
                         ILOŚĆ
                     </span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
-                                                                                                                    szt.
-                                                                                                                </span>
+                        szt.
+                    </span>
                     <div class="icon-pencil text-edit"></div>
                 </div>
 
@@ -88,9 +88,10 @@
                     <div class="clear" style="clear:both"></div>
                 </div>
                 <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
-            </div>               
+            </div>
         }
-    </div>        
+    </div>
+    <div class="clear" style="clear:both;float:none;height:0"></div>
 </div>
 
 @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")

@@ -156,7 +156,51 @@ body {
 		    }
 	    }
     }
-
+footer {
+	    margin: 60px auto 0;
+	    width: 1066px;
+	    @extend %stopka-extend;
+	    ul {
+            padding:0;
+            list-style-type:none;
+		    margin-top: 25px;
+		    li {
+			    width: 240px;
+			    float: left;
+			    margin-right: 120px;
+			    &:last-child {
+				    margin-right: 140px;
+				    margin-right: 0;
+				    float: right;
+				    width: 290px;
+				    .footer-text-big {
+					    width: 230px;
+           
+				    }
+			    }
+			    .footer-text-big {
+				    font-size: 25px;
+				    text-transform: uppercase;
+				    color: $black;
+				    width: 160px;
+				    float: left;
+				    margin-bottom: 28px;
+			    }
+			    img {
+				    float: right;
+			    }
+                .footer-text {
+	                margin-bottom: 14px;
+                }
+		    }
+	    }
+	    a {
+		    @extend %stopka-extend;
+		    &:hover {
+			    color: $black;
+		    }
+	    }
+    }
 }
 
 *:focus {

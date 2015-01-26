@@ -4,14 +4,19 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   width: 21px;
   list-style-type: none; }
 
+#plz th a {
+  opacity: 0.5; }
+
+#plz th a.selected {
+  opacity: 1; }
+
 body .panel-cont {
   width: 1066px;
   margin: auto; }
   body .panel-cont .side-nav {
     float: left;
     width: 220px;
-    border-right: 2px solid #f89b1d;
-    height: 750px; }
+    border-right: 2px solid #f89b1d; }
     body .panel-cont .side-nav .search-box {
       width: 190px;
       float: left;

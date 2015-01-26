@@ -392,6 +392,12 @@
     <Content Include="Areas\Admin\Content\css\AdminProductsList.min.css">
       <DependentUpon>AdminProductsList.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\AdminUserList.css">
+      <DependentUpon>AdminUserList.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminUserList.min.css">
+      <DependentUpon>AdminUserList.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\ContentIndex.css">
       <DependentUpon>ContentIndex.scss</DependentUpon>
     </Content>
@@ -905,6 +911,10 @@
     <Content Include="Areas\Admin\Content\css\EditorView.scss" />
     <Content Include="Areas\Admin\Content\css\EditorView.css.map">
       <DependentUpon>EditorView.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminUserList.scss" />
+    <Content Include="Areas\Admin\Content\css\AdminUserList.css.map">
+      <DependentUpon>AdminUserList.css</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />

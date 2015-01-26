@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Models;
 
@@ -33,6 +34,19 @@ namespace SukkuShop.Areas.Admin.Controllers
                 HasDiscount = x.Rabat != 0
             });
             return Json(users, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual JsonResult SetDiscount(int id, int rabat)
+        {
+            var user = _dbContext.Users.FirstOrDefault(x => x.Id == id);
+            if (user != null)
+            {
+                user.Rabat = rabat;
+                _dbContext.Users.AddOrUpdate(user);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
 }
