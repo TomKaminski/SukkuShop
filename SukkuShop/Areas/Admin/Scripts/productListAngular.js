@@ -221,7 +221,7 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
              products = $filter('filter')(products, { Name: $scope.textFilter });
 
          $scope.productsOperative = products;
-         $scope.pages = Math.ceil(products.length / 10);
+         $scope.pages = Math.ceil(products.length / itemsPerPage);
         var pages = [];
         for (var j = 1; j <= $scope.pages; j++) {
             pages.push(j);

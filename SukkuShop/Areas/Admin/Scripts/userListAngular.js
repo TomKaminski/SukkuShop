@@ -67,12 +67,7 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
                 success(function (data) {
                     if (data == true) {
                         var result = $.grep($scope.usersTotal, function (e) { return e.Id == id; });
-                        if (result.length == 0) {
-                        } else if (result.length == 1) {
-                            result[0].Rabat = rabat;
-                        } else {
-                            // multiple items found
-                        }
+                        result[0].Rabat = rabat;
                     }
                     hideAjaxLoader();
                     showAjaxTick();

@@ -394,6 +394,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 product.Quantity = model.Quantity;
                 product.Packing = model.Packing;
                 product.Published = model.PublishAfterCreate;
+                product.Promotion = model.Promotion;
                 if (model.TrueImageDeleted)
                 {
                     product.IconName = null;

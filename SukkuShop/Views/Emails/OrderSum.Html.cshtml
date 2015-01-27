@@ -32,7 +32,7 @@ Content-Type: text/html; charset=utf-8
                     @foreach (var item in Model.OrderViewModelsSummary.OrderViewItemsTotal.OrderProductList)
                     {
                         <tr style="border-bottom: 1px solid orange">
-                            <td style="max-height: 100px; text-align: center; border-bottom: 1px solid orange">@Html.EmbedImage("~/Content/Images/Shop/" + item.Image + "small.jpg")</td>
+                            <td style="max-height: 100px; text-align: center; border-bottom: 1px solid orange">@Html.EmbedImage("~/Content/Images/Shop/" + item.Image + ".jpg")</td>
                             <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Name</td>
                             <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Quantity szt. x @item.Packing</td>
                             <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.TotalValue zł</td>

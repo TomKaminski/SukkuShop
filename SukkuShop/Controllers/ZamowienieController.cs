@@ -483,7 +483,7 @@ namespace SukkuShop.Controllers
                         TotalValue = hehe,
                         OrderProductList = listakurwa.Select(m => new OrderItemSummary
                         {
-                            Image = m.Products.ImageName,
+                            Image = m.Products.IconName,
                             Name = m.Products.Name,
                             Price = m.Products.Price??0,
                             Quantity = m.Quantity,
