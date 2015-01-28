@@ -166,6 +166,7 @@ $SeUI: Segoe UI;
 .left-container-edit{
     width:358px;
     float:left;
+position: relative;
     .styled-select{
         height: 25px;
         overflow: hidden;
@@ -314,9 +315,9 @@ bottom: 5px;
     }
     .bad-image{
         font-size:16px;
-        font-weight:bold;
         color:#cc3333;
-        font-family:Segoe UI;
+        font-weight:bold;
+        font-family:SegoeLight;
         visibility:hidden;
         margin-bottom:90px;
     }   
@@ -385,14 +386,30 @@ text-align:center;
 visibility:hidden;
 }
 
+#delete-img,#hide-img{
+&:hover{text-decoration:underline;}
+}
+
 .default-img{
 position: absolute;
-bottom: -20px;
-color: red;
-font-family: Segoe UI;
-font-size: 16px;
+top:20px;
 cursor:pointer;
+font-size: 16px;
+color: #cc3333;
+font-weight:bold;
+font-family: SegoeLight;
+text-transform:uppercase;
 &:hover{
 text-decoration:underline
 }
+}
+
+.danger-text{
+position: absolute;
+cursor:pointer;
+font-size: 16px;
+color: #cc3333;
+font-weight:bold;
+font-family: SegoeLight;
+text-transform:uppercase;
 }

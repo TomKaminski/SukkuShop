@@ -128,7 +128,8 @@
         text-transform: uppercase; }
   .main-box .left-container-edit {
     width: 358px;
-    float: left; }
+    float: left;
+    position: relative; }
     .main-box .left-container-edit .styled-select {
       height: 25px;
       overflow: hidden;
@@ -254,9 +255,9 @@
           color: #f89b1d; }
     .main-box .left-container-edit .bad-image {
       font-size: 16px;
-      font-weight: bold;
       color: #cc3333;
-      font-family: Segoe UI;
+      font-weight: bold;
+      font-family: SegoeLight;
       visibility: hidden;
       margin-bottom: 90px; }
 
@@ -320,13 +321,27 @@ label.css-label {
   text-align: center;
   visibility: hidden; }
 
+#delete-img:hover, #hide-img:hover {
+  text-decoration: underline; }
+
 .default-img {
   position: absolute;
-  bottom: -20px;
-  color: red;
-  font-family: Segoe UI;
+  top: 20px;
+  cursor: pointer;
   font-size: 16px;
-  cursor: pointer; }
+  color: #cc3333;
+  font-weight: bold;
+  font-family: SegoeLight;
+  text-transform: uppercase; }
   .default-img:hover {
     text-decoration: underline; }
+
+.danger-text {
+  position: absolute;
+  cursor: pointer;
+  font-size: 16px;
+  color: #cc3333;
+  font-weight: bold;
+  font-family: SegoeLight;
+  text-transform: uppercase; }
 

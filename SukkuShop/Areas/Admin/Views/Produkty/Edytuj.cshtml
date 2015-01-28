@@ -7,11 +7,9 @@
     <div class="create-prod-box">
         <div id="image-container">
             @if (Model.Image != null)
-            {
-                <div class="default-img">Przywróć domyślne</div>
+            {                
                 <div id="trueimg-box">
-                    <img id="trueimg" src=~/@("Content/Images/Shop/"+Model.Image+".jpg") />
-                    <div id='hide-img' style='z-index:100;position:absolute;width:25px;height:25px;background-color:red;color:white;line-height:25px;font-family:Segoe UI;text-align:center;top:0;right:0'>X</div>
+                    <img id="trueimg" src=~/@("Content/Images/Shop/"+Model.Image+".jpg") />                    
                     <div id="tekst-noimg"></div>
                 </div>
             }
@@ -29,16 +27,22 @@
             @Html.AntiForgeryToken()
             <div class="left-container-edit">
                 <div class="bad-image">ZŁE ZDJĘCIE</div>
+                <div class="default-img">Przywróć domyślne</div>
+                @if (Model.Image != null)
+                {
+                    <div id='hide-img' class="danger-text" style='z-index:100;top:0;left:0'>USUŃ ZDJĘCIE</div>
+                }
+                
                 @Html.ValidationSummary()
                 <div class="textbox-container" id="title">
                     @Html.TextBoxFor(m => m.Title, new { placeholder = "NAZWA PRODUKTU" })
                     <div class="icon-pencil"></div>
                 </div>
                 <div class="styled-select" style="margin-bottom: 10px;">
-                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })<selectlistitem>
+                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })
                 </div>
                 <div class="styled-select plz" id="sublist">
-                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })<selectlistitem>
+                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">

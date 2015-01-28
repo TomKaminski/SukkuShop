@@ -3,8 +3,8 @@
     ViewBag.Title = "Index";
 }
 
-<div class="main-container">
-    <h1>Zarządzaj wszystkimi dokumentami sklepu z jednego miejsca</h1>
+@*<div class="main-container">
+    <h1>Zarządzaj wszystkimi dokumentami sklepu <br/>z jednego miejsca</h1>
     <a href="@Url.Action(MVC.Admin.Content.Regulamin())">
         <div class="content-box-big"><div class="icon-list-alt icon"></div><div class="tekst">Regulamin</div></div>
     </a>
@@ -20,7 +20,33 @@
     <a href="@Url.Action(MVC.Admin.Content.ZwrotTowarow())">
         <div class="content-box-big"><div class="icon-retweet icon"></div><div class="tekst">Zwrot towarów</div></div>
     </a>
-</div>
+</div>*@
 
+<div class="main-container">
+    <h1>Zarządzaj wszystkimi dokumentami sklepu <br />z jednego miejsca</h1>
+    <div class="container-main">
+        <a href="@Url.Action(MVC.Admin.Content.PolitykaPrywatnosci())"><div class="hexagon" id="polityka" style="position: relative;top:0;left:210px"><div id="lockicon" class="icon-lock icon"></div><div class="tekst">Polityka <br /> prywatności</div></div></a>
+        <a href="@Url.Action(MVC.Admin.Content.Regulamin())">
+            <div class="hexagon" id="regulamin" style="position: relative;top: -65px;left: 425px;"><div id="iconregulamin"class="icon-file-text-alt icon"></div><div class="tekst">Regulamin</div></div></a>
+        <a href="@Url.Action(MVC.Admin.Content.Reklamacje())">
+            <div class="hexagon" id="reklamacje" style="position: relative;left: 425px; top:-5px;"><div class="icon-legal icon"></div><div class="tekst">Reklamacje</div></div></a>
+        <a href="@Url.Action(MVC.Admin.Content.Reklamacje())">
+            <div class="hexagon" id="platnosci" style="position: relative;left: 219px;
+top: -60px;"><div id="iconplatnosci" class="icon-dollar icon"></div><div class="tekst">Płatności</div></div></a>
+        <a href="@Url.Action(MVC.Admin.Content.Gwarancja())">
+            <div class="hexagon" id="gwarancje" style="position: relative;top: -380px;left:0"><div class="icon-shield icon"></div><div class="tekst">Gwarancje</div></div></a>
+        <a href="@Url.Action(MVC.Admin.Content.ZwrotTowarow())">
+            <div class="hexagon" id="zwrottowarow" style="position: relative;top: -820px;left:0"><div class="icon-retweet icon"></div><div class="tekst">Zwrot towaru</div></div></a>
+            <div class="mini-box">
+                <div class="hexagon-mini" id="polityka" style="position: absolute;top:0;left:48px"></div>
+                <div class="hexagon-mini" id="regulamin" style="position: absolute;top:27px;left:94px"></div>
+                <div class="hexagon-mini" id="reklamacje" style="position: absolute;top:78px;left:94px"></div>
+                <div class="hexagon-mini" id="platnosci" style="position: absolute;top:104px;left:47px"></div>
+                <div class="hexagon-mini" id="gwarancje" style="position: absolute;top:78px;left:1px"></div>
+                <div class="hexagon-mini" id="zwrottowarow" style="position: absolute;top:27px;left:0"></div>
+            </div>
+</div>
+</div>
 @Styles.Render("~/Areas/Admin/Content/css/ContentIndex.css")
+@Scripts.Render("~/Areas/Admin/Scripts/ContentIndex.js")
 

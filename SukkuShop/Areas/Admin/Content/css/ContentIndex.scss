@@ -1,71 +1,185 @@
 $sukkucolor: #f89b1d;
 
-.main-container {
-    width:1066px;
-    margin:auto;
-    margin-bottom:50px;
+
 a{
 text-decoration:none;
 }
-    h1{
-        font-size:32px;
-        text-align:center;
-        padding-bottom:20px;
-        color:#ff6600;
-        font-weight:bold;
-        font-family:Segoe UI;
-    }
-.content-box-big{
-        width:800px;
-        height:150px;
-        background-color:white;
-        border:2px solid #ff6600;
-        margin:10px auto;        
-        border-radius:5px;
-        .tekst{
-            line-height:150px;
-            color:#ff6600;
-            font-family:SegoeBold;
-            font-size:40px;
-        }
-        &:hover{
-            background-color:#f89b1d;
-            .tekst{
-                color:white;
-            }      
-            .icon{
-                color:white;
-            }      
-        }
-        .icon{
+
+
+
+h1 {
+font-family:Segoe UI;
+font-weight:bold;
+color:#f89b1d;
+text-align:center;
+font-size:30px;
+text-transform:uppercase;
+}
+
+
+.icon{
             font-size:100px;
-            color:#ff6600;
+            color:#f89b1d;
             line-height:150px;
+position:absolute;
+right: 40px;
+top: -40px;
+transform:rotate(30deg);
         }
-}
-    
-    a:nth-child(even) .content-box-big{
-        .tekst{
-            text-align:right;
-            padding-right:120px;
-        }
-.icon{
-    float:left;
-    padding-left:120px;
-}
-    }
-    a:nth-child(odd) .content-box-big{
-        .tekst{
-            text-align:left;
-            padding-left:120px;
-            float:left;
-        }
-.icon{
-    float:right;
-    padding-right:120px;
-}
-    }
 
-
-    
+#polityka .tekst {
+top: 70px;
 }
+#gwarancje .icon {
+right: 60px;
+top: -35px;
+}
+
+.container-main {
+    width:675px;
+    height:698px;
+    margin:auto;
+    position:relative;
+}
+
+.hexagon:hover, .hexagon:active {
+.icon {
+color: white;
+}
+
+border-color: #f89b1d !important;
+
+&:before, &:after {
+border-color: #f89b1d !important;
+}
+
+.tekst {
+color: white;
+font-family: SegoeBold;
+}
+
+color: white !important;
+background-color: #f89b1d;
+}
+
+.hexagon {
+  position: relative;
+  width: 219px; 
+  height: 126.5px;
+  background-color: #ffffff;
+  margin: 63.51px 0;
+  border-left: solid 2px #333333;
+  border-right: solid 2px #333333;
+  -webkit-transform:  rotate(-30deg);
+  -ms-transform:  rotate(-30deg);
+  transform:  rotate(-30deg);
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 155.5px;
+  height: 155px;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background-color: inherit;
+  left: 30.2183px;
+z-index:-100;
+}
+
+.hexagon:before {
+  top: -79px;
+  border-top: solid 2.8284px #333333;
+  border-right: solid 2.8284px #333333;
+}
+
+.hexagon:after {
+  bottom: -77.7817px;
+  border-bottom: solid 2.8284px #333333;
+  border-left: solid 2.8284px #333333;
+}
+
+.mini-box {
+height: 149px;
+width: 142px;
+position: relative;
+/* margin: auto; */
+top: -900px;
+left: 37.5%;
+.hexagon-mini {
+  position: relative;
+  width: 46px; 
+  height: 26px;
+  background-color: #ffffff;
+  margin: 13.28px 0;
+  -webkit-transform:  rotate(-30deg);
+  -ms-transform:  rotate(-30deg);
+  transform:  rotate(-30deg);
+border:none;
+background-color:#cccccc
+}
+
+.hexagon-mini:before,
+.hexagon-mini:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 32.53px;
+  height: 32.53px;
+  -webkit-transform: scaleY(0.5774) rotate(-46deg);
+  -ms-transform: scaleY(0.5774) rotate(-46deg);
+  transform: scaleY(0.5774) rotate(-46deg);
+  background-color: inherit;
+  left: 6.2px;
+background-color:#cccccc
+}
+
+.hexagon-mini:before {
+  top: -16.2635px;
+border:none;
+}
+
+.hexagon-mini:after {
+  bottom: -16.2635px;
+border:none;
+}
+}
+
+.selected-mini {
+background-color: #f89b1d !important;
+ &:before,&:after {
+background-color: #f89b1d !important;
+}
+}
+
+.tekst{
+            color:black;
+            font-family:SegoeLight;
+            font-size:22px;
+transform:rotate(30deg);
+text-transform:uppercase;
+position: absolute;
+width: 200px;
+text-align: center;
+top: 80px;
+left: -10px;
+        }
+
+#lockicon {
+right: 60px;
+top: -40px;
+}
+
+#iconregulamin {
+right: 55px;
+top: -40px;
+}
+
+#iconplatnosci {
+right: 65px;
+top: -40px;
+}
+
