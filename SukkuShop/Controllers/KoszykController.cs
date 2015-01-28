@@ -74,8 +74,8 @@ namespace SukkuShop.Controllers
             var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
             if (firstOrDefault.Quantity-firstOrDefault.ReservedQuantity <= quantity) return Json(false);
             shoppingCart.AddItem(id);
-            var data = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100))*(quantity+1) ??
-                       firstOrDefault.Price*(quantity+1);
+            var price = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
+            var data = price*(quantity+1);
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -90,7 +90,8 @@ namespace SukkuShop.Controllers
                 k.Promotion
             }).First();
             var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
-            var data = (firstOrDefault.Price - ((firstOrDefault.Price * firstOrDefault.Promotion) / 100)) * quantity ?? firstOrDefault.Price * quantity;
+            var price = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
+            var data = price*quantity;
             return Json(data, JsonRequestBehavior.AllowGet);
         }
 
@@ -114,8 +115,7 @@ namespace SukkuShop.Controllers
                 var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
                 if (firstOrDefault != null)
                 {
-                    var price = (firstOrDefault.Price - ((firstOrDefault.Price*firstOrDefault.Promotion)/100)) ?? firstOrDefault.Price;
-                    var priceFloored = Math.Floor((price??0)*100)/100;
+                    var priceFloored = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
                     sum += priceFloored*line.Quantity;
                 }
             }
@@ -127,6 +127,13 @@ namespace SukkuShop.Controllers
         {
             var model = CartViewModels(shoppingCart);
             return View(model);
+        }
+
+
+        private static decimal CalcPrice(decimal? price, int? promotion)
+        {
+            var pricee = (price - ((price * promotion) / 100)) ?? price;
+            return Math.Floor((pricee ?? 0) * 100) / 100;
         }
 
         private CartViewModels CartViewModels(Cart shoppingCart)

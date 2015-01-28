@@ -548,8 +548,7 @@ namespace SukkuShop.Controllers
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
-                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = Math.Floor((price??0) * 100) / 100;
+                var priceFloored = CalcPrice(product.Price, product.Promotion);
 
                 productList.Add(new OrderItem
                 {
@@ -581,8 +580,7 @@ namespace SukkuShop.Controllers
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
                 if (product == null) continue;
-                var price = (product.Price - ((product.Price * product.Promotion) / 100)) ?? product.Price;
-                var priceFloored = decimal.Round(Math.Floor((price??0) * 100) / 100,2);
+                var priceFloored = CalcPrice(product.Price, product.Promotion);
                 productList.Add(new OrderItemSummary
                 {
                     Name = product.Name,
@@ -601,6 +599,11 @@ namespace SukkuShop.Controllers
                 TotalValue = decimal.Round(totalValue,2)
             };
             return model;
+        }
+        private static decimal CalcPrice(decimal? price, int? promotion)
+        {
+            var pricee = (price - ((price * promotion) / 100)) ?? price;
+            return Math.Floor((pricee ?? 0) * 100) / 100;
         }
     }
 }
