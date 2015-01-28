@@ -54,6 +54,19 @@ namespace SukkuShop.Areas.Admin.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetDiscount()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetDiscount);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Szczegóły()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Szczegóły);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public KlienciController Actions { get { return MVC.Admin.Klienci; } }
@@ -72,6 +85,8 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string Lista = "Lista";
             public readonly string GetUserList = "GetUserList";
+            public readonly string SetDiscount = "SetDiscount";
+            public readonly string Szczegóły = "Szczegóły";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -79,9 +94,28 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public const string Lista = "Lista";
             public const string GetUserList = "GetUserList";
+            public const string SetDiscount = "SetDiscount";
+            public const string Szczegóły = "Szczegóły";
         }
 
 
+        static readonly ActionParamsClass_SetDiscount s_params_SetDiscount = new ActionParamsClass_SetDiscount();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetDiscount SetDiscountParams { get { return s_params_SetDiscount; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetDiscount
+        {
+            public readonly string id = "id";
+            public readonly string rabat = "rabat";
+        }
+        static readonly ActionParamsClass_Szczegóły s_params_Szczegóły = new ActionParamsClass_Szczegóły();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Szczegóły SzczegółyParams { get { return s_params_Szczegóły; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Szczegóły
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -123,6 +157,31 @@ namespace SukkuShop.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetUserList);
             GetUserListOverride(callInfo);
             return callInfo;
+        }
+
+        [NonAction]
+        partial void SetDiscountOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id, int rabat);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetDiscount(int id, int rabat)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetDiscount);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "rabat", rabat);
+            SetDiscountOverride(callInfo, id, rabat);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SzczegółyOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Szczegóły(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Szczegóły);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SzczegółyOverride(callInfo, id);
+            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
         }
 
     }

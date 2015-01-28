@@ -349,9 +349,9 @@ namespace Links
             public static readonly string checkbox_nonactive_png = Url("checkbox-nonactive.png");
             public static readonly string checkbox_png = Url("checkbox.png");
             public static readonly string cinnamon_sticks_jpg = Url("cinnamon-sticks.jpg");
-            public static readonly string content_pic1_png = Url("content-pic1.png");
-            public static readonly string content_pic2_png = Url("content-pic2.png");
-            public static readonly string content_pic3_png = Url("content-pic3.png");
+            public static readonly string content_pic1_jpg = Url("content-pic1.jpg");
+            public static readonly string content_pic2_jpg = Url("content-pic2.jpg");
+            public static readonly string content_pic3_jpg = Url("content-pic3.jpg");
             public static readonly string footer_cart_png = Url("footer-cart.png");
             public static readonly string footer_sukku_png = Url("footer-sukku.png");
             public static readonly string footer_user_png = Url("footer-user.png");
@@ -373,11 +373,8 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string _1_jpg = Url("1.jpg");
-                public static readonly string _1_png = Url("1.png");
                 public static readonly string _2_jpg = Url("2.jpg");
-                public static readonly string _2_png = Url("2.png");
                 public static readonly string _4_jpg = Url("4.jpg");
-                public static readonly string _4_png = Url("4.png");
                 public static readonly string basket_png = Url("basket.png");
                 public static readonly string carticon_png = Url("carticon.png");
                 public static readonly string carticonwhite_png = Url("carticonwhite.png");
@@ -421,6 +418,7 @@ namespace Links
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string AdminEditProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminEditProduct.min.js") ? Url("AdminEditProduct.min.js") : Url("AdminEditProduct.js");
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
+                public static readonly string ContentIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.js") ? Url("ContentIndex.min.js") : Url("ContentIndex.js");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
                 public static readonly string RegulaminEditor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegulaminEditor.min.js") ? Url("RegulaminEditor.min.js") : Url("RegulaminEditor.js");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
@@ -447,6 +445,11 @@ namespace Links
                          
                     public static readonly string AdminProductsList_css_map = Url("AdminProductsList.css.map");
                     public static readonly string AdminProductsList_min_css = Url("AdminProductsList.min.css");
+                    public static readonly string AdminUserList_scss = Url("AdminUserList.scss");
+                    public static readonly string AdminUserList_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminUserList.min.css") ? Url("AdminUserList.min.css") : Url("AdminUserList.css");
+                         
+                    public static readonly string AdminUserList_css_map = Url("AdminUserList.css.map");
+                    public static readonly string AdminUserList_min_css = Url("AdminUserList.min.css");
                     public static readonly string ContentIndex_scss = Url("ContentIndex.scss");
                     public static readonly string ContentIndex_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.css") ? Url("ContentIndex.min.css") : Url("ContentIndex.css");
                          
@@ -457,6 +460,11 @@ namespace Links
                          
                     public static readonly string CreateProduct_css_map = Url("CreateProduct.css.map");
                     public static readonly string CreateProduct_min_css = Url("CreateProduct.min.css");
+                    public static readonly string EditorView_scss = Url("EditorView.scss");
+                    public static readonly string EditorView_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/EditorView.min.css") ? Url("EditorView.min.css") : Url("EditorView.css");
+                         
+                    public static readonly string EditorView_css_map = Url("EditorView.css.map");
+                    public static readonly string EditorView_min_css = Url("EditorView.min.css");
                     public static readonly string main_scss = Url("main.scss");
                     public static readonly string main_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.css") ? Url("main.min.css") : Url("main.css");
                          
