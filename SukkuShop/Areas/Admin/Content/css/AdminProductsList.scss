@@ -139,12 +139,12 @@ position:relative;
                     a{
                         cursor:pointer;
 &.trash-yes{
-                        color:green;
+                        color:black;
                         font-size:30px;
                         margin-right:5px
                         }
 &.trash-no{
-                            color:red;
+                            color:black;
 font-size:30px;
 }
                         &:hover{text-decoration:none;}

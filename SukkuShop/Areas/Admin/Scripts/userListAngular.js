@@ -8,13 +8,14 @@
 }
 
 function showAjaxTick() {
-    var loaderDiv = jQuery("#ajax-completetick");
-    if (loaderDiv.length === 0) {
+    var loaderDivv = jQuery("#ajax-completetick");
+    if (loaderDivv.length === 0) {
         jQuery("body").append("<div id='ajax-completetick'>&#10004;</div>");
-        loaderDiv = jQuery("#ajax-completetick");
+        loaderDivv = jQuery("#ajax-completetick");
     }
-    loaderDiv.show();
-    jQuery("#ajax-completetick").fadeOut(3000);
+    loaderDivv.stop().fadeIn(function() {
+        loaderDivv.fadeOut(1000);
+    });
 }
 
 function hideAjaxLoader() {
@@ -69,8 +70,9 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
                         var result = $.grep($scope.usersTotal, function (e) { return e.Id == id; });
                         result[0].Rabat = rabat;
                     }
-                    hideAjaxLoader();
                     showAjaxTick();
+                    hideAjaxLoader();
+                    
                     $scope.usersList = filterUsers($scope.usersOperative);
                 }).
                 error(function (data) {

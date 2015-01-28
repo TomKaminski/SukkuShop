@@ -1,6 +1,9 @@
 ﻿using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Identity;
 using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
@@ -9,10 +12,12 @@ namespace SukkuShop.Areas.Admin.Controllers
     public partial class KlienciController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly ApplicationUserManager _userManager;
 
-        public KlienciController(ApplicationDbContext dbContext)
+        public KlienciController(ApplicationDbContext dbContext, ApplicationUserManager userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
         // GET: Admin/AdminUser/Index
@@ -47,6 +52,31 @@ namespace SukkuShop.Areas.Admin.Controllers
                 return Json(true, JsonRequestBehavior.AllowGet);
             }
             return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        public virtual async Task<ActionResult> Szczegóły(int id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+
+            var model = new UserDetailsModel
+            {
+                Ulica = user.Street,
+                KodPocztowy = user.PostalCode,
+                Telefon = user.PhoneNumber,
+                Numer = user.Number,
+                Miasto = user.City,
+                NameTitle = user.KontoFirmowe?user.NazwaFirmy:user.Name,
+                NipUsername = user.KontoFirmowe?user.AccNip:user.LastName,
+                Rabat = user.Rabat,
+                AccountOrderItemViewModel = _dbContext.Orders.Where(m => m.UserId == user.Id).Select(x => new AccountOrderItemViewModel
+            {
+                ActualState = x.OrderInfo,
+                Id = x.OrderId,
+                OrderDate = x.OrderDate.ToShortDateString(),
+                TotalPrice = x.TotalPrice
+            }).ToList()
+            };
+            return View(model);
         }
     }
 }

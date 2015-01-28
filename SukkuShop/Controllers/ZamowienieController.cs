@@ -389,7 +389,7 @@ namespace SukkuShop.Controllers
 
                                     item.QuantityChanged = true;
                                     item.OldQuantity = item.Quantity;
-                                    item.Quantity = product.Quantity??0 - product.ReservedQuantity;
+                                    item.Quantity = (product.Quantity??0) - product.ReservedQuantity;
                                     item.TotalValue = item.Price*item.Quantity;
                                     var firstOrDefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == item.Id);
                                     if (firstOrDefault != null)

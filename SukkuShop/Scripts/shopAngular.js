@@ -8,7 +8,7 @@ function plz(data) {
     if (parseFloat(plza) != parseFloat(data.value)) {
         var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
         obj.css('color', 'green');
-        obj.html('&#10004;');
+        obj.html('&#10003;');
         obj.stop().show("fast", function () {
             obj.fadeOut(2500);
         });
@@ -43,7 +43,7 @@ function plz(data) {
         var obj2 = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
 
         obj2.css('color', 'red');
-        obj2.html('&#10008;');
+        obj2.html('&#10006;');
         obj2.stop().show("fast", function () {
             obj2.fadeOut(2500);
         });

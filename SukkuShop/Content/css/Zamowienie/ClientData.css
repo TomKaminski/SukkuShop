@@ -123,8 +123,10 @@
         float: right;
         margin-right: 10px;
         margin-top: 20px; }
-      .order-container .client-data-container .right-container .validation-summary-errors ul li {
-        padding: 10px 0 10px 20px; }
+      .order-container .client-data-container .right-container .validation-summary-errors ul {
+        list-style-type: none; }
+        .order-container .client-data-container .right-container .validation-summary-errors ul li {
+          padding: 10px 0 10px 20px; }
 
 .data-box {
   width: 423px;
@@ -137,8 +139,7 @@
     color: red;
     margin-left: 145px;
     font-weight: bold;
-    font-size: 14px;
-    margin-top: 2px; }
+    font-size: 14px; }
   .data-box input[type=text], .data-box input[type=password], .data-box input[type=email] {
     text-align: center;
     font-family: SegoeLight;

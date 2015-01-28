@@ -107,11 +107,11 @@ body .panel-cont {
         body .panel-cont .main-cont .main-table tbody td a {
           cursor: pointer; }
           body .panel-cont .main-cont .main-table tbody td a.trash-yes {
-            color: green;
+            color: black;
             font-size: 30px;
             margin-right: 5px; }
           body .panel-cont .main-cont .main-table tbody td a.trash-no {
-            color: red;
+            color: black;
             font-size: 30px; }
           body .panel-cont .main-cont .main-table tbody td a:hover {
             text-decoration: none; }

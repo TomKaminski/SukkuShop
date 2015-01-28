@@ -230,6 +230,7 @@
     <Compile Include="Areas\Admin\Controllers\KlienciController.cs" />
     <Compile Include="Areas\Admin\Models\ContentModels.cs" />
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
+    <Compile Include="Areas\Admin\Models\UserDetails.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
     <Compile Include="Controllers\KontoController.cs" />

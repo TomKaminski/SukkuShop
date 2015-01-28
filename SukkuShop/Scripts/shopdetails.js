@@ -39,14 +39,14 @@
             var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
             if (parseFloat(plza) != parseFloat(data.value)) {
                 $("#add-to-cart-animation").css("color", "green");
-                $("#add-to-cart-animation").html("Produkt został dodany do koszyka &#10004;");
+                $("#add-to-cart-animation").html("Produkt został dodany do koszyka &#10003;");
                 $('#add-to-cart-animation').stop().show("slow", function() {
                     $('#add-to-cart-animation').fadeOut(3000);
                 });
                 $("#cart-price-header").html('koszyk ' + data.value + ' zł');
             } else {
                 $("#add-to-cart-animation").css("color", "red");
-                $("#add-to-cart-animation").html("Aktualnie nie dysponujemy wiekszą iloscią tego produktu &#10008;");
+                $("#add-to-cart-animation").html("Aktualnie nie dysponujemy wiekszą iloscią tego produktu &#10006;");
                 $('#add-to-cart-animation').stop().show("slow", function () {
                     $('#add-to-cart-animation').fadeOut(3000);
                 });
@@ -61,7 +61,7 @@ function plz(data) {
     if (plza != data.value) {
         var obj = $("#img" + data.id).parent().parent().parent().children('div.add-to-cart-info');
         obj.css('color', 'green');
-        obj.html('&#10004;');
+        obj.html('&#10003;');
         obj.stop().show("fast", function () {
             obj.fadeOut(2500);
         });
@@ -95,7 +95,7 @@ function plz(data) {
     } else {
         var obj2 = $("#img" + data.id).parent().parent().parent().children('div.add-to-cart-info');
         obj2.css('color', 'red');
-        obj2.html('&#10008;');
+        obj2.html('&#10006;');
         obj2.stop().show("fast", function () {
             obj2.fadeOut(2500);
         });

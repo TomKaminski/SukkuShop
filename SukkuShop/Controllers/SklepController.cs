@@ -232,7 +232,7 @@ namespace SukkuShop.Controllers
                 Price = x.Price??0,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
-                PriceAfterDiscount = x.Price - ((x.Price*x.Promotion)/100) ?? x.Price??0,
+                PriceAfterDiscount = Math.Floor((x.Price - ((x.Price*x.Promotion)/100) ?? x.Price??0)*100)/100,
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount,

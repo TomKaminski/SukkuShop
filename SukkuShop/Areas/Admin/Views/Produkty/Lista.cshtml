@@ -83,7 +83,7 @@
                             <td ng-click="unpublish(item.ProductId)" ng-if="item.Published && !item.WrongModel" class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>                           
                             <td><a ng-href="@Url.Action("Edytuj")/{{item.ProductId}}" class="icon-pencil pencil"></a></td>
                             <td ng-if="item.orders==0 && item.canDelete==false"><a ng-click="deleteitemask(item.ProductId)" class="icon-trash trash"></a></td>
-                            <td ng-if="item.orders==0 && item.canDelete==true"><a ng-click="deleteitem(item.ProductId)" class="icon-check-sign trash-yes"></a><a ng-click="nodeleteitem(item.ProductId)" class="icon-remove-sign trash-no"></a></td>
+                            <td ng-if="item.orders==0 && item.canDelete==true"><a ng-click="deleteitem(item.ProductId)" class="trash-yes">&#10003;</a><a ng-click="nodeleteitem(item.ProductId)" class="trash-no">&#10006;</a></td>
 
                         </tr>
                     </tbody>
