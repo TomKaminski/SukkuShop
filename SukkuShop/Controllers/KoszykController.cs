@@ -70,13 +70,18 @@ namespace SukkuShop.Controllers
                 k.Promotion,
                 k.ReservedQuantity
             }).First();
-            
-            var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
-            if (firstOrDefault.Quantity-firstOrDefault.ReservedQuantity <= quantity) return Json(false);
-            shoppingCart.AddItem(id);
-            var price = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
-            var data = price*(quantity+1);
-            return Json(data, JsonRequestBehavior.AllowGet);
+
+            var ordefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == id);
+            if (ordefault != null)
+            {
+                var quantity = ordefault.Quantity;
+                if (firstOrDefault.Quantity - firstOrDefault.ReservedQuantity <= quantity) return Json(false);
+                shoppingCart.AddItem(id);
+                var price = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
+                var data = price*(quantity + 1);
+                return Json(data, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false,JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult DecreaseQuantity(int id, Cart shoppingCart)
