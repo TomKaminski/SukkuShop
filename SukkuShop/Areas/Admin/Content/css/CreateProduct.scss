@@ -178,15 +178,19 @@ position: relative;
             border: none;
             font-size: 14px;
             height: 26px;
+-moz-appearance:none;
+text-indent: 0.01px;
+text-overflow:"";
             padding: 0 5px; /* If you add too much padding here, the options won't show in IE */
             width: 232px;
             text-align:center;
             font-family:Segoe Ui;
+
+
             -webkit-appearance: none;
             color:#f89b1d;
             font-weight:bold;
             line-height:26px;
-            -moz-appearance: none;
             option{
                 color:black;
                 border-right:1px solid  #f89b1d !important;

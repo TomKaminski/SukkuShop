@@ -37,7 +37,6 @@ namespace SukkuShop.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public virtual async Task<ActionResult> ZalogujOrder(LoginViewModel model, string returnUrl)
         {
@@ -58,6 +57,7 @@ namespace SukkuShop.Controllers
             return PartialView("_LoginOrderPartial", model);
         }
 
+        [HttpGet]
         public virtual ActionResult Krok1(Cart shoppingCart)
         {
             if (!shoppingCart.Lines.Any())
@@ -66,6 +66,7 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public async virtual Task<ActionResult>Krok2(Cart shoppingCart)
         {
             if (shoppingCart.PaymentId == 0 || shoppingCart.ShippingId == 0)

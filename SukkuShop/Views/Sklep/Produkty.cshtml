@@ -56,7 +56,7 @@
                     <div class="product-list-item-box" ng-repeat="item in productList">
                         <div class="product-list-item">
                             <div class="product-list-item-image" style="background-color: white;">
-                                <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.jpg" />
+                                <img ng-src="~/Content/Images/Shop/{{item.ImageName}}.jpg" ng-class="{'grayscale': item.QuantityInStock==0}"/>
                                 <ul class="top-panel">
                                     <li ng-if="item.Bestseller"><div class="top-panel-text-container"><div class="top-panel-text" style="color: #875546">Bestseller</div></div></li>
                                     <li ng-if="item.Promotion!=0"><div class="top-panel-text-container"><div class="top-panel-text" style="color: green">Promocja</div></div></li>
