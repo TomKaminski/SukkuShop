@@ -41,7 +41,8 @@ h1 {
     border-color: #f89b1d !important; }
   .hexagon:hover .tekst, .hexagon:active .tekst {
     color: white;
-    font-family: SegoeBold; }
+    font-family: Segoe UI;
+    font-weight: bold; }
 
 .hexagon {
   position: relative;
@@ -124,7 +125,7 @@ h1 {
 
 .tekst {
   color: black;
-  font-family: SegoeLight;
+  font-family: Segoe UI;
   font-size: 22px;
   transform: rotate(30deg);
   text-transform: uppercase;

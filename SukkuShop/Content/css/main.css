@@ -1,4 +1,12 @@
 @font-face {
+  font-family: SegoeBlack;
+  src: url("../fonts/seguibl.eot");
+  src: local("seguibl"), url("../fonts/seguibl.woff") format("woff"), url("../fonts/seguibl.ttf") format("truetype"); }
+@font-face {
+  font-family: SegoeLight;
+  src: url("../fonts/SEGOEUIL.eot");
+  src: local("SEGOEUIL"), url("../fonts/SEGOEUIL.woff") format("woff"), url("../fonts/SEGOEUIL.ttf") format("truetype"); }
+@font-face {
   font-family: SegoeSemiboldIE;
   src: url(../fonts/SegoeSemiboldIE.eot); }
 @font-face {
@@ -7,12 +15,6 @@
 @font-face {
   font-family: SegoeBold;
   src: url(../fonts/segoeuibold.ttf); }
-@font-face {
-  font-family: SegoeBlack;
-  src: url(../fonts/seguiblack.ttf); }
-@font-face {
-  font-family: SegoeLight;
-  src: url(../fonts/segoeuil.ttf); }
 .segoe-semibold {
   font-family: SegoeSemibold, SegoeSemiboldIE; }
 
@@ -48,7 +50,8 @@ body {
     width: 1066px; }
     body header .nav-low {
       width: 1066px;
-      margin: 10px auto 0; }
+      margin: 10px auto 0;
+      height: 41px; }
       body header .nav-low .search {
         border-bottom: 1px black solid;
         float: left; }
@@ -64,7 +67,8 @@ body {
           opacity: 0.6;
           margin-top: 20px;
           margin-left: 5px;
-          margin-right: -12px; }
+          margin-right: -12px;
+          -moz-transform: scale(0.9999); }
           body header .nav-low .search .search-arrow:hover {
             opacity: 1; }
       body header .nav-low .link-to-shop-container {
@@ -84,12 +88,13 @@ body {
         body header .nav-low .link-to-shop-container #triangle-right {
           width: 0;
           height: 0;
-          border-top: 8px solid transparent;
+          border-top: 8px solid rgba(255, 255, 255, 0);
           border-left: 10px solid #f89b1d;
-          border-bottom: 8px solid transparent;
+          border-bottom: 8px solid rgba(255, 255, 255, 0);
           float: right;
           margin-left: 5px;
-          margin-top: 3px; }
+          margin-top: 3px;
+          -moz-transform: scale(0.9999); }
     body header nav {
       width: 802px;
       float: left; }
@@ -116,7 +121,7 @@ body {
         body header nav .cart-box .cart-img {
           width: 35px;
           height: 28px;
-          background-image: url(data:data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACMAAAAcCAYAAADr9QYhAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDoAABSCAABFVgAADqXAAAXb9daH5AAAAHsSURBVHjazNfPi01hGAfwz7nN+BUxDaU0FmJHypSyshKaUjLZkPIPqFEaU7ZkgxU7WdhY2VhYzU4KJT8WEhJR8iP5ld/z2jy3TqfLOde95977rdM55z3v0/2+3+d5vu97s5SSgUGQ2YcH2NtXHkHmOhLeDAKZySCTsKvfZOB1kLkT7w3M7xGXRSklWUpJlmVwAjPxcQSf8Aw/ekDmbkppd16ZZfge6pyLscu59NV5TRWVgYvYH88L8BuzkbI6PCDDF+wo1gyM59ge6XUBF5WBe9iAp1gTRTyNz11Wp4FvONuqm5qYyKmzCcP4WlOt3Pxba+fxPiZfi/dtNZFZX5YmOI2peB7DC2yNe7dStCKcv1SZEfwM9qdy46PRZZ1eo2UOXMSlIPMBQ1jaxfS8i1qsTGZLLvhQjJ3vEpmDVVs7j+dRM4+xLuQ92kGLN9v5WLtpEm7cXM3mfpheER+xJHb1+5jr8Hff4jBetasMnKnBXyZbKTNUYSUzsZrVodIcFscmVwW/wsGHI+4lrv7rDDwQZ/FGG/O34zYeRkdV7Z4LETOLVVX+HZRhrEXe91SIO16IeYR5nSoz3mJsokJccc5aLO9UmZVxFs6vcmeFuOlCzI3YWvyP6eWxEbdC6gNt1NpJPMEVLCw1vUHBnwEAnKBwIV3OpOwAAAAASUVORK5CYII=);
+          background-image: url("../Images/Shop/carticon.png");
           float: right;
           margin-right: 5px; }
       body header nav .login-panel-text {
@@ -174,11 +179,10 @@ body {
       float: left;
       background-image: url(../Images/logo-header.png); }
       body header .header-logo:hover {
-        transition: all 0.3s ease-in-out;
         opacity: 0.8; }
     body header ul#shop-category {
       float: left;
-      margin-top: 44px;
+      margin: 40px 0 0 0;
       padding: 0; }
       body header ul#shop-category li {
         display: inline;
@@ -214,7 +218,7 @@ body {
           color: black;
           width: 160px;
           float: left;
-          margin-bottom: 28px; }
+          margin-bottom: 25px; }
         body footer ul li img {
           float: right; }
         body footer ul li .footer-text {

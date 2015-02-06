@@ -11,7 +11,8 @@
         $.ajax({
             url: '/Koszyk/DecreaseQuantity/' + id,
             contentType: 'application/html; charset=utf-8',
-            type: 'GET'
+            type: 'GET',
+            cache: false
         }).success(function(data) {
             var value = target.text();
             if (value > 1)
@@ -31,7 +32,8 @@
         $.ajax({
             url: '/Koszyk/IncreaseQuantity/' + id,
             contentType: 'application/html; charset=utf-8',
-            type: 'GET'
+            type: 'GET',
+            cache: false
         }).success(function(data) {
             var value = target.text();
             value++;
@@ -48,7 +50,8 @@
         $.ajax({
                 url: '/Koszyk/TotalPriceJson',
                 contentType: 'application/html; charset=utf-8',
-                type: 'GET'
+                type: 'GET',
+                cache: false
             }).success(function (data) {
                 var curr = currency(data);
                 var target3 = $('#cart-price-header');
@@ -64,12 +67,13 @@
 
 
     $("#remove").on("click", ".cart-delete-text", function() {
-        var url = $('#removeform').attr("action");
-        var formData = $('#removeform').serialize();
+        var url = $(this).parent().attr("action");
+        var formData = $(this).parent().serialize();
         $.ajax({
             url: url,
             type: "GET",
-            data: formData
+            data: formData,
+            cache: false
         }).success(function(data) {
             var target = $('#remove');
             target.empty().append(data);

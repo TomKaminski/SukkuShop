@@ -241,7 +241,7 @@ margin-bottom:25px;
 	    border-bottom: 11px solid transparent;
 	    float: right;
 	    margin-left: 25px;
-	    
+	    -moz-transform: scale(.9999);
 margin-top:5px;margin-top: 23px;
     }
     #triangle-left-big {
@@ -253,12 +253,13 @@ margin-top:5px;margin-top: 23px;
 	    float: left;
         margin-top:5px;
 	    margin-top: 23px;
-	    margin-right: 25px;
+	    margin-right: 25px;-moz-transform: scale(.9999);
     }
     .order-summary-header-text {
         margin-bottom:10px;
 	    font-size: 18px;
-	    font-family: $font_2;
+	    font-family: Segoe UI;
+font-weight:bold;
 	    float: left;
 	    width: 548px;
     }

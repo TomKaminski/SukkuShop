@@ -6,6 +6,7 @@
   position: relative; }
   .register-success-box .tick {
     font-size: 400px;
+    line-height: 400px;
     color: #f89b1d;
     float: left;
     margin-left: 60px; }
@@ -102,7 +103,7 @@
     padding-top: 20px;
     color: #f89b1d; }
   .order-container .title {
-    font-family: SegoeBold;
+    font-family: Segoe UI;
     text-transform: uppercase;
     font-size: 24px;
     text-align: center;
@@ -199,11 +200,12 @@
     border-bottom: 11px solid transparent;
     float: left;
     margin-top: 23px;
-    margin-right: 25px; }
+    margin-right: 25px;
+    -moz-transform: scale(0.9999); }
   .order-container .order-summary-header-text {
     margin-bottom: 10px;
     font-size: 18px;
-    font-family: SegoeBold;
+    font-family: Segoe UI;
     float: left;
     width: 548px; }
   .order-container .order-summary-description-text {

@@ -15,7 +15,7 @@ $font_2: SegoeBold;
        padding:50px 0 20px 0; 
        text-align: center;
        color:$orangeplz;
-       font-family: $font_2;
+       font-family: Segoe UI;
        font-size: 24px;
        text-transform: uppercase;
     }
@@ -48,7 +48,7 @@ $font_2: SegoeBold;
             .text {
                 float:left;
 	            font-size: 20px;
-	            font-family: $font_2;
+	            font-family: Segoe UI;
 	            font-weight: bold;
 	            text-transform: uppercase;
 	            margin: 0;
@@ -62,12 +62,12 @@ $font_2: SegoeBold;
                 border-left: 15px solid #f89b1d;
                 border-bottom: 11px solid transparent;
                 float: right;
-                margin: 0 25px 37px 15px;
-                cursor:pointer;
+                margin: 5px 25px 37px 15px;
+                cursor:pointer;-moz-transform: scale(.9999);
             }
         }
         .success-text{
-            font-family: $font_2;
+            font-family: Segoe UI;
             font-weight: bold;
             font-size: 16px;
             color: #088106;

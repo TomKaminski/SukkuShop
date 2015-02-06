@@ -18,27 +18,30 @@
                     <div class="icon-pencil"></div>
                 </div>
                 <div class="styled-select" style="margin-bottom: 10px;">
-                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })
+                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()", autocomplete = "off" })
                 </div>
                 <div class="styled-select plz" id="sublist">
-                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
+                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList", autocomplete = "off" })
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
-    PLN</span>
+                        PLN
+                    </span>
                     <div class="icon-pencil text-edit"></div>
-</div>
+                </div>
                 <div class="textbox-container" id="quantity">
                     <span class="text-edit">
-                        ILOŚĆ</span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
-    szt.</span>
+                        ILOŚĆ
+                    </span> @Html.TextBoxFor(m => m.Quantity, new { placeholder = 0, id = "quantity-textbox" }) <span class="text-edit">
+                        szt.
+                    </span>
                     <div class="icon-pencil text-edit"></div>
-</div>
+                </div>
 
                 <div class="textbox-container" id="packing">
-                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE",id="packing-textbox" })
+                    @Html.TextBoxFor(m => m.Packing, new { placeholder = "PAKOWANIE", id = "packing-textbox" })
                     <div class="icon-pencil text-edit"></div>
-                    
+
                 </div>
                 @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
 
@@ -52,22 +55,23 @@
                 @Html.TextBoxFor(m => m.Promotion, new { placeholder = 0, id = "prom-textbox" })
 
                 <div style="float:right;">
-                    @Html.CheckBoxFor(m => m.PublishAfterCreate,new{@class="css-checkbox"})
-                    @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep",new{@class="css-label",style="margin-top:40px;"})
-                    
-                    <br/>
+                    @Html.CheckBoxFor(m => m.PublishAfterCreate, new { @class = "css-checkbox" })
+                    @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep", new { @class = "css-label", style = "margin-top:40px;" })
+
+                    <div style="clear: both"></div>
                     <div id="start-upload">
                         <div id="triangle-right"></div><div class="zapisz-text">ZAPISZ</div>
                     </div>
-                    
+
                 </div>
+                
             </div>
-    <div class="clear"></div>
-   
-   
+            <div class="clear" style="clear:both"></div>
+    <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
+
         }
     </div>
-    <div class="error-plz">Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!</div>
+
     <div class="clear" style="clear:both;float:none;height:0"></div>
 </div>
 @Styles.Render("~/Areas/Admin/Content/css/CreateProduct.css")

@@ -43,6 +43,8 @@ $(".left-container-edit").delegate("#delete-img", "click", function (e) {
     e.stopImmediatePropagation();
 });
 $(document).ready(function () {
+
+
     $.validator.addMethod("regex", function (value, element, regexpr) {
         return regexpr.test(value);
     }, "Nieprawidłowa wartość");

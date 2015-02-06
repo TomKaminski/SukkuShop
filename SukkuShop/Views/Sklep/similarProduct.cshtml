@@ -2,7 +2,7 @@
 <div class="product-list-item-box">
     <div class="product-list-item">
         <div class="product-list-item-image">
-            <img src=~/@("Content/Images/Shop/"+Model.ImageName+".jpg") />
+            <img src=~/@("Content/Images/Shop/"+Model.ImageName+".jpg") class=@(Model.Available?"":"grayscale")>
             <div class="image-bottom-panel">
                 @if (Model.Available)
                 {

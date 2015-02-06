@@ -92,7 +92,7 @@ $font_2: SegoeBold;
     }
     .title
         {
-        font-family:$font_2;
+        font-family:Segoe UI;
         text-transform:uppercase;
         font-size: 24px;
         text-align:center;
@@ -222,12 +222,12 @@ $font_2: SegoeBold;
 	    border-bottom: 11px solid transparent;
 	    float: left;
 	    margin-top: 23px;
-	    margin-right: 25px;
+	    margin-right: 25px;-moz-transform: scale(.9999);
     }
     .order-summary-header-text {
         margin-bottom:10px;
 	    font-size: 18px;
-	    font-family: $font_2;
+	    font-family: Segoe UI;
 	    float: left;
 	    width: 548px;
     }

@@ -208,6 +208,7 @@ $font_2: SegoeBold;
         border-bottom: 11px solid transparent;
         float: right;
         margin-left: 25px;
+        margin-top:5px;-moz-transform: scale(.9999);
     }
     #triangle-left-big {
 	    width: 0;
@@ -217,6 +218,7 @@ $font_2: SegoeBold;
 	    border-bottom: 11px solid transparent;
 	    float: left;
 	    margin-right: 25px;
-    }
+        margin-top:5px;   -moz-transform: scale(.9999); 
+}
 }
 

@@ -13,22 +13,33 @@ function showAjaxTick() {
         jQuery("body").append("<div id='ajax-completetick'>&#10004;</div>");
         loaderDivv = jQuery("#ajax-completetick");
     }
-    loaderDivv.stop().fadeIn(function() {
-        loaderDivv.fadeOut(1000);
-    });
+    loaderDivv.show();
 }
+
+function fadeOutAjaxTick() {
+    jQuery("#ajax-completetick").stop().fadeOut(1000);
+}
+function hideAjaxTick() {
+    jQuery("#ajax-completetick").stop().hide();
+}
+
 
 function hideAjaxLoader() {
     jQuery("#ajax-processing").hide();
 }
 
-jQuery(document).ready(function () {
-    jQuery(document).bind('mousemove', function (e) {
-        jQuery('#ajax-processing,#ajax-completetick').css({
-            left: e.pageX + 20,
-            top: e.pageY
-        });
+jQuery(document).bind('mousemove', function (e) {
+    jQuery('#ajax-processing,#ajax-completetick').css({
+        left: e.pageX + 20,
+        top: e.pageY
     });
+});
+jQuery(document).ready(function () {
+    
+    showAjaxLoader();
+    hideAjaxLoader();
+    showAjaxTick();
+    hideAjaxTick();
 });
 
 var adminApp = angular.module("adminApp", []);
@@ -70,8 +81,9 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
                         var result = $.grep($scope.usersTotal, function (e) { return e.Id == id; });
                         result[0].Rabat = rabat;
                     }
-                    showAjaxTick();
                     hideAjaxLoader();
+                    showAjaxTick();
+                    fadeOutAjaxTick();
                     
                     $scope.usersList = filterUsers($scope.usersOperative);
                 }).

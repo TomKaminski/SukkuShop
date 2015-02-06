@@ -142,7 +142,7 @@ line-height: 30px;
 	        background-color: transparent;
 	        cursor: pointer;
 	        margin-top: 2px;
-	        margin-right: 12px;
+	        margin-right: 12px;-moz-transform: scale(.9999);
         }
         .paging-arrow-left {
 	        width: 0;
@@ -154,7 +154,7 @@ line-height: 30px;
 	        cursor: pointer;
 	        float: left;
 	        margin-top: 2px;
-	        margin-left: 12px;
+	        margin-left: 12px;-moz-transform: scale(.9999);
         }
 	}
 }

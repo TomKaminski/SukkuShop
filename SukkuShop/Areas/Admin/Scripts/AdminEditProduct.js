@@ -173,6 +173,13 @@ function mainselectchange() {
         $("#sublist").css("background", "url('../../../../Areas/Admin/Content/Images/selectboxbtn.png') no-repeat right center");
         $("#sublist select").css("color", "#f89b1d");
         $("#sublist select").attr("disabled", false);
+        $.getJSON("/Admin/Produkty/GetSubCategoryList", { id: $("select#MainCategoryList").val(), ajax: 'true' }, function (j) {
+            var options = '';
+            for (var i = 0; i < j.length; i++) {
+                options += '<option value="' + j[i].Value + '">' + j[i].Text + '</option>';
+            }
+            $("select#SubCategoryList").html(options);
+        });
     } else {
         $("#sublist").removeAttr("style");
         $("#sublist select").removeAttr("style");

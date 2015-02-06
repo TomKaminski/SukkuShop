@@ -21,7 +21,8 @@
       border-bottom: 11px solid transparent;
       float: right;
       margin-left: 25px;
-      margin-top: 23px; }
+      margin-top: 23px;
+      -moz-transform: scale(0.9999); }
     .cart-container #cart-button-bottom #triangle-left-big {
       width: 0;
       height: 0;
@@ -30,7 +31,8 @@
       border-bottom: 11px solid transparent;
       float: left;
       margin-top: 23px;
-      margin-right: 25px; }
+      margin-right: 25px;
+      -moz-transform: scale(0.9999); }
   .cart-container .cart-title {
     font-size: 24px;
     font-family: Segoe UI;
@@ -141,7 +143,8 @@
           background-color: transparent;
           cursor: pointer;
           margin: auto;
-          padding-top: 2px; }
+          padding-top: 2px;
+          -moz-transform: scale(0.9999); }
         .cart-container table.cart-table tbody tr td .quantity-box .quantity-arrow-down {
           width: 0;
           height: 0;
@@ -150,7 +153,8 @@
           border-left: 7px solid transparent;
           background-color: transparent;
           cursor: pointer;
-          margin: auto; }
+          margin: auto;
+          -moz-transform: scale(0.9999); }
         .cart-container table.cart-table tbody tr td .quantity-box .quanity-text-right {
           line-height: 24px;
           vertical-align: middle;

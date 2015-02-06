@@ -106,7 +106,8 @@ ul.shop-paginator li:hover {
       background-color: transparent;
       cursor: pointer;
       margin-top: 2px;
-      margin-right: 12px; }
+      margin-right: 12px;
+      -moz-transform: scale(0.9999); }
     #paginator ul.shop-paginator .paging-arrow-left {
       width: 0;
       height: 0;
@@ -117,7 +118,8 @@ ul.shop-paginator li:hover {
       cursor: pointer;
       float: left;
       margin-top: 2px;
-      margin-left: 12px; }
+      margin-left: 12px;
+      -moz-transform: scale(0.9999); }
 
 input[type=text].rabat {
   text-align: center;

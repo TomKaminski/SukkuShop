@@ -7,7 +7,7 @@
     padding: 50px 0 20px 0;
     text-align: center;
     color: #f89b1d;
-    font-family: SegoeBold;
+    font-family: Segoe UI;
     font-size: 24px;
     text-transform: uppercase; }
   .login-background img {
@@ -37,7 +37,7 @@
       .login-background .login-cont .przypomnij .text {
         float: left;
         font-size: 20px;
-        font-family: SegoeBold;
+        font-family: Segoe UI;
         font-weight: bold;
         text-transform: uppercase;
         margin: 0;
@@ -50,10 +50,11 @@
         border-left: 15px solid #f89b1d;
         border-bottom: 11px solid transparent;
         float: right;
-        margin: 0 25px 37px 15px;
-        cursor: pointer; }
+        margin: 5px 25px 37px 15px;
+        cursor: pointer;
+        -moz-transform: scale(0.9999); }
     .login-background .login-cont .success-text {
-      font-family: SegoeBold;
+      font-family: Segoe UI;
       font-weight: bold;
       font-size: 16px;
       color: #088106;

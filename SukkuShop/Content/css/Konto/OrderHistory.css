@@ -43,7 +43,8 @@
     .details-container table.history-table tbody tr td {
       /*padding: 20px 0;*/
       line-height: 54px;
-      font-family: SegoeBold;
+      font-family: Segoe UI;
+      font-weight: bold;
       text-align: center;
       border-bottom: 1px solid #bababa; }
       .details-container table.history-table tbody tr td a.see {

@@ -244,7 +244,7 @@ padding: 0;
 		li {
 			margin-bottom: 20px;
                 cursor:pointer;
-				font-family: $font_4;
+				font-family: Segoe UI;
 				font-size: 22px;
 				color: $color_tree_poppy_approx;
 				text-transform: uppercase;
@@ -260,7 +260,7 @@ padding: 0;
 			display: inline;
 			float: right;
 			font-size: 16px;
-			font-family: $font_4;
+			font-family: Segoe UI;
 			color: $color_tree_poppy_approx;
 			text-transform: uppercase;
 			&:nth-child(5) {
@@ -288,7 +288,7 @@ padding: 0;
                       background-color: transparent;
                       cursor: pointer;
                       opacity: 0.6;
-                      margin-bottom: 1px; 
+                      margin-bottom: 1px; -moz-transform: scale(.9999);
                       &:hover {
                         opacity: 1;
                       }
@@ -303,7 +303,7 @@ padding: 0;
                       background-color: transparent;
                       cursor: pointer;
                       opacity: 0.6;
-                      margin-top: 1px; 
+                      margin-top: 1px; -moz-transform: scale(.9999);
                       &:hover {
                         opacity: 1;
                       }
@@ -321,6 +321,7 @@ padding: 0;
 	            opacity: 0.6;
 	            margin-top: 2px;
 	            margin-left: 8px;
+-moz-transform: scale(.9999);
 	            &:hover {
 		            opacity: 1;
 	            }
@@ -418,6 +419,7 @@ li {
 	        cursor: pointer;
 	        margin-top: 2px;
 	        margin-right: 12px;
+-moz-transform: scale(.9999);
         }
         .paging-arrow-left {
 	        width: 0;
@@ -430,6 +432,7 @@ li {
 	        float: left;
 	        margin-top: 2px;
 	        margin-left: 12px;
+-moz-transform: scale(.9999);
         }
 	}
 }

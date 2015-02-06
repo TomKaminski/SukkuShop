@@ -39,10 +39,10 @@
                     <div class="icon-pencil"></div>
                 </div>
                 <div class="styled-select" style="margin-bottom: 10px;">
-                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()" })
+                    @Html.DropDownListFor(m => m.Category, (List<SelectListItem>)ViewBag.CategoryList, new { id = "MainCategoryList", onchange = "mainselectchange()", autocomplete = "off" })
                 </div>
                 <div class="styled-select plz" id="sublist">
-                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList" })
+                    @Html.DropDownListFor(m => m.SubCategory, (List<SelectListItem>)ViewBag.SubCategoryList, new { id = "SubCategoryList", autocomplete = "off" })
                 </div>
                 <div class="textbox-container" id="price">
                     <span class="text-edit">CENA</span> @Html.TextBoxFor(m => m.Price, new { placeholder = "0,00", id = "price-textbox" }) <span class="text-edit">
@@ -79,8 +79,8 @@
                         @Html.CheckBoxFor(m => m.PublishAfterCreate, new { @class = "css-checkbox" })
                         @Html.LabelFor(m => m.PublishAfterCreate, "dodaj na sklep", new { @class = "css-label", style = "margin-top:40px;" })
 
-                        <br />
-                        <div class="clear" style="clear:both"></div>
+                        
+                        <div style="clear:both"></div>
                         <div id="start-upload">
                             <div id="triangle-right"></div><div class="zapisz-text">WYJDŹ I ZAPISZ</div>
                         </div>

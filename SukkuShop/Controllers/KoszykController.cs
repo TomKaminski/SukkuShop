@@ -153,7 +153,7 @@ namespace SukkuShop.Controllers
                 var priceFloored = Math.Floor((price??0)*100)/100;
                 productList.Add(new CartProduct
                 {
-                    Id = product.ProductId, Description = product.Description, Name = product.Name, Price = priceFloored.ToString(), Quantity = item.Quantity, TotalValue = (priceFloored*item.Quantity).ToString("c"), Image = product.ImageName, MaxQuantity = product.Quantity??0, CategoryName = categoryName, Packing = product.Packing
+                    Id = product.ProductId, Description = product.Description, Name = product.Name, Price = priceFloored.ToString("c"), Quantity = item.Quantity, TotalValue = (priceFloored*item.Quantity).ToString("c"), Image = product.ImageName, MaxQuantity = product.Quantity??0, CategoryName = categoryName, Packing = product.Packing
                 });
             }
             var model = new CartViewModels

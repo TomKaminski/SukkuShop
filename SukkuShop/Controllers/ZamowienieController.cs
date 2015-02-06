@@ -81,7 +81,7 @@ namespace SukkuShop.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
-                model = user.AccNip == null;
+                model = user.KontoFirmowe;
                 return View(model);
             }
             return View(model);

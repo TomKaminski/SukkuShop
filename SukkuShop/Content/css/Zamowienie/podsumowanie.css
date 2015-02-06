@@ -181,6 +181,7 @@ img.grayscale {
     border-bottom: 11px solid transparent;
     float: right;
     margin-left: 25px;
+    -moz-transform: scale(0.9999);
     margin-top: 5px;
     margin-top: 23px; }
   .order-container #triangle-left-big {
@@ -192,11 +193,13 @@ img.grayscale {
     float: left;
     margin-top: 5px;
     margin-top: 23px;
-    margin-right: 25px; }
+    margin-right: 25px;
+    -moz-transform: scale(0.9999); }
   .order-container .order-summary-header-text {
     margin-bottom: 10px;
     font-size: 18px;
-    font-family: SegoeBold;
+    font-family: Segoe UI;
+    font-weight: bold;
     float: left;
     width: 548px; }
   .order-container .order-summary-description-text {

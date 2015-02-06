@@ -40,6 +40,7 @@ $font_2: SegoeBold;
 	        float: right;
 	        margin-left: 25px;
 	        margin-top: 23px;
+-moz-transform: scale(.9999);
         }
         #triangle-left-big {
 	        width: 0;
@@ -50,6 +51,7 @@ $font_2: SegoeBold;
 	        float: left;
 	        margin-top: 23px;
 	        margin-right: 25px;
+-moz-transform: scale(.9999);
         }
     }
     .cart-title {
@@ -191,7 +193,7 @@ $font_2: SegoeBold;
 		            background-color: transparent;
 		            cursor: pointer;
 		            margin: auto;
-		            padding-top: 2px;
+		            padding-top: 2px;-moz-transform: scale(.9999);
 	            }
 	            .quantity-arrow-down {
 		            width: 0;
@@ -201,7 +203,7 @@ $font_2: SegoeBold;
 		            border-left: 7px solid transparent;
 		            background-color: transparent;
 		            cursor: pointer;
-		            margin: auto;
+		            margin: auto;-moz-transform: scale(.9999);
 	            }
 	            .quanity-text-right {
 		            line-height: 24px;

@@ -6,6 +6,7 @@
   position: relative; }
   .register-success-box .tick {
     font-size: 400px;
+    line-height: 400px;
     color: #f89b1d;
     float: left;
     margin-left: 50px;

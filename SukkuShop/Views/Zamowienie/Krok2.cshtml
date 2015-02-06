@@ -12,26 +12,30 @@
     @if (User.Identity.IsAuthenticated)
     {
         <div class="client-data-container" style="height: 560px;">
-            <div id="changeaddress-replace">
-                @{
+            <div>
+                <div id="changeaddress-replace">
+                    @{
         Html.RenderAction(Model == true ? MVC.Zamowienie.ChangeAddressFirmaPartial() : MVC.Zamowienie.ChangeAddressPartial());
-                }
-            </div>
-            <div class="right-container">
-                <div class="client-type-text">Zalogowany jako:</div>
-                <div class="logged-user-text">@User.Identity.Name</div>
-                @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
-                {
-                    @Html.AntiForgeryToken()
-                    <a class="wyloguj-text-form" href="javascript:document.getElementById('logoutForm1').submit()">
-                        <div id="triangle-right-big"></div>
-                        <div class="order-title-ending" style="float: right">WYLOGUJ</div>
-                    </a>
-                }
-                <div class="error-box">
-                    @Html.ValidationSummary()
+                    }
                 </div>
+                <div class="right-container">
+                    <div class="client-type-text">Zalogowany jako:</div>
+                    <div class="logged-user-text">@User.Identity.Name</div>
+                    @using (Html.BeginForm(MVC.Zamowienie.Wyloguj(), FormMethod.Post, new { id = "logoutForm1" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <a class="wyloguj-text-form" href="javascript:document.getElementById('logoutForm1').submit()">
+                            <div id="triangle-right-big"></div>
+                            <div class="order-title-ending" style="float: right">WYLOGUJ</div>
+                        </a>
+                    }
+                    <div class="error-box">
+                        @Html.ValidationSummary()
+                    </div>
+                </div>
+                <div style="clear:both"></div>
             </div>
+
             <a href="@Url.Action(MVC.Zamowienie.Krok1())">
                 <div id="triangle-left-big"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
             </a>

@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Web;
+using System.Linq.Expressions;
 using System.Web.Mvc;
 using System.Web.Routing;
-using System.Web.Script.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using SukkuShop.Areas.Admin.Controllers;
@@ -33,7 +31,8 @@ namespace SukkuShop.Tests
                 OrdersCount = 5,
                 ImageName = "asd.png",
                 Promotion = 0,
-                Categories = new Categories {CategoryId = 1, Name = "Kosmetyki"}
+                Categories = new Categories {CategoryId = 1, Name = "Kosmetyki"},
+                Published = true
             },
             new Products
             {
@@ -47,7 +46,8 @@ namespace SukkuShop.Tests
                 OrdersCount = 6,
                 ImageName = "asd.png",
                 Promotion = 10,
-                Categories = new Categories {CategoryId = 2, Name = "Bakalie"}
+                Categories = new Categories {CategoryId = 2, Name = "Bakalie"},
+                Published = false
             },
             new Products
             {
@@ -140,19 +140,12 @@ namespace SukkuShop.Tests
 
             var controller = new ProduktyController(mockContext.Object);
             var actual = controller.GetProductList();
-            var result = AsRouteValueDictionary(actual);
-            var list = (result["products"] as IEnumerable<object>).ToList();
+            var result = new RouteValueDictionary(actual.Data);
+            dynamic list = (result["products"] as IEnumerable<object>).ToList();
             var list2 = (result["categories"] as IEnumerable<object>).ToList();
             Assert.AreEqual(list.Count, 6);
             Assert.AreEqual(list2.Count, 2);
-
-        }
-
-        public static RouteValueDictionary AsRouteValueDictionary(JsonResult jsonResult)
-        {
-
-            return new RouteValueDictionary(jsonResult.Data);
-
+            Assert.AreEqual(list[0].Name,"Produkt1");
         }
     }
 }

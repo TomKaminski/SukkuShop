@@ -757,7 +757,6 @@
     <Content Include="Content\web\OrderSummary.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="PrivateSettings.config" />
     <Content Include="Content\fonts\SegoeSemibold.ttf" />
     <Content Include="Content\fonts\FTLTLT.TTF" />
     <Content Include="Content\fonts\FoglihtenPCS.otf" />
@@ -915,6 +914,11 @@
     <Content Include="Areas\Admin\Content\css\AdminUserList.css.map">
       <DependentUpon>AdminUserList.css</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\SEGOEUIL.eot" />
+    <Content Include="Content\fonts\SEGOEUIL.woff" />
+    <Content Include="Content\fonts\seguibl.eot" />
+    <Content Include="Content\fonts\seguibl.ttf" />
+    <Content Include="Content\fonts\seguibl.woff" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
@@ -1042,7 +1046,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />

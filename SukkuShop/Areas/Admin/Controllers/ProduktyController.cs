@@ -348,7 +348,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             if (category != null)
             {
                 var subCategoryList2 =
-                    _dbContext.Categories.Where(x => x.UpperCategoryId == category.UpperCategoryId)
+                    _dbContext.Categories.Where(x => x.UpperCategoryId == category.CategoryId)
                         .Select(k => new SelectListItem
                         {
                             Text = k.Name,
