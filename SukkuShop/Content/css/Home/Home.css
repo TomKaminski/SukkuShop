@@ -1,4 +1,4 @@
-.main-container {
+﻿.main-container {
   width: 1066px;
   margin: auto; }
   .main-container .container {
@@ -14,7 +14,8 @@
       text-align: center;
       color: black; }
     .main-container .container img:hover {
-      transition: all 0.3s ease-in-out;
+      -webkit-transition: all 0.3s ease-in-out;
+              transition: all 0.3s ease-in-out;
       opacity: 0.8; }
     .main-container .container .container-check {
       width: 180px;
@@ -28,6 +29,7 @@
         font-size: 29px;
         font-weight: bold;
         text-transform: uppercase;
+        font-family: Segoe UI;
         text-align: center;
         color: #6d6c6c;
         line-height: 60px;
@@ -35,4 +37,4 @@
         .main-container .container .container-check a .check:hover {
           text-decoration: underline;
           color: #6d6c6c; }
-
+/*# sourceMappingURL=Home.css.map */
