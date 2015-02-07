@@ -46,18 +46,20 @@
                 </div>
                 <table class="main-table">
                     <thead id="plz">
-                        <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)"><div class="icon-arrow-up up"></div></a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)"><div class="icon-arrow-down down"></div></a></th>
-                        <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)"><div class="icon-arrow-down down"></div></a></th>
-                        <th>Ilość zam. <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
-                        <th class="blank">Status</th>
-                        <th class="blank"></th>
-                        <th class="blank"></th>
-                        <th class="blank"></th>
+                    <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)"><div class="icon-arrow-up up"></div></a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Magazyn<a href="" ng-class="{'selected': selectedIndex==7}" ng-click="orderByMhm('Quantity',false,7)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==8}" ng-click="orderByMhm('Quantity',true,8)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Ilość zam. <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
+                    <th class="blank">Status</th>
+                    <th class="blank"></th>
+                    <th class="blank"></th>
+                    <th class="blank"></th>
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in productsList">
                             <td>{{item.ProductId}}.</td>
                             <td>{{item.Name}}</td>
+                            <td>{{item.Quantity}}({{item.ReservedQuantity}})</td>
                             <td>{{item.orders}}</td>
                             <td class="state">
                                 <div ng-if="item.Published && !item.WrongModel">Na sklepie</div>
@@ -80,7 +82,7 @@
                                     </ul>
                                 </div>
                             </td>
-                            <td ng-click="unpublish(item.ProductId)" ng-if="item.Published && !item.WrongModel" class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>                           
+                            <td ng-click="unpublish(item.ProductId)" ng-if="item.Published && !item.WrongModel" class="take-out">ściągnij ze sklepu<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>
                             <td><a ng-href="@Url.Action("Edytuj")/{{item.ProductId}}" class="icon-pencil pencil"></a></td>
                             <td ng-if="item.orders==0 && item.canDelete==false"><a ng-click="deleteitemask(item.ProductId)" class="icon-trash trash"></a></td>
                             <td ng-if="item.orders==0 && item.canDelete==true"><a ng-click="deleteitem(item.ProductId)" class="trash-yes">&#10003;</a><a ng-click="nodeleteitem(item.ProductId)" class="trash-no">&#10006;</a></td>

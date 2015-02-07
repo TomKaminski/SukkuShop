@@ -42,6 +42,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 x.WrongModel,
                 x.IsComplete,
                 x.CategoryId,
+                Quantity=x.Quantity??0,
+                x.ReservedQuantity,
                 upper = x.Categories.UpperCategoryId,
                 canDelete = false,
                 orders = x.OrdersCount,
