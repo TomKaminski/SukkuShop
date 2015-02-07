@@ -72,7 +72,7 @@ namespace SukkuShop.Controllers
             if (shoppingCart.PaymentId == 0 || shoppingCart.ShippingId == 0)
             {
                 ModelState.AddModelError("", "Proszę wybrać metodę dostawy oraz metodę płatności");
-                return View(MVC.Zamowienie.Views.Krok1);
+                return RedirectToAction(MVC.Zamowienie.Krok1());
             }
                 
             if (!shoppingCart.Lines.Any())

@@ -164,6 +164,7 @@ z-index:-50;
 		                        }
 	                        }
 	                        input {
+                                &:focus{outline:none;}
 		                        @extend %extend_1;
 	                        }
 	                    }

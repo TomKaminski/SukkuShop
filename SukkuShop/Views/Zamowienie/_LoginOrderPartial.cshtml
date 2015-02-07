@@ -17,9 +17,9 @@
         @Html.CheckBoxFor(m => m.RememberMe, new { @class = "css-checkbox" })
         @Html.LabelFor(m => m.RememberMe, "Nie wylogowuj mnie", new { @class = "css-label", style="margin-left: 137px;margin-top: 10px;" })
     </div>
-    <div id="zaloguj">
+    <a id="zaloguj" href="">
         <div id="triangle-right-big"></div><div class="order-title-ending" style="float: right">ZALOGUJ</div><div class="clear" style="clear: both"></div>
-    </div>
+    </a>
     
     @Html.ValidationSummary(true,"", new { @class = "error-summary" })
 

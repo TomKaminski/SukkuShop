@@ -121,8 +121,15 @@ $(document).ready(function () {
         }
     });
 
-    $("#login-replace").delegate("#zaloguj", "click", function() {
+    $("#login-replace").delegate("#zaloguj", "click", function (e) {
+        e.preventDefault();
         $("#LoginOrderForm").submit();
+    });
+
+    $(".client-data-container").delegate('input','keypress',function (e) {
+        if (e.keyCode == 13) {
+            $(this).closest('form').submit();
+        }
     });
 
     $("#changeaddress-replace").delegate("input[id=newaddress]", "click", function () {

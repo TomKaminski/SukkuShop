@@ -91,7 +91,6 @@ body {
       float: left;
       background-image: url(../../../../Content/Images/logo-header.png); }
       body header .header-logo:hover {
-        transition: all 0.3s ease-in-out;
         opacity: 0.8; }
     body header ul#shop-category {
       float: left;

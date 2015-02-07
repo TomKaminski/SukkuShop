@@ -60,7 +60,7 @@
       border-left: 15px solid #f89b1d;
       border-bottom: 11px solid transparent;
       float: right;
-      margin: 4px 25px 37px 15px;
+      margin: 4px 25px 0 15px;
       cursor: pointer;
       -moz-transform: scale(0.9999); }
     .order-container .client-data-container .left-container {
@@ -68,7 +68,8 @@
       float: left; }
       .order-container .client-data-container .left-container .newaddress-box {
         width: 100%;
-        height: 20px; }
+        height: 20px;
+        margin-bottom: 10px; }
       .order-container .client-data-container .left-container label.error {
         margin-left: 145px; }
     .order-container .client-data-container .right-container {
@@ -114,8 +115,7 @@
         cursor: pointer;
         font-size: 14px; }
       .order-container .client-data-container .right-container #zaloguj {
-        margin-top: 45px;
-        margin-right: 20px; }
+        float: right; }
       .order-container .client-data-container .right-container .error-box {
         margin: 94px auto auto 50px;
         width: 90%;
@@ -142,7 +142,7 @@
     color: red;
     margin-left: 145px;
     font-weight: bold;
-    font-size: 14px; }
+    font-size: 12px; }
   .data-box input[type=text], .data-box input[type=password], .data-box input[type=email] {
     text-align: center;
     font-family: SegoeLight;
@@ -220,7 +220,6 @@ input[type=checkbox].css-checkbox {
     background-position: 0 0;
     font-size: 14px;
     font-family: SegoeLight;
-    float: left;
     vertical-align: middle;
     cursor: pointer;
     margin-left: 33px;
@@ -239,7 +238,6 @@ input[type=radio].css-checkbox {
     background-position: 0 0;
     font-size: 14px;
     font-family: SegoeLight;
-    float: left;
     vertical-align: middle;
     cursor: pointer;
     margin-left: 33px;

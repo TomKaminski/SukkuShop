@@ -39,6 +39,12 @@ $(document).ready(function() {
     changeFirmaInfo();
     changePasswordForm();
 
+    $(".change-container").delegate('input', 'keypress', function (e) {
+        if (e.keyCode == 13) {
+            $(this).closest('form').submit();
+        }
+    });
+
     $(".change-container").delegate("input[id=firmafalse]", "click", function () {
         showAjaxLoader();
         $.ajax({

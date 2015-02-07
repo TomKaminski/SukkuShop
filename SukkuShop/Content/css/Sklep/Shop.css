@@ -112,6 +112,8 @@ img.grayscale {
               cursor: pointer; }
               .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon img:hover {
                 opacity: 1; }
+              .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon input:focus {
+                outline: none; }
             .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .info-icon {
               width: 32px;
               height: 32px;

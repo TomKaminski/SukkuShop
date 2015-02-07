@@ -1,8 +1,16 @@
 ﻿$(document).ready(function() {
-    $(".zaloguj").click(function() {
+    $(".zaloguj").click(function (e) {
+            e.preventDefault();
             $("#LoginForm").submit();
         }
     );
+
+    $("input").keypress(function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            $("#LoginForm").submit();
+        }
+    });
 
     $(".data-box input").click(function () {
         if ($(this).siblings(".field-validation-error").html('') != "") {

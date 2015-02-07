@@ -311,9 +311,9 @@ margin-top: 0;
     }
 }
 
-*:focus {
+/**:focus {
 	outline: 0;
-}
+}*/
 
 .product-error-big {
 	font-family: $SeUI;
