@@ -45,7 +45,7 @@ jQuery(document).ready(function () {
 var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 10;
 
-adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
+adminApp.controller("AdminUserCtrl",['$scope', '$http','$filter', function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
     $scope.init = function () {
         $scope.selectedIndex = 1;
@@ -132,4 +132,4 @@ adminApp.controller("AdminUserCtrl", function ($scope, $http, $filter) {
         return users.slice($scope.currentPage * itemsPerPage - itemsPerPage, $scope.currentPage * itemsPerPage);
     }
 
-});
+}]);

@@ -4,8 +4,8 @@
     Session["returnUrl"] = HttpContext.Current.Request.RawUrl;
 }
 
-@Scripts.Render("~/Scripts/angular.js")
-@Scripts.Render("~/Scripts/shopAngular.js")
+@Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Scripts/shopAngular.min.js")
 
 <div ng-app="shopApp">
     <div ng-controller="ShopCtrl" ng-init="init('@Model')">
@@ -112,4 +112,4 @@
     </div>
 </div>
 
-@Styles.Render("~/Content/css/Sklep/Shop.css")
+@Styles.Render("~/Content/css/Sklep/Shop.min.css")

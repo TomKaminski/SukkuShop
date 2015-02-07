@@ -1,61 +1,10 @@
-﻿function currency(n) {
-    n = parseFloat(n);
-    return isNaN(n) ? false : n.toFixed(2);
-}
-
-function plz(data) {
-    var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
-    if (parseFloat(plza) != parseFloat(data.value)) {
-        var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
-        obj.css('color', 'green');
-        obj.html('&#10003;');
-        obj.stop().show("fast", function () {
-            obj.fadeOut(2500);
-        });
-        $("#cart-price-header").html('koszyk ' + data.value + ' zł');
-        //var cart = $("#img" + data.id);
-        //var imgtodrag = cart.parent().parent().parent().parent().parent().find("img").eq(0);
-        //if (imgtodrag) {
-        //    imgtodrag.clone()
-        //        .offset({
-        //            top: imgtodrag.offset().top,
-        //            left: imgtodrag.offset().left
-        //        })
-        //        .addClass("flying-product-start")
-        //        .css('position', 'absolute')
-        //        .appendTo(jQuery('body')).
-        //        animate({
-        //            'top': cart.offset().top + 10,
-        //            'left': cart.offset().left + 10,
-        //            'width': '10px',
-        //            'height': '10px',
-        //            'position': 'absolute'
-        //        }, 1000, function() {
-        //            jQuery(this).animate({
-        //                'width': 0,
-        //                'height': 0
-        //            }, function() {
-        //                jQuery(this).detach();
-        //            });
-        //        });
-        //}
-    } else {
-        var obj2 = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
-
-        obj2.css('color', 'red');
-        obj2.html('&#10006;');
-        obj2.stop().show("fast", function () {
-            obj2.fadeOut(2500);
-        });
-    }
-    
-};
+﻿
 
 
 var shopApp = angular.module("shopApp", []);
 var itemsPerPage = 12;
 
-shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
+shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $http, $filter) {
     $scope.init = function (category) {
         $scope.sortMethod = "Nowosc";
         $scope.currentPage = 1;
@@ -149,9 +98,35 @@ shopApp.controller("ShopCtrl", function($scope, $http, $filter) {
         return filteredProducts.slice($scope.currentPage * 12 - 12, $scope.currentPage * 12);
      }
 
-});
+}]);
 
+function currency(n) {
+    n = parseFloat(n);
+    return isNaN(n) ? false : n.toFixed(2);
+}
 
+function plz(data) {
+    var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
+    if (parseFloat(plza) != parseFloat(data.value)) {
+        var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
+        obj.css('color', 'green');
+        obj.html('&#10003;');
+        obj.stop().show("fast", function () {
+            obj.fadeOut(2500);
+        });
+        $("#cart-price-header").html('koszyk ' + data.value + ' zł');
+
+    } else {
+        var obj2 = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
+
+        obj2.css('color', 'red');
+        obj2.html('&#10006;');
+        obj2.stop().show("fast", function () {
+            obj2.fadeOut(2500);
+        });
+    }
+
+};
 jQuery(document).ready(function () {
     jQuery('#add-to-cart-info').hide();
     jQuery("ul.sort-menu div.plz").click(function () {

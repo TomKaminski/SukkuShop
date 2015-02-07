@@ -4,7 +4,6 @@
 /// <reference path="jquery.unobtrusive-ajax.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />
-/// <reference path="main.js" />
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="jquery.elevatezoom.js" />
 /// <reference path="shopdetails.js" />

@@ -1,7 +1,7 @@
 ﻿@using System.Web.Script.Serialization
 @model SukkuShop.Models.ProductDetailsViewModel
 @{
-    ViewBag.Title = "SzczegółyProduktu";
+    ViewBag.Title = Model.Product.Name + "- Szczegóły";
 }
 
 <div class="product-details-main-container">
@@ -96,7 +96,7 @@
                             returnUrl = Session["returnUrl"]
                         })</div>
 
-@Styles.Render("~/Content/css/Sklep/ShopDetails.css")
+@Styles.Render("~/Content/css/Sklep/ShopDetails.min.css")
 @section Scripts{
     <script>
     $(document).ready(function() {
@@ -123,6 +123,5 @@
     });
     </script>
 }
-@Scripts.Render("~/Scripts/jquery.elevatezoom.js")
-@Scripts.Render("~/Scripts/shopdetails.js")
-@Scripts.Render("~/Scripts/main.js")
+@Scripts.Render("~/Scripts/jquery.elevatezoom.min.js")
+@Scripts.Render("~/Scripts/shopdetails.min.js")

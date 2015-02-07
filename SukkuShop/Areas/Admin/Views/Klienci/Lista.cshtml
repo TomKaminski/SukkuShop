@@ -1,10 +1,10 @@
 ﻿@{
     ViewBag.Title = "Lista użytkowników";
 }
+@Styles.Render("~/Areas/Admin/Content/css/AdminUserList.min.css")
+@Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Areas/Admin/Scripts/userListAngular.min.js")
 
-@Scripts.Render("~/Scripts/angular.js")
-@Scripts.Render("~/Areas/Admin/Scripts/userListAngular.js")
-@Styles.Render("~/Areas/Admin/Content/css/AdminUserList.css")
 <div ng-app="adminApp">
     <div ng-controller="AdminUserCtrl" ng-init="init()">
         <div class="main-cont">

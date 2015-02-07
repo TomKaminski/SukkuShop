@@ -433,14 +433,38 @@
     <Content Include="Areas\Admin\Content\Images\selectboxbtn.png" />
     <Content Include="Areas\Admin\Content\web\AdminProductsList.html" />
     <Content Include="Areas\Admin\Scripts\AdminEditProduct.js" />
+    <Content Include="Areas\Admin\Scripts\AdminEditProduct.min.js">
+      <DependentUpon>AdminEditProduct.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
+    <Content Include="Areas\Admin\Scripts\AdminProduct.min.js">
+      <DependentUpon>AdminProduct.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\ContentIndex.js" />
+    <Content Include="Areas\Admin\Scripts\ContentIndex.min.js">
+      <DependentUpon>ContentIndex.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\productListAngular.js" />
+    <Content Include="Areas\Admin\Scripts\productListAngular.min.js">
+      <DependentUpon>productListAngular.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\RegulaminEditor.js" />
+    <Content Include="Areas\Admin\Scripts\RegulaminEditor.min.js">
+      <DependentUpon>RegulaminEditor.js</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Scripts\userListAngular.js" />
+    <Content Include="Areas\Admin\Scripts\userListAngular.min.js">
+      <DependentUpon>userListAngular.js</DependentUpon>
+    </Content>
     <Content Include="ckeditor\adapters\jquery.js" />
+    <Content Include="ckeditor\adapters\jquery.min.js">
+      <DependentUpon>jquery.js</DependentUpon>
+    </Content>
     <Content Include="ckeditor\build-config.js" />
     <Content Include="ckeditor\ckeditor.js" />
+    <Content Include="ckeditor\ckeditor.min.js">
+      <DependentUpon>ckeditor.js</DependentUpon>
+    </Content>
     <Content Include="ckeditor\config.js" />
     <Content Include="ckeditor\contents.css" />
     <Content Include="ckeditor\lang\en-gb.js" />
@@ -919,14 +943,68 @@
     <Content Include="Content\fonts\seguibl.eot" />
     <Content Include="Content\fonts\seguibl.ttf" />
     <Content Include="Content\fonts\seguibl.woff" />
+    <Content Include="Scripts\AccSzczegZam.min.js">
+      <DependentUpon>AccSzczegZam.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\angular.min.js.map">
+      <DependentUpon>angular.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\CartSummary.min.js.map">
+      <DependentUpon>CartSummary.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\AccSzczegZam.min.js.map">
+      <DependentUpon>AccSzczegZam.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AdminEditProduct.min.js.map">
+      <DependentUpon>AdminEditProduct.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AdminProduct.min.js.map">
+      <DependentUpon>AdminProduct.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\ContentIndex.min.js.map">
+      <DependentUpon>ContentIndex.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\productListAngular.min.js.map">
+      <DependentUpon>productListAngular.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\RegulaminEditor.min.js.map">
+      <DependentUpon>RegulaminEditor.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\userListAngular.min.js.map">
+      <DependentUpon>userListAngular.min.js</DependentUpon>
+    </Content>
+    <Content Include="ckeditor\ckeditor.min.js.map">
+      <DependentUpon>ckeditor.min.js</DependentUpon>
+    </Content>
+    <Content Include="ckeditor\adapters\jquery.min.js.map">
+      <DependentUpon>jquery.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\CartSummary.js" />
+    <Content Include="Scripts\CartSummary.min.js">
+      <DependentUpon>CartSummary.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
+    <Content Include="Scripts\jquery-2.1.1.min.js.map">
+      <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery-ui-1.9.0.min.js.map">
+      <DependentUpon>jquery-ui-1.9.0.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.elevatezoom.min.js">
+      <DependentUpon>jquery.elevatezoom.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js.map">
+      <DependentUpon>jquery.unobtrusive-ajax.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.elevatezoom.min.js.map">
+      <DependentUpon>jquery.elevatezoom.min.js</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-ui-1.9.0.js" />
     <Content Include="Scripts\jquery-ui-1.9.0.min.js" />
@@ -938,19 +1016,96 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\Konto.js" />
+    <Content Include="Scripts\Konto.min.js">
+      <DependentUpon>Konto.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\KontoNieaktywne.js" />
+    <Content Include="Scripts\KontoNieaktywne.min.js">
+      <DependentUpon>KontoNieaktywne.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Login.min.js">
+      <DependentUpon>Login.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modernizr-2.8.3.min.js">
+      <DependentUpon>modernizr-2.8.3.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\OrderKrok1.min.js">
+      <DependentUpon>OrderKrok1.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\OrderKrok2.min.js">
+      <DependentUpon>OrderKrok2.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\podsumowanie.min.js">
+      <DependentUpon>podsumowanie.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Register.min.js">
+      <DependentUpon>Register.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\Resetuj.js" />
     <Content Include="Scripts\Login.js" />
-    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\OrderKrok1.js" />
     <Content Include="Scripts\OrderKrok2.js" />
     <Content Include="Scripts\podsumowanie.js" />
     <Content Include="Scripts\Register.js" />
+    <Content Include="Scripts\Resetuj.min.js">
+      <DependentUpon>Resetuj.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\shopAngular.js" />
+    <Content Include="Scripts\shopAngular.min.js">
+      <DependentUpon>shopAngular.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\shopdetails.js" />
+    <Content Include="Scripts\shopdetails.min.js">
+      <DependentUpon>shopdetails.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\ZapomnianeHaslo.js" />
+    <Content Include="Scripts\ZapomnianeHaslo.min.js">
+      <DependentUpon>ZapomnianeHaslo.js</DependentUpon>
+    </Content>
     <Content Include="Scripts\_references.js" />
+    <Content Include="Scripts\jquery.validate.min.js.map">
+      <DependentUpon>jquery.validate.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js.map">
+      <DependentUpon>jquery.validate.unobtrusive.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\ZapomnianeHaslo.min.js.map">
+      <DependentUpon>ZapomnianeHaslo.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\shopdetails.min.js.map">
+      <DependentUpon>shopdetails.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Resetuj.min.js.map">
+      <DependentUpon>Resetuj.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Register.min.js.map">
+      <DependentUpon>Register.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\podsumowanie.min.js.map">
+      <DependentUpon>podsumowanie.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\OrderKrok2.min.js.map">
+      <DependentUpon>OrderKrok2.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\OrderKrok1.min.js.map">
+      <DependentUpon>OrderKrok1.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Login.min.js.map">
+      <DependentUpon>Login.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\KontoNieaktywne.min.js.map">
+      <DependentUpon>KontoNieaktywne.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\Konto.min.js.map">
+      <DependentUpon>Konto.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\modernizr-2.8.3.min.js.map">
+      <DependentUpon>modernizr-2.8.3.min.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\shopAngular.min.js.map">
+      <DependentUpon>shopAngular.min.js</DependentUpon>
+    </Content>
     <None Include="T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -1042,7 +1197,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Views\Rangi\" />
-    <Folder Include="Views\Preview\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

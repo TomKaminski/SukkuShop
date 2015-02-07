@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
 var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 12;
 
-adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
+adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
 
     $scope.init = function (name,id) {
@@ -229,4 +229,4 @@ adminApp.controller("AdminProdCtrl", function ($scope, $http, $filter) {
         $scope.tableOfPages = pages;
         return products.slice($scope.currentPage * itemsPerPage - itemsPerPage, $scope.currentPage * itemsPerPage);
      }
-});
+}]);
