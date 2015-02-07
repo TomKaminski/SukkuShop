@@ -118,7 +118,7 @@ namespace SukkuShop.Controllers
                 _dbContext.Products.Where(
                     x =>
                         (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId??-1)) &&
-                        x.ProductId != product.ProductId).Select(j => new SimilarProductModel
+                        x.ProductId != product.ProductId && x.Published).Select(j => new SimilarProductModel
                         {
                             Id = j.ProductId,
                             ImageName = j.IconName,
