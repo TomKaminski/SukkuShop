@@ -123,7 +123,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 var category = model.Category == 0 ? null : model.Category;
                 var price = model.Price == null
                     ? (decimal?) null
-                    : Math.Floor((Convert.ToDecimal(model.Price.Replace(".", ",")))*100)/100;
+                    : Math.Floor((Convert.ToDecimal(model.Price.Replace(",", ".")))*100)/100;
 
                 if ((price == null || category == null || model.Packing == null) && model.PublishAfterCreate)
                 {
@@ -370,7 +370,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var category = model.Category == 0 ? null : model.Category;
-                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
+                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(",", "."));
                 if (price == null || category == null || model.Packing == null)
                 {
                     if (model.PublishAfterCreate)

@@ -22,10 +22,8 @@ $font_8: Segoe Ui;
     src: url(../../fonts/FTLTLT.ttf);
 }
 
-@font-face {
-    font-family: $font_3;
-    src: url(../../fonts/FoglihtenPCS.otf);
-}
+@font-face {font-family:$font_3;src:url("../../fonts/FoglihtenPCS-068.eot?") format("eot"),url("../../fonts/FoglihtenPCS-068.woff") format("woff"),url("../../fonts/FoglihtenPCS-068.ttf") format("truetype"),url("../../fonts/FoglihtenPCS-068.svg#FoglihtenPCS-Petitecaps") format("svg");font-weight:normal;font-style:normal;}
+
 
 //.add-to-cart-icon img, .info-icon img, .add-to-cart-icon input
 %extend_1 {

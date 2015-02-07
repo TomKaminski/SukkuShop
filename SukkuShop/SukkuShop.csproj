@@ -528,9 +528,6 @@
     <Content Include="ckeditor\plugins\a11yhelp\dialogs\lang\zh-cn.js" />
     <Content Include="ckeditor\plugins\a11yhelp\dialogs\lang\zh.js" />
     <Content Include="ckeditor\plugins\a11yhelp\dialogs\lang\_translationstatus.txt" />
-    <Content Include="ckeditor\plugins\about\dialogs\about.js" />
-    <Content Include="ckeditor\plugins\about\dialogs\hidpi\logo_ckeditor.png" />
-    <Content Include="ckeditor\plugins\about\dialogs\logo_ckeditor.png" />
     <Content Include="ckeditor\plugins\clipboard\dialogs\paste.js" />
     <Content Include="ckeditor\plugins\dialog\dialogDefinition.js" />
     <Content Include="ckeditor\plugins\icons.png" />
@@ -749,6 +746,7 @@
     <Content Include="Content\css\Zamowienie\podsumowanie.min.css">
       <DependentUpon>podsumowanie.css</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\FoglihtenPCS-068.svg" />
     <Content Include="Content\fonts\lucida_bright.svg" />
     <Content Include="Content\fonts\lucida_console.svg" />
     <Content Include="Content\Images\checkbox-nonactive.png" />
@@ -764,6 +762,7 @@
     <Content Include="Content\Images\Shop\1.jpg" />
     <Content Include="Content\Images\Shop\2.jpg" />
     <Content Include="Content\Images\Shop\4.jpg" />
+    <Content Include="Content\Images\Shop\bakalie.jpg" />
     <Content Include="Content\Images\Shop\carticon.png" />
     <Content Include="Content\Images\footer-cart.png" />
     <Content Include="Content\Images\footer-sukku.png" />
@@ -771,9 +770,12 @@
     <Content Include="Content\Images\logo-header.png" />
     <Content Include="Content\Images\Shop\basket.png" />
     <Content Include="Content\Images\Shop\carticonwhite.png" />
+    <Content Include="Content\Images\Shop\herbaty.jpg" />
     <Content Include="Content\Images\Shop\info_icon.png" />
+    <Content Include="Content\Images\Shop\inne.jpg" />
     <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
+    <Content Include="Content\Images\Shop\przyprawy.jpg" />
     <Content Include="Content\web\DaneKlientaKoszyk.html" />
     <Content Include="Content\web\OrderDetails.html" />
     <Content Include="Content\web\OrderHistory.html" />
@@ -783,7 +785,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\fonts\SegoeSemibold.ttf" />
     <Content Include="Content\fonts\FTLTLT.TTF" />
-    <Content Include="Content\fonts\FoglihtenPCS.otf" />
     <Content Include="Content\fonts\SegoeSemiboldIE.eot" />
     <Content Include="Content\fonts\lucida_console.eot" />
     <Content Include="Content\fonts\lucida_console.ttf" />
@@ -979,6 +980,10 @@
     <Content Include="ckeditor\adapters\jquery.min.js.map">
       <DependentUpon>jquery.min.js</DependentUpon>
     </Content>
+    <Content Include="Content\fonts\FoglihtenPCS-068.eot" />
+    <Content Include="Content\fonts\FoglihtenPCS-068.ttf" />
+    <Content Include="Content\fonts\FoglihtenPCS-068.woff" />
+    <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
