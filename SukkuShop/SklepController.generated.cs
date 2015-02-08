@@ -74,6 +74,12 @@ namespace SukkuShop.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult AskForProduct()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.AskForProduct);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult RedirectToLocal()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.RedirectToLocal);
@@ -98,6 +104,7 @@ namespace SukkuShop.Controllers
             public readonly string Produkty = "Produkty";
             public readonly string SzczegółyProduktu = "SzczegółyProduktu";
             public readonly string Wyszukaj = "Wyszukaj";
+            public readonly string AskForProduct = "AskForProduct";
             public readonly string Szukaj = "Szukaj";
             public readonly string RedirectToLocal = "RedirectToLocal";
         }
@@ -109,6 +116,7 @@ namespace SukkuShop.Controllers
             public const string Produkty = "Produkty";
             public const string SzczegółyProduktu = "SzczegółyProduktu";
             public const string Wyszukaj = "Wyszukaj";
+            public const string AskForProduct = "AskForProduct";
             public const string Szukaj = "Szukaj";
             public const string RedirectToLocal = "RedirectToLocal";
         }
@@ -145,6 +153,15 @@ namespace SukkuShop.Controllers
         public class ActionParamsClass_Wyszukaj
         {
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_AskForProduct s_params_AskForProduct = new ActionParamsClass_AskForProduct();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AskForProduct AskForProductParams { get { return s_params_AskForProduct; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AskForProduct
+        {
+            public readonly string id = "id";
+            public readonly string email = "email";
         }
         static readonly ActionParamsClass_RedirectToLocal s_params_RedirectToLocal = new ActionParamsClass_RedirectToLocal();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -228,6 +245,19 @@ namespace SukkuShop.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Wyszukaj);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             WyszukajOverride(callInfo, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void AskForProductOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id, string email);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult AskForProduct(int id, string email)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.AskForProduct);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "email", email);
+            AskForProductOverride(callInfo, id, email);
             return callInfo;
         }
 

@@ -1,11 +1,4 @@
-﻿function showAjaxLoader() {
-    var loaderDiv = $("#ajax-processing");
-    if (loaderDiv.length === 0) {
-        $("body").append("<div id='ajax-processing'></div>");
-        loaderDiv = $("#ajax-processing");
-    }
-    loaderDiv.show();
-}
+﻿
 
 function SendEmailSuccess() {
     $("#ajax-processing").hide();
@@ -14,7 +7,14 @@ function SendEmailSuccess() {
 function hideAjaxLoader() {
     $("#ajax-processing").hide();
 }
-
+function showAjaxLoader() {
+    var loaderDiv = $("#ajax-processing");
+    if (loaderDiv.length === 0) {
+        $("body").append("<div id='ajax-processing'></div>");
+        loaderDiv = $("#ajax-processing");
+    }
+    loaderDiv.show();
+}
 $(document).ready(function () {
 
     $("#ajax-processing").hide();

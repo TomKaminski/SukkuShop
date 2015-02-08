@@ -2,6 +2,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Infrastructure.Generic;
@@ -150,7 +151,8 @@ namespace SukkuShop.Controllers
                     QuantityInStock = product.Quantity??0,
                     Packing = product.Packing,
                     Description = product.Description,
-                    ReservedQuantity = product.ReservedQuantity
+                    ReservedQuantity = product.ReservedQuantity,
+                    IconName = product.IconName
                 },
                 SimilarProducts = similarProducts
             };
@@ -205,6 +207,27 @@ namespace SukkuShop.Controllers
             //    CurrentSearch = search
             //});
             return View("Produkty", (object) id);
+        }
+
+        public virtual JsonResult AskForProduct(int id, string email)
+        {
+            var prodDemand = new ProductDemands
+            {
+                Email = email,
+                ProductId = id
+            };
+            var plz = _dbContext.ProductDemands.FirstOrDefault(x => x.Email == email && x.ProductId == id);
+            if(plz==null)
+                _dbContext.ProductDemands.AddOrUpdate(prodDemand);
+            try
+            {
+                _dbContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
         }
 
         public virtual ActionResult Szukaj()

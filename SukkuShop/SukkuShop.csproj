@@ -353,6 +353,10 @@
     <Compile Include="Migrations\201501211212171_discount.Designer.cs">
       <DependentUpon>201501211212171_discount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502081901288_ProductDemands.cs" />
+    <Compile Include="Migrations\201502081901288_ProductDemands.Designer.cs">
+      <DependentUpon>201502081901288_ProductDemands.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -631,6 +635,14 @@
     </Content>
     <Content Include="Content\css\Error\Error.min.css">
       <DependentUpon>Error.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Content\css\jquery-ui.min.css">
+      <DependentUpon>jquery-ui.css</DependentUpon>
+    </Content>
+    <Content Include="Content\css\jquery-ui.structure.css" />
+    <Content Include="Content\css\jquery-ui.structure.min.css">
+      <DependentUpon>jquery-ui.structure.css</DependentUpon>
     </Content>
     <Content Include="Content\css\Konto\Details.css">
       <DependentUpon>Details.scss</DependentUpon>
@@ -998,9 +1010,8 @@
     <Content Include="Scripts\jquery-2.1.1.min.js.map">
       <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
     </Content>
-    <Content Include="Scripts\jquery-ui-1.9.0.min.js.map">
-      <DependentUpon>jquery-ui-1.9.0.min.js</DependentUpon>
-    </Content>
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
     <Content Include="Scripts\jquery.elevatezoom.min.js">
       <DependentUpon>jquery.elevatezoom.js</DependentUpon>
     </Content>
@@ -1011,8 +1022,6 @@
       <DependentUpon>jquery.elevatezoom.min.js</DependentUpon>
     </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui-1.9.0.js" />
-    <Content Include="Scripts\jquery-ui-1.9.0.min.js" />
     <Content Include="Scripts\jquery.elevatezoom.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
@@ -1273,6 +1282,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201501211212171_discount.resx">
       <DependentUpon>201501211212171_discount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502081901288_ProductDemands.resx">
+      <DependentUpon>201502081901288_ProductDemands.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

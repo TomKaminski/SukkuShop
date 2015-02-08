@@ -7,6 +7,19 @@
         zoomWindowFadeOut: 750
     });
 
+    $(document).bind('mousemove', function (e) {
+        $('#ajax-processing').css({
+            left: e.pageX + 20,
+            top: e.pageY
+        });
+    });
+
+    $(".ask-for-product").click(function (event) {
+        $("#dialog").dialog("open");
+        event.preventDefault();
+    });
+
+    $("span.ui-button-text").html("x");
     //Counter --
     $('#decrease_quantity').click(function() {
         var value = $('#quantity_counter').val();
@@ -25,7 +38,28 @@
             return false;
     });
 
-
+    $('#submitdialog').click(function (event) {
+        
+        event.preventDefault();
+        if (!$("input#email").hasClass("error") && $("input#email").val()!="") {
+            showAjaxLoader();
+            var url = $('#dialogform').attr("action");
+            var formData = $('#dialogform').serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData
+            }).success(function (data) {
+                hideAjaxLoader();
+                if (data == true) {
+                    $("#dialogsuccess").empty().append("<div style='color:green;text-align: center;font-family: Segoe UI'>Dziękujemy za zgłoszenie</div>");
+                } else {
+                    $("#dialogsuccess").empty().append("<div style='color:red;text-align: center;font-family: Segoe UI'>Wsytąpił błąd, spróbuj ponownie</div>");
+                }
+            });
+        }
+        
+    });
 
     //Ajax add to cart from details
     $('.add-to-cart-button').click(function () {
@@ -55,7 +89,24 @@
     });
 });
 
+$("#dialog").dialog({
+    autoOpen: false,
+    width: 600,
+    modal: true,
+    resizable: false
+});
 
+function hideAjaxLoader() {
+    $("#ajax-processing").hide();
+}
+function showAjaxLoader() {
+    var loaderDiv = $("#ajax-processing");
+    if (loaderDiv.length === 0) {
+        $("body").append("<div id='ajax-processing'></div>");
+        loaderDiv = $("#ajax-processing");
+    }
+    loaderDiv.show();
+}
 function plz(data) {
     var plza = parseFloat($("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(',', '.').replace(' ', ''));
     if (plza != data.value) {
@@ -102,3 +153,18 @@ function plz(data) {
     }
 
 };
+
+$("#dialogform").validate({
+    rules: {
+        email: {
+            required: true,
+            email: true
+        }
+    },
+    messages: {
+        email: {
+            required: "Email jest wymagany.",
+            email: "Podaj poprawny adres email."
+        }
+    }
+});

@@ -341,3 +341,25 @@ img.grayscale {
             width: 127px;
             bottom: 0; }
 
+#triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-left: 14px solid #ff6600;
+  border-bottom: 9px solid transparent;
+  float: right;
+  margin-left: 15px;
+  margin-top: 9px;
+  -moz-transform: scale(0.9999); }
+
+input.error {
+  border: 1px solid red !important; }
+
+label.error {
+  color: red;
+  font-family: SegoeLight;
+  float: left;
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: 170px; }
+

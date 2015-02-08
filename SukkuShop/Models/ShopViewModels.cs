@@ -67,6 +67,7 @@ namespace SukkuShop.Models
         public string Packing  { get; set; }
         public string Description { get; set; }
         public int ReservedQuantity { get; set; }
+        public string IconName { get; set; }
     }
 
     public class SimilarProductModel:SharedProductModels

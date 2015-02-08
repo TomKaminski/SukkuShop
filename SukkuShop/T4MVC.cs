@@ -130,36 +130,70 @@ namespace Links
         public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
         public static readonly string _references_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/_references.min.js") ? Url("_references.min.js") : Url("_references.js");
         public static readonly string AccSzczegZam_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AccSzczegZam.min.js") ? Url("AccSzczegZam.min.js") : Url("AccSzczegZam.js");
+        public static readonly string AccSzczegZam_min_js = Url("AccSzczegZam.min.js");
+        public static readonly string AccSzczegZam_min_js_map = Url("AccSzczegZam.min.js.map");
         public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
         public static readonly string angular_min_js = Url("angular.min.js");
+        public static readonly string angular_min_js_map = Url("angular.min.js.map");
         public static readonly string CartSummary_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CartSummary.min.js") ? Url("CartSummary.min.js") : Url("CartSummary.js");
+        public static readonly string CartSummary_min_js = Url("CartSummary.min.js");
+        public static readonly string CartSummary_min_js_map = Url("CartSummary.min.js.map");
         public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
+        public static readonly string jquery_2_1_1_min_js_map = Url("jquery-2.1.1.min.js.map");
         public static readonly string jquery_2_1_1_min_map = Url("jquery-2.1.1.min.map");
-        public static readonly string jquery_ui_1_9_0_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui-1.9.0.min.js") ? Url("jquery-ui-1.9.0.min.js") : Url("jquery-ui-1.9.0.js");
-        public static readonly string jquery_ui_1_9_0_min_js = Url("jquery-ui-1.9.0.min.js");
+        public static readonly string jquery_ui_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui.min.js") ? Url("jquery-ui.min.js") : Url("jquery-ui.js");
+        public static readonly string jquery_ui_min_js = Url("jquery-ui.min.js");
         public static readonly string jquery_elevatezoom_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.elevatezoom.min.js") ? Url("jquery.elevatezoom.min.js") : Url("jquery.elevatezoom.js");
+        public static readonly string jquery_elevatezoom_min_js = Url("jquery.elevatezoom.min.js");
+        public static readonly string jquery_elevatezoom_min_js_map = Url("jquery.elevatezoom.min.js.map");
         public static readonly string jquery_unobtrusive_ajax_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.unobtrusive-ajax.min.js") ? Url("jquery.unobtrusive-ajax.min.js") : Url("jquery.unobtrusive-ajax.js");
         public static readonly string jquery_unobtrusive_ajax_min_js = Url("jquery.unobtrusive-ajax.min.js");
+        public static readonly string jquery_unobtrusive_ajax_min_js_map = Url("jquery.unobtrusive-ajax.min.js.map");
         public static readonly string jquery_validate_vsdoc_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate-vsdoc.min.js") ? Url("jquery.validate-vsdoc.min.js") : Url("jquery.validate-vsdoc.js");
         public static readonly string jquery_validate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.min.js") ? Url("jquery.validate.min.js") : Url("jquery.validate.js");
         public static readonly string jquery_validate_min_js = Url("jquery.validate.min.js");
+        public static readonly string jquery_validate_min_js_map = Url("jquery.validate.min.js.map");
         public static readonly string jquery_validate_unobtrusive_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery.validate.unobtrusive.min.js") ? Url("jquery.validate.unobtrusive.min.js") : Url("jquery.validate.unobtrusive.js");
         public static readonly string jquery_validate_unobtrusive_min_js = Url("jquery.validate.unobtrusive.min.js");
+        public static readonly string jquery_validate_unobtrusive_min_js_map = Url("jquery.validate.unobtrusive.min.js.map");
         public static readonly string Konto_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Konto.min.js") ? Url("Konto.min.js") : Url("Konto.js");
+        public static readonly string Konto_min_js = Url("Konto.min.js");
+        public static readonly string Konto_min_js_map = Url("Konto.min.js.map");
         public static readonly string KontoNieaktywne_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/KontoNieaktywne.min.js") ? Url("KontoNieaktywne.min.js") : Url("KontoNieaktywne.js");
+        public static readonly string KontoNieaktywne_min_js = Url("KontoNieaktywne.min.js");
+        public static readonly string KontoNieaktywne_min_js_map = Url("KontoNieaktywne.min.js.map");
         public static readonly string Login_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Login.min.js") ? Url("Login.min.js") : Url("Login.js");
-        public static readonly string main_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/main.min.js") ? Url("main.min.js") : Url("main.js");
+        public static readonly string Login_min_js = Url("Login.min.js");
+        public static readonly string Login_min_js_map = Url("Login.min.js.map");
         public static readonly string modernizr_2_8_3_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/modernizr-2.8.3.min.js") ? Url("modernizr-2.8.3.min.js") : Url("modernizr-2.8.3.js");
+        public static readonly string modernizr_2_8_3_min_js = Url("modernizr-2.8.3.min.js");
+        public static readonly string modernizr_2_8_3_min_js_map = Url("modernizr-2.8.3.min.js.map");
         public static readonly string OrderKrok1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok1.min.js") ? Url("OrderKrok1.min.js") : Url("OrderKrok1.js");
+        public static readonly string OrderKrok1_min_js = Url("OrderKrok1.min.js");
+        public static readonly string OrderKrok1_min_js_map = Url("OrderKrok1.min.js.map");
         public static readonly string OrderKrok2_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/OrderKrok2.min.js") ? Url("OrderKrok2.min.js") : Url("OrderKrok2.js");
+        public static readonly string OrderKrok2_min_js = Url("OrderKrok2.min.js");
+        public static readonly string OrderKrok2_min_js_map = Url("OrderKrok2.min.js.map");
         public static readonly string podsumowanie_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/podsumowanie.min.js") ? Url("podsumowanie.min.js") : Url("podsumowanie.js");
+        public static readonly string podsumowanie_min_js = Url("podsumowanie.min.js");
+        public static readonly string podsumowanie_min_js_map = Url("podsumowanie.min.js.map");
         public static readonly string Register_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Register.min.js") ? Url("Register.min.js") : Url("Register.js");
+        public static readonly string Register_min_js = Url("Register.min.js");
+        public static readonly string Register_min_js_map = Url("Register.min.js.map");
         public static readonly string Resetuj_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Resetuj.min.js") ? Url("Resetuj.min.js") : Url("Resetuj.js");
+        public static readonly string Resetuj_min_js = Url("Resetuj.min.js");
+        public static readonly string Resetuj_min_js_map = Url("Resetuj.min.js.map");
         public static readonly string shopAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopAngular.min.js") ? Url("shopAngular.min.js") : Url("shopAngular.js");
+        public static readonly string shopAngular_min_js = Url("shopAngular.min.js");
+        public static readonly string shopAngular_min_js_map = Url("shopAngular.min.js.map");
         public static readonly string shopdetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/shopdetails.min.js") ? Url("shopdetails.min.js") : Url("shopdetails.js");
+        public static readonly string shopdetails_min_js = Url("shopdetails.min.js");
+        public static readonly string shopdetails_min_js_map = Url("shopdetails.min.js.map");
         public static readonly string ZapomnianeHaslo_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ZapomnianeHaslo.min.js") ? Url("ZapomnianeHaslo.min.js") : Url("ZapomnianeHaslo.js");
+        public static readonly string ZapomnianeHaslo_min_js = Url("ZapomnianeHaslo.min.js");
+        public static readonly string ZapomnianeHaslo_min_js_map = Url("ZapomnianeHaslo.min.js.map");
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -196,6 +230,12 @@ namespace Links
                 public static readonly string Home_min_css = Url("Home.min.css");
             }
         
+            public static readonly string jquery_ui_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui.min.css") ? Url("jquery-ui.min.css") : Url("jquery-ui.css");
+                 
+            public static readonly string jquery_ui_min_css = Url("jquery-ui.min.css");
+            public static readonly string jquery_ui_structure_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-ui.structure.min.css") ? Url("jquery-ui.structure.min.css") : Url("jquery-ui.structure.css");
+                 
+            public static readonly string jquery_ui_structure_min_css = Url("jquery-ui.structure.min.css");
             [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
             public static class Konto {
                 private const string URLPATH = "~/Content/css/Konto";
@@ -321,7 +361,10 @@ namespace Links
             private const string URLPATH = "~/Content/fonts";
             public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
             public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
-            public static readonly string FoglihtenPCS_otf = Url("FoglihtenPCS.otf");
+            public static readonly string FoglihtenPCS_068_eot = Url("FoglihtenPCS-068.eot");
+            public static readonly string FoglihtenPCS_068_svg = Url("FoglihtenPCS-068.svg");
+            public static readonly string FoglihtenPCS_068_ttf = Url("FoglihtenPCS-068.ttf");
+            public static readonly string FoglihtenPCS_068_woff = Url("FoglihtenPCS-068.woff");
             public static readonly string FTLTLT_TTF = Url("FTLTLT.TTF");
             public static readonly string lucida_bright_eot = Url("lucida_bright.eot");
             public static readonly string lucida_bright_svg = Url("lucida_bright.svg");
@@ -336,8 +379,13 @@ namespace Links
             public static readonly string SegoeSemiboldIE_eot = Url("SegoeSemiboldIE.eot");
             public static readonly string segoeui_ttf = Url("segoeui.ttf");
             public static readonly string segoeuibold_ttf = Url("segoeuibold.ttf");
+            public static readonly string SEGOEUIL_eot = Url("SEGOEUIL.eot");
             public static readonly string segoeuil_ttf = Url("segoeuil.ttf");
+            public static readonly string SEGOEUIL_woff = Url("SEGOEUIL.woff");
             public static readonly string segoeuisl_ttf = Url("segoeuisl.ttf");
+            public static readonly string seguibl_eot = Url("seguibl.eot");
+            public static readonly string seguibl_ttf = Url("seguibl.ttf");
+            public static readonly string seguibl_woff = Url("seguibl.woff");
             public static readonly string seguiblack_ttf = Url("seguiblack.ttf");
         }
     
@@ -375,12 +423,16 @@ namespace Links
                 public static readonly string _1_jpg = Url("1.jpg");
                 public static readonly string _2_jpg = Url("2.jpg");
                 public static readonly string _4_jpg = Url("4.jpg");
+                public static readonly string bakalie_jpg = Url("bakalie.jpg");
                 public static readonly string basket_png = Url("basket.png");
                 public static readonly string carticon_png = Url("carticon.png");
                 public static readonly string carticonwhite_png = Url("carticonwhite.png");
+                public static readonly string herbaty_jpg = Url("herbaty.jpg");
                 public static readonly string info_icon_png = Url("info_icon.png");
+                public static readonly string inne_jpg = Url("inne.jpg");
                 public static readonly string kosmetyki_jpg = Url("kosmetyki.jpg");
                 public static readonly string lupa_png = Url("lupa.png");
+                public static readonly string przyprawy_jpg = Url("przyprawy.jpg");
             }
         
         }
@@ -417,11 +469,23 @@ namespace Links
                 public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                 public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
                 public static readonly string AdminEditProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminEditProduct.min.js") ? Url("AdminEditProduct.min.js") : Url("AdminEditProduct.js");
+                public static readonly string AdminEditProduct_min_js = Url("AdminEditProduct.min.js");
+                public static readonly string AdminEditProduct_min_js_map = Url("AdminEditProduct.min.js.map");
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
+                public static readonly string AdminProduct_min_js = Url("AdminProduct.min.js");
+                public static readonly string AdminProduct_min_js_map = Url("AdminProduct.min.js.map");
                 public static readonly string ContentIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.js") ? Url("ContentIndex.min.js") : Url("ContentIndex.js");
+                public static readonly string ContentIndex_min_js = Url("ContentIndex.min.js");
+                public static readonly string ContentIndex_min_js_map = Url("ContentIndex.min.js.map");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
+                public static readonly string productListAngular_min_js = Url("productListAngular.min.js");
+                public static readonly string productListAngular_min_js_map = Url("productListAngular.min.js.map");
                 public static readonly string RegulaminEditor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegulaminEditor.min.js") ? Url("RegulaminEditor.min.js") : Url("RegulaminEditor.js");
+                public static readonly string RegulaminEditor_min_js = Url("RegulaminEditor.min.js");
+                public static readonly string RegulaminEditor_min_js_map = Url("RegulaminEditor.min.js.map");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
+                public static readonly string userListAngular_min_js = Url("userListAngular.min.js");
+                public static readonly string userListAngular_min_js_map = Url("userListAngular.min.js.map");
             }
         
         }

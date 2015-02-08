@@ -54,6 +54,15 @@ namespace SukkuShop.Models
         public int? UpperCategoryId { get; set; }
     }
 
+    [Table("ProductDemands")]
+    public sealed class ProductDemands
+    {
+        [Key]
+        public int DemandId { get; set; }
+
+        public string Email { get; set; }
+        public int ProductId { get; set; }
+    }
 
     [Table("Products")]
     public sealed class Products
@@ -184,17 +193,12 @@ namespace SukkuShop.Models
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<ShippingType> ShippingTypes { get; set; }
         public virtual DbSet<PaymentType> PaymentTypes { get; set; }
-
+        public virtual DbSet<ProductDemands> ProductDemands { get; set; } 
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
-
-        //public bool Seed(ApplicationDbContext context)
-        //{
-            
-        //}
 
         /// Context Initializer
         public class DropCreateInitializer : CreateDatabaseIfNotExists<ApplicationDbContext>
