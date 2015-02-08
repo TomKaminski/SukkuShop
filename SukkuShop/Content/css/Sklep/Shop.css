@@ -1,21 +1,17 @@
-﻿@font-face {
+@font-face {
   font-family: LucidaBright;
   src: url(../../fonts/lucida_bright.ttf); }
-
 @font-face {
   font-family: Microsoft PhagsPa;
   src: url(../../fonts/phagspa.ttf); }
-
 @font-face {
   font-family: FootlightMTLight;
   src: url(../../fonts/FTLTLT.ttf); }
-
 @font-face {
   font-family: FoglihtenPCS;
   src: url("../../fonts/FoglihtenPCS-068.eot?") format("eot"), url("../../fonts/FoglihtenPCS-068.woff") format("woff"), url("../../fonts/FoglihtenPCS-068.ttf") format("truetype"), url("../../fonts/FoglihtenPCS-068.svg#FoglihtenPCS-Petitecaps") format("svg");
   font-weight: normal;
   font-style: normal; }
-
 .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon img, .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon input, .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .info-icon img {
   position: absolute;
   margin: auto;
@@ -31,11 +27,11 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   width: 21px; }
 
 img.grayscale {
-  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
   /* Firefox 10+, Firefox on Android */
   filter: gray;
   /* IE6-9 */
-  -webkit-filter: grayscale(100%)
+  -webkit-filter: grayscale(100%);
   /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
 
 #no-products-angular {
@@ -51,11 +47,10 @@ img.grayscale {
 
 @font-face {
   font-family: LucidaConsole;
-  src: url('../../fonts/lucida_console.eot');
-  src: url('../../fonts/lucida_console.eot?#iefix') format('embedded-opentype'), url('../../fonts/lucida_console.svg#Lucida Console') format('svg'), url('../../fonts/lucida_console.woff') format('woff'), url('../../fonts/lucida_console.ttf') format('truetype');
+  src: url("../../fonts/lucida_console.eot");
+  src: url("../../fonts/lucida_console.eot?#iefix") format("embedded-opentype"), url("../../fonts/lucida_console.svg#Lucida Console") format("svg"), url("../../fonts/lucida_console.woff") format("woff"), url("../../fonts/lucida_console.ttf") format("truetype");
   font-weight: normal;
   font-style: normal; }
-
 .product-background {
   height: 752px;
   max-width: 1600px;
@@ -70,17 +65,9 @@ img.grayscale {
     padding-top: 20px;
     width: 642px;
     margin-left: 40%;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-            flex-wrap: wrap;
-    -webkit-box-pack: start;
-    -webkit-justify-content: flex-start;
-        -ms-flex-pack: start;
-            justify-content: flex-start; }
+    flex-wrap: wrap;
+    justify-content: flex-start; }
     .product-background .product-list-container .product-list-item-box {
       height: 191px;
       width: 135px;
@@ -342,4 +329,27 @@ ul {
       margin-top: 2px;
       margin-left: 12px;
       -moz-transform: scale(0.9999); }
-/*# sourceMappingURL=Shop.css.map */
+
+input[type=checkbox].css-checkbox {
+  display: none; }
+  input[type=checkbox].css-checkbox + label.css-label {
+    padding-left: 23px;
+    height: 18px;
+    line-height: 20px;
+    display: inline-block;
+    float: right;
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    font-size: 14px;
+    font-family: SegoeLight;
+    vertical-align: middle;
+    cursor: pointer;
+    margin-left: 33px;
+    margin-bottom: 10px; }
+  input[type=checkbox].css-checkbox:checked + label.css-label {
+    background-position: 0 -18px; }
+
+label.css-label {
+  background-image: url("../../Images/checkbox.png");
+  user-select: none; }
+

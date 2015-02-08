@@ -9,6 +9,7 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
         $scope.sortMethod = "Nowosc";
         $scope.currentPage = 1;
         $scope.category = category;
+        $scope.onlyavailable = false;
         if ($scope.category == "") {
             $http.get("/Sklep/GetProductByCategory").success(function(data) {
                 $scope.products = data;
@@ -53,6 +54,10 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
         $scope.productList = filterProducts();
     }
 
+    $scope.filterByCheckboxes = function () {
+        $scope.currentPage = 1;
+        $scope.productList = filterProducts();
+    };
 
      function filterProducts() {
         var filteredProducts;
@@ -60,6 +65,15 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
             filteredProducts=$filter('filter')($scope.products.productList, { Category: $scope.subCategoryList[$scope.selectedIndex] });
         else
             filteredProducts = $scope.products.productList;
+
+        if ($scope.onlyavailable) {
+            var available = [];
+            for (var j = 0; j < filteredProducts.length; j++) {
+                if (filteredProducts[j].QuantityInStock != 0)
+                    available.push(filteredProducts[j]);
+            }
+            filteredProducts = available;
+        }
         var orderBy = $filter('orderBy');
         switch($scope.sortMethod) {
             case "Nowosc":

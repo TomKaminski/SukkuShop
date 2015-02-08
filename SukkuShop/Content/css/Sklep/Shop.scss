@@ -436,6 +436,29 @@ li {
 	}
 }
 
-
+input[type=checkbox].css-checkbox {
+	display: none;
+	+ label.css-label {
+		padding-left: 23px;
+		height: 18px;
+		line-height: 20px;
+		display: inline-block;
+float:right;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		font-size: 14px;
+		font-family: SegoeLight;
+		vertical-align: middle;
+		cursor: pointer;
+        margin-left:33px;
+        margin-bottom:10px;
+	}
+	&:checked + label.css-label {
+		background-position: 0 -18px;
+	}
+}
+label.css-label {
+background-image:	url('../../Images/checkbox.png');	user-select: none;
+}
 
 

@@ -40,6 +40,9 @@
                     {{subcategory}}
                 </li>
             </ul>
+            <input type="checkbox" id="onlyavailable" class="css-checkbox" ng-model="onlyavailable" ng-change="filterByCheckboxes()" />
+            <label for="onlyavailable" class="css-label">Pokazuj tylko dostępne</label>
+            <div style="clear:both"></div>
         </div>
         <div class="product-background">
             <img id="big" ng-src="~/Content/Images/Shop/{{imgName}}.jpg" />
