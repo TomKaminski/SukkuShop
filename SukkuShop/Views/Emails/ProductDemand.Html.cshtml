@@ -1,0 +1,28 @@
+﻿@model SukkuShop.Models.ProductDemandEmail
+Content-Type: text/html; charset=utf-8
+<html>
+    <head>
+        <title>Zamówienie przyjęte!</title>
+    </head>
+    <body>
+        <div style="width: 800px">
+            <a href="@Url.Action(MVC.Home.Index())">
+                <div style="width: 132px; height: 188px; margin: auto">
+                    @Html.EmbedImage("/Content/Images/logo-header.png")
+                </div>
+            </a>
+
+            <div style="color: orange; text-align: center; font-size: 30px; font-family: Segoe UI; font-weight: bold; margin-bottom: 30px">Twój produkt jest już dostępny!</div>
+            <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">
+                Poniżej znajdują się informacje o produkcie, którego szukałeś, pamiętaj - śpiesz się - nie tylko Ty zgłosiłeś potrzebę tego produktu.
+            </div>
+            <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">Nazwa produktu: @Model.Name</div>
+            <div style="max-height: 100px; text-align: center; border-bottom: 1px solid orange">@Html.EmbedImage("~/Content/Images/Shop/" + Model.IconName + ".jpg")</div>
+                            
+            <a style="text-decoration: none" href="@Model.CallbackUrl">
+                <div style="width:500px;height:50px;border-radius: 20px;border:none; line-height:50px;background-color:orange;color:white;font-family:Segoe UI;font-weight: bold;font-size: 25px;margin:50px auto;text-align: center;text-decoration: none">Przejdź do stronu produktu</div>
+            </a>
+        </div>
+    </body>
+
+</html>

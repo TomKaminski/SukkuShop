@@ -5,7 +5,7 @@
 }
 @Styles.Render("~/Areas/Admin/Content/css/AdminProductsList.min.css")
 @Scripts.Render("~/Scripts/angular.min.js")
-@Scripts.Render("~/Areas/Admin/Scripts/productListAngular.min.js")
+@Scripts.Render("~/Areas/Admin/Scripts/productListAngular.js")
 
 
 <div ng-app="adminApp">
@@ -46,9 +46,11 @@
                 </div>
                 <table class="main-table">
                     <thead id="plz">
-                    <th>ID <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('ProductId',false,1)"><div class="icon-arrow-up up"></div></a><a ng-class="{'selected': selectedIndex==2}" href="" ng-click="orderByMhm('ProductId',true,2)"><div class="icon-arrow-down down"></div></a></th>
+                    <th class="blank"></th>
                     <th>Nazwa <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('Name',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('Name',true,4)"><div class="icon-arrow-down down"></div></a></th>
                     <th>Magazyn<a href="" ng-class="{'selected': selectedIndex==7}" ng-click="orderByMhm('Quantity',false,7)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==8}" ng-click="orderByMhm('Quantity',true,8)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Dost.</th>
+                    <th>Zarezerw.</th>
                     <th>Ilość zam. <a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('orders',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('orders',true,6)"><div class="icon-arrow-down down"></div></a></th>
                     <th class="blank">Status</th>
                     <th class="blank"></th>
@@ -57,9 +59,29 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in productsList">
-                            <td>{{item.ProductId}}.</td>
+                            <td>
+                                <span ng-click="getWarning(item.ProductId)" ng-model="item.warningcount" ng-if="item.warningcount>0" id="warninginfo" style="font-family: SegoeBlack;color:red;cursor:pointer">
+                                    <div class=" icon-exclamation pencil"></div>{{item.warningcount}}
+                                </span>
+                                <div ng-if="item.showwarning==true" class="info-box-plz">
+                                    <div ng-click="closewarningbox(item.ProductId,$event)" class="close-info-box icon-remove"></div>
+                                    <ul style="font-size:10px">
+                                        <li ng-if="item.warning.demandsCount!=0">
+                                            {{item.warning.demandsCount}} klientów prosi o produkt
+                                        </li>
+                                        <li ng-if="item.warning.lowQuantity!=null && item.Quantity-item.ReservedQuantity>0 && item.Quantity-item.ReservedQuantity<15">
+                                            {{item.warning.lowQuantity}}
+                                        </li>
+                                        <li ng-if="item.warning.noProduct!=null && item.Quantity-item.ReservedQuantity==0">
+                                            {{item.warning.noProduct}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
                             <td>{{item.Name}}</td>
-                            <td>{{item.Quantity}}({{item.ReservedQuantity}})</td>
+                            <td><input type=text class="quantitybox" value={{item.Quantity}} ng-keypress="keyPressRabat($event)" ng-change="validateInput(item.Rabat,$index)" ng-model="item.Quantity" />szt.<div class="save-text"><a ng-click="SetQuantity(item.ProductId,item.Quantity)">Zapisz</a></div></td>
+                            <td>{{item.Quantity-item.ReservedQuantity}}</td>
+                            <td>{{item.ReservedQuantity}}</td>
                             <td>{{item.orders}}</td>
                             <td class="state">
                                 <div ng-if="item.Published && !item.WrongModel">Na sklepie</div>

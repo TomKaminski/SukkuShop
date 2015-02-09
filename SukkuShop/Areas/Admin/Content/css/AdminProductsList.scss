@@ -18,14 +18,21 @@ $SeUI: Segoe UI;
 	width: 21px;
     list-style-type:none;
 }
-
+#ajax-completetick{
+    position:absolute;
+    float:left;
+    width:50px;
+    height:50px;
+    color:green;
+    font-size:50px;
+}
     #plz th a { opacity: 0.5; }
 
     #plz th a.selected { opacity: 1; }
 
 body{
     .panel-cont{
-        width:1066px;
+        width:1266px;
         margin: auto;
         .side-nav{
             float:left;
@@ -92,7 +99,7 @@ body{
              }
         }
         .main-cont{
-            width:844px;
+            width:1044px;
             float:left;
             .top-cont{
                 float:left;
@@ -107,8 +114,7 @@ body{
                 font-size:25px
             }
             .main-table{
-                width:840px;
-
+                width:1040px;
                 thead th{
                     font-family:$SeUI;
                     
@@ -132,8 +138,7 @@ body{
                 tbody td{
                     color:$black;
                     font-family:$SeUI;
-                    font-size:16px;
-                    text-transform:uppercase;
+                    font-size:14px;
                     text-align: center;
 position:relative;
                     a{
@@ -161,14 +166,14 @@ font-size:30px;
                     +.state{
                         font-size:10px;
                         color:$sukkugrey;
-
+text-transform:uppercase;
                     }
                     +.deta{
                             color:$sukkugrey;
                             font-size:10px;
                             font-weight:bold;
                             line-height:20px;
-                            cursor:pointer;
+                            cursor:pointer;text-transform:uppercase;
                     }
                     +.share{
                             color:green;
@@ -176,7 +181,7 @@ font-size:30px;
                             font-weight:bold;
                             line-height:20px;
                             cursor:pointer;
-                
+                            text-transform:uppercase;
                         }
                     +.take-out{
                             color:red;
@@ -184,7 +189,7 @@ font-size:30px;
                             font-weight:bold;
                             line-height:20px;
 cursor:pointer;
-                        
+                        text-transform:uppercase;
                     }
                 }
             }
@@ -295,6 +300,7 @@ text-align: left;
 li{padding:0;
 color: $sukkucolor;
 font-weight:bold;
+text-transform:uppercase;
 }
     }
     .close-info-box{
@@ -311,3 +317,21 @@ font-weight:bold;
 }
         
 
+input[type=text].quantitybox{
+        text-align:center;
+        width:30px;
+height:25px;
+border:1px solid black;
+font-family:SegoeLight;
+color:black;
+font-size:16px;
+    }
+.save-text{
+                            float:right;
+                            margin-right:30px;
+line-height: 30px;
+                            a{
+                                color:$sukkucolor;
+text-transform:uppercase;
+                            }
+                        }

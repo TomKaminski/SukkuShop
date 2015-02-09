@@ -8,6 +8,14 @@ namespace SukkuShop.Models
         public string CallbackUrl { get; set; }
     }
 
+    public class ProductDemandEmail : Email
+    {
+        public string To { get; set; }
+        public string CallbackUrl { get; set; }
+        public string Name { get; set; }
+        public string IconName { get; set; }
+    }
+
     public class ResetEmail : Email
     {
         public string To { get; set; }

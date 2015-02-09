@@ -70,6 +70,7 @@ namespace SukkuShop.Models
         public Products()
         {
             OrderDetails = new List<OrderDetails>();
+            ProductDemands = new List<ProductDemands>();
         }
 
         [Key]
@@ -104,6 +105,7 @@ namespace SukkuShop.Models
         public Categories Categories { get; set; }
 
         public ICollection<OrderDetails> OrderDetails { get; set; }
+        public ICollection<ProductDemands> ProductDemands { get; set; }
     }
 
     [Table("OrderDetails")]

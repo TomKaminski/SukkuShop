@@ -6,16 +6,38 @@
     }
     loaderDiv.show();
 }
+
+function showAjaxTick() {
+    var loaderDivv = jQuery("#ajax-completetick");
+    if (loaderDivv.length === 0) {
+        jQuery("body").append("<div id='ajax-completetick'>&#10004;</div>");
+        loaderDivv = jQuery("#ajax-completetick");
+    }
+    loaderDivv.show();
+}
+
+function fadeOutAjaxTick() {
+    jQuery("#ajax-completetick").stop().fadeOut(1000);
+}
+function hideAjaxTick() {
+    jQuery("#ajax-completetick").stop().hide();
+}
+
+
 function hideAjaxLoader() {
     jQuery("#ajax-processing").hide();
 }
 jQuery(document).ready(function() {
-    jQuery(document).bind('mousemove', function(e) {
-        jQuery('#ajax-processing').css({
+    jQuery(document).bind('mousemove', function (e) {
+        jQuery('#ajax-processing,#ajax-completetick').css({
             left: e.pageX + 20,
             top: e.pageY
         });
     });
+    showAjaxLoader();
+    hideAjaxLoader();
+    showAjaxTick();
+    hideAjaxTick();
 });
 
 var adminApp = angular.module("adminApp", []);
@@ -24,7 +46,8 @@ var itemsPerPage = 12;
 adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
 
-    $scope.init = function (name,id) {
+    $scope.init = function (name, id) {
+        $scope.Object = Object;
         $scope.selectedIndex = 1;
         $scope.selectedCategory = parseInt(id);
         $scope.currentPage = 1;
@@ -38,6 +61,10 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
             $scope.productsTotal = data.products;
             $scope.productsOperative = $scope.productsTotal;
             $scope.categories = data.categories;
+
+            for (var i = 0; i < $scope.productsTotal.length; i++) {
+                $scope.warningCounter($scope.productsTotal[i].ProductId);
+            }
             $scope.productsList = filterProducts($scope.productsTotal);
         });
     };
@@ -47,6 +74,48 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
         $scope.productsList = filterProducts($scope.productsTotal);
 
     };
+
+    $scope.SetQuantity = function (id, quantity) {
+
+        showAjaxLoader();
+        $http.post('/Admin/Produkty/SetQuantity', { id: id, quantity: quantity }).
+            success(function (data) {
+                if (data == true) {
+                    var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
+                    result[0].Quantity = quantity;
+                    $scope.warningCounter(id);
+                }
+                hideAjaxLoader();
+                showAjaxTick();
+                fadeOutAjaxTick();
+                
+                $scope.productsList = filterProducts($scope.productsTotal);
+            }).
+            error(function (xhr, status, error) {
+                alert(error);
+                console.log(xhr.responseText);
+            });
+    }
+
+    $scope.warningCounter = function(id) {
+        var counter = 0;
+        var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
+        if (result[0].warning.demandsCount > 0)
+            counter++;
+        if (result[0].warning.lowQuantity != null && result[0].Quantity - result[0].ReservedQuantity < 15 && result[0].Quantity - result[0].ReservedQuantity > 0)
+            counter++;
+        if (result[0].warning.noProduct != null && result[0].Quantity-result[0].ReservedQuantity==0)
+            counter++;
+        result[0].warningcount = counter;
+    }
+
+    $scope.keyPressRabat = function ($event) {
+        if ($event.which != 8 && $event.which != 0 && ($event.which < 48 || $event.which > 57)) {
+            $event.preventDefault();
+            return false;
+        }
+        return true;
+    }
 
     $scope.orderByMhm = function (mhm, reverse, index) {
         $scope.selectedIndex = index;
@@ -106,12 +175,38 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
         }
     }
 
+    $scope.getWarning = function (id) {
+        if ($scope.infoboxActive == false) {
+            $scope.infoboxActive = true;
+            var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
+            if (result.length == 0) {
+            } else if (result.length == 1) {
+                result[0].showwarning = true;
+            } else {
+                // multiple items found
+            }
+        }
+    }
+
     $scope.closeinfobox = function (id, $event) {
         $scope.infoboxActive = false;
         var result = $.grep($scope.productsTotal, function (plz) { return plz.ProductId == id; });
         if (result.length == 0) {
         } else if (result.length == 1) {
             result[0].showinfo = false;
+        } else {
+            // multiple items found
+        }
+        if ($event)
+            $event.stopPropagation();
+    }
+
+    $scope.closewarningbox = function (id, $event) {
+        $scope.infoboxActive = false;
+        var result = $.grep($scope.productsTotal, function (plz) { return plz.ProductId == id; });
+        if (result.length == 0) {
+        } else if (result.length == 1) {
+            result[0].showwarning = false;
         } else {
             // multiple items found
         }
@@ -201,8 +296,10 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
          var products = [];
          if ($scope.selectedCategory != 0) {
              for (var i = 0; i < tab.length; i++) {
-                 if (tab[i].CategoryId == $scope.selectedCategory || tab[i].upper == $scope.selectedCategory)
+                 if (tab[i].CategoryId == $scope.selectedCategory || tab[i].upper == $scope.selectedCategory) {
                      productsBeforeFilter.push(tab[i]);
+                 }
+                     
              }
          } else {
              productsBeforeFilter = tab;

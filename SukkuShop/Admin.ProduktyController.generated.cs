@@ -62,6 +62,12 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult SetQuantity()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetQuantity);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.ActionResult PublishProduct()
         {
             return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.PublishProduct);
@@ -107,6 +113,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Lista = "Lista";
+            public readonly string SetQuantity = "SetQuantity";
             public readonly string GetProductList = "GetProductList";
             public readonly string PublishProduct = "PublishProduct";
             public readonly string UnpublishProduct = "UnpublishProduct";
@@ -121,6 +128,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNameConstants
         {
             public const string Lista = "Lista";
+            public const string SetQuantity = "SetQuantity";
             public const string GetProductList = "GetProductList";
             public const string PublishProduct = "PublishProduct";
             public const string UnpublishProduct = "UnpublishProduct";
@@ -140,6 +148,15 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string name = "name";
             public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_SetQuantity s_params_SetQuantity = new ActionParamsClass_SetQuantity();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SetQuantity SetQuantityParams { get { return s_params_SetQuantity; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SetQuantity
+        {
+            public readonly string id = "id";
+            public readonly string quantity = "quantity";
         }
         static readonly ActionParamsClass_PublishProduct s_params_PublishProduct = new ActionParamsClass_PublishProduct();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -227,6 +244,19 @@ namespace SukkuShop.Areas.Admin.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ListaOverride(callInfo, name, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SetQuantityOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id, int quantity);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult SetQuantity(int id, int quantity)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetQuantity);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "quantity", quantity);
+            SetQuantityOverride(callInfo, id, quantity);
             return callInfo;
         }
 

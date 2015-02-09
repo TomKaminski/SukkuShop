@@ -357,6 +357,10 @@
     <Compile Include="Migrations\201502081901288_ProductDemands.Designer.cs">
       <DependentUpon>201502081901288_ProductDemands.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502091802344_productdemandsLinked.cs" />
+    <Compile Include="Migrations\201502091802344_productdemandsLinked.Designer.cs">
+      <DependentUpon>201502091802344_productdemandsLinked.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -1207,6 +1211,9 @@
     <Content Include="Views\Emails\Change.Html.cshtml" />
     <Content Include="Views\Emails\Change.Text.cshtml" />
     <Content Include="Views\Konto\ChangeEmailSuccess.cshtml" />
+    <Content Include="Views\Emails\ProductDemand.cshtml" />
+    <Content Include="Views\Emails\ProductDemand.Html.cshtml" />
+    <Content Include="Views\Emails\ProductDemand.Text.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1285,6 +1292,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502081901288_ProductDemands.resx">
       <DependentUpon>201502081901288_ProductDemands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502091802344_productdemandsLinked.resx">
+      <DependentUpon>201502091802344_productdemandsLinked.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

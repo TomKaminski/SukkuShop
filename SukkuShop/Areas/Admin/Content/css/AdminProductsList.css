@@ -4,6 +4,14 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   width: 21px;
   list-style-type: none; }
 
+#ajax-completetick {
+  position: absolute;
+  float: left;
+  width: 50px;
+  height: 50px;
+  color: green;
+  font-size: 50px; }
+
 #plz th a {
   opacity: 0.5; }
 
@@ -11,7 +19,7 @@ ul.shop-paginator li, ul.shop-paginator li.inner-paginator {
   opacity: 1; }
 
 body .panel-cont {
-  width: 1066px;
+  width: 1266px;
   margin: auto; }
   body .panel-cont .side-nav {
     float: left;
@@ -68,7 +76,7 @@ body .panel-cont {
         margin-top: 10px;
         cursor: pointer; }
   body .panel-cont .main-cont {
-    width: 844px;
+    width: 1044px;
     float: left; }
     body .panel-cont .main-cont .top-cont {
       float: left;
@@ -81,7 +89,7 @@ body .panel-cont {
       color: #458B00;
       font-size: 25px; }
     body .panel-cont .main-cont .main-table {
-      width: 840px; }
+      width: 1040px; }
       body .panel-cont .main-cont .main-table thead th {
         font-family: Segoe UI;
         color: #f89b1d;
@@ -100,8 +108,7 @@ body .panel-cont {
       body .panel-cont .main-cont .main-table tbody td {
         color: black;
         font-family: Segoe UI;
-        font-size: 16px;
-        text-transform: uppercase;
+        font-size: 14px;
         text-align: center;
         position: relative; }
         body .panel-cont .main-cont .main-table tbody td a {
@@ -123,25 +130,29 @@ body .panel-cont {
           font-size: 30px; }
         body .panel-cont .main-cont .main-table tbody td + .state {
           font-size: 10px;
-          color: #8d8d8d; }
+          color: #8d8d8d;
+          text-transform: uppercase; }
         body .panel-cont .main-cont .main-table tbody td + .deta {
           color: #8d8d8d;
           font-size: 10px;
           font-weight: bold;
           line-height: 20px;
-          cursor: pointer; }
+          cursor: pointer;
+          text-transform: uppercase; }
         body .panel-cont .main-cont .main-table tbody td + .share {
           color: green;
           font-size: 10px;
           font-weight: bold;
           line-height: 20px;
-          cursor: pointer; }
+          cursor: pointer;
+          text-transform: uppercase; }
         body .panel-cont .main-cont .main-table tbody td + .take-out {
           color: red;
           font-size: 10px;
           font-weight: bold;
           line-height: 20px;
-          cursor: pointer; }
+          cursor: pointer;
+          text-transform: uppercase; }
 
 input[type=checkbox].css-checkbox {
   display: none; }
@@ -233,7 +244,8 @@ ul.shop-paginator li:hover {
     .info-box-plz ul li {
       padding: 0;
       color: #f89b1d;
-      font-weight: bold; }
+      font-weight: bold;
+      text-transform: uppercase; }
   .info-box-plz .close-info-box {
     color: black;
     font-size: 20px;
@@ -243,4 +255,21 @@ ul.shop-paginator li:hover {
     .info-box-plz .close-info-box:hover {
       opacity: 1;
       cursor: pointer; }
+
+input[type=text].quantitybox {
+  text-align: center;
+  width: 30px;
+  height: 25px;
+  border: 1px solid black;
+  font-family: SegoeLight;
+  color: black;
+  font-size: 16px; }
+
+.save-text {
+  float: right;
+  margin-right: 30px;
+  line-height: 30px; }
+  .save-text a {
+    color: #f89b1d;
+    text-transform: uppercase; }
 

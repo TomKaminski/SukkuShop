@@ -49,6 +49,9 @@ namespace T4MVC
                 public readonly string OrderSum = "OrderSum";
                 public readonly string OrderSum_Html = "OrderSum.Html";
                 public readonly string OrderSum_Text = "OrderSum.Text";
+                public readonly string ProductDemand = "ProductDemand";
+                public readonly string ProductDemand_Html = "ProductDemand.Html";
+                public readonly string ProductDemand_Text = "ProductDemand.Text";
                 public readonly string Reset = "Reset";
                 public readonly string Reset_Html = "Reset.Html";
                 public readonly string Reset_Text = "Reset.Text";
@@ -67,6 +70,9 @@ namespace T4MVC
             public readonly string OrderSum = "~/Views/Emails/OrderSum.cshtml";
             public readonly string OrderSum_Html = "~/Views/Emails/OrderSum.Html.cshtml";
             public readonly string OrderSum_Text = "~/Views/Emails/OrderSum.Text.cshtml";
+            public readonly string ProductDemand = "~/Views/Emails/ProductDemand.cshtml";
+            public readonly string ProductDemand_Html = "~/Views/Emails/ProductDemand.Html.cshtml";
+            public readonly string ProductDemand_Text = "~/Views/Emails/ProductDemand.Text.cshtml";
             public readonly string Reset = "~/Views/Emails/Reset.cshtml";
             public readonly string Reset_Html = "~/Views/Emails/Reset.Html.cshtml";
             public readonly string Reset_Text = "~/Views/Emails/Reset.Text.cshtml";

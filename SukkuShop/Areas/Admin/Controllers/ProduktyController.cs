@@ -9,6 +9,7 @@ using ImageResizer;
 using SukkuShop.Areas.Admin.Models;
 using SukkuShop.Models;
 
+
 #endregion
 
 namespace SukkuShop.Areas.Admin.Controllers
@@ -29,6 +30,36 @@ namespace SukkuShop.Areas.Admin.Controllers
             ViewBag.SelectedOpt = 1;
             ViewBag.Name = name;
             return View(id);
+        }
+
+        public virtual JsonResult SetQuantity(int id, int quantity)
+        {
+            var prod = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
+            var emails = _dbContext.ProductDemands.Where(x => x.ProductId == id);
+            if (prod != null)
+            {
+                var oldQ = prod.Quantity;
+                prod.Quantity = quantity;
+                _dbContext.Products.AddOrUpdate(prod);
+                if (oldQ < quantity)
+                {
+                    foreach (var item in emails)
+                    {
+                        var email = new ProductDemandEmail
+                        {
+                            CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(prod.ProductId)),
+                            IconName = prod.IconName,
+                            Name = prod.Name,
+                            To = item.Email
+                        };
+                        email.Send();
+                    }
+                    _dbContext.ProductDemands.RemoveRange(emails);
+                }
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
         //Angular GET products
@@ -55,7 +86,15 @@ namespace SukkuShop.Areas.Admin.Controllers
                     packing = x.Packing == null ? "Brak metody pakowania" : "",
                     opis = x.Description == null ? "Brak opisu" : "",
                     img = x.ImageName == null ? "Brak zdjęcia" : ""
-                }
+                },
+                warning = new
+                {
+                    lowQuantity = "Zaczyna brakować produktu",
+                    noProduct = "Zabrakło produktu",
+                    demandsCount = x.ProductDemands.Count()
+                },
+                warningcount = 0,
+                showwarning=false
             });
             var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
             {
@@ -372,7 +411,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var category = model.Category == 0 ? null : model.Category;
-                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(",", "."));
+                var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
                 if (price == null || category == null || model.Packing == null)
                 {
                     if (model.PublishAfterCreate)
@@ -393,6 +432,20 @@ namespace SukkuShop.Areas.Admin.Controllers
                 product.CategoryId = category;
                 product.Description = model.Description;
                 product.Name = model.Title;
+                if (product.Quantity < model.Quantity)
+                {
+                    foreach (var email in product.ProductDemands.Select(item => new ProductDemandEmail
+                    {
+                        CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(product.ProductId)),
+                        IconName = product.IconName,
+                        Name = product.Name,
+                        To = item.Email
+                    }))
+                    {
+                        email.Send();
+                    }
+                    _dbContext.ProductDemands.RemoveRange(product.ProductDemands);
+                }
                 product.Quantity = model.Quantity;
                 product.Packing = model.Packing;
                 product.Published = model.PublishAfterCreate;
