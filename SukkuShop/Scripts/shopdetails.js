@@ -7,7 +7,7 @@
         zoomWindowFadeOut: 750
     });
 
-    $(document).bind('mousemove', function (e) {
+    $("#dialog").bind('mousemove', function (e) {
         $('#ajax-processing').css({
             left: e.pageX + 20,
             top: e.pageY
