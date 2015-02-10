@@ -10,29 +10,42 @@ $Calibri: Calibri;
     text-align: center;
 	margin-bottom: 10px;
 }
+.container{
+width:1066px;
+margin:auto;
+}
 .order-submitted-text1 {
-	font-size: 42px;
-	color: $black;
-	font-family: $Calibri;
-	@extend %text-extend;
+	font-size: 30px;
+color: #000;
+font-family: Segoe UI;
+@extend %text-extend;
     .order-submitted-number {
-	    font-size: 60px;
+	    font-size: 55px;
 	    font-family: $SeUI;
 	    color: $sukkucolor;
 	    @extend %text-extend;
     }
 }
+.order-submitted-title {
+font-size: 40px;
+color: #000;
+font-family: SegoeBlack;
+margin: 0 0 30px 0;
+}
 .order-submitted-text2 {
-	font-size: 42px;
-	color: $sukkucolor;
-	font-family: $Calibri;
+	font-size: 20px;
+color: #f89b1d;
+font-family: Segoe UI;
+font-weight: bold;
 	@extend %text-extend;
 }
 .notfound-backlink {
 	@extend %text-extend;
 	a {
 		text-decoration: none;
-		color: $sukkucolor;
-		font-family: $SeUI;
+color: #ff730c;
+font-family: Segoe UI;
+font-weight: bold;
+font-size: 20px;
 	}
 }

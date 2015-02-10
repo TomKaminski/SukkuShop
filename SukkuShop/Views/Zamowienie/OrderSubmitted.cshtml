@@ -2,14 +2,17 @@
 @{
     ViewBag.Title = "Zamówienie przyjęte";
 }
-<div class="order-submitted-text1">
-    Zamówienie o numerze <span class="order-submitted-number">@Model</span> zostało przyjęte!
+<div class="container">
+    <div class="order-submitted-title">
+        Dziękujemy za dokonanie zakupów w naszym sklepie!
+    </div>
+    <div class="order-submitted-text1">
+        Twoje zamówienie zostało przyjęte do realizacji, nadano mu numer <span class="order-submitted-number">@Model</span>
+    </div>
+    <div class="order-submitted-text2">
+        Na adres email podany podczas składania zamówienia została wysłana wiadomość z dokładnym zestawieniem Twoich zakupów.
+        Dalsze informacje o postępie realizacji Twojego zamówienia otrzymasz drogą mailową, oraz w odpowiedniej sekcji panelu klienta (jeżeli złożyłeś zamówienie jako zarejestrowany klient).
+    </div>
+    <div class="notfound-backlink"><a href="@Url.Action(MVC.Home.Index())">&laquo Wróc do sklepu &raquo</a></div>
 </div>
-<div class="order-submitted-text2">
-    Postępy realizacji zamówienia otrzymasz drogą mailową <br />oraz w panelu klienta.
-</div>
-<div class="notfound-backlink"><a href="@Url.Action(MVC.Home.Index())">&laquo Wróc do sklepu &raquo</a></div>
-
-
 @Styles.Render("~/Content/css/Zamowienie/OrderSubmitted.min.css")
-

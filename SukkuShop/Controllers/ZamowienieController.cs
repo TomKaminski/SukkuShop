@@ -335,7 +335,8 @@ namespace SukkuShop.Controllers
         [HttpPost]
         public virtual async Task<ActionResult> Podsumowanie(OrderViewModelsSummary model, Cart shoppingCart)
         {
-
+            if (!shoppingCart.Lines.Any())
+                return RedirectToAction(MVC.Koszyk.Index());
 
             var user = await _userManager.FindByIdAsync(User.Identity.GetUserId<int>());
             int? userId = null;
@@ -347,7 +348,7 @@ namespace SukkuShop.Controllers
             }
                 
             var orders = new Orders();
-            var listakurwa = new List<OrderDetails>();
+            var orderdetailslist = new List<OrderDetails>();
             decimal hehe = 0;
             decimal discountVal = 0;
             var paymentPrice = model.OrderPayment;
@@ -372,7 +373,7 @@ namespace SukkuShop.Controllers
                                     SubTotalPrice = item.TotalValue
                                 };
                                 _dbContext.OrderDetails.Add(orderD);
-                                listakurwa.Add(orderD);
+                                orderdetailslist.Add(orderD);
                                 hehe += item.TotalValue;
                                 product.ReservedQuantity += item.Quantity;
                                 product.OrdersCount++;
@@ -434,7 +435,7 @@ namespace SukkuShop.Controllers
                         Street = model.UserAddressModel.Ulica,
                         Number = model.UserAddressModel.Numer,
                         PostalCode = model.UserAddressModel.KodPocztowy,
-                        OrderDetails = listakurwa,
+                        OrderDetails = orderdetailslist,
                         UserId = userId,
                         OrderInfo = "Przyjęte",
                         UserHints = model.UserHints,
@@ -482,7 +483,7 @@ namespace SukkuShop.Controllers
                     OrderViewItemsTotal = new OrderViewItemsTotal
                     {
                         TotalValue = hehe,
-                        OrderProductList = listakurwa.Select(m => new OrderItemSummary
+                        OrderProductList = orderdetailslist.Select(m => new OrderItemSummary
                         {
                             Image = m.Products.IconName,
                             Name = m.Products.Name,
