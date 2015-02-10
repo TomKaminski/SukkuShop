@@ -60,13 +60,6 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.SetDiscount);
         }
-        [NonAction]
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Threading.Tasks.Task<System.Web.Mvc.ActionResult> Szczegóły()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Szczegóły);
-            return System.Threading.Tasks.Task.FromResult(callInfo as ActionResult);
-        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public KlienciController Actions { get { return MVC.Admin.Klienci; } }
@@ -127,8 +120,10 @@ namespace SukkuShop.Areas.Admin.Controllers
             public class _ViewNamesClass
             {
                 public readonly string Lista = "Lista";
+                public readonly string Szczegóły = "Szczegóły";
             }
             public readonly string Lista = "~/Areas/Admin/Views/Klienci/Lista.cshtml";
+            public readonly string Szczegóły = "~/Areas/Admin/Views/Klienci/Szczegóły.cshtml";
         }
     }
 

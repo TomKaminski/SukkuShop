@@ -22,7 +22,7 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in usersList">
-                        <td>{{item.Id}}<div class="icon-eye-open icon"></div></td>
+                        <td>{{item.Id}}<a ng-href="@Url.Action("Szczegóły")/{{item.Id}}"><div class="icon-eye-open icon"></div></a></td>
                         <td>{{item.Email}}</td>
                         <td>{{item.Orders}}</td>
                         <td><input type=text class="rabat" value={{item.Rabat}} ng-keypress="keyPressRabat($event)" ng-change="validateInput(item.Rabat,$index)" ng-model="item.Rabat" /> % <div class="save-text"><a ng-click="setDiscount(item.Id,item.Rabat)">Zapisz</a></div></td>

@@ -1,0 +1,71 @@
+﻿@model SukkuShop.Areas.Admin.Models.UserDetailsModel
+
+@{
+    ViewBag.Title = "Szczegóły";
+}
+
+<div class="main-container">
+    <div class="title">Informacje o kliencie</div>
+    <div class="account-type">Rodzaj konta: @(Model.KontoFirmowe ? "Konto firmowe" : "Konto prywatne")</div>
+    <div class="dane-adresowe-title">Dane adresowe:</div>
+    @if (Model.KontoFirmowe)
+    {
+
+        <div class="dane-adresowe-data"><strong>Nazwa firmy</strong> @Model.NameTitle</div>
+        <div class="dane-adresowe-data"><strong>NIP:</strong> @Model.NipUsername</div>
+    }
+    else
+    {
+        <div class="dane-adresowe-data"><strong>Imię:</strong> @Model.NameTitle</div>
+        <div class="dane-adresowe-data"><strong>Nazwisko:</strong> @Model.NipUsername</div>
+    }
+    <div class="dane-adresowe-data"><strong>Miasto:</strong> @Model.Miasto</div>
+    <div class="dane-adresowe-data"><strong>Ulica:</strong> @Model.Ulica</div>
+    <div class="dane-adresowe-data"><strong>Numer:</strong> @Model.Numer</div>
+    <div class="dane-adresowe-data"><strong>Kod pocztowy:</strong> @Model.KodPocztowy</div>
+    <div class="dane-adresowe-data"><strong>Telefon:</strong> @Model.Telefon</div>
+
+    @using (Html.BeginForm(MVC.Admin.Klienci.SetDiscount(),FormMethod.Post,new{id="setDiscountForm"}))
+    {
+        <div class="rabat"><div style="float:left">Wysokość rabatu: @Html.TextBoxFor(m => m.Rabat)% </div><a href="" class="change-rabat"><div style="float:left;margin-left:20px">ZMIEŃ </div><div id="triangle-right"></div></a><div style="clear:both;float:none"></div></div>
+        @Html.HiddenFor(m=>m.Id)
+    }
+
+    <div class="dane-adresowe-title" style="clear:both;margin-top:30px">Zamówienia klienta: @Model.OrdersCount</div>
+    <table class="history-table" cellspacing="0" style="clear:both">
+        <thead>
+            <tr>
+                <th>nr zamówienia</th>
+                <th>data</th>
+                <th>kwota</th>
+                <th></th>
+                <th>stan realizacji</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.AccountOrderItemViewModel)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.OrderDate</td>
+                    <td>@item.TotalPrice PLN</td>
+                    <td><a href="#" class="see">podgląd zamówienia</a></td>
+                    <td>
+                        @if (item.ActualState == "Anulowano")
+                        {
+                            <span style="color: red">@item.ActualState</span>
+                        }
+                        else
+                        {
+                            @item.ActualState
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
+@Styles.Render("~/Areas/Admin/Content/css/UserDetails.min.css")
+@Scripts.Render("~/Areas/Admin/Scripts/userDetails.js")

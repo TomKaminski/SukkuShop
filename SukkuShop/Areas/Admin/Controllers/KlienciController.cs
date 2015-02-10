@@ -54,27 +54,38 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(false, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual async Task<ActionResult> Szczegóły(int id)
+        public virtual async Task<ActionResult> Szczegóły(int id=1)
         {
             var user = await _userManager.FindByIdAsync(id);
 
-            var model = new UserDetailsModel
-            {
-                Ulica = user.Street,
-                KodPocztowy = user.PostalCode,
-                Telefon = user.PhoneNumber,
-                Numer = user.Number,
-                Miasto = user.City,
-                NameTitle = user.KontoFirmowe?user.NazwaFirmy:user.Name,
-                NipUsername = user.KontoFirmowe?user.AccNip:user.LastName,
-                Rabat = user.Rabat,
-                AccountOrderItemViewModel = _dbContext.Orders.Where(m => m.UserId == user.Id).Select(x => new AccountOrderItemViewModel
+            var userOrders = _dbContext.Orders.Where(m => m.UserId == user.Id).Select(x => new AccountOrderItemModel
             {
                 ActualState = x.OrderInfo,
                 Id = x.OrderId,
-                OrderDate = x.OrderDate.ToShortDateString(),
+                OrderDate = x.OrderDate,
                 TotalPrice = x.TotalPrice
-            }).ToList()
+            }).ToList();
+
+            var model = new UserDetailsModel
+            {
+                Ulica = user.Street??"Nie podano",
+                KodPocztowy = user.PostalCode ?? "Nie podano",
+                Telefon = user.PhoneNumber ?? "Nie podano",
+                Numer = user.Number ?? "Nie podano",
+                Miasto = user.City ?? "Nie podano",
+                NameTitle = (user.KontoFirmowe ? user.NazwaFirmy : user.Name) ?? "Nie podano",
+                NipUsername = (user.KontoFirmowe ? user.AccNip : user.LastName) ?? "Nie podano",
+                Rabat = user.Rabat,
+                KontoFirmowe = user.KontoFirmowe,
+                OrdersCount = userOrders.Count,
+                Id = user.Id,
+                AccountOrderItemViewModel = userOrders.Select(itemModel => new AccountOrderItemViewModel
+                {
+                    ActualState = itemModel.ActualState,
+                    Id = itemModel.Id,
+                    OrderDate = itemModel.OrderDate.ToShortDateString(),
+                    TotalPrice = itemModel.TotalPrice
+                }).ToList()
             };
             return View(model);
         }

@@ -152,3 +152,4 @@
 /// <reference path="../areas/admin/scripts/regulamineditor.js" />
 /// <reference path="../areas/admin/scripts/contentindex.js" />
 /// <reference path="jquery-ui.js" />
+/// <reference path="../areas/admin/scripts/userdetails.js" />
