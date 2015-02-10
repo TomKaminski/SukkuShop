@@ -83,6 +83,7 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
                 if (data == true) {
                     var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
                     result[0].Quantity = quantity;
+                    result[0].warning.demandsCount = 0;
                     $scope.warningCounter(id);
                 }
                 hideAjaxLoader();
