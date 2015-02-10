@@ -47,7 +47,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     {
                         var email = new ProductDemandEmail
                         {
-                            CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(prod.ProductId)),
+                            CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(prod.ProductId), Request.Url.Scheme),
                             IconName = prod.IconName,
                             Name = prod.Name,
                             To = item.Email
@@ -434,17 +434,19 @@ namespace SukkuShop.Areas.Admin.Controllers
                 product.Name = model.Title;
                 if (product.Quantity < model.Quantity)
                 {
-                    foreach (var email in product.ProductDemands.Select(item => new ProductDemandEmail
+                    var emails = _dbContext.ProductDemands.Where(x => x.ProductId == product.ProductId);
+                    foreach (var item in emails)
                     {
-                        CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(product.ProductId)),
-                        IconName = product.IconName,
-                        Name = product.Name,
-                        To = item.Email
-                    }))
-                    {
+                        var email = new ProductDemandEmail
+                        {
+                            CallbackUrl = Url.Action(MVC.Sklep.SzczegółyProduktu(product.ProductId), Request.Url.Scheme),
+                            IconName = product.IconName,
+                            Name = product.Name,
+                            To = item.Email
+                        };
                         email.Send();
                     }
-                    _dbContext.ProductDemands.RemoveRange(product.ProductDemands);
+                    _dbContext.ProductDemands.RemoveRange(emails);
                 }
                 product.Quantity = model.Quantity;
                 product.Packing = model.Packing;
