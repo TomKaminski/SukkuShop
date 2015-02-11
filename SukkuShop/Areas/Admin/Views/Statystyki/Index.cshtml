@@ -1,18 +1,18 @@
 ﻿@{
     ViewBag.Title = "Index";
 }
-<div style="width:1066px;margin:0 auto 20px;">
-    <div style="text-align: center;color:#f89b1d;font-family:Segoe UI; font-weight: bold;margin-bottom: 10px;font-size: 24px;">Zamówienia</div>
+<div class="cont">
+    <div class="order-cont">Zamówienia</div>
     <canvas id="ordersChart" width="800" height="400" style="margin:auto;display: block;"></canvas>
 </div>
 
 
-<div style="width:1066px;margin:0 auto 20px;">
-    <div id="titlepie" style="text-align: center;color:#f89b1d;font-family:Segoe UI; font-weight: bold;margin-bottom: 10px;font-size: 24px;">Top 10 zamawianych produktów</div>
-    <ul style="display: block;list-style-type: none;text-align: center">
-        <li id="left" style="display:inline-block;text-align: center;color:#f89b1d;font-family:Segoe UI; font-weight: bold;margin-bottom: 10px"></li>
-        <li id="current" style="display:inline-block;text-align: center;color:black;font-family:Segoe UI; font-weight: bold;margin-bottom: 10px"></li>
-        <li id="right" style="display:inline-block;text-align: center;color:#f89b1d;font-family:Segoe UI; font-weight: bold;margin-bottom: 10px"></li>
+<div class="cont">
+    <div id="titlepie">Top 10 zamawianych produktów</div>
+    <ul class="month-list">
+        <li id="left"></li>
+        <li id="current"></li>
+        <li id="right"></li>
     </ul>
     
     <div id="canvas-wrapper">
@@ -20,6 +20,6 @@
     </div>
 </div>
 
-
+@Styles.Render("~/Areas/Admin/Content/css/Statistics.css")
 @Scripts.Render("~/Scripts/Chart.js")
 @Scripts.Render("~/Areas/Admin/Scripts/StatisticsAdmin.js")

@@ -441,6 +441,12 @@
     <Content Include="Areas\Admin\Content\css\reset.min.css">
       <DependentUpon>reset.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\Statistics.css">
+      <DependentUpon>Statistics.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\Statistics.min.css">
+      <DependentUpon>Statistics.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\UserDetails.css">
       <DependentUpon>UserDetails.scss</DependentUpon>
     </Content>
@@ -1017,6 +1023,10 @@
       <DependentUpon>UserDetails.css</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Statystyki\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\css\Statistics.scss" />
+    <Content Include="Areas\Admin\Content\css\Statistics.css.map">
+      <DependentUpon>Statistics.css</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
