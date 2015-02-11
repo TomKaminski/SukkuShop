@@ -1,0 +1,56 @@
+﻿$sukkucolor: #f89b1d;
+//colors
+$orangeplz: #ff730c;
+$greyplz: #bababa;
+
+//fonts
+$font_0: Segoe UI;
+$font_1: SegoeLight;
+$font_2: SegoeBold;
+
+div.cont{
+    width:1066px;
+    margin:0 auto 20px;
+
+    .order-cont{
+        text-align: center;
+        color:$sukkucolor;
+        font-family:$font_0;
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 24px;
+         ul.month-list{
+            display: block;
+            list-style-type: none;
+            text-align: center;
+
+            #left, #right{
+                display:inline-block;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color:$sukkucolor;
+                font-family:$font_0; 
+            }
+            #current{
+                display:inline-block;
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 10px;
+                color:black;
+                font-family:$font_0;
+            }
+
+        }
+    }
+    #titlepie{
+        text-align: center;
+        color:$sukkucolor;
+        font-family:$font_0; 
+        font-weight: bold;
+        margin-bottom: 10px;
+        font-size: 24px;
+
+       
+    }
+}
