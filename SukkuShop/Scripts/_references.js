@@ -153,3 +153,5 @@
 /// <reference path="../areas/admin/scripts/contentindex.js" />
 /// <reference path="jquery-ui.js" />
 /// <reference path="../areas/admin/scripts/userdetails.js" />
+/// <reference path="chart.min.js" />
+/// <reference path="../areas/admin/scripts/statisticsadmin.js" />

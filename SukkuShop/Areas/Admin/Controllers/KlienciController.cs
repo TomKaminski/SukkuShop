@@ -56,6 +56,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual async Task<ActionResult> Szczegóły(int id=1)
         {
+            ViewBag.SelectedOpt = 3;
             var user = await _userManager.FindByIdAsync(id);
 
             var userOrders = _dbContext.Orders.Where(m => m.UserId == user.Id).Select(x => new AccountOrderItemModel

@@ -216,6 +216,9 @@
     <Compile Include="Admin.SharedController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.StatystykiController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -228,6 +231,7 @@
     <Compile Include="Areas\Admin\Controllers\ProduktyController.cs" />
     <Compile Include="Areas\Admin\Controllers\RangiController.cs" />
     <Compile Include="Areas\Admin\Controllers\KlienciController.cs" />
+    <Compile Include="Areas\Admin\Controllers\StatystykiController.cs" />
     <Compile Include="Areas\Admin\Models\ContentModels.cs" />
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
     <Compile Include="Areas\Admin\Models\UserDetails.cs" />
@@ -466,6 +470,7 @@
     <Content Include="Areas\Admin\Scripts\RegulaminEditor.min.js">
       <DependentUpon>RegulaminEditor.js</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Scripts\StatisticsAdmin.js" />
     <Content Include="Areas\Admin\Scripts\userDetails.js" />
     <Content Include="Areas\Admin\Scripts\userListAngular.js" />
     <Content Include="Areas\Admin\Scripts\userListAngular.min.js">
@@ -1011,6 +1016,7 @@
     <Content Include="Areas\Admin\Content\css\UserDetails.css.map">
       <DependentUpon>UserDetails.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Statystyki\Index.cshtml" />
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\AccSzczegZam.js" />
@@ -1020,6 +1026,8 @@
     <Content Include="Scripts\CartSummary.min.js">
       <DependentUpon>CartSummary.js</DependentUpon>
     </Content>
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />

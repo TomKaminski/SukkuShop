@@ -50,6 +50,7 @@ namespace T4MVC
         public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
         public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
         public SukkuShop.Areas.Admin.Controllers.RangiController Rangi = new SukkuShop.Areas.Admin.Controllers.T4MVC_RangiController();
+        public SukkuShop.Areas.Admin.Controllers.StatystykiController Statystyki = new SukkuShop.Areas.Admin.Controllers.T4MVC_StatystykiController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
 }
@@ -138,6 +139,8 @@ namespace Links
         public static readonly string CartSummary_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CartSummary.min.js") ? Url("CartSummary.min.js") : Url("CartSummary.js");
         public static readonly string CartSummary_min_js = Url("CartSummary.min.js");
         public static readonly string CartSummary_min_js_map = Url("CartSummary.min.js.map");
+        public static readonly string Chart_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Chart.min.js") ? Url("Chart.min.js") : Url("Chart.js");
+        public static readonly string Chart_min_js = Url("Chart.min.js");
         public static readonly string jquery_2_1_1_intellisense_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.intellisense.min.js") ? Url("jquery-2.1.1.intellisense.min.js") : Url("jquery-2.1.1.intellisense.js");
         public static readonly string jquery_2_1_1_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/jquery-2.1.1.min.js") ? Url("jquery-2.1.1.min.js") : Url("jquery-2.1.1.js");
         public static readonly string jquery_2_1_1_min_js = Url("jquery-2.1.1.min.js");
@@ -483,6 +486,8 @@ namespace Links
                 public static readonly string RegulaminEditor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegulaminEditor.min.js") ? Url("RegulaminEditor.min.js") : Url("RegulaminEditor.js");
                 public static readonly string RegulaminEditor_min_js = Url("RegulaminEditor.min.js");
                 public static readonly string RegulaminEditor_min_js_map = Url("RegulaminEditor.min.js.map");
+                public static readonly string StatisticsAdmin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/StatisticsAdmin.min.js") ? Url("StatisticsAdmin.min.js") : Url("StatisticsAdmin.js");
+                public static readonly string userDetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userDetails.min.js") ? Url("userDetails.min.js") : Url("userDetails.js");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
                 public static readonly string userListAngular_min_js = Url("userListAngular.min.js");
                 public static readonly string userListAngular_min_js_map = Url("userListAngular.min.js.map");
@@ -539,6 +544,11 @@ namespace Links
                          
                     public static readonly string reset_css_map = Url("reset.css.map");
                     public static readonly string reset_min_css = Url("reset.min.css");
+                    public static readonly string UserDetails_scss = Url("UserDetails.scss");
+                    public static readonly string UserDetails_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/UserDetails.min.css") ? Url("UserDetails.min.css") : Url("UserDetails.css");
+                         
+                    public static readonly string UserDetails_css_map = Url("UserDetails.css.map");
+                    public static readonly string UserDetails_min_css = Url("UserDetails.min.css");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]

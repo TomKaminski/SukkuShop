@@ -376,7 +376,7 @@ namespace SukkuShop.Controllers
                                 orderdetailslist.Add(orderD);
                                 hehe += item.TotalValue;
                                 product.ReservedQuantity += item.Quantity;
-                                product.OrdersCount++;
+                                product.OrdersCount+=item.Quantity;
                                 _dbContext.Products.AddOrUpdate(product);
                             }
                             else
