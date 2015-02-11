@@ -73,15 +73,27 @@ namespace SukkuShop.Areas.Admin.Controllers
                 month = x.Key
             }).ToList();
 
-            var total = _dbContext.Products.Select(x => new
-            {
-                name= x.Name,
-                sum = x.OrdersCount
-            }).OrderByDescending(k=>k.sum).Take(10).ToList();
+            var total2 =
+                _dbContext.OrderDetails.Where(k => k.Orders.OrderInfo != "Anulowano")
+                    .Select(m => new
+                    {
+                        m.Quantity,
+                        m.Products.Name
+                    }).GroupBy(j => j.Name).Select(y=>new
+                    {
+                        y.Key,
+                        sum=y.Select(m=>m.Quantity).Sum()
+                    }).ToList();
+
+            //var total = _dbContext.Products.Select(x => new
+            //{
+            //    name= x.Name,
+            //    sum = x.OrderDetails.Sum(k=>k.Quantity)
+            //}).OrderByDescending(k=>k.sum).Take(10).ToList();
 
             var mergedObj = new
             {
-                total,
+                total2,
                 ordersbymonth
             };
             return Json(mergedObj, JsonRequestBehavior.AllowGet);

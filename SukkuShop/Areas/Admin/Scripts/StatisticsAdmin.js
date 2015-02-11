@@ -125,9 +125,9 @@ function dataForPieMonthChart(selectedmonth, data) {
         obj.label = '';
     });
     if (selectedmonth == maxMonth) {
-        $("#titlepie").html("Top "+data.total.length+ " zamawianych produktów");
+        $("#titlepie").html("Top " + data.total.length + " zamawianych produktów");
         for (var i = 0; i < data.total.length; i++) {
-            
+
             dataPie[i].label = data.total[i].name;
             dataPie[i].value = data.total[i].sum;
         }
@@ -143,31 +143,38 @@ function dataForPieMonthChart(selectedmonth, data) {
 
 var months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
 
-function setNavigtionText(data,selectedmonth) {
+function setNavigtionText(data, selectedmonth) {
     if (selectedmonth == maxMonth) {
         $("#left").html(months[data.ordersbymonth[data.ordersbymonth.length - 1].month - 1]);
         $("#current").html("Total");
         $("#right").html("");
+    } else if (selectedmonth + 1 == maxMonth && selectedmonth != 0) {
+        $("#right").html("Wszystko");
+        $("#left").html(months[data.ordersbymonth[data.ordersbymonth.length - 2].month - 1]);
+        $("#current").html(months[data.ordersbymonth[data.ordersbymonth.length - 1].month - 1]);
+    } else if (selectedmonth + 1 == maxMonth && selectedmonth == 0) {
+        $("#right").html("Wszystko");
+        $("#left").html("");
+        $("#current").html(months[data.ordersbymonth[data.ordersbymonth.length - 1].month - 1]);
+    } else if
+    (selectedmonth == 0 && maxMonth != 1) {
+        $("#left").html("");
+        $("#right").html(months[data.ordersbymonth[1].month - 1]);
+        $("#current").html(months[data.ordersbymonth[0].month - 1]);
+
+    } else if (selectedmonth == 0 && maxMonth != 1) {
+        $("#right").html("Wszystko");
+        $("#left").html("");
+        $("#current").html(months[data.ordersbymonth[selectedmonth].month - 1]);
     } else {
-        if (selectedmonth == data.ordersbymonth.length - 1) {
-            $("#right").html("Wszystko");
-            $("#left").html(months[data.ordersbymonth[data.ordersbymonth.length - 2].month - 1]);
-            $("#current").html(months[data.ordersbymonth[data.ordersbymonth.length - 1].month - 1]);
-        } else {
-            if (selectedmonth == 0) {
-                $("#left").html("");
-                $("#right").html(months[data.ordersbymonth[1].month - 1]);
-                $("#current").html(months[data.ordersbymonth[0].month - 1]);
+        $("#right").html(months[data.ordersbymonth[selectedmonth + 1].month - 1]);
+        $("#left").html(months[data.ordersbymonth[selectedmonth - 1].month - 1]);
+        $("#current").html(months[data.ordersbymonth[selectedmonth].month - 1]);
 
-            } else {
-                $("#right").html(months[data.ordersbymonth[selectedmonth + 1].month - 1]);
-                $("#left").html(months[data.ordersbymonth[selectedmonth - 1].month - 1]);
-                $("#current").html(months[data.ordersbymonth[selectedmonth].month - 1]);
-
-            }
-        }
     }
 }
+
+
 var maxMonth = 0;
 var selectedmonth = -1;
 $("#left").click(function() {
@@ -176,12 +183,12 @@ $("#left").click(function() {
         setNavigtionText(piedataplz, selectedmonth);
         dataForPieMonthChart(selectedmonth, piedataplz);
         $("#canvas-wrapper").html("").html("<canvas id='top5productsChart' width='800' height='400' style='margin:auto;display: block;'></canvas>");
-        var ctxPie = $("#top5productsChart").get(0).getContext("2d");        
+        var ctxPie = $("#top5productsChart").get(0).getContext("2d");
         var myPieChart = new Chart(ctxPie).Pie(dataPie, options);
     }
 });
 
-$("#right").click(function () {
+$("#right").click(function() {
     if (selectedmonth <= maxMonth) {
         selectedmonth++;
         setNavigtionText(piedataplz, selectedmonth);
@@ -194,10 +201,9 @@ $("#right").click(function () {
 
 var piedataplz = [];
 
-$(document).ready(function () {
-    
+$(document).ready(function() {
 
-    
+
     $.get("/Admin/Statystyki/GetOrderData", function(data) {
         for (var i = 0; i < data.length; i++) {
             chartData.labels.push(data[i].date);
@@ -211,13 +217,13 @@ $(document).ready(function () {
         console.log(xhr.responseText);
     });
 
-    $.get("/Admin/Statystyki/GetTopProducts", function (data) {
+    $.get("/Admin/Statystyki/GetTopProducts", function(data) {
         maxMonth = data.ordersbymonth.length;
         selectedmonth = maxMonth;
         dataForPieMonthChart(selectedmonth, data);
         piedataplz = data;
         setNavigtionText(data, selectedmonth);
-        
+
         // For a pie chart
         var ctxPie = $("#top5productsChart").get(0).getContext("2d");
         var myPieChart = new Chart(ctxPie).Pie(dataPie, options);
@@ -226,7 +232,7 @@ $(document).ready(function () {
         console.log(xhr.responseText);
     });
 
-    $.get("/Admin/Statystyki/GetOrdersByCategory", function (data) {
+    $.get("/Admin/Statystyki/GetOrdersByCategory", function(data) {
         //for (var i = 0; i < data.length; i++) {
         //    dataPie[i].label = data[i].name;
         //    dataPie[i].value = data[i].sum;
@@ -234,7 +240,7 @@ $(document).ready(function () {
         //// For a pie chart
         //var ctxPie = $("#top5productsChart").get(0).getContext("2d");
         //var myPieChart = new Chart(ctxPie).Pie(dataPie, options);
-    }).error(function (xhr, status, error) {
+    }).error(function(xhr, status, error) {
         alert(error);
         console.log(xhr.responseText);
     });
