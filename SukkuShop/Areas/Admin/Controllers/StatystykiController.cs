@@ -43,6 +43,15 @@ namespace SukkuShop.Areas.Admin.Controllers
                     count = firstOrDefault != null ? firstOrDefault.Count : 0
                 };
             }).ToList();
+
+            var startMonth = DateTime.Now.AddMonths(-11);
+            var monthsofOrders = _dbContext.Orders.Select(j => j.OrderDate).ToList();
+            var groupOrdersByMonths = datesOfOrders.GroupBy(x => x.ToShortDateString()).Select(x => new
+            {
+                Date = x.Key,
+                Count = x.Count()
+            }).ToList();
+
             return Json(ordersCount, JsonRequestBehavior.AllowGet);
         }
 
@@ -73,7 +82,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 month = x.Key
             }).ToList();
 
-            var total2 =
+            var total =
                 _dbContext.OrderDetails.Where(k => k.Orders.OrderInfo != "Anulowano")
                     .Select(m => new
                     {
@@ -81,7 +90,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                         m.Products.Name
                     }).GroupBy(j => j.Name).Select(y=>new
                     {
-                        y.Key,
+                        name=y.Key,
                         sum=y.Select(m=>m.Quantity).Sum()
                     }).ToList();
 
@@ -93,7 +102,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
             var mergedObj = new
             {
-                total2,
+                total,
                 ordersbymonth
             };
             return Json(mergedObj, JsonRequestBehavior.AllowGet);
