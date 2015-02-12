@@ -18,20 +18,21 @@ div.cont{
         font-family:$font_0;
         font-weight: bold;
         margin-bottom: 10px;
-        font-size: 24px;}
+        font-size: 32px;}
          ul.month-list{
             padding:0;
             display: block;
             list-style-type: none;
             text-align: center;
-
             #left, #right{
                 display:inline-block;
                 text-align: center;
-                font-weight: bold;
                 margin-bottom: 10px;
                 color:$sukkucolor;
                 font-family:$font_0; 
+                cursor:pointer;font-size: 24px;
+padding:10px;
+&:hover{opacity:0.8;text-decoration:underline}
             }
             #current{
                 display:inline-block;
@@ -39,7 +40,7 @@ div.cont{
                 font-weight: bold;
                 margin-bottom: 10px;
                 color:black;
-                font-family:$font_0;
+                font-family:$font_0;text-decoration:underline;font-size: 28px;
             }
 
         }

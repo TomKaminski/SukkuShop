@@ -3,12 +3,15 @@
 }
 <div class="cont">
     <div class="order-cont">Zamówienia</div>
-    <input type="radio" name="linechart" id="days" class="css-checkbox" checked>
-    <label for="days" class="css-label">Ostatnie 14 dni</label>
-    <input type="radio" name="linechart" id="months" class="css-checkbox">
-    <label for="months" class="css-label">Ostatnie 12 miesięcy</label>
+    <div style="width:800px;margin:10px auto">
+        <input type="radio" name="linechart" id="days" class="css-checkbox" checked>
+        <label for="days" class="css-label">Ostatnie 14 dni</label>
+        <input type="radio" name="linechart" id="months" class="css-checkbox">
+        <label for="months" class="css-label">Ostatnie 12 miesięcy</label>
+        <div style="clear:both"></div>
+    </div>
     <div id="canvas-line-wrapper">
-        <canvas id="ordersChart" width="800" height="400" style="margin:auto;display: block;"></canvas>
+        <canvas id="ordersChart" width="800" height="400" style="margin:20px auto;display: block;"></canvas>
     </div>
 </div>
 

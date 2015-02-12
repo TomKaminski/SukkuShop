@@ -317,6 +317,9 @@ label.css-label {
   margin-top: 29px;
   -moz-transform: scale(0.9999); }
 
+#canvas-wrapper {
+  float: left; }
+
 .text-edit {
   font-size: 26px; }
 

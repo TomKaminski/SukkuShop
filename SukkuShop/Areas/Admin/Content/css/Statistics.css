@@ -7,7 +7,7 @@ div.cont {
     font-family: Segoe UI;
     font-weight: bold;
     margin-bottom: 10px;
-    font-size: 24px; }
+    font-size: 32px; }
   div.cont ul.month-list {
     padding: 0;
     display: block;
@@ -16,17 +16,24 @@ div.cont {
     div.cont ul.month-list #left, div.cont ul.month-list #right {
       display: inline-block;
       text-align: center;
-      font-weight: bold;
       margin-bottom: 10px;
       color: #f89b1d;
-      font-family: Segoe UI; }
+      font-family: Segoe UI;
+      cursor: pointer;
+      font-size: 24px;
+      padding: 10px; }
+      div.cont ul.month-list #left:hover, div.cont ul.month-list #right:hover {
+        opacity: 0.8;
+        text-decoration: underline; }
     div.cont ul.month-list #current {
       display: inline-block;
       text-align: center;
       font-weight: bold;
       margin-bottom: 10px;
       color: black;
-      font-family: Segoe UI; }
+      font-family: Segoe UI;
+      text-decoration: underline;
+      font-size: 28px; }
   div.cont #titlepie {
     text-align: center;
     color: #f89b1d;
