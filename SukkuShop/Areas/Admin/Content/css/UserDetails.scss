@@ -35,12 +35,13 @@ $font_2: SegoeBold;
     width:1066px;
     margin:auto;
     .title{
-        font-family:SegoeBlack;
+        font-family:$font_0;
         font-size:30px;
         color: $sukkucolor;
         margin-bottom:20px;
         padding-bottom:10px;
         border-bottom:2px solid $sukkucolor;
+        font-weight: bold;
     }
     .account-type{
         font-size:24px;
@@ -53,6 +54,7 @@ $font_2: SegoeBold;
         font-family:Segoe UI;
         font-weight:bold;
         margin-bottom:10px;
+        text-decoration: underline;
     }
     .dane-adresowe-data{
         font-family:Segoe UI;
@@ -67,17 +69,18 @@ font-weight:bold;
 font-family:Segoe UI;
 line-height:39px;
 .change-rabat{
-color:#ff6600;font-weight: bold;
+color:$sukkucolor;
+font-weight: bold;
 }
 input{
-width:35px;
-height:35px;
+width:30px;
+height:30px;
 border:1px solid black;
 font-family:Segoe UI;
 color:black;
 text-align:center;
 font-size:20px;
-line-height:35px;
+line-height:30px;
 }
 }
     
@@ -86,7 +89,7 @@ line-height:35px;
     width: 0;
     height: 0;
     border-top: 9px solid transparent;
-    border-left: 14px solid #ff6600;
+    border-left: 14px solid $sukkucolor;
     border-bottom: 9px solid transparent;
     margin-left: 15px;margin-top:12px;
     -moz-transform: scale(.9999);float:left;
@@ -95,7 +98,7 @@ line-height:35px;
 table.history-table
         {
         font-family:$font_1;
-        font-size:24px;
+        font-size:16px;
         tr{
             th{
                 text-transform:lowercase;

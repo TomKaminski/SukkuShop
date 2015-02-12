@@ -27,7 +27,7 @@
 
     @using (Html.BeginForm(MVC.Admin.Klienci.SetDiscount(),FormMethod.Post,new{id="setDiscountForm"}))
     {
-        <div class="rabat"><div style="float:left">Wysokość rabatu: @Html.TextBoxFor(m => m.Rabat)% </div><a href="" class="change-rabat"><div style="float:left;margin-left:20px">ZMIEŃ </div><div id="triangle-right"></div></a><div style="clear:both;float:none"></div></div>
+        <div class="rabat"><div style="float:left">Wysokość rabatu: @Html.TextBoxFor(m => m.Rabat) % </div><a href="" class="change-rabat"><div style="float:left;margin-left:20px">ZMIEŃ </div><div id="triangle-right"></div></a><div style="clear:both;float:none"></div></div>
         @Html.HiddenFor(m=>m.Id)
     }
 

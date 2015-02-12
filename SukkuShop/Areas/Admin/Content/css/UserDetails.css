@@ -20,12 +20,13 @@ table.history-table tr th:first-child, table.history-table tbody tr td:first-chi
   width: 1066px;
   margin: auto; }
   .main-container .title {
-    font-family: SegoeBlack;
+    font-family: Segoe UI;
     font-size: 30px;
     color: #f89b1d;
     margin-bottom: 20px;
     padding-bottom: 10px;
-    border-bottom: 2px solid #f89b1d; }
+    border-bottom: 2px solid #f89b1d;
+    font-weight: bold; }
   .main-container .account-type {
     font-size: 24px;
     font-family: Segoe UI;
@@ -35,7 +36,8 @@ table.history-table tr th:first-child, table.history-table tbody tr td:first-chi
     font-size: 20px;
     font-family: Segoe UI;
     font-weight: bold;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    text-decoration: underline; }
   .main-container .dane-adresowe-data {
     font-family: Segoe UI;
     font-size: 16px;
@@ -48,23 +50,23 @@ table.history-table tr th:first-child, table.history-table tbody tr td:first-chi
     font-family: Segoe UI;
     line-height: 39px; }
     .main-container .rabat .change-rabat {
-      color: #ff6600;
+      color: #f89b1d;
       font-weight: bold; }
     .main-container .rabat input {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       border: 1px solid black;
       font-family: Segoe UI;
       color: black;
       text-align: center;
       font-size: 20px;
-      line-height: 35px; }
+      line-height: 30px; }
 
 #triangle-right {
   width: 0;
   height: 0;
   border-top: 9px solid transparent;
-  border-left: 14px solid #ff6600;
+  border-left: 14px solid #f89b1d;
   border-bottom: 9px solid transparent;
   margin-left: 15px;
   margin-top: 12px;
@@ -73,7 +75,7 @@ table.history-table tr th:first-child, table.history-table tbody tr td:first-chi
 
 table.history-table {
   font-family: SegoeLight;
-  font-size: 24px; }
+  font-size: 16px; }
   table.history-table tr th {
     text-transform: lowercase;
     border-bottom: 1px solid #bababa; }
