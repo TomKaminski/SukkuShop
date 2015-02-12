@@ -45,14 +45,32 @@ namespace SukkuShop.Areas.Admin.Controllers
             }).ToList();
 
             var startMonth = DateTime.Now.AddMonths(-11);
-            var monthsofOrders = _dbContext.Orders.Select(j => j.OrderDate).ToList();
-            var groupOrdersByMonths = datesOfOrders.GroupBy(x => x.ToShortDateString()).Select(x => new
+            var groupOrdersByMonths = datesOfOrders.Select(x => new
             {
-                Date = x.Key,
-                Count = x.Count()
+                Date = x.ToString("yyyy/MM")
+            }).GroupBy(m=>m.Date).Select(m=>new
+            {
+                date=m.Key,
+                sum=m.Count()
             }).ToList();
 
-            return Json(ordersCount, JsonRequestBehavior.AllowGet);
+            var ordersCountMonth = new List<object>();
+            for (var i = 0; i < 12; i++)
+            {
+                var firstOrDefault = groupOrdersByMonths.FirstOrDefault(x => x.date == startMonth.AddMonths(i).ToString("yyyy/MM"));
+                ordersCountMonth.Add(new
+                {
+                    date = startMonth.AddMonths(i).ToString("yyyy/MM"),
+                    count = firstOrDefault == null?0:firstOrDefault.sum
+                });
+            }
+            var mergedobj = new
+            {
+                days = ordersCount,
+                months = ordersCountMonth
+            };
+
+            return Json(mergedobj, JsonRequestBehavior.AllowGet);
         }
 
         public virtual JsonResult GetTopProducts()

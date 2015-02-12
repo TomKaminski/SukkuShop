@@ -116,7 +116,7 @@ var options = {
     datasetFill: true,
 
     //String - A legend template
-    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>"
+    legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<dataPie.length; i++){%><li><span style=\"background-color:<%=dataPie[i].strokeColor%>\"></span><%if(dataPie[i].label){%><%=dataPie[i].label%><%}%></li><%}%></ul>"
 };
 
 function dataForPieMonthChart(selectedmonth, data) {
@@ -188,6 +188,36 @@ $("#left").click(function() {
     }
 });
 
+$("input:radio[id=days]").click(function() {
+
+        chartData.labels = [];
+        chartData.datasets[0].data = [];
+        for (var i = 0; i < chartdataplz.days.length; i++) {
+            chartData.labels.push(chartdataplz.days[i].date);
+            chartData.datasets[0].data.push(chartdataplz.days[i].count);
+        }
+        $("#canvas-line-wrapper").html("").html("<canvas id='ordersChart' width='800' height='400' style='margin:auto;display: block;'></canvas>");
+        var ctx = $("#ordersChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var myLineChart = new Chart(ctx).Line(chartData, options);
+    
+});
+
+$("input:radio[id=months]").click(function () {
+
+        chartData.labels = [];
+        chartData.datasets[0].data = [];
+        for (var i = 0; i < chartdataplz.months.length; i++) {
+            chartData.labels.push(chartdataplz.months[i].date);
+            chartData.datasets[0].data.push(chartdataplz.months[i].count);
+        }
+        $("#canvas-line-wrapper").html("").html("<canvas id='ordersChart' width='800' height='400' style='margin:auto;display: block;'></canvas>");
+        var ctx = $("#ordersChart").get(0).getContext("2d");
+        // This will get the first returned node in the jQuery collection.
+        var myLineChart = new Chart(ctx).Line(chartData, options);
+    
+});
+
 $("#right").click(function() {
     if (selectedmonth <= maxMonth) {
         selectedmonth++;
@@ -200,15 +230,17 @@ $("#right").click(function() {
 });
 
 var piedataplz = [];
+var chartdataplz = [];
 
 $(document).ready(function() {
 
 
     $.get("/Admin/Statystyki/GetOrderData", function(data) {
-        for (var i = 0; i < data.length; i++) {
-            chartData.labels.push(data[i].date);
-            chartData.datasets[0].data.push(data[i].count);
+        for (var i = 0; i < data.days.length; i++) {
+            chartData.labels.push(data.days[i].date);
+            chartData.datasets[0].data.push(data.days[i].count);
         }
+        chartdataplz = data;
         var ctx = $("#ordersChart").get(0).getContext("2d");
         // This will get the first returned node in the jQuery collection.
         var myLineChart = new Chart(ctx).Line(chartData, options);

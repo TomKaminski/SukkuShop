@@ -3,7 +3,13 @@
 }
 <div class="cont">
     <div class="order-cont">Zamówienia</div>
-    <canvas id="ordersChart" width="800" height="400" style="margin:auto;display: block;"></canvas>
+    <input type="radio" name="linechart" id="days" class="css-checkbox" checked>
+    <label for="days" class="css-label">Ostatnie 14 dni</label>
+    <input type="radio" name="linechart" id="months" class="css-checkbox">
+    <label for="months" class="css-label">Ostatnie 12 miesięcy</label>
+    <div id="canvas-line-wrapper">
+        <canvas id="ordersChart" width="800" height="400" style="margin:auto;display: block;"></canvas>
+    </div>
 </div>
 
 
