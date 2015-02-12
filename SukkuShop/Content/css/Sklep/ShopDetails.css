@@ -1,11 +1,13 @@
-@font-face {
+﻿@font-face {
   font-family: FootlightMTLight;
   src: url(../../fonts/FTLTLT.ttf); }
+
 @font-face {
   font-family: FoglihtenPCS;
   src: url("../../fonts/FoglihtenPCS-068.eot?") format("eot"), url("../../fonts/FoglihtenPCS-068.woff") format("woff"), url("../../fonts/FoglihtenPCS-068.ttf") format("truetype"), url("../../fonts/FoglihtenPCS-068.svg#FoglihtenPCS-Petitecaps") format("svg");
   font-weight: normal;
   font-style: normal; }
+
 .product-details-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon img, .product-details-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .add-to-cart-icon input, .product-details-list-container .product-list-item-box .product-list-item .product-list-item-image .image-bottom-panel .info-icon img {
   position: absolute;
   margin: auto;
@@ -16,11 +18,11 @@
   opacity: 0.8; }
 
 img.grayscale {
-  filter: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><filter id='grayscale'><feColorMatrix type='matrix' values='0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0'/></filter></svg>#grayscale");
+  filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
   /* Firefox 10+, Firefox on Android */
   filter: gray;
   /* IE6-9 */
-  -webkit-filter: grayscale(100%);
+  -webkit-filter: grayscale(100%)
   /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
 
 .product-details-main-container {
@@ -244,9 +246,17 @@ img.grayscale {
 .product-details-list-container {
   padding-top: 20px;
   margin: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; }
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
   .product-details-list-container .product-list-item-box {
     height: 191px;
     width: 135px;
@@ -407,4 +417,4 @@ div#dialogsuccess {
   margin-top: 15px;
   font-weight: bold;
   font-size: 14px; }
-
+/*# sourceMappingURL=ShopDetails.css.map */
