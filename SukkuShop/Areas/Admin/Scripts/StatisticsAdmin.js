@@ -1,61 +1,61 @@
 ﻿var dataPie = [
     {
         value: 0,
-        color: "rgba(255, 102, 0, 1)",
-        highlight: "rgba(255, 102, 0, 0.7)",
+        color: "rgba(255, 102, 0, 0.8)",
+        highlight: "rgba(255, 102, 0, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(0, 196, 40, 1)",
-        highlight: "rgba(0, 196, 40, 0.7)",
+        color: "rgba(0, 196, 40, 0.8)",
+        highlight: "rgba(0, 196, 40, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(250, 30, 30, 1)",
-        highlight: "rgba(250, 30, 30, 0.7)",
+        color: "rgba(250, 30, 30, 0.8)",
+        highlight: "rgba(250, 30, 30, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(181, 22, 160, 1)",
-        highlight: "rgba(181, 22, 160, 0.7)",
+        color: "rgba(181, 22, 160, 0.8)",
+        highlight: "rgba(181, 22, 160, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(43, 22, 181, 1)",
-        highlight: "rgba(43, 22, 181, 0.7)",
+        color: "rgba(43, 22, 181, 0.8)",
+        highlight: "rgba(43, 22, 181, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(22, 144, 181, 1)",
-        highlight: "rgba(22, 144, 181, 0.7)",
+        color: "rgba(22, 144, 181, 0.8)",
+        highlight: "rgba(22, 144, 181, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(181, 96, 22, 1)",
-        highlight: "rgba(181, 96, 22, 0.7)",
+        color: "rgba(181, 96, 22, 0.8)",
+        highlight: "rgba(181, 96, 22, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(247, 232, 10, 1)",
-        highlight: "rgba(247, 232, 10, 0.7)",
+        color: "rgba(247, 232, 10, 0.8)",
+        highlight: "rgba(247, 232, 10, 0.6)",
         label: ""
     },
     {
         value: 0,
-        color: "rgba(255, 179, 0, 1)",
-        highlight: "rgba(255, 179, 0, 0.7)",
+        color: "rgba(255, 179, 0, 0.8)",
+        highlight: "rgba(255, 179, 0, 0.6)",
         label: ""
     }, {
         value: 0,
-        color: "rgba(0, 255, 128, 1)",
-        highlight: "rgba(0, 255, 128, 0.7)",
+        color: "rgba(0, 255, 128, 0.8)",
+        highlight: "rgba(0, 255, 128, 0.6)",
         label: ""
     }
 ];
@@ -146,7 +146,7 @@ var months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lip
 function setNavigtionText(data, selectedmonth) {
     if (selectedmonth == maxMonth) {
         $("#left").html(months[data.ordersbymonth[data.ordersbymonth.length - 1].month - 1]);
-        $("#current").html("Total");
+        $("#current").html("Wszystko");
         $("#right").html("");
     } else if (selectedmonth + 1 == maxMonth && selectedmonth != 0) {
         $("#right").html("Wszystko");
