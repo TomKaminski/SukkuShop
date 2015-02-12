@@ -363,3 +363,48 @@ label.error {
   font-weight: bold;
   margin-left: 170px; }
 
+p.ask {
+  font-family: SegoeLight;
+  font-size: 14px; }
+
+p.product {
+  font-family: Segoe UI;
+  font-weight: bold; }
+
+div.cont {
+  height: 100px;
+  margin-bottom: 20px; }
+  div.cont img.pic {
+    float: left; }
+  div.cont p.prod-name {
+    line-height: 100px;
+    float: left;
+    margin: 0 20px;
+    font-family: SegoeLight; }
+
+input#email {
+  width: 50%;
+  height: 20px;
+  border: 1px solid grey;
+  font-family: Segoe UI;
+  padding-left: 5px;
+  margin-left: 10px; }
+
+div.send {
+  height: 24px;
+  width: 100%;
+  margin-top: 20px; }
+  div.send a#submitdialog {
+    color: #818181;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Segoe UI;
+    font-size: 24px;
+    float: right; }
+
+div#dialogsuccess {
+  clear: both;
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 14px; }
+

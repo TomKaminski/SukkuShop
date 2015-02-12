@@ -209,7 +209,7 @@ button.ui-button-icons-only {
 }
 .ui-button-icon-only .ui-button-text,
 .ui-button-icons-only .ui-button-text {
-    color: #ff6600;
+    color: #f89b1d;
 font-weight: bold;
 font-size: 25px;
 font-family: Segoe UI;
@@ -294,7 +294,7 @@ border: 2px solid #f89b1d;
 	overflow: hidden;
 	text-overflow: ellipsis;
     font-family: Segoe UI;
-    color:#ff6600;
+    color: #f89b1d;
     font-weight: bold;
     
 }
