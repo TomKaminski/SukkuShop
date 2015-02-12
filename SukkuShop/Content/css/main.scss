@@ -15,29 +15,29 @@ $Calbr: Calibri;
 
 @font-face {
 	font-family: $SeBlack;
-	src: url('../fonts/seguibl.eot');
-	src: local('seguibl'), url('../fonts/seguibl.woff') format('woff'), url('../fonts/seguibl.ttf') format('truetype');
+	src: url('../Content/fonts/seguibl.eot');
+	src: local('seguibl'), url('../Content/fonts/seguibl.woff') format('woff'), url('../Content/fonts/seguibl.ttf') format('truetype');
 }
 
 
 @font-face {
 	font-family: $SeL;
-	src: url('../fonts/SEGOEUIL.eot');
-	src: local('SEGOEUIL'), url('../fonts/SEGOEUIL.woff') format('woff'), url('../fonts/SEGOEUIL.ttf') format('truetype');
+	src: url('../Content/fonts/SEGOEUIL.eot');
+	src: local('SEGOEUIL'), url('../Content/fonts/SEGOEUIL.woff') format('woff'), url('../Content/fonts/SEGOEUIL.ttf') format('truetype');
 }
 @font-face {
     font-family: $SeSBIE;
-    src: url(../fonts/SegoeSemiboldIE.eot);
+    src: url(../Content/fonts/SegoeSemiboldIE.eot);
 }
 
 @font-face {
     font-family: $SeSL;
-    src: url(../fonts/segoeuisl.ttf)
+    src: url(../Content/fonts/segoeuisl.ttf)
 }
 
 @font-face {
     font-family: $SeB;
-    src: url(../fonts/segoeuibold.ttf)
+    src: url(../Content/fonts/segoeuibold.ttf)
 }
 
 
@@ -46,7 +46,7 @@ $Calbr: Calibri;
 }
 @font-face {
 	font-family: $SeSB;
-	src: url(../fonts/SegoeSemibold.ttf);
+	src: url(../Content/fonts/SegoeSemibold.ttf);
 }
 
 //@extend-elements
@@ -74,7 +74,7 @@ a {
     float:left;
     width:50px;
     height:50px;
-    background-image: url('../Images/processing.gif');
+    background-image: url('../Content/Images/processing.gif');
     background-size: 100% 100%;
 }
 
@@ -169,7 +169,7 @@ margin-top: 0;
                 .cart-img {
 	                width: 35px;
 	                height: 28px;
-	                background-image: url('../Images/Shop/carticon.png');
+	                background-image: url('../Content/Images/Shop/carticon.png');
 	                float: right;
 	                margin-right: 5px;
                 }
@@ -238,7 +238,7 @@ margin-top: 0;
 	        width: 132px;
 	        height: 188px;
 	        float: left;
-	        background-image: url(../Images/logo-header.png);
+	        background-image: url(../Content/Images/logo-header.png);
 	        &:hover {
 
 		        opacity: 0.8;

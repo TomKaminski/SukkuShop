@@ -1,32 +1,26 @@
-﻿@font-face {
+@font-face {
   font-family: SegoeBlack;
-  src: url('../fonts/seguibl.eot');
-  src: local('seguibl'), url('../fonts/seguibl.woff') format('woff'), url('../fonts/seguibl.ttf') format('truetype'); }
-
+  src: url("../Content/fonts/seguibl.eot");
+  src: local("seguibl"), url("../Content/fonts/seguibl.woff") format("woff"), url("../Content/fonts/seguibl.ttf") format("truetype"); }
 @font-face {
   font-family: SegoeLight;
-  src: url('../fonts/SEGOEUIL.eot');
-  src: local('SEGOEUIL'), url('../fonts/SEGOEUIL.woff') format('woff'), url('../fonts/SEGOEUIL.ttf') format('truetype'); }
-
+  src: url("../Content/fonts/SEGOEUIL.eot");
+  src: local("SEGOEUIL"), url("../Content/fonts/SEGOEUIL.woff") format("woff"), url("../Content/fonts/SEGOEUIL.ttf") format("truetype"); }
 @font-face {
   font-family: SegoeSemiboldIE;
-  src: url(../fonts/SegoeSemiboldIE.eot); }
-
+  src: url(../Content/fonts/SegoeSemiboldIE.eot); }
 @font-face {
   font-family: SegoeSemilight;
-  src: url(../fonts/segoeuisl.ttf); }
-
+  src: url(../Content/fonts/segoeuisl.ttf); }
 @font-face {
   font-family: SegoeBold;
-  src: url(../fonts/segoeuibold.ttf); }
-
+  src: url(../Content/fonts/segoeuibold.ttf); }
 .segoe-semibold {
   font-family: SegoeSemibold, SegoeSemiboldIE; }
 
 @font-face {
   font-family: SegoeSemibold;
-  src: url(../fonts/SegoeSemibold.ttf); }
-
+  src: url(../Content/fonts/SegoeSemibold.ttf); }
 body footer, body footer a {
   font-size: 15px;
   font-family: SegoeSemibold, SegoeSemiboldIE;
@@ -46,7 +40,7 @@ a {
   float: left;
   width: 50px;
   height: 50px;
-  background-image: url('../Images/processing.gif');
+  background-image: url("../Content/Images/processing.gif");
   background-size: 100% 100%; }
 
 body {
@@ -127,7 +121,7 @@ body {
         body header nav .cart-box .cart-img {
           width: 35px;
           height: 28px;
-          background-image: url('../Images/Shop/carticon.png');
+          background-image: url("../Content/Images/Shop/carticon.png");
           float: right;
           margin-right: 5px; }
       body header nav .login-panel-text {
@@ -183,7 +177,7 @@ body {
       width: 132px;
       height: 188px;
       float: left;
-      background-image: url(../Images/logo-header.png); }
+      background-image: url(../Content/Images/logo-header.png); }
       body header .header-logo:hover {
         opacity: 0.8; }
     body header ul#shop-category {
@@ -258,4 +252,4 @@ body {
     font-family: SegoeSemibold; }
     #product-error a:hover {
       text-decoration: underline; }
-/*# sourceMappingURL=main.css.map */
+
