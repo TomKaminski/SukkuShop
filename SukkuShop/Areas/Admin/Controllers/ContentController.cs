@@ -5,6 +5,7 @@ using SukkuShop.Areas.Admin.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public partial class ContentController : Controller
     {
         // GET: Admin/Content

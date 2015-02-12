@@ -9,6 +9,7 @@ using WebGrease.Css.Extensions;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public partial class StatystykiController : Controller
     {
 
