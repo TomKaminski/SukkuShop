@@ -2,92 +2,92 @@
 @using (Ajax.BeginForm(MVC.Konto.ChangeUserInfoViewModel(), new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "showAjaxLoader()", OnComplete = "hideAjaxLoader()", OnFailure = "onError(xhr, status, error)" }, new { id = "changeUserInfoForm" }))
 {
 
-<div class="data-container">
-    <div class="main-text">Edytuj dane osobowe</div>
-     
-    <div class="switch-box">
-        @Html.RadioButtonFor(m => m.CzyFirmowe, false, new { @class = "css-checkbox", id = "firmafalse", @checked = true })
-        @Html.LabelFor(m => m.CzyFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
-        @Html.RadioButtonFor(m => m.CzyFirmowe, true, new { @class = "css-checkbox", id = "firmatrue" })
-        @Html.LabelFor(m => m.CzyFirmowe, "firma", new { @class = "css-label", @for = "firmatrue", style = "margin-left:33px" })
-    </div>
-    <div class="clear">&nbsp;</div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Name, "imię*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Name)
-        @Html.ValidationMessageFor(m => m.Name)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.LastName, "nazwisko*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.LastName)
-        @Html.ValidationMessageFor(m => m.LastName)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Ulica, "ulica*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Ulica)
-        @Html.ValidationMessageFor(m => m.Ulica)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Numer, "numer*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Numer)
-        @Html.ValidationMessageFor(m => m.Numer)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Miasto, "miasto*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Miasto)
-        @Html.ValidationMessageFor(m => m.Miasto)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.KodPocztowy, "kod pocztowy*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.KodPocztowy)
-        @Html.ValidationMessageFor(m => m.KodPocztowy)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Telefon, "telefon*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Telefon)
-        @Html.ValidationMessageFor(m => m.Telefon)
-    </div>
-    <div class="data-box">
-        @Html.LabelFor(m => m.Email, "e-mail*:", new {@class = "text"})
-        @Html.TextBoxFor(m => m.Email)
-        @Html.ValidationMessageFor(m => m.Email)
-    </div>
-    <div class="clear">&nbsp;</div>
-    <div>
-        <div class="validation-box" style="float:left">
-            @if (Model.Success == null)
-            {
-                @Html.ValidationSummary(true)
-            }
-            else if (Model.Success == false)
-            {
-                <div class="bubble">
-                    <p>
-                        Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;
-                    </p>
-                </div>
-            }
-            else
-            {
-                <div style="color:green" class="bubble">
-                    <p>
-                        Konto zostało auktualnione &#10003;<br />
-                        @if (ViewBag.EmailChanged == true)
-                        {
-                            @:Potwierdzenie zmiany adresu email zostało wysłane na Twój nowy adres!
+    <div class="data-container">
+        <div class="main-text">Edytuj dane osobowe</div>
+
+        <div class="switch-box">
+            @Html.RadioButtonFor(m => m.CzyFirmowe, false, new { @class = "css-checkbox", id = "firmafalse", @checked = true })
+            @Html.LabelFor(m => m.CzyFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
+            @Html.RadioButtonFor(m => m.CzyFirmowe, true, new { @class = "css-checkbox", id = "firmatrue" })
+            @Html.LabelFor(m => m.CzyFirmowe, "firma", new { @class = "css-label", @for = "firmatrue", style = "margin-left:33px" })
+            <div class="clear" style="clear:both;height:0;float:none;"></div>
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Name, "imię*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Name)
+            @Html.ValidationMessageFor(m => m.Name)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.LastName, "nazwisko*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.LastName)
+            @Html.ValidationMessageFor(m => m.LastName)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Ulica, "ulica*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Ulica)
+            @Html.ValidationMessageFor(m => m.Ulica)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Numer, "numer*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Numer)
+            @Html.ValidationMessageFor(m => m.Numer)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Miasto, "miasto*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Miasto)
+            @Html.ValidationMessageFor(m => m.Miasto)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.KodPocztowy, "kod pocztowy*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.KodPocztowy)
+            @Html.ValidationMessageFor(m => m.KodPocztowy)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Telefon, "telefon*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Telefon)
+            @Html.ValidationMessageFor(m => m.Telefon)
+        </div>
+        <div class="data-box">
+            @Html.LabelFor(m => m.Email, "e-mail*:", new { @class = "text" })
+            @Html.TextBoxFor(m => m.Email)
+            @Html.ValidationMessageFor(m => m.Email)
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div>
+            <div class="validation-box" style="float:left">
+                @if (Model.Success == null)
+                {
+                    @Html.ValidationSummary(true)
+                }
+                else if (Model.Success == false)
+                {
+                    <div class="bubble">
+                        <p>
+                            Zmiana danych zakończyła się niepowodzeniem, przepraszamy &#10007;
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <div style="color:green" class="bubble">
+                        <p>
+                            Konto zostało auktualnione &#10003;<br />
+                            @if (ViewBag.EmailChanged == true)
+                            {
+                                @:Potwierdzenie zmiany adresu email zostało wysłane na Twój nowy adres!
                         }
-                    </p>
-                </div>
-            }
-        </div>
+                        </p>
+                    </div>
+                }
+            </div>
 
-        <div class="save" id="save-nofirma" style="margin-left:0">
-            <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+            <div class="save" id="save-nofirma" style="margin-left:0">
+                <div class="text">Zapisz Dane</div><div id="triangle-right-big"></div>
+            </div>
+            <div class="clear" style="clear:both">&nbsp;</div>
+
         </div>
-        <div class="clear" style="clear:both">&nbsp;</div>
 
     </div>
-
-</div>
 
 }

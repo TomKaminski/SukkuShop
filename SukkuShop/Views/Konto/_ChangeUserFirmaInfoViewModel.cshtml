@@ -10,8 +10,10 @@
             @Html.LabelFor(m => m.CzyFirmowe, "osoba prywatna", new { @class = "css-label", @for = "firmafalse" })
             @Html.RadioButtonFor(m => m.CzyFirmowe, true, new { @class = "css-checkbox", id = "firmatrue", @checked = true })
             @Html.LabelFor(m => m.CzyFirmowe, "firma", new { @class = "css-label", @for = "firmatrue", style = "margin-left:33px" })
+            <div class="clear" style="clear:both;height:0;float:none;"></div>
+
         </div>
-        <div class="clear">&nbsp;</div>
+
         <div class="data-box">
             @Html.LabelFor(m => m.NazwaFirmy, "Nazwa firmy*:", new { @class = "text" })
             @Html.TextBoxFor(m => m.NazwaFirmy)
@@ -85,5 +87,5 @@
             <div class="clear" style="clear:both">&nbsp;</div>
         </div>
     </div>
-    
+
 }

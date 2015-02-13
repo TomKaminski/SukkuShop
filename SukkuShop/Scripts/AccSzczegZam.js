@@ -10,6 +10,10 @@
 function hideAjaxLoader() {
     $("#ajax-processing").hide();
 }
+function onError(xhr, status, error) {
+    alert(error);
+    console.log(xhr.responseText);
+}
 
 $(document).ready(function () {
     $("#anuluj-box").delegate("#cancel-start","click",function () {
@@ -29,7 +33,10 @@ $(document).ready(function () {
         $.ajax({
             url: '/Konto/AnulujZamówienie/' + id,
             contentType: 'application/html; charset=utf-8',
-            type: 'POST'
+            type: 'POST',
+            error: function (xhr, status, error) {
+                onError(xhr, status, error);
+            }
         }).success(function (data) {
             if (data == true) {
                 $("#anuluj-box").empty().append("<p class='cancel' style='color:green'>Zamówienie zostało pomyślnie anulowane &#10004;.</p>");

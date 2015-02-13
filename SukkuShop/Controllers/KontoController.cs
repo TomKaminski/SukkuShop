@@ -431,11 +431,11 @@ namespace SukkuShop.Controllers
         public virtual ActionResult AnulujZamówienie(int id)
         {
             
-            var order = _dbContext.Orders.First(m => m.OrderId == id);
-            if (order.OrderInfo!="Wysłano")
+            var order = _dbContext.Orders.FirstOrDefault(m => m.OrderId == id);
+            if (order != null && (order.OrderInfo != "Wysłane" && order.OrderInfo != "Anulowane"))
             {
-                order.OrderInfo = "Anulowano";
-                var orderItems = _dbContext.OrderDetails.Where(x => x.OrderId == id);
+                order.OrderInfo = "Anulowane";
+                var orderItems = _dbContext.OrderDetails.Where(x => x.OrderId == id).ToList();
                 foreach (var item in orderItems)
                 {
                     var prod = _dbContext.Products.First(m => m.ProductId == item.ProductId);

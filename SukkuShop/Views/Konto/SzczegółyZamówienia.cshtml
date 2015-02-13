@@ -25,12 +25,12 @@
             }
         </div>
         <div class="right-box" id="anuluj-box">
-            @if (Model.OrderInfo != "Anulowano")
+            @if (Model.OrderInfo != "Anulowane" && Model.OrderInfo!="Wysłane")
             {
                 <p class="cancel" id="cancel-start" style="cursor:pointer">ANULUJ ZAMÓWIENIE</p>
             }            
         </div>
-        <div class="clear">&nbsp; </div>
+        <div class="clear" style="clear:both">&nbsp; </div>
     </div>
 
     <table class="order-table" cellspacing="0">
@@ -106,4 +106,4 @@
 
 
 @Styles.Render("~/Content/css/Konto/OrderPreview.min.css")
-@Scripts.Render("~/Scripts/AccSzczegZam.min.js")
+@Scripts.Render("~/Scripts/AccSzczegZam.js")
