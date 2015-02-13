@@ -437,7 +437,7 @@ namespace SukkuShop.Controllers
                         PostalCode = model.UserAddressModel.KodPocztowy,
                         OrderDetails = orderdetailslist,
                         UserId = userId,
-                        OrderInfo = "Przyjęte",
+                        OrderInfo = (model.OrderPayment.Id==1||model.OrderPayment.Id==3)?"Oczekujące":"Przyjęte",
                         UserHints = model.UserHints,
                         NazwaFirmy = model.UserAddressModel.NazwaFirmy,
                         OrderNip = model.UserAddressModel.Nip,
