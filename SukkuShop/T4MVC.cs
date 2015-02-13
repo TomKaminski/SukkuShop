@@ -46,11 +46,10 @@ namespace T4MVC
     {
         public readonly string Name = "Admin";
         public SukkuShop.Areas.Admin.Controllers.ContentController Content = new SukkuShop.Areas.Admin.Controllers.T4MVC_ContentController();
-        public SukkuShop.Areas.Admin.Controllers.HomeController Home = new SukkuShop.Areas.Admin.Controllers.T4MVC_HomeController();
         public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
         public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
-        public SukkuShop.Areas.Admin.Controllers.RangiController Rangi = new SukkuShop.Areas.Admin.Controllers.T4MVC_RangiController();
         public SukkuShop.Areas.Admin.Controllers.StatystykiController Statystyki = new SukkuShop.Areas.Admin.Controllers.T4MVC_StatystykiController();
+        public SukkuShop.Areas.Admin.Controllers.ZamowieniaController Zamowienia = new SukkuShop.Areas.Admin.Controllers.T4MVC_ZamowieniaController();
         public T4MVC.Admin.SharedController Shared = new T4MVC.Admin.SharedController();
     }
 }
@@ -480,6 +479,7 @@ namespace Links
                 public static readonly string ContentIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.js") ? Url("ContentIndex.min.js") : Url("ContentIndex.js");
                 public static readonly string ContentIndex_min_js = Url("ContentIndex.min.js");
                 public static readonly string ContentIndex_min_js_map = Url("ContentIndex.min.js.map");
+                public static readonly string ordersListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ordersListAngular.min.js") ? Url("ordersListAngular.min.js") : Url("ordersListAngular.js");
                 public static readonly string productListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/productListAngular.min.js") ? Url("productListAngular.min.js") : Url("productListAngular.js");
                 public static readonly string productListAngular_min_js = Url("productListAngular.min.js");
                 public static readonly string productListAngular_min_js_map = Url("productListAngular.min.js.map");
@@ -487,7 +487,11 @@ namespace Links
                 public static readonly string RegulaminEditor_min_js = Url("RegulaminEditor.min.js");
                 public static readonly string RegulaminEditor_min_js_map = Url("RegulaminEditor.min.js.map");
                 public static readonly string StatisticsAdmin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/StatisticsAdmin.min.js") ? Url("StatisticsAdmin.min.js") : Url("StatisticsAdmin.js");
+                public static readonly string StatisticsAdmin_min_js = Url("StatisticsAdmin.min.js");
+                public static readonly string StatisticsAdmin_min_js_map = Url("StatisticsAdmin.min.js.map");
                 public static readonly string userDetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userDetails.min.js") ? Url("userDetails.min.js") : Url("userDetails.js");
+                public static readonly string userDetails_min_js = Url("userDetails.min.js");
+                public static readonly string userDetails_min_js_map = Url("userDetails.min.js.map");
                 public static readonly string userListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/userListAngular.min.js") ? Url("userListAngular.min.js") : Url("userListAngular.js");
                 public static readonly string userListAngular_min_js = Url("userListAngular.min.js");
                 public static readonly string userListAngular_min_js_map = Url("userListAngular.min.js.map");
@@ -509,6 +513,11 @@ namespace Links
                     private const string URLPATH = "~/Areas/Admin/Content/css";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string AdminOrdersList_scss = Url("AdminOrdersList.scss");
+                    public static readonly string AdminOrdersList_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminOrdersList.min.css") ? Url("AdminOrdersList.min.css") : Url("AdminOrdersList.css");
+                         
+                    public static readonly string AdminOrdersList_css_map = Url("AdminOrdersList.css.map");
+                    public static readonly string AdminOrdersList_min_css = Url("AdminOrdersList.min.css");
                     public static readonly string AdminProductsList_scss = Url("AdminProductsList.scss");
                     public static readonly string AdminProductsList_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProductsList.min.css") ? Url("AdminProductsList.min.css") : Url("AdminProductsList.css");
                          
@@ -544,6 +553,11 @@ namespace Links
                          
                     public static readonly string reset_css_map = Url("reset.css.map");
                     public static readonly string reset_min_css = Url("reset.min.css");
+                    public static readonly string Statistics_scss = Url("Statistics.scss");
+                    public static readonly string Statistics_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/Statistics.min.css") ? Url("Statistics.min.css") : Url("Statistics.css");
+                         
+                    public static readonly string Statistics_css_map = Url("Statistics.css.map");
+                    public static readonly string Statistics_min_css = Url("Statistics.min.css");
                     public static readonly string UserDetails_scss = Url("UserDetails.scss");
                     public static readonly string UserDetails_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/UserDetails.min.css") ? Url("UserDetails.min.css") : Url("UserDetails.css");
                          

@@ -18,7 +18,7 @@
         <nav id="nav-bottom" class="nav-low">
             <ul class="nav-list">
                 <li id="1"> <a class="@(ViewBag.SelectedOpt==1?"selected":"")" href="@Url.Action(MVC.Admin.Produkty.Lista())">Produkty</a> </li>
-                <li id="2"> <a href="">Zamówienia</a> </li>
+                <li id="2"> <a class="@(ViewBag.SelectedOpt==2?"selected":"")" href="@Url.Action(MVC.Admin.Zamowienia.Index())">Zamówienia</a> </li>
                 <li id="3"> <a class="@(ViewBag.SelectedOpt==3?"selected":"")" href="@Url.Action(MVC.Admin.Klienci.Lista())">Użytkownicy</a></li>
                 <li id="4"> <a href="">Strona główna</a></li>
                 <li id="5"> <a class="@(ViewBag.SelectedOpt == 5 ? "selected" : "")" href="@Url.Action(MVC.Admin.Content.Index())">Sekcja informacyjna</a></li>

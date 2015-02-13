@@ -155,3 +155,4 @@
 /// <reference path="../areas/admin/scripts/userdetails.js" />
 /// <reference path="chart.min.js" />
 /// <reference path="../areas/admin/scripts/statisticsadmin.js" />
+/// <reference path="../areas/admin/scripts/orderslistangular.js" />

@@ -23,13 +23,10 @@ using System.Web.Routing;
 using T4MVC;
 namespace SukkuShop.Areas.Admin.Controllers
 {
-    public partial class RangiController
+    public partial class ZamowieniaController
     {
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RangiController() { }
-
-        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        protected RangiController(Dummy d) { }
+        protected ZamowieniaController(Dummy d) { }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         protected RedirectToRouteResult RedirectToAction(ActionResult result)
@@ -59,13 +56,13 @@ namespace SukkuShop.Areas.Admin.Controllers
 
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public RangiController Actions { get { return MVC.Admin.Rangi; } }
+        public ZamowieniaController Actions { get { return MVC.Admin.Zamowienia; } }
         [GeneratedCode("T4MVC", "2.0")]
         public readonly string Area = "Admin";
         [GeneratedCode("T4MVC", "2.0")]
-        public readonly string Name = "Rangi";
+        public readonly string Name = "Zamowienia";
         [GeneratedCode("T4MVC", "2.0")]
-        public const string NameConst = "Rangi";
+        public const string NameConst = "Zamowienia";
 
         static readonly ActionNamesClass s_actions = new ActionNamesClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -74,12 +71,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionNamesClass
         {
             public readonly string Index = "Index";
+            public readonly string GetOrdersList = "GetOrdersList";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionNameConstants
         {
             public const string Index = "Index";
+            public const string GetOrdersList = "GetOrdersList";
         }
 
 
@@ -93,14 +92,16 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Areas/Admin/Views/Zamowienia/Index.cshtml";
         }
     }
 
     [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-    public partial class T4MVC_RangiController : SukkuShop.Areas.Admin.Controllers.RangiController
+    public partial class T4MVC_ZamowieniaController : SukkuShop.Areas.Admin.Controllers.ZamowieniaController
     {
-        public T4MVC_RangiController() : base(Dummy.Instance) { }
+        public T4MVC_ZamowieniaController() : base(Dummy.Instance) { }
 
         [NonAction]
         partial void IndexOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
@@ -110,6 +111,17 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Index);
             IndexOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GetOrdersListOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult GetOrdersList()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetOrdersList);
+            GetOrdersListOverride(callInfo);
             return callInfo;
         }
 

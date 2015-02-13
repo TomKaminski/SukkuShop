@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Lista zamówień";
+}
+@Styles.Render("~/Areas/Admin/Content/css/AdminOrdersList.min.css")
+@Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Areas/Admin/Scripts/ordersListAngular.min.js")
+
+<div ng-app="adminApp">
+    <div ng-controller="AdminOrderCtrl" ng-init="init()">
+        <div class="main-cont">
+            <div style="margin-bottom: 20px">
+                <input type="checkbox" class="css-checkbox" ng-model="przyjete" id="przyjete" ng-change="filterByCheckboxes()" />
+                <label for="przyjete" class="css-label" style="margin-left:0">TYLKO PRZYJĘTE</label>
+                <input type="checkbox" class="css-checkbox" ng-model="zakonczone" id="zakonczone" ng-change="filterByCheckboxes()" />
+                <label for="zakonczone" class="css-label">TYLKO ZAKOŃCZONE</label>
+                <input type="checkbox" class="css-checkbox" ng-model="oczekujace" id="oczekujace" ng-change="filterByCheckboxes()" />
+                <label for="oczekujace" class="css-label">TYLKO OCZEKUJĄCE NA WPŁATĘ</label>
+                <input type="checkbox" class="css-checkbox" ng-model="realizowane" id="uregulowane" ng-change="filterByCheckboxes()" />
+                <label for="uregulowane" class="css-label">TYLKO REALIZOWANE</label>
+                <div style="clear:both"></div>
+            </div>
+            <table class="main-table">
+                <thead id="plz">
+                    <th>ID Zamówienia <a href="" ng-class="{'selected': selectedIndex==1}" ng-click="orderByMhm('id',false,1)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==2}" ng-click="orderByMhm('id',true,2)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Email klienta <a href="" ng-class="{'selected': selectedIndex==3}" ng-click="orderByMhm('email',false,3)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==4}" ng-click="orderByMhm('email',true,4)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Data złożenia<a href="" ng-class="{'selected': selectedIndex==5}" ng-click="orderByMhm('data',false,5)"><div class="icon-arrow-up up"></div></a><a href="" ng-class="{'selected': selectedIndex==6}" ng-click="orderByMhm('data',true,6)"><div class="icon-arrow-down down"></div></a></th>
+                    <th>Stan zamówienia</th>
+                    <th>Wartość</th>
+                    <th class="blank"></th>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in ordersList">
+                        <td>{{item.id}}<a ng-href="@Url.Action("Szczegóły","Klienci")/{{item.id}}"><div class="icon-eye-open icon"></div></a></td>
+                        <td>{{item.email}}<a ng-if="item.userId!=null" ng-href="@Url.Action("Szczegóły","Klienci")/{{item.id}}"><div class="icon-eye-open icon"></div></a></td>
+                        <td>{{item.data}}</td>
+                        <td>
+                            <div ng-if="item.stan!='Anulowane' && item.stan!='Wysłane'">
+
+                                    <div class="styled-select">
+                                        <select ng-model="item.selectedOpt">
+                                            <option name="orderstate" ng-selected="itemm.selected" ng-repeat="itemm in item.orderOpts" value="{{itemm.label}}">{{itemm.label}}</option>
+                                        </select>
+                                    </div><div class="save-text"><a ng-click="ChangeOrderState(item.id,item.selectedOpt)">ZAPISZ</a></div>
+                                
+                                
+                            </div>
+                            <div ng-if="item.stan=='Anulowane'" style="color:red">Anulowane</div>
+                            <div ng-if="item.stan=='Wysłane'" style="color:green">Wysłane</div>
+                        </td>
+                        <td>{{item.total}} PLN</td>
+                        <td><div class="save-text"><a ng-click="">DRUKUJ FAKTURĘ</a></div></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div id="paginator" ng-if="pages>1">
+                <ul class="shop-paginator">
+                    <li>
+                        <div class="paging-arrow-left" ng-click="setPage(currentPage-1)"></div>
+                    </li>
+                    <li class="inner-paginator" ng-repeat="page in tableOfPages" style="display: inline-block">
+                        <div ng-if="page==currentPage">
+                            <div class="paginator-box" style="font-weight: bold" ng-click="setPage($index+1)">{{page}}</div>
+                        </div>
+                        <div ng-if="page!=currentPage">
+                            <div class="paginator-box" ng-click="setPage($index+1)">{{page}}</div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="paging-arrow-right" ng-click="setPage(currentPage+1)"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
