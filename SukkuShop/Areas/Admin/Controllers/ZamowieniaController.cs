@@ -57,7 +57,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual JsonResult ChangeOrderState(int id, string value)
         {
             var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
-            if (order != null)
+            if (order != null && order.OrderInfo!=value)
             {
                 order.OrderInfo = value;
                 _dbContext.Orders.AddOrUpdate(order);
