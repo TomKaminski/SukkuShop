@@ -35,9 +35,9 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual JsonResult SetQuantity(int id, int quantity)
         {
             var prod = _dbContext.Products.FirstOrDefault(x => x.ProductId == id);
-            var emails = _dbContext.ProductDemands.Where(x => x.ProductId == id);
             if (prod != null)
             {
+                var emails = prod.ProductDemands;
                 var oldQ = prod.Quantity;
                 prod.Quantity = quantity;
                 _dbContext.Products.AddOrUpdate(prod);

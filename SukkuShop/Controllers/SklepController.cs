@@ -45,7 +45,11 @@ namespace SukkuShop.Controllers
 
                 var optionlist = new List<string> {"promocje", "bestseller", "nowość"};
                 if (categorylist.Contains(id))
-                    categoryId = _dbContext.Categories.FirstOrDefault(x => x.Name == id).CategoryId;
+                {
+                    var firstOrDefault = _dbContext.Categories.FirstOrDefault(x => x.Name == id);
+                    if (firstOrDefault != null)
+                        categoryId = firstOrDefault.CategoryId;
+                }
                 if (categoryId != 0)
                     subcategoryList =
                         _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
@@ -104,8 +108,7 @@ namespace SukkuShop.Controllers
             if (product == null)
                 return View(MVC.Sklep.Views.NoProducts);
 
-            var category =
-                _dbContext.Categories.First(x => x.CategoryId == product.CategoryId);
+            var category = product.Categories;
             var subCategories = new List<int>();
             if (category.UpperCategoryId == 0)
             {

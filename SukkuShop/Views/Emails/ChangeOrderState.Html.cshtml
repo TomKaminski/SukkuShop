@@ -1,0 +1,95 @@
+﻿@model SukkuShop.Models.ChangeOrderStateEmail
+Content-Type: text/html; charset=utf-8
+<html>
+    <head>
+        <title>Zmiana stanu zamówienia na: @Model.State</title>
+    </head>
+    <body>
+        <div style="width: 800px">
+            <a href="@Url.Action(MVC.Home.Index())">
+                <div style="width: 132px; height: 188px; margin: auto">
+                    @Html.EmbedImage("/Content/Images/logo-header.png")
+                </div>
+            </a>
+
+            <div style="color: orange; text-align: center; font-size: 30px; font-family: Segoe UI; font-weight: bold; margin-bottom: 30px">Twoje zamówienie otrzymały nowy status: @Model.State</div>
+            <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">
+                @Model.StateDescription
+            </div>
+            <div style="color: black; font-family: Segoe UI; font-size: 15px; text-align: left; margin-bottom: 10px;font-weight: bold">Poniżej zobaczysz szczegóły Twojego zamówienia:</div>
+            <table style="border-top: 2px solid orange; font-family: Segoe UI; margin-bottom: 10px; border-bottom: 1px solid orange" cellspacing="0">
+                <thead>
+                    <tr style="height: 2em; border-bottom: 2px solid orange">
+                        <th style="width: 125px; line-height: 2em; border-bottom: 2px solid orange">Produkt</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Nazwa</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Ilość</th>
+                        <th style="width: 225px; line-height: 2em; border-bottom: 2px solid orange">Cena</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderViewModelsSummary.OrderViewItemsTotal.OrderProductList)
+                    {
+                        <tr style="border-bottom: 1px solid orange">
+                            <td style="max-height: 100px; text-align: center; border-bottom: 1px solid orange">@Html.EmbedImage("~/Content/Images/Shop/" + item.Image + ".jpg")</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Name</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.Quantity szt. x @item.Packing</td>
+                            <td style="line-height: 100px; max-height: 100px; text-align: center; border-bottom: 1px solid orange">@item.TotalValue zł</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: right; color:black;font-weight: bold;font-family:Segoe UI;margin-bottom: 20px">Produkty RAZEM: <span style="color:orange">@Model.OrderViewModelsSummary.OrderViewItemsTotal.TotalValue</span></div>
+            <table style="width: 800px; border-top: 2px solid orange;margin-bottom: 10px; font-family: Segoe UI; border-bottom: 2px solid orange;" cellspacing="0">
+                <thead>
+                    <tr style="height: 2em; border-bottom: 1px solid orange;">
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Dane osobowe</th>
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Wysyłka</th>
+                        <th style="width: 33%; line-height: 2em; border-bottom: 2px solid orange">Płatność</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center">
+                    <tr>
+                        <td style="width: 33%; height: 100px; line-height: 20px;border-right:2px solid orange ">
+                            @if (Model.OrderViewModelsSummary.Firma)
+                            {
+                                <span style="font-weight: bold;">@Model.OrderViewModelsSummary.UserAddressModel.NazwaFirmy NIP: @Model.OrderViewModelsSummary.UserAddressModel.Nip</span>
+                                <br />
+                                @Model.OrderViewModelsSummary.UserAddressModel.KodPocztowy
+                                @Model.OrderViewModelsSummary.UserAddressModel.Miasto<br />
+                                @:ul. @Model.OrderViewModelsSummary.UserAddressModel.Ulica @Model.OrderViewModelsSummary.UserAddressModel.Numer <br />
+                                @:tel: @Model.OrderViewModelsSummary.UserAddressModel.Telefon
+                            }
+                            else
+                            {
+                                <span style="font-weight: bold;">@Model.OrderViewModelsSummary.UserAddressModel.Imie @Model.OrderViewModelsSummary.UserAddressModel.Nazwisko</span>
+                                <br />
+                                @Model.OrderViewModelsSummary.UserAddressModel.KodPocztowy
+                                @Model.OrderViewModelsSummary.UserAddressModel.Miasto<br />
+                                @:ul. @Model.OrderViewModelsSummary.UserAddressModel.Ulica @Model.OrderViewModelsSummary.UserAddressModel.Numer <br />
+                                @:tel: @Model.OrderViewModelsSummary.UserAddressModel.Telefon
+                            }
+                        </td>
+                        <td style="width: 33%; height: 100px; line-height: 25px;border-right:2px solid orange ">
+                            <span style="font-weight: bold">@Model.OrderViewModelsSummary.OrderShipping.Name</span><br />
+
+                            @Model.OrderViewModelsSummary.OrderShipping.Price<br />
+                            @Model.OrderViewModelsSummary.OrderShipping.Description
+                        </td>
+                        <td style="width: 33%; height: 100px; line-height: 20px; ">
+                            <span style="font-weight: bold">@Model.OrderViewModelsSummary.OrderPayment.Name</span><br />
+
+                            @Model.OrderViewModelsSummary.OrderPayment.Price<br />
+                            @Model.OrderViewModelsSummary.OrderPayment.Description
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="text-align: right; color:black;font-family:Segoe UI;margin-bottom: 20px">RABAT: <span style="color:orange">@Model.OrderViewModelsSummary.DiscountValue (@Model.OrderViewModelsSummary.Discount%)</span></div>
+
+            <div style="text-align: right; color:black;font-weight: bold;font-family:Segoe UI;margin-bottom: 20px">RAZEM: <span style="color:orange">@Model.OrderViewModelsSummary.TotalTotalValue</span></div>
+
+            <div style="color: orange; text-align: center; font-size: 20px; font-family: Segoe UI; font-weight: bold">Dziękujemy za złożenie zamówienia, zapraszamy ponownie!</div>
+        </div>
+    </body>
+
+</html>

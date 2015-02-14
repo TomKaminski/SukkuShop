@@ -147,8 +147,8 @@ namespace SukkuShop.Controllers
             foreach (var item in shoppingCart.Lines)
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
-                var categoryName = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == product.CategoryId).Name;
                 if (product == null) continue;
+                var categoryName = product.Categories.Name;
                 var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
                 var priceFloored = Math.Floor((price??0)*100)/100;
                 productList.Add(new CartProduct

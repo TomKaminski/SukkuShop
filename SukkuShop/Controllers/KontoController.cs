@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Threading.Tasks;
@@ -435,13 +436,11 @@ namespace SukkuShop.Controllers
             if (order != null && (order.OrderInfo != "Wysłane" && order.OrderInfo != "Anulowane"))
             {
                 order.OrderInfo = "Anulowane";
-                var orderItems = _dbContext.OrderDetails.Where(x => x.OrderId == id).ToList();
-                foreach (var item in orderItems)
+                foreach (var item in order.OrderDetails)
                 {
-                    var prod = _dbContext.Products.First(m => m.ProductId == item.ProductId);
-                    prod.Quantity += item.Quantity;
-                    prod.OrdersCount++;
-                    _dbContext.Products.AddOrUpdate(prod);
+                    item.Products.Quantity += item.Quantity;
+                    item.Products.OrdersCount++;
+                    _dbContext.Products.AddOrUpdate(item.Products);
                 }
                 _dbContext.Orders.AddOrUpdate(order);
                 try
@@ -470,41 +469,29 @@ namespace SukkuShop.Controllers
             var order = _dbContext.Orders.First(m => m.OrderId == id);
             if (userId.Id != order.UserId)
                 return RedirectToAction(MVC.Konto.HistoriaZamowien());
-            var paymentModel = _dbContext.PaymentTypes.Where(m => m.PaymentId == order.PaymentId)
-                .Select(k => new SharedShippingOrderSummaryModels
-                {
-                    Description = k.PaymentDescription,
-                    Name = k.PaymentName,
-                    Price = k.PaymentPrice
-                }).First();
-            var shippingModel = _dbContext.ShippingTypes.Where(m => m.ShippingId == order.ShippingId)
-                .Select(k => new SharedShippingOrderSummaryModels
-                {
-                    Description = k.ShippingDescription,
-                    Name = k.ShippingName,
-                    Price = k.ShippingPrice
-                }).First();
-            var orderProductsList = _dbContext.OrderDetails.Where(k => k.OrderId == order.OrderId).Select(x => new OrderItemSummary
-                {                    
-                    Name = x.Products.Description,
-                    Image = x.Products.ImageName,
-                    Price = x.ProdPrice,
-                    Quantity = x.Quantity,
-                    TotalValue = x.SubTotalPrice,
-                    Packing = x.Products.Packing
-                }).ToList();
-            var orderProductsPrice= orderProductsList.Sum(itemSummary => itemSummary.TotalValue);
             var model = new AccountOrderViewModelsSummary
             {
                 Id = id,
                 Firma = userId.KontoFirmowe,
-                OrderPayment = paymentModel,
-                OrderShipping = shippingModel,
+                OrderPayment = new SharedShippingOrderSummaryModels
+                {
+                    Description = order.Payment.PaymentDescription,
+                    Id=order.PaymentId,
+                    Name = order.Payment.PaymentName,
+                    Price = order.Payment.PaymentPrice
+                },
+                OrderShipping = new SharedShippingOrderSummaryModels
+                {
+                    Description = order.Shipping.ShippingDescription,
+                    Id=order.ShippingId,
+                    Name = order.Shipping.ShippingName,
+                    Price = order.Shipping.ShippingPrice
+                },
                 TotalTotalValue = order.TotalPrice.ToString("c"),
                 OrderInfo = order.OrderInfo,
                 OrderDat = order.OrderDate.ToShortDateString(),
                 Discount = order.Discount,
-                DiscountValue = (order.TotalPrice-(orderProductsPrice + shippingModel.Price + paymentModel.Price)).ToString("c"),
+                DiscountValue = (order.TotalPrice-(order.ProductsPrice + order.Payment.PaymentPrice + order.Shipping.ShippingPrice)).ToString("c"),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,
@@ -519,8 +506,16 @@ namespace SukkuShop.Controllers
                 },
                 OrderViewItemsTotal = new OrderViewItemsTotal
                 {
-                    OrderProductList = orderProductsList,
-                    TotalValue = orderProductsPrice                       
+                    OrderProductList = order.OrderDetails.Select(x=>new OrderItemSummary
+                    {
+                        Name = x.Products.Description,
+                        Image = x.Products.ImageName,
+                        Price = x.ProdPrice,
+                        Quantity = x.Quantity,
+                        TotalValue = x.SubTotalPrice,
+                        Packing = x.Products.Packing,
+                    }).ToList(),
+                    TotalValue = order.ProductsPrice                      
                 }
             };
             return View(model);

@@ -43,4 +43,13 @@ namespace SukkuShop.Models
         public string OldEmail { get; set; }
         public string CallbackUrl { get; set; }
     }
+
+    public class ChangeOrderStateEmail : Email
+    {
+        public string To { get; set; }
+        public int Id { get; set; }
+        public string State { get; set; }
+        public string StateDescription { get; set; }
+        public OrderViewModelsSummary OrderViewModelsSummary { get; set; }
+    }
 }

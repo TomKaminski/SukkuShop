@@ -1,0 +1,14 @@
+﻿@model SukkuShop.Models.ChangeOrderStateEmail
+Content-Type: text/plain; charset=utf-8
+
+Stan Twojego zamówienia o ID @Model.Id został zmieniony na @Model.State
+
+@Model.StateDescription
+
+Łączna kwota zamówienia wyniosła @Model.OrderViewModelsSummary.TotalTotalValue
+
+Wybrana metoda przesyłki: @Model.OrderViewModelsSummary.OrderShipping.Name
+
+Wybrana metoda płatności: @Model.OrderViewModelsSummary.OrderPayment.Name
+
+
