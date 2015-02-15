@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Data.Entity.Migrations;
-using System.Diagnostics;
 using System.IO;
+using System.IO.MemoryMappedFiles;
 using System.Linq;
 using System.Web.Mvc;
-using PdfSharp.Drawing;
-using PdfSharp.Pdf;
-using SukkuShop.Identity;
-using SukkuShop.Migrations;
 using SukkuShop.Models;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
@@ -127,27 +125,23 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual FileResult DownloadInvoice()
         {
-            // Create a new PDF document
-            var document = new PdfDocument();
-            document.Info.Title = "Faktura";
- 
-            // Create an empty page
-            var page = document.AddPage();
- 
-            // Get an XGraphics object for drawing
-            var gfx = XGraphics.FromPdfPage(page);
- 
-            // Create a font
-            var font = new XFont("Verdana", 20, XFontStyle.BoldItalic);
- 
-            // Draw the text
-            gfx.DrawString("Miejscę na fakturę zamówienia", font, XBrushes.Black, new XRect(0, 0, page.Width, page.Height),XStringFormats.Center);
-            var stream = new MemoryStream();
-            document.Save(stream, false);
-            return File(stream, System.Net.Mime.MediaTypeNames.Application.Pdf);
+            var workStream = new MemoryStream();
+            var document = new Document();
+            PdfWriter.GetInstance(document, workStream).CloseStream = false;
+
+            document.Open();
+            document.Add(new Paragraph("Tutaj znajduje sie miejsce na fakture."));
+            document.Add(new Paragraph(DateTime.Now.ToString()));
+            document.Close();
+
+            byte[] byteInfo = workStream.ToArray();
+            workStream.Write(byteInfo, 0, byteInfo.Length);
+            workStream.Position = 0;
+
+            return File(workStream, "application/pdf");    
         }
 
-        private string SetStateDescription(string state)
+        private static string SetStateDescription(string state)
         {
             string stateDescription;
             switch (state)
@@ -170,7 +164,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             return stateDescription;
         }
 
-        private object[] GetOrderChangeOptions(string stan)
+        private static object[] GetOrderChangeOptions(string stan)
         {
             switch (stan)
             {
