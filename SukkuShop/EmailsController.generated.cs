@@ -4,7 +4,8 @@
 // to the .tt file (i.e. the T4 template) and save it to regenerate this file.
 
 // Make sure the compiler doesn't complain about missing Xml comments and CLS compliance
-#pragma warning disable 1591, 3008, 3009
+// 0108: suppress "Foo hides inherited member Foo. Use the new keyword if hiding was intended." when a controller and its abstract parent are both processed
+#pragma warning disable 1591, 3008, 3009, 0108
 #region T4MVC
 
 using System;
@@ -43,6 +44,9 @@ namespace T4MVC
                 public readonly string Change = "Change";
                 public readonly string Change_Html = "Change.Html";
                 public readonly string Change_Text = "Change.Text";
+                public readonly string ChangeOrderState = "ChangeOrderState";
+                public readonly string ChangeOrderState_Html = "ChangeOrderState.Html";
+                public readonly string ChangeOrderState_Text = "ChangeOrderState.Text";
                 public readonly string OrderCancel = "OrderCancel";
                 public readonly string OrderCancel_Html = "OrderCancel.Html";
                 public readonly string OrderCancel_Text = "OrderCancel.Text";
@@ -64,6 +68,9 @@ namespace T4MVC
             public readonly string Change = "~/Views/Emails/Change.cshtml";
             public readonly string Change_Html = "~/Views/Emails/Change.Html.cshtml";
             public readonly string Change_Text = "~/Views/Emails/Change.Text.cshtml";
+            public readonly string ChangeOrderState = "~/Views/Emails/ChangeOrderState.cshtml";
+            public readonly string ChangeOrderState_Html = "~/Views/Emails/ChangeOrderState.Html.cshtml";
+            public readonly string ChangeOrderState_Text = "~/Views/Emails/ChangeOrderState.Text.cshtml";
             public readonly string OrderCancel = "~/Views/Emails/OrderCancel.cshtml";
             public readonly string OrderCancel_Html = "~/Views/Emails/OrderCancel.Html.cshtml";
             public readonly string OrderCancel_Text = "~/Views/Emails/OrderCancel.Text.cshtml";
@@ -83,4 +90,4 @@ namespace T4MVC
 }
 
 #endregion T4MVC
-#pragma warning restore 1591, 3008, 3009
+#pragma warning restore 1591, 3008, 3009, 0108

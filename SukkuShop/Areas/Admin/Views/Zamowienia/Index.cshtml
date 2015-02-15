@@ -48,7 +48,7 @@
                             <div ng-if="item.stan=='Wysłane'" style="color:green">Wysłane</div>
                         </td>
                         <td>{{item.total}} PLN</td>
-                        <td><div class="save-text"><a ng-click="">DRUKUJ FAKTURĘ</a></div></td>
+                        <td><div class="save-text"><a target="_blank" href="@Url.Action(MVC.Admin.Zamowienia.DownloadInvoice())">POBIERZ FAKTURĘ</a></div></td>
                     </tr>
                 </tbody>
             </table>

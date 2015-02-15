@@ -61,6 +61,20 @@ adminApp.controller("AdminOrderCtrl", ['$scope', '$http', '$filter', function ($
         });
     };
 
+    $scope.DownloadInvoice = function() {
+        showAjaxLoader();
+        $http.get('/Admin/Zamowienia/DownloadInvoice').
+            success(function () {               
+                hideAjaxLoader();
+                showAjaxTick();
+                fadeOutAjaxTick();
+            }).
+            error(function (xhr, status, error) {
+                alert(error);
+                console.log(xhr.responseText);
+            });
+    }
+
     $scope.ChangeOrderState = function (id, value) {
         showAjaxLoader();
         $http.post('/Admin/Zamowienia/ChangeOrderState', { id: id, value: value }).
