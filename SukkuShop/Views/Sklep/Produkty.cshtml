@@ -67,15 +67,14 @@
                                 </ul>
                                 <div class="image-bottom-panel">
                                     <div ng-if="item.QuantityInStock != 0">
-                                        @using (Ajax.BeginForm("AddToCart", "Koszyk", null, new AjaxOptions { HttpMethod = "POST", OnSuccess = "plz(data)" }))
-                                        {
-                                            <input type="hidden" name="id" value="{{item.Id}}" />
-                                            <div class="add-to-cart-icon">
-                                                <input id="img{{item.Id}}" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width: 75%" />
-                                            </div>
-                                        }
+                                        <div class="add-to-cart-icon">
+                                            <input ng-click="AddToCart(item.Id)" type="image" src="~/Content/Images/Shop/basket.png" alt="Submit Form" style="width: 75%" />
+                                        </div> 
                                     </div>
-                                    <div class="add-to-cart-info"></div>
+                                    <div id="addinfo{{item.Id}}" class="add-to-cart-info" ng-if="item.CartAmount!=0" style="color:green;font-family:Segoe UI">
+                                        &#10003;{{item.CartAmount}}
+                                    </div>
+
                                     <a ng-href="/Sklep/SzczegółyProduktu/{{item.Id}}"><div class="info-icon"><img src="~/Content/Images/Shop/info_icon.png" style="width: 75%" /></div></a>
                                 </div>
                             </div>

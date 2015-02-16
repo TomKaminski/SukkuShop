@@ -25,10 +25,10 @@ namespace SukkuShop.Controllers
 
         // GET: Produkty
 
-        public virtual ActionResult GetProductByCategory(string id = null)
+        public virtual ActionResult GetProductByCategory(Cart shoppingCart,string id = null)
         {
             //getallproducts
-            GetAllProducts();
+            GetAllProducts(shoppingCart.Lines.ToList());
 
             //Novelty system
             _shop.Bestsellers();
@@ -155,7 +155,7 @@ namespace SukkuShop.Controllers
                     Packing = product.Packing,
                     Description = product.Description,
                     ReservedQuantity = product.ReservedQuantity,
-                    IconName = product.IconName
+                    IconName = product.IconName ?? "NoPhoto_small"
                 },
                 SimilarProducts = similarProducts
             };
@@ -249,7 +249,7 @@ namespace SukkuShop.Controllers
             return RedirectToAction(MVC.Home.Index());
         }
 
-        private void GetAllProducts()
+        private void GetAllProducts(List<Cart.CartLine> liness )
         {
             _shop.Products = _dbContext.Products.Where(k=>k.Published && !k.WrongModel).Select(x => new ProductModel
             {
@@ -262,8 +262,15 @@ namespace SukkuShop.Controllers
                 Category = x.Categories.Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount,
-                QuantityInStock = (x.Quantity??0) - x.ReservedQuantity
+                QuantityInStock = (x.Quantity??0) - x.ReservedQuantity,
+                CartAmount = 0
             }).ToList();
+
+            foreach (var product in _shop.Products)
+            {
+                var firstOrDefault = liness.FirstOrDefault(x => x.Id == product.Id);                
+                product.CartAmount = firstOrDefault==null?0:firstOrDefault.Quantity;
+            }
         }
     }
 }

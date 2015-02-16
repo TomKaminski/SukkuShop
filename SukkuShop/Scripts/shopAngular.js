@@ -16,7 +16,11 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
                 $scope.subCategoryList = $scope.products.subcategoryList;
                 $scope.selectedIndex = $scope.subCategoryList.length - 1;
                 $scope.productList = filterProducts();
-            });
+            }).
+              error(function(xhr, status, error) {
+                  alert(error);
+                  console.log(xhr);
+              });
             $scope.imgName = "inne";
         } else {
             $http.get("/Sklep/GetProductByCategory/" + $scope.category).success(function(data) {
@@ -28,10 +32,41 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
                     $scope.imgName = category.toLowerCase();
                 else
                     $scope.imgName = "inne";
-            });
+            }).
+              error(function (xhr, status, error) {
+                  alert(error);
+                  console.log(xhr);
+              });
             
         }
     };
+    $scope.AddToCart = function (id) {
+        $http.post('/Koszyk/AddToCart/SetQuantity', { id: id, quantity: 1 }).
+            success(function (data) {
+                var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', '').replace('zł', '').replace('koszyk', '').replace(' ', '');
+                var result = $.grep($scope.products.productList, function (e) { return e.Id == data.id; });
+
+                if (parseFloat(plza) != parseFloat(data.value)) {
+                    result[0].CartAmount++;
+                    $("#cart-price-header").html("KOSZYK " + data.value + " zł");
+                } else {
+                    $("#addinfo" + id).html("&#10005; " + result[0].CartAmount);
+                    jQuery("#addinfo" + id).css("color", "red");
+                    jQuery("#addinfo" + id).fadeOut(1000,function() {
+                        jQuery(this).css("color", "green").html("&#10003;" + result[0].CartAmount).fadeIn(1000);
+
+                    });
+                }
+                    
+            }).
+            error(function (xhr, status, error) {
+                alert(error);
+                console.log(xhr.responseText);
+            });
+    }
+    function plz(data) {
+
+    }
 
     $scope.itemClicked = function($index) {
         $scope.selectedIndex = $index;
@@ -119,28 +154,6 @@ function currency(n) {
     return isNaN(n) ? false : n.toFixed(2);
 }
 
-function plz(data) {
-    var plza = $("#cart-price-header").html().toLowerCase().replace('&nbsp;', ' ').replace('zł', '').replace('koszyk', '').replace(' ', '');
-    if (parseFloat(plza) != parseFloat(data.value)) {
-        var obj = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
-        obj.css('color', 'green');
-        obj.html('&#10003;');
-        obj.stop().show("fast", function () {
-            obj.fadeOut(2500);
-        });
-        $("#cart-price-header").html('koszyk ' + data.value + ' zł');
-
-    } else {
-        var obj2 = $("#img" + data.id).parent().parent().parent().parent().children('div.add-to-cart-info');
-
-        obj2.css('color', 'red');
-        obj2.html('&#10006;');
-        obj2.stop().show("fast", function () {
-            obj2.fadeOut(2500);
-        });
-    }
-
-};
 jQuery(document).ready(function () {
     jQuery('#add-to-cart-info').hide();
     jQuery("ul.sort-menu div.plz").click(function () {

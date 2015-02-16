@@ -453,6 +453,8 @@ namespace Links
                 public static readonly string inne_jpg = Url("inne.jpg");
                 public static readonly string kosmetyki_jpg = Url("kosmetyki.jpg");
                 public static readonly string lupa_png = Url("lupa.png");
+                public static readonly string NoPhoto_normal_jpg = Url("NoPhoto_normal.jpg");
+                public static readonly string NoPhoto_small_jpg = Url("NoPhoto_small.jpg");
                 public static readonly string przyprawy_jpg = Url("przyprawy.jpg");
             }
         

@@ -99,27 +99,32 @@
                             returnUrl = Session["returnUrl"]
                         })</div>
 
-<div id="dialog" title="Zapytaj o produkt" >
-    <p class="ask">Zabrakło produktu, którym jesteś zainteresowany/a? Wyślij do nas zapytanie o ten produkt, <br />a gdy będzie on dostępny, otrzymasz informację na podany adres email.</p>
-    <p class="product">Produkt którego szukasz:</p>
-    <div class="cont">
-        <img class="pic"src=~/@("Content/Images/Shop/"+Model.Product.IconName+".jpg") width="100" height="100"/>
-        <p class="prod-name">@Model.Product.Name</p>
-    </div>
-    @using (Html.BeginForm(MVC.Sklep.AskForProduct(), FormMethod.Post,new{id="dialogform"}))
-    {
-        <label for="email" style="font-family: SegoeLight">Podaj swój adres Email:</label>
-        <input type="text" id="email" name="email"/>
-        @Html.Hidden("id",Model.Product.Id)
-    }
-    <div class="send">
-        <div id="triangle-right"></div>
-        <a href="" id="submitdialog">Wyślij zapytanie</a>
-    </div>  
-    <div id="dialogsuccess" >
 
+@if (Model.Product.QuantityInStock - Model.Product.ReservedQuantity <= 0)
+{
+    <div id="dialog" title="Zapytaj o produkt">
+        <p class="ask">Zabrakło produktu, którym jesteś zainteresowany/a? Wyślij do nas zapytanie o ten produkt, <br />a gdy będzie on dostępny, otrzymasz informację na podany adres email.</p>
+        <p class="product">Produkt którego szukasz:</p>
+        <div class="cont">
+            <img class="pic" src=~/@("Content/Images/Shop/"+Model.Product.IconName+".jpg") width="100" height="100" />
+            <p class="prod-name">@Model.Product.Name</p>
+        </div>
+        @using (Html.BeginForm(MVC.Sklep.AskForProduct(), FormMethod.Post, new { id = "dialogform" }))
+        {
+            <label for="email" style="font-family: SegoeLight">Podaj swój adres Email:</label>
+            <input type="text" id="email" name="email" />
+            @Html.Hidden("id", Model.Product.Id)
+        }
+        <div class="send">
+            <div id="triangle-right"></div>
+            <a href="" id="submitdialog">Wyślij zapytanie</a>
+        </div>
+        <div id="dialogsuccess">
+
+        </div>
     </div>
-</div>
+}
+
 @Styles.Render("~/Content/css/jquery-ui.min.css")
 @Styles.Render("~/Content/css/Sklep/ShopDetails.min.css")
 @section Scripts{

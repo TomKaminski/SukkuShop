@@ -43,6 +43,7 @@ namespace SukkuShop.Models
         public string Category { get; set; }
         public DateTime DateAdded { get; set; }
         public int OrdersCount { get; set; }
+        public int CartAmount { get; set; }
     }
 
     public class ProductViewModel:SharedProductModels

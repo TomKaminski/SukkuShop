@@ -57,15 +57,15 @@ namespace SukkuShop.Controllers
 
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult Produkty()
+        public virtual System.Web.Mvc.ActionResult GetProductByCategory()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
-        public virtual System.Web.Mvc.ActionResult SzczegółyProduktu()
+        public virtual System.Web.Mvc.ActionResult Produkty()
         {
-            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SzczegółyProduktu);
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Produkty);
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -129,6 +129,7 @@ namespace SukkuShop.Controllers
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public class ActionParamsClass_GetProductByCategory
         {
+            public readonly string shoppingCart = "shoppingCart";
             public readonly string id = "id";
         }
         static readonly ActionParamsClass_Produkty s_params_Produkty = new ActionParamsClass_Produkty();
@@ -202,14 +203,15 @@ namespace SukkuShop.Controllers
         public T4MVC_SklepController() : base(Dummy.Instance) { }
 
         [NonAction]
-        partial void GetProductByCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string id);
+        partial void GetProductByCategoryOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, SukkuShop.Models.Cart shoppingCart, string id);
 
         [NonAction]
-        public override System.Web.Mvc.ActionResult GetProductByCategory(string id)
+        public override System.Web.Mvc.ActionResult GetProductByCategory(SukkuShop.Models.Cart shoppingCart, string id)
         {
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.GetProductByCategory);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "shoppingCart", shoppingCart);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
-            GetProductByCategoryOverride(callInfo, id);
+            GetProductByCategoryOverride(callInfo, shoppingCart, id);
             return callInfo;
         }
 
