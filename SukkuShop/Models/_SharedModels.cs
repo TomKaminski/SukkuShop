@@ -29,6 +29,7 @@ namespace SukkuShop.Models
         [NotEqualTo("Nie podano", ErrorMessage = "Zła wartość")]
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]
         [Phone(ErrorMessage = "Numer telefonu jest niepoprawny")]
+        [RegularExpression("^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$", ErrorMessage = "Telefon jest niepoprawny.")]
         public string Telefon { get; set; }
 
         [Required(ErrorMessage = "Pole {0} jest wymagane.")]

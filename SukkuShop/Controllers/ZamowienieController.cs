@@ -485,7 +485,7 @@ namespace SukkuShop.Controllers
                         TotalValue = hehe,
                         OrderProductList = orderdetailslist.Select(m => new OrderItemSummary
                         {
-                            Image = m.Products.IconName,
+                            Image = m.Products.IconName ?? "NoPhoto_small",
                             Name = m.Products.Name,
                             Price = m.Products.Price??0,
                             Quantity = m.Quantity,
@@ -589,7 +589,7 @@ namespace SukkuShop.Controllers
                     Price = decimal.Round(priceFloored,2),
                     Quantity = item.Quantity,
                     TotalValue = priceFloored * item.Quantity,
-                    Image=product.ImageName,
+                    Image = product.IconName ?? "NoPhoto_small",
                     Packing = product.Packing,
                     Id = product.ProductId
                 });

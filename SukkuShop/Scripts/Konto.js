@@ -58,6 +58,7 @@ $(document).ready(function() {
         }).success(function (data) {
             setTimeout(hideAjaxLoader, 1000);
             $("#replace").empty().append(data);
+            changeuserInfo();
         });
     });
 
@@ -74,6 +75,7 @@ $(document).ready(function() {
         }).success(function (data) {
             setTimeout(hideAjaxLoader, 1000);
             $("#replace").empty().append(data);
+            changeFirmaInfo();
         });
     });
 
@@ -102,6 +104,7 @@ $(document).ready(function() {
 
 
 function changeFirmaInfo() {
+    hideAjaxLoader();
     $("#changeFirmaInfoForm").validate({
         rules: {
             NazwaFirmy: {
@@ -123,8 +126,8 @@ function changeFirmaInfo() {
                 minlength: 2,
                 regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$|^Nie podano$/
             },
-            Phone: {
-                regex: /^[1-9][0-9]{8}$|^Nie podano$/
+            Telefon: {
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$|^Nie podano$/
             },
             PostalCode: {
                 regex: /^[0-9]{2}-[0-9]{3}$|^Nie podano$/
@@ -154,7 +157,7 @@ function changeFirmaInfo() {
                 minlength: "Miasto musi zawierać conajmniej 2 znaki.",
                 regex: "Miasto jest niepoprawne."
             },
-            Phone: {
+            Telefon: {
                 regex: "Numer telefonu jest niepoprawny."
             },
             PostalCode: {
@@ -169,6 +172,7 @@ function changeFirmaInfo() {
 }
 
 function changeuserInfo() {
+    hideAjaxLoader();
     $("#changeUserInfoForm").validate({
         rules: {
             Name: {
@@ -190,8 +194,8 @@ function changeuserInfo() {
                 minlength: 2,
                 regex: /^[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*[-, ]{0,1}[A-Ża-ż]*$|^Nie podano$/
             },
-            Phone: {
-                regex: /^[1-9][0-9]{8}$|^Nie podano$/
+            Telefon: {
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$|^Nie podano$/
             },
             PostalCode: {
                 regex: /^[0-9]{2}-[0-9]{3}$|^Nie podano$/
@@ -221,7 +225,7 @@ function changeuserInfo() {
                 minlength: "Miasto musi zawierać conajmniej 2 znaki.",
                 regex: "Miasto jest niepoprawne."
             },
-            Phone: {
+            Telefon: {
                 regex: "Numer telefonu jest niepoprawny."
             },
             PostalCode: {

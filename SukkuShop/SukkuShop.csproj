@@ -833,6 +833,8 @@
     <Content Include="Content\Images\Shop\inne.jpg" />
     <Content Include="Content\Images\Shop\kosmetyki.jpg" />
     <Content Include="Content\Images\Shop\lupa.png" />
+    <Content Include="Content\Images\Shop\NoPhoto_normal.jpg" />
+    <Content Include="Content\Images\Shop\NoPhoto_small.jpg" />
     <Content Include="Content\Images\Shop\przyprawy.jpg" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />

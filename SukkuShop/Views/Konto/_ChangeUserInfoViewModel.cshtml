@@ -1,5 +1,5 @@
 ﻿@model SukkuShop.Models.ChangeUserInfoViewModel
-@using (Ajax.BeginForm(MVC.Konto.ChangeUserInfoViewModel(), new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "showAjaxLoader()", OnComplete = "hideAjaxLoader()", OnFailure = "onError(xhr, status, error)" }, new { id = "changeUserInfoForm" }))
+@using (Ajax.BeginForm(MVC.Konto.ChangeUserInfoViewModel(), new AjaxOptions { HttpMethod = "POST", InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", OnBegin = "showAjaxLoader()", OnComplete = "changeuserInfo()", OnFailure = "onError(xhr, status, error)" }, new { id = "changeUserInfoForm" }))
 {
 
     <div class="data-container">

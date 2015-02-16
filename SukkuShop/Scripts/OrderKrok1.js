@@ -2,11 +2,11 @@
     var shiping = false;
     var payment = false;
     $("input[name=shipping]").each(function () {
-        if ($(this).is(':checked'))
+        if ($(this).is(':checked') && !$(this).is(":disabled"))
             shiping = true;
     });
     $("input[name=payment]").each(function () {
-        if ($(this).is(':checked'))
+        if ($(this).is(':checked')&& !$(this).is(":disabled"))
             payment = true;
     });
     if (payment && shiping)
@@ -50,29 +50,66 @@ $("input:radio[name=shipping]").click(function () {
     var target = $('#shipping-price-summary');
     target.empty().append(currency(sum) + " zł");
     if (id == 5) {
-        $("input:radio[name=payment]").each(function () {
-            $(this).attr('checked', false);
-        });
+        
         $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
         $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
         $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
         $("input:radio[id=pay4]").attr('disabled', false);
         $("input:radio[id=pay3]").attr('disabled', true);
         $("input:radio[id=pay2]").attr('disabled', true);
-        $('#payment-box-summary').empty().append('WYBIERZ');
     } else {
-        $("input:radio[name=payment]").each(function () {
-            $(this).attr('checked', false);
-        });
+        
         $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
         $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
         $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
         $("input:radio[id=pay4]").attr('disabled', true);
         $("input:radio[id=pay3]").attr('disabled', false);
         $("input:radio[id=pay2]").attr('disabled', false);
-        $('#payment-box-summary').empty().append('WYBIERZ');
+
     }
     priceSummary();
+});
+
+$(document).ready(function() {
+    var id=-1;
+    $("input:radio[name=shipping]").each(function () {
+        if ($(this).is(":checked")) {
+            id = parseInt($(this).attr("id").replace('ship', ''));
+            var value = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
+            var productsPrice = $('#products-price-sum').text().replace(' zł', '').replace(',', '.');
+            var sum = Number(currency(value)) + Number(currency(productsPrice));
+            $('#dostawa-box-summary').empty().append(value + ' zł');
+            var target = $('#shipping-price-summary');
+            target.empty().append(currency(sum) + " zł");
+        }
+            
+    });
+    if (id == 5) {
+
+        $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay4]").attr('disabled', false);
+        $("input:radio[id=pay3]").attr('disabled', true);
+        $("input:radio[id=pay2]").attr('disabled', true);
+    } else if (id >0 && id!=5) {
+
+        $("input:radio[id=pay4]").siblings('label').css('background-image', 'url(/Content/Images/checkbox-nonactive.png)');
+        $("input:radio[id=pay2]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay3]").siblings('label').css('background-image', 'url(/Content/Images/checkbox.png)');
+        $("input:radio[id=pay4]").attr('disabled', true);
+        $("input:radio[id=pay3]").attr('disabled', false);
+        $("input:radio[id=pay2]").attr('disabled', false);
+
+    }
+    $("input:radio[name=payment]").each(function () {
+        if ($(this).is(":checked")) {
+            var valuee = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
+            var summ = currency(valuee);
+            $('#payment-box-summary').empty().append(summ + ' zł');
+            priceSummary();
+        }
+    });    
 });
 
 $("input:radio[name=payment]").click(function () {

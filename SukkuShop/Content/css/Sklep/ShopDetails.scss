@@ -51,10 +51,8 @@ img.grayscale {
 }
 
 .product-details-main-container {
-height: 450px;
 	width: 1066px;
 	margin: 60px auto 12px;
-	padding-bottom: 60px;
 	border-bottom: 1px solid $color_tree_poppy_approx;
 	position: relative;
     .product-promotion-label-img {
@@ -291,6 +289,7 @@ height: 450px;
 		    font-family: $font_6;
 		    font-size: 14px;
 		    margin-top: 14px;
+min-height: 50px;
 	    }
     }
 }

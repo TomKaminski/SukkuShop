@@ -10,8 +10,11 @@
         <div class="product-promotion-label-img">PROMOCJA -@Model.Product.Promotion%</div>
     }
     <div class="product-details-img" style="background-color:white;">
-        <img id="product-image-details" src=~/@("Content/Images/Shop/"+Model.Product.ImageName+".jpg") data-zoom-image="@Url.Content("~/Content/Images/Shop/" + Model.Product.ImageName+".jpg")">
-        <img src="~/Content/Images/Shop/lupa.png" class="lupa"/>
+        <img id="product-image-details" src=~/@("Content/Images/Shop/"+Model.Product.ImageName+".jpg") data-zoom-image="@Url.Content("~/Content/Images/Shop/" + Model.Product.ImageName+".jpg")">        
+        @if (Model.Product.ImageName != "NoPhoto_normal")
+        {
+            <img src="~/Content/Images/Shop/lupa.png" class="lupa" />
+        }
         <div class="product-category-label-img">@Model.Product.Category</div>
     </div>
     
@@ -32,7 +35,7 @@
         <div class="avaibility segoe-semibold">
             @if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity > 0)
             {
-                <span style="color: green">PRODUKT DOSTĘPNY (@Model.Product.QuantityInStock)</span>
+                <span style="color: green">PRODUKT DOSTĘPNY @*(@Model.Product.QuantityInStock)*@</span>
             }
             else
             {
@@ -48,7 +51,7 @@
         {
             <div class="quantity-box">
                 <div class="quanity-text">Ilość:</div>
-                @Html.TextBox("quantity", null, new {id = "quantity_counter", placeholder = "1"})
+                @Html.TextBox("quantity", 1, new {id = "quantity_counter"})
                 @Html.Hidden("id", Model.Product.Id)
                 <div class="arrows-box">
                     <div id="increase_quantity" class="arrow-up-box"><div class="quantity-arrow-up"></div></div>
@@ -78,7 +81,7 @@
         <div class="details-info-title">szczegóły produktu</div>
         <div class="details-info-text">@Model.Product.Description</div>
     </div>
-    <div class="clear">&nbsp;</div>
+    <div class="clear" style="clear:both">&nbsp;</div>
 </div>
 
 <div class="details-info-title" style="text-align: center; margin-top: 30px;">podobne w tej kategorii</div>

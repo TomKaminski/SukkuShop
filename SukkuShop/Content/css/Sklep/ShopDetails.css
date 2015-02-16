@@ -24,10 +24,8 @@ img.grayscale {
   /* Chrome 19+, Safari 6+, Safari 6+ iOS */ }
 
 .product-details-main-container {
-  height: 450px;
   width: 1066px;
   margin: 60px auto 12px;
-  padding-bottom: 60px;
   border-bottom: 1px solid #f89b1d;
   position: relative; }
   .product-details-main-container .product-promotion-label-img {
@@ -232,7 +230,8 @@ img.grayscale {
     .product-details-main-container .product-details-info-container .details-info-text {
       font-family: SegoeLight;
       font-size: 14px;
-      margin-top: 14px; }
+      margin-top: 14px;
+      min-height: 50px; }
 
 .details-info-title {
   font-family: Segoe UI;

@@ -102,7 +102,7 @@ namespace SukkuShop.Controllers
 
 
         //[DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
-        public virtual ActionResult SzczegółyProduktu(int id)
+        public virtual ActionResult SzczegółyProduktu(int id=1)
         {
             var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id && x.Published && !x.WrongModel);
             if (product == null)
@@ -125,7 +125,7 @@ namespace SukkuShop.Controllers
                         x.ProductId != product.ProductId && x.Published).Select(j => new SimilarProductModel
                         {
                             Id = j.ProductId,
-                            ImageName = j.IconName,
+                            ImageName = j.IconName ?? "NoPhoto_small",
                             Name = j.Name,
                             Price = j.Price??0,
                             Available = j.Quantity - j.ReservedQuantity > 0,
@@ -146,7 +146,7 @@ namespace SukkuShop.Controllers
                 {
                     Category = category.Name,
                     Id = product.ProductId,
-                    ImageName = product.ImageName,
+                    ImageName = product.ImageName ?? "NoPhoto_normal",
                     Name = product.Name,
                     Price = product.Price??0,
                     PriceAfterDiscount = priceFloored,
@@ -254,7 +254,7 @@ namespace SukkuShop.Controllers
             _shop.Products = _dbContext.Products.Where(k=>k.Published && !k.WrongModel).Select(x => new ProductModel
             {
                 Name = x.Name,
-                ImageName = x.IconName,
+                ImageName = x.IconName ?? "NoPhoto_small",
                 Price = x.Price??0,
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,

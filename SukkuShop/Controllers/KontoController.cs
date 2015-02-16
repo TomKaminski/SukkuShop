@@ -509,7 +509,7 @@ namespace SukkuShop.Controllers
                     OrderProductList = order.OrderDetails.Select(x=>new OrderItemSummary
                     {
                         Name = x.Products.Description,
-                        Image = x.Products.ImageName,
+                        Image = x.Products.IconName ?? "NoPhoto_small",
                         Price = x.ProdPrice,
                         Quantity = x.Quantity,
                         TotalValue = x.SubTotalPrice,

@@ -302,7 +302,7 @@ function newAddressFormFirma() {
             },
             Telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}$/,
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$/,
                 notEqual: "Nie podano"
             },
             KodPocztowy: {
@@ -381,7 +381,7 @@ function newAddressForm() {
             },
             Telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}$/,
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$/,
                 notEqual: "Nie podano"
             },
             KodPocztowy: {
@@ -473,7 +473,7 @@ function newClientFormFirma() {
             },
             Telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}$/,
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$/,
                 notEqual: "Nie podano"
             },
             KodPocztowy: {
@@ -576,7 +576,7 @@ function newClientForm() {
             },
             Telefon: {
                 required: true,
-                regex: /^[1-9][0-9]{8}$/,
+                regex: /^[1-9][0-9]{8}$|^[1-9][0-9]{2}[' ']{1}[0-9]{3}[' ']{1}[0-9]{3}$/,
                 notEqual: "Nie podano"
             },
             KodPocztowy: {
