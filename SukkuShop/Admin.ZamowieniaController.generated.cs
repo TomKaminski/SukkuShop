@@ -61,6 +61,18 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.ChangeOrderState);
         }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.PartialViewResult ChangeOrderStateFromDetails()
+        {
+            return new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.ChangeOrderStateFromDetails);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.ActionResult SzczegolyZamowienia()
+        {
+            return new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SzczegolyZamowienia);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ZamowieniaController Actions { get { return MVC.Admin.Zamowienia; } }
@@ -80,6 +92,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string Index = "Index";
             public readonly string GetOrdersList = "GetOrdersList";
             public readonly string ChangeOrderState = "ChangeOrderState";
+            public readonly string ChangeOrderStateFromDetails = "ChangeOrderStateFromDetails";
+            public readonly string SzczegolyZamowienia = "SzczegolyZamowienia";
             public readonly string DownloadInvoice = "DownloadInvoice";
         }
 
@@ -89,6 +103,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             public const string Index = "Index";
             public const string GetOrdersList = "GetOrdersList";
             public const string ChangeOrderState = "ChangeOrderState";
+            public const string ChangeOrderStateFromDetails = "ChangeOrderStateFromDetails";
+            public const string SzczegolyZamowienia = "SzczegolyZamowienia";
             public const string DownloadInvoice = "DownloadInvoice";
         }
 
@@ -102,6 +118,23 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string id = "id";
             public readonly string value = "value";
         }
+        static readonly ActionParamsClass_ChangeOrderStateFromDetails s_params_ChangeOrderStateFromDetails = new ActionParamsClass_ChangeOrderStateFromDetails();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_ChangeOrderStateFromDetails ChangeOrderStateFromDetailsParams { get { return s_params_ChangeOrderStateFromDetails; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_ChangeOrderStateFromDetails
+        {
+            public readonly string id = "id";
+            public readonly string value = "value";
+        }
+        static readonly ActionParamsClass_SzczegolyZamowienia s_params_SzczegolyZamowienia = new ActionParamsClass_SzczegolyZamowienia();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_SzczegolyZamowienia SzczegolyZamowieniaParams { get { return s_params_SzczegolyZamowienia; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_SzczegolyZamowienia
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -112,9 +145,13 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string _ChangeOrderStateFromDetails = "_ChangeOrderStateFromDetails";
                 public readonly string Index = "Index";
+                public readonly string SzczegolyZamowienia = "SzczegolyZamowienia";
             }
+            public readonly string _ChangeOrderStateFromDetails = "~/Areas/Admin/Views/Zamowienia/_ChangeOrderStateFromDetails.cshtml";
             public readonly string Index = "~/Areas/Admin/Views/Zamowienia/Index.cshtml";
+            public readonly string SzczegolyZamowienia = "~/Areas/Admin/Views/Zamowienia/SzczegolyZamowienia.cshtml";
         }
     }
 
@@ -155,6 +192,31 @@ namespace SukkuShop.Areas.Admin.Controllers
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
             ChangeOrderStateOverride(callInfo, id, value);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ChangeOrderStateFromDetailsOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo, int id, string value);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult ChangeOrderStateFromDetails(int id, string value)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.ChangeOrderStateFromDetails);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "value", value);
+            ChangeOrderStateFromDetailsOverride(callInfo, id, value);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void SzczegolyZamowieniaOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult SzczegolyZamowienia(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.SzczegolyZamowienia);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            SzczegolyZamowieniaOverride(callInfo, id);
             return callInfo;
         }
 

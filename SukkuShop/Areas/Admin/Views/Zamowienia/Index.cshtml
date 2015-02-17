@@ -30,8 +30,8 @@
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in ordersList">
-                        <td>{{item.id}}<a ng-href="@Url.Action("Szczegóły","Klienci")/{{item.id}}"><div class="icon-eye-open icon"></div></a></td>
-                        <td>{{item.email}}<a ng-if="item.userId!=null" ng-href="@Url.Action("Szczegóły","Klienci")/{{item.id}}"><div class="icon-eye-open icon"></div></a></td>
+                        <td>{{item.id}}<a ng-href="@Url.Action("SzczegolyZamowienia","Zamowienia")/{{item.id}}"><div class="icon-eye-open icon"></div></a></td>
+                        <td>{{item.email}}<a ng-if="item.userId!=null" ng-href="@Url.Action("Szczegóły", "Klienci")/{{item.userId}}"><div class="icon-eye-open icon"></div></a></td>
                         <td>{{item.data}}</td>
                         <td>
                             <div ng-if="item.stan!='Anulowane' && item.stan!='Wysłane'">

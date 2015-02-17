@@ -1,0 +1,129 @@
+﻿@model SukkuShop.Areas.Admin.Models.AdminOrderViewModelsSummary
+
+@{
+    ViewBag.Title = "SzczegółyZamówienia";
+}
+
+<div class="order-container">
+    <div class="title">Podgląd zamówienia</div>
+    <div class="options-container">
+        <div class="left-box">
+            Data zamówienia: <p>@Model.OrderDat</p>
+        </div>
+        <div class="right-box" id="id-box">
+            Numer zamówienia: <p>@Model.Id</p>
+        </div>
+        <div class="left-box" id="replace">
+
+            @if (Model.OrderInfo == "Anulowane")
+            {@:Stan zamówienia:
+                <p style="color: red">@Model.OrderInfo</p>
+            }
+            else if (Model.OrderInfo == "Wysłane")
+            {@:Stan zamówienia:
+                <p id="order-info" style="color: green">@Model.OrderInfo</p>
+            }
+            else
+            {
+                using (Ajax.BeginForm(MVC.Admin.Zamowienia.ChangeOrderStateFromDetails(), new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", HttpMethod = "POST", OnSuccess = "endAjaxLoader()" }, new { id = "changeStateForm" }))
+                {
+                    <span style="float:left;margin:0 10px 0 80px">Stan zamówienia:</span>
+                    <div class="styled-select">
+                        @Html.DropDownList("value", (List<SelectListItem>)ViewBag.OrderStateList)
+                    </div>
+                    @Html.HiddenFor(x=>x.Id)
+                    <a href="" id="submitOrderState" style="float:left;margin-left: 10px">ZAPISZ</a>
+                }
+
+            }
+        </div>
+        <div class="right-box" id="anuluj-box">
+            <a href="@Url.Action(MVC.Admin.Zamowienia.DownloadInvoice())">Pobierz fakturę</a>
+        </div>
+        <div class="clear" style="clear:both">&nbsp; </div>
+    </div>
+
+    <table class="order-table" cellspacing="0">
+        <thead>
+            <tr>
+                <th>Zamówione produkty</th>
+                <th>Cena</th>
+                <th>Ilość</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderViewItemsTotal.OrderProductList)
+            {
+                <tr>
+                    <td>
+                        <img img src="@Url.Content("~/Content/Images/Shop/"+item.Image+".jpg")" alt="produkt" />
+                        <div class="custom-product-text-container">
+                            <p>
+                                <span style="font-size: 18px; line-height: 25px;">@item.Name</span>
+                            </p>
+                        </div>
+                    </td>
+                    <td>@item.Price zł</td>
+                    <td>@item.Quantity szt. x @item.Packing</td>
+                    <td>@item.TotalValue zł</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="products-price-summary"><span style="margin-right: 15px">Razem</span> @Model.OrderViewItemsTotal.TotalValue zł</div>
+    <div class="order-title">Dostawa</div>
+    <div class="order-summary-header-text">@Model.OrderShipping.Name</div>
+    <div class="shipping-price">@Model.OrderShipping.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-title">Adres dostawy</div>
+    @if (Model.Firma)
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.NazwaFirmy <br />NIP @Model.UserAddressModel.Nip</div>
+    }
+    else
+    {
+        <div class="order-summary-header-text">@Model.UserAddressModel.Imie @Model.UserAddressModel.Nazwisko</div>
+    }
+
+    <div class="clear">&nbsp;</div>
+    <div class="order-summary-description-text">
+        ul. @Model.UserAddressModel.Ulica @Model.UserAddressModel.Numer<br />
+        @Model.UserAddressModel.KodPocztowy @Model.UserAddressModel.Miasto<br />
+        Tel.: @Model.UserAddressModel.Telefon<br />
+    </div>
+
+    <div class="order-title" style="clear: both">Płatność</div>
+    <div class="order-summary-header-text">@Model.OrderPayment.Name</div>
+    <div class="shipping-price">@Model.OrderPayment.Price zł</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-title" style="clear: both">Uwagi Klienta</div>
+    <div class="shipping-price">@Model.UserOrderInfo</div>
+    <div class="clear">&nbsp;</div>
+    <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
+    <ul id="products-summary" style="padding-bottom: 20px;">
+        <li>
+            <div id="price-box">Produkty: @Model.OrderViewItemsTotal.TotalValue ZŁ</div>
+        </li>
+        <li>
+            <div id="price-box">Wysyłka: @Model.OrderShipping.Price ZŁ</div>
+        </li>
+        <li>
+            <div id="price-box">Płatność: @Model.OrderPayment.Price ZŁ</div>
+        </li>
+        <li>
+            <div id="price-box">Rabat: @Model.DiscountValue (@Model.Discount%)</div>
+        </li>
+        <li class="summary-text-bold">
+            <div id="price-box">Razem: <span style="color: #f89b1d">@Model.TotalTotalValue</span></div>
+        </li>
+    </ul>
+    <a href="@Url.Action(MVC.Admin.Zamowienia.Index())">
+        <div id="triangle-left-big" style="margin-top: 0"></div><div class="order-title-ending" style="float: left;">POWRÓT</div>
+    </a>
+
+</div>
+
+
+@Styles.Render("~/Areas/Admin/Content/css/AdminOrderDetails.min.css")
+@Scripts.Render("~/Areas/Admin/Scripts/AdminOrderDetails.min.js")

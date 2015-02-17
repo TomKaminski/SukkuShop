@@ -1,0 +1,22 @@
+﻿@model List<SelectListItem>
+@if (ViewBag.AjaxOrderState == "Anulowane")
+{@:Stan zamówienia:
+    <p style="color: red">@ViewBag.AjaxOrderState</p>
+}
+else if (ViewBag.AjaxOrderState == "Wysłane")
+{@:Stan zamówienia:
+    <p id="order-info" style="color: green">@ViewBag.AjaxOrderState</p>
+}
+else
+{
+    using (Ajax.BeginForm(MVC.Admin.Zamowienia.ChangeOrderStateFromDetails(), new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "replace", HttpMethod = "POST", OnSuccess = "endAjaxLoader()" }, new { id = "changeStateForm" }))
+    {
+        <span style="float:left;margin:0 10px 0 80px">Stan zamówienia:</span>
+        <div class="styled-select">
+            @Html.DropDownList("value", Model)
+        </div>
+        @Html.Hidden("Id", (int)ViewBag.OrderId)
+    <a href="" id="submitOrderState" style="float:left;margin-left: 10px">ZAPISZ</a>
+    }
+
+}

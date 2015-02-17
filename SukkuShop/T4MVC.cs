@@ -610,6 +610,11 @@ namespace Links
                     private const string URLPATH = "~/Areas/Admin/Content/css";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string AdminOrderDetails_scss = Url("AdminOrderDetails.scss");
+                    public static readonly string AdminOrderDetails_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminOrderDetails.min.css") ? Url("AdminOrderDetails.min.css") : Url("AdminOrderDetails.css");
+                         
+                    public static readonly string AdminOrderDetails_css_map = Url("AdminOrderDetails.css.map");
+                    public static readonly string AdminOrderDetails_min_css = Url("AdminOrderDetails.min.css");
                     public static readonly string AdminOrdersList_scss = Url("AdminOrdersList.scss");
                     public static readonly string AdminOrdersList_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminOrdersList.min.css") ? Url("AdminOrdersList.min.css") : Url("AdminOrdersList.css");
                          

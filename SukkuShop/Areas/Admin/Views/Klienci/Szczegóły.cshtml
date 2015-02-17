@@ -49,7 +49,7 @@
                     <td>@item.Id</td>
                     <td>@item.OrderDate</td>
                     <td>@item.TotalPrice PLN</td>
-                    <td><a href="#" class="see">podgląd zamówienia</a></td>
+                    <td><a href="@Url.Action(MVC.Admin.Zamowienia.SzczegolyZamowienia(item.Id))" class="see">podgląd zamówienia</a></td>
                     <td>
                         @if (item.ActualState == "Anulowano")
                         {

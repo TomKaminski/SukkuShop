@@ -238,6 +238,7 @@
     <Compile Include="Areas\Admin\Controllers\ZamowieniaController.cs" />
     <Compile Include="Areas\Admin\Models\ContentModels.cs" />
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
+    <Compile Include="Areas\Admin\Models\OrderModels.cs" />
     <Compile Include="Areas\Admin\Models\UserDetails.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
@@ -407,6 +408,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\AdminOrderDetails.css">
+      <DependentUpon>AdminOrderDetails.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\AdminOrderDetails.min.css">
+      <DependentUpon>AdminOrderDetails.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\AdminProductsList.css">
       <DependentUpon>AdminProductsList.scss</DependentUpon>
     </Content>
@@ -473,6 +480,10 @@
     <Content Include="Areas\Admin\Scripts\AdminEditProduct.js" />
     <Content Include="Areas\Admin\Scripts\AdminEditProduct.min.js">
       <DependentUpon>AdminEditProduct.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AdminOrderDetails.js" />
+    <Content Include="Areas\Admin\Scripts\AdminOrderDetails.min.js">
+      <DependentUpon>AdminOrderDetails.js</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Scripts\AdminProduct.js" />
     <Content Include="Areas\Admin\Scripts\AdminProduct.min.js">
@@ -1098,6 +1109,15 @@
     </Content>
     <Content Include="Areas\Admin\Scripts\ordersListAngular.min.js.map">
       <DependentUpon>ordersListAngular.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Zamowienia\SzczegolyZamowienia.cshtml" />
+    <Content Include="Areas\Admin\Views\Zamowienia\_ChangeOrderStateFromDetails.cshtml" />
+    <Content Include="Areas\Admin\Content\css\AdminOrderDetails.scss" />
+    <Content Include="Areas\Admin\Content\css\AdminOrderDetails.css.map">
+      <DependentUpon>AdminOrderDetails.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\AdminOrderDetails.min.js.map">
+      <DependentUpon>AdminOrderDetails.min.js</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <Content Include="Scripts\AccSzczegZam.js" />

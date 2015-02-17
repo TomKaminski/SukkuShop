@@ -1,6 +1,8 @@
 ﻿#region
 
 using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
@@ -8,6 +10,8 @@ using System.Web;
 using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Identity;
 using SukkuShop.Models;
 
 #endregion
@@ -18,7 +22,6 @@ namespace SukkuShop.Areas.Admin.Controllers
     public partial class ZamowieniaController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-
 
         public ZamowieniaController(ApplicationDbContext dbContext)
         {
@@ -128,6 +131,137 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(GetOrderChangeOptions(value), JsonRequestBehavior.AllowGet);
         }
 
+        public virtual PartialViewResult ChangeOrderStateFromDetails(int id, string value)
+        {
+            var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
+            if (order != null && order.OrderInfo != value)
+            {
+                order.OrderInfo = value;
+                _dbContext.Orders.AddOrUpdate(order);
+                _dbContext.SaveChanges();
+                ViewBag.AjaxOrderState = order.OrderInfo;
+                ViewBag.OrderId = id;
+                var discounvalue = ((order.OrderDetails.Sum(orderdetail => orderdetail.SubTotalPrice) * order.Discount) *
+                                    100) / 100;
+                var email = new ChangeOrderStateEmail
+                {
+                    To = order.Email,
+                    Id = order.OrderId,
+                    State = value,
+                    StateDescription = SetStateDescription(value),
+                    OrderViewModelsSummary = new OrderViewModelsSummary
+                    {
+                        Firma = order.NazwaFirmy != null,
+                        TotalTotalValue = order.TotalPrice,
+                        Discount = order.Discount,
+                        DiscountValue = discounvalue.ToString("c"),
+                        OrderPayment = new SharedShippingOrderSummaryModels
+                        {
+                            Description = order.Payment.PaymentDescription,
+                            Name = order.Payment.PaymentName,
+                            Price = order.Payment.PaymentPrice
+                        },
+                        OrderShipping = new SharedShippingOrderSummaryModels
+                        {
+                            Description = order.Shipping.ShippingDescription,
+                            Name = order.Shipping.ShippingName,
+                            Price = order.Shipping.ShippingPrice
+                        },
+                        UserAddressModel = new CartAddressModel
+                        {
+                            Email = order.Email,
+                            Imie = order.Name,
+                            KodPocztowy = order.PostalCode,
+                            Miasto = order.City,
+                            NazwaFirmy = order.NazwaFirmy,
+                            Nazwisko = order.Surname,
+                            Nip = order.OrderNip,
+                            Numer = order.Number,
+                            Telefon = order.Phone,
+                            Ulica = order.Street
+                        },
+                        OrderViewItemsTotal = new OrderViewItemsTotal
+                        {
+                            TotalValue = order.OrderDetails.Sum(x => x.SubTotalPrice),
+                            OrderProductList = order.OrderDetails.Select(m => new OrderItemSummary
+                            {
+                                Image = m.Products.IconName ?? "NoPhoto_small",
+                                Name = m.Products.Name,
+                                Price = m.Products.Price ?? 0,
+                                Quantity = m.Quantity,
+                                TotalValue = m.SubTotalPrice,
+                                Packing = m.Products.Packing
+                            }).ToList()
+                        }
+                    }
+                };
+                email.Send();
+            }
+            var list = GetOrderDetailsStateList(value);
+            return PartialView(MVC.Admin.Zamowienia.Views._ChangeOrderStateFromDetails,list);
+        }
+
+        public virtual ActionResult SzczegolyZamowienia(int id)
+        {
+            var order = _dbContext.Orders.First(m => m.OrderId == id);
+            var model = new AdminOrderViewModelsSummary
+            {
+                Id = id,
+                Firma = order.OrderNip != null,
+                UserOrderInfo = order.UserHints,
+                OrderPayment = new SharedShippingOrderSummaryModels
+                {
+                    Description = order.Payment.PaymentDescription,
+                    Id = order.PaymentId,
+                    Name = order.Payment.PaymentName,
+                    Price = order.Payment.PaymentPrice
+                },
+                OrderShipping = new SharedShippingOrderSummaryModels
+                {
+                    Description = order.Shipping.ShippingDescription,
+                    Id = order.ShippingId,
+                    Name = order.Shipping.ShippingName,
+                    Price = order.Shipping.ShippingPrice
+                },
+                TotalTotalValue = order.TotalPrice.ToString("c"),
+                OrderInfo = order.OrderInfo,
+                OrderDat = order.OrderDate.ToShortDateString(),
+                Discount = order.Discount,
+                DiscountValue =
+                    (order.TotalPrice -
+                     (order.ProductsPrice + order.Payment.PaymentPrice + order.Shipping.ShippingPrice)).ToString("c"),
+                UserAddressModel = new CartAddressModel
+                {
+                    Imie = order.Name,
+                    KodPocztowy = order.PostalCode,
+                    Miasto = order.City,
+                    NazwaFirmy = order.NazwaFirmy,
+                    Nazwisko = order.Surname,
+                    Nip = order.OrderNip,
+                    Numer = order.Number,
+                    Telefon = order.Phone,
+                    Ulica = order.Street,
+                    Email = order.Email
+                },
+                OrderViewItemsTotal = new OrderViewItemsTotal
+                {
+                    OrderProductList = order.OrderDetails.Select(x => new OrderItemSummary
+                    {
+                        Name = x.Products.Name,
+                        Image = x.Products.IconName ?? "NoPhoto_small",
+                        Price = x.ProdPrice,
+                        Quantity = x.Quantity,
+                        TotalValue = x.SubTotalPrice,
+                        Packing = x.Products.Packing,
+                    }).ToList(),
+                    TotalValue = order.ProductsPrice
+                }
+            };
+            if (order.OrderInfo != "Wysłane" && order.OrderInfo != "Anulowane")
+                ViewBag.OrderStateList = GetOrderDetailsStateList(order.OrderInfo);
+            return View(model);
+        }
+
         public virtual FileResult DownloadInvoice()
         {
             var workStream = CreatePdf();
@@ -136,6 +270,86 @@ namespace SukkuShop.Areas.Admin.Controllers
             workStream.Position = 0;
 
             return File(workStream, "application/pdf");
+        }
+
+        private List<SelectListItem> GetOrderDetailsStateList(string stan)
+        {
+            switch (stan)
+            {
+                case "Przyjęte":
+                {
+                    var list = new List<SelectListItem>
+                    {
+                        new SelectListItem
+                        {
+                            Selected = true,
+                            Text = "Przyjęte",
+                            Value = "Przyjęte"
+                        },
+                        new SelectListItem
+                        {
+                            Selected = false,
+                            Text = "Realizowane",
+                            Value = "Realizowane"
+                        },
+                        new SelectListItem
+                        {
+                            Selected = false,
+                            Text = "Wysłane",
+                            Value = "Wysłane"
+                        }
+                    };
+                    return list;
+                }
+
+                case "Oczekujące":
+                {
+                    var list = new List<SelectListItem>
+                    {
+                        new SelectListItem
+                        {
+                            Selected = true,
+                            Text = "Oczekujące",
+                            Value = "Oczekujące"
+                        },
+                        new SelectListItem
+                        {
+                            Selected = false,
+                            Text = "Realizowane",
+                            Value = "Realizowane"
+                        },
+                        new SelectListItem
+                        {
+                            Selected = false,
+                            Text = "Wysłane",
+                            Value = "Wysłane"
+                        }
+                    };
+                    return list;
+                }
+
+                case "Realizowane":
+                {
+                    var list = new List<SelectListItem>
+                    {
+                        new SelectListItem
+                        {
+                            Selected = true,
+                            Text = "Realizowane",
+                            Value = "Realizowane"
+                        },
+                        new SelectListItem
+                        {
+                            Selected = false,
+                            Text = "Wysłane",
+                            Value = "Wysłane"
+                        }
+                    };
+                    return list;
+                }
+                default:
+                    return new List<SelectListItem>();
+            }
         }
 
         protected MemoryStream CreatePdf()
@@ -157,7 +371,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             // Open the Document for writing
             document.Open();
             document.NewPage();
-            var headerPhrase = new Paragraph("Kęty, dnia 01.10.1993",fNormal)
+            var headerPhrase = new Paragraph("Kęty, dnia 01.10.1993", fNormal)
             {
                 Alignment = Element.ALIGN_RIGHT,
                 SpacingAfter = 10
@@ -167,7 +381,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 WidthPercentage = 100
             };
-            headerTable.SetWidths(new[]{4.5f,1,4.5f});
+            headerTable.SetWidths(new[] {4.5f, 1, 4.5f});
             headerTable.DefaultCell.Border = Rectangle.NO_BORDER;
             var leftHeaderTable = new PdfPTable(1) {WidthPercentage = 45};
             leftHeaderTable.DefaultCell.Border = Rectangle.BOX;
@@ -205,7 +419,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             headerTable.AddCell(leftHeaderTable);
             headerTable.AddCell("");
 
-            var rightHeaderTable = new PdfPTable(1) { WidthPercentage = 45 };
+            var rightHeaderTable = new PdfPTable(1) {WidthPercentage = 45};
             rightHeaderTable.DefaultCell.Border = Rectangle.BOX;
             var buyerTitleCell = new PdfPCell(new Phrase("Nabywca", fBold))
             {
@@ -239,17 +453,16 @@ namespace SukkuShop.Areas.Admin.Controllers
             rightHeaderTable.AddCell(buyernipcodeCell);
             headerTable.AddCell(rightHeaderTable);
 
-            
 
             document.Add(headerTable);
             var fakturaNrTable = new PdfPTable(2)
             {
                 WidthPercentage = 55
             };
-            fakturaNrTable.SetWidths(new[] { 6, 4 });
+            fakturaNrTable.SetWidths(new[] {6, 4});
             fakturaNrTable.DefaultCell.Border = Rectangle.NO_BORDER;
             fakturaNrTable.SpacingBefore = 10;
-            var leftfakturaTable = new PdfPTable(1) { WidthPercentage = 60 };
+            var leftfakturaTable = new PdfPTable(1) {WidthPercentage = 60};
             leftfakturaTable.DefaultCell.Border = Rectangle.BOX;
             var sfakturaTableTitleCell = new PdfPCell(new Phrase("FAKTURA Nr", fTitleB))
             {
@@ -258,11 +471,11 @@ namespace SukkuShop.Areas.Admin.Controllers
             };
             leftfakturaTable.AddCell(sfakturaTableTitleCell);
             fakturaNrTable.AddCell(leftfakturaTable);
-            var rightFakturaHeaderTable = new PdfPTable(1) { WidthPercentage = 40 };
+            var rightFakturaHeaderTable = new PdfPTable(1) {WidthPercentage = 40};
             rightFakturaHeaderTable.DefaultCell.Border = Rectangle.BOX;
             var rightfakturaheadercell = new PdfPCell(new Phrase("52517242", fTitleN))
             {
-                Border = Rectangle.BOX, 
+                Border = Rectangle.BOX,
                 HorizontalAlignment = Element.ALIGN_CENTER
             };
             rightFakturaHeaderTable.AddCell(rightfakturaheadercell);
@@ -306,7 +519,6 @@ namespace SukkuShop.Areas.Admin.Controllers
                         new {label = "Przyjęte", value = 1, selected = true},
                         new {label = "Realizowane", value = 3},
                         new {label = "Wysłane", value = 4}
-                        
                     };
                     return obj;
                 }
