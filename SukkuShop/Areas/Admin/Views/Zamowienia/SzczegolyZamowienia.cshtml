@@ -100,6 +100,13 @@
     <div class="order-title" style="clear: both">Uwagi Klienta</div>
     <div class="shipping-price">@Model.UserOrderInfo</div>
     <div class="clear">&nbsp;</div>
+    @if (Model.UserId != null)
+    {
+        <div class="order-title">Konto klienta</div>
+        <div class="order-summary-header-text" style="width:Auto;margin-right: 10px"><strong>Email:</strong> @Model.UserAddressModel.Email</div>
+            <a href="@Url.Action(MVC.Admin.Klienci.Szczegóły((int) Model.UserId))"><div class="icon-eye-open" style="font-size:25px;color:grey"></div></a>
+        <div class="clear">&nbsp;</div>
+    }
     <div class="order-title" style="border-top: #f89b1d 1px solid">Podsumowanie</div>
     <ul id="products-summary" style="padding-bottom: 20px;">
         <li>

@@ -17,6 +17,6 @@ namespace SukkuShop.Areas.Admin.Models
         public int Discount { get; set; }
         public string UserOrderInfo { get; set; }
         public bool AccountExists { get; set; }
-
+        public int? UserId { get; set; }
     }
 }

@@ -201,7 +201,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             return PartialView(MVC.Admin.Zamowienia.Views._ChangeOrderStateFromDetails,list);
         }
 
-        public virtual ActionResult SzczegolyZamowienia(int id)
+        public virtual ActionResult SzczegolyZamowienia(int id=1)
         {
             var order = _dbContext.Orders.First(m => m.OrderId == id);
             var model = new AdminOrderViewModelsSummary
@@ -209,6 +209,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Id = id,
                 Firma = order.OrderNip != null,
                 UserOrderInfo = order.UserHints,
+                UserId = order.UserId,
                 OrderPayment = new SharedShippingOrderSummaryModels
                 {
                     Description = order.Payment.PaymentDescription,
