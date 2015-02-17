@@ -1,7 +1,4 @@
-﻿
-
-
-var shopApp = angular.module("shopApp", []);
+﻿var shopApp = angular.module("shopApp", []);
 var itemsPerPage = 12;
 
 shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $http, $filter) {
@@ -50,10 +47,10 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
                     result[0].CartAmount++;
                     $("#cart-price-header").html("KOSZYK " + data.value + " zł");
                 } else {
-                    $("#addinfo" + id).html("&#10005; " + result[0].CartAmount);
+                    $("#addinfo" + id).html("&#10005;<span style='font-size:20px'>" + result[0].CartAmount + "</span>");
                     jQuery("#addinfo" + id).css("color", "red");
                     jQuery("#addinfo" + id).fadeOut(1000,function() {
-                        jQuery(this).css("color", "green").html("&#10003;" + result[0].CartAmount).fadeIn(1000);
+                        jQuery(this).css("color", "green").html("&#10003;<span style='font-size:20px'>" + result[0].CartAmount + "</span>").fadeIn(1000);
 
                     });
                 }
@@ -63,9 +60,6 @@ shopApp.controller("ShopCtrl", ['$scope', '$http','$filter',function($scope, $ht
                 alert(error);
                 console.log(xhr.responseText);
             });
-    }
-    function plz(data) {
-
     }
 
     $scope.itemClicked = function($index) {

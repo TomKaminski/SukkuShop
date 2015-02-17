@@ -36,14 +36,15 @@
                         <td>
                             <div ng-if="item.stan!='Anulowane' && item.stan!='Wysłane'">
 
-                                    <div class="styled-select">
-                                        <select ng-model="item.selectedOpt">
-                                            <option name="orderstate" ng-selected="itemm.selected" ng-repeat="itemm in item.orderOpts" value="{{itemm.label}}">{{itemm.label}}</option>
-                                        </select>
-                                    </div><div class="save-text"><a ng-click="ChangeOrderState(item.id,item.selectedOpt)">ZAPISZ</a></div>
+                                <div class="styled-select">
+                                    <select ng-model="item.selectedOpt">
+                                        <option name="orderstate" ng-selected="itemm.selected" ng-repeat="itemm in item.orderOpts" value="{{itemm.label}}">{{itemm.label}}</option>
+                                    </select>
+                                </div><div class="save-text" ng-show="item.selectedOpt!=item.orderOpts[0].label"><a ng-click="ChangeOrderState(item.id,item.selectedOpt)">ZAPISZ</a></div>
                                 
                                 
                             </div>
+
                             <div ng-if="item.stan=='Anulowane'" style="color:red">Anulowane</div>
                             <div ng-if="item.stan=='Wysłane'" style="color:green">Wysłane</div>
                         </td>

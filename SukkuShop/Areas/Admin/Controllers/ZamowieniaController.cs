@@ -142,185 +142,132 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             // Create a Document object
             var document = new Document();
-
             //MemoryStream
             var pdfData = new MemoryStream();
             PdfWriter.GetInstance(document, pdfData).CloseStream = false;
-
             //Full path to the Unicode Arial file
             var segoeUniTtf = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/fonts/segoeui.ttf");
-
             //Create a base font object making sure to specify IDENTITY-H
             var bff = BaseFont.CreateFont(segoeUniTtf, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);
-
             //Create a specific font object
-            var f = new Font(bff, 12, Font.NORMAL);
-
+            var fNormal = new Font(bff, 10, Font.NORMAL);
+            var fBold = new Font(bff, 10, Font.BOLD);
+            var fTitleB = new Font(bff, 14, Font.BOLD);
+            var fTitleN = new Font(bff, 14, Font.NORMAL);
             // Open the Document for writing
             document.Open();
-            //Add elements to the document here
-
-            #region Top table
-
-            // Create the header table 
-            var headertable = new PdfPTable(3)
+            document.NewPage();
+            var headerPhrase = new Paragraph("Kęty, dnia 01.10.1993",fNormal)
             {
-                HorizontalAlignment = 0,
+                Alignment = Element.ALIGN_RIGHT,
+                SpacingAfter = 10
+            };
+            document.Add(headerPhrase);
+            var headerTable = new PdfPTable(3)
+            {
                 WidthPercentage = 100
             };
-            headertable.SetWidths(new float[] {4, 2, 4}); // then set the column's __relative__ widths
-            headertable.DefaultCell.Border = Rectangle.NO_BORDER;
-            //headertable.DefaultCell.Border = Rectangle.BOX; //for testing
-            headertable.SpacingAfter = 30;
-            var nested = new PdfPTable(1);
-            nested.DefaultCell.Border = Rectangle.BOX;
-            var nextPostCell1 = new PdfPCell(new Phrase("ABC Co.,Ltd", f))
+            headerTable.SetWidths(new[]{4.5f,1,4.5f});
+            headerTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            var leftHeaderTable = new PdfPTable(1) {WidthPercentage = 45};
+            leftHeaderTable.DefaultCell.Border = Rectangle.BOX;
+            var sellerTitleCell = new PdfPCell(new Phrase("Sprzedawca", fBold))
             {
-                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.TOP_BORDER,
+                BorderWidth = 0.5f
             };
-            nested.AddCell(nextPostCell1);
-            var nextPostCell2 = new PdfPCell(new Phrase("111/206 Moo 9, Ramkhamheang Road,", f))
+            leftHeaderTable.AddCell(sellerTitleCell);
+            var sellerNameCell = new PdfPCell(new Phrase("Tomasz Kamiński", fNormal))
             {
-                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            nested.AddCell(nextPostCell2);
-            var nextPostCell3 = new PdfPCell(new Phrase("Nonthaburi 11120", f))
+            leftHeaderTable.AddCell(sellerNameCell);
+            var streetCell = new PdfPCell(new Phrase("ul. Maków 12", fNormal))
             {
-                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            nested.AddCell(nextPostCell3);
-            var nesthousing = new PdfPCell(nested)
+            leftHeaderTable.AddCell(streetCell);
+            var postalecodeCell = new PdfPCell(new Phrase("43-200 Pszczyna", fNormal))
             {
-                Rowspan = 4,
-                Padding = 0f
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            headertable.AddCell(nesthousing);
-
-            headertable.AddCell("");
-            var invoiceCell = new PdfPCell(new Phrase("INVOICE", f))
+            leftHeaderTable.AddCell(postalecodeCell);
+            var nipcodeCell = new PdfPCell(new Phrase("NIP 1234567890", fNormal))
             {
-                HorizontalAlignment = 2,
-                Border = Rectangle.NO_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER,
+                BorderWidth = 0.5f
             };
-            headertable.AddCell(invoiceCell);
-            var noCell = new PdfPCell(new Phrase("No :", f))
+            leftHeaderTable.AddCell(nipcodeCell);
+
+            headerTable.AddCell(leftHeaderTable);
+            headerTable.AddCell("");
+
+            var rightHeaderTable = new PdfPTable(1) { WidthPercentage = 45 };
+            rightHeaderTable.DefaultCell.Border = Rectangle.BOX;
+            var buyerTitleCell = new PdfPCell(new Phrase("Nabywca", fBold))
             {
-                HorizontalAlignment = 2,
-                Border = Rectangle.NO_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.TOP_BORDER,
+                BorderWidth = 0.5f
             };
-            headertable.AddCell(noCell);
-            headertable.AddCell(new Phrase("5", f));
-            var dateCell = new PdfPCell(new Phrase("Date :", f))
+            rightHeaderTable.AddCell(buyerTitleCell);
+            var buyerNameCell = new PdfPCell(new Phrase("Tomasz Kamiński", fNormal))
             {
-                HorizontalAlignment = 2,
-                Border = Rectangle.NO_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            headertable.AddCell(dateCell);
-            headertable.AddCell(new Phrase(DateTime.Now.ToShortDateString(), f));
-            var billCell = new PdfPCell(new Phrase("Bill To :", f))
+            rightHeaderTable.AddCell(buyerNameCell);
+            var buyerCell = new PdfPCell(new Phrase("ul. Maków 12", fNormal))
             {
-                HorizontalAlignment = 2,
-                Border = Rectangle.NO_BORDER
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            headertable.AddCell(billCell);
-            headertable.AddCell(new Phrase("CustomerName" + "\n" + "CustomerAddress", f));
-            document.Add(headertable);
-
-            #endregion
-
-            #region Items Table
-
-            //Create body table
-            var itemTable = new PdfPTable(4) {HorizontalAlignment = 0, WidthPercentage = 100};
-            itemTable.SetWidths(new float[] {10, 40, 20, 30}); // then set the column's __relative__ widths
-            itemTable.SpacingAfter = 40;
-            itemTable.DefaultCell.Border = Rectangle.BOX;
-            var cell1 = new PdfPCell(new Phrase("NO", f)) {HorizontalAlignment = 1};
-            itemTable.AddCell(cell1);
-            var cell2 = new PdfPCell(new Phrase("ITEM", f)) {HorizontalAlignment = 1};
-            itemTable.AddCell(cell2);
-            var cell3 = new PdfPCell(new Phrase("QUANTITY", f)) {HorizontalAlignment = 1};
-            itemTable.AddCell(cell3);
-            var cell4 = new PdfPCell(new Phrase("AMOUNT(USD)", f)) {HorizontalAlignment = 1};
-            itemTable.AddCell(cell4);
-
-            //foreach (DataRow row in dt.Rows)
-            //{
-            //    PdfPCell numberCell = new PdfPCell(new Phrase(row["NO"].ToString(), bodyFont));
-            //    numberCell.HorizontalAlignment = 0;
-            //    numberCell.PaddingLeft = 10f;
-            //    numberCell.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            //    itemTable.AddCell(numberCell);
-
-            //    PdfPCell descCell = new PdfPCell(new Phrase(row["ITEM"].ToString(), bodyFont));
-            //    descCell.HorizontalAlignment = 0;
-            //    descCell.PaddingLeft = 10f;
-            //    descCell.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            //    itemTable.AddCell(descCell);
-
-            //    PdfPCell qtyCell = new PdfPCell(new Phrase(row["QUANTITY"].ToString(), bodyFont));
-            //    qtyCell.HorizontalAlignment = 0;
-            //    qtyCell.PaddingLeft = 10f;
-            //    qtyCell.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            //    itemTable.AddCell(qtyCell);
-
-            //    PdfPCell amtCell = new PdfPCell(new Phrase(row["AMOUNT"].ToString(), bodyFont));
-            //    amtCell.HorizontalAlignment = 1;
-            //    amtCell.Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER;
-            //    itemTable.AddCell(amtCell);
-
-            //}
-            // Table footer
-            var totalAmtCell1 = new PdfPCell(new Phrase("")) {Border = Rectangle.LEFT_BORDER | Rectangle.TOP_BORDER};
-            itemTable.AddCell(totalAmtCell1);
-            var totalAmtCell2 = new PdfPCell(new Phrase("")) {Border = Rectangle.TOP_BORDER};
-            itemTable.AddCell(totalAmtCell2);
-            var totalAmtStrCell = new PdfPCell(new Phrase("Total Amount", f))
+            rightHeaderTable.AddCell(buyerCell);
+            var buyerpostalcodeCell = new PdfPCell(new Phrase("43-200 Pszczyna", fNormal))
             {
-                Border = Rectangle.TOP_BORDER,
-                HorizontalAlignment = 1
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER,
+                BorderWidth = 0.5f
             };
-            itemTable.AddCell(totalAmtStrCell);
-            var totalAmtCell = new PdfPCell(new Phrase(60.ToString("#,###.00"), f)) {HorizontalAlignment = 1};
-            itemTable.AddCell(totalAmtCell);
+            rightHeaderTable.AddCell(buyerpostalcodeCell);
+            var buyernipcodeCell = new PdfPCell(new Phrase("NIP 1234567890", fNormal))
+            {
+                Border = Rectangle.LEFT_BORDER | Rectangle.RIGHT_BORDER | Rectangle.BOTTOM_BORDER,
+                BorderWidth = 0.5f
+            };
+            rightHeaderTable.AddCell(buyernipcodeCell);
+            headerTable.AddCell(rightHeaderTable);
 
-            var cell =
-                new PdfPCell(new Phrase("*** Please note that ABC Co., Ltd’s bank account is USD Bank Account ***", f))
-                {
-                    Colspan = 4,
-                    HorizontalAlignment = 1
-                };
-            itemTable.AddCell(cell);
-            document.Add(itemTable);
+            
 
-            #endregion
-
-            var transferBank = new Chunk("Your Bank Account:", f);
-            transferBank.SetUnderline(0.1f, -2f); //0.1 thick, -2 y-location
-            document.Add(transferBank);
-            document.Add(Chunk.NEWLINE);
-
-            // Bank Account Info
-            var bottomTable = new PdfPTable(3) {HorizontalAlignment = 0, TotalWidth = 300f};
-            bottomTable.SetWidths(new[] {90, 10, 200});
-            bottomTable.LockedWidth = true;
-            bottomTable.SpacingBefore = 20;
-            bottomTable.DefaultCell.Border = Rectangle.NO_BORDER;
-            bottomTable.AddCell(new Phrase("Account No", f));
-            bottomTable.AddCell(":");
-            bottomTable.AddCell(new Phrase(5.ToString(), f));
-            bottomTable.AddCell(new Phrase("Account Name", f));
-            bottomTable.AddCell(":");
-            bottomTable.AddCell(new Phrase("AccName", f));
-            bottomTable.AddCell(new Phrase("Branch", f));
-            bottomTable.AddCell(":");
-            bottomTable.AddCell(new Phrase("Asd", f));
-            bottomTable.AddCell(new Phrase("Bank", f));
-            bottomTable.AddCell(":");
-            bottomTable.AddCell(new Phrase("Millenium Bank", f));
-            document.Add(bottomTable);
-
-            // Close the Document without closing the underlying stream
+            document.Add(headerTable);
+            var fakturaNrTable = new PdfPTable(2)
+            {
+                WidthPercentage = 55
+            };
+            fakturaNrTable.SetWidths(new[] { 6, 4 });
+            fakturaNrTable.DefaultCell.Border = Rectangle.NO_BORDER;
+            fakturaNrTable.SpacingBefore = 10;
+            var leftfakturaTable = new PdfPTable(1) { WidthPercentage = 60 };
+            leftfakturaTable.DefaultCell.Border = Rectangle.BOX;
+            var sfakturaTableTitleCell = new PdfPCell(new Phrase("FAKTURA Nr", fTitleB))
+            {
+                Border = Rectangle.NO_BORDER,
+                HorizontalAlignment = Element.ALIGN_RIGHT
+            };
+            leftfakturaTable.AddCell(sfakturaTableTitleCell);
+            fakturaNrTable.AddCell(leftfakturaTable);
+            var rightFakturaHeaderTable = new PdfPTable(1) { WidthPercentage = 40 };
+            rightFakturaHeaderTable.DefaultCell.Border = Rectangle.BOX;
+            var rightfakturaheadercell = new PdfPCell(new Phrase("52517242", fTitleN))
+            {
+                Border = Rectangle.BOX, 
+                HorizontalAlignment = Element.ALIGN_CENTER
+            };
+            rightFakturaHeaderTable.AddCell(rightfakturaheadercell);
+            fakturaNrTable.AddCell(rightFakturaHeaderTable);
+            document.Add(fakturaNrTable);
             document.Close();
             return pdfData;
         }
@@ -357,8 +304,9 @@ namespace SukkuShop.Areas.Admin.Controllers
                     object[] obj =
                     {
                         new {label = "Przyjęte", value = 1, selected = true},
-                        new {label = "Wysłane", value = 4},
-                        new {label = "Realizowane", value = 3}
+                        new {label = "Realizowane", value = 3},
+                        new {label = "Wysłane", value = 4}
+                        
                     };
                     return obj;
                 }
