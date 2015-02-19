@@ -33,11 +33,15 @@
             <div class="gramature-text">(@Model.Product.Packing)</div>
         </div>
         <div class="avaibility segoe-semibold">
-            @if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity > 0)
+            @if (Model.Product.QuantityInStock-Model.Product.ReservedQuantity > 10)
             {
                 <span style="color: green">PRODUKT DOSTĘPNY @*(@Model.Product.QuantityInStock)*@</span>
             }
-            else
+            else if (Model.Product.QuantityInStock - Model.Product.ReservedQuantity < 10 && Model.Product.QuantityInStock - Model.Product.ReservedQuantity > 0)
+            {
+                <span style="color: #f89b1d">MAŁA ILOŚĆ NA MAGAZYNIE</span>
+            }
+            else if (Model.Product.QuantityInStock - Model.Product.ReservedQuantity == 0)
             {
                 <span style="color: red">PRODUKT NIEDOSTĘPNY</span>
             }

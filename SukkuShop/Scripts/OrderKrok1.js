@@ -1,11 +1,11 @@
 ﻿$("#nextStep").click(function () {
     var shiping = false;
     var payment = false;
-    $("input[name=shipping]").each(function () {
+    $("ul#shipping-list li input:radio").each(function () {
         if ($(this).is(':checked') && !$(this).is(":disabled"))
             shiping = true;
     });
-    $("input[name=payment]").each(function () {
+    $("ul#payment-list li input:radio").each(function () {
         if ($(this).is(':checked')&& !$(this).is(":disabled"))
             payment = true;
     });
@@ -36,7 +36,7 @@ function priceSummary() {
     $("#total-price-summary").empty().append(currency(sum) + " zł");
 }
 
-$("input:radio[name=shipping]").click(function () {
+$("ul#shipping-list li input:radio").click(function () {
     var id = parseInt($(this).attr("id").replace('ship', ''));
     $.ajax({
         url: '/Zamowienie/SetShipping/' + id,
@@ -71,8 +71,8 @@ $("input:radio[name=shipping]").click(function () {
 });
 
 $(document).ready(function() {
-    var id=-1;
-    $("input:radio[name=shipping]").each(function () {
+    var id = -1;
+    $("ul#shipping-list li input:radio").each(function () {
         if ($(this).is(":checked")) {
             id = parseInt($(this).attr("id").replace('ship', ''));
             var value = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
@@ -102,7 +102,7 @@ $(document).ready(function() {
         $("input:radio[id=pay2]").attr('disabled', false);
 
     }
-    $("input:radio[name=payment]").each(function () {
+    $("ul#payment-list li input:radio").each(function () {
         if ($(this).is(":checked")) {
             var valuee = $(this).siblings(".shipping-price").text().replace(' zł', '').replace(',', '.');
             var summ = currency(valuee);
@@ -112,7 +112,7 @@ $(document).ready(function() {
     });    
 });
 
-$("input:radio[name=payment]").click(function () {
+$("ul#payment-list li input:radio").click(function () {
     var id = parseInt($(this).attr("id").replace('pay', ''));
     $.ajax({
         url: '/Zamowienie/SetPayment/' + id,

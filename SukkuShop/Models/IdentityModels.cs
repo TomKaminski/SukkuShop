@@ -5,7 +5,6 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
-using System.Data.Entity.ModelConfiguration;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
@@ -309,30 +308,30 @@ namespace SukkuShop.Models
                     new ShippingType
                     {
                         ShippingId = 1,
-                        ShippingName = "Poczta Polska Kurier48",
+                        ShippingName = "List polecony ekonomiczny",
                         ShippingPrice = 8,
-                        ShippingDescription = "Poczta Polsa Kurier48 OPIS"
+                        ShippingDescription = "List polecony ekonomiczny OPIS"
                     },
                     new ShippingType
                     {
                         ShippingId = 2,
-                        ShippingName = "Poczta Polska Przesyłka Ekonomiczna",
+                        ShippingName = "List polecony priorytetowy",
                         ShippingPrice = 7,
-                        ShippingDescription = "Poczta Polska Przesyłka Ekonomiczna OPIS"
+                        ShippingDescription = "List polecony priorytetowy OPIS"
                     },
                     new ShippingType
                     {
                         ShippingId = 3,
-                        ShippingName = "Kurier Siódemka",
+                        ShippingName = "Paczka ekonomiczna",
                         ShippingPrice = 12,
-                        ShippingDescription = "Kurier Siódemka OPIS"
+                        ShippingDescription = "Paczka ekonomiczna OPIS"
                     },
                     new ShippingType
                     {
                         ShippingId = 4,
-                        ShippingName = "Paczkomaty",
+                        ShippingName = "Paczka priorytetowa",
                         ShippingPrice = 5,
-                        ShippingDescription = "Paczkomaty OPIS"
+                        ShippingDescription = "Paczka priorytetowa OPIS"
                     },
                     new ShippingType
                     {

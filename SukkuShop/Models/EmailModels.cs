@@ -50,6 +50,7 @@ namespace SukkuShop.Models
         public int Id { get; set; }
         public string State { get; set; }
         public string StateDescription { get; set; }
+        public string PackageName { get; set; }
         public OrderViewModelsSummary OrderViewModelsSummary { get; set; }
     }
 }

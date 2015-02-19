@@ -16,6 +16,13 @@ Content-Type: text/html; charset=utf-8
             <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">
                 @Model.StateDescription
             </div>
+            @if (Model.PackageName != null)
+            {
+                <div style="color:black;font-family: Segoe UI;text-align: left;font-style: italic; margin-bottom: 20px">
+                   Numer listu przewozowego to: @Model.PackageName
+                </div>
+            }
+            
             <div style="color: black; font-family: Segoe UI; font-size: 15px; text-align: left; margin-bottom: 10px;font-weight: bold">Poniżej zobaczysz szczegóły Twojego zamówienia:</div>
             <table style="border-top: 2px solid orange; font-family: Segoe UI; margin-bottom: 10px; border-bottom: 1px solid orange" cellspacing="0">
                 <thead>

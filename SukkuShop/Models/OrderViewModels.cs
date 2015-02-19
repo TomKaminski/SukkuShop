@@ -19,6 +19,26 @@ namespace SukkuShop.Models
         public string TotalValue { get; set; }
         public int Discount { get; set; }
         public string DiscountValue { get; set; }
+        public OrderViewRadioModel OrderViewShippingModel { get; set; }
+        public OrderViewRadioModel OrderViewPaymentModel { get; set; } 
+    }
+
+    public class OrderViewRadioModel
+    {
+        public List<OrderViewRadioOption> Option { set; get; }
+        public string SelectedOption { set; get; }
+        public OrderViewRadioModel()
+        {
+            Option = new List<OrderViewRadioOption>();
+        }
+    }
+
+    public class OrderViewRadioOption
+    {
+        public int Id { get; set; }
+        public string Text { get; set; }
+        public decimal Price { get; set; }
+        public string Description { get; set; }
     }
 
     public class OrderItem

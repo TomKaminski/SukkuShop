@@ -2,7 +2,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
@@ -11,7 +10,6 @@ using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using SukkuShop.Areas.Admin.Models;
-using SukkuShop.Identity;
 using SukkuShop.Models;
 
 #endregion
@@ -62,76 +60,77 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(ordersObj, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpPost]
-        public virtual JsonResult ChangeOrderState(int id, string value)
-        {
-            var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
-            if (order != null && order.OrderInfo != value)
-            {
-                order.OrderInfo = value;
-                _dbContext.Orders.AddOrUpdate(order);
-                _dbContext.SaveChanges();
+        //[HttpPost]
+        //public virtual JsonResult ChangeOrderState(int id, string value, string packageNumber)
+        //{
+        //    var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
+        //    if (order != null && order.OrderInfo != value)
+        //    {
+        //        order.OrderInfo = value;
+        //        _dbContext.Orders.AddOrUpdate(order);
+        //        _dbContext.SaveChanges();
 
-                var discounvalue = ((order.OrderDetails.Sum(orderdetail => orderdetail.SubTotalPrice)*order.Discount)*
-                                    100)/100;
-                var email = new ChangeOrderStateEmail
-                {
-                    To = order.Email,
-                    Id = order.OrderId,
-                    State = value,
-                    StateDescription = SetStateDescription(value),
-                    OrderViewModelsSummary = new OrderViewModelsSummary
-                    {
-                        Firma = order.NazwaFirmy != null,
-                        TotalTotalValue = order.TotalPrice,
-                        Discount = order.Discount,
-                        DiscountValue = discounvalue.ToString("c"),
-                        OrderPayment = new SharedShippingOrderSummaryModels
-                        {
-                            Description = order.Payment.PaymentDescription,
-                            Name = order.Payment.PaymentName,
-                            Price = order.Payment.PaymentPrice
-                        },
-                        OrderShipping = new SharedShippingOrderSummaryModels
-                        {
-                            Description = order.Shipping.ShippingDescription,
-                            Name = order.Shipping.ShippingName,
-                            Price = order.Shipping.ShippingPrice
-                        },
-                        UserAddressModel = new CartAddressModel
-                        {
-                            Email = order.Email,
-                            Imie = order.Name,
-                            KodPocztowy = order.PostalCode,
-                            Miasto = order.City,
-                            NazwaFirmy = order.NazwaFirmy,
-                            Nazwisko = order.Surname,
-                            Nip = order.OrderNip,
-                            Numer = order.Number,
-                            Telefon = order.Phone,
-                            Ulica = order.Street
-                        },
-                        OrderViewItemsTotal = new OrderViewItemsTotal
-                        {
-                            TotalValue = order.OrderDetails.Sum(x => x.SubTotalPrice),
-                            OrderProductList = order.OrderDetails.Select(m => new OrderItemSummary
-                            {
-                                Image = m.Products.IconName ?? "NoPhoto_small",
-                                Name = m.Products.Name,
-                                Price = m.Products.Price ?? 0,
-                                Quantity = m.Quantity,
-                                TotalValue = m.SubTotalPrice,
-                                Packing = m.Products.Packing
-                            }).ToList()
-                        }
-                    }
-                };
-                email.Send();
-            }
-            return Json(GetOrderChangeOptions(value), JsonRequestBehavior.AllowGet);
-        }
+        //        var discounvalue = ((order.OrderDetails.Sum(orderdetail => orderdetail.SubTotalPrice)*order.Discount)*
+        //                            100)/100;
+        //        var email = new ChangeOrderStateEmail
+        //        {
+        //            To = order.Email,
+        //            Id = order.OrderId,
+        //            State = value,
+        //            StateDescription = SetStateDescription(value),
+        //            PackageName = value=="Wysłane"?packageNumber:null,
+        //            OrderViewModelsSummary = new OrderViewModelsSummary
+        //            {
+        //                Firma = order.NazwaFirmy != null,
+        //                TotalTotalValue = order.TotalPrice,
+        //                Discount = order.Discount,
+        //                DiscountValue = discounvalue.ToString("c"),
+        //                OrderPayment = new SharedShippingOrderSummaryModels
+        //                {
+        //                    Description = order.Payment.PaymentDescription,
+        //                    Name = order.Payment.PaymentName,
+        //                    Price = order.Payment.PaymentPrice
+        //                },
+        //                OrderShipping = new SharedShippingOrderSummaryModels
+        //                {
+        //                    Description = order.Shipping.ShippingDescription,
+        //                    Name = order.Shipping.ShippingName,
+        //                    Price = order.Shipping.ShippingPrice
+        //                },
+        //                UserAddressModel = new CartAddressModel
+        //                {
+        //                    Email = order.Email,
+        //                    Imie = order.Name,
+        //                    KodPocztowy = order.PostalCode,
+        //                    Miasto = order.City,
+        //                    NazwaFirmy = order.NazwaFirmy,
+        //                    Nazwisko = order.Surname,
+        //                    Nip = order.OrderNip,
+        //                    Numer = order.Number,
+        //                    Telefon = order.Phone,
+        //                    Ulica = order.Street
+        //                },
+        //                OrderViewItemsTotal = new OrderViewItemsTotal
+        //                {
+        //                    TotalValue = order.OrderDetails.Sum(x => x.SubTotalPrice),
+        //                    OrderProductList = order.OrderDetails.Select(m => new OrderItemSummary
+        //                    {
+        //                        Image = m.Products.IconName ?? "NoPhoto_small",
+        //                        Name = m.Products.Name,
+        //                        Price = m.Products.Price ?? 0,
+        //                        Quantity = m.Quantity,
+        //                        TotalValue = m.SubTotalPrice,
+        //                        Packing = m.Products.Packing
+        //                    }).ToList()
+        //                }
+        //            }
+        //        };
+        //        email.Send();
+        //    }
+        //    return Json(GetOrderChangeOptions(value), JsonRequestBehavior.AllowGet);
+        //}
 
-        public virtual PartialViewResult ChangeOrderStateFromDetails(int id, string value)
+        public virtual PartialViewResult ChangeOrderStateFromDetails(int id, string value, string packageNumber)
         {
             var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
             if (order != null && order.OrderInfo != value)
@@ -149,6 +148,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     Id = order.OrderId,
                     State = value,
                     StateDescription = SetStateDescription(value),
+                    PackageName = value == "Wysłane" ? packageNumber : null,
                     OrderViewModelsSummary = new OrderViewModelsSummary
                     {
                         Firma = order.NazwaFirmy != null,

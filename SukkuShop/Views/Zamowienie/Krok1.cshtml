@@ -34,57 +34,28 @@
     <div>
         <div class="bottom-box">
             <div class="order-title">Dostawa</div>
-            <ul class="shipping">
-                <li>
-                    <input type="radio" name="shipping" id="ship1" class="css-checkbox">
-                    <label for="ship1" class="css-label">Poczta Polska Kurier48</label>
-                    <div class="shipping-price">8,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="shipping" id="ship2" class="css-checkbox">
-                    <label for="ship2" class="css-label">Poczta Polska Przesyłka Ekonomiczna</label>
-                    <div class="shipping-price">7,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="shipping" id="ship3" class="css-checkbox">
-                    <label for="ship3" class="css-label">Kurier Siódemka</label>
-                    <div class="shipping-price">12,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="shipping" id="ship4" class="css-checkbox">
-                    <label for="ship4" class="css-label">Paczkomaty</label>
-                    <div class="shipping-price">5,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="shipping" id="ship5" class="css-checkbox">
-                    <label for="ship5" class="css-label">Odbiór osobisty</label>
-                    <div class="shipping-price">0,00 zł</div>
-                </li>
+            <ul class="shipping" id="shipping-list">
+                @foreach (var item in Model.OrderViewShippingModel.Option)
+                {
+                    <li>
+                        @Html.RadioButtonFor(x => x.OrderViewShippingModel.SelectedOption, item.Id, new { @class = "css-checkbox", id="ship"+item.Id})
+                        <label for="@("ship"+item.Id)" class="css-label">@item.Text</label>
+                        <div class="shipping-price">@item.Price zł</div>
+                    </li>
+                }                
             </ul>
         </div>
         <div class="bottom-box">
             <div class="order-title">Płatność</div>
             <ul id="payment-list" class="shipping">
-                <li>
-                    <input type="radio" name="payment" id="pay1" class="css-checkbox">
-                    <label for="pay1" class="css-label">Przedpłata na konto</label>
-                    <div class="shipping-price">0,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="payment" id="pay2" class="css-checkbox">
-                    <label for="pay2" class="css-label">Płatność za pobraniem</label>
-                    <div class="shipping-price">5,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="payment" id="pay3" class="css-checkbox">
-                    <label for="pay3" class="css-label">PayU</label>
-                    <div class="shipping-price">1,00 zł</div>
-                </li>
-                <li>
-                    <input type="radio" name="payment" id="pay4" class="css-checkbox">
-                    <label for="pay4" class="css-label">Płatność w sklepie</label>
-                    <div class="shipping-price">0,00 zł</div>
-                </li>
+                @foreach (var item in Model.OrderViewPaymentModel.Option)
+                {
+                    <li>
+                        @Html.RadioButtonFor(x => x.OrderViewPaymentModel.SelectedOption, item.Id, new { @class = "css-checkbox", id = "pay" + item.Id })
+                        <label for="@("pay"+item.Id)" class="css-label">@item.Text</label>
+                        <div class="shipping-price">@item.Price zł</div>
+                    </li>
+                }       
             </ul>
         </div>
         <div class="clear" style="clear: both"></div>
@@ -123,4 +94,4 @@
 
 </div>
 @Styles.Render("~/Content/css/Zamowienie/Krok1.min.css")
-@Scripts.Render("~/Scripts/OrderKrok1.min.js")
+@Scripts.Render("~/Scripts/OrderKrok1.js")

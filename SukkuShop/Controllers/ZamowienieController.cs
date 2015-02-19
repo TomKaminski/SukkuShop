@@ -564,12 +564,37 @@ namespace SukkuShop.Controllers
                 });
                 totalValue += (priceFloored * item.Quantity);
             }
+            var orderShippingRadios = _dbContext.ShippingTypes.Select(x => new OrderViewRadioOption
+            {
+                Id = x.ShippingId,
+                Price = x.ShippingPrice,
+                Text = x.ShippingName,
+                Description = x.ShippingDescription
+            }).ToList();
+            var orderPaymentRadios = _dbContext.PaymentTypes.Select(x => new OrderViewRadioOption
+            {
+                Id = x.PaymentId,
+                Price = x.PaymentPrice,
+                Text = x.PaymentName,
+                Description = x.PaymentDescription
+            }).ToList();
+            
             var model = new OrderViewModels
             {
                 OrderProductList = productList,
                 TotalValue = totalValue.ToString("c").Replace(",", "."),
                 Discount = discount,
-                DiscountValue = Convert.ToDecimal((totalValue*discount)/100).ToString("c").Replace(",",".")
+                DiscountValue = Convert.ToDecimal((totalValue*discount)/100).ToString("c").Replace(",","."),
+                OrderViewPaymentModel = new OrderViewRadioModel
+                {
+                    Option = orderPaymentRadios,
+                    SelectedOption = shoppingCart.PaymentId.ToString()
+                },
+                OrderViewShippingModel = new OrderViewRadioModel
+                {
+                    Option = orderShippingRadios,
+                    SelectedOption = shoppingCart.ShippingId.ToString()
+                }
             };
             return model;
         }

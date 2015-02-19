@@ -54,12 +54,24 @@ adminApp.controller("AdminOrderCtrl", ['$scope', '$http', '$filter', function ($
         $scope.zakonczone = false;
         $scope.oczekujace = false;
         $scope.realizowane = false;
+        $scope.textFilter = "";
         $http.get("/Admin/Zamowienia/GetOrdersList").success(function (data) {
             $scope.ordersTotal = data;
             $scope.ordersOperative = $scope.ordersTotal;
             $scope.ordersList = filterOrders($scope.ordersTotal);
         });
     };
+
+    $scope.filterByName = function () {
+        $scope.przyjete = false;
+        $scope.zakonczone = false;
+        $scope.oczekujace = false;
+        $scope.realizowane = false;
+        $scope.selectedIndex = 1;
+        $scope.currentPage = 1;
+        var filterByNameTab = $filter('filter')($scope.ordersTotal, { id: $scope.textFilter });
+        $scope.ordersList = filterOrders(filterByNameTab);
+    }
 
     $scope.DownloadInvoice = function() {
         showAjaxLoader();
@@ -75,25 +87,25 @@ adminApp.controller("AdminOrderCtrl", ['$scope', '$http', '$filter', function ($
             });
     }
 
-    $scope.ChangeOrderState = function (id, value) {
-        showAjaxLoader();
-        $http.post('/Admin/Zamowienia/ChangeOrderState', { id: id, value: value }).
-            success(function (data) {
-                    var result = $.grep($scope.ordersTotal, function (e) { return e.id == id; });
-                    result[0].stan = value;
-                    result[0].orderOpts = data;
-                    result[0].selectedOpt = value;
+    //$scope.ChangeOrderState = function (id, value) {
+    //    showAjaxLoader();
+    //    $http.post('/Admin/Zamowienia/ChangeOrderState', { id: id, value: value }).
+    //        success(function (data) {
+    //                var result = $.grep($scope.ordersTotal, function (e) { return e.id == id; });
+    //                result[0].stan = value;
+    //                result[0].orderOpts = data;
+    //                result[0].selectedOpt = value;
                 
-                hideAjaxLoader();
-                showAjaxTick();
-                fadeOutAjaxTick();
-                $scope.ordersList = filterOrders($scope.ordersTotal);
-            }).
-            error(function (xhr, status, error) {
-                alert(error);
-                console.log(xhr.responseText);
-            });
-    }
+    //            hideAjaxLoader();
+    //            showAjaxTick();
+    //            fadeOutAjaxTick();
+    //            $scope.ordersList = filterOrders($scope.ordersTotal);
+    //        }).
+    //        error(function (xhr, status, error) {
+    //            alert(error);
+    //            console.log(xhr.responseText);
+    //        });
+    //}
 
     $scope.filterByCheckboxes = function () {
         $scope.currentPage = 1;

@@ -568,6 +568,9 @@ namespace Links
                 public static readonly string AdminEditProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminEditProduct.min.js") ? Url("AdminEditProduct.min.js") : Url("AdminEditProduct.js");
                 public static readonly string AdminEditProduct_min_js = Url("AdminEditProduct.min.js");
                 public static readonly string AdminEditProduct_min_js_map = Url("AdminEditProduct.min.js.map");
+                public static readonly string AdminOrderDetails_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminOrderDetails.min.js") ? Url("AdminOrderDetails.min.js") : Url("AdminOrderDetails.js");
+                public static readonly string AdminOrderDetails_min_js = Url("AdminOrderDetails.min.js");
+                public static readonly string AdminOrderDetails_min_js_map = Url("AdminOrderDetails.min.js.map");
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
                 public static readonly string AdminProduct_min_js = Url("AdminProduct.min.js");
                 public static readonly string AdminProduct_min_js_map = Url("AdminProduct.min.js.map");

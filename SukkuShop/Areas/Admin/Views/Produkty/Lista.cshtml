@@ -69,7 +69,7 @@
                                         <li ng-if="item.warning.demandsCount!=0">
                                             {{item.warning.demandsCount}} klientów prosi o produkt
                                         </li>
-                                        <li ng-if="item.warning.lowQuantity!=null && item.Quantity-item.ReservedQuantity>0 && item.Quantity-item.ReservedQuantity<15">
+                                        <li ng-if="item.warning.lowQuantity!=null && item.Quantity-item.ReservedQuantity>0 && item.Quantity-item.ReservedQuantity<10">
                                             {{item.warning.lowQuantity}}
                                         </li>
                                         <li ng-if="item.warning.noProduct!=null && item.Quantity-item.ReservedQuantity==0">

@@ -103,7 +103,7 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
         var result = $.grep($scope.productsTotal, function (e) { return e.ProductId == id; });
         if (result[0].warning.demandsCount > 0)
             counter++;
-        if (result[0].warning.lowQuantity != null && result[0].Quantity - result[0].ReservedQuantity < 15 && result[0].Quantity - result[0].ReservedQuantity > 0)
+        if (result[0].warning.lowQuantity != null && result[0].Quantity - result[0].ReservedQuantity < 10 && result[0].Quantity - result[0].ReservedQuantity > 0)
             counter++;
         if (result[0].warning.noProduct != null && result[0].Quantity-result[0].ReservedQuantity==0)
             counter++;

@@ -13,10 +13,14 @@ else
     {
         <span style="float:left;margin:0 10px 0 80px">Stan zamówienia:</span>
         <div class="styled-select">
-            @Html.DropDownList("value", Model)
+            @Html.DropDownList("value", Model, new { id = "stateDropdown" })
         </div>
         @Html.Hidden("Id", (int)ViewBag.OrderId)
-    <a href="" id="submitOrderState" style="float:left;margin-left: 10px">ZAPISZ</a>
+        <a href="" id="submitOrderState" style="float:left;margin-left: 10px">ZAPISZ</a>
+        <div id="number-box" style="visibility: hidden;clear:both;padding-top:10px;">
+            <span style="float:left;margin:0 10px 0 80px">Numer listu:</span>
+            @Html.TextBox("packageNumber", null, new { style = "float: left;height: 20px;font-family: Segoe UI;font-size: 14px;line-height: 20px;width: 200px;border: 1px solid #f89b1d;" })
+        </div>
     }
 
 }

@@ -48,9 +48,25 @@ jQuery(document).ready(function () {
     showAjaxTick();
     hideAjaxTick();
 
+    $("#replace").delegate("#stateDropdown", "change", function() {
+        if ($("select#stateDropdown").val() == "Wysłane")
+            $("#number-box").css("visibility", "visible");
+        else {
+            $("#number-box").css("visibility", "hidden");
+            $("#numberAlert").css("visibility", "hidden");
+        }
+    });
+
     $("#replace").delegate("a#submitOrderState", "click", function(event) {
         event.preventDefault();
-        showAjaxLoader();
-        $("#changeStateForm").submit();
+        if ($("#stateDropdown").val() == "Wysłane" && $("#packageNumber").val() == "") {
+            $("#packageNumber").css("border", "1px solid red");
+            $("#numberAlert").css("visibility", "visible");
+        } else {
+            showAjaxLoader();
+            $("#changeStateForm").submit();
+            $("#numberAlert").css("visibility", "hidden");
+        }
+
     });
 });
