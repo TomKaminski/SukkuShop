@@ -135,6 +135,14 @@ namespace SukkuShop.Areas.Admin.Controllers
             var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
             if (order != null && order.OrderInfo != value)
             {
+                if (value == "Wysłane")
+                {
+                    foreach (var item in order.OrderDetails)
+                    {
+                        item.Products.ReservedQuantity -= item.Quantity;
+                        item.Products.Quantity -= item.Quantity;
+                    }
+                }
                 order.OrderInfo = value;
                 _dbContext.Orders.AddOrUpdate(order);
                 _dbContext.SaveChanges();
@@ -206,6 +214,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             var order = _dbContext.Orders.First(m => m.OrderId == id);
             var model = new AdminOrderViewModelsSummary
             {
+                OrderWeight = order.OrderWeight,
                 Id = id,
                 Firma = order.OrderNip != null,
                 UserOrderInfo = order.UserHints,

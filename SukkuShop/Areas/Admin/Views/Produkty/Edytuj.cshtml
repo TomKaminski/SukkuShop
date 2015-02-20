@@ -64,6 +64,10 @@
                     <div class="icon-pencil text-edit"></div>
 
                 </div>
+                <div class="textbox-container" id="weight">
+                    <span class="text-edit">WAGA(KG)</span> @Html.TextBoxFor(m => m.Weight, new { placeholder = "0.00", id = "weight-textbox" })
+                    <div class="icon-pencil text-edit"></div>
+                </div>
                 @Html.TextBoxFor(m => m.ImageBig, new { type = "file", onchange = "onFileSelected(event)", style = "visibility: hidden" })
 
             </div>

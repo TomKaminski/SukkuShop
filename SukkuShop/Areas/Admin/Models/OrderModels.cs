@@ -18,5 +18,6 @@ namespace SukkuShop.Areas.Admin.Models
         public string UserOrderInfo { get; set; }
         public bool AccountExists { get; set; }
         public int? UserId { get; set; }
+        public decimal OrderWeight { get; set; }
     }
 }

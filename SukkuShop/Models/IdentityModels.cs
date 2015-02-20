@@ -101,7 +101,7 @@ namespace SukkuShop.Models
         public int? Promotion { get; set; }
 
         public string Description { get; set; }
-
+        public decimal? Weight { get; set; }
         [DefaultValue(typeof (bool), "True")]
         public bool Published { get; set; }
 
@@ -152,7 +152,7 @@ namespace SukkuShop.Models
 
         [Key]
         public int OrderId { get; set; }
-
+        public decimal OrderWeight { get; set; }
         public int? UserId { get; set; }
         public DateTime OrderDate { get; set; }
         public DateTime SentDate { get; set; }

@@ -97,10 +97,8 @@ $(document).ready(function () {
             $(this).siblings('.icon-pencil').css('visibility', 'hidden');
     });
 
-    $("#price-textbox,#prom-textbox").keypress(function (e) {
+    $("#price-textbox,#prom-textbox,#weight-textbox").keypress(function (e) {
         if (e.which != 8 && e.which != 0 && e.which != 44 && e.which != 46 && (e.which < 48 || e.which > 57))
-            return false;
-        if ($('#price-textbox').val().length == 0 && e.which == 48)
             return false;
     });
 
@@ -128,11 +126,11 @@ $(document).ready(function () {
                 minlength: 2
             },
             Price: {
-                regex: /^[1-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
+                regex: /^[0-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
             },
             Packing: {
                 minlength: 2,
-                regex: /^[1-9][0-9]*[A-Ża-ż]{1,2}$|^$/,
+                regex: /^[0-9][0-9]*[A-Ża-ż]{1,2}$|^$/,
             },
             Promotion: {
                 min: 0,
@@ -140,6 +138,9 @@ $(document).ready(function () {
             },
             Quantity: {
                 min: 0
+            },
+            Weight: {
+                regex: /^[0-9][0-9]*[,.]{0,1}[0-9]{0,2}$|^$/
             }
         },
         messages: {
@@ -160,6 +161,9 @@ $(document).ready(function () {
             },
             Quantity: {
                 min: "Minimalna wartość to 0"
+            },
+            Weight: {
+                regex: "Zły format!"
             }
         }
     });

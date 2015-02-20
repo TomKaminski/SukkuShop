@@ -351,6 +351,7 @@ namespace SukkuShop.Controllers
             var orderdetailslist = new List<OrderDetails>();
             decimal hehe = 0;
             decimal discountVal = 0;
+            decimal? orderWeight = 0;
             var paymentPrice = model.OrderPayment;
             var shippingPrice = model.OrderShipping;
             using (var transaction = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
@@ -375,6 +376,7 @@ namespace SukkuShop.Controllers
                                 _dbContext.OrderDetails.Add(orderD);
                                 orderdetailslist.Add(orderD);
                                 hehe += item.TotalValue;
+                                orderWeight += product.Weight*item.Quantity;
                                 product.ReservedQuantity += item.Quantity;
                                 product.OrdersCount+=item.Quantity;
                                 _dbContext.Products.AddOrUpdate(product);
@@ -422,6 +424,7 @@ namespace SukkuShop.Controllers
                     
                     orders = new Orders
                     {
+                        OrderWeight = orderWeight??0,
                         Email = model.UserAddressModel.Email,
                         ProductsPrice = hehe,
                         TotalPrice = (hehe + (hehe > 250 ? 0 : paymentPrice.Price) + (hehe > 250 ? 0 : shippingPrice.Price)) - discountVal,

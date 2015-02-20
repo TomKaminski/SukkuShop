@@ -85,7 +85,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     category = x.CategoryId == null ? "Brak kategorii" : "",
                     packing = x.Packing == null ? "Brak metody pakowania" : "",
                     opis = x.Description == null ? "Brak opisu" : "",
-                    img = x.ImageName == null ? "Brak zdjęcia" : ""
+                    img = x.ImageName == null ? "Brak zdjęcia" : "",
+                    weight = x.Weight==0?"Brak podanej wagi":""
                 },
                 warning = new
                 {
@@ -164,12 +165,17 @@ namespace SukkuShop.Areas.Admin.Controllers
                 var category = model.Category == 0 ? null : model.Category;
                 var price = model.Price == null
                     ? (decimal?) null
-                    : Math.Floor((Convert.ToDecimal(model.Price.Replace(",", ".")))*100)/100;
+                    : Math.Floor((Convert.ToDecimal(model.Price.Replace(".", ",")))*100)/100;
 
-                if ((price == null || category == null || model.Packing == null) && model.PublishAfterCreate)
+                var weight = model.Weight == null
+                    ? (decimal?)null
+                    : Math.Floor((Convert.ToDecimal(model.Weight.Replace(".", ","))) * 100) / 100;
+
+
+                if ((price == null || category == null || model.Packing == null || weight == null) && model.PublishAfterCreate)
                 {
                     ModelState.AddModelError("PublishAfterCreate",
-                        "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
+                        "Cena, kategoria, waga oraz sposób pakowania muszą być podane przed publikacją!");
                     GetDropDownLists(model.Category);
                     return View(model);                    
                 }
@@ -188,7 +194,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     Packing = model.Packing,
                     Promotion = model.Promotion,
                     Price = price,
-                    ReservedQuantity = 0
+                    ReservedQuantity = 0,
+                    Weight = weight
                 };
 
                 _dbContext.Products.AddOrUpdate(product);
@@ -347,7 +354,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Quantity = item.Quantity,
                 PublishAfterCreate = item.Published,
                 Id = item.ProductId,
-                Title = item.Name
+                Title = item.Name,
+                Weight = item.Weight.ToString()
             };
             return View(model);
         }
@@ -412,12 +420,15 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 var category = model.Category == 0 ? null : model.Category;
                 var price = model.Price == null ? (decimal?) null : Convert.ToDecimal(model.Price.Replace(".", ","));
-                if (price == null || category == null || model.Packing == null)
+                var weight = model.Weight == null
+                    ? (decimal?)null
+                    : Math.Floor((Convert.ToDecimal(model.Weight.Replace(".", ","))) * 100) / 100;
+                if (price == null || category == null || model.Packing == null || weight == null)
                 {
                     if (model.PublishAfterCreate)
                     {
                         ModelState.AddModelError("PublishAfterCreate",
-                            "Cena, Kategoria oraz sposób pakowania muszą być podane przed publikacją!");
+                            "Cena, kategoria, waga oraz sposób pakowania muszą być podane przed publikacją!");
                         GetCategoryListEdit(product);
                         return View(model);
                     }
@@ -432,6 +443,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 product.CategoryId = category;
                 product.Description = model.Description;
                 product.Name = model.Title;
+                product.Weight = weight;
                 if (product.Quantity < model.Quantity)
                 {
                     var emails = _dbContext.ProductDemands.Where(x => x.ProductId == product.ProductId);

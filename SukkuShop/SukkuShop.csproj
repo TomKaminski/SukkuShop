@@ -378,6 +378,18 @@
     <Compile Include="Migrations\201502201028132_FreeShippingPayment.Designer.cs">
       <DependentUpon>201502201028132_FreeShippingPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502201333472_ProductWeight.cs" />
+    <Compile Include="Migrations\201502201333472_ProductWeight.Designer.cs">
+      <DependentUpon>201502201333472_ProductWeight.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502201422583_ProductWeight_cd.cs" />
+    <Compile Include="Migrations\201502201422583_ProductWeight_cd.Designer.cs">
+      <DependentUpon>201502201422583_ProductWeight_cd.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502201503250_OrderWeight.cs" />
+    <Compile Include="Migrations\201502201503250_OrderWeight.Designer.cs">
+      <DependentUpon>201502201503250_OrderWeight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -1432,6 +1444,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502201028132_FreeShippingPayment.resx">
       <DependentUpon>201502201028132_FreeShippingPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502201333472_ProductWeight.resx">
+      <DependentUpon>201502201333472_ProductWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502201422583_ProductWeight_cd.resx">
+      <DependentUpon>201502201422583_ProductWeight_cd.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502201503250_OrderWeight.resx">
+      <DependentUpon>201502201503250_OrderWeight.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

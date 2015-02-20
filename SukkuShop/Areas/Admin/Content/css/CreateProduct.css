@@ -187,7 +187,7 @@
           width: 319px;
           font-weight: bold;
           font-family: Segoe UI; }
-      .main-box .left-container-edit .textbox-container#price input[type=text] {
+      .main-box .left-container-edit .textbox-container#price input[type=text], .main-box .left-container-edit .textbox-container#weight input[type=text] {
         width: 80px;
         text-align: right;
         margin-top: 15px;
@@ -264,7 +264,7 @@
       font-weight: bold;
       font-family: SegoeLight;
       visibility: hidden;
-      margin-bottom: 90px; }
+      margin-bottom: 40px; }
 
 input[type=checkbox].css-checkbox {
   display: none; }
