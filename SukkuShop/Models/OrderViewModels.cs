@@ -16,12 +16,13 @@ namespace SukkuShop.Models
     public class OrderViewModels
     {
         public List<OrderItem> OrderProductList { get; set; }
-        public string TotalValue { get; set; }
+        public decimal TotalValue { get; set; }
         public int Discount { get; set; }
         public string DiscountValue { get; set; }
         public OrderViewRadioModel OrderViewShippingModel { get; set; }
         public OrderViewRadioModel OrderViewPaymentModel { get; set; } 
     }
+
 
     public class OrderViewRadioModel
     {

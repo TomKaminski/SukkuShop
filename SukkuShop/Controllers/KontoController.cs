@@ -478,20 +478,20 @@ namespace SukkuShop.Controllers
                     Description = order.Payment.PaymentDescription,
                     Id=order.PaymentId,
                     Name = order.Payment.PaymentName,
-                    Price = order.Payment.PaymentPrice
+                    Price = order.FreeShippingPayment?0:order.Payment.PaymentPrice
                 },
                 OrderShipping = new SharedShippingOrderSummaryModels
                 {
                     Description = order.Shipping.ShippingDescription,
                     Id=order.ShippingId,
                     Name = order.Shipping.ShippingName,
-                    Price = order.Shipping.ShippingPrice
+                    Price = order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice
                 },
                 TotalTotalValue = order.TotalPrice.ToString("c"),
                 OrderInfo = order.OrderInfo,
                 OrderDat = order.OrderDate.ToShortDateString(),
                 Discount = order.Discount,
-                DiscountValue = (order.TotalPrice-(order.ProductsPrice + order.Payment.PaymentPrice + order.Shipping.ShippingPrice)).ToString("c"),
+                DiscountValue = (order.TotalPrice - (order.ProductsPrice + (order.FreeShippingPayment ? 0 : order.Payment.PaymentPrice) + (order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice))).ToString("c"),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,

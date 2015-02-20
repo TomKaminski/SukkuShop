@@ -173,6 +173,7 @@ namespace SukkuShop.Models
         public string Phone { get; set; }
         public string Email { get; set; }
         public int Discount { get; set; }
+        public bool FreeShippingPayment { get; set; }
         public virtual ICollection<OrderDetails> OrderDetails { get; set; }
 
         [ForeignKey("ShippingId")]

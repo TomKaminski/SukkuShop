@@ -411,7 +411,7 @@ namespace SukkuShop.Controllers
                     if (model.HasErrors)
                     {
                         model.OrderViewItemsTotal.TotalValue = hehe;
-                        model.TotalTotalValue = hehe + model.OrderShipping.Price + model.OrderPayment.Price - discountVal;
+                        model.TotalTotalValue = hehe + (hehe > 250 ? 0 : model.OrderShipping.Price) + (hehe > 250 ? 0 : model.OrderPayment.Price) - discountVal;
                         return View(model);
                     }
                     if (model.OrderViewItemsTotal.OrderProductList.Count == 0)
@@ -424,7 +424,7 @@ namespace SukkuShop.Controllers
                     {
                         Email = model.UserAddressModel.Email,
                         ProductsPrice = hehe,
-                        TotalPrice = (hehe + paymentPrice.Price + shippingPrice.Price) - discountVal,
+                        TotalPrice = (hehe + (hehe > 250 ? 0 : paymentPrice.Price) + (hehe > 250 ? 0 : shippingPrice.Price)) - discountVal,
                         Name = model.UserAddressModel.Imie,
                         Surname = model.UserAddressModel.Nazwisko,
                         OrderDate = DateTime.Today,
@@ -442,7 +442,8 @@ namespace SukkuShop.Controllers
                         NazwaFirmy = model.UserAddressModel.NazwaFirmy,
                         OrderNip = model.UserAddressModel.Nip,
                         Phone = model.UserAddressModel.Telefon,
-                        Discount = discount
+                        Discount = discount,
+                        FreeShippingPayment = hehe>250
                     };
                     _dbContext.Orders.Add(orders);
                     await _dbContext.SaveChangesAsync();
@@ -471,13 +472,13 @@ namespace SukkuShop.Controllers
                     {
                         Description = paymentPrice.Description,
                         Name = paymentPrice.Name,
-                        Price = paymentPrice.Price
+                        Price = hehe>250?0:paymentPrice.Price
                     },
                     OrderShipping = new SharedShippingOrderSummaryModels
                     {
                         Description = shippingPrice.Description,
                         Name = shippingPrice.Name,
-                        Price = shippingPrice.Price
+                        Price = hehe > 250 ? 0 : shippingPrice.Price
                     },
                     UserAddressModel = model.UserAddressModel,
                     OrderViewItemsTotal = new OrderViewItemsTotal
@@ -521,14 +522,14 @@ namespace SukkuShop.Controllers
             paymentModel = new SharedShippingOrderSummaryModels
             {
                 Name = payment.PaymentName,
-                Price = payment.PaymentPrice,
+                Price = orderitemsummary.TotalValue>250?0:payment.PaymentPrice,
                 Description = payment.PaymentDescription,
                 Id = payment.PaymentId
             };
             shippingModel = new SharedShippingOrderSummaryModels
             {
                 Name = shipping.ShippingName,
-                Price = shipping.ShippingPrice,
+                Price = orderitemsummary.TotalValue > 250 ? 0 : shipping.ShippingPrice,
                 Description = shipping.ShippingDescription,
                 Id=shipping.ShippingId
             };
@@ -567,14 +568,14 @@ namespace SukkuShop.Controllers
             var orderShippingRadios = _dbContext.ShippingTypes.Select(x => new OrderViewRadioOption
             {
                 Id = x.ShippingId,
-                Price = x.ShippingPrice,
+                Price = totalValue>250?0:x.ShippingPrice,
                 Text = x.ShippingName,
                 Description = x.ShippingDescription
             }).ToList();
             var orderPaymentRadios = _dbContext.PaymentTypes.Select(x => new OrderViewRadioOption
             {
                 Id = x.PaymentId,
-                Price = x.PaymentPrice,
+                Price = totalValue > 250 ? 0 : x.PaymentPrice,
                 Text = x.PaymentName,
                 Description = x.PaymentDescription
             }).ToList();
@@ -582,7 +583,7 @@ namespace SukkuShop.Controllers
             var model = new OrderViewModels
             {
                 OrderProductList = productList,
-                TotalValue = totalValue.ToString("c").Replace(",", "."),
+                TotalValue = totalValue,
                 Discount = discount,
                 DiscountValue = Convert.ToDecimal((totalValue*discount)/100).ToString("c").Replace(",","."),
                 OrderViewPaymentModel = new OrderViewRadioModel

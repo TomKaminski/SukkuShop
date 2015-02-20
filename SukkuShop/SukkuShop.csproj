@@ -374,6 +374,10 @@
     <Compile Include="Migrations\201502141437025_relationshipFix.Designer.cs">
       <DependentUpon>201502141437025_relationshipFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502201028132_FreeShippingPayment.cs" />
+    <Compile Include="Migrations\201502201028132_FreeShippingPayment.Designer.cs">
+      <DependentUpon>201502201028132_FreeShippingPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -1425,6 +1429,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502141437025_relationshipFix.resx">
       <DependentUpon>201502141437025_relationshipFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502201028132_FreeShippingPayment.resx">
+      <DependentUpon>201502201028132_FreeShippingPayment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

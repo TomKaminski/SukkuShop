@@ -30,10 +30,12 @@
             }
         </tbody>
     </table>
-    <div class="products-price-summary">@Model.TotalValue</div>
+    <div class="products-price-summary">@Model.TotalValue.ToString("c")</div>
     <div>
+        
         <div class="bottom-box">
             <div class="order-title">Dostawa</div>
+            
             <ul class="shipping" id="shipping-list">
                 @foreach (var item in Model.OrderViewShippingModel.Option)
                 {
@@ -58,12 +60,16 @@
                 }       
             </ul>
         </div>
+        @if (Model.TotalValue > 250)
+        {
+            <div class="freeshipping">Zakupy powyżej 250zł oznaczają darmową wysyłkę!</div>
+        }
         <div class="clear" style="clear: both"></div>
     </div>
     <div class="order-title">Podsumowanie</div>
     <ul id="products-summary">
         <li>
-            <div class="price-box" id="price-box-json">@Model.TotalValue</div><div id="text-box clear">Produkty</div>
+            <div class="price-box" id="price-box-json">@Model.TotalValue.ToString("c")</div><div id="text-box clear">Produkty</div>
         </li>
         @if (Model.Discount > 0)
         {
