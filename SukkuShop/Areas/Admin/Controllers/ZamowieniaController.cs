@@ -211,6 +211,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual ActionResult SzczegolyZamowienia(int id=1)
         {
+            ViewBag.SelectedOpt = 2;
             var order = _dbContext.Orders.First(m => m.OrderId == id);
             var model = new AdminOrderViewModelsSummary
             {

@@ -235,6 +235,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 _dbContext.SaveChanges();
                 return RedirectToAction(MVC.Admin.Produkty.Lista(prod.Name));
             }
+            ViewBag.SelectedOpt = 1;
             GetDropDownLists(model.Category);
             return View(model);
         }
@@ -505,6 +506,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 _dbContext.SaveChanges();
                 return RedirectToAction(MVC.Admin.Produkty.Lista(product.Name));
             }
+            ViewBag.SelectedOpt = 1;
             GetCategoryListEdit(product);
             return View(model);
         }

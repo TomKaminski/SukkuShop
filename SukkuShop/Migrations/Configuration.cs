@@ -46,17 +46,73 @@ namespace SukkuShop.Migrations
                     );
 
                 context.PaymentTypes.AddOrUpdate(p => p.PaymentId,
-                        new PaymentType { PaymentId = 1, PaymentName = "Przedp³ata na konto", PaymentPrice = 0,PaymentDescription = "Przedp³ata na konto OPIS"},
-                        new PaymentType { PaymentId = 2, PaymentName = "P³atnoœæ za pobraniem", PaymentPrice = 5, PaymentDescription = "P³atnoœæ za pobraniem OPIS" },
-                        new PaymentType { PaymentId = 3, PaymentName = "PayU", PaymentPrice = 1, PaymentDescription = "PayU OPIS" }
+                        new PaymentType
+                        {
+                            PaymentId = 1,
+                            PaymentName = "Przedp³ata na konto",
+                            PaymentPrice = 0,
+                            PaymentDescription = "Przedp³ata na konto OPIS",
+                            Active = true
+                        },
+                        new PaymentType
+                        {
+                            PaymentId = 2,
+                            PaymentName = "P³atnoœæ za pobraniem",
+                            PaymentPrice = 5,
+                            PaymentDescription = "P³atnoœæ za pobraniem OPIS",
+                            Active = true
+                        },
+                        new PaymentType
+                        {
+                            PaymentId = 3,
+                            PaymentName = "PayU",
+                            PaymentPrice = 1,
+                            PaymentDescription = "PayU OPIS",
+                            Active = true
+                        }
                     );
 
                 context.ShippingTypes.AddOrUpdate(p => p.ShippingId,
-                    new ShippingType { ShippingId = 1, ShippingName = "Poczta Polska Kurier48", ShippingPrice = 8,ShippingDescription = "Poczta Polsa Kurier48 OPIS"},
-                    new ShippingType { ShippingId = 2, ShippingName = "Poczta Polska Przesy³ka Ekonomiczna", ShippingPrice = 7, ShippingDescription = "Poczta Polska Przesy³ka Ekonomiczna OPIS" },
-                    new ShippingType { ShippingId = 3, ShippingName = "Kurier Siódemka", ShippingPrice = 12 ,ShippingDescription = "Kurier Siódemka OPIS"},
-                    new ShippingType { ShippingId = 4, ShippingName = "Paczkomaty", ShippingPrice = 5, ShippingDescription = "Paczkomaty OPIS" },
-                    new ShippingType { ShippingId = 5, ShippingName = "Odbiór osobisty", ShippingPrice = 0, ShippingDescription = "Odbiór osobisty OPIS" }
+                    new ShippingType
+                    {
+                        ShippingId = 1,
+                        ShippingName = "List polecony ekonomiczny",
+                        ShippingPrice = 5,
+                        ShippingDescription = "list polecony ekonomiczny bardzo tani",
+                        Active = true
+                    },
+                    new ShippingType
+                    {
+                        ShippingId = 2,
+                        ShippingName = "List polecony priorytetowy",
+                        ShippingPrice = 7,
+                        ShippingDescription = "list polecony zwyk³y",
+                        Active = true
+                    },
+                    new ShippingType
+                    {
+                        ShippingId = 3,
+                        ShippingName = "Paczka ekonomiczna",
+                        ShippingPrice = 10,
+                        ShippingDescription = "Paaaaaaczkaaaa ekonomiczna opis",
+                        Active = true
+                    },
+                    new ShippingType
+                    {
+                        ShippingId = 4,
+                        ShippingName = "Paczka priorytetowa",
+                        ShippingPrice = 15,
+                        ShippingDescription = "Paka priorytet opis",
+                        Active = true
+                    },
+                    new ShippingType
+                    {
+                        ShippingId = 5,
+                        ShippingName = "Odbiór osobisty",
+                        ShippingPrice = 0,
+                        ShippingDescription = "Odbiór osobisty OPIS",
+                        Active = true
+                    }
                     );
                 base.Seed(context);
             }

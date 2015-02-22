@@ -201,6 +201,7 @@ namespace SukkuShop.Models
         public string ShippingName { get; set; }
         public decimal ShippingPrice { get; set; }
         public string ShippingDescription { get; set; }
+        public bool Active { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
     }
@@ -219,6 +220,7 @@ namespace SukkuShop.Models
         public string PaymentName { get; set; }
         public decimal PaymentPrice { get; set; }
         public string PaymentDescription { get; set; }
+        public bool Active { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
     }
@@ -282,64 +284,72 @@ namespace SukkuShop.Models
                     );
 
                 context.PaymentTypes.AddOrUpdate(p => p.PaymentId,
-                    new PaymentType
-                    {
-                        PaymentId = 1,
-                        PaymentName = "Przedpłata na konto",
-                        PaymentPrice = 0,
-                        PaymentDescription = "Przedpłata na konto OPIS"
-                    },
-                    new PaymentType
-                    {
-                        PaymentId = 2,
-                        PaymentName = "Płatność za pobraniem",
-                        PaymentPrice = 5,
-                        PaymentDescription = "Płatność za pobraniem OPIS"
-                    },
-                    new PaymentType
-                    {
-                        PaymentId = 3,
-                        PaymentName = "PayU",
-                        PaymentPrice = 1,
-                        PaymentDescription = "PayU OPIS"
-                    }
-                    );
+                       new PaymentType
+                       {
+                           PaymentId = 1,
+                           PaymentName = "Przedpłata na konto",
+                           PaymentPrice = 0,
+                           PaymentDescription = "Przedpłata na konto OPIS",
+                           Active = true
+                       },
+                       new PaymentType
+                       {
+                           PaymentId = 2,
+                           PaymentName = "Płatność za pobraniem",
+                           PaymentPrice = 5,
+                           PaymentDescription = "Płatność za pobraniem OPIS",
+                           Active = true
+                       },
+                       new PaymentType
+                       {
+                           PaymentId = 3,
+                           PaymentName = "PayU",
+                           PaymentPrice = 1,
+                           PaymentDescription = "PayU OPIS",
+                           Active = true
+                       }
+                   );
 
                 context.ShippingTypes.AddOrUpdate(p => p.ShippingId,
                     new ShippingType
                     {
                         ShippingId = 1,
                         ShippingName = "List polecony ekonomiczny",
-                        ShippingPrice = 8,
-                        ShippingDescription = "List polecony ekonomiczny OPIS"
+                        ShippingPrice = 5,
+                        ShippingDescription = "list polecony ekonomiczny bardzo tani",
+                        Active = true
                     },
                     new ShippingType
                     {
                         ShippingId = 2,
                         ShippingName = "List polecony priorytetowy",
                         ShippingPrice = 7,
-                        ShippingDescription = "List polecony priorytetowy OPIS"
+                        ShippingDescription = "list polecony zwykły",
+                        Active = true
                     },
                     new ShippingType
                     {
                         ShippingId = 3,
                         ShippingName = "Paczka ekonomiczna",
-                        ShippingPrice = 12,
-                        ShippingDescription = "Paczka ekonomiczna OPIS"
+                        ShippingPrice = 10,
+                        ShippingDescription = "Paaaaaaczkaaaa ekonomiczna opis",
+                        Active = true
                     },
                     new ShippingType
                     {
                         ShippingId = 4,
                         ShippingName = "Paczka priorytetowa",
-                        ShippingPrice = 5,
-                        ShippingDescription = "Paczka priorytetowa OPIS"
+                        ShippingPrice = 15,
+                        ShippingDescription = "Paka priorytet opis",
+                        Active = true
                     },
                     new ShippingType
                     {
                         ShippingId = 5,
                         ShippingName = "Odbiór osobisty",
                         ShippingPrice = 0,
-                        ShippingDescription = "Odbiór osobisty OPIS"
+                        ShippingDescription = "Odbiór osobisty OPIS",
+                        Active = true
                     }
                     );
                 base.Seed(context);

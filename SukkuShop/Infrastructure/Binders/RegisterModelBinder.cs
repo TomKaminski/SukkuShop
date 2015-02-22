@@ -1,6 +1,11 @@
-﻿using System.Web.Mvc;
+﻿#region
+
+using System;
+using System.Web.Mvc;
+using SukkuShop.Areas.Admin.Models;
 using SukkuShop.Models;
 
+#endregion
 
 namespace SukkuShop.Infrastructure.Binders
 {
@@ -18,6 +23,44 @@ namespace SukkuShop.Infrastructure.Binders
             //model.Phone = (request.Form.Get("Phone") == "" ? "<Nie określono>":request.Form.Get("Phone"));
             //model.Name = request.Form.Get("Name");
             return model;
+        }
+    }
+
+    public class ShippingPaymentModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+            ModelBindingContext bindingContext)
+        {
+            var model = (ShippingPaymentCreateModel)bindingContext.Model ?? new ShippingPaymentCreateModel();
+            model.Description = TryGet(bindingContext, "description");
+            model.Name = TryGet(bindingContext, "name");
+            model.Price = TryGet(bindingContext, "price");
+            return model;
+        }
+
+        private string TryGet(ModelBindingContext bindingContext, string key)
+        {
+            if (String.IsNullOrEmpty(key))
+                return null;
+
+            var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + "." + key);
+            if (valueResult == null && bindingContext.FallbackToEmptyPrefix)
+                valueResult = bindingContext.ValueProvider.GetValue(key);
+
+            bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueResult);
+
+            if (valueResult == null)
+                return null;
+
+            try
+            {
+                return (string)valueResult.ConvertTo(typeof(string));
+            }
+            catch (Exception ex)
+            {
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex);
+                return null;
+            }
         }
     }
 }

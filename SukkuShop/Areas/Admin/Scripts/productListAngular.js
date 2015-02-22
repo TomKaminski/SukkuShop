@@ -72,7 +72,6 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
     $scope.filterByCheckboxes = function () {
         $scope.currentPage = 1;
         $scope.productsList = filterProducts($scope.productsTotal);
-
     };
 
     $scope.SetQuantity = function (id, quantity) {

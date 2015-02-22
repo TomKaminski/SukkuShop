@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SukkuShop.Areas.Admin.Models;
 using SukkuShop.Controllers;
 using SukkuShop.Infrastructure.Binders;
 using SukkuShop.Models;
@@ -21,10 +22,10 @@ namespace SukkuShop
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
             ModelMetadataProviders.Current = new CachedDataAnnotationsModelMetadataProvider();
             Database.SetInitializer(new ApplicationDbContext.DropCreateInitializer());
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());
+            //ModelBinders.Binders.Add(typeof(ShippingPaymentCreateModel), new ShippingPaymentModelBinder());
         }
 
         protected void Application_EndRequest()

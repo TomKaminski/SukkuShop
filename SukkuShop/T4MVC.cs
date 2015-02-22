@@ -47,6 +47,7 @@ namespace T4MVC
     {
         public readonly string Name = "Admin";
         public SukkuShop.Areas.Admin.Controllers.ContentController Content = new SukkuShop.Areas.Admin.Controllers.T4MVC_ContentController();
+        public SukkuShop.Areas.Admin.Controllers.DostawyPlatnosciController DostawyPlatnosci = new SukkuShop.Areas.Admin.Controllers.T4MVC_DostawyPlatnosciController();
         public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
         public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
         public SukkuShop.Areas.Admin.Controllers.StatystykiController Statystyki = new SukkuShop.Areas.Admin.Controllers.T4MVC_StatystykiController();
@@ -586,6 +587,7 @@ namespace Links
                 public static readonly string RegulaminEditor_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/RegulaminEditor.min.js") ? Url("RegulaminEditor.min.js") : Url("RegulaminEditor.js");
                 public static readonly string RegulaminEditor_min_js = Url("RegulaminEditor.min.js");
                 public static readonly string RegulaminEditor_min_js_map = Url("RegulaminEditor.min.js.map");
+                public static readonly string ShipingPaymentAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ShipingPaymentAngular.min.js") ? Url("ShipingPaymentAngular.min.js") : Url("ShipingPaymentAngular.js");
                 public static readonly string StatisticsAdmin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/StatisticsAdmin.min.js") ? Url("StatisticsAdmin.min.js") : Url("StatisticsAdmin.js");
                 public static readonly string StatisticsAdmin_min_js = Url("StatisticsAdmin.min.js");
                 public static readonly string StatisticsAdmin_min_js_map = Url("StatisticsAdmin.min.js.map");
@@ -653,6 +655,11 @@ namespace Links
                          
                     public static readonly string main_css_map = Url("main.css.map");
                     public static readonly string main_min_css = Url("main.min.css");
+                    public static readonly string PaymentShipping_scss = Url("PaymentShipping.scss");
+                    public static readonly string PaymentShipping_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/PaymentShipping.min.css") ? Url("PaymentShipping.min.css") : Url("PaymentShipping.css");
+                         
+                    public static readonly string PaymentShipping_css_map = Url("PaymentShipping.css.map");
+                    public static readonly string PaymentShipping_min_css = Url("PaymentShipping.min.css");
                     public static readonly string reset_scss = Url("reset.scss");
                     public static readonly string reset_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/reset.min.css") ? Url("reset.min.css") : Url("reset.css");
                          

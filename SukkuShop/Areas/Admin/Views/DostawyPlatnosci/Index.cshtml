@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Dostawy i płatności";
+}
+@Styles.Render("~/Areas/Admin/Content/css/PaymentShipping.min.css")
+@Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Areas/Admin/Scripts/ShipingPaymentAngular.min.js")
+
+<div ng-app="adminApp">
+    <div ng-controller="AdminPayShipCtrl" ng-init="init()">
+        <div class="main-cont">
+            <div class="title-payship">Wysyłka</div>
+            <div style="margin-bottom: 10px">
+                <input type="checkbox" class="css-checkbox" ng-model="onlyActiveShipping" id="onlyActiveShipping" ng-change="filterShippingByCheckboxes()" />
+                <label for="onlyActiveShipping" class="css-label" style="margin-left:0">Tylko aktywne</label>
+                <div style="clear:both"></div>
+            </div>            
+            <table class="main-table">
+                <thead id="plz">
+                    <tr>
+                        <th class="tableId">ID</th>
+                        <th class="tableName">Nazwa</th>
+                        <th class="tableOpis">Opis</th>
+                        <th class="tablePrice">Cena</th>
+                        <th class="blank tableBlank"></th>
+                    </tr>                   
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in shippingList">
+                        <td>{{item.ShippingId}}</td>
+                        <td>{{item.ShippingName}}</td>
+                        <td>{{item.ShippingDescription}}</td>
+                        <td>{{item.ShippingPrice}} PLN</td>
+                        <td ng-click="activateShipping(item.ShippingId)" ng-if="!item.Active" class="share">
+                            Aktywuj
+                            <div class="icon-mail-forward" style="margin-left: 5px; font-size: 17px"></div>
+                        </td>
+                        <td ng-click="deactivateShipping(item.ShippingId)" ng-if="item.Active" class="take-out">Dezaktywuj<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>
+                        <td ng-if="item.canDelete==true"><a ng-click="deleteShipping(item.ShippingId)" class="icon-trash trash"></a></td>
+                    </tr>
+                    <tr ng-if="!addShippingActive">
+                        <td ng-click="addShippingForm()" class="addoption">DODAJ <div class="icon-plus-sign"></div></td>
+                    </tr>
+                    <tr ng-if="addShippingActive">
+                        <td ng-click="cancelShippingForm()" class="addoption" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
+                        <td><input ng-model="newShippingName" type="text" placeholder="Wprowadź nazwę" /></td>
+                        <td><input ng-model="newShippingDescription" type="text"  placeholder="Wprowadź opis" /></td>
+                        <td><input ng-model="newShippingPrice" type="text" placeholder="np. 15,50" /></td>                        
+                        <td ng-click="submitShippingForm(newShippingName,newShippingDescription,newShippingPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                    </tr>
+                </tbody>
+
+            </table>
+            
+            <div class="title-payship">Płatności</div>
+            <div style="margin-bottom: 10px">
+                <input type="checkbox" class="css-checkbox" ng-model="onlyActivePayment" id="onlyActivePayment" ng-change="filterPaymentByCheckboxes()" />
+                <label for="onlyActivePayment" class="css-label" style="margin-left:0">Tylko aktywne</label>
+                <div style="clear:both"></div>
+            </div> 
+            <table class="main-table">
+                <thead id="plz">
+                    <tr>
+                        <th class="tableId">ID</th>
+                        <th class="tableName">Nazwa</th>
+                        <th class="tableOpis">Opis</th>
+                        <th class="tablePrice">Cena</th>
+                        <th class="blank tableBlank"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in paymentList">
+                        <td>{{item.PaymentId}}</td>
+                        <td>{{item.PaymentName}}</td>
+                        <td>{{item.PaymentDescription}}</td>
+                        <td>{{item.PaymentPrice}} PLN</td>
+                        <td ng-click="activatePayment(item.PaymentId)" ng-if="!item.Active" class="share">
+                            Aktywuj
+                            <div class="icon-mail-forward" style="margin-left: 5px; font-size: 17px"></div>
+                        </td>
+                        <td ng-click="deactivatePayment(item.PaymentId)" ng-if="item.Active" class="take-out">Dezaktywuj<div class="icon-remove-sign" style="margin-left: 5px; font-size: 17px"></div></td>
+                        <td ng-if="item.canDelete==true"><a ng-click="deletePayment(item.PaymentId)" class="icon-trash trash"></a></td>
+                    </tr>
+                    <tr ng-if="!addPaymentActive">
+                        <td ng-click="addPaymentForm()" class="addoption">DODAJ <div class="icon-plus-sign"></div></td>
+                    </tr>
+                    <tr ng-if="addPaymentActive">
+                        <td ng-click="cancelPaymentForm()" class="addoption" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
+                        <td><input ng-model="newPaymentName" type="text"  placeholder="Wprowadź nazwę" /></td>
+                        <td><input ng-model="newPaymentDescription" type="text"  placeholder="Wprowadź opis" /></td>
+                        <td><input ng-model="newPaymentPrice" type="text" placeholder="np. 15,50" /></td>                            
+                        <td ng-click="submitPaymentForm(newPaymentName,newPaymentDescription,newPaymentPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

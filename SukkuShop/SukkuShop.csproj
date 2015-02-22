@@ -209,6 +209,9 @@
     <Compile Include="Admin.ContentController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.DostawyPlatnosciController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.KlienciController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -232,6 +235,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DostawyPlatnosciController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProduktyController.cs" />
     <Compile Include="Areas\Admin\Controllers\KlienciController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatystykiController.cs" />
@@ -239,6 +243,7 @@
     <Compile Include="Areas\Admin\Models\ContentModels.cs" />
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModels.cs" />
+    <Compile Include="Areas\Admin\Models\ShippingPaymentCreateModel.cs" />
     <Compile Include="Areas\Admin\Models\UserDetails.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
@@ -390,6 +395,10 @@
     <Compile Include="Migrations\201502201503250_OrderWeight.Designer.cs">
       <DependentUpon>201502201503250_OrderWeight.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502210950586_ActivationShippingPayment.cs" />
+    <Compile Include="Migrations\201502210950586_ActivationShippingPayment.Designer.cs">
+      <DependentUpon>201502210950586_ActivationShippingPayment.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -472,6 +481,12 @@
     <Content Include="Areas\Admin\Content\css\main.min.css">
       <DependentUpon>main.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\PaymentShipping.css">
+      <DependentUpon>PaymentShipping.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\PaymentShipping.min.css">
+      <DependentUpon>PaymentShipping.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\reset.css">
       <DependentUpon>reset.scss</DependentUpon>
     </Content>
@@ -520,6 +535,10 @@
     <Content Include="Areas\Admin\Scripts\RegulaminEditor.js" />
     <Content Include="Areas\Admin\Scripts\RegulaminEditor.min.js">
       <DependentUpon>RegulaminEditor.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\ShipingPaymentAngular.js" />
+    <Content Include="Areas\Admin\Scripts\ShipingPaymentAngular.min.js">
+      <DependentUpon>ShipingPaymentAngular.js</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Scripts\StatisticsAdmin.js" />
     <Content Include="Areas\Admin\Scripts\StatisticsAdmin.min.js">
@@ -1135,6 +1154,14 @@
     <Content Include="Areas\Admin\Scripts\AdminOrderDetails.min.js.map">
       <DependentUpon>AdminOrderDetails.min.js</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\DostawyPlatnosci\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\css\PaymentShipping.scss" />
+    <Content Include="Areas\Admin\Content\css\PaymentShipping.css.map">
+      <DependentUpon>PaymentShipping.css</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Scripts\ShipingPaymentAngular.min.js.map">
+      <DependentUpon>ShipingPaymentAngular.min.js</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
@@ -1453,6 +1480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502201503250_OrderWeight.resx">
       <DependentUpon>201502201503250_OrderWeight.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502210950586_ActivationShippingPayment.resx">
+      <DependentUpon>201502210950586_ActivationShippingPayment.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

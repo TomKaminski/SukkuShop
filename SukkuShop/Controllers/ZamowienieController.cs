@@ -568,14 +568,14 @@ namespace SukkuShop.Controllers
                 });
                 totalValue += (priceFloored * item.Quantity);
             }
-            var orderShippingRadios = _dbContext.ShippingTypes.Select(x => new OrderViewRadioOption
+            var orderShippingRadios = _dbContext.ShippingTypes.Where(j=>j.Active).Select(x => new OrderViewRadioOption
             {
                 Id = x.ShippingId,
                 Price = totalValue>250?0:x.ShippingPrice,
                 Text = x.ShippingName,
                 Description = x.ShippingDescription
             }).ToList();
-            var orderPaymentRadios = _dbContext.PaymentTypes.Select(x => new OrderViewRadioOption
+            var orderPaymentRadios = _dbContext.PaymentTypes.Where(j => j.Active).Select(x => new OrderViewRadioOption
             {
                 Id = x.PaymentId,
                 Price = totalValue > 250 ? 0 : x.PaymentPrice,
