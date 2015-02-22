@@ -27,7 +27,12 @@ $SeUI: Segoe UI;
     color:green;
     font-size:50px;
 }
-
+.pencilek{
+float:right;
+visibility:hidden;
+color:$sukkucolor;
+font-size:20px;
+}
 .tableId{
 width:10%;
 }
@@ -40,14 +45,21 @@ width:10%
 .tablePrice{
 width:8%;
 }
-table input[type=text]{
+.tableDelete{
+width:3%;
+}
+input[type=text]{
 height:20px;
 font-family:Segoe UI;
 padding:2px;
-font-size:16px;
+font-size:14px;
 border:1px solid $sukkucolor;
 width:90%;
 text-align:center;
+}
+
+table td:hover div div.pencilek{
+visibility:visible;
 }
 
 .icon{
@@ -74,7 +86,6 @@ margin-left: 5px; color: grey;font-size:20px;cursor:pointer
             }
             .main-table{
                 width:1066px;
-                margin-bottom:30px;
                  thead th{
                     font-family:$SeUI;
                     
@@ -99,6 +110,7 @@ margin-left: 5px; color: grey;font-size:20px;cursor:pointer
                     color:$black;
                     font-family:$SeUI;
                     font-size:14px;
+height:33px;
                     text-align: center;
                     position:relative;
 a{
@@ -111,7 +123,7 @@ a{
                         font-size:30px;
                     }
 &.addoption{
-color: #458B00;font-weight: bold;line-height: 25px;font-size:20px;
+color: #458B00;font-weight: bold;line-height: 25px;font-size:20px;cursor:pointer;
 }
                     +.share{
                             color:green;

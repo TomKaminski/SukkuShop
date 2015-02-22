@@ -1,4 +1,9 @@
-﻿function showAjaxLoader() {
+﻿function isValidPrice(price) {
+    var pattern = new RegExp(/^[0-9]{1}[0-9]*[,.]{0,1}[0-9]{0,2}$|^$/);
+    return pattern.test(price);
+};
+
+function showAjaxLoader() {
     var loaderDiv = jQuery("#ajax-processing");
     if (loaderDiv.length === 0) {
         jQuery("body").append("<div id='ajax-processing'></div>");
@@ -35,12 +40,7 @@ jQuery(document).bind('mousemove', function (e) {
     });
 });
 
-jQuery(document).ready(function () {
-    showAjaxLoader();
-    hideAjaxLoader();
-    showAjaxTick();
-    hideAjaxTick();
-});
+
 
 var adminApp = angular.module("adminApp", []);
 
@@ -51,6 +51,14 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
     $scope.newShippingName = '';
     $scope.newShippingDescription = '';
     $scope.newShippingPrice = '';
+    $scope.invalidShippingForm = false;
+    $scope.invalidPaymentForm = false;
+    $scope.invalidPaymentPrice = false;
+    $scope.invalidShippingPrice = false;
+    $scope.editShippingDescriptionActive = false;
+    $scope.editPaymentDescriptionActive = false;
+    $scope.shippingEditorValue = '';
+    $scope.paymentEditorValue = '';
     $scope.init = function () {
         $scope.onlyActiveShipping = false;
         $scope.onlyActivePayment = false;
@@ -64,34 +72,169 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
         });
     };
 
-    $scope.submitPaymentForm = function (name, description, price) {
-        showAjaxLoader();
-        $http.post('/Admin/DostawyPlatnosci/AddPayment', { description: description, price: price, name: name }).
-          success(function (data) {
-              if (data !=false) {
-                  $scope.paymentTotal.push(data);
-                  filterPayment($scope.paymentTotal);
-              }
-              $scope.addShippingActive = false;
-              hideAjaxLoader();
-          }).
-          error(function (data) {
-          });
+
+    $scope.ActivateShippingEditor = function(id,description) {
+        if (!$scope.editShippingDescriptionActive) {
+            $scope.editShippingDescriptionActive = true;
+            var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+            result[0].editActive = true;
+            $scope.shippingEditorValue = description;
+        }
     }
 
-    $scope.submitShippingForm = function (name,description,price) {
+    $scope.DeactivateShippingEditor = function (id) {
+        if ($scope.editShippingDescriptionActive) {
+            $scope.editShippingDescriptionActive = false;
+            var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+            result[0].editActive = false;
+        }
+    }
+
+    $scope.SubmitShippingEditor = function(id, description) {
         showAjaxLoader();
-        $http.post('/Admin/DostawyPlatnosci/AddShipping', { description: description, price: price, name: name }).
-          success(function (data) {
-              if (data != false) {
-                  $scope.shippingTotal.push(data);
-                  filterShipping($scope.shippingTotal);
-              }
-              $scope.addShippingActive = false;
-              hideAjaxLoader();
-          }).
-          error(function (data) {
-          });
+        $http.post('/Admin/DostawyPlatnosci/EditShippingDescription', { description: description, id: id }).
+            success(function (data) {
+                if (data != false) {
+                    var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+                    result[0].ShippingDescription = description;
+                    result[0].editActive = false;
+                    $scope.editShippingDescriptionActive = false;
+                }
+                hideAjaxLoader();
+                showAjaxTick();
+                fadeOutAjaxTick();
+            }).
+            error(function (data) {
+            });
+    }
+
+    $scope.SubmitPaymentEditor = function (id, description) {
+        showAjaxLoader();
+        $http.post('/Admin/DostawyPlatnosci/EditPaymentDescription', { description: description, id: id }).
+            success(function (data) {
+                if (data != false) {
+                    var result = $.grep($scope.paymentTotal, function (e) { return e.PaymentId == id; });
+                    result[0].PaymentDescription = description;
+                    result[0].editActive = false;
+                    $scope.editPaymentDescriptionActive = false;
+                }
+                hideAjaxLoader();
+                showAjaxTick();
+                fadeOutAjaxTick();
+            }).
+            error(function (data) {
+            });
+    }
+
+    $scope.ActivatePaymentEditor = function (id, description) {
+        if (!$scope.editPaymentDescriptionActive) {
+            $scope.editPaymentDescriptionActive = true;
+            var result = $.grep($scope.paymentTotal, function (e) { return e.PaymentId == id; });
+            result[0].editActive = true;
+            $scope.paymentEditorValue = description;
+        }
+    }
+
+    $scope.DeactivatePaymentEditor = function (id) {
+        if ($scope.editPaymentDescriptionActive) {
+            $scope.editPaymentDescriptionActive = false;
+            var result = $.grep($scope.paymentTotal, function (e) { return e.PaymentId == id; });
+            result[0].editActive = false;
+        }
+    }
+
+    $scope.submitPaymentForm = function (name, description, price) {
+        if (description != '' && name != '' && price != '' && isValidPrice(price)) {
+            $scope.invalidPaymentForm = false;
+            $scope.invalidPaymentPrice = false;
+            showAjaxLoader();
+            $http.post('/Admin/DostawyPlatnosci/AddPayment', { description: description, price: price, name: name }).
+                success(function(data) {
+                    if (data != false) {
+                        $scope.paymentTotal.push(data);
+                        filterPayment($scope.paymentTotal);
+                    }
+                    $scope.addPaymentActive = false;
+                    hideAjaxLoader();
+                    showAjaxTick();
+                    fadeOutAjaxTick();
+                }).
+                error(function(data) {
+                });
+        } else {
+            $scope.invalidPaymentForm = true;
+            if (!isValidPrice(price)) {
+                $scope.invalidPaymentPrice = true;
+            }
+        }
+           
+             
+    }
+
+    $scope.validatePaymentPrice = function (name, description, price) {
+        if (isValidPrice(price)) {
+            $scope.invalidPaymentPrice = false;
+        }
+        if (name != '' && description != '' && price != '') {
+            $scope.invalidPaymentForm = false;
+        }
+    }
+
+    $scope.validateShippingPrice = function (name, description, price) {
+        if (isValidPrice(price)) {
+            $scope.invalidShippingPrice = false;
+        }
+        if (name != '' && description != '' && price != '') {
+            $scope.invalidShippingForm = false;
+        }
+    }
+
+    $scope.validatePaymentForm = function (name, description, price) {
+        if (name != '' && description != '' && price != '') {
+            $scope.invalidPaymentForm = false;
+        }
+    }
+
+    $scope.validateShippingForm = function (name, description, price) {
+        if (name != '' && description != '' && price != '') {
+            $scope.invalidShippingForm = false;
+        }
+    }
+
+    $scope.submitShippingForm = function (name, description, price) {
+        if (description != '' && name != '' && price != '' && isValidPrice(price)) {
+            $scope.invalidShippingForm = false;
+            $scope.invalidShippingPrice = false;
+            showAjaxLoader();
+            $http.post('/Admin/DostawyPlatnosci/AddShipping', { description: description, price: price, name: name }).
+                success(function(data) {
+                    if (data != false) {
+                        $scope.shippingTotal.push(data);
+                        filterShipping($scope.shippingTotal);
+                    }
+                    $scope.addShippingActive = false;
+                    hideAjaxLoader();
+                    showAjaxTick();
+                    fadeOutAjaxTick();
+                }).
+                error(function(data) {
+                });
+        } else {
+            $scope.invalidShippingForm = true;
+            if (!isValidPrice(price)) {
+                $scope.invalidShippingPrice = true;
+            }
+        }
+
+    }
+
+    $scope.keyPressPrice = function ($event) {
+        if ($event.which != 8 && $event.which != 0 && $event.which != 46 && $event.which != 44 && ($event.which < 48 || $event.which > 57)) {
+            $event.preventDefault();
+            return false;
+        } else {
+            return true;
+        }
     }
 
     $scope.deletePayment = function (id) {
@@ -104,6 +247,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
               }
               
               hideAjaxLoader();
+              showAjaxTick();
+              fadeOutAjaxTick();
           }).
           error(function (data) {
           });
@@ -117,6 +262,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                   filterShipping($scope.shippingTotal);
               }
               hideAjaxLoader();
+              showAjaxTick();
+              fadeOutAjaxTick();
           }).
           error(function (data) {
           });        
@@ -132,10 +279,14 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
 
     $scope.cancelShippingForm = function () {
         $scope.addShippingActive = false;
+        $scope.invalidShippingForm = false;
+        $scope.invalidShippingPrice = false;
     }
 
     $scope.cancelPaymentForm = function () {
         $scope.addPaymentActive = false;
+        $scope.invalidPaymentForm = false;
+        $scope.invalidPaymentPrice = false;
     }
 
     $scope.activateShipping = function (id) {
@@ -152,7 +303,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                     }
                 }
                 hideAjaxLoader();
-                filterShipping($scope.shippingTotal);
+                showAjaxTick();
+                fadeOutAjaxTick();
             }).
             error(function (data) {
 
@@ -172,7 +324,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                     }
                 }
                 hideAjaxLoader();
-                filterShipping($scope.shippingTotal);
+                showAjaxTick();
+                fadeOutAjaxTick();
             }).
             error(function (data) {
             });
@@ -192,7 +345,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                     }
                 }
                 hideAjaxLoader();
-                filterPayment($scope.paymentTotal);
+                showAjaxTick();
+                fadeOutAjaxTick();
             }).
             error(function (data) {
             });
@@ -211,7 +365,8 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                     }
                 }
                 hideAjaxLoader();
-                filterPayment($scope.paymentTotal);
+                showAjaxTick();
+                fadeOutAjaxTick();
             }).
             error(function (data) {
             });
@@ -253,3 +408,10 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
 
 
 }]);
+
+jQuery(document).ready(function () {
+    showAjaxLoader();
+    hideAjaxLoader();
+    showAjaxTick();
+    hideAjaxTick();    
+});

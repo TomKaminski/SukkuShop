@@ -588,6 +588,8 @@ namespace Links
                 public static readonly string RegulaminEditor_min_js = Url("RegulaminEditor.min.js");
                 public static readonly string RegulaminEditor_min_js_map = Url("RegulaminEditor.min.js.map");
                 public static readonly string ShipingPaymentAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ShipingPaymentAngular.min.js") ? Url("ShipingPaymentAngular.min.js") : Url("ShipingPaymentAngular.js");
+                public static readonly string ShipingPaymentAngular_min_js = Url("ShipingPaymentAngular.min.js");
+                public static readonly string ShipingPaymentAngular_min_js_map = Url("ShipingPaymentAngular.min.js.map");
                 public static readonly string StatisticsAdmin_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/StatisticsAdmin.min.js") ? Url("StatisticsAdmin.min.js") : Url("StatisticsAdmin.js");
                 public static readonly string StatisticsAdmin_min_js = Url("StatisticsAdmin.min.js");
                 public static readonly string StatisticsAdmin_min_js_map = Url("StatisticsAdmin.min.js.map");

@@ -6,6 +6,12 @@
   color: green;
   font-size: 50px; }
 
+.pencilek {
+  float: right;
+  visibility: hidden;
+  color: #f89b1d;
+  font-size: 20px; }
+
 .tableId {
   width: 10%; }
 
@@ -18,14 +24,20 @@
 .tablePrice {
   width: 8%; }
 
-table input[type=text] {
+.tableDelete {
+  width: 3%; }
+
+input[type=text] {
   height: 20px;
   font-family: Segoe UI;
   padding: 2px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #f89b1d;
   width: 90%;
   text-align: center; }
+
+table td:hover div div.pencilek {
+  visibility: visible; }
 
 .icon {
   margin-left: 5px;
@@ -50,8 +62,7 @@ body .main-cont {
       width: 170px;
       outline: none; }
   body .main-cont .main-table {
-    width: 1066px;
-    margin-bottom: 30px; }
+    width: 1066px; }
     body .main-cont .main-table thead th {
       font-family: Segoe UI;
       color: #f89b1d;
@@ -71,6 +82,7 @@ body .main-cont {
       color: black;
       font-family: Segoe UI;
       font-size: 14px;
+      height: 33px;
       text-align: center;
       position: relative; }
       body .main-cont .main-table tbody td a {
@@ -84,7 +96,8 @@ body .main-cont {
         color: #458B00;
         font-weight: bold;
         line-height: 25px;
-        font-size: 20px; }
+        font-size: 20px;
+        cursor: pointer; }
       body .main-cont .main-table tbody td + .share {
         color: green;
         font-size: 10px;

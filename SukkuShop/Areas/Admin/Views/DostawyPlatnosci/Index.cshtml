@@ -13,7 +13,7 @@
                 <input type="checkbox" class="css-checkbox" ng-model="onlyActiveShipping" id="onlyActiveShipping" ng-change="filterShippingByCheckboxes()" />
                 <label for="onlyActiveShipping" class="css-label" style="margin-left:0">Tylko aktywne</label>
                 <div style="clear:both"></div>
-            </div>            
+            </div>
             <table class="main-table">
                 <thead id="plz">
                     <tr>
@@ -22,13 +22,21 @@
                         <th class="tableOpis">Opis</th>
                         <th class="tablePrice">Cena</th>
                         <th class="blank tableBlank"></th>
-                    </tr>                   
+                        <th class="blank tableDelete"></th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in shippingList">
                         <td>{{item.ShippingId}}</td>
                         <td>{{item.ShippingName}}</td>
-                        <td>{{item.ShippingDescription}}</td>
+                        <td>
+                            <div style="cursor:pointer" ng-if="!item.editActive" ng-click="ActivateShippingEditor(item.ShippingId,item.ShippingDescription)">{{item.ShippingDescription}}<div class="icon-pencil pencilek"></div></div>
+                            <div ng-if="item.editActive" style="position: relative">
+                                <input type="text" style="padding-right:40px;" ng-model="shippingEditorValue" />
+                                <div style="position: absolute;color:red;right:5px;top:0;cursor:pointer;font-size:18px;" ng-click="DeactivateShippingEditor(item.ShippingId)">&#10005;</div>
+                                <div style="position: absolute;color:green;right:25px;top:0;cursor:pointer;font-size:18px;" ng-click="SubmitShippingEditor(item.ShippingId,shippingEditorValue)">&#10003;</div>
+                            </div>
+                        </td>
                         <td>{{item.ShippingPrice}} PLN</td>
                         <td ng-click="activateShipping(item.ShippingId)" ng-if="!item.Active" class="share">
                             Aktywuj
@@ -42,21 +50,25 @@
                     </tr>
                     <tr ng-if="addShippingActive">
                         <td ng-click="cancelShippingForm()" class="addoption" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
-                        <td><input ng-model="newShippingName" type="text" placeholder="Wprowadź nazwę" /></td>
-                        <td><input ng-model="newShippingDescription" type="text"  placeholder="Wprowadź opis" /></td>
-                        <td><input ng-model="newShippingPrice" type="text" placeholder="np. 15,50" /></td>                        
-                        <td ng-click="submitShippingForm(newShippingName,newShippingDescription,newShippingPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                        @using (Html.BeginForm(MVC.Admin.DostawyPlatnosci.AddShipping(), FormMethod.Post, new { id = "newShippingForm" }))
+                        {
+                            <td><input ng-model="newShippingName" id="newShippingName" name="newShippingName" type="text" placeholder="Wprowadź nazwę" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice)" /></td>
+                            <td><input ng-model="newShippingDescription" id="newShippingDescription" name="newShippingDescription" type="text" placeholder="Wprowadź opis" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice)" /></td>
+                            <td><input ng-model="newShippingPrice" id="newShippingPrice" type="text" name="newShippingPrice" placeholder="np. 15,50" ng-keypress="keyPressPrice($event)" ng-change="validateShippingPrice(newShippingName,newShippingDescription,newShippingPrice)" /></td>
+                            <td ng-click="submitShippingForm(newShippingName,newShippingDescription,newShippingPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                        }
                     </tr>
                 </tbody>
-
             </table>
-            
-            <div class="title-payship">Płatności</div>
+            <div ng-if="invalidShippingForm" style="color:red;font-family:Segoe UI; text-align:center;">Wypełnij wszystkie pola!</div>
+            <div ng-if="invalidShippingPrice" style="color:red;font-family:Segoe UI; text-align:center;">Nieprawidłowy format ceny (np. 15,99)!</div>
+
+            <div class="title-payship" style="margin-top:30px">Płatności</div>
             <div style="margin-bottom: 10px">
                 <input type="checkbox" class="css-checkbox" ng-model="onlyActivePayment" id="onlyActivePayment" ng-change="filterPaymentByCheckboxes()" />
                 <label for="onlyActivePayment" class="css-label" style="margin-left:0">Tylko aktywne</label>
                 <div style="clear:both"></div>
-            </div> 
+            </div>
             <table class="main-table">
                 <thead id="plz">
                     <tr>
@@ -65,13 +77,21 @@
                         <th class="tableOpis">Opis</th>
                         <th class="tablePrice">Cena</th>
                         <th class="blank tableBlank"></th>
+                        <th class="blank tableDelete"></th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="item in paymentList">
                         <td>{{item.PaymentId}}</td>
                         <td>{{item.PaymentName}}</td>
-                        <td>{{item.PaymentDescription}}</td>
+                        <td>
+                            <div style="cursor:pointer" ng-if="!item.editActive" ng-click="ActivatePaymentEditor(item.PaymentId,item.PaymentDescription)">{{item.PaymentDescription}}<div class="icon-pencil pencilek"></div></div>
+                            <div ng-if="item.editActive" style="position: relative">
+                                <input type="text" style="padding-right:40px;" ng-model="paymentEditorValue" />
+                                <div style="position: absolute;color:red;right:5px;top:0;cursor:pointer;font-size:18px;" ng-click="DeactivatePaymentEditor(item.PaymentId)">&#10006;</div>
+                                <div style="position: absolute;color:green;right:25px;top:0;cursor:pointer;font-size:18px;" ng-click="SubmitPaymentEditor(item.PaymentId,paymentEditorValue)">&#10004;</div>
+                            </div>
+                        </td>
                         <td>{{item.PaymentPrice}} PLN</td>
                         <td ng-click="activatePayment(item.PaymentId)" ng-if="!item.Active" class="share">
                             Aktywuj
@@ -85,13 +105,19 @@
                     </tr>
                     <tr ng-if="addPaymentActive">
                         <td ng-click="cancelPaymentForm()" class="addoption" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
-                        <td><input ng-model="newPaymentName" type="text"  placeholder="Wprowadź nazwę" /></td>
-                        <td><input ng-model="newPaymentDescription" type="text"  placeholder="Wprowadź opis" /></td>
-                        <td><input ng-model="newPaymentPrice" type="text" placeholder="np. 15,50" /></td>                            
-                        <td ng-click="submitPaymentForm(newPaymentName,newPaymentDescription,newPaymentPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                        @using (Html.BeginForm(MVC.Admin.DostawyPlatnosci.AddPayment(), FormMethod.Post, new { id = "newPaymentForm" }))
+                        {
+                            <td><input ng-model="newPaymentName" id="newPaymentName" name="newPaymentName" type="text" placeholder="Wprowadź nazwę" ng-change="validatePaymentForm(newPaymentName,newPaymentDescription,newPaymentPrice)" /></td>
+                            <td><input ng-model="newPaymentDescription" id="newPaymentDescription" name="newPaymentDescription" type="text" placeholder="Wprowadź opis" ng-change="validatePaymentForm(newPaymentName,newPaymentDescription,newPaymentPrice)" /></td>
+                            <td><input ng-model="newPaymentPrice" id="newPaymentPrice" type="text" name="newPaymentPrice" placeholder="np. 15,50" ng-keypress="keyPressPrice($event)" ng-change="validatePaymentPrice(newPaymentName,newPaymentDescription,newPaymentPrice)" /></td>
+                            <td ng-click="submitPaymentForm(newPaymentName,newPaymentDescription,newPaymentPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                        }
                     </tr>
                 </tbody>
             </table>
+            <div ng-if="invalidPaymentForm" style="color:red;font-family:Segoe UI; text-align:center;">Wypełnij wszystkie pola!</div>
+            <div ng-if="invalidPaymentPrice" style="color:red;font-family:Segoe UI; text-align:center;">Nieprawidłowy format ceny (np. 15,99)!</div>
+
         </div>
     </div>
 </div>

@@ -37,7 +37,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     x.ShippingName,
                     x.ShippingPrice,
                     x.Active,
-                    canDelete = x.Orders.Count==0
+                    canDelete = x.Orders.Count==0,
+                    editActive = false
                 }),
                 payment = _dbContext.PaymentTypes.Select(x => new
                 {
@@ -46,7 +47,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     x.PaymentName,
                     x.PaymentPrice,
                     x.Active,
-                    canDelete = x.Orders.Count == 0
+                    canDelete = x.Orders.Count == 0,
+                    editActive = false
                 })
             }, JsonRequestBehavior.AllowGet);
         }
@@ -147,7 +149,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     pay.PaymentDescription,
                     pay.PaymentName,
                     pay.PaymentPrice,
-                    canDelete = pay.Orders.Count == 0
+                    canDelete = pay.Orders.Count == 0,
+                    editActive = false
                 }, JsonRequestBehavior.AllowGet);
             }
             catch
@@ -177,13 +180,42 @@ namespace SukkuShop.Areas.Admin.Controllers
                     ship.ShippingDescription,
                     ship.ShippingName,
                     ship.ShippingPrice,
-                    canDelete = ship.Orders.Count == 0
+                    canDelete = ship.Orders.Count == 0,
+                    editActive = false
                 }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public virtual JsonResult EditShippingDescription(int id, string description)
+        {
+            var firstOrDefault = _dbContext.ShippingTypes.FirstOrDefault(x => x.ShippingId == id);
+            if (firstOrDefault != null)
+            {
+                firstOrDefault.ShippingDescription = description;
+                _dbContext.ShippingTypes.AddOrUpdate(firstOrDefault);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public virtual JsonResult EditPaymentDescription(int id, string description)
+        {
+            var firstOrDefault = _dbContext.PaymentTypes.FirstOrDefault(x => x.PaymentId == id);
+            if (firstOrDefault != null)
+            {
+                firstOrDefault.PaymentDescription = description;
+                _dbContext.PaymentTypes.AddOrUpdate(firstOrDefault);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
     }
 }
