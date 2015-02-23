@@ -202,6 +202,7 @@ namespace SukkuShop.Models
         public decimal ShippingPrice { get; set; }
         public string ShippingDescription { get; set; }
         public bool Active { get; set; }
+        public decimal MaxWeight { get; set; }
 
         public virtual ICollection<Orders> Orders { get; set; }
     }
@@ -317,7 +318,8 @@ namespace SukkuShop.Models
                         ShippingName = "List polecony ekonomiczny",
                         ShippingPrice = 5,
                         ShippingDescription = "list polecony ekonomiczny bardzo tani",
-                        Active = true
+                        Active = true,
+                        MaxWeight = 2
                     },
                     new ShippingType
                     {
@@ -325,7 +327,8 @@ namespace SukkuShop.Models
                         ShippingName = "List polecony priorytetowy",
                         ShippingPrice = 7,
                         ShippingDescription = "list polecony zwykły",
-                        Active = true
+                        Active = true,
+                        MaxWeight = 2
                     },
                     new ShippingType
                     {
@@ -333,7 +336,8 @@ namespace SukkuShop.Models
                         ShippingName = "Paczka ekonomiczna",
                         ShippingPrice = 10,
                         ShippingDescription = "Paaaaaaczkaaaa ekonomiczna opis",
-                        Active = true
+                        Active = true,
+                        MaxWeight = 25
                     },
                     new ShippingType
                     {
@@ -341,7 +345,8 @@ namespace SukkuShop.Models
                         ShippingName = "Paczka priorytetowa",
                         ShippingPrice = 15,
                         ShippingDescription = "Paka priorytet opis",
-                        Active = true
+                        Active = true,
+                        MaxWeight = 50
                     },
                     new ShippingType
                     {
@@ -349,7 +354,8 @@ namespace SukkuShop.Models
                         ShippingName = "Odbiór osobisty",
                         ShippingPrice = 0,
                         ShippingDescription = "Odbiór osobisty OPIS",
-                        Active = true
+                        Active = true,
+                        MaxWeight = 999
                     }
                     );
                 base.Seed(context);

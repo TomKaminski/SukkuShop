@@ -21,6 +21,7 @@
                         <th class="tableName">Nazwa</th>
                         <th class="tableOpis">Opis</th>
                         <th class="tablePrice">Cena</th>
+                        <th class="tableWeight">Waga (kg)</th>
                         <th class="blank tableBlank"></th>
                         <th class="blank tableDelete"></th>
                     </tr>
@@ -38,6 +39,14 @@
                             </div>
                         </td>
                         <td>{{item.ShippingPrice}} PLN</td>
+                        <td>
+                            <div style="cursor:pointer" ng-if="!item.editWeight" ng-click="ActivateWeightShippingEditor(item.ShippingId,item.MaxWeight)">{{item.MaxWeight}}<div class="icon-pencil pencilek"></div></div>
+                            <div ng-if="item.editWeight" style="position: relative">
+                                <input type="text" style="width: 50%;padding-right: 40px;" ng-model="shippingWeightEditorValue" />
+                                <div style="position: absolute;color:red;right:9px;top:0;cursor:pointer;font-size:18px;" ng-click="DeactivateWeightShippingEditor(item.ShippingId)">&#10005;</div>
+                                <div style="position: absolute;color:green;right:25px;top:0;cursor:pointer;font-size:18px;" ng-click="SubmitWeightShippingEditor(item.ShippingId,shippingWeightEditorValue)">&#10003;</div>
+                            </div>
+                        </td>
                         <td ng-click="activateShipping(item.ShippingId)" ng-if="!item.Active" class="share">
                             Aktywuj
                             <div class="icon-mail-forward" style="margin-left: 5px; font-size: 17px"></div>
@@ -52,16 +61,19 @@
                         <td ng-click="cancelShippingForm()" class="addoption" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
                         @using (Html.BeginForm(MVC.Admin.DostawyPlatnosci.AddShipping(), FormMethod.Post, new { id = "newShippingForm" }))
                         {
-                            <td><input ng-model="newShippingName" id="newShippingName" name="newShippingName" type="text" placeholder="Wprowadź nazwę" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice)" /></td>
-                            <td><input ng-model="newShippingDescription" id="newShippingDescription" name="newShippingDescription" type="text" placeholder="Wprowadź opis" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice)" /></td>
-                            <td><input ng-model="newShippingPrice" id="newShippingPrice" type="text" name="newShippingPrice" placeholder="np. 15,50" ng-keypress="keyPressPrice($event)" ng-change="validateShippingPrice(newShippingName,newShippingDescription,newShippingPrice)" /></td>
-                            <td ng-click="submitShippingForm(newShippingName,newShippingDescription,newShippingPrice)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
+                            <td><input ng-model="newShippingName" id="newShippingName" name="newShippingName" type="text" placeholder="Wprowadź nazwę" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice,newShippingWeight)" /></td>
+                            <td><input ng-model="newShippingDescription" id="newShippingDescription" name="newShippingDescription" type="text" placeholder="Wprowadź opis" ng-change="validateShippingForm(newShippingName,newShippingDescription,newShippingPrice,newShippingWeight)" /></td>
+                            <td><input ng-model="newShippingPrice" id="newShippingPrice" type="text" name="newShippingPrice" placeholder="np. 15,50" ng-keypress="keyPressPrice($event)" ng-change="validateShippingPrice(newShippingName,newShippingDescription,newShippingPrice,newShippingWeight)" /></td>
+                            <td><input ng-model="newShippingWeight" id="newShippingWeight" type="text" name="newShippingWeight" placeholder="np. 0,50" ng-keypress="keyPressPrice($event)" ng-change="validateShippingPrice(newShippingName,newShippingDescription,newShippingPrice,newShippingWeight)" /></td>
+
+    <td ng-click="submitShippingForm(newShippingName,newShippingDescription,newShippingPrice,newShippingWeight)" class="addoption">ZAPISZ <div class="icon-plus-sign"></div></td>
                         }
                     </tr>
                 </tbody>
             </table>
             <div ng-if="invalidShippingForm" style="color:red;font-family:Segoe UI; text-align:center;">Wypełnij wszystkie pola!</div>
             <div ng-if="invalidShippingPrice" style="color:red;font-family:Segoe UI; text-align:center;">Nieprawidłowy format ceny (np. 15,99)!</div>
+            <div ng-if="invalidShippingWeight" style="color:red;font-family:Segoe UI; text-align:center;">Nieprawidłowy format wagi (np. 0,50)!</div>
 
             <div class="title-payship" style="margin-top:30px">Płatności</div>
             <div style="margin-bottom: 10px">

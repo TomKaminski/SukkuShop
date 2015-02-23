@@ -9,5 +9,6 @@ namespace SukkuShop.Areas.Admin.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public string Price { get; set; }
+        public string MaxWeight { get; set; }
     }
 }

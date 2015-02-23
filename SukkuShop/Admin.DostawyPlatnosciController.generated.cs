@@ -105,6 +105,12 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
         [NonAction]
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult EditShippingWeight()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditShippingWeight);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public virtual System.Web.Mvc.JsonResult EditShippingDescription()
         {
             return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditShippingDescription);
@@ -141,6 +147,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string DeactivateShipping = "DeactivateShipping";
             public readonly string AddPayment = "AddPayment";
             public readonly string AddShipping = "AddShipping";
+            public readonly string EditShippingWeight = "EditShippingWeight";
             public readonly string EditShippingDescription = "EditShippingDescription";
             public readonly string EditPaymentDescription = "EditPaymentDescription";
         }
@@ -158,6 +165,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             public const string DeactivateShipping = "DeactivateShipping";
             public const string AddPayment = "AddPayment";
             public const string AddShipping = "AddShipping";
+            public const string EditShippingWeight = "EditShippingWeight";
             public const string EditShippingDescription = "EditShippingDescription";
             public const string EditPaymentDescription = "EditPaymentDescription";
         }
@@ -226,6 +234,15 @@ namespace SukkuShop.Areas.Admin.Controllers
         public class ActionParamsClass_AddShipping
         {
             public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_EditShippingWeight s_params_EditShippingWeight = new ActionParamsClass_EditShippingWeight();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditShippingWeight EditShippingWeightParams { get { return s_params_EditShippingWeight; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditShippingWeight
+        {
+            public readonly string id = "id";
+            public readonly string weight = "weight";
         }
         static readonly ActionParamsClass_EditShippingDescription s_params_EditShippingDescription = new ActionParamsClass_EditShippingDescription();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -381,6 +398,19 @@ namespace SukkuShop.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.AddShipping);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
             AddShippingOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EditShippingWeightOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id, string weight);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult EditShippingWeight(int id, string weight)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditShippingWeight);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "weight", weight);
+            EditShippingWeightOverride(callInfo, id, weight);
             return callInfo;
         }
 

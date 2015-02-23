@@ -38,7 +38,9 @@ namespace SukkuShop.Areas.Admin.Controllers
                     x.ShippingPrice,
                     x.Active,
                     canDelete = x.Orders.Count==0,
-                    editActive = false
+                    editActive = false,
+                    x.MaxWeight,
+                    editWeight = false
                 }),
                 payment = _dbContext.PaymentTypes.Select(x => new
                 {
@@ -167,7 +169,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Active = false,
                 ShippingDescription = model.Description,
                 ShippingName = model.Name,
-                ShippingPrice = Convert.ToDecimal(model.Price.Replace(".", ","))
+                ShippingPrice = Convert.ToDecimal(model.Price.Replace(".", ",")),
+                MaxWeight = Convert.ToDecimal(model.MaxWeight.Replace(".", ","))
             };
             try
             {
@@ -181,13 +184,29 @@ namespace SukkuShop.Areas.Admin.Controllers
                     ship.ShippingName,
                     ship.ShippingPrice,
                     canDelete = ship.Orders.Count == 0,
-                    editActive = false
+                    editActive = false,
+                    ship.MaxWeight,
+                    editWeight = false
                 }, JsonRequestBehavior.AllowGet);
             }
             catch
             {
                 return Json(false, JsonRequestBehavior.AllowGet);
             }
+        }
+
+        [HttpPost]
+        public virtual JsonResult EditShippingWeight(int id, string weight)
+        {
+            var firstOrDefault = _dbContext.ShippingTypes.FirstOrDefault(x => x.ShippingId == id);
+            if (firstOrDefault != null)
+            {
+                firstOrDefault.MaxWeight = Convert.ToDecimal(weight.Replace(".", ","));
+                _dbContext.ShippingTypes.AddOrUpdate(firstOrDefault);
+                _dbContext.SaveChanges();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            return Json(false, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
@@ -203,6 +222,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }
+
+        
 
         [HttpPost]
         public virtual JsonResult EditPaymentDescription(int id, string description)

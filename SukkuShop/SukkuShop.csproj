@@ -399,6 +399,10 @@
     <Compile Include="Migrations\201502210950586_ActivationShippingPayment.Designer.cs">
       <DependentUpon>201502210950586_ActivationShippingPayment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502231913351_ShippingMaxWeight.cs" />
+    <Compile Include="Migrations\201502231913351_ShippingMaxWeight.Designer.cs">
+      <DependentUpon>201502231913351_ShippingMaxWeight.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Cart.cs" />
@@ -1483,6 +1487,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502210950586_ActivationShippingPayment.resx">
       <DependentUpon>201502210950586_ActivationShippingPayment.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502231913351_ShippingMaxWeight.resx">
+      <DependentUpon>201502231913351_ShippingMaxWeight.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

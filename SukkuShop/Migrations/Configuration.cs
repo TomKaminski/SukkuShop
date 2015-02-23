@@ -73,46 +73,51 @@ namespace SukkuShop.Migrations
                     );
 
                 context.ShippingTypes.AddOrUpdate(p => p.ShippingId,
-                    new ShippingType
-                    {
-                        ShippingId = 1,
-                        ShippingName = "List polecony ekonomiczny",
-                        ShippingPrice = 5,
-                        ShippingDescription = "list polecony ekonomiczny bardzo tani",
-                        Active = true
-                    },
-                    new ShippingType
-                    {
-                        ShippingId = 2,
-                        ShippingName = "List polecony priorytetowy",
-                        ShippingPrice = 7,
-                        ShippingDescription = "list polecony zwyk³y",
-                        Active = true
-                    },
-                    new ShippingType
-                    {
-                        ShippingId = 3,
-                        ShippingName = "Paczka ekonomiczna",
-                        ShippingPrice = 10,
-                        ShippingDescription = "Paaaaaaczkaaaa ekonomiczna opis",
-                        Active = true
-                    },
-                    new ShippingType
-                    {
-                        ShippingId = 4,
-                        ShippingName = "Paczka priorytetowa",
-                        ShippingPrice = 15,
-                        ShippingDescription = "Paka priorytet opis",
-                        Active = true
-                    },
-                    new ShippingType
-                    {
-                        ShippingId = 5,
-                        ShippingName = "Odbiór osobisty",
-                        ShippingPrice = 0,
-                        ShippingDescription = "Odbiór osobisty OPIS",
-                        Active = true
-                    }
+                     new ShippingType
+                     {
+                         ShippingId = 1,
+                         ShippingName = "List polecony ekonomiczny",
+                         ShippingPrice = 5,
+                         ShippingDescription = "list polecony ekonomiczny bardzo tani",
+                         Active = true,
+                         MaxWeight = 2
+                     },
+                     new ShippingType
+                     {
+                         ShippingId = 2,
+                         ShippingName = "List polecony priorytetowy",
+                         ShippingPrice = 7,
+                         ShippingDescription = "list polecony zwyk³y",
+                         Active = true,
+                         MaxWeight = 2
+                     },
+                     new ShippingType
+                     {
+                         ShippingId = 3,
+                         ShippingName = "Paczka ekonomiczna",
+                         ShippingPrice = 10,
+                         ShippingDescription = "Paaaaaaczkaaaa ekonomiczna opis",
+                         Active = true,
+                         MaxWeight = 25
+                     },
+                     new ShippingType
+                     {
+                         ShippingId = 4,
+                         ShippingName = "Paczka priorytetowa",
+                         ShippingPrice = 15,
+                         ShippingDescription = "Paka priorytet opis",
+                         Active = true,
+                         MaxWeight = 50
+                     },
+                     new ShippingType
+                     {
+                         ShippingId = 5,
+                         ShippingName = "Odbiór osobisty",
+                         ShippingPrice = 0,
+                         ShippingDescription = "Odbiór osobisty OPIS",
+                         Active = true,
+                         MaxWeight = 999
+                     }
                     );
                 base.Seed(context);
             }

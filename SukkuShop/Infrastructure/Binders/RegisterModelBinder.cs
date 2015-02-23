@@ -35,6 +35,7 @@ namespace SukkuShop.Infrastructure.Binders
             model.Description = TryGet(bindingContext, "description");
             model.Name = TryGet(bindingContext, "name");
             model.Price = TryGet(bindingContext, "price");
+            model.MaxWeight = TryGet(bindingContext, "weight");
             return model;
         }
 

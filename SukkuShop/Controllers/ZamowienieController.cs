@@ -550,6 +550,7 @@ namespace SukkuShop.Controllers
                 discount = user.Rabat;
             var productList = new List<OrderItem>();
             decimal totalValue = 0;
+            decimal weight = 0;
             foreach (var item in shoppingCart.Lines)
             {
                 var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
@@ -566,9 +567,10 @@ namespace SukkuShop.Controllers
                         (priceFloored*item.Quantity).ToString("c"),
                             Packing = product.Packing
                 });
+                weight += (product.Weight??0)*item.Quantity;
                 totalValue += (priceFloored * item.Quantity);
             }
-            var orderShippingRadios = _dbContext.ShippingTypes.Where(j=>j.Active).Select(x => new OrderViewRadioOption
+            var orderShippingRadios = _dbContext.ShippingTypes.Where(j=>j.Active && j.MaxWeight>weight).Select(x => new OrderViewRadioOption
             {
                 Id = x.ShippingId,
                 Price = totalValue>250?0:x.ShippingPrice,

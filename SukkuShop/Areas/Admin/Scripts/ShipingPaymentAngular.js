@@ -51,14 +51,18 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
     $scope.newShippingName = '';
     $scope.newShippingDescription = '';
     $scope.newShippingPrice = '';
+    $scope.newShippingWeight = '';
     $scope.invalidShippingForm = false;
     $scope.invalidPaymentForm = false;
     $scope.invalidPaymentPrice = false;
     $scope.invalidShippingPrice = false;
+    $scope.invalidShippingWeight = false;
     $scope.editShippingDescriptionActive = false;
+    $scope.editShippingWeightDescriptionActive = false;
     $scope.editPaymentDescriptionActive = false;
     $scope.shippingEditorValue = '';
     $scope.paymentEditorValue = '';
+    $scope.shippingWeightEditorValue = '';
     $scope.init = function () {
         $scope.onlyActiveShipping = false;
         $scope.onlyActivePayment = false;
@@ -82,11 +86,28 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
         }
     }
 
+    $scope.ActivateWeightShippingEditor = function (id, weight) {
+        if (!$scope.editShippingWeightDescriptionActive) {
+            $scope.editShippingWeightDescriptionActive = true;
+            var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+            result[0].editWeight = true;
+            $scope.shippingWeightEditorValue = weight;
+        }
+    }
+
     $scope.DeactivateShippingEditor = function (id) {
         if ($scope.editShippingDescriptionActive) {
             $scope.editShippingDescriptionActive = false;
             var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
             result[0].editActive = false;
+        }
+    }
+
+    $scope.DeactivateWeightShippingEditor = function(id) {
+        if ($scope.editShippingWeightDescriptionActive) {
+            $scope.editShippingWeightDescriptionActive = false;
+            var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+            result[0].editWeight = false;
         }
     }
 
@@ -99,6 +120,24 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
                     result[0].ShippingDescription = description;
                     result[0].editActive = false;
                     $scope.editShippingDescriptionActive = false;
+                }
+                hideAjaxLoader();
+                showAjaxTick();
+                fadeOutAjaxTick();
+            }).
+            error(function (data) {
+            });
+    }
+
+    $scope.SubmitWeightShippingEditor = function (id, weight) {
+        showAjaxLoader();
+        $http.post('/Admin/DostawyPlatnosci/EditShippingWeight', { weight: weight, id: id }).
+            success(function (data) {
+                if (data != false) {
+                    var result = $.grep($scope.shippingTotal, function (e) { return e.ShippingId == id; });
+                    result[0].MaxWeight = weight;
+                    result[0].editWeight = false;
+                    $scope.editShippingWeightDescriptionActive = false;
                 }
                 hideAjaxLoader();
                 showAjaxTick();
@@ -180,14 +219,18 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
         }
     }
 
-    $scope.validateShippingPrice = function (name, description, price) {
+    $scope.validateShippingPrice = function (name, description, price,weight) {
         if (isValidPrice(price)) {
             $scope.invalidShippingPrice = false;
         }
-        if (name != '' && description != '' && price != '') {
+        if (isValidPrice(weight)) {
+            $scope.invalidShippingWeight = false;
+        }
+        if (name != '' && description != '' && price != '' && weight != '') {
             $scope.invalidShippingForm = false;
         }
     }
+
 
     $scope.validatePaymentForm = function (name, description, price) {
         if (name != '' && description != '' && price != '') {
@@ -201,12 +244,13 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
         }
     }
 
-    $scope.submitShippingForm = function (name, description, price) {
-        if (description != '' && name != '' && price != '' && isValidPrice(price)) {
+    $scope.submitShippingForm = function (name, description, price, weight) {
+        if (description != '' && name != '' && price != '' && isValidPrice(price) && isValidPrice(weight)) {
             $scope.invalidShippingForm = false;
             $scope.invalidShippingPrice = false;
+            $scope.invalidShippingWeight = false;
             showAjaxLoader();
-            $http.post('/Admin/DostawyPlatnosci/AddShipping', { description: description, price: price, name: name }).
+            $http.post('/Admin/DostawyPlatnosci/AddShipping', { description: description, price: price, name: name, weight: weight }).
                 success(function(data) {
                     if (data != false) {
                         $scope.shippingTotal.push(data);
@@ -223,6 +267,9 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
             $scope.invalidShippingForm = true;
             if (!isValidPrice(price)) {
                 $scope.invalidShippingPrice = true;
+            }
+            if (!isValidPrice(weight)) {
+                $scope.invalidShippingWeight = true;
             }
         }
 
@@ -281,6 +328,7 @@ adminApp.controller("AdminPayShipCtrl", ['$scope', '$http', function ($scope, $h
         $scope.addShippingActive = false;
         $scope.invalidShippingForm = false;
         $scope.invalidShippingPrice = false;
+        $scope.invalidShippingWeight = false;
     }
 
     $scope.cancelPaymentForm = function () {
