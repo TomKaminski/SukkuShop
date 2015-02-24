@@ -55,6 +55,30 @@ namespace SukkuShop.Areas.Admin.Controllers
             return RedirectToActionPermanent(taskResult.Result);
         }
 
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult AddSubCategory()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.AddSubCategory);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult EditCategoryName()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditCategoryName);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult EditCategoryDiscount()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditCategoryDiscount);
+        }
+        [NonAction]
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public virtual System.Web.Mvc.JsonResult DeleteSubCategory()
+        {
+            return new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.DeleteSubCategory);
+        }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public PodkategorieController Actions { get { return MVC.Admin.Podkategorie; } }
@@ -73,6 +97,10 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string Index = "Index";
             public readonly string GetCategoriesList = "GetCategoriesList";
+            public readonly string AddSubCategory = "AddSubCategory";
+            public readonly string EditCategoryName = "EditCategoryName";
+            public readonly string EditCategoryDiscount = "EditCategoryDiscount";
+            public readonly string DeleteSubCategory = "DeleteSubCategory";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -80,9 +108,47 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public const string Index = "Index";
             public const string GetCategoriesList = "GetCategoriesList";
+            public const string AddSubCategory = "AddSubCategory";
+            public const string EditCategoryName = "EditCategoryName";
+            public const string EditCategoryDiscount = "EditCategoryDiscount";
+            public const string DeleteSubCategory = "DeleteSubCategory";
         }
 
 
+        static readonly ActionParamsClass_AddSubCategory s_params_AddSubCategory = new ActionParamsClass_AddSubCategory();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_AddSubCategory AddSubCategoryParams { get { return s_params_AddSubCategory; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_AddSubCategory
+        {
+            public readonly string model = "model";
+        }
+        static readonly ActionParamsClass_EditCategoryName s_params_EditCategoryName = new ActionParamsClass_EditCategoryName();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditCategoryName EditCategoryNameParams { get { return s_params_EditCategoryName; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditCategoryName
+        {
+            public readonly string name = "name";
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_EditCategoryDiscount s_params_EditCategoryDiscount = new ActionParamsClass_EditCategoryDiscount();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_EditCategoryDiscount EditCategoryDiscountParams { get { return s_params_EditCategoryDiscount; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_EditCategoryDiscount
+        {
+            public readonly string discount = "discount";
+            public readonly string id = "id";
+        }
+        static readonly ActionParamsClass_DeleteSubCategory s_params_DeleteSubCategory = new ActionParamsClass_DeleteSubCategory();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_DeleteSubCategory DeleteSubCategoryParams { get { return s_params_DeleteSubCategory; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_DeleteSubCategory
+        {
+            public readonly string id = "id";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -93,7 +159,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
+                public readonly string Index = "Index";
             }
+            public readonly string Index = "~/Areas/Admin/Views/Podkategorie/Index.cshtml";
         }
     }
 
@@ -121,6 +189,56 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetCategoriesList);
             GetCategoriesListOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void AddSubCategoryOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, SukkuShop.Areas.Admin.Models.SubcategoryCreateModel model);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult AddSubCategory(SukkuShop.Areas.Admin.Models.SubcategoryCreateModel model)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.AddSubCategory);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "model", model);
+            AddSubCategoryOverride(callInfo, model);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EditCategoryNameOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, string name, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult EditCategoryName(string name, int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditCategoryName);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "name", name);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EditCategoryNameOverride(callInfo, name, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void EditCategoryDiscountOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, string discount, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult EditCategoryDiscount(string discount, int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.EditCategoryDiscount);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "discount", discount);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            EditCategoryDiscountOverride(callInfo, discount, id);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void DeleteSubCategoryOverride(T4MVC_System_Web_Mvc_JsonResult callInfo, int id);
+
+        [NonAction]
+        public override System.Web.Mvc.JsonResult DeleteSubCategory(int id)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.DeleteSubCategory);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "id", id);
+            DeleteSubCategoryOverride(callInfo, id);
             return callInfo;
         }
 

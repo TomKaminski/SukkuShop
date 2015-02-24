@@ -73,12 +73,12 @@ namespace SukkuShop.Infrastructure.Binders
             var model = (SubcategoryCreateModel)bindingContext.Model ?? new SubcategoryCreateModel();
             model.Discount = TryGet<int>(bindingContext, "discount");
             model.Name = TryGetString(bindingContext, "name");
-            model.UpperCategoryId = TryGet<int>(bindingContext, "uppercategoryid");
+            model.UpperCategoryId = TryGet<int>(bindingContext, "upperid");
             return model;
         }
 
 
-        private string TryGetString(ModelBindingContext bindingContext, string key)
+        private static string TryGetString(ModelBindingContext bindingContext, string key)
         {
             if (String.IsNullOrEmpty(key))
                 return null;
@@ -103,9 +103,12 @@ namespace SukkuShop.Infrastructure.Binders
             }
         }
 
-        private T? TryGet<T>(ModelBindingContext bindingContext, string key) where T : struct
+        private static T? TryGet<T>(ModelBindingContext bindingContext, string key) where T : struct
         {
 
+            if (String.IsNullOrEmpty(key))
+                return null;
+            
             var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + "." + key);
             if (valueResult == null && bindingContext.FallbackToEmptyPrefix)
                 valueResult = bindingContext.ValueProvider.GetValue(key);
@@ -117,7 +120,7 @@ namespace SukkuShop.Infrastructure.Binders
 
             try
             {
-                return (T)valueResult.ConvertTo(typeof(T));
+                return (T?)valueResult.ConvertTo(typeof(T));
             }
             catch (Exception ex)
             {

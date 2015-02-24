@@ -12,34 +12,54 @@
             <table style="text-align: center; width: 1066px; margin: auto;" ng-if="item.subCategoriesActive">
                 <thead>
                     <tr>
+                        <th>Id</th>
                         <th>Nazwa</th>
                         <th>Promocja</th>
                         <th>Ilość produktów</th>
+                        <th>Usuń</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="subItem in item.subCategories">
+                        <td>{{subItem.CategoryId}}</td>
                         <td>
-                            <div ng-if="item.editNameActive==false" ng-click="StartNameEdit(subItem.CategoryId,subItem.Name)">{{subItem.Name}}</div>
-                            <div ng-if="item.editNameActive">
-                                <input type="text" model="newEditorName" />
-                                <div ng-click="CancelNameEdit(subItem.CategoryId)">X</div>
-                                <div ng-click="SubmitNameEdit(item.CategoryId,newEditorName)">V</div>
+                            <div ng-if="!subItem.editNameActive" ng-click="StartNameEdit(subItem.CategoryId,subItem.Name, item.CategoryId)">{{subItem.Name}}</div>
+                            <div ng-if="subItem.editNameActive">
+                                <input type="text" ng-model="newEditorName" name="newEditorName" />
+                                <div ng-click="CancelNameEdit(subItem.CategoryId, item.CategoryId)">X</div>
+                                <div ng-click="SubmitNameEdit(subItem.CategoryId,newEditorName, item.CategoryId)">V</div>
                             </div>
                         </td>
                         <td>
-                            <div ng-if="item.editDiscountActive==false" ng-click="StartDiscountEdit(subItem.CategoryId,subItem.Discount)">{{subItem.Discount}}</div>
-                            <div ng-if="item.editDiscountActive">
-                                <input type="text" model="newEditorDiscount" />
-                                <div ng-click="CancelDiscountEdit(subItem.CategoryId)">X</div>
-                                <div ng-click="SubmitDiscountEdit(item.CategoryId,newEditorDiscount)">V</div>
+                            <div ng-if="!subItem.editDiscountActive" ng-click="StartDiscountEdit(subItem.CategoryId,subItem.Promotion, item.CategoryId)">{{subItem.Promotion}}</div>
+                            <div ng-if="subItem.editDiscountActive">
+                                <input type="text" ng-model="newEditorDiscount" ng-change="discountEditChange(newEditorDiscount)" ng-keypress="keyPressPrice($event)" />
+                                <div ng-click="CancelDiscountEdit(subItem.CategoryId, item.CategoryId)">X</div>
+                                <div ng-click="SubmitDiscountEdit(subItem.CategoryId,newEditorDiscount, item.CategoryId)">V</div>
                             </div>
                         </td>
                         <td>{{subItem.productsCount}}</td>
+                        <td ng-if="!subItem.canDelete"><a ng-click="deleteCategoryAsk(subItem.CategoryId, item.CategoryId)" class="icon-trash trash"></a></td>
+                        <td ng-if="subItem.canDelete"><a ng-click="DeleteSubCategory(subItem.CategoryId, item.CategoryId)" class="trash-yes">&#10003;</a><a ng-click="noDeleteCategory(subItem.CategoryId, item.CategoryId)" class="trash-no">&#10006;</a></td>
                     </tr>
+                    <tr ng-if="!addCategoryActive">
+                        <td ng-click="addCategoryForm()">DODAJ <div class="icon-plus-sign"></div></td>
+                    </tr>
+                    <tr ng-if="addCategoryActive">
+                        <td ng-click="cancelCategoryForm()" style="color:red">ANULUJ <div class="icon-remove-sign"></div></td>
+
+                        <td><input ng-model="newSubCategoryName" id="newSubCategoryName" name="newSubCategoryName" type="text" placeholder="Wprowadź nazwę" ng-change="validateCategoryForm(newSubCategoryName,newSubCategoryDiscount)" /></td>
+                        <td><input ng-model="newSubCategoryDiscount" id="newSubCategoryDiscount" name="newSubCategoryDiscount" type="text" placeholder="Wprowadź opis" ng-change="validateCategoryDiscountForm(newSubCategoryName,newSubCategoryDiscount)" ng-keypress="keyPressPrice($event)" /></td>
+                        <td ng-click="submitCategoryForm(item.CategoryId,newSubCategoryName,newSubCategoryDiscount)">ZAPISZ <div class="icon-plus-sign"></div></td>
+                        
+                    </tr>
+                    
                 </tbody>
             </table>
+            
         </div>
+        <div ng-if="invalidCategoryForm" style="color:red;font-family:Segoe UI; text-align:center;">Wypełnij wszystkie pola!</div>
+        <div ng-if="invalidDiscountForm" style="color:red;font-family:Segoe UI; text-align:center;">Zły format promocji (max. 100)</div>
     </div>
 </div>
 

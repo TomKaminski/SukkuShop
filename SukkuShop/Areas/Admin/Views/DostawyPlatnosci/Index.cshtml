@@ -42,7 +42,7 @@
                         <td>
                             <div style="cursor:pointer" ng-if="!item.editWeight" ng-click="ActivateWeightShippingEditor(item.ShippingId,item.MaxWeight)">{{item.MaxWeight}}<div class="icon-pencil pencilek"></div></div>
                             <div ng-if="item.editWeight" style="position: relative">
-                                <input type="text" style="width: 50%;padding-right: 40px;" ng-model="shippingWeightEditorValue" />
+                                <input type="text" style="width: 50%;padding-right: 40px;" ng-model="shippingWeightEditorValue" ng-keypress="keyPressPrice($event)" />
                                 <div style="position: absolute;color:red;right:9px;top:0;cursor:pointer;font-size:18px;" ng-click="DeactivateWeightShippingEditor(item.ShippingId)">&#10005;</div>
                                 <div style="position: absolute;color:green;right:25px;top:0;cursor:pointer;font-size:18px;" ng-click="SubmitWeightShippingEditor(item.ShippingId,shippingWeightEditorValue)">&#10003;</div>
                             </div>

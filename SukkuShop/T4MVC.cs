@@ -576,6 +576,7 @@ namespace Links
                 public static readonly string AdminProduct_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AdminProduct.min.js") ? Url("AdminProduct.min.js") : Url("AdminProduct.js");
                 public static readonly string AdminProduct_min_js = Url("AdminProduct.min.js");
                 public static readonly string AdminProduct_min_js_map = Url("AdminProduct.min.js.map");
+                public static readonly string CategoriesListAngular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CategoriesListAngular.min.js") ? Url("CategoriesListAngular.min.js") : Url("CategoriesListAngular.js");
                 public static readonly string ContentIndex_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.js") ? Url("ContentIndex.min.js") : Url("ContentIndex.js");
                 public static readonly string ContentIndex_min_js = Url("ContentIndex.min.js");
                 public static readonly string ContentIndex_min_js_map = Url("ContentIndex.min.js.map");
@@ -638,6 +639,11 @@ namespace Links
                          
                     public static readonly string AdminUserList_css_map = Url("AdminUserList.css.map");
                     public static readonly string AdminUserList_min_css = Url("AdminUserList.min.css");
+                    public static readonly string CategoriesAngular_scss = Url("CategoriesAngular.scss");
+                    public static readonly string CategoriesAngular_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/CategoriesAngular.min.css") ? Url("CategoriesAngular.min.css") : Url("CategoriesAngular.css");
+                         
+                    public static readonly string CategoriesAngular_css_map = Url("CategoriesAngular.css.map");
+                    public static readonly string CategoriesAngular_min_css = Url("CategoriesAngular.min.css");
                     public static readonly string ContentIndex_scss = Url("ContentIndex.scss");
                     public static readonly string ContentIndex_css = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/ContentIndex.min.css") ? Url("ContentIndex.min.css") : Url("ContentIndex.css");
                          
