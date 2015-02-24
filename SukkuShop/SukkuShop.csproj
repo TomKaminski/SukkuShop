@@ -215,6 +215,9 @@
     <Compile Include="Admin.KlienciController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Admin.PodkategorieController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Admin.ProduktyController.generated.cs">
       <DependentUpon>T4MVC.tt</DependentUpon>
     </Compile>
@@ -236,6 +239,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DostawyPlatnosciController.cs" />
+    <Compile Include="Areas\Admin\Controllers\PodkategorieController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProduktyController.cs" />
     <Compile Include="Areas\Admin\Controllers\KlienciController.cs" />
     <Compile Include="Areas\Admin\Controllers\StatystykiController.cs" />
@@ -244,6 +248,7 @@
     <Compile Include="Areas\Admin\Models\FileUploadModel.cs" />
     <Compile Include="Areas\Admin\Models\OrderModels.cs" />
     <Compile Include="Areas\Admin\Models\ShippingPaymentCreateModel.cs" />
+    <Compile Include="Areas\Admin\Models\SubcategoryModels.cs" />
     <Compile Include="Areas\Admin\Models\UserDetails.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\KoszykController.cs" />
@@ -461,6 +466,12 @@
     <Content Include="Areas\Admin\Content\css\AdminUserList.min.css">
       <DependentUpon>AdminUserList.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\css\CategoriesAngular.css">
+      <DependentUpon>CategoriesAngular.scss</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Content\css\CategoriesAngular.min.css">
+      <DependentUpon>CategoriesAngular.css</DependentUpon>
+    </Content>
     <Content Include="Areas\Admin\Content\css\ContentIndex.css">
       <DependentUpon>ContentIndex.scss</DependentUpon>
     </Content>
@@ -524,6 +535,7 @@
     <Content Include="Areas\Admin\Scripts\AdminProduct.min.js">
       <DependentUpon>AdminProduct.js</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Scripts\CategoriesListAngular.js" />
     <Content Include="Areas\Admin\Scripts\ContentIndex.js" />
     <Content Include="Areas\Admin\Scripts\ContentIndex.min.js">
       <DependentUpon>ContentIndex.js</DependentUpon>
@@ -1165,6 +1177,11 @@
     </Content>
     <Content Include="Areas\Admin\Scripts\ShipingPaymentAngular.min.js.map">
       <DependentUpon>ShipingPaymentAngular.min.js</DependentUpon>
+    </Content>
+    <Content Include="Areas\Admin\Views\Podkategorie\Index.cshtml" />
+    <Content Include="Areas\Admin\Content\css\CategoriesAngular.scss" />
+    <Content Include="Areas\Admin\Content\css\CategoriesAngular.css.map">
+      <DependentUpon>CategoriesAngular.css</DependentUpon>
     </Content>
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <Content Include="Scripts\AccSzczegZam.js" />

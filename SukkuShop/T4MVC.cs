@@ -49,6 +49,7 @@ namespace T4MVC
         public SukkuShop.Areas.Admin.Controllers.ContentController Content = new SukkuShop.Areas.Admin.Controllers.T4MVC_ContentController();
         public SukkuShop.Areas.Admin.Controllers.DostawyPlatnosciController DostawyPlatnosci = new SukkuShop.Areas.Admin.Controllers.T4MVC_DostawyPlatnosciController();
         public SukkuShop.Areas.Admin.Controllers.KlienciController Klienci = new SukkuShop.Areas.Admin.Controllers.T4MVC_KlienciController();
+        public SukkuShop.Areas.Admin.Controllers.PodkategorieController Podkategorie = new SukkuShop.Areas.Admin.Controllers.T4MVC_PodkategorieController();
         public SukkuShop.Areas.Admin.Controllers.ProduktyController Produkty = new SukkuShop.Areas.Admin.Controllers.T4MVC_ProduktyController();
         public SukkuShop.Areas.Admin.Controllers.StatystykiController Statystyki = new SukkuShop.Areas.Admin.Controllers.T4MVC_StatystykiController();
         public SukkuShop.Areas.Admin.Controllers.ZamowieniaController Zamowienia = new SukkuShop.Areas.Admin.Controllers.T4MVC_ZamowieniaController();

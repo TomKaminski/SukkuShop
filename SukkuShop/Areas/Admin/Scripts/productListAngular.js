@@ -306,7 +306,7 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
          }
 
          for (var k = 0; k < productsBeforeFilter.length; k++) {
-             if ($scope.published == false && $scope.isready == false && $scope.wrongmodel == false) {
+             if ($scope.published === false && $scope.isready === false && $scope.wrongmodel === false) {
                  products.push(productsBeforeFilter[k]);
              } else {
                  if (($scope.published && productsBeforeFilter[k].Published) || ($scope.isready && productsBeforeFilter[k].WrongModel == false && productsBeforeFilter[k].Published == false) || ($scope.wrongmodel && productsBeforeFilter[k].WrongModel == true)) {

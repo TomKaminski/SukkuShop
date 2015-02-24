@@ -64,4 +64,66 @@ namespace SukkuShop.Infrastructure.Binders
             }
         }
     }
+
+    public class SubcategoryCreateModelBinder : IModelBinder
+    {
+        public object BindModel(ControllerContext controllerContext,
+            ModelBindingContext bindingContext)
+        {
+            var model = (SubcategoryCreateModel)bindingContext.Model ?? new SubcategoryCreateModel();
+            model.Discount = TryGet<int>(bindingContext, "discount");
+            model.Name = TryGetString(bindingContext, "name");
+            model.UpperCategoryId = TryGet<int>(bindingContext, "uppercategoryid");
+            return model;
+        }
+
+
+        private string TryGetString(ModelBindingContext bindingContext, string key)
+        {
+            if (String.IsNullOrEmpty(key))
+                return null;
+
+            var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + "." + key);
+            if (valueResult == null && bindingContext.FallbackToEmptyPrefix)
+                valueResult = bindingContext.ValueProvider.GetValue(key);
+
+            bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueResult);
+
+            if (valueResult == null)
+                return null;
+
+            try
+            {
+                return (string)valueResult.ConvertTo(typeof(string));
+            }
+            catch (Exception ex)
+            {
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex);
+                return null;
+            }
+        }
+
+        private T? TryGet<T>(ModelBindingContext bindingContext, string key) where T : struct
+        {
+
+            var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName + "." + key);
+            if (valueResult == null && bindingContext.FallbackToEmptyPrefix)
+                valueResult = bindingContext.ValueProvider.GetValue(key);
+
+            bindingContext.ModelState.SetModelValue(bindingContext.ModelName, valueResult);
+
+            if (valueResult == null)
+                return null;
+
+            try
+            {
+                return (T)valueResult.ConvertTo(typeof(T));
+            }
+            catch (Exception ex)
+            {
+                bindingContext.ModelState.AddModelError(bindingContext.ModelName, ex);
+                return null;
+            }
+        }
+    }
 }
