@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Kategorie";
+}
+@Styles.Render("~/Areas/Admin/Content/css/CategoriesAngular.min.css")
+@Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Areas/Admin/Scripts/CategoriesListAngular.js")
+
+<div ng-app="adminApp">
+    <div ng-controller="AdminCategoriesCtrl" ng-init="init()">
+        <div ng-repeat="item in categories">
+            <div style="text-align: center">{{item.Name}} <a href="" ng-click="toggleSubCategories(item.CategoryId)">PLZ</a></div>
+            <table style="text-align: center; width: 1066px; margin: auto;" ng-if="item.subCategoriesActive">
+                <thead>
+                    <tr>
+                        <th>Nazwa</th>
+                        <th>Promocja</th>
+                        <th>Ilość produktów</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="subItem in item.subCategories">
+                        <td>
+                            <div ng-if="item.editNameActive==false" ng-click="StartNameEdit(subItem.CategoryId,subItem.Name)">{{subItem.Name}}</div>
+                            <div ng-if="item.editNameActive">
+                                <input type="text" model="newEditorName" />
+                                <div ng-click="CancelNameEdit(subItem.CategoryId)">X</div>
+                                <div ng-click="SubmitNameEdit(item.CategoryId,newEditorName)">V</div>
+                            </div>
+                        </td>
+                        <td>
+                            <div ng-if="item.editDiscountActive==false" ng-click="StartDiscountEdit(subItem.CategoryId,subItem.Discount)">{{subItem.Discount}}</div>
+                            <div ng-if="item.editDiscountActive">
+                                <input type="text" model="newEditorDiscount" />
+                                <div ng-click="CancelDiscountEdit(subItem.CategoryId)">X</div>
+                                <div ng-click="SubmitDiscountEdit(item.CategoryId,newEditorDiscount)">V</div>
+                            </div>
+                        </td>
+                        <td>{{subItem.productsCount}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
