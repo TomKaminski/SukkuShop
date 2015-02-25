@@ -73,7 +73,7 @@ img.grayscale {
       bottom: 0;
       text-transform: uppercase; }
   .product-details-main-container .product-details-info-container {
-    width: 415px;
+    width: 570px;
     float: left; }
     .product-details-main-container .product-details-info-container .add-to-cart-animation-box {
       height: 11px; }
@@ -92,7 +92,8 @@ img.grayscale {
       margin-bottom: 28px;
       font-size: 24px;
       font-family: FoglihtenPCS;
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      width: 65%; }
     .product-details-main-container .product-details-info-container .price-box {
       margin-bottom: 10px; }
       .product-details-main-container .product-details-info-container .price-box .price-text {

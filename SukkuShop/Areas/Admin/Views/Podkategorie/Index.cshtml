@@ -3,13 +3,14 @@
 }
 @Styles.Render("~/Areas/Admin/Content/css/CategoriesAngular.min.css")
 @Scripts.Render("~/Scripts/angular.min.js")
+@Scripts.Render("~/Scripts/angular-animate.min.js")
 @Scripts.Render("~/Areas/Admin/Scripts/CategoriesListAngular.js")
 
 <div ng-app="adminApp">
     <div ng-controller="AdminCategoriesCtrl" ng-init="init()">
         <div ng-repeat="item in categories">
             <div style="text-align: center">{{item.Name}} <a href="" ng-click="toggleSubCategories(item.CategoryId)">PLZ</a></div>
-            <table style="text-align: center; width: 1066px; margin: auto;" ng-if="item.subCategoriesActive">
+            <table style="text-align: center; width: 1066px; margin: auto;" ng-show="item.subCategoriesActive" class="animate-show">
                 <thead>
                     <tr>
                         <th>Id</th>
@@ -51,12 +52,11 @@
                         <td><input ng-model="newSubCategoryName" id="newSubCategoryName" name="newSubCategoryName" type="text" placeholder="Wprowadź nazwę" ng-change="validateCategoryForm(newSubCategoryName,newSubCategoryDiscount)" /></td>
                         <td><input ng-model="newSubCategoryDiscount" id="newSubCategoryDiscount" name="newSubCategoryDiscount" type="text" placeholder="Wprowadź opis" ng-change="validateCategoryDiscountForm(newSubCategoryName,newSubCategoryDiscount)" ng-keypress="keyPressPrice($event)" /></td>
                         <td ng-click="submitCategoryForm(item.CategoryId,newSubCategoryName,newSubCategoryDiscount)">ZAPISZ <div class="icon-plus-sign"></div></td>
-                        
+
                     </tr>
-                    
+
                 </tbody>
-            </table>
-            
+            </table>            
         </div>
         <div ng-if="invalidCategoryForm" style="color:red;font-family:Segoe UI; text-align:center;">Wypełnij wszystkie pola!</div>
         <div ng-if="invalidDiscountForm" style="color:red;font-family:Segoe UI; text-align:center;">Zły format promocji (max. 100)</div>

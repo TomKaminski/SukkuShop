@@ -45,7 +45,7 @@ jQuery(document).ready(function () {
     hideAjaxTick();
 });
 
-var adminApp = angular.module("adminApp", []);
+var adminApp = angular.module("adminApp", ['ngAnimate']);
 var itemsPerPage = 12;
 
 adminApp.controller("AdminCategoriesCtrl", ["$scope", "$http", '$filter', function ($scope, $http, $filter) {

@@ -162,3 +162,5 @@
 /// <reference path="../ckeditor/plugins/specialchar/dialogs/lang/vi.js" />
 /// <reference path="../ckeditor/plugins/specialchar/dialogs/lang/zh-cn.js" />
 /// <reference path="../ckeditor/plugins/specialchar/dialogs/lang/zh.js" />
+/// <reference path="angular-mocks.js" />
+/// <reference path="angular-animate.min.js" />

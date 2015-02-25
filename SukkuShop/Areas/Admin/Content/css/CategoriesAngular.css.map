@@ -1,7 +1,1 @@
-{
-"version": 3,
-"mappings": "",
-"sources": [],
-"names": [],
-"file": "CategoriesAngular.css"
-}
+﻿{"version":3,"sources":["CategoriesAngular.scss","CategoriesAngular.css"],"names":[],"mappings":"AAO2D;ECNzD,mBAAkB;EAClB,YAAW;EACX,eAAc;EACd,mBAAkB,EAAE;;AAEtB;EACE,qCAAoC;EACpC,6BAA4B,EAAE;;AAEhC;EACE,gBAAe;EACf,YAAW;EACX,iBAAgB,EAAE","file":"CategoriesAngular.css"}
