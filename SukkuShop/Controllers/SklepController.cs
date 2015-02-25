@@ -52,7 +52,7 @@ namespace SukkuShop.Controllers
                 }
                 if (categoryId != 0)
                     subcategoryList =
-                        _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId)
+                        _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId && x.Products.Count>0)
                             .Select(j => j.Name)
                             .Distinct()
                             .ToList();

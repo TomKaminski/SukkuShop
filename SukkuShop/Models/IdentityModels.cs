@@ -278,8 +278,8 @@ namespace SukkuShop.Models
                     new Categories {CategoryId = 3, Name = "Herbaty", UpperCategoryId = 0},
                     new Categories {CategoryId = 4, Name = "Bakalie", UpperCategoryId = 0},
                     new Categories {CategoryId = 5, Name = "Inne", UpperCategoryId = 0},
-                    new Categories {CategoryId = 6, Name = "Pielęgnacja Ciała", UpperCategoryId = 1},
-                    new Categories {CategoryId = 7, Name = "Pielęgnacja Twarzy", UpperCategoryId = 1},
+                    new Categories {CategoryId = 6, Name = "Do Ciała", UpperCategoryId = 1},
+                    new Categories {CategoryId = 7, Name = "Do Twarzy", UpperCategoryId = 1},
                     new Categories {CategoryId = 8, Name = "Ostre", UpperCategoryId = 2},
                     new Categories {CategoryId = 9, Name = "Łagodne", UpperCategoryId = 2}
                     );

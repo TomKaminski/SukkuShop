@@ -31,7 +31,10 @@ namespace SukkuShop.Areas.Admin.Controllers
                 j.CategoryId,
                 j.Name,
                 productsCount = j.Products.Count,
-                subCategoriesActive = false,                
+                subCategoriesActive = false,    
+                newDiscount = 0,
+                Promotion=j.Promotion??0,
+                editDiscountActive=false,
                 subCategories = _dbContext.Categories.Where(k => k.UpperCategoryId == j.CategoryId).Select(m => new
                 {
                     m.CategoryId,
@@ -40,7 +43,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                     productsCount = m.Products.Count,
                     editNameActive = false,
                     editDiscountActive=false,
-                    canDelete = false
+                    canDelete = false,
+                    NewPromotion = 0
                 })
             });
             return Json(categoriesList, JsonRequestBehavior.AllowGet);
@@ -62,10 +66,11 @@ namespace SukkuShop.Areas.Admin.Controllers
                 cat.CategoryId,
                 cat.Name,
                 cat.Promotion,
-                cat.Products.Count,
+                productsCount = cat.Products.Count,
                 editNameActive = false,
                 editDiscountActive = false,
-                canDelete = false
+                canDelete = false,
+                NewPromotion = 0
             },JsonRequestBehavior.AllowGet);
         }
 
@@ -94,6 +99,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             }
             return Json(false, JsonRequestBehavior.AllowGet);
         }
+
+        
 
         public virtual JsonResult DeleteSubCategory(int id)
         {

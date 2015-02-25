@@ -69,7 +69,7 @@ img.grayscale {
     flex-wrap: wrap;
     justify-content: flex-start; }
     .product-background .product-list-container .product-list-item-box {
-      height: 191px;
+      height: 196px;
       width: 135px;
       box-sizing: border-box;
       margin-bottom: 28px;
@@ -132,7 +132,7 @@ img.grayscale {
               width: 127px;
               bottom: 0; }
         .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-textbox {
-          height: 54px;
+          height: 59px;
           position: relative;
           margin-top: 2px; }
           .product-background .product-list-container .product-list-item-box .product-list-item .product-list-item-textbox:before {

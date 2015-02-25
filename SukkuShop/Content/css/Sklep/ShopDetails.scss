@@ -310,7 +310,7 @@ min-height: 50px;
 	flex-wrap: wrap;
 	justify-content: center;
     .product-list-item-box {
-	    height: 191px;
+	    height: 196px;
 	    width: 135px;
 	    //Instead of the line below you could use @includebox-sizing($bs)
 	    box-sizing: border-box;
@@ -337,7 +337,7 @@ min-height: 50px;
 	        box-sizing: border-box;
 	        position: absolute;
             .product-list-item-textbox {
-	            height: 54px;
+	            height: 59px;
 	            position: relative;
 	            margin-top: 2px;
 	            &:before {

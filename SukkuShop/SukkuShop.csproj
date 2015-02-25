@@ -520,8 +520,10 @@
     <Content Include="Areas\Admin\Content\css\UserDetails.min.css">
       <DependentUpon>UserDetails.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Content\Images\rozwin.png" />
     <Content Include="Areas\Admin\Content\Images\selectboxbtn-nonactive.png" />
     <Content Include="Areas\Admin\Content\Images\selectboxbtn.png" />
+    <Content Include="Areas\Admin\Content\Images\zsun.png" />
     <Content Include="Areas\Admin\Content\web\AdminProductsList.html" />
     <Content Include="Areas\Admin\Scripts\AdminEditProduct.js" />
     <Content Include="Areas\Admin\Scripts\AdminEditProduct.min.js">

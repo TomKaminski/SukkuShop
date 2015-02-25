@@ -39,8 +39,8 @@ namespace SukkuShop.Migrations
                         new Categories { CategoryId = 3, Name = "Herbaty", UpperCategoryId = 0 },
                         new Categories { CategoryId = 4, Name = "Bakalie", UpperCategoryId = 0 },
                         new Categories { CategoryId = 5, Name = "Inne", UpperCategoryId = 0 },
-                        new Categories { CategoryId = 6, Name = "Pielêgnacja Cia³a", UpperCategoryId = 1 },
-                        new Categories { CategoryId = 7, Name = "Pielêgnacja Twarzy", UpperCategoryId = 1 },
+                        new Categories { CategoryId = 6, Name = "Do Cia³a", UpperCategoryId = 1 },
+                        new Categories { CategoryId = 7, Name = "Do Twarzy", UpperCategoryId = 1 },
                         new Categories { CategoryId = 8, Name = "Ostre", UpperCategoryId = 2 },
                         new Categories { CategoryId = 9, Name = "£agodne", UpperCategoryId = 2 }
                     );
