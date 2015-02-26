@@ -164,4 +164,3 @@
 /// <reference path="../ckeditor/plugins/specialchar/dialogs/lang/zh.js" />
 /// <reference path="angular-mocks.js" />
 /// <reference path="angular-animate.min.js" />
-/// <reference path="clamp.min.js" />

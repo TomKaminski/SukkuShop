@@ -28,16 +28,16 @@ namespace SukkuShop.Controllers
             return View(model);
         }
 
-        public virtual ViewResult Dostawa()
+        public virtual ViewResult Reklamacje()
         {
-            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/gwarancja.html");
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/reklamacje.html");
             var model = new HtmlString(System.IO.File.ReadAllText(path));           
             return View(model);
         }
 
         public virtual ViewResult Platnosci()
         {
-            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/zwrottowarow.html");
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/platnosci.html");
             var model = new HtmlString(System.IO.File.ReadAllText(path));  
             return View(model);
         }
@@ -46,6 +46,20 @@ namespace SukkuShop.Controllers
         {
             var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/politykaprywatnosci.html");
             var model = new HtmlString(System.IO.File.ReadAllText(path));  
+            return View(model);
+        }
+
+        public virtual ViewResult Gwarancje()
+        {
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/gwarancja.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));
+            return View(model);
+        }
+
+        public virtual ViewResult ZwrotTowarow()
+        {
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/zwrottowarow.html");
+            var model = new HtmlString(System.IO.File.ReadAllText(path));
             return View(model);
         }
     }

@@ -77,9 +77,11 @@ namespace SukkuShop.Controllers
             public readonly string Index = "Index";
             public readonly string LoginPartial = "LoginPartial";
             public readonly string Regulamin = "Regulamin";
-            public readonly string Dostawa = "Dostawa";
+            public readonly string Reklamacje = "Reklamacje";
             public readonly string Platnosci = "Platnosci";
             public readonly string PolitykaPrywatnosci = "PolitykaPrywatnosci";
+            public readonly string Gwarancje = "Gwarancje";
+            public readonly string ZwrotTowarow = "ZwrotTowarow";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -88,9 +90,11 @@ namespace SukkuShop.Controllers
             public const string Index = "Index";
             public const string LoginPartial = "LoginPartial";
             public const string Regulamin = "Regulamin";
-            public const string Dostawa = "Dostawa";
+            public const string Reklamacje = "Reklamacje";
             public const string Platnosci = "Platnosci";
             public const string PolitykaPrywatnosci = "PolitykaPrywatnosci";
+            public const string Gwarancje = "Gwarancje";
+            public const string ZwrotTowarow = "ZwrotTowarow";
         }
 
 
@@ -104,17 +108,21 @@ namespace SukkuShop.Controllers
             public _ViewNamesClass ViewNames { get { return s_ViewNames; } }
             public class _ViewNamesClass
             {
-                public readonly string Dostawa = "Dostawa";
+                public readonly string Gwarancje = "Gwarancje";
                 public readonly string Index = "Index";
                 public readonly string Platnosci = "Platnosci";
                 public readonly string PolitykaPrywatnosci = "PolitykaPrywatnosci";
                 public readonly string Regulamin = "Regulamin";
+                public readonly string Reklamacje = "Reklamacje";
+                public readonly string ZwrotTowarow = "ZwrotTowarow";
             }
-            public readonly string Dostawa = "~/Views/Home/Dostawa.cshtml";
+            public readonly string Gwarancje = "~/Views/Home/Gwarancje.cshtml";
             public readonly string Index = "~/Views/Home/Index.cshtml";
             public readonly string Platnosci = "~/Views/Home/Platnosci.cshtml";
             public readonly string PolitykaPrywatnosci = "~/Views/Home/PolitykaPrywatnosci.cshtml";
             public readonly string Regulamin = "~/Views/Home/Regulamin.cshtml";
+            public readonly string Reklamacje = "~/Views/Home/Reklamacje.cshtml";
+            public readonly string ZwrotTowarow = "~/Views/Home/ZwrotTowarow.cshtml";
         }
     }
 
@@ -157,13 +165,13 @@ namespace SukkuShop.Controllers
         }
 
         [NonAction]
-        partial void DostawaOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+        partial void ReklamacjeOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
 
         [NonAction]
-        public override System.Web.Mvc.ViewResult Dostawa()
+        public override System.Web.Mvc.ViewResult Reklamacje()
         {
-            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Dostawa);
-            DostawaOverride(callInfo);
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Reklamacje);
+            ReklamacjeOverride(callInfo);
             return callInfo;
         }
 
@@ -186,6 +194,28 @@ namespace SukkuShop.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.PolitykaPrywatnosci);
             PolitykaPrywatnosciOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void GwarancjeOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ViewResult Gwarancje()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.Gwarancje);
+            GwarancjeOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void ZwrotTowarowOverride(T4MVC_System_Web_Mvc_ViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ViewResult ZwrotTowarow()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ViewResult(Area, Name, ActionNames.ZwrotTowarow);
+            ZwrotTowarowOverride(callInfo);
             return callInfo;
         }
 

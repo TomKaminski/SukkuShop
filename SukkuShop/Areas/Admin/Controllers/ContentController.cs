@@ -58,6 +58,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             return PartialView("_RegulaminGet", model);
         }
 
+
+
         [HttpPost, ValidateInput(false)]
         public virtual ActionResult Regulamin(string text)
         {
@@ -265,6 +267,56 @@ namespace SukkuShop.Areas.Admin.Controllers
             var pathForSaving = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/zwrottowarow.html");
             System.IO.File.WriteAllText(pathForSaving, text);
             return RedirectToAction(MVC.Admin.Content.ZwrotTowarow());
+        }
+
+        [HttpGet]
+        public virtual ActionResult Platnosci()
+        {
+            ViewBag.SelectedOpt = 5;
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/platnosci.html");
+            var text = new MvcHtmlString("");
+            if (System.IO.File.Exists(path))
+                text = new MvcHtmlString(System.IO.File.ReadAllText(path));
+            var model = new RegulaminModel
+            {
+                Text = text
+            };
+            return View(model);
+        }
+
+        public virtual PartialViewResult PlatnosciAjaxGet()
+        {
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/platnosci.html");
+            var text = new MvcHtmlString("");
+            if (System.IO.File.Exists(path))
+                text = new MvcHtmlString(System.IO.File.ReadAllText(path));
+            var model = new RegulaminModel
+            {
+                Text = text
+            };
+            return PartialView("_PlatnosciPost", model);
+        }
+
+        public virtual PartialViewResult PlatnosciAjaxPost()
+        {
+            var path = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/platnosci.html");
+            var text = new MvcHtmlString("");
+            if (System.IO.File.Exists(path))
+                text = new MvcHtmlString(System.IO.File.ReadAllText(path));
+            var model = new RegulaminModel
+            {
+                Text = text
+            };
+            return PartialView("_PlatnosciGet", model);
+        }
+
+        [HttpPost, ValidateInput(false)]
+        public virtual ActionResult Platnosci(string text)
+        {
+            ViewBag.SelectedOpt = 5;
+            var pathForSaving = Path.Combine(HttpRuntime.AppDomainAppPath, "Content/web/platnosci.html");
+            System.IO.File.WriteAllText(pathForSaving, text);
+            return RedirectToAction(MVC.Admin.Content.Platnosci());
         }
     }
 }

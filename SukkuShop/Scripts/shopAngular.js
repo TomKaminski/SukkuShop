@@ -149,12 +149,6 @@ function currency(n) {
 }
 
 jQuery(document).ready(function () {
-
-    jQuery(".product-title").each(function() {
-        var plz = jQuery(this);
-        $clamp(plz, { clamp: 2 });
-    });
-
     jQuery('#add-to-cart-info').hide();
     jQuery("ul.sort-menu div.plz").click(function () {
         jQuery("ul.sort-menu div.plz").css("opacity", "0.6");

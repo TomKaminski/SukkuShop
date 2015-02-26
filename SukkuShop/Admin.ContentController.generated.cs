@@ -90,6 +90,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string ZwrotTowarow = "ZwrotTowarow";
             public readonly string ZwrotTowarowAjaxGet = "ZwrotTowarowAjaxGet";
             public readonly string ZwrotTowarowAjaxPost = "ZwrotTowarowAjaxPost";
+            public readonly string Platnosci = "Platnosci";
+            public readonly string PlatnosciAjaxGet = "PlatnosciAjaxGet";
+            public readonly string PlatnosciAjaxPost = "PlatnosciAjaxPost";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -111,6 +114,9 @@ namespace SukkuShop.Areas.Admin.Controllers
             public const string ZwrotTowarow = "ZwrotTowarow";
             public const string ZwrotTowarowAjaxGet = "ZwrotTowarowAjaxGet";
             public const string ZwrotTowarowAjaxPost = "ZwrotTowarowAjaxPost";
+            public const string Platnosci = "Platnosci";
+            public const string PlatnosciAjaxGet = "PlatnosciAjaxGet";
+            public const string PlatnosciAjaxPost = "PlatnosciAjaxPost";
         }
 
 
@@ -166,6 +172,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             {
                 public readonly string _GwarancjaGet = "_GwarancjaGet";
                 public readonly string _GwarancjaPost = "_GwarancjaPost";
+                public readonly string _PlatnosciGet = "_PlatnosciGet";
+                public readonly string _PlatnosciPost = "_PlatnosciPost";
                 public readonly string _PolitykaGet = "_PolitykaGet";
                 public readonly string _PolitykaPost = "_PolitykaPost";
                 public readonly string _RegulaminGet = "_RegulaminGet";
@@ -176,6 +184,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 public readonly string _ZwrotTowarowPost = "_ZwrotTowarowPost";
                 public readonly string Gwarancja = "Gwarancja";
                 public readonly string Index = "Index";
+                public readonly string Platnosci = "Platnosci";
                 public readonly string PolitykaPrywatnosci = "PolitykaPrywatnosci";
                 public readonly string Regulamin = "Regulamin";
                 public readonly string Reklamacje = "Reklamacje";
@@ -183,6 +192,8 @@ namespace SukkuShop.Areas.Admin.Controllers
             }
             public readonly string _GwarancjaGet = "~/Areas/Admin/Views/Content/_GwarancjaGet.cshtml";
             public readonly string _GwarancjaPost = "~/Areas/Admin/Views/Content/_GwarancjaPost.cshtml";
+            public readonly string _PlatnosciGet = "~/Areas/Admin/Views/Content/_PlatnosciGet.cshtml";
+            public readonly string _PlatnosciPost = "~/Areas/Admin/Views/Content/_PlatnosciPost.cshtml";
             public readonly string _PolitykaGet = "~/Areas/Admin/Views/Content/_PolitykaGet.cshtml";
             public readonly string _PolitykaPost = "~/Areas/Admin/Views/Content/_PolitykaPost.cshtml";
             public readonly string _RegulaminGet = "~/Areas/Admin/Views/Content/_RegulaminGet.cshtml";
@@ -193,6 +204,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string _ZwrotTowarowPost = "~/Areas/Admin/Views/Content/_ZwrotTowarowPost.cshtml";
             public readonly string Gwarancja = "~/Areas/Admin/Views/Content/Gwarancja.cshtml";
             public readonly string Index = "~/Areas/Admin/Views/Content/Index.cshtml";
+            public readonly string Platnosci = "~/Areas/Admin/Views/Content/Platnosci.cshtml";
             public readonly string PolitykaPrywatnosci = "~/Areas/Admin/Views/Content/PolitykaPrywatnosci.cshtml";
             public readonly string Regulamin = "~/Areas/Admin/Views/Content/Regulamin.cshtml";
             public readonly string Reklamacje = "~/Areas/Admin/Views/Content/Reklamacje.cshtml";
@@ -438,6 +450,39 @@ namespace SukkuShop.Areas.Admin.Controllers
             var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.ZwrotTowarow);
             ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "text", text);
             ZwrotTowarowOverride(callInfo, text);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PlatnosciOverride(T4MVC_System_Web_Mvc_ActionResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Platnosci()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Platnosci);
+            PlatnosciOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PlatnosciAjaxGetOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult PlatnosciAjaxGet()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.PlatnosciAjaxGet);
+            PlatnosciAjaxGetOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PlatnosciAjaxPostOverride(T4MVC_System_Web_Mvc_PartialViewResult callInfo);
+
+        [NonAction]
+        public override System.Web.Mvc.PartialViewResult PlatnosciAjaxPost()
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.PlatnosciAjaxPost);
+            PlatnosciAjaxPostOverride(callInfo);
             return callInfo;
         }
 

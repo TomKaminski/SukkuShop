@@ -1188,6 +1188,9 @@
     <Content Include="Areas\Admin\Content\css\CategoriesAngular.css.map">
       <DependentUpon>CategoriesAngular.css</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\Content\_PlatnosciGet.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\_PlatnosciPost.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Platnosci.cshtml" />
     <None Include="Properties\PublishProfiles\trysukku.pubxml" />
     <Content Include="Scripts\AccSzczegZam.js" />
     <Content Include="Scripts\angular.js" />
@@ -1198,7 +1201,6 @@
     </Content>
     <Content Include="Scripts\Chart.js" />
     <Content Include="Scripts\Chart.min.js" />
-    <Content Include="Scripts\clamp.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js.map">
       <DependentUpon>jquery-2.1.1.min.js</DependentUpon>
@@ -1350,7 +1352,6 @@
     <Content Include="Views\Shared\_CartInfoPartialView.cshtml" />
     <Content Include="Views\Sklep\Produkty.cshtml" />
     <Content Include="Views\Home\Regulamin.cshtml" />
-    <Content Include="Views\Home\Dostawa.cshtml" />
     <Content Include="Views\Home\Platnosci.cshtml" />
     <Content Include="Views\Nav\Menu.cshtml" />
     <Content Include="Views\Home\PolitykaPrywatnosci.cshtml" />
@@ -1413,6 +1414,9 @@
     <Content Include="Views\Emails\ChangeOrderState.cshtml" />
     <Content Include="Views\Emails\ChangeOrderState.Html.cshtml" />
     <Content Include="Views\Emails\ChangeOrderState.Text.cshtml" />
+    <Content Include="Views\Home\Gwarancje.cshtml" />
+    <Content Include="Views\Home\ZwrotTowarow.cshtml" />
+    <Content Include="Views\Home\Reklamacje.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

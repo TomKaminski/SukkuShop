@@ -150,6 +150,10 @@ namespace Links
         public static readonly string AccSzczegZam_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/AccSzczegZam.min.js") ? Url("AccSzczegZam.min.js") : Url("AccSzczegZam.js");
         public static readonly string AccSzczegZam_min_js = Url("AccSzczegZam.min.js");
         public static readonly string AccSzczegZam_min_js_map = Url("AccSzczegZam.min.js.map");
+        public static readonly string angular_animate_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-animate.min.js") ? Url("angular-animate.min.js") : Url("angular-animate.js");
+        public static readonly string angular_animate_min_js = Url("angular-animate.min.js");
+        public static readonly string angular_animate_min_js_map = Url("angular-animate.min.js.map");
+        public static readonly string angular_mocks_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular-mocks.min.js") ? Url("angular-mocks.min.js") : Url("angular-mocks.js");
         public static readonly string angular_js = T4MVCHelpers.IsProduction() && T4Extensions.FileExists(URLPATH + "/angular.min.js") ? Url("angular.min.js") : Url("angular.js");
         public static readonly string angular_min_js = Url("angular.min.js");
         public static readonly string angular_min_js_map = Url("angular.min.js.map");
@@ -691,8 +695,10 @@ namespace Links
                     private const string URLPATH = "~/Areas/Admin/Content/Images";
                     public static string Url() { return T4MVCHelpers.ProcessVirtualPath(URLPATH); }
                     public static string Url(string fileName) { return T4MVCHelpers.ProcessVirtualPath(URLPATH + "/" + fileName); }
+                    public static readonly string rozwin_png = Url("rozwin.png");
                     public static readonly string selectboxbtn_nonactive_png = Url("selectboxbtn-nonactive.png");
                     public static readonly string selectboxbtn_png = Url("selectboxbtn.png");
+                    public static readonly string zsun_png = Url("zsun.png");
                 }
             
                 [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -717,6 +723,9 @@ namespace Links
             {
                 public const string _references_js = "~/Scripts/_references.js"; 
                 public const string AccSzczegZam_js = "~/Scripts/AccSzczegZam.js"; 
+                public const string angular_animate_js = "~/Scripts/angular-animate.js"; 
+                public const string angular_animate_min_js = "~/Scripts/angular-animate.min.js"; 
+                public const string angular_mocks_js = "~/Scripts/angular-mocks.js"; 
                 public const string angular_js = "~/Scripts/angular.js"; 
                 public const string angular_min_js = "~/Scripts/angular.min.js"; 
                 public const string CartSummary_js = "~/Scripts/CartSummary.js"; 
