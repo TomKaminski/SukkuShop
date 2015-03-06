@@ -2,11 +2,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.Entity.Migrations;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Mvc;
+using Dapper;
 using ImageResizer;
 using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 
@@ -18,9 +22,11 @@ namespace SukkuShop.Areas.Admin.Controllers
     public partial class ProduktyController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IAppRepository _appRepository;
 
-        public ProduktyController(ApplicationDbContext dbContext)
+        public ProduktyController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
+            _appRepository = appRepository;
             _dbContext = dbContext;
         }
 
@@ -65,7 +71,23 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular GET products
         public virtual JsonResult GetProductList()
         {
-            var products = _dbContext.Products.Select(x => new
+            var categories2 = _appRepository.GetAll<Categories>().ToList();
+            var productsDemand = _appRepository.GetAll<ProductDemands>().ToList();
+
+            var categories = categories2.Where(x=>x.UpperCategoryId==0).Select(k => new
+            {
+                k.CategoryId,
+                k.UpperCategoryId,
+                k.Name,
+                subcategories = categories2.Where(x=>x.UpperCategoryId == k.CategoryId).Select(p => new
+                {
+                    p.CategoryId,
+                    p.UpperCategoryId,
+                    p.Name,
+                })
+            });
+
+            var products = _appRepository.GetAll<Products>().Select(x => new
             {
                 x.ProductId,
                 x.Name,
@@ -73,9 +95,9 @@ namespace SukkuShop.Areas.Admin.Controllers
                 x.WrongModel,
                 x.IsComplete,
                 x.CategoryId,
-                Quantity=x.Quantity??0,
+                Quantity = x.Quantity ?? 0,
                 x.ReservedQuantity,
-                upper = x.Categories.UpperCategoryId,
+                upper = categories2.FirstOrDefault(j => j.CategoryId == x.CategoryId) == null ? 0 : categories2.FirstOrDefault(j => j.CategoryId == x.CategoryId).UpperCategoryId,
                 canDelete = false,
                 orders = x.OrdersCount,
                 showinfo = false,
@@ -86,29 +108,20 @@ namespace SukkuShop.Areas.Admin.Controllers
                     packing = x.Packing == null ? "Brak metody pakowania" : "",
                     opis = x.Description == null ? "Brak opisu" : "",
                     img = x.ImageName == null ? "Brak zdjęcia" : "",
-                    weight = x.Weight==0?"Brak podanej wagi":""
+                    weight = x.Weight == 0 ? "Brak podanej wagi" : ""
                 },
                 warning = new
                 {
                     lowQuantity = "Zaczyna brakować produktu",
                     noProduct = "Zabrakło produktu",
-                    demandsCount = x.ProductDemands.Count()
+                    demandsCount = productsDemand.Select(h=>h.ProductId==x.ProductId).Count()
                 },
                 warningcount = 0,
-                showwarning=false
-            });
-            var categories = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new
-            {
-                k.CategoryId,
-                k.UpperCategoryId,
-                k.Name,
-                subcategories = _dbContext.Categories.Where(m => m.UpperCategoryId == k.CategoryId).Select(p => new
-                {
-                    p.CategoryId,
-                    p.UpperCategoryId,
-                    p.Name,
-                })
-            });
+                showwarning = false
+            }).ToList();
+            
+            
+
             var data = new
             {
                 products,
@@ -120,7 +133,8 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular publish product
         public virtual ActionResult PublishProduct(int id)
         {
-            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            var product = _appRepository.GetSingle<Products>(x=>x.ProductId==id);
+            //var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
             if (product != null)
             {
                 product.Published = true;
@@ -134,7 +148,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular Unpublish product
         public virtual ActionResult UnpublishProduct(int id)
         {
-            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            var product = _appRepository.GetSingle<Products>(x=>x.ProductId==id); 
             if (product != null)
             {
                 product.Published = false;
@@ -148,7 +162,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular delete product
         public virtual ActionResult DeleteProduct(int id)
         {
-            var product = _dbContext.Products.FirstOrDefault(m => m.ProductId == id);
+            var product = _appRepository.GetSingle<Products>(x => x.ProductId == id);
             if (product == null) return Json(false);
             if (product.OrderDetails.Count != 0) return Json(false);
             _dbContext.Products.Remove(product);
@@ -201,7 +215,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 _dbContext.Products.AddOrUpdate(product);
                 _dbContext.SaveChanges();
 
-                var prod = _dbContext.Products.OrderByDescending(x => x.ProductId).First();
+                var prod = _appRepository.GetAll<Products>().OrderByDescending(x=>x.ProductId).First();
                 if (model.ImageBig != null && model.ImageBig.ContentLength != 0)
                 {
                     var pathForSaving = Server.MapPath("~/Content/Images/Shop/");
@@ -243,11 +257,11 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Get category lists if model validation fails
         private void GetDropDownLists(int? id)
         {
-            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            var categoryList = _appRepository.GetAll<Categories>(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
                 Value = k.CategoryId.ToString()
-            }).ToList();
+            }).ToList();           
             categoryList.Add(new SelectListItem
             {
                 Text = "Wybierz kategorię",
@@ -261,11 +275,11 @@ namespace SukkuShop.Areas.Admin.Controllers
             };
 
             var subCategoryList2 =
-                _dbContext.Categories.Where(x => x.UpperCategoryId == id).Select(k => new SelectListItem
+                _appRepository.GetAll<Categories>(x => x.UpperCategoryId == id).Select(k => new SelectListItem
                 {
                     Text = k.Name,
                     Value = k.CategoryId.ToString()
-                }).ToList();
+                }).ToList();          
             subCategoryList.AddRange(subCategoryList2);
             ViewBag.SubCategoryList = subCategoryList;
         }
@@ -284,11 +298,11 @@ namespace SukkuShop.Areas.Admin.Controllers
                     Selected = true
                 }
             };
-            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            var categoryList = _appRepository.GetAll<Categories>(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
                 Value = k.CategoryId.ToString()
-            }).ToList();
+            }).ToList();          
             list.AddRange(categoryList);
             ViewBag.CategoryList = list;
             var subCategoryList = new List<SelectListItem>
@@ -303,13 +317,13 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual ActionResult GetCategoriesCreateEditProduct()
         {
             var categories =
-                _dbContext.Categories.Where(x => x.UpperCategoryId == 0)
+                _appRepository.GetAll<Categories>(x => x.UpperCategoryId == 0)
                     .Select(k => new CategoriesEditCreateProductModel
                     {
                         Id = k.CategoryId,
                         Name = k.Name,
                         SubCategoryList =
-                            _dbContext.Categories.Where(m => m.UpperCategoryId == k.CategoryId)
+                            _appRepository.GetAll<Categories>(m => m.UpperCategoryId == k.CategoryId)
                                 .Select(p => new CateogriesCreateEditProduct
                                 {
                                     Id = p.CategoryId,
@@ -328,7 +342,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 new {Text = "Wybierz podkategorię", Value = 0}
             };
             if (id == 0) return Json(subcategoryList, JsonRequestBehavior.AllowGet);
-            var subcategoryList2 = _dbContext.Categories.Where(x => x.UpperCategoryId == id).Select(k => new
+            var subcategoryList2 = _appRepository.GetAll<Categories>(x => x.UpperCategoryId == id).Select(k => new
             {
                 Text = k.Name,
                 Value = k.CategoryId
@@ -342,7 +356,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual ActionResult Edytuj(int id)
         {
             ViewBag.SelectedOpt = 1;
-            var item = _dbContext.Products.Find(id);
+            var item = _appRepository.GetSingle<Products>(x => x.ProductId == id);
             GetCategoryListEdit(item);
 
             var model = new ProductEditModel
@@ -364,7 +378,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Get category list for edit view (selected)
         private void GetCategoryListEdit(Products item)
         {
-            var category = _dbContext.Categories.Find(item.CategoryId);
+            var category = _appRepository.GetSingle<Categories>(x=>x.CategoryId == item.CategoryId);
             var list = new List<SelectListItem>
             {
                 new SelectListItem
@@ -375,7 +389,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 }
             };
 
-            var categoryList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
+            var categoryList = _appRepository.GetAll<Categories>(x => x.UpperCategoryId == 0).Select(k => new SelectListItem
             {
                 Text = k.Name,
                 Value = k.CategoryId.ToString(),
@@ -398,7 +412,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             if (category != null)
             {
                 var subCategoryList2 =
-                    _dbContext.Categories.Where(x => x.UpperCategoryId == category.CategoryId)
+                    _appRepository.GetAll<Categories>(x => x.UpperCategoryId == category.CategoryId)
                         .Select(k => new SelectListItem
                         {
                             Text = k.Name,
@@ -416,7 +430,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public virtual ActionResult Edytuj(ProductEditModel model)
         {
-            var product = _dbContext.Products.Find(model.Id);
+            var product = _appRepository.GetSingle<Products>(x=>x.ProductId == model.Id);
             if (ModelState.IsValid)
             {
                 var category = model.Category == 0 ? null : model.Category;
@@ -447,7 +461,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                 product.Weight = weight;
                 if (product.Quantity < model.Quantity)
                 {
-                    var emails = _dbContext.ProductDemands.Where(x => x.ProductId == product.ProductId);
+                    var emails = _appRepository.GetAll<ProductDemands>(x => x.ProductId == product.ProductId).ToList();
                     foreach (var item in emails)
                     {
                         var email = new ProductDemandEmail

@@ -1,17 +1,18 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
 using DevTrends.MvcDonutCaching;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
 {
     public partial class NavController : Controller
     {
-        private readonly ApplicationDbContext _dbContext;
+        private readonly IAppRepository _appRepository;
 
-        public NavController(ApplicationDbContext dbContext)
+        public NavController(IAppRepository appRepository)
         {
-            _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         [ChildActionOnly]
@@ -19,7 +20,7 @@ namespace SukkuShop.Controllers
         public virtual PartialViewResult Menu(string id)
         {
             ViewBag.Category = id;
-            var categoryLinks = _dbContext.Categories.Where(j=>j.UpperCategoryId==0).Select(x => x.Name);
+            var categoryLinks = _appRepository.GetAll<Categories>(j => j.UpperCategoryId == 0).Select(x => x.Name);
             return PartialView(categoryLinks);
         }
 

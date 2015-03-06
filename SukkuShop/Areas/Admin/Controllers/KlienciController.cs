@@ -2,8 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using SukkuShop.Areas.Admin.Models;
 using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
@@ -13,11 +15,13 @@ namespace SukkuShop.Areas.Admin.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly ApplicationUserManager _userManager;
+        private readonly IAppRepository _appRepository;
 
-        public KlienciController(ApplicationDbContext dbContext, ApplicationUserManager userManager)
+        public KlienciController(ApplicationDbContext dbContext, ApplicationUserManager userManager, IAppRepository appRepository)
         {
             _dbContext = dbContext;
             _userManager = userManager;
+            _appRepository = appRepository;
         }
 
         // GET: Admin/AdminUser/Index
@@ -30,7 +34,8 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult GetUserList()
         {
-            var users = _dbContext.Users.Select(x => new
+            
+            var users = _userManager.Users.Select(x => new
             {
                 x.Email,
                 x.Id,
@@ -43,7 +48,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult SetDiscount(int id, int rabat)
         {
-            var user = _dbContext.Users.FirstOrDefault(x => x.Id == id);
+            var user = _userManager.FindById(id);
             if (user != null)
             {
                 user.Rabat = rabat;
@@ -59,7 +64,7 @@ namespace SukkuShop.Areas.Admin.Controllers
             ViewBag.SelectedOpt = 3;
             var user = await _userManager.FindByIdAsync(id);
 
-            var userOrders = _dbContext.Orders.Where(m => m.UserId == user.Id).Select(x => new AccountOrderItemModel
+            var userOrders = _appRepository.GetAll<Orders>(m => m.UserId == user.Id).Select(x => new AccountOrderItemModel
             {
                 ActualState = x.OrderInfo,
                 Id = x.OrderId,

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 #endregion
@@ -19,11 +20,13 @@ namespace SukkuShop.Areas.Admin.Controllers
     [Authorize(Roles = "Admin")]
     public partial class ZamowieniaController : Controller
     {
+        private readonly IAppRepository _appRepository;
         private readonly ApplicationDbContext _dbContext;
 
-        public ZamowieniaController(ApplicationDbContext dbContext)
+        public ZamowieniaController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         // GET: Admin/Zamowienia
@@ -35,7 +38,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult GetOrdersList()
         {
-            var orders = _dbContext.Orders.Select(x => new
+            var orders = _appRepository.GetAll<Orders>().Select(x => new
             {
                 x.Email,
                 x.OrderId,
@@ -132,15 +135,19 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual PartialViewResult ChangeOrderStateFromDetails(int id, string value, string packageNumber)
         {
-            var order = _dbContext.Orders.FirstOrDefault(x => x.OrderId == id);
+            var order = _appRepository.GetSingle<Orders>(x => x.OrderId == id);
+
             if (order != null && order.OrderInfo != value)
             {
+                var orderDetails = _appRepository.GetAll<OrderDetails>(x => x.OrderId == order.OrderId).ToList();
                 if (value == "Wysłane")
                 {
-                    foreach (var item in order.OrderDetails)
+                    foreach (var item in orderDetails)
                     {
-                        item.Products.ReservedQuantity -= item.Quantity;
-                        item.Products.Quantity -= item.Quantity;
+                        var product = _appRepository.GetSingle<Products>(j => j.ProductId == item.ProductId);
+                        product.ReservedQuantity -= item.Quantity;
+                        product.Quantity -= item.Quantity;
+                        _dbContext.Products.AddOrUpdate(product);
                     }
                 }
                 order.OrderInfo = value;
@@ -148,8 +155,12 @@ namespace SukkuShop.Areas.Admin.Controllers
                 _dbContext.SaveChanges();
                 ViewBag.AjaxOrderState = order.OrderInfo;
                 ViewBag.OrderId = id;
-                var discounvalue = ((order.OrderDetails.Sum(orderdetail => orderdetail.SubTotalPrice) * order.Discount) *
-                                    100) / 100;
+                var discounvalue = ((order.OrderDetails.Sum(orderdetail => orderdetail.SubTotalPrice)*order.Discount)*
+                                    100)/100;
+
+                var payment = _appRepository.GetSingle<PaymentType>(x => x.PaymentId == order.PaymentId);
+                var shipping = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == order.ShippingId);
+
                 var email = new ChangeOrderStateEmail
                 {
                     To = order.Email,
@@ -165,15 +176,15 @@ namespace SukkuShop.Areas.Admin.Controllers
                         DiscountValue = discounvalue.ToString("c"),
                         OrderPayment = new SharedShippingOrderSummaryModels
                         {
-                            Description = order.Payment.PaymentDescription,
-                            Name = order.Payment.PaymentName,
-                            Price = order.FreeShippingPayment ? 0 : order.Payment.PaymentPrice
+                            Description = payment.PaymentDescription,
+                            Name = payment.PaymentName,
+                            Price = order.FreeShippingPayment ? 0 : payment.PaymentPrice
                         },
                         OrderShipping = new SharedShippingOrderSummaryModels
                         {
-                            Description = order.Shipping.ShippingDescription,
-                            Name = order.Shipping.ShippingName,
-                            Price = order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice
+                            Description = shipping.ShippingDescription,
+                            Name = shipping.ShippingName,
+                            Price = order.FreeShippingPayment ? 0 : shipping.ShippingPrice
                         },
                         UserAddressModel = new CartAddressModel
                         {
@@ -190,15 +201,19 @@ namespace SukkuShop.Areas.Admin.Controllers
                         },
                         OrderViewItemsTotal = new OrderViewItemsTotal
                         {
-                            TotalValue = order.OrderDetails.Sum(x => x.SubTotalPrice),
-                            OrderProductList = order.OrderDetails.Select(m => new OrderItemSummary
+                            TotalValue = orderDetails.Sum(x => x.SubTotalPrice),
+                            OrderProductList = orderDetails.Select(m =>
                             {
-                                Image = m.Products.IconName ?? "NoPhoto_small",
-                                Name = m.Products.Name,
-                                Price = m.Products.Price ?? 0,
-                                Quantity = m.Quantity,
-                                TotalValue = m.SubTotalPrice,
-                                Packing = m.Products.Packing
+                                var product = _appRepository.GetSingle<Products>(k => k.ProductId == m.ProductId);
+                                return new OrderItemSummary
+                                {
+                                    Image = product.IconName ?? "NoPhoto_small",
+                                    Name = product.Name,
+                                    Price = product.Price ?? 0,
+                                    Quantity = m.Quantity,
+                                    TotalValue = m.SubTotalPrice,
+                                    Packing = product.Packing
+                                };
                             }).ToList()
                         }
                     }
@@ -206,13 +221,16 @@ namespace SukkuShop.Areas.Admin.Controllers
                 email.Send();
             }
             var list = GetOrderDetailsStateList(value);
-            return PartialView(MVC.Admin.Zamowienia.Views._ChangeOrderStateFromDetails,list);
+            return PartialView(MVC.Admin.Zamowienia.Views._ChangeOrderStateFromDetails, list);
         }
 
-        public virtual ActionResult SzczegolyZamowienia(int id=1)
+        public virtual ActionResult SzczegolyZamowienia(int id = 1)
         {
             ViewBag.SelectedOpt = 2;
-            var order = _dbContext.Orders.First(m => m.OrderId == id);
+            var order = _appRepository.GetSingle<Orders>(m => m.OrderId == id);
+            var payment = _appRepository.GetSingle<PaymentType>(x => x.PaymentId == order.PaymentId);
+            var shipping = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == order.ShippingId);
+            var orderDetails = _appRepository.GetAll<OrderDetails>(x => x.OrderId == order.OrderId).ToList();
             var model = new AdminOrderViewModelsSummary
             {
                 OrderWeight = order.OrderWeight,
@@ -222,17 +240,17 @@ namespace SukkuShop.Areas.Admin.Controllers
                 UserId = order.UserId,
                 OrderPayment = new SharedShippingOrderSummaryModels
                 {
-                    Description = order.Payment.PaymentDescription,
-                    Id = order.PaymentId,
-                    Name = order.Payment.PaymentName,
-                    Price = order.FreeShippingPayment ? 0 : order.Payment.PaymentPrice
+                    Description = payment.PaymentDescription,
+                    Name = payment.PaymentName,
+                    Price = order.FreeShippingPayment ? 0 : payment.PaymentPrice,
+                    Id = payment.PaymentId
                 },
                 OrderShipping = new SharedShippingOrderSummaryModels
                 {
-                    Description = order.Shipping.ShippingDescription,
-                    Id = order.ShippingId,
-                    Name = order.Shipping.ShippingName,
-                    Price = order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice
+                    Description = shipping.ShippingDescription,
+                    Name = shipping.ShippingName,
+                    Price = order.FreeShippingPayment ? 0 : shipping.ShippingPrice,
+                    Id = shipping.ShippingId
                 },
                 TotalTotalValue = order.TotalPrice.ToString("c"),
                 OrderInfo = order.OrderInfo,
@@ -240,7 +258,8 @@ namespace SukkuShop.Areas.Admin.Controllers
                 Discount = order.Discount,
                 DiscountValue =
                     (order.TotalPrice -
-                     (order.ProductsPrice + (order.FreeShippingPayment?0: order.Payment.PaymentPrice) + (order.FreeShippingPayment?0:order.Shipping.ShippingPrice))).ToString("c"),
+                     (order.ProductsPrice + (order.FreeShippingPayment ? 0 : payment.PaymentPrice) +
+                      (order.FreeShippingPayment ? 0 : shipping.ShippingPrice))).ToString("c"),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,
@@ -256,16 +275,20 @@ namespace SukkuShop.Areas.Admin.Controllers
                 },
                 OrderViewItemsTotal = new OrderViewItemsTotal
                 {
-                    OrderProductList = order.OrderDetails.Select(x => new OrderItemSummary
+                    TotalValue = orderDetails.Sum(x => x.SubTotalPrice),
+                    OrderProductList = orderDetails.Select(m =>
                     {
-                        Name = x.Products.Name,
-                        Image = x.Products.IconName ?? "NoPhoto_small",
-                        Price = x.ProdPrice,
-                        Quantity = x.Quantity,
-                        TotalValue = x.SubTotalPrice,
-                        Packing = x.Products.Packing,
-                    }).ToList(),
-                    TotalValue = order.ProductsPrice
+                        var product = _appRepository.GetSingle<Products>(k => k.ProductId == m.ProductId);
+                        return new OrderItemSummary
+                        {
+                            Image = product.IconName ?? "NoPhoto_small",
+                            Name = product.Name,
+                            Price = product.Price ?? 0,
+                            Quantity = m.Quantity,
+                            TotalValue = m.SubTotalPrice,
+                            Packing = product.Packing
+                        };
+                    }).ToList()
                 }
             };
             if (order.OrderInfo != "Wysłane" && order.OrderInfo != "Anulowane")

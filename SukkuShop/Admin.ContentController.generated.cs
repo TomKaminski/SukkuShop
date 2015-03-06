@@ -160,6 +160,14 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             public readonly string text = "text";
         }
+        static readonly ActionParamsClass_Platnosci s_params_Platnosci = new ActionParamsClass_Platnosci();
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public ActionParamsClass_Platnosci PlatnosciParams { get { return s_params_Platnosci; } }
+        [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
+        public class ActionParamsClass_Platnosci
+        {
+            public readonly string text = "text";
+        }
         static readonly ViewsClass s_views = new ViewsClass();
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
         public ViewsClass Views { get { return s_views; } }
@@ -483,6 +491,18 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_PartialViewResult(Area, Name, ActionNames.PlatnosciAjaxPost);
             PlatnosciAjaxPostOverride(callInfo);
+            return callInfo;
+        }
+
+        [NonAction]
+        partial void PlatnosciOverride(T4MVC_System_Web_Mvc_ActionResult callInfo, string text);
+
+        [NonAction]
+        public override System.Web.Mvc.ActionResult Platnosci(string text)
+        {
+            var callInfo = new T4MVC_System_Web_Mvc_ActionResult(Area, Name, ActionNames.Platnosci);
+            ModelUnbinderHelpers.AddRouteValues(callInfo.RouteValueDictionary, "text", text);
+            PlatnosciOverride(callInfo, text);
             return callInfo;
         }
 

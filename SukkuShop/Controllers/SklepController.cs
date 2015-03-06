@@ -16,9 +16,12 @@ namespace SukkuShop.Controllers
     {
         private readonly ApplicationDbContext _dbContext;
         private readonly IShop _shop;
+        private readonly IAppRepository _appRepository;
 
-        public SklepController(ApplicationDbContext dbContext, IShop shop)
+
+        public SklepController(ApplicationDbContext dbContext, IShop shop, IAppRepository appRepository)
         {
+            _appRepository = appRepository;
             _dbContext = dbContext;
             _shop = shop;
         }
@@ -40,19 +43,19 @@ namespace SukkuShop.Controllers
             if (id != null)
             {
                 var categorylist =
-                    _dbContext.Categories.Where(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
+                    _appRepository.GetAll<Categories>(j => j.UpperCategoryId == 0 || j.UpperCategoryId == null)
                         .Select(x => x.Name);
 
                 var optionlist = new List<string> {"promocje", "bestseller", "nowość"};
                 if (categorylist.Contains(id))
                 {
-                    var firstOrDefault = _dbContext.Categories.FirstOrDefault(x => x.Name == id);
+                    var firstOrDefault = _appRepository.GetSingle<Categories>(x => x.Name == id);
                     if (firstOrDefault != null)
                         categoryId = firstOrDefault.CategoryId;
                 }
                 if (categoryId != 0)
                     subcategoryList =
-                        _dbContext.Categories.Where(x => x.UpperCategoryId == categoryId && x.Products.Count>0)
+                        _appRepository.GetAll<Categories>(x => x.UpperCategoryId == categoryId && x.Products.Count > 0)
                             .Select(j => j.Name)
                             .Distinct()
                             .ToList();
@@ -104,22 +107,22 @@ namespace SukkuShop.Controllers
         //[DonutOutputCache(Duration = 86400, VaryByParam = "id",Location = OutputCacheLocation.Server)]
         public virtual ActionResult SzczegółyProduktu(int id=1)
         {
-            var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == id && x.Published && !x.WrongModel);
+            var product = _appRepository.GetSingle<Products>(x => x.ProductId == id && x.Published && !x.WrongModel);
             if (product == null)
                 return View(MVC.Sklep.Views.NoProducts);
 
-            var category = product.Categories;
+            var category = _appRepository.GetSingle<Categories>(x => x.CategoryId == product.CategoryId);
             var subCategories = new List<int>();
             if (category.UpperCategoryId == 0)
             {
                 subCategories =
-                    _dbContext.Categories.Where(m => m.UpperCategoryId == category.CategoryId)
+                    _appRepository.GetAll<Categories>(m => m.UpperCategoryId == category.CategoryId)
                         .Select(x => x.CategoryId)
                         .ToList();
             }
 
             var similarProducts =
-                _dbContext.Products.Where(
+                _appRepository.GetAll<Products>(
                     x =>
                         (x.CategoryId == product.CategoryId || subCategories.Contains(x.CategoryId??-1)) &&
                         x.ProductId != product.ProductId && x.Published).Select(j => new SimilarProductModel
@@ -219,7 +222,7 @@ namespace SukkuShop.Controllers
                 Email = email,
                 ProductId = id
             };
-            var plz = _dbContext.ProductDemands.FirstOrDefault(x => x.Email == email && x.ProductId == id);
+            var plz = _appRepository.GetSingle<ProductDemands>(x => x.Email == email && x.ProductId == id);
             if(plz==null)
                 _dbContext.ProductDemands.AddOrUpdate(prodDemand);
             try
@@ -251,7 +254,7 @@ namespace SukkuShop.Controllers
 
         private void GetAllProducts(List<Cart.CartLine> liness )
         {
-            _shop.Products = _dbContext.Products.Where(k=>k.Published && !k.WrongModel).Select(x => new ProductModel
+            _shop.Products = _appRepository.GetAll<Products>(k => k.Published && !k.WrongModel).Select(x => new ProductModel
             {
                 Name = x.Name,
                 ImageName = x.IconName ?? "NoPhoto_small",
@@ -259,7 +262,7 @@ namespace SukkuShop.Controllers
                 Promotion = x.Promotion ?? 0,
                 Id = x.ProductId,
                 PriceAfterDiscount = Math.Floor((x.Price - ((x.Price*x.Promotion)/100) ?? x.Price??0)*100)/100,
-                Category = x.Categories.Name,
+                Category = _appRepository.GetSingle<Categories>(c=>c.CategoryId == x.CategoryId).Name,
                 DateAdded = x.DateAdded,
                 OrdersCount = x.OrdersCount,
                 QuantityInStock = (x.Quantity??0) - x.ReservedQuantity,

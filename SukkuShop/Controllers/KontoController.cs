@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
@@ -20,14 +21,16 @@ namespace SukkuShop.Controllers
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAuthenticationManager _authenticationManager;
         private readonly ApplicationDbContext _dbContext;
+        private readonly IAppRepository _appRepository;
 
         public KontoController(ApplicationUserManager userManager, ApplicationSignInManager signInManager,
-            IAuthenticationManager authenticationManager, ApplicationDbContext dbContext)
+            IAuthenticationManager authenticationManager, ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _authenticationManager = authenticationManager;
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         [AllowAnonymous]
@@ -412,7 +415,7 @@ namespace SukkuShop.Controllers
         public virtual ActionResult HistoriaZamowien()
         {
             var userId = _userManager.FindById(User.Identity.GetUserId<int>()).Id;
-            var model = _dbContext.Orders.Where(m => m.UserId == userId).Select(x => new AccountOrderItemModel
+            var model = _appRepository.GetAll<Orders>(m => m.UserId == userId).Select(x => new AccountOrderItemModel
             {
                 ActualState = x.OrderInfo,
                 Id = x.OrderId,
@@ -432,15 +435,17 @@ namespace SukkuShop.Controllers
         public virtual ActionResult AnulujZamówienie(int id)
         {
             
-            var order = _dbContext.Orders.FirstOrDefault(m => m.OrderId == id);
+            var order = _appRepository.GetSingle<Orders>(m => m.OrderId == id);
+            var orderDetails = _appRepository.GetAll<OrderDetails>(x => x.OrderId == id);
             if (order != null && (order.OrderInfo != "Wysłane" && order.OrderInfo != "Anulowane"))
             {
                 order.OrderInfo = "Anulowane";
-                foreach (var item in order.OrderDetails)
+                foreach (var item in orderDetails)
                 {
-                    item.Products.Quantity += item.Quantity;
-                    item.Products.OrdersCount++;
-                    _dbContext.Products.AddOrUpdate(item.Products);
+                    var productItem = _appRepository.GetSingle<Products>(j => j.ProductId == item.ProductId);
+                    productItem.Quantity += item.Quantity;
+                    productItem.OrdersCount++;
+                    _dbContext.Products.AddOrUpdate(productItem);
                 }
                 _dbContext.Orders.AddOrUpdate(order);
                 try
@@ -466,32 +471,35 @@ namespace SukkuShop.Controllers
         public virtual ActionResult SzczegółyZamówienia(int id)
         {
             var userId = _userManager.FindById(User.Identity.GetUserId<int>());
-            var order = _dbContext.Orders.First(m => m.OrderId == id);
+            var order = _appRepository.GetSingle<Orders>(m => m.OrderId == id);
             if (userId.Id != order.UserId)
                 return RedirectToAction(MVC.Konto.HistoriaZamowien());
+            var payment = _appRepository.GetSingle<PaymentType>(x => x.PaymentId == order.PaymentId);
+            var shipping = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == order.ShippingId);
+            var orderDetails = _appRepository.GetAll<OrderDetails>(x => x.OrderId == order.OrderId);
             var model = new AccountOrderViewModelsSummary
             {
                 Id = id,
                 Firma = userId.KontoFirmowe,
                 OrderPayment = new SharedShippingOrderSummaryModels
                 {
-                    Description = order.Payment.PaymentDescription,
+                    Description = payment.PaymentDescription,
                     Id=order.PaymentId,
-                    Name = order.Payment.PaymentName,
-                    Price = order.FreeShippingPayment?0:order.Payment.PaymentPrice
+                    Name = payment.PaymentName,
+                    Price = order.FreeShippingPayment ? 0 : payment.PaymentPrice
                 },
                 OrderShipping = new SharedShippingOrderSummaryModels
                 {
-                    Description = order.Shipping.ShippingDescription,
+                    Description = shipping.ShippingDescription,
                     Id=order.ShippingId,
-                    Name = order.Shipping.ShippingName,
-                    Price = order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice
+                    Name = shipping.ShippingName,
+                    Price = order.FreeShippingPayment ? 0 : shipping.ShippingPrice
                 },
                 TotalTotalValue = order.TotalPrice.ToString("c"),
                 OrderInfo = order.OrderInfo,
                 OrderDat = order.OrderDate.ToShortDateString(),
                 Discount = order.Discount,
-                DiscountValue = (order.TotalPrice - (order.ProductsPrice + (order.FreeShippingPayment ? 0 : order.Payment.PaymentPrice) + (order.FreeShippingPayment ? 0 : order.Shipping.ShippingPrice))).ToString("c"),
+                DiscountValue = (order.TotalPrice - (order.ProductsPrice + (order.FreeShippingPayment ? 0 : payment.PaymentPrice) + (order.FreeShippingPayment ? 0 : shipping.ShippingPrice))).ToString("c"),
                 UserAddressModel = new CartAddressModel
                 {
                     Imie = order.Name,
@@ -506,14 +514,18 @@ namespace SukkuShop.Controllers
                 },
                 OrderViewItemsTotal = new OrderViewItemsTotal
                 {
-                    OrderProductList = order.OrderDetails.Select(x=>new OrderItemSummary
+                    OrderProductList = orderDetails.Select(x =>
                     {
-                        Name = x.Products.Name,
-                        Image = x.Products.IconName ?? "NoPhoto_small",
-                        Price = x.ProdPrice,
-                        Quantity = x.Quantity,
-                        TotalValue = x.SubTotalPrice,
-                        Packing = x.Products.Packing,
+                        var product = _appRepository.GetSingle<Products>(k => k.ProductId == x.ProductId);
+                        return new OrderItemSummary
+                        {
+                            Name = product.Name,
+                            Image = product.IconName ?? "NoPhoto_small",
+                            Price = x.ProdPrice,
+                            Quantity = x.Quantity,
+                            TotalValue = x.SubTotalPrice,
+                            Packing = product.Packing,
+                        };
                     }).ToList(),
                     TotalValue = order.ProductsPrice                      
                 }

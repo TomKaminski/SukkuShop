@@ -55,6 +55,8 @@ adminApp.controller("AdminUserCtrl",['$scope', '$http','$filter', function ($sco
             $scope.usersTotal = data;
             $scope.usersOperative = $scope.usersTotal;
             $scope.usersList = filterUsers($scope.usersTotal);
+        }).error(function (data, status, headers, config) {
+            console.log(data);
         });
     };
 

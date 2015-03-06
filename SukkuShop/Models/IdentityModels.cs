@@ -228,7 +228,7 @@ namespace SukkuShop.Models
 
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser, RoleIntPk, int,
-        UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>, IAppRepository
+        UserLoginIntPk, UserRoleIntPk, UserClaimIntPk>
     {
         public ApplicationDbContext()
             : base("DefaultConnection")

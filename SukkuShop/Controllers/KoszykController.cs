@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers 
@@ -10,21 +11,18 @@ namespace SukkuShop.Controllers
     public partial class KoszykController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
-
+        private readonly IAppRepository _appRepository;
         
-        public KoszykController(ApplicationDbContext dbContext)
+        public KoszykController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         [HttpPost]
         public virtual ActionResult AddToCart(int id, Cart shoppingCart, int quantity = 1)
         {
-            var productQ = _dbContext.Products.Where(m => m.ProductId == id).Select(n=>new
-            {
-                n.Quantity,n.ReservedQuantity
-            }).First();
-
+            var productQ = _appRepository.GetSingle<Products>(m => m.ProductId == id);
             var firstOrDefault = shoppingCart.Lines.FirstOrDefault(m => m.Id == id);
             if (firstOrDefault != null)
             {
@@ -50,7 +48,6 @@ namespace SukkuShop.Controllers
                 id
             };
             return Json(data, JsonRequestBehavior.AllowGet);
-            //return PartialView(MVC.Shared.Views._CartInfoPartialView, value.ToString("c"));
         }
 
         public virtual ActionResult RemoveFromCart(int id, Cart shoppingCart)
@@ -62,15 +59,8 @@ namespace SukkuShop.Controllers
 
         public virtual JsonResult IncreaseQuantity(int id, Cart shoppingCart)
         {
-            
-            var firstOrDefault = _dbContext.Products.Where(x => x.ProductId == id).Select(k => new
-            {
-                k.Price,
-                k.Quantity,
-                k.Promotion,
-                k.ReservedQuantity
-            }).First();
 
+            var firstOrDefault = _appRepository.GetSingle<Products>(m => m.ProductId == id);
             var ordefault = shoppingCart.Lines.FirstOrDefault(x => x.Id == id);
             if (ordefault != null)
             {
@@ -85,15 +75,9 @@ namespace SukkuShop.Controllers
         }
 
         public virtual JsonResult DecreaseQuantity(int id, Cart shoppingCart)
-        {
-            
+        {           
             shoppingCart.DecreaseQuantity(id);
-            var firstOrDefault = _dbContext.Products.Where(x => x.ProductId == id).Select(k => new
-            {
-                k.Price,
-                k.Quantity,
-                k.Promotion
-            }).First();
+            var firstOrDefault = _appRepository.GetSingle<Products>(m => m.ProductId == id);
             var quantity = shoppingCart.Lines.FirstOrDefault(x => x.Id == id).Quantity;
             var price = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
             var data = price*quantity;
@@ -117,7 +101,7 @@ namespace SukkuShop.Controllers
             decimal sum = 0;
             foreach (var line in shoppingCart.Lines)
             {
-                var firstOrDefault = _dbContext.Products.FirstOrDefault(e => e.ProductId == line.Id);
+                var firstOrDefault = _appRepository.GetSingle<Products>(m => m.ProductId == line.Id);
                 if (firstOrDefault != null)
                 {
                     var priceFloored = CalcPrice(firstOrDefault.Price, firstOrDefault.Promotion);
@@ -146,9 +130,9 @@ namespace SukkuShop.Controllers
             var productList = new List<CartProduct>();
             foreach (var item in shoppingCart.Lines)
             {
-                var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
+                var product = _appRepository.GetSingle<Products>(m => m.ProductId == item.Id);
                 if (product == null) continue;
-                var categoryName = product.Categories.Name;
+                var categoryName = _appRepository.GetSingle<Categories>(m => m.CategoryId == product.CategoryId).Name;
                 var price = (product.Price - ((product.Price*product.Promotion)/100)) ?? product.Price;
                 var priceFloored = Math.Floor((price??0)*100)/100;
                 productList.Add(new CartProduct

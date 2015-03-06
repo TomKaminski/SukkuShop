@@ -1,0 +1,6 @@
+﻿@model SukkuShop.Areas.Admin.Models.RegulaminModel
+<div>
+    <div id="triangle-right"></div>
+    @Ajax.ActionLink("Edytuj tekst", MVC.Admin.Content.PlatnosciAjaxGet(), new AjaxOptions { UpdateTargetId = "regulamin-replace", HttpMethod = "POST", InsertionMode = InsertionMode.Replace, OnComplete = "SetEditor()" }, new { @class = "sukku-link", style = "float:right" })
+    <div style="clear: both;float:none;height:0"></div>
+</div>@Model.Text

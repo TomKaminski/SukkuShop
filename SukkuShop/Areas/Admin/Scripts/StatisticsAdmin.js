@@ -264,17 +264,17 @@ $(document).ready(function() {
         console.log(xhr.responseText);
     });
 
-    $.get("/Admin/Statystyki/GetOrdersByCategory", function(data) {
-        //for (var i = 0; i < data.length; i++) {
-        //    dataPie[i].label = data[i].name;
-        //    dataPie[i].value = data[i].sum;
-        //}
-        //// For a pie chart
-        //var ctxPie = $("#top5productsChart").get(0).getContext("2d");
-        //var myPieChart = new Chart(ctxPie).Pie(dataPie, options);
-    }).error(function(xhr, status, error) {
-        alert(error);
-        console.log(xhr.responseText);
-    });
+    //$.get("/Admin/Statystyki/GetOrdersByCategory", function(data) {
+    //    //for (var i = 0; i < data.length; i++) {
+    //    //    dataPie[i].label = data[i].name;
+    //    //    dataPie[i].value = data[i].sum;
+    //    //}
+    //    //// For a pie chart
+    //    //var ctxPie = $("#top5productsChart").get(0).getContext("2d");
+    //    //var myPieChart = new Chart(ctxPie).Pie(dataPie, options);
+    //}).error(function(xhr, status, error) {
+    //    alert(error);
+    //    console.log(xhr.responseText);
+    //});
 
 });

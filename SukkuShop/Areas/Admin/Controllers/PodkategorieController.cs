@@ -3,18 +3,20 @@ using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Web.Mvc;
 using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
     public partial class PodkategorieController : Controller
     {
-
+        private readonly IAppRepository _appRepository;
         private readonly ApplicationDbContext _dbContext;
 
-        public PodkategorieController(ApplicationDbContext dbContext)
+        public PodkategorieController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         // GET: Admin/Podkategorie
@@ -26,21 +28,21 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult GetCategoriesList()
         {
-            var categoriesList = _dbContext.Categories.Where(x => x.UpperCategoryId == 0).Select(j => new
+            var categoriesList = _appRepository.GetAll<Categories>(x => x.UpperCategoryId == 0).Select(j => new
             {
                 j.CategoryId,
                 j.Name,
-                productsCount = j.Products.Count,
+                productsCount = _appRepository.GetAll<Products>(y => y.CategoryId == j.CategoryId).Count(),
                 subCategoriesActive = false,    
                 newDiscount = 0,
                 Promotion=j.Promotion??0,
                 editDiscountActive=false,
-                subCategories = _dbContext.Categories.Where(k => k.UpperCategoryId == j.CategoryId).Select(m => new
+                subCategories = _appRepository.GetAll<Categories>(k => k.UpperCategoryId == j.CategoryId).Select(m => new
                 {
                     m.CategoryId,
                     m.Name,
                     Promotion = m.Promotion??0,
-                    productsCount = m.Products.Count,
+                    productsCount = _appRepository.GetAll<Products>(v => v.CategoryId == m.CategoryId).Count(),
                     editNameActive = false,
                     editDiscountActive=false,
                     canDelete = false,
@@ -60,13 +62,13 @@ namespace SukkuShop.Areas.Admin.Controllers
             };
             _dbContext.Categories.AddOrUpdate(category);
             _dbContext.SaveChanges();
-            var cat = _dbContext.Categories.OrderByDescending(x => x.CategoryId).First();
+            var cat = _appRepository.GetAll<Categories>().OrderByDescending(x=>x.CategoryId).First();
             return Json(new
             {
                 cat.CategoryId,
                 cat.Name,
                 cat.Promotion,
-                productsCount = cat.Products.Count,
+                productsCount = _appRepository.GetAll<Products>(x=>x.CategoryId==cat.CategoryId).Count(),
                 editNameActive = false,
                 editDiscountActive = false,
                 canDelete = false,
@@ -76,7 +78,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult EditCategoryName(string name, int id)
         {
-            var firstOrDefault = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            var firstOrDefault = _appRepository.GetSingle<Categories>(x => x.CategoryId == id);
             if (firstOrDefault != null)
             {
                 firstOrDefault.Name = name;
@@ -89,7 +91,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult EditCategoryDiscount(string discount, int id)
         {
-            var firstOrDefault = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            var firstOrDefault = _appRepository.GetSingle<Categories>(x => x.CategoryId == id);
             if (firstOrDefault != null)
             {
                 firstOrDefault.Promotion = Convert.ToInt32(discount);
@@ -104,10 +106,10 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult DeleteSubCategory(int id)
         {
-            var fo = _dbContext.Categories.FirstOrDefault(x => x.CategoryId == id);
+            var fo = _appRepository.GetSingle<Categories>(x => x.CategoryId == id);
             if (fo != null)
             {
-                var firstOrDefault = fo.Products;
+                var firstOrDefault = _appRepository.GetAll<Products>(x => x.CategoryId == fo.CategoryId);
                 foreach (var products in firstOrDefault)
                 {
                     products.CategoryId = fo.UpperCategoryId;

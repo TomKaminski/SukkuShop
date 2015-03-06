@@ -74,7 +74,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             public readonly string Index = "Index";
             public readonly string GetOrderData = "GetOrderData";
             public readonly string GetTopProducts = "GetTopProducts";
-            public readonly string GetOrdersByCategory = "GetOrdersByCategory";
         }
 
         [GeneratedCode("T4MVC", "2.0"), DebuggerNonUserCode]
@@ -83,7 +82,6 @@ namespace SukkuShop.Areas.Admin.Controllers
             public const string Index = "Index";
             public const string GetOrderData = "GetOrderData";
             public const string GetTopProducts = "GetTopProducts";
-            public const string GetOrdersByCategory = "GetOrdersByCategory";
         }
 
 
@@ -138,17 +136,6 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetTopProducts);
             GetTopProductsOverride(callInfo);
-            return callInfo;
-        }
-
-        [NonAction]
-        partial void GetOrdersByCategoryOverride(T4MVC_System_Web_Mvc_JsonResult callInfo);
-
-        [NonAction]
-        public override System.Web.Mvc.JsonResult GetOrdersByCategory()
-        {
-            var callInfo = new T4MVC_System_Web_Mvc_JsonResult(Area, Name, ActionNames.GetOrdersByCategory);
-            GetOrdersByCategoryOverride(callInfo);
             return callInfo;
         }
 

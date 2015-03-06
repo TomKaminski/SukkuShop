@@ -43,6 +43,7 @@ jQuery(document).ready(function() {
 var adminApp = angular.module("adminApp", []);
 var itemsPerPage = 12;
 
+
 adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($scope, $http, $filter) {
     var orderBy = $filter('orderBy');
 
@@ -66,6 +67,8 @@ adminApp.controller("AdminProdCtrl", ['$scope', '$http','$filter',function ($sco
                 $scope.warningCounter($scope.productsTotal[i].ProductId);
             }
             $scope.productsList = filterProducts($scope.productsTotal);
+        }).error(function (data, status, headers, config) {
+            console.log(data);
         });
     };
 

@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Controllers
@@ -20,11 +21,13 @@ namespace SukkuShop.Controllers
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAuthenticationManager _authenticationManager;
+        private readonly IAppRepository _appRepository;
 
-        public ZamowienieController(IAuthenticationManager authenticationManager,ApplicationUserManager userManager, ApplicationDbContext dbContext, ApplicationSignInManager signInManager)
+        public ZamowienieController(IAuthenticationManager authenticationManager,ApplicationUserManager userManager, ApplicationDbContext dbContext, ApplicationSignInManager signInManager, IAppRepository appRepository)
         {
             _authenticationManager = authenticationManager;
             _signInManager = signInManager;
+            _appRepository = appRepository;
             _userManager = userManager;
             _dbContext = dbContext;
         }
@@ -362,7 +365,7 @@ namespace SukkuShop.Controllers
                     {
                         if (!item.ItemRemoved)
                         {
-                            var product = _dbContext.Products.First(i => i.ProductId == item.Id);
+                            var product = _appRepository.GetSingle<Products>(i => i.ProductId == item.Id);
                             
                             if (product.Quantity - product.ReservedQuantity >= item.Quantity)
                             {
@@ -520,8 +523,8 @@ namespace SukkuShop.Controllers
         {
 
             var orderitemsummary = OrderViewItemsSummary(shoppingCart);
-            var payment = _dbContext.PaymentTypes.First(x => x.PaymentId == shoppingCart.PaymentId);
-            var shipping = _dbContext.ShippingTypes.First(x => x.ShippingId == shoppingCart.ShippingId);
+            var payment = _appRepository.GetSingle<PaymentType>(x => x.PaymentId == shoppingCart.PaymentId);
+            var shipping = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == shoppingCart.ShippingId);
             paymentModel = new SharedShippingOrderSummaryModels
             {
                 Name = payment.PaymentName,
@@ -553,7 +556,7 @@ namespace SukkuShop.Controllers
             decimal weight = 0;
             foreach (var item in shoppingCart.Lines)
             {
-                var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
+                var product = _appRepository.GetSingle<Products>(x => x.ProductId == item.Id);
                 if (product == null) continue;
                 var priceFloored = CalcPrice(product.Price, product.Promotion);
 
@@ -570,14 +573,14 @@ namespace SukkuShop.Controllers
                 weight += (product.Weight??0)*item.Quantity;
                 totalValue += (priceFloored * item.Quantity);
             }
-            var orderShippingRadios = _dbContext.ShippingTypes.Where(j=>j.Active && j.MaxWeight>weight).Select(x => new OrderViewRadioOption
+            var orderShippingRadios = _appRepository.GetAll<ShippingType>(j=>j.Active && j.MaxWeight>weight).Select(x => new OrderViewRadioOption
             {
                 Id = x.ShippingId,
                 Price = totalValue>250?0:x.ShippingPrice,
                 Text = x.ShippingName,
                 Description = x.ShippingDescription
             }).ToList();
-            var orderPaymentRadios = _dbContext.PaymentTypes.Where(j => j.Active).Select(x => new OrderViewRadioOption
+            var orderPaymentRadios = _appRepository.GetAll<PaymentType>(j => j.Active).Select(x => new OrderViewRadioOption
             {
                 Id = x.PaymentId,
                 Price = totalValue > 250 ? 0 : x.PaymentPrice,
@@ -611,7 +614,7 @@ namespace SukkuShop.Controllers
             decimal totalValue = 0;
             foreach (var item in shoppingCart.Lines)
             {
-                var product = _dbContext.Products.FirstOrDefault(x => x.ProductId == item.Id);
+                var product = _appRepository.GetSingle<Products>(x => x.ProductId == item.Id);
                 if (product == null) continue;
                 var priceFloored = CalcPrice(product.Price, product.Promotion);
                 productList.Add(new OrderItemSummary

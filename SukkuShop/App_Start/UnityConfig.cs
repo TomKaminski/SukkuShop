@@ -44,6 +44,8 @@ namespace SukkuShop
                 new InjectionConstructor(typeof(ApplicationDbContext)));
 
             container.RegisterType<IShop, Shop>();
+
+            container.RegisterType<IAppRepository, AppRepository>();
         }
     }
 }

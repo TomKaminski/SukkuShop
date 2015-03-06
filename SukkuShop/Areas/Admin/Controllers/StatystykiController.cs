@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using SukkuShop.Identity;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
-using WebGrease.Css.Extensions;
 
 namespace SukkuShop.Areas.Admin.Controllers
 {
     [Authorize(Roles = "Admin")]
     public partial class StatystykiController : Controller
     {
-
+        private readonly IAppRepository _appRepository;
         private readonly ApplicationDbContext _dbContext;
 
-        public StatystykiController(ApplicationDbContext dbContext)
+        public StatystykiController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
+
         // GET: Admin/Statystyki
         public virtual ActionResult Index()
         {
@@ -29,7 +29,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         public virtual JsonResult GetOrderData()
         {
             var startDate = DateTime.Now.AddDays(-13);
-            var datesOfOrders = _dbContext.Orders.Select(j => j.OrderDate).ToList();
+            var datesOfOrders = _appRepository.GetAll<Orders>().Select(j => j.OrderDate).ToList();
             var groupOrdersByDate = datesOfOrders.GroupBy(x => x.ToShortDateString()).Select(x => new
             {
                 Date = x.Key,
@@ -76,12 +76,24 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual JsonResult GetTopProducts()
         {
-            var datesOfOrders = _dbContext.OrderDetails.Where(k=>k.Orders.OrderInfo!="Anulowano").Select(j => new
+
+            var datesOfOrders = _appRepository.GetAll<OrderDetails>().Select(k =>
             {
-                name = j.Products.Name,
-                quantity = j.Quantity,
-                date = j.Orders.OrderDate
-            }).ToList();
+                var order = _appRepository.GetSingle<Orders>(x => x.OrderId == k.OrderId);
+                return new {
+                    order.OrderInfo,
+                    quantity = k.Quantity,
+                    date = order.OrderDate,
+                    name = _appRepository.GetSingle<Products>(n=>n.ProductId==k.ProductId)
+                };
+            }).Where(k => k.OrderInfo!="Anulowano").ToList();
+
+            //var datesOfOrders = _dbContext.OrderDetails.Where(k => k.Orders.OrderInfo != "Anulowano").Select(j => new
+            //{
+            //    name = j.Products.Name,
+            //    quantity = j.Quantity,
+            //    date = j.Orders.OrderDate
+            //}).ToList();
 
             var ordersbymonth = datesOfOrders.Select(x => new
             {
@@ -102,15 +114,20 @@ namespace SukkuShop.Areas.Admin.Controllers
             }).ToList();
 
             var total =
-                _dbContext.OrderDetails.Where(k => k.Orders.OrderInfo != "Anulowano")
-                    .Select(m => new
+                _appRepository.GetAll<OrderDetails>().Select(k =>
+                {
+                    var order = _appRepository.GetSingle<Orders>(x => x.OrderId == k.OrderId);
+                    return new
                     {
-                        m.Quantity,
-                        m.Products.Name
-                    }).GroupBy(j => j.Name).Select(y=>new
+                        order.OrderInfo,
+                        quantity = k.Quantity,
+                        date = order.OrderDate,
+                        name = _appRepository.GetSingle<Products>(n => n.ProductId == k.ProductId)
+                    };
+                }).Where(k => k.OrderInfo != "Anulowano").GroupBy(j => j.name).Select(y => new
                     {
                         name=y.Key,
-                        sum=y.Select(m=>m.Quantity).Sum()
+                        sum=y.Select(m=>m.quantity).Sum()
                     }).ToList();
 
             //var total = _dbContext.Products.Select(x => new
@@ -127,19 +144,19 @@ namespace SukkuShop.Areas.Admin.Controllers
             return Json(mergedObj, JsonRequestBehavior.AllowGet);
         }
 
-        public virtual JsonResult GetOrdersByCategory()
-        {
-            var data = _dbContext.Products.Where(m=>m.Categories.UpperCategoryId==0).Select(x => new
-            {
-                name = x.Name,
-                orders = x.OrdersCount,
-                category = x.Categories.Name
-            }).GroupBy(k=>k.category).Select(x=>new
-            {
-                x.Key,
-                sum = x.Sum(j=>j.orders)
-            }).ToList();
-            return Json(data, JsonRequestBehavior.AllowGet);
-        }
+        //public virtual JsonResult GetOrdersByCategory()
+        //{
+        //    var data = _dbContext.Products.Where(m=>m.Categories.UpperCategoryId==0).Select(x => new
+        //    {
+        //        name = x.Name,
+        //        orders = x.OrdersCount,
+        //        category = x.Categories.Name
+        //    }).GroupBy(k=>k.category).Select(x=>new
+        //    {
+        //        x.Key,
+        //        sum = x.Sum(j=>j.orders)
+        //    }).ToList();
+        //    return Json(data, JsonRequestBehavior.AllowGet);
+        //}
     }
 }

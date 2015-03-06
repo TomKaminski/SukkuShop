@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Web.Mvc;
 using SukkuShop.Areas.Admin.Models;
+using SukkuShop.Infrastructure.Generic;
 using SukkuShop.Models;
 
 namespace SukkuShop.Areas.Admin.Controllers
@@ -12,10 +13,12 @@ namespace SukkuShop.Areas.Admin.Controllers
     public partial class DostawyPlatnosciController : Controller
     {
         private readonly ApplicationDbContext _dbContext;
+        private readonly IAppRepository _appRepository;
 
-        public DostawyPlatnosciController(ApplicationDbContext dbContext)
+        public DostawyPlatnosciController(ApplicationDbContext dbContext, IAppRepository appRepository)
         {
             _dbContext = dbContext;
+            _appRepository = appRepository;
         }
 
         // GET: Admin/DostawyPlatnosci
@@ -30,7 +33,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         {
             return Json(new
             {
-                shipping =_dbContext.ShippingTypes.Select(x => new
+                shipping =_appRepository.GetAll<ShippingType>().Select(x => new
                 {
                     x.ShippingId,
                     x.ShippingDescription,
@@ -42,7 +45,7 @@ namespace SukkuShop.Areas.Admin.Controllers
                     x.MaxWeight,
                     editWeight = false
                 }),
-                payment = _dbContext.PaymentTypes.Select(x => new
+                payment = _appRepository.GetAll<PaymentType>().Select(x => new
                 {
                     x.PaymentId,
                     x.PaymentDescription,
@@ -57,7 +60,7 @@ namespace SukkuShop.Areas.Admin.Controllers
 
         public virtual ActionResult DeletePayment(int id)
         {
-            var payment = _dbContext.PaymentTypes.FirstOrDefault(m => m.PaymentId == id);
+            var payment = _appRepository.GetSingle<PaymentType>(m => m.PaymentId == id);
             if (payment == null) return Json(false);
             if (payment.Orders.Count != 0) return Json(false);
             _dbContext.PaymentTypes.Remove(payment);
@@ -66,7 +69,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         }
         public virtual ActionResult DeleteShipping(int id)
         {
-            var shipping = _dbContext.ShippingTypes.FirstOrDefault(m => m.ShippingId == id);
+            var shipping = _appRepository.GetSingle<ShippingType>(m => m.ShippingId == id);
             if (shipping == null) return Json(false);
             if (shipping.Orders.Count != 0) return Json(false);
             _dbContext.ShippingTypes.Remove(shipping);
@@ -77,7 +80,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular activate payment
         public virtual ActionResult ActivatePayment(int id)
         {
-            var payment = _dbContext.PaymentTypes.FirstOrDefault(m => m.PaymentId == id);
+            var payment = _appRepository.GetSingle<PaymentType>(m => m.PaymentId == id);
             if (payment != null)
             {
                 payment.Active = true;
@@ -91,7 +94,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular deactivate payment
         public virtual ActionResult DeactivatePayment(int id)
         {
-            var payment = _dbContext.PaymentTypes.FirstOrDefault(m => m.PaymentId == id);
+            var payment = _appRepository.GetSingle<PaymentType>(m => m.PaymentId == id);
             if (payment != null)
             {
                 payment.Active = false;
@@ -105,7 +108,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular activate shipping
         public virtual ActionResult ActivateShipping(int id)
         {
-            var shipping = _dbContext.ShippingTypes.FirstOrDefault(m => m.ShippingId == id);
+            var shipping = _appRepository.GetSingle<ShippingType>(m => m.ShippingId == id);
             if (shipping != null)
             {
                 shipping.Active = true;
@@ -119,7 +122,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         //Angular deactivate shipping
         public virtual ActionResult DeactivateShipping(int id)
         {
-            var shipping = _dbContext.ShippingTypes.FirstOrDefault(m => m.ShippingId == id);
+            var shipping = _appRepository.GetSingle<ShippingType>(m => m.ShippingId == id);
             if (shipping != null)
             {
                 shipping.Active = false;
@@ -198,7 +201,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [HttpPost]
         public virtual JsonResult EditShippingWeight(int id, string weight)
         {
-            var firstOrDefault = _dbContext.ShippingTypes.FirstOrDefault(x => x.ShippingId == id);
+            var firstOrDefault = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == id);
             if (firstOrDefault != null)
             {
                 firstOrDefault.MaxWeight = Convert.ToDecimal(weight.Replace(".", ","));
@@ -212,7 +215,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [HttpPost]
         public virtual JsonResult EditShippingDescription(int id, string description)
         {
-            var firstOrDefault = _dbContext.ShippingTypes.FirstOrDefault(x => x.ShippingId == id);
+            var firstOrDefault = _appRepository.GetSingle<ShippingType>(x => x.ShippingId == id);
             if (firstOrDefault != null)
             {
                 firstOrDefault.ShippingDescription = description;
@@ -228,7 +231,7 @@ namespace SukkuShop.Areas.Admin.Controllers
         [HttpPost]
         public virtual JsonResult EditPaymentDescription(int id, string description)
         {
-            var firstOrDefault = _dbContext.PaymentTypes.FirstOrDefault(x => x.PaymentId == id);
+            var firstOrDefault = _appRepository.GetSingle<PaymentType>(x => x.PaymentId == id);
             if (firstOrDefault != null)
             {
                 firstOrDefault.PaymentDescription = description;
